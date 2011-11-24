@@ -251,7 +251,7 @@ archives:
     indistinguishable from the result that would be obtained by the
     specification's algorithms.</p>
 
-    <p class="note">This specification uses both the terms "conforming user
+    <p class=note>This specification uses both the terms "conforming user
     agent(s)" and "user agent(s)" to refer to this product class.</p>
    </dd>
   </dl>
@@ -441,7 +441,7 @@ interface <dfn id="anonxmlhttprequest">AnonXMLHttpRequest</dfn> : <span>XMLHttpR
   associated with the <code data-anolis-spec=html>Window</code> object for
   which the <code>XMLHttpRequest</code> interface object was created.</p>
 
-  <p class="note">The
+  <p class=note>The
   <span><code>XMLHttpRequest</code> document</span> is used to
   determine the <span><code>XMLHttpRequest</code> origin</span> and
   <span><code>XMLHttpRequest</code> base URL</span> at a later stage.</p>
@@ -790,7 +790,7 @@ discarding any further data received from the network for them.
     subtract 0x20 from each byte in the range 0x61 (ASCII a) to
     0x7A (ASCII z).</p>
 
-    <p class="note">If it does not match any of the above, it is passed
+    <p class=note>If it does not match any of the above, it is passed
     through <em>literally</em>, including in the final request.</p>
    </li>
    <!-- WebKit (and supposedly Gecko) also uppercase: COPY, INDEX, LOCK,
@@ -803,7 +803,7 @@ discarding any further data received from the network for them.
     "<code data-anolis-spec=dom>SecurityError</code>" exception and
     terminate these steps.
 
-    <p class="note">Allowing these methods poses a security risk.
+    <p class=note>Allowing these methods poses a security risk.
     <span data-anolis-ref>HTTPVERBSEC</span>
    </li>
 
@@ -878,7 +878,7 @@ discarding any further data received from the network for them.
      <li><p>Let <var>temp user</var> be <var>user</var>.</p></li>
     </ol>
 
-    <p class="note">These steps override anything that may have been set by
+    <p class=note>These steps override anything that may have been set by
     the <var title>url</var> argument.</p>
    </li>
 
@@ -898,7 +898,7 @@ discarding any further data received from the network for them.
      <li><p>Let <var>temp password</var> be <var>password</var>.</p></li>
     </ol>
 
-    <p class="note">These steps override anything that may have been set by
+    <p class=note>These steps override anything that may have been set by
     the <var title>url</var> argument.</p>
    </li>
 
@@ -970,14 +970,14 @@ discarding any further data received from the network for them.
    </dd>
   </dl>
 
-  <p class="note">As indicated in the algorithm below certain headers cannot
+  <p class=note>As indicated in the algorithm below certain headers cannot
   be set and are left up to the user agent. In addition there are certain
   other headers the user agent will take control of if they are not set by
   the author as indicated at the end of the
   <code title="dom-XMLHttpRequest-send">send()</code> method section.</p>
 
 
-  <p class="note">For non <span data-anolis-spec=html>same origin</span> requests using the HTTP
+  <p class=note>For non <span data-anolis-spec=html>same origin</span> requests using the HTTP
   <code>GET</code> method a preflight request is made when headers other
   than <code>Accept</code> and <code>Accept-Language</code> are set.</p>
 
@@ -1021,7 +1021,7 @@ discarding any further data received from the network for them.
     <span title="deflate a DOMString into a byte sequence">deflating</span>
     <var>value</var>.</p> <!-- This sounds lame, but it works. -->
 
-    <p class="note">The empty string is legal and represents the empty
+    <p class=note>The empty string is legal and represents the empty
     header value.</p>
    </li>
 
@@ -1057,7 +1057,7 @@ discarding any further data received from the network for them.
     match for <code>Proxy-</code> or <code>Sec-</code> (including when
     <var>header</var> is just <code>Proxy-</code> or <code>Sec-</code>).</p>
 
-    <p class="note">The above headers are controlled by the user agent to
+    <p class=note>The above headers are controlled by the user agent to
     let it control those aspects of transport. This guarantees data
     integrity to some extent. Header names starting with <code>Sec-</code>
     are not allowed to be set to allow new headers to be minted that are
@@ -1076,7 +1076,7 @@ discarding any further data received from the network for them.
    <!-- XXX it seems UAs always combine the values -->
   </ol>
 
-  <p class="note">See also the
+  <p class=note>See also the
   <code title="dom-XMLHttpRequest-send">send()</code> method regarding user
   agent header handling for caching, authentication, proxies, and
   cookies.</p>
@@ -1191,7 +1191,7 @@ X-Test: one, two</code></pre>
    attribute's value to the given value.</p></li>
   </ol>
 
-  <p class="note">The
+  <p class=note>The
   <code title="dom-XMLHttpRequest-withCredentials">withCredentials</code>
   attribute has no effect when
   <span data-anolis-spec=html title=fetch>fetching</span>
@@ -1240,7 +1240,7 @@ X-Test: one, two</code></pre>
   <span title="terminate send()">terminated</span> the user agent
   must terminate the algorithm after finishing the step it is on.</p>
 
-  <p class="note">The <code title="dom-XMLHttpRequest-send">send()</code>
+  <p class=note>The <code title="dom-XMLHttpRequest-send">send()</code>
   algorithm can only be terminated if the <span>synchronous flag</span> is
   unset and only after the method call has returned.</p>
 
@@ -1268,7 +1268,7 @@ X-Test: one, two</code></pre>
     <p>Otherwise, let <var>encoding</var> be null, <var>mime type</var> be
     null, and then follow these rules:</p>
 
-    <dl class="switch">
+    <dl class=switch>
 
      <dt>If <var>data</var> is a <code data-anolis-spec=typedarray>ArrayBuffer</code></dt>
      <dd><p>Let the <span>request entity body</span> be the raw data
@@ -1309,11 +1309,11 @@ X-Test: one, two</code></pre>
       and encoded as <var>encoding</var>. Re-throw any exception this
       throws.</p> <!-- XXX replace innerHTML somehow -->
 
-      <p class="note">In particular, if the document cannot be serialized an
+      <p class=note>In particular, if the document cannot be serialized an
       "<code data-anolis-spec=dom>InvalidStateError</code>" exception is
       thrown.</p>
 
-      <p class="note">Subsequent changes to the
+      <p class=note>Subsequent changes to the
       <code data-anolis-spec=dom>Document</code> have no effect on what
       is transferred.</p>
      </dd>
@@ -1396,7 +1396,7 @@ X-Test: one, two</code></pre>
      <li>
       <p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.
 
-      <p class="note">The state does not change. The event is dispatched for
+      <p class=note>The state does not change. The event is dispatched for
       historical reasons.</p>
      </li>
 
@@ -1414,7 +1414,7 @@ X-Test: one, two</code></pre>
    </li>
 
    <li>
-    <dl class="switch">
+    <dl class=switch>
      <dt>If the <span><code>XMLHttpRequest</code> origin</span> and the
      <span>request URL</span> are <span data-anolis-spec=html>same origin</span></dt>
 
@@ -1432,7 +1432,7 @@ X-Test: one, two</code></pre>
       <span>author request headers</span> and the rules listed at the end of
       this section.</p>
 
-      <dl class="switch">
+      <dl class=switch>
        <dt>If the <span>synchronous flag</span> is set</dt>
        <dd>
         <p>While making the request also follow the
@@ -1444,7 +1444,7 @@ X-Test: one, two</code></pre>
          which is counter to the whole idea of doing things synchronous.
         -->
 
-        <p class="note">The
+        <p class=note>The
         <code title="dom-XMLHttpRequest-send">send()</code> method call will
         now be returned by virtue of this algorithm ending.</p>
        </dd>
@@ -1501,7 +1501,7 @@ X-Test: one, two</code></pre>
        <dd>The <span>upload events flag</span>.</dd>
       </dl>
 
-      <p class="note"><span>Request username</span> and
+      <p class=note><span>Request username</span> and
       <span>request password</span> are always ignored as part of a
       <span data-anolis-spec=cors>cross-origin request</span>; including
       them would allow a site to perform a distributed password search.
@@ -1510,7 +1510,7 @@ X-Test: one, two</code></pre>
       <code title="dom-XMLHttpRequest-withCredentials">withCredentials</code>
       is true).</p>
 
-      <dl class="switch">
+      <dl class=switch>
        <dt>If the <span>synchronous flag</span> is set</dt>
        <dd>
         <p>While making the request also follow the
@@ -1522,7 +1522,7 @@ X-Test: one, two</code></pre>
          which is counter to the whole idea of doing things synchronous.
         -->
 
-        <p class="note">The
+        <p class=note>The
         <code title="dom-XMLHttpRequest-send">send()</code> method call will
         now be returned by virtue of this algorithm ending.</p>
        </dd>
@@ -1573,7 +1573,7 @@ X-Test: one, two</code></pre>
   must not prompt the end user for their username and
   password. <span data-anolis-ref>HTTPAUTH</span>
 
-  <p class="note">End users are not prompted for various cases so that
+  <p class=note>End users are not prompted for various cases so that
   authors can implement their own user interface.</p>
 
   <hr>
@@ -1638,7 +1638,7 @@ X-Test: one, two</code></pre>
 
   <p>The <dfn>same-origin request event rules</dfn> are as follows:</p>
 
-  <dl class="switch">
+  <dl class=switch>
    <dt>If the response has an HTTP status code of 301, 302, 303, or 307</dt>
    <dd>
     <p>If the redirect violates infinite loop precautions this is a
@@ -1661,7 +1661,7 @@ X-Test: one, two</code></pre>
      and terminate the steps for this algorithm.</p></li>
     </ol>
 
-    <p class="note">HTTP places requirements on the user agent regarding the
+    <p class=note>HTTP places requirements on the user agent regarding the
     preservation of the <span>request method</span> and
     <span>request entity body</span> during redirects, and also requires end
     users to be notified of certain kinds of automatic redirections.</p>
@@ -1677,7 +1677,7 @@ X-Test: one, two</code></pre>
     network errors, this is a <span>network error</span>. Do not request any
     kind of end user interaction.</p>
 
-    <p class="note">This does not include HTTP responses that indicate
+    <p class=note>This does not include HTTP responses that indicate
     some type of error, such as HTTP status code 410.</p>
    </dd>
 
@@ -1714,7 +1714,7 @@ X-Test: one, two</code></pre>
 
   <p>The <dfn>cross-origin request event rules</dfn> are as follows:</p>
 
-  <dl class="switch">
+  <dl class=switch>
    <dt>If the <span data-anolis-spec=cors>cross-origin request status</span>
    is <i>preflight complete</i> and the <span>synchronous flag</span> is
    unset</dt>
@@ -1810,7 +1810,7 @@ X-Test: one, two</code></pre>
    <li>
     <p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.</p>
 
-    <p class="note">At this point it is clear that the
+    <p class=note>At this point it is clear that the
     <span>synchronous flag</span> is unset.</p>
    </li>
 
@@ -1938,7 +1938,7 @@ X-Test: one, two</code></pre>
   <span title="terminate abort()">terminated</span> the user agent
   must terminate the algorithm after finishing the step it is on.
 
-  <p class="note">The <code title="dom-XMLHttpRequest-abort">abort()</code>
+  <p class=note>The <code title="dom-XMLHttpRequest-abort">abort()</code>
   algorithm can only be terminated by invoking
   <code title="dom-XMLHttpRequest-open">open()</code> from an event
   handler.</p>
@@ -2000,7 +2000,7 @@ X-Test: one, two</code></pre>
    <li>
     <p>Change the state to <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span>.</p>
 
-    <p class="note">No <code title="event-xhr-readystatechange">readystatechange</code> event is dispatched.</p>
+    <p class=note>No <code title="event-xhr-readystatechange">readystatechange</code> event is dispatched.</p>
    </li>
   </ol>
 
@@ -2105,7 +2105,7 @@ X-Test: one, two</code></pre>
   </ol>
 
 
-  <p class="note">The Cross-Origin Resource Sharing specification filters
+  <p class=note>The Cross-Origin Resource Sharing specification filters
   the headers that are exposed by
   <code title="dom-XMLHttpRequest-getResponseHeader">getResponseHeader()</code>
   for non <span data-anolis-spec=html title="same origin">same-origin</span>
@@ -2164,7 +2164,7 @@ client.onreadystatechange = function() {
   </ol>
 
 
-  <p class="note">The Cross-Origin Resource Sharing specification filters
+  <p class=note>The Cross-Origin Resource Sharing specification filters
   the headers that are exposed by
   <code title="dom-XMLHttpRequest-getAllResponseHeaders">getAllResponseHeaders()</code>
   for non <span data-anolis-spec=html title="same origin">same-origin</span>
@@ -2198,23 +2198,23 @@ Content-Type: text/plain; charset=utf-8</code></pre>
 
   <h4>Response entity body</h4>
 
-  <p>The <dfn id="response-mime-type">response MIME type</dfn> is the MIME
-  type the <code>Content-Type</code> header contains without any
-  parameters or null if the header could not be parsed properly or was
+  <p>The <dfn id="response-mime-type">response MIME type</dfn> is the
+  MIME type the <code>Content-Type</code> header contains excluding any
+  parameters, or null if the response header can not be parsed or was
   omitted. The <dfn id="override-mime-type">override MIME type</dfn> is
   initially null and can get a value if <code title="dom-XMLHttpRequest-overrideMimeType">overrideMimeType()</code> is
   invoked. <dfn id="final-mime-type">Final MIME type</dfn> is the
-  override MIME type unless that is null in which case it is the response
-  MIME type.</p>
+  <span>override MIME type</span> unless that is null in which case it is the <span>response MIME type</span>.</p>
 
   <p>The <dfn id="response-charset">response charset</dfn> is the value of
   the <code>charset</code> parameter of the <code>Content-Type</code> header
-  or null if there was no <code>charset</code> parameter or if
-  the header could not be parsed properly or was omitted. The
+  or null if there was no <code>charset</code> parameter or the header could
+  not be parsed or was omitted. The
   <dfn id="override-charset">override charset</dfn> is initially null and
   can get a value if <code title="dom-XMLHttpRequest-overrideMimeType">overrideMimeType()</code> is invoked.
-  <dfn id="final-charset">Final charset</dfn> is the override charset unless
-  that is null in which case it is the response charset.</p>
+  <dfn id="final-charset">Final charset</dfn> is the
+  <span>override charset</span> unless
+  that is null in which case it is the <span>response charset</span>.</p>
 
 
 
@@ -2224,33 +2224,35 @@ Content-Type: text/plain; charset=utf-8</code></pre>
   fragment of the <span data-anolis-spec=http>entity body</span> of the
   response received so far
   (<span title="dom-XMLHttpRequest-LOADING">LOADING</span>) or the complete
-  entity body of the response
+  <span data-anolis-spec=http>entity body</span> of the response
   (<span title="dom-XMLHttpRequest-DONE">DONE</span>). If the response
-  does not have an entity body the response entity body is null.</p>
+  does not have an <span data-anolis-spec=http>entity body</span>, the
+  <span>response entity body</span> is null.</p>
 
-  <p class="note">The <span>response entity body</span> is updated as part
+  <p class=note>The <span>response entity body</span> is updated as part
   of the <code title="dom-XMLHttpRequest-send">send()</code> algorithm.</p>
 
   <hr>
 
   <p>The <dfn id="text-response-entity-body">text response entity body</dfn>
-  is a <code>DOMString</code> representing the <span>response entity
-  body</span>. The text response entity body is the return value of the
+  is a string representing the <span>response entity body</span>. The
+  <span>text response entity body</span> is the return value of the
   following algorithm:</p>
 
   <ol>
-   <li><p>If the response entity body is null return the empty string and
-   terminate these steps.</p>
+   <li><p>If the <span>response entity body</span> is null, return the empty
+   string and terminate these steps.</p>
 
    <li><p>Let <var>charset</var> be the <span>final charset</span>.</p></li>
 
    <li><p>Let <var>mime</var> be the <span>final MIME type</span>.</p></li>
 
-   <li><p>If <var>charset</var> is null and <var>mime</var> is null,
+   <li><p>If <var>charset</var> is null and <var>mime</var> is either null,
    <code>text/xml</code>, <code>application/xml</code> or ends in
-   <code title>+xml</code> use the rules set forth in the XML
+   <code title>+xml</code>, use the rules set forth in the XML
    specifications to determine the character encoding. Let
-   <var>charset</var> be the determined character encoding.</p></li>
+   <var>charset</var> be the determined character encoding.
+   <span data-anolis-ref>XML</span> <span data-anolis-ref>XMLNS</span>
 
    <li><p>If <var>charset</var> is null and <var>mime</var> is
    <code>text/html</code> follow the rules set forth in the HTML
@@ -2287,14 +2289,15 @@ Content-Type: text/plain; charset=utf-8</code></pre>
    <li><p>If <var>charset</var> is null let <var>charset</var> be
    UTF-8.</p></li>
 
-   <li><p>Return the result of decoding the response entity body using
-   <var>charset</var>. Replace bytes or sequences of bytes that are not
-   valid accordng to the <var>charset</var> with a single
+   <li><p>Return the result of decoding the
+   <span>response entity body</span> using <var>charset</var>. Replace bytes
+   or sequences of bytes that are not valid accordng to the
+   <var>charset</var> with a single
    U+FFFD REPLACEMENT CHARACTER character. Remove one leading
-   U+FEFF BYTE ORDER MARK character, if present.</p></li>
+   U+FEFF BYTE ORDER MARK character, if present.
   </ol>
 
-  <p class="note">Authors are strongly encouraged to always encode their
+  <p class=note>Authors are strongly encouraged to always encode their
   resources using UTF-8.</p>
 
   <hr>
@@ -2336,7 +2339,7 @@ Content-Type: text/plain; charset=utf-8</code></pre>
     cetera) return null and terminate these steps.
     <span data-anolis-ref>XML</span> <span data-anolis-ref>XMLNS</span>
 
-    <p class="note">Scripts in the resulting document tree will not be executed,
+    <p class=note>Scripts in the resulting document tree will not be executed,
     resources referenced will not be loaded and no associated XSLT will be
     applied.</p> <!-- XXX more formally?! -->
    </li>
@@ -2499,7 +2502,7 @@ Content-Type: text/plain; charset=utf-8</code></pre>
   attribute must return the result of running these
   steps:</p>
 
-  <dl class="switch">
+  <dl class=switch>
    <dt>If <code title="dom-XMLHttpRequest-responseType">responseType</code>
    is the empty string or "<code title>text</code>"</dt>
    <dd>
@@ -2526,7 +2529,7 @@ Content-Type: text/plain; charset=utf-8</code></pre>
      these steps.</p></li>
 
      <li>
-      <dl class="switch">
+      <dl class=switch>
        <dt>If
        <code title="dom-XMLHttpRequest-responseType">responseType</code> is
        "<code title>arraybuffer</code>"</dt>
@@ -2632,7 +2635,7 @@ Content-Type: text/plain; charset=utf-8</code></pre>
   </ol>
 
 
-  <p class="note">The
+  <p class=note>The
   <code title="dom-XMLHttpRequest-responseXML">responseXML</code> attribute
   has XML in its name for historical reasons. It also returns HTML resources
   as documents.</p>

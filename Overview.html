@@ -2239,23 +2239,23 @@ Content-Type: text/plain; charset=utf-8</code></pre>
 
   <h4 id="response-entity-body-0"><span class="secno">4.8.5 </span>Response entity body</h4>
 
-  <p>The <dfn id="response-mime-type">response MIME type</dfn> is the MIME
-  type the <code>Content-Type</code> header contains without any
-  parameters or null if the header could not be parsed properly or was
+  <p>The <dfn id="response-mime-type">response MIME type</dfn> is the
+  MIME type the <code>Content-Type</code> header contains excluding any
+  parameters, or null if the response header can not be parsed or was
   omitted. The <dfn id="override-mime-type">override MIME type</dfn> is
   initially null and can get a value if <code title="dom-XMLHttpRequest-overrideMimeType"><a href="#dom-xmlhttprequest-overridemimetype">overrideMimeType()</a></code> is
   invoked. <dfn id="final-mime-type">Final MIME type</dfn> is the
-  override MIME type unless that is null in which case it is the response
-  MIME type.</p>
+  <a href="#override-mime-type">override MIME type</a> unless that is null in which case it is the <a href="#response-mime-type">response MIME type</a>.</p>
 
   <p>The <dfn id="response-charset">response charset</dfn> is the value of
   the <code>charset</code> parameter of the <code>Content-Type</code> header
-  or null if there was no <code>charset</code> parameter or if
-  the header could not be parsed properly or was omitted. The
+  or null if there was no <code>charset</code> parameter or the header could
+  not be parsed or was omitted. The
   <dfn id="override-charset">override charset</dfn> is initially null and
   can get a value if <code title="dom-XMLHttpRequest-overrideMimeType"><a href="#dom-xmlhttprequest-overridemimetype">overrideMimeType()</a></code> is invoked.
-  <dfn id="final-charset">Final charset</dfn> is the override charset unless
-  that is null in which case it is the response charset.</p>
+  <dfn id="final-charset">Final charset</dfn> is the
+  <a href="#override-charset">override charset</a> unless
+  that is null in which case it is the <a href="#response-charset">response charset</a>.</p>
 
 
 
@@ -2265,9 +2265,10 @@ Content-Type: text/plain; charset=utf-8</code></pre>
   fragment of the <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-7.2">entity body</a> of the
   response received so far
   (<a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a>) or the complete
-  entity body of the response
+  <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-7.2">entity body</a> of the response
   (<a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>). If the response
-  does not have an entity body the response entity body is null.</p>
+  does not have an <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-7.2">entity body</a>, the
+  <a href="#response-entity-body">response entity body</a> is null.</p>
 
   <p class="note">The <a href="#response-entity-body">response entity body</a> is updated as part
   of the <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code> algorithm.</p>
@@ -2275,23 +2276,24 @@ Content-Type: text/plain; charset=utf-8</code></pre>
   <hr>
 
   <p>The <dfn id="text-response-entity-body">text response entity body</dfn>
-  is a <code>DOMString</code> representing the <a href="#response-entity-body">response entity
-  body</a>. The text response entity body is the return value of the
+  is a string representing the <a href="#response-entity-body">response entity body</a>. The
+  <a href="#text-response-entity-body">text response entity body</a> is the return value of the
   following algorithm:</p>
 
   <ol>
-   <li><p>If the response entity body is null return the empty string and
-   terminate these steps.</p>
+   <li><p>If the <a href="#response-entity-body">response entity body</a> is null, return the empty
+   string and terminate these steps.</p>
 
    <li><p>Let <var>charset</var> be the <a href="#final-charset">final charset</a>.</li>
 
    <li><p>Let <var>mime</var> be the <a href="#final-mime-type">final MIME type</a>.</li>
 
-   <li><p>If <var>charset</var> is null and <var>mime</var> is null,
+   <li><p>If <var>charset</var> is null and <var>mime</var> is either null,
    <code>text/xml</code>, <code>application/xml</code> or ends in
-   <code title="">+xml</code> use the rules set forth in the XML
+   <code title="">+xml</code>, use the rules set forth in the XML
    specifications to determine the character encoding. Let
-   <var>charset</var> be the determined character encoding.</li>
+   <var>charset</var> be the determined character encoding.
+   <a href="#refsXML">[XML]</a> <a href="#refsXMLNS">[XMLNS]</a>
 
    <li><p>If <var>charset</var> is null and <var>mime</var> is
    <code>text/html</code> follow the rules set forth in the HTML
@@ -2328,11 +2330,12 @@ Content-Type: text/plain; charset=utf-8</code></pre>
    <li><p>If <var>charset</var> is null let <var>charset</var> be
    UTF-8.</li>
 
-   <li><p>Return the result of decoding the response entity body using
-   <var>charset</var>. Replace bytes or sequences of bytes that are not
-   valid accordng to the <var>charset</var> with a single
+   <li><p>Return the result of decoding the
+   <a href="#response-entity-body">response entity body</a> using <var>charset</var>. Replace bytes
+   or sequences of bytes that are not valid accordng to the
+   <var>charset</var> with a single
    U+FFFD REPLACEMENT CHARACTER character. Remove one leading
-   U+FEFF BYTE ORDER MARK character, if present.</li>
+   U+FEFF BYTE ORDER MARK character, if present.
   </ol>
 
   <p class="note">Authors are strongly encouraged to always encode their
