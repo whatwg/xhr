@@ -2293,7 +2293,7 @@ Content-Type: text/plain; charset=utf-8</code></pre>
 
    <li><p>Return the result of decoding the
    <span>response entity body</span> using <var>charset</var>. Replace bytes
-   or sequences of bytes that are not valid accordng to the
+   or sequences of bytes that are not valid according to the
    <var>charset</var> with a single
    U+FFFD REPLACEMENT CHARACTER character. Remove one leading
    U+FEFF BYTE ORDER MARK character, if present.
@@ -2304,10 +2304,12 @@ Content-Type: text/plain; charset=utf-8</code></pre>
 
   <hr>
 
-  <p>The <dfn id="document-response-entity-body">document response entity
-  body</dfn> is either a <code data-anolis-spec=dom>Document</code> representing the
+  <p>The
+  <dfn id="document-response-entity-body">document response entity body</dfn>
+  is either a <code data-anolis-spec=dom>Document</code> representing the
   <span>response entity body</span> or null. If it is a
-  <code data-anolis-spec=dom>Document</code> its <span data-anolis-spec=html>origin</span> is the
+  <code data-anolis-spec=dom>Document</code>, its
+  <span data-anolis-spec=html>origin</span> is the
   <span><code>XMLHttpRequest</code> origin</span>. If the
   <span>document response entity body</span> has no value assigned to it let
   it be the return value of the following algorithm:</p>
@@ -2319,9 +2321,17 @@ Content-Type: text/plain; charset=utf-8</code></pre>
    <li><p>If <span>final MIME type</span> is not null,
    <code>text/html</code>, <code>text/xml</code>,
    <code>application/xml</code>, or does not end in
-   <code title>+xml</code>, return null and terminate these
-   steps.</p></li>
+   <code title>+xml</code>, return null and terminate these steps.
 
+   <li>
+    <p>If <code title=dom-XMLHttpRequest-responseType>responseType</code> is
+    the empty string and <span>final MIME type</span> is
+    <code>text/html</code>, return null and terminate these steps.
+
+    <p class=note>This is restricted to
+    <code title=dom-XMLHttpRequest-responseType>responseType</code> being
+    "<code title>document</code>" in order to prevent breaking legacy
+    content.
 
    <li>
     <p>If <span>final MIME type</span> is <code>text/html</code> let
@@ -2329,8 +2339,6 @@ Content-Type: text/plain; charset=utf-8</code></pre>
     the <span>response entity body</span> parsed following the rules set
     forth in the HTML specification for an HTML parser with scripting
     disabled. <span data-anolis-ref>HTML</span>
-   </li>
-
 
    <li>
     <p>Otherwise, let <var title>document</var> be a
@@ -2346,7 +2354,7 @@ Content-Type: text/plain; charset=utf-8</code></pre>
     applied.</p> <!-- XXX more formally?! -->
    </li>
 
-   <li><p>Return <var title>document</var>.</p></li>
+   <li><p>Return <var title>document</var>.
   </ol>
 
 
