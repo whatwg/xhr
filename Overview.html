@@ -2288,12 +2288,20 @@ Content-Type: text/plain; charset=utf-8</code></pre>
 
    <li><p>Let <var>mime</var> be the <a href="#final-mime-type">final MIME type</a>.</li>
 
-   <li><p>If <var>charset</var> is null and <var>mime</var> is either null,
-   <code>text/xml</code>, <code>application/xml</code> or ends in
-   <code title="">+xml</code>, use the rules set forth in the XML
-   specifications to determine the character encoding. Let
-   <var>charset</var> be the determined character encoding.
-   <a href="#refsXML">[XML]</a> <a href="#refsXMLNS">[XMLNS]</a>
+   <li>
+    <p>If <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code> is
+    the empty string, <var>charset</var> is null, and <var>mime</var> is
+    either null, <code>text/xml</code>, <code>application/xml</code> or ends
+    in <code title="">+xml</code>, use the rules set forth in the XML
+    specifications to determine the character encoding. Let
+    <var>charset</var> be the determined character encoding.
+    <a href="#refsXML">[XML]</a> <a href="#refsXMLNS">[XMLNS]</a>
+
+    <p class="note">This is restricted to
+    <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code> being
+    the empty string to keep the non-legacy
+    <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code> value
+    "<code title="">text</code>" simple.
 
    <li>
     <p>If <var>charset</var> is null then, for each of the rows in the

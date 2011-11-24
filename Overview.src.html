@@ -2247,12 +2247,20 @@ Content-Type: text/plain; charset=utf-8</code></pre>
 
    <li><p>Let <var>mime</var> be the <span>final MIME type</span>.</p></li>
 
-   <li><p>If <var>charset</var> is null and <var>mime</var> is either null,
-   <code>text/xml</code>, <code>application/xml</code> or ends in
-   <code title>+xml</code>, use the rules set forth in the XML
-   specifications to determine the character encoding. Let
-   <var>charset</var> be the determined character encoding.
-   <span data-anolis-ref>XML</span> <span data-anolis-ref>XMLNS</span>
+   <li>
+    <p>If <code title=dom-XMLHttpRequest-responseType>responseType</code> is
+    the empty string, <var>charset</var> is null, and <var>mime</var> is
+    either null, <code>text/xml</code>, <code>application/xml</code> or ends
+    in <code title>+xml</code>, use the rules set forth in the XML
+    specifications to determine the character encoding. Let
+    <var>charset</var> be the determined character encoding.
+    <span data-anolis-ref>XML</span> <span data-anolis-ref>XMLNS</span>
+
+    <p class=note>This is restricted to
+    <code title=dom-XMLHttpRequest-responseType>responseType</code> being
+    the empty string to keep the non-legacy
+    <code title=dom-XMLHttpRequest-responseType>responseType</code> value
+    "<code title>text</code>" simple.
 
    <li>
     <p>If <var>charset</var> is null then, for each of the rows in the
