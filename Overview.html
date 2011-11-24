@@ -453,7 +453,7 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <a href="#xmlhttpreque
            attribute DOMString <a href="#dom-xmlhttprequest-responsetype" title="dom-XMLHttpRequest-responseType">responseType</a>;
   readonly attribute any <a href="#dom-xmlhttprequest-response" title="dom-XMLHttpRequest-response">response</a>;
   readonly attribute DOMString <a href="#dom-xmlhttprequest-responsetext" title="dom-XMLHttpRequest-responseText">responseText</a>;
-  readonly attribute <span>Document</span> <a href="#dom-xmlhttprequest-responsexml" title="dom-XMLHttpRequest-responseXML">responseXML</a>;
+  readonly attribute <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a> <a href="#dom-xmlhttprequest-responsexml" title="dom-XMLHttpRequest-responseXML">responseXML</a>;
 };
 
 [<a href="#dom-anonxmlhttprequest" title="dom-AnonXMLHttpRequest">Constructor</a>]
@@ -1359,7 +1359,7 @@ X-Test: one, two</code></pre>
       is transferred.</p>
      </dd>
 
-     <dt>If <var>data</var> is a <code>DOMString</code></dt>
+     <dt>If <var>data</var> is a string</dt>
 
      <dd>
       <p>Let <var>encoding</var> be UTF-8.</p>
@@ -2347,9 +2347,10 @@ Content-Type: text/plain; charset=utf-8</code></pre>
 
   <p>The
   <dfn id="document-response-entity-body">document response entity body</dfn>
-  is either a <code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a></code> representing the
-  <a href="#response-entity-body">response entity body</a> or null. If it is a
-  <code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a></code>, its
+  is either a
+  <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a>
+  representing the <a href="#response-entity-body">response entity body</a> or null. If it is a
+  <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a>, its
   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a> is the
   <a href="#xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</a>. If the
   <a href="#document-response-entity-body">document response entity body</a> has no value assigned to it let
@@ -2375,24 +2376,26 @@ Content-Type: text/plain; charset=utf-8</code></pre>
     content.
 
    <li>
-    <p>If <a href="#final-mime-type">final MIME type</a> is <code>text/html</code> let
-    <var title="">document</var> be <code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a></code> object that represents
-    the <a href="#response-entity-body">response entity body</a> parsed following the rules set
-    forth in the HTML specification for an HTML parser with scripting
-    disabled. <a href="#refsHTML">[HTML]</a>
+    <p>If <a href="#final-mime-type">final MIME type</a> is <code>text/html</code> let,
+    <var title="">document</var> be a
+    <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a> that
+    represents the <a href="#response-entity-body">response entity body</a> parsed following the
+    rules set forth in the HTML specification for an HTML parser with
+    scripting disabled. <a href="#refsHTML">[HTML]</a>
 
    <li>
     <p>Otherwise, let <var title="">document</var> be a
-    <code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a></code> object that represents the result of parsing the
-    <a href="#response-entity-body">response entity body</a> into a document tree following the
-    rules set forth in the XML specifications. If that fails
-    (unsupported character encoding, namespace well-formedness error et
-    cetera) return null and terminate these steps.
+    <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a>
+    that represents the result of parsing the
+    <a href="#response-entity-body">response entity body</a> following the rules set forth in the
+    XML specifications. If that fails (unsupported character encoding,
+    namespace well-formedness error, etc.) return null and terminate these
+    steps.
     <a href="#refsXML">[XML]</a> <a href="#refsXMLNS">[XMLNS]</a>
 
-    <p class="note">Scripts in the resulting document tree will not be executed,
-    resources referenced will not be loaded and no associated XSLT will be
-    applied.</p> <!-- XXX more formally?! -->
+    <p class="note">Scripts in the resulting document tree will not be
+    executed, resources referenced will not be loaded and no associated XSLT
+    will be applied.</p> <!-- XXX more formally?! -->
    </li>
 
    <li><p>Return <var title="">document</var>.
