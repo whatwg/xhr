@@ -223,33 +223,19 @@ archives:
 
 
 
-  <h2 id="conformance"><span class="secno">2 </span>Conformance</h2>
+<h2 id="conformance"><span class="secno">2 </span>Conformance</h2>
 
-  <p>Everything in this specification is normative except for diagrams,
-  examples, notes and sections marked non-normative.</p>
+<p>All diagrams, examples, and notes in this specification are
+non-normative, as are all sections explicitly marked non-normative.
+Everything else in this specification is normative.
 
-  <p>The key words must, must not, should, should not and may in this
-  document are to be interpreted as described in RFC 2119.
-  <a href="#refsRFC2119">[RFC2119]</a></p>
+<p>The key words "MUST", "MUST NOT", "REQUIRED", <!--"SHALL", "SHALL
+NOT",--> "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
+"OPTIONAL" in the normative parts of this specification are to be
+interpreted as described in RFC2119. For readability, these words do
+not appear in all uppercase letters in this specification.
+<a href="#refsRFC2119">[RFC2119]</a>
 
-  <p>This specification defines a single conformance class:</p>
-
-  <dl>
-   <dt><dfn id="conforming-user-agent">Conforming user agent</dfn></dt>
-
-   <dd>
-    <p>A user agent must behave as described in this
-    specification in order to be considered conformant.</p>
-
-    <p>User agents may implement algorithms given in
-    this specification in any way desired, so long as the end result is
-    indistinguishable from the result that would be obtained by the
-    specification's algorithms.</p>
-
-    <p class="note">This specification uses both the terms "conforming user
-    agent(s)" and "user agent(s)" to refer to this product class.</p>
-   </dd>
-  </dl>
 
   <h3 id="dependencies"><span class="secno">2.1 </span>Dependencies</h3>
 
@@ -258,56 +244,56 @@ archives:
   <dl>
 
    <dt>Cross-Origin Resource Sharing</dt>
-   <dd><p>A <a href="#conforming-user-agent">conforming user agent</a> must
+   <dd><p>A <span>conforming user agent</span> must
    support the algorithms of the Cross-Origin Resource Sharing
    specification. <a href="#refsCORS">[CORS]</a></dd>
 
 
    <dt>DOM4</dt>
-   <dd><p>A <a href="#conforming-user-agent">conforming user agent</a> must
+   <dd><p>A <span>conforming user agent</span> must
    support at least the subset of the functionality defined in DOM4 that
    this specification relies upon, such as various exceptions and
    <code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#eventtarget">EventTarget</a></code>. <a href="#refsDOM">[DOM]</a></dd>
 
    <dt>File API</dt>
-   <dd><p>A <a href="#conforming-user-agent">conforming user agent</a> must
+   <dd><p>A <span>conforming user agent</span> must
    support at least the subset of the functionality defined in File API that
    this specification relies upon, such as the <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code> and
    <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a></code> interfaces. <a href="#refsFILEAPI">[FILEAPI]</a></p>
 
 
    <dt>HTML</dt>
-   <dd><p>A <a href="#conforming-user-agent">conforming user agent</a> must
+   <dd><p>A <span>conforming user agent</span> must
    support at least the subset of the functionality defined in HTML that
    this specification relies upon, such as the basics of the
    <code class="external"><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#window">Window</a></code> object and serializing a <code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a></code>
    object. <a href="#refsHTML">[HTML]</a>
 
    <dt>HTTP</dt>
-   <dd><p>A <a href="#conforming-user-agent">conforming user agent</a> must
+   <dd><p>A <span>conforming user agent</span> must
    support some version of the HTTP protocol. Requirements regarding HTTP
    are made throughout the specification. <a href="#refsHTTP">[HTTP]</a>
 
 
    <dt>Progress Events</dt>
-   <dd><p>A <a href="#conforming-user-agent">conforming user agent</a> must support the
+   <dd><p>A <span>conforming user agent</span> must support the
    Progress Events specification.
    <a href="#refsPROGRESSEVENTS">[PROGRESSEVENTS]</a>
 
    <dt>Typed Array</dt>
-   <dd><p>A <a href="#conforming-user-agent">conforming user agent</a> must support the
+   <dd><p>A <span>conforming user agent</span> must support the
    <code class="external"><a href="http://www.khronos.org/registry/typedarray/specs/latest/#5">ArrayBuffer</a></code> object.
    <a href="#refsTYPEDARRAY">[TYPEDARRAY]</a>
 
 
    <dt>Web IDL</dt>
-   <dd><p>A <a href="#conforming-user-agent">conforming user agent</a> must also
+   <dd><p>A <span>conforming user agent</span> must also
    be a conforming implementation of the IDL fragments in this
    specification, as described in the Web IDL specification.
    <a href="#refsWEBIDL">[WEBIDL]</a>
 
    <dt>XML</dt>
-   <dd><p>A <a href="#conforming-user-agent">conforming user agent</a> must be a
+   <dd><p>A <span>conforming user agent</span> must be a
    conforming XML processor that reports violations of namespace
    well-formedness. <a href="#refsXML">[XML]</a>
    <a href="#refsXMLNS">[XMLNS]</a>
