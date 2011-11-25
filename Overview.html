@@ -39,7 +39,7 @@
 
    <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
 
-   <h2 class="no-num no-toc" id="w3c-doctype">Editor's Draft 24 November 2011</h2>
+   <h2 class="no-num no-toc" id="w3c-doctype">Editor's Draft 25 November 2011</h2>
 
    <dl>
     <dt>This Version:</dt>
@@ -64,7 +64,7 @@
 <p class="dontpublish"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-24 November 2011, the editor has made this specification available
+25 November 2011, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -507,7 +507,7 @@ one of the following is true:
  <code title="event-xhr-load"><a href="#event-xhr-load">load</a></code>,
  <code title="event-xhr-timeout"><a href="#event-xhr-timeout">timeout</a></code>, or
  <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>.
- <li><p>The <a href="#upload-complete-flag">upload complete flag</a> is false and the associated
+ <li><p>The <a href="#upload-complete-flag">upload complete flag</a> is unset and the associated
  <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object has one or more
  <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-listener" title="concept-event-listener">event listeners</a>
  registered whose <b>type</b> is
@@ -627,11 +627,10 @@ discarding any further data received from the network for them.
    during the transfer (e.g. infinite redirects).</dd>
   </dl>
 
-  <p>The <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a> state has an associated
-  <dfn id="send-flag"><code>send()</code> flag</dfn> that indicates whether
-  the <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code> method has been
-  invoked. It can be either true or false and has an initial value of
-  false.</p>
+  <p>The <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a> state has an
+  associated <dfn id="send-flag"><code>send()</code> flag</dfn> that
+  indicates whether the <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code>
+  method has been invoked. It is initially unset.</p>
 
   <p>The <dfn id="error-flag">error flag</dfn> indicates some type of
   network error or abortion. It is used during the
@@ -645,42 +644,42 @@ discarding any further data received from the network for them.
   metadata variables:</p>
 
   <dl>
-   <dt>The <dfn id="synchronous-flag">synchronous flag</dfn></dt>
+   <dt><dfn id="synchronous-flag">synchronous flag</dfn></dt>
    <dd>Set when <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/fetching-resources.html#fetch" title="fetch">fetching</a> is
    done synchronously. Initially unset.</dd>
 
-   <dt>The <dfn id="request-method">request method</dfn></dt>
+   <dt><dfn id="request-method">request method</dfn></dt>
    <dd>The HTTP method used in the request.</dd>
 
-   <dt>The <dfn id="request-url">request URL</dfn></dt>
+   <dt><dfn id="request-url">request URL</dfn></dt>
    <dd>The resolved <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/urls.html#url">URL</a> used in the
    request.</dd>
 
-   <dt>The <dfn id="request-username">request username</dfn></dt>
+   <dt><dfn id="request-username">request username</dfn></dt>
    <dd>The username used in the request or null if there is no
    username.</dd>
 
-   <dt>The <dfn id="request-password">request password</dfn></dt>
+   <dt><dfn id="request-password">request password</dfn></dt>
    <dd>The password used in the request or null if there is no
    password.</dd>
 
-   <dt>The <dfn id="author-request-headers">author request headers</dfn></dt>
+   <dt><dfn id="author-request-headers">author request headers</dfn></dt>
    <dd>A list consisting of HTTP header name/value pairs to be used in the
-   request.<p></p>
+   request.
 
-   <dt>The <dfn id="request-entity-body">request entity body</dfn></dt>
+   <dt><dfn id="request-entity-body">request entity body</dfn></dt>
    <dd>The <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-7.2">entity body</a> used in the
    request or null if there is no
    <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-7.2">entity body</a>.</dd>
 
+   <dt><dfn id="upload-complete-flag">upload complete flag</dfn></dt>
+   <dd>Set when no more events are to be dispatched on the
+   <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object. Initially unset.
 
-   <dt>The <dfn id="upload-complete-flag">upload complete flag</dfn></dt>
-   <dd>Used to determine when to stop sending upload progress events. The
-   flag is either true or false.</dd>
-
-   <dt>The <dfn id="upload-events-flag">upload events flag</dfn></dt>
-   <dd>Used to determine whether to send upload progress events for
-   cross-origin requests. The flag is either true or false.</dd>
+   <dt><dfn id="upload-events-flag">upload events flag</dfn></dt>
+   <dd>Set when event listeners are registered on the
+   <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object to determine whether a preflight
+   request is needed. Initially unset.</dd>
 
   </dl>
 
@@ -929,7 +928,7 @@ discarding any further data received from the network for them.
 
      <li><p>Empty the list of <a href="#author-request-headers">author request headers</a>.</p>
 
-     <li><p>Set the <a href="#send-flag"><code>send()</code> flag</a> to false.</li>
+     <li><p>Unset the <a href="#send-flag"><code>send()</code> flag</a>.
 
      <li><p>Set <a href="#response-entity-body">response entity body</a> to null.</li>
     </ul>
@@ -957,7 +956,7 @@ discarding any further data received from the network for them.
     <p>Throws an "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>"
     exception if the state is not
     <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a> or if the
-    <a href="#send-flag"><code>send()</code> flag</a> is true.</p>
+    <a href="#send-flag"><code>send()</code> flag</a> is set.</p>
 
     <p>Throws a "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror">SyntaxError</a></code>" exception if
     <var title="">header</var> is not a valid HTTP header field name or if
@@ -988,7 +987,7 @@ discarding any further data received from the network for them.
    "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>" exception and
    terminate these steps.
 
-   <li><p>If the <a href="#send-flag"><code>send()</code> flag</a> is true,
+   <li><p>If the <a href="#send-flag"><code>send()</code> flag</a> is set,
    <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> an
    "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>" exception and
    terminate these steps.
@@ -1139,7 +1138,7 @@ X-Test: one, two</code></pre>
     "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>" exception if the
     state is not <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a> or
     <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a>, or if
-    the <a href="#send-flag"><code>send()</code> flag</a> is true.</p>
+    the <a href="#send-flag"><code>send()</code> flag</a> is set.</p>
     <p>When set: throws an
     "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidaccesserror">InvalidAccessError</a></code>" exception if
     either the <a href="#synchronous-flag">synchronous flag</a> is set when there is an
@@ -1164,7 +1163,7 @@ X-Test: one, two</code></pre>
    "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>" exception and
    terminate these steps.
 
-   <li><p>If the <a href="#send-flag"><code>send()</code> flag</a> is true,
+   <li><p>If the <a href="#send-flag"><code>send()</code> flag</a> is set,
    <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> an
    "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>" exception and
    terminate these steps.
@@ -1222,7 +1221,7 @@ X-Test: one, two</code></pre>
     <p>Throws an "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>"
     exception if the state is not
     <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a> or if the
-    <a href="#send-flag"><code>send()</code> flag</a> is true.</p>
+    <a href="#send-flag"><code>send()</code> flag</a> is set.</p>
    </dd>
   </dl>
 
@@ -1246,7 +1245,7 @@ X-Test: one, two</code></pre>
    "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>" exception and
    terminate these steps.
 
-   <li><p>If the <a href="#send-flag"><code>send()</code> flag</a> is true,
+   <li><p>If the <a href="#send-flag"><code>send()</code> flag</a> is set,
    <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> an
    "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>" exception and
    terminate these steps.
@@ -1369,24 +1368,22 @@ X-Test: one, two</code></pre>
 
    <li><p>If the <a href="#synchronous-flag">synchronous flag</a> is unset and one or more
    event listeners are registered on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code>
-   object set the <a href="#upload-events-flag">upload events flag</a> to true. Otherwise, set
-   the <a href="#upload-events-flag">upload events flag</a> to false.</li>
+   object set the <a href="#upload-events-flag">upload events flag</a>.
 
 
    <li><p>Set the <a href="#error-flag">error flag</a> to false.</li>
 
 
-   <li><p>Set the <a href="#upload-complete-flag">upload complete flag</a> to true if there is no
+   <li><p>Set the <a href="#upload-complete-flag">upload complete flag</a> if there is no
    <a href="#request-entity-body">request entity body</a> or if the
-   <a href="#request-entity-body">request entity body</a> is empty. Otherwise, set the
-   <a href="#upload-complete-flag">upload complete flag</a> to false.</li>
+   <a href="#request-entity-body">request entity body</a> is empty.
 
 
    <li>
     <p>If the <a href="#synchronous-flag">synchronous flag</a> is unset, run these substeps:</p>
 
     <ol>
-     <li><p>Set the <a href="#send-flag"><code>send()</code> flag</a> to true.</li>
+     <li><p>Set the <a href="#send-flag"><code>send()</code> flag</a>.
 
      <li>
       <p><a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.
@@ -1398,7 +1395,7 @@ X-Test: one, two</code></pre>
 
      <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadstart"><a href="#event-xhr-loadstart">loadstart</a></code>.</li>
 
-     <li><p>If the <a href="#upload-complete-flag">upload complete flag</a> is false
+     <li><p>If the <a href="#upload-complete-flag">upload complete flag</a> is unset,
      <a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">fire a progress event</a> named <code title="event-xhr-loadstart"><a href="#event-xhr-loadstart">loadstart</a></code>
      on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.</li>
 
@@ -1493,7 +1490,8 @@ X-Test: one, two</code></pre>
        attribute's value.</dd>
 
        <dt>force preflight flag</dt>
-       <dd>The <a href="#upload-events-flag">upload events flag</a>.</dd>
+       <dd>True if the <a href="#upload-events-flag">upload events flag</a> is set, or false
+       otherwise.
       </dl>
 
       <p class="note"><a href="#request-username">Request username</a> and
@@ -1811,11 +1809,11 @@ X-Test: one, two</code></pre>
 
 
    <li>
-    <p>If the <a href="#upload-complete-flag">upload complete flag</a> is false, follow these
+    <p>If the <a href="#upload-complete-flag">upload complete flag</a> is unset, follow these
     substeps:</p>
 
     <ol>
-     <li><p>Set the <a href="#upload-complete-flag">upload complete flag</a> to true.</li>
+     <li><p>Set the <a href="#upload-complete-flag">upload complete flag</a>.
 
      <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <var title="">event</var>
      on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
@@ -1890,7 +1888,7 @@ X-Test: one, two</code></pre>
 
   <ul>
    <li><p>While the request entity body is being uploaded and the
-   <a href="#upload-complete-flag">upload complete flag</a> is false,
+   <a href="#upload-complete-flag">upload complete flag</a> is unset,
    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to
    <a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code> at
    the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object about every 50ms or for
@@ -1898,11 +1896,11 @@ X-Test: one, two</code></pre>
 
    <li>
     <p>If the <a href="#request-entity-body">request entity body</a> has been successfully
-    uploaded and the <a href="#upload-complete-flag">upload complete flag</a> is still false,
+    uploaded and the <a href="#upload-complete-flag">upload complete flag</a> is still unset,
     <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to run these substeps:</p>
 
     <ol>
-     <li><p>Set the <a href="#upload-complete-flag">upload complete flag</a> to true.</li>
+     <li><p>Set the <a href="#upload-complete-flag">upload complete flag</a>.
 
      <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-load"><a href="#event-xhr-load">load</a></code>
      at the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.</li>
@@ -1955,7 +1953,7 @@ X-Test: one, two</code></pre>
    <li>
     <p>If the state is <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a>,
     <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a> with the
-    <a href="#send-flag"><code>send()</code> flag</a> being false, or
+    <a href="#send-flag"><code>send()</code> flag</a> being unset, or
     <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a> go to the next step.</p>
 
     <p>Otherwise run these substeps:</p>
@@ -1963,7 +1961,7 @@ X-Test: one, two</code></pre>
     <ol>
      <li><p>Change the state to <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>.</li>
 
-     <li><p>Set the <a href="#send-flag"><code>send()</code> flag</a> to false.</li>
+     <li><p>Unset the <a href="#send-flag"><code>send()</code> flag</a>.
 
      <li><p><a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.</li>
 

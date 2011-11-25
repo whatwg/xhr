@@ -514,7 +514,7 @@ one of the following is true:
  <code title=event-xhr-load>load</code>,
  <code title=event-xhr-timeout>timeout</code>, or
  <code title=event-xhr-loadend>loadend</code>.
- <li><p>The <span>upload complete flag</span> is false and the associated
+ <li><p>The <span>upload complete flag</span> is unset and the associated
  <code>XMLHttpRequestUpload</code> object has one or more
  <span data-anolis-spec=dom title=concept-event-listener>event listeners</span>
  registered whose <b>type</b> is
@@ -634,11 +634,10 @@ discarding any further data received from the network for them.
    during the transfer (e.g. infinite redirects).</p></dd>
   </dl>
 
-  <p>The <span title="dom-XMLHttpRequest-OPENED">OPENED</span> state has an associated
-  <dfn id="send-flag"><code>send()</code> flag</dfn> that indicates whether
-  the <code title="dom-XMLHttpRequest-send">send()</code> method has been
-  invoked. It can be either true or false and has an initial value of
-  false.</p>
+  <p>The <span title="dom-XMLHttpRequest-OPENED">OPENED</span> state has an
+  associated <dfn id="send-flag"><code>send()</code> flag</dfn> that
+  indicates whether the <code title="dom-XMLHttpRequest-send">send()</code>
+  method has been invoked. It is initially unset.</p>
 
   <p>The <dfn id="error-flag">error flag</dfn> indicates some type of
   network error or abortion. It is used during the
@@ -652,42 +651,42 @@ discarding any further data received from the network for them.
   metadata variables:</p>
 
   <dl>
-   <dt>The <dfn>synchronous flag</dfn></dt>
+   <dt><dfn>synchronous flag</dfn></dt>
    <dd>Set when <span data-anolis-spec=html title=fetch>fetching</span> is
    done synchronously. Initially unset.</dd>
 
-   <dt>The <dfn>request method</dfn></dt>
+   <dt><dfn>request method</dfn></dt>
    <dd>The HTTP method used in the request.</dd>
 
-   <dt>The <dfn>request URL</dfn></dt>
+   <dt><dfn>request URL</dfn></dt>
    <dd>The resolved <span data-anolis-spec=html>URL</span> used in the
    request.</dd>
 
-   <dt>The <dfn>request username</dfn></dt>
+   <dt><dfn>request username</dfn></dt>
    <dd>The username used in the request or null if there is no
    username.</dd>
 
-   <dt>The <dfn>request password</dfn></dt>
+   <dt><dfn>request password</dfn></dt>
    <dd>The password used in the request or null if there is no
    password.</dd>
 
-   <dt>The <dfn id="author-request-headers">author request headers</dfn></dt>
+   <dt><dfn id="author-request-headers">author request headers</dfn></dt>
    <dd>A list consisting of HTTP header name/value pairs to be used in the
-   request.</p>
+   request.
 
-   <dt>The <dfn>request entity body</dfn></dt>
+   <dt><dfn>request entity body</dfn></dt>
    <dd>The <span data-anolis-spec=http>entity body</span> used in the
    request or null if there is no
    <span data-anolis-spec=http>entity body</span>.</dd>
 
+   <dt><dfn id="upload-complete-flag">upload complete flag</dfn></dt>
+   <dd>Set when no more events are to be dispatched on the
+   <code>XMLHttpRequestUpload</code> object. Initially unset.
 
-   <dt>The <dfn id="upload-complete-flag">upload complete flag</dfn></dt>
-   <dd>Used to determine when to stop sending upload progress events. The
-   flag is either true or false.</dd>
-
-   <dt>The <dfn id="upload-events-flag">upload events flag</dfn></dt>
-   <dd>Used to determine whether to send upload progress events for
-   cross-origin requests. The flag is either true or false.</dd>
+   <dt><dfn id="upload-events-flag">upload events flag</dfn></dt>
+   <dd>Set when event listeners are registered on the
+   <code>XMLHttpRequestUpload</code> object to determine whether a preflight
+   request is needed. Initially unset.</dd>
 
   </dl>
 
@@ -936,7 +935,7 @@ discarding any further data received from the network for them.
 
      <li><p>Empty the list of <span>author request headers</span>.</p>
 
-     <li><p>Set the <span><code>send()</code> flag</span> to false.</p></li>
+     <li><p>Unset the <span><code>send()</code> flag</span>.
 
      <li><p>Set <span>response entity body</span> to null.</p></li>
     </ul>
@@ -964,7 +963,7 @@ discarding any further data received from the network for them.
     <p>Throws an "<code data-anolis-spec=dom>InvalidStateError</code>"
     exception if the state is not
     <span title="dom-XMLHttpRequest-OPENED">OPENED</span> or if the
-    <span><code>send()</code> flag</span> is true.</p>
+    <span><code>send()</code> flag</span> is set.</p>
 
     <p>Throws a "<code data-anolis-spec=dom>SyntaxError</code>" exception if
     <var title>header</var> is not a valid HTTP header field name or if
@@ -995,7 +994,7 @@ discarding any further data received from the network for them.
    "<code data-anolis-spec=dom>InvalidStateError</code>" exception and
    terminate these steps.
 
-   <li><p>If the <span><code>send()</code> flag</span> is true,
+   <li><p>If the <span><code>send()</code> flag</span> is set,
    <span data-anolis-spec=dom title=concept-throw>throw</span> an
    "<code data-anolis-spec=dom>InvalidStateError</code>" exception and
    terminate these steps.
@@ -1146,7 +1145,7 @@ X-Test: one, two</code></pre>
     "<code data-anolis-spec=dom>InvalidStateError</code>" exception if the
     state is not <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span> or
     <span title="dom-XMLHttpRequest-OPENED">OPENED</span>, or if
-    the <span><code>send()</code> flag</span> is true.</p>
+    the <span><code>send()</code> flag</span> is set.</p>
     <p>When set: throws an
     "<code data-anolis-spec=dom>InvalidAccessError</code>" exception if
     either the <span>synchronous flag</span> is set when there is an
@@ -1171,7 +1170,7 @@ X-Test: one, two</code></pre>
    "<code data-anolis-spec=dom>InvalidStateError</code>" exception and
    terminate these steps.
 
-   <li><p>If the <span><code>send()</code> flag</span> is true,
+   <li><p>If the <span><code>send()</code> flag</span> is set,
    <span data-anolis-spec=dom title=concept-throw>throw</span> an
    "<code data-anolis-spec=dom>InvalidStateError</code>" exception and
    terminate these steps.
@@ -1229,7 +1228,7 @@ X-Test: one, two</code></pre>
     <p>Throws an "<code data-anolis-spec=dom>InvalidStateError</code>"
     exception if the state is not
     <span title="dom-XMLHttpRequest-OPENED">OPENED</span> or if the
-    <span><code>send()</code> flag</span> is true.</p>
+    <span><code>send()</code> flag</span> is set.</p>
    </dd>
   </dl>
 
@@ -1253,7 +1252,7 @@ X-Test: one, two</code></pre>
    "<code data-anolis-spec=dom>InvalidStateError</code>" exception and
    terminate these steps.
 
-   <li><p>If the <span><code>send()</code> flag</span> is true,
+   <li><p>If the <span><code>send()</code> flag</span> is set,
    <span data-anolis-spec=dom title=concept-throw>throw</span> an
    "<code data-anolis-spec=dom>InvalidStateError</code>" exception and
    terminate these steps.
@@ -1376,24 +1375,22 @@ X-Test: one, two</code></pre>
 
    <li><p>If the <span>synchronous flag</span> is unset and one or more
    event listeners are registered on the <code>XMLHttpRequestUpload</code>
-   object set the <span>upload events flag</span> to true. Otherwise, set
-   the <span>upload events flag</span> to false.</p></li>
+   object set the <span>upload events flag</span>.
 
 
    <li><p>Set the <span>error flag</span> to false.</p></li>
 
 
-   <li><p>Set the <span>upload complete flag</span> to true if there is no
+   <li><p>Set the <span>upload complete flag</span> if there is no
    <span>request entity body</span> or if the
-   <span>request entity body</span> is empty. Otherwise, set the
-   <span>upload complete flag</span> to false.</p></li>
+   <span>request entity body</span> is empty.
 
 
    <li>
     <p>If the <span>synchronous flag</span> is unset, run these substeps:</p>
 
     <ol>
-     <li><p>Set the <span><code>send()</code> flag</span> to true.</p></li>
+     <li><p>Set the <span><code>send()</code> flag</span>.
 
      <li>
       <p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.
@@ -1405,7 +1402,7 @@ X-Test: one, two</code></pre>
 
      <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadstart">loadstart</code>.</p></li>
 
-     <li><p>If the <span>upload complete flag</span> is false
+     <li><p>If the <span>upload complete flag</span> is unset,
      <span data-anolis-spec=progress-events title=concept-event-fire-progress>fire a progress event</span> named <code title="event-xhr-loadstart">loadstart</code>
      on the <code>XMLHttpRequestUpload</code> object.</p></li>
 
@@ -1500,7 +1497,8 @@ X-Test: one, two</code></pre>
        attribute's value.</dd>
 
        <dt>force preflight flag</dt>
-       <dd>The <span>upload events flag</span>.</dd>
+       <dd>True if the <span>upload events flag</span> is set, or false
+       otherwise.
       </dl>
 
       <p class=note><span>Request username</span> and
@@ -1818,11 +1816,11 @@ X-Test: one, two</code></pre>
 
 
    <li>
-    <p>If the <span>upload complete flag</span> is false, follow these
+    <p>If the <span>upload complete flag</span> is unset, follow these
     substeps:</p>
 
     <ol>
-     <li><p>Set the <span>upload complete flag</span> to true.</p></li>
+     <li><p>Set the <span>upload complete flag</span>.
 
      <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <var title>event</var>
      on the <code>XMLHttpRequestUpload</code> object.
@@ -1897,7 +1895,7 @@ X-Test: one, two</code></pre>
 
   <ul>
    <li><p>While the request entity body is being uploaded and the
-   <span>upload complete flag</span> is false,
+   <span>upload complete flag</span> is unset,
    <span data-anolis-spec=html>queue a task</span> to
    <span data-anolis-spec=progress-events title=concept-event-fire-progress>fire a progress event</span> named <code title="event-xhr-progress">progress</code> at
    the <code>XMLHttpRequestUpload</code> object about every 50ms or for
@@ -1905,11 +1903,11 @@ X-Test: one, two</code></pre>
 
    <li>
     <p>If the <span>request entity body</span> has been successfully
-    uploaded and the <span>upload complete flag</span> is still false,
+    uploaded and the <span>upload complete flag</span> is still unset,
     <span data-anolis-spec=html>queue a task</span> to run these substeps:</p>
 
     <ol>
-     <li><p>Set the <span>upload complete flag</span> to true.</p></li>
+     <li><p>Set the <span>upload complete flag</span>.
 
      <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-load">load</code>
      at the <code>XMLHttpRequestUpload</code> object.</p></li>
@@ -1962,7 +1960,7 @@ X-Test: one, two</code></pre>
    <li>
     <p>If the state is <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span>,
     <span title="dom-XMLHttpRequest-OPENED">OPENED</span> with the
-    <span><code>send()</code> flag</span> being false, or
+    <span><code>send()</code> flag</span> being unset, or
     <span title="dom-XMLHttpRequest-DONE">DONE</span> go to the next step.</p>
 
     <p>Otherwise run these substeps:</p>
@@ -1970,7 +1968,7 @@ X-Test: one, two</code></pre>
     <ol>
      <li><p>Change the state to <span title="dom-XMLHttpRequest-DONE">DONE</span>.</p></li>
 
-     <li><p>Set the <span><code>send()</code> flag</span> to false.</p></li>
+     <li><p>Unset the <span><code>send()</code> flag</span>.
 
      <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.</p></li>
 
