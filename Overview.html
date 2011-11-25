@@ -135,11 +135,9 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
   <p><em>This section is non-normative.</em></p>
 
-  <p>The <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object implements an interface exposed
-  by a scripting engine that allows scripts to perform HTTP client
-  functionality, such as submitting form data or loading data from a
-  server. It is the ECMAScript HTTP API.
+  <p>The <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object is the ECMAScript HTTP API.
   <a class="informative" href="#refsECMASCRIPT">[ECMASCRIPT]</a>
+  <!-- XXX elaborate on options -->
 
   <p>The name of the object is <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> for compatibility
   with the Web, though each component of this name is potentially
@@ -150,6 +148,7 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
   supports "requests" in a broad sense of the term as it pertains to HTTP;
   namely all activity involved with HTTP requests or responses for the
   defined HTTP methods.</p>
+  <!-- XXX need to improve point 2 -->
 
   <div class="example">
    <p>Some simple code to do something with data from an XML document
@@ -337,9 +336,6 @@ not appear in all uppercase letters in this specification.
 
 
   <h2 id="interface-xmlhttprequest"><span class="secno">4 </span>Interface <code title="">XMLHttpRequest</code></h2>
-
-  <p>The <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object can be used by scripts to issue
-  HTTP requests.</p>
 
   <pre class="idl">[NoInterfaceObject]
 interface <dfn id="xmlhttprequesteventtarget">XMLHttpRequestEventTarget</dfn> : <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#eventtarget">EventTarget</a> {
