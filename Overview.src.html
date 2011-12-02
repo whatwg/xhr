@@ -2313,6 +2313,22 @@ Content-Type: text/plain; charset=utf-8</code></pre>
   </ol>
 
 
+<p>The <dfn>JSON response entity body</dfn> is an ECMAScript value
+representing the <span>response entity body</span>. The
+<span>JSON response entity body</span> is the return value of the following
+algorithm:</p>
+
+<ol>
+ <li>Let <var title>JSON text</var> be the <span>response entity body</span>
+ decoded using UTF-8.</li>
+
+ <li>Return the result of invoking the <code title>parse</code> function
+ of the <code>JSON</code> object defined in ECMAScript, with
+ <var title>JSON text</var> as its only argument, or null if that function
+ throws an exception. <span data-anolis-ref>ECMASCRIPT</span>
+</ol>
+
+
   <p>The <dfn id="text-response-entity-body">text response entity body</dfn>
   is a string representing the <span>response entity body</span>. The
   <span>text response entity body</span> is the return value of the
@@ -2439,7 +2455,8 @@ Content-Type: text/plain; charset=utf-8</code></pre>
     the empty string (default),
     "<code title>arraybuffer</code>",
     "<code title>blob</code>",
-    "<code title>document</code>", and
+    "<code title>document</code>",
+    "<code title>json</code>", and
     "<code title>text</code>".</p>
     <p>Throws an "<code data-anolis-spec=dom>InvalidStateError</code>"
     exception if the state is
@@ -2480,7 +2497,8 @@ Content-Type: text/plain; charset=utf-8</code></pre>
     the empty string,
     "<code title>arraybuffer</code>",
     "<code title>blob</code>",
-    "<code title>document</code>", or
+    "<code title>document</code>",
+    "<code title>json</code>", or
     "<code title>text</code>"
     terminate these steps.</p></li>
 
@@ -2549,6 +2567,12 @@ Content-Type: text/plain; charset=utf-8</code></pre>
        "<code title>document</code>"</dt>
        <dd><p>Return the
        <span>document response entity body</span>.</p></dd>
+
+       <dt>If
+       <code title="dom-XMLHttpRequest-responseType">responseType</code> is
+       "<code title>json</code>"</dt>
+       <dd><p>Return the
+       <span>JSON response entity body</span>.</p></dd>
       </dl>
      </li>
     </ol>
@@ -2771,8 +2795,8 @@ interface <dfn>FormData</dfn> {
 <h3 class=no-num>Normative references</h3>
 <div id=anolis-references-normative></div>
 
-<h3 class=no-num>Informative references</h3>
-<div id=anolis-references-informative></div>
+<!--<h3 class=no-num>Informative references</h3>
+<div id=anolis-references-informative></div>-->
 
 
 

@@ -130,8 +130,7 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
    <li><a href="#the-append-method"><span class="secno">5.2 </span>The <code title="">append()</code> method</a></ol></li>
  <li><a class="no-num" href="#references">References</a>
   <ol class="toc">
-   <li><a class="no-num" href="#normative-references">Normative references</a></li>
-   <li><a class="no-num" href="#informative-references">Informative references</a></ol></li>
+   <li><a class="no-num" href="#normative-references">Normative references</a></ol></li>
  <li><a class="no-num" href="#acknowledgments">Acknowledgments</a></ol>
 <!--end-toc-->
 
@@ -2306,6 +2305,22 @@ Content-Type: text/plain; charset=utf-8</code></pre>
   </ol>
 
 
+<p>The <dfn id="json-response-entity-body">JSON response entity body</dfn> is an ECMAScript value
+representing the <a href="#response-entity-body">response entity body</a>. The
+<a href="#json-response-entity-body">JSON response entity body</a> is the return value of the following
+algorithm:</p>
+
+<ol>
+ <li>Let <var title="">JSON text</var> be the <a href="#response-entity-body">response entity body</a>
+ decoded using UTF-8.</li>
+
+ <li>Return the result of invoking the <code title="">parse</code> function
+ of the <code>JSON</code> object defined in ECMAScript, with
+ <var title="">JSON text</var> as its only argument, or null if that function
+ throws an exception. <a href="#refsECMASCRIPT">[ECMASCRIPT]</a>
+</ol>
+
+
   <p>The <dfn id="text-response-entity-body">text response entity body</dfn>
   is a string representing the <a href="#response-entity-body">response entity body</a>. The
   <a href="#text-response-entity-body">text response entity body</a> is the return value of the
@@ -2432,7 +2447,8 @@ Content-Type: text/plain; charset=utf-8</code></pre>
     the empty string (default),
     "<code title="">arraybuffer</code>",
     "<code title="">blob</code>",
-    "<code title="">document</code>", and
+    "<code title="">document</code>",
+    "<code title="">json</code>", and
     "<code title="">text</code>".</p>
     <p>Throws an "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>"
     exception if the state is
@@ -2473,7 +2489,8 @@ Content-Type: text/plain; charset=utf-8</code></pre>
     the empty string,
     "<code title="">arraybuffer</code>",
     "<code title="">blob</code>",
-    "<code title="">document</code>", or
+    "<code title="">document</code>",
+    "<code title="">json</code>", or
     "<code title="">text</code>"
     terminate these steps.</li>
 
@@ -2542,6 +2559,12 @@ Content-Type: text/plain; charset=utf-8</code></pre>
        "<code title="">document</code>"</dt>
        <dd><p>Return the
        <a href="#document-response-entity-body">document response entity body</a>.</dd>
+
+       <dt>If
+       <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code> is
+       "<code title="">json</code>"</dt>
+       <dd><p>Return the
+       <a href="#json-response-entity-body">JSON response entity body</a>.</dd>
       </dl>
      </li>
     </ol>
@@ -2771,6 +2794,9 @@ interface <dfn id="formdata">FormData</dfn> {
 <dt id="refsDOM">[DOM]
 <dd><cite><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html">DOM4</a></cite>, Anne van Kesteren, Aryeh Gregor and Ms2ger. W3C.
 
+<dt id="refsECMASCRIPT">[ECMASCRIPT]
+<dd><cite><a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">ECMAScript Language Specification</a></cite>. ECMA.
+
 <dt id="refsFILEAPI">[FILEAPI]
 <dd><cite><a href="http://dev.w3.org/2006/webapi/FileAPI/">File API</a></cite>, Arun Ranganathan and Jonas Sicking. W3C.
 
@@ -2810,11 +2836,8 @@ interface <dfn id="formdata">FormData</dfn> {
 
 </dl></div>
 
-<h3 class="no-num" id="informative-references">Informative references</h3>
-<div id="anolis-references-informative"><dl><dt id="refsECMASCRIPT">[ECMASCRIPT]
-<dd><cite><a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">ECMAScript Language Specification</a></cite>. ECMA.
-
-</dl></div>
+<!--<h3 class=no-num>Informative references</h3>
+<div id=anolis-references-informative></div>-->
 
 
 
