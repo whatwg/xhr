@@ -2223,6 +2223,96 @@ Content-Type: text/plain; charset=utf-8</code></pre>
 
   <hr>
 
+  <p>The
+  <dfn id="arraybuffer-response-entity-body">arraybuffer response entity body</dfn>
+  is an <code data-anolis-spec=typedarray>ArrayBuffer</code> representing
+  the <span>response entity body</span>. If the
+  <span>arraybuffer response entity body</span> has no value assigned to it
+  let it be the return value of the following algorithm:</p>
+
+  <ol>
+   <li><p>If the <span>response entity body</span> is null, return an empty
+   <code data-anolis-spec=typedarray>ArrayBuffer</code> object and terminate
+   these steps.</p></li>
+
+   <li><p>Return an <code data-anolis-spec=typedarray>ArrayBuffer</code>
+   object representing the <span>response entity body</span>.</p></li>
+  </ol>
+
+
+  <p>The
+  <dfn id="blob-response-entity-body">blob response entity body</dfn> is a
+  <code data-anolis-spec=fileapi>Blob</code> representing the <span>response entity body</span>. If
+  the <span>blob response entity body</span> has no value assigned to it let
+  it be the return value of the following algorithm:</p>
+
+  <ol>
+   <li><p>If the <span>response entity body</span> is null, return an empty
+   <code data-anolis-spec=fileapi>Blob</code> object and terminate these steps.</p></li>
+
+   <li><p>Return a <code data-anolis-spec=fileapi>Blob</code> object representing the
+   <span>response entity body</span>.</p></li>
+  </ol>
+
+
+
+  <p>The
+  <dfn id="document-response-entity-body">document response entity body</dfn>
+  is either a
+  <span data-anolis-spec=dom title=concept-document>document</span>
+  representing the <span>response entity body</span> or null. If it is a
+  <span data-anolis-spec=dom title=concept-document>document</span>, its
+  <span data-anolis-spec=html>origin</span> is the
+  <span><code>XMLHttpRequest</code> origin</span>. If the
+  <span>document response entity body</span> has no value assigned to it let
+  it be the return value of the following algorithm:</p>
+
+  <ol>
+   <li><p>If the <span>response entity body</span> is null, return null and
+   terminate these steps.</p></li>
+
+   <li><p>If <span>final MIME type</span> is not null,
+   <code>text/html</code>, <code>text/xml</code>,
+   <code>application/xml</code>, or does not end in
+   <code title>+xml</code>, return null and terminate these steps.
+
+   <li>
+    <p>If <code title=dom-XMLHttpRequest-responseType>responseType</code> is
+    the empty string and <span>final MIME type</span> is
+    <code>text/html</code>, return null and terminate these steps.
+
+    <p class=note>This is restricted to
+    <code title=dom-XMLHttpRequest-responseType>responseType</code> being
+    "<code title>document</code>" in order to prevent breaking legacy
+    content.
+
+   <li>
+    <p>If <span>final MIME type</span> is <code>text/html</code> let,
+    <var title>document</var> be a
+    <span data-anolis-spec=dom title=concept-document>document</span> that
+    represents the <span>response entity body</span> parsed following the
+    rules set forth in the HTML specification for an HTML parser with
+    scripting disabled. <span data-anolis-ref>HTML</span>
+
+   <li>
+    <p>Otherwise, let <var title>document</var> be a
+    <span data-anolis-spec=dom title=concept-document>document</span>
+    that represents the result of parsing the
+    <span>response entity body</span> following the rules set forth in the
+    XML specifications. If that fails (unsupported character encoding,
+    namespace well-formedness error, etc.) return null and terminate these
+    steps.
+    <span data-anolis-ref>XML</span> <span data-anolis-ref>XMLNS</span>
+
+    <p class=note>Scripts in the resulting document tree will not be
+    executed, resources referenced will not be loaded and no associated XSLT
+    will be applied.</p> <!-- XXX more formally?! -->
+   </li>
+
+   <li><p>Return <var title>document</var>.
+  </ol>
+
+
   <p>The <dfn id="text-response-entity-body">text response entity body</dfn>
   is a string representing the <span>response entity body</span>. The
   <span>text response entity body</span> is the return value of the
@@ -2290,96 +2380,6 @@ Content-Type: text/plain; charset=utf-8</code></pre>
 
   <p class=note>Authors are strongly encouraged to always encode their
   resources using UTF-8.</p>
-
-  <hr>
-
-  <p>The
-  <dfn id="document-response-entity-body">document response entity body</dfn>
-  is either a
-  <span data-anolis-spec=dom title=concept-document>document</span>
-  representing the <span>response entity body</span> or null. If it is a
-  <span data-anolis-spec=dom title=concept-document>document</span>, its
-  <span data-anolis-spec=html>origin</span> is the
-  <span><code>XMLHttpRequest</code> origin</span>. If the
-  <span>document response entity body</span> has no value assigned to it let
-  it be the return value of the following algorithm:</p>
-
-  <ol>
-   <li><p>If the <span>response entity body</span> is null, return null and
-   terminate these steps.</p></li>
-
-   <li><p>If <span>final MIME type</span> is not null,
-   <code>text/html</code>, <code>text/xml</code>,
-   <code>application/xml</code>, or does not end in
-   <code title>+xml</code>, return null and terminate these steps.
-
-   <li>
-    <p>If <code title=dom-XMLHttpRequest-responseType>responseType</code> is
-    the empty string and <span>final MIME type</span> is
-    <code>text/html</code>, return null and terminate these steps.
-
-    <p class=note>This is restricted to
-    <code title=dom-XMLHttpRequest-responseType>responseType</code> being
-    "<code title>document</code>" in order to prevent breaking legacy
-    content.
-
-   <li>
-    <p>If <span>final MIME type</span> is <code>text/html</code> let,
-    <var title>document</var> be a
-    <span data-anolis-spec=dom title=concept-document>document</span> that
-    represents the <span>response entity body</span> parsed following the
-    rules set forth in the HTML specification for an HTML parser with
-    scripting disabled. <span data-anolis-ref>HTML</span>
-
-   <li>
-    <p>Otherwise, let <var title>document</var> be a
-    <span data-anolis-spec=dom title=concept-document>document</span>
-    that represents the result of parsing the
-    <span>response entity body</span> following the rules set forth in the
-    XML specifications. If that fails (unsupported character encoding,
-    namespace well-formedness error, etc.) return null and terminate these
-    steps.
-    <span data-anolis-ref>XML</span> <span data-anolis-ref>XMLNS</span>
-
-    <p class=note>Scripts in the resulting document tree will not be
-    executed, resources referenced will not be loaded and no associated XSLT
-    will be applied.</p> <!-- XXX more formally?! -->
-   </li>
-
-   <li><p>Return <var title>document</var>.
-  </ol>
-
-
-  <p>The
-  <dfn id="blob-response-entity-body">blob response entity body</dfn> is a
-  <code data-anolis-spec=fileapi>Blob</code> representing the <span>response entity body</span>. If
-  the <span>blob response entity body</span> has no value assigned to it let
-  it be the return value of the following algorithm:</p>
-
-  <ol>
-   <li><p>If the <span>response entity body</span> is null, return an empty
-   <code data-anolis-spec=fileapi>Blob</code> object and terminate these steps.</p></li>
-
-   <li><p>Return a <code data-anolis-spec=fileapi>Blob</code> object representing the
-   <span>response entity body</span>.</p></li>
-  </ol>
-
-
-  <p>The
-  <dfn id="arraybuffer-response-entity-body">arraybuffer response entity body</dfn>
-  is an <code data-anolis-spec=typedarray>ArrayBuffer</code> representing
-  the <span>response entity body</span>. If the
-  <span>arraybuffer response entity body</span> has no value assigned to it
-  let it be the return value of the following algorithm:</p>
-
-  <ol>
-   <li><p>If the <span>response entity body</span> is null, return an empty
-   <code data-anolis-spec=typedarray>ArrayBuffer</code> object and terminate
-   these steps.</p></li>
-
-   <li><p>Return an <code data-anolis-spec=typedarray>ArrayBuffer</code>
-   object representing the <span>response entity body</span>.</p></li>
-  </ol>
 
 
 
