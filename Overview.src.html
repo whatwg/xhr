@@ -2319,11 +2319,12 @@ representing the <span>response entity body</span>. The
 algorithm:</p>
 
 <ol>
- <li>Let <var title>JSON text</var> be the <span>response entity body</span>
- decoded using UTF-8.</li>
+ <li><p>Let <var title>JSON text</var> be the
+ <span>response entity body</span> decoded using UTF-8. Remove one leading
+ U+FEFF BYTE ORDER MARK character, if present.</li>
 
- <li>Return the result of invoking the <code title>parse</code> function
- of the <code>JSON</code> object defined in ECMAScript, with
+ <li><p>Return the result of invoking the <code title>parse</code> function
+ of the <code title>JSON</code> object defined in ECMAScript, with
  <var title>JSON text</var> as its only argument, or null if that function
  throws an exception. <span data-anolis-ref>ECMASCRIPT</span>
 </ol>
