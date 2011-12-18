@@ -39,7 +39,7 @@
 
    <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
 
-   <h2 class="no-num no-toc" id="w3c-doctype">Editor's Draft 5 December 2011</h2>
+   <h2 class="no-num no-toc" id="w3c-doctype">Editor's Draft 18 December 2011</h2>
 
    <dl>
     <dt>This Version:</dt>
@@ -70,7 +70,7 @@
 <p class="dontpublish copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-5 December 2011, the editor has made this specification available
+18 December 2011, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -615,15 +615,14 @@ discarding any further data received from the network for them.
    during the transfer (e.g. infinite redirects).</dd>
   </dl>
 
-  <p>The <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a> state has an
-  associated <dfn id="send-flag"><code>send()</code> flag</dfn> that
-  indicates whether the <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code>
-  method has been invoked. It is initially unset.</p>
+  <p>The <dfn id="send-flag"><code>send()</code> flag</dfn> indicates
+  that the <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code> method has
+  been invoked. It is initially unset and is used during the
+  <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a> state.
 
   <p>The <dfn id="error-flag">error flag</dfn> indicates some type of
-  network error or abortion. It is used during the
-  <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a> state. It can be either
-  true or false and has an initial value of false.</p>
+  network error or request abortion. It is initially unset and is used
+  during the <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a> state.
 
 
   <h3 id="request"><span class="secno">4.7 </span>Request</h3>
@@ -1359,7 +1358,7 @@ X-Test: one, two</code></pre>
    object set the <a href="#upload-events-flag">upload events flag</a>.
 
 
-   <li><p>Set the <a href="#error-flag">error flag</a> to false.</li>
+   <li><p>Unset the <a href="#error-flag">error flag</a>.</li>
 
 
    <li><p>Set the <a href="#upload-complete-flag">upload complete flag</a> if there is no
@@ -1779,7 +1778,7 @@ X-Test: one, two</code></pre>
    the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#task-queue" title="task queue">task queues</a>,
    then remove them.
 
-   <li><p>Set the the <a href="#error-flag">error flag</a> to true.</li>
+   <li><p>Set the the <a href="#error-flag">error flag</a>.
 
    <li><p>Change the state to <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>.</li>
 
@@ -1936,7 +1935,7 @@ X-Test: one, two</code></pre>
    the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#task-queue" title="task queue">task queues</a>,
    then remove them.
 
-   <li><p>Set the <a href="#error-flag">error flag</a> to true.</li>
+   <li><p>Set the <a href="#error-flag">error flag</a>.
 
    <li>
     <p>If the state is <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a>,
@@ -2002,11 +2001,12 @@ X-Test: one, two</code></pre>
   steps:</p>
 
   <ol>
-   <li><p>If the state is <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a> or
-   <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a> return 0 and terminate these
-   steps.</li>
+   <li><p>If the state is
+   <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a> or
+   <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a>, return 0 and
+   terminate these steps.
 
-   <li><p>If the <a href="#error-flag">error flag</a> is true return 0 and terminate
+   <li><p>If the <a href="#error-flag">error flag</a> is set, return 0 and terminate
    these steps.</li>
 
    <li><p>Return the HTTP status code.</li>
@@ -2022,16 +2022,16 @@ X-Test: one, two</code></pre>
 
   <p>The
   <dfn id="dom-xmlhttprequest-statustext" title="dom-XMLHttpRequest-statusText"><code>statusText</code></dfn>
-  attribute must return the result of running these
-  steps:</p>
+  attribute must return the result of running these steps:
 
   <ol>
-   <li><p>If the state is <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a> or
-   <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a> return the empty string and
-   terminate these steps.</li>
+   <li><p>If the state is
+   <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a> or
+   <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a>, return the empty
+   string and terminate these steps.
 
-   <li><p>If the <a href="#error-flag">error flag</a> is true return the empty string and
-   terminate these steps.</li>
+   <li><p>If the <a href="#error-flag">error flag</a> is set, return the empty string and
+   terminate these steps.
 
    <li><p>Return the HTTP status text.</li>
   </ol>
@@ -2051,15 +2051,16 @@ X-Test: one, two</code></pre>
   method must run these steps:
 
   <ol>
-   <li><p>If the state is <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a> or
-   <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a> return null and terminate these
-   steps.</li>
+   <li><p>If the state is
+   <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a> or
+   <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a>, return null and
+   terminate these steps.
 
-   <li><p>If the <a href="#error-flag">error flag</a> is true return null
-   and terminate these steps.</li>
+   <li><p>If the <a href="#error-flag">error flag</a> is set, return null and terminate
+   these steps.
 
    <li><p>If any code point in <var>header</var> is higher than
-   U+00FF LATIN SMALL LETTER Y WITH DIAERESIS return null and terminate
+   U+00FF LATIN SMALL LETTER Y WITH DIAERESIS, return null and terminate
    these steps.</li>
 
    <li><p>Let <var>header</var> be the result of
@@ -2067,7 +2068,7 @@ X-Test: one, two</code></pre>
    <var>header</var>.</li> <!-- This sounds lame, but it works. -->
 
    <li><p>If <var>header</var> is a case-insensitive match for
-   <code>Set-Cookie</code> or <code>Set-Cookie2</code> return null and
+   <code>Set-Cookie</code> or <code>Set-Cookie2</code>, return null and
    terminate these steps.</li>
 
    <li><p>If <var>header</var> is a case-insensitive match for multiple HTTP
@@ -2127,12 +2128,13 @@ client.onreadystatechange = function() {
   method must run these steps:</p>
 
   <ol>
-   <li><p>If the state is <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a> or
-   <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a> return the empty string and
-   terminate these steps.</li>
+   <li><p>If the state is
+   <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a> or
+   <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a>, return the empty
+   string and terminate these steps.
 
-   <li><p>If the <a href="#error-flag">error flag</a> is true return the empty string and
-   terminate these steps.</li>
+   <li><p>If the <a href="#error-flag">error flag</a> is set, return the empty string and
+   terminate these steps.
 
    <li><p>Return all the HTTP headers, excluding headers that are a
    case-insensitive match for <code>Set-Cookie</code> or
@@ -2242,8 +2244,8 @@ Content-Type: text/plain; charset=utf-8</code></pre>
    <li><p>If the <a href="#response-entity-body">response entity body</a> is null, return an empty
    <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code> object and terminate these steps.</li>
 
-   <li><p>Return a <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code> object representing the
-   <a href="#response-entity-body">response entity body</a>.</li>
+   <li><p>Return a <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code> object
+   representing the <a href="#response-entity-body">response entity body</a>.
   </ol>
 
 
@@ -2292,7 +2294,7 @@ Content-Type: text/plain; charset=utf-8</code></pre>
     that represents the result of parsing the
     <a href="#response-entity-body">response entity body</a> following the rules set forth in the
     XML specifications. If that fails (unsupported character encoding,
-    namespace well-formedness error, etc.) return null and terminate these
+    namespace well-formedness error, etc.), return null and terminate these
     steps.
     <a href="#refsXML">[XML]</a> <a href="#refsXMLNS">[XMLNS]</a>
 
@@ -2522,10 +2524,10 @@ algorithm:</p>
     <ol>
      <li><p>If the state is not
      <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a> or
-     <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a> return the empty
+     <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>, return the empty
      string and terminate these steps.</li>
 
-     <li><p>If the <a href="#error-flag">error flag</a> is true return the empty string
+     <li><p>If the <a href="#error-flag">error flag</a> is set, return the empty string
      and terminate these steps.</li>
 
      <li><p>Return the <a href="#text-response-entity-body">text response entity body</a>.</li>
@@ -2535,10 +2537,10 @@ algorithm:</p>
    <dd>
     <ol>
      <li><p>If the state is not
-     <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a> return null and
+     <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>, return null and
      terminate these steps.</li>
 
-     <li><p>If the <a href="#error-flag">error flag</a> is true return null and terminate
+     <li><p>If the <a href="#error-flag">error flag</a> is set, return null and terminate
      these steps.</li>
 
      <li>
@@ -2604,11 +2606,12 @@ algorithm:</p>
    terminate these steps.
 
 
-   <li><p>If the state is not <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a> or
-   <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a> return the empty string and
-   terminate these steps.</li>
+   <li><p>If the state is not
+   <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a> or
+   <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>, return the empty
+   string and terminate these steps.</li>
 
-   <li><p>If the <a href="#error-flag">error flag</a> is true return the empty string and
+   <li><p>If the <a href="#error-flag">error flag</a> is set, return the empty string and
    terminate these steps.</li>
 
    <li><p>Return the <a href="#text-response-entity-body">text response entity body</a>.</li>
@@ -2644,11 +2647,12 @@ algorithm:</p>
    terminate these steps.</li>
 
 
-   <li><p>If the state is not <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a> return
-   null and terminate these steps.</li>
+   <li><p>If the state is not
+   <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>, return null and
+   terminate these steps.
 
-   <li><p>If the <a href="#error-flag">error flag</a> is true return null and terminate
-   these steps.</li>
+   <li><p>If the <a href="#error-flag">error flag</a> is set, return null and terminate
+   these steps.
 
    <li><p>Return the <a href="#document-response-entity-body">document response entity body</a>.</li>
   </ol>

@@ -623,15 +623,14 @@ discarding any further data received from the network for them.
    during the transfer (e.g. infinite redirects).</p></dd>
   </dl>
 
-  <p>The <span title="dom-XMLHttpRequest-OPENED">OPENED</span> state has an
-  associated <dfn id="send-flag"><code>send()</code> flag</dfn> that
-  indicates whether the <code title="dom-XMLHttpRequest-send">send()</code>
-  method has been invoked. It is initially unset.</p>
+  <p>The <dfn id="send-flag"><code>send()</code> flag</dfn> indicates
+  that the <code title="dom-XMLHttpRequest-send">send()</code> method has
+  been invoked. It is initially unset and is used during the
+  <span title="dom-XMLHttpRequest-OPENED">OPENED</span> state.
 
   <p>The <dfn id="error-flag">error flag</dfn> indicates some type of
-  network error or abortion. It is used during the
-  <span title="dom-XMLHttpRequest-DONE">DONE</span> state. It can be either
-  true or false and has an initial value of false.</p>
+  network error or request abortion. It is initially unset and is used
+  during the <span title="dom-XMLHttpRequest-DONE">DONE</span> state.
 
 
   <h3 id="request">Request</h3>
@@ -1367,7 +1366,7 @@ X-Test: one, two</code></pre>
    object set the <span>upload events flag</span>.
 
 
-   <li><p>Set the <span>error flag</span> to false.</p></li>
+   <li><p>Unset the <span>error flag</span>.</p></li>
 
 
    <li><p>Set the <span>upload complete flag</span> if there is no
@@ -1787,7 +1786,7 @@ X-Test: one, two</code></pre>
    the <span data-anolis-spec=html title="task queue">task queues</span>,
    then remove them.
 
-   <li><p>Set the the <span>error flag</span> to true.</p></li>
+   <li><p>Set the the <span>error flag</span>.
 
    <li><p>Change the state to <span title="dom-XMLHttpRequest-DONE">DONE</span>.</p></li>
 
@@ -1944,7 +1943,7 @@ X-Test: one, two</code></pre>
    the <span data-anolis-spec=html title="task queue">task queues</span>,
    then remove them.
 
-   <li><p>Set the <span>error flag</span> to true.</p></li>
+   <li><p>Set the <span>error flag</span>.
 
    <li>
     <p>If the state is <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span>,
@@ -2010,11 +2009,12 @@ X-Test: one, two</code></pre>
   steps:</p>
 
   <ol>
-   <li><p>If the state is <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span> or
-   <span title="dom-XMLHttpRequest-OPENED">OPENED</span> return 0 and terminate these
-   steps.</p></li>
+   <li><p>If the state is
+   <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span> or
+   <span title="dom-XMLHttpRequest-OPENED">OPENED</span>, return 0 and
+   terminate these steps.
 
-   <li><p>If the <span>error flag</span> is true return 0 and terminate
+   <li><p>If the <span>error flag</span> is set, return 0 and terminate
    these steps.</p></li>
 
    <li><p>Return the HTTP status code.</p></li>
@@ -2030,16 +2030,16 @@ X-Test: one, two</code></pre>
 
   <p>The
   <dfn title="dom-XMLHttpRequest-statusText"><code>statusText</code></dfn>
-  attribute must return the result of running these
-  steps:</p>
+  attribute must return the result of running these steps:
 
   <ol>
-   <li><p>If the state is <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span> or
-   <span title="dom-XMLHttpRequest-OPENED">OPENED</span> return the empty string and
-   terminate these steps.</p></li>
+   <li><p>If the state is
+   <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span> or
+   <span title="dom-XMLHttpRequest-OPENED">OPENED</span>, return the empty
+   string and terminate these steps.
 
-   <li><p>If the <span>error flag</span> is true return the empty string and
-   terminate these steps.</p></li>
+   <li><p>If the <span>error flag</span> is set, return the empty string and
+   terminate these steps.
 
    <li><p>Return the HTTP status text.</p></li>
   </ol>
@@ -2059,15 +2059,16 @@ X-Test: one, two</code></pre>
   method must run these steps:
 
   <ol>
-   <li><p>If the state is <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span> or
-   <span title="dom-XMLHttpRequest-OPENED">OPENED</span> return null and terminate these
-   steps.</p></li>
+   <li><p>If the state is
+   <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span> or
+   <span title="dom-XMLHttpRequest-OPENED">OPENED</span>, return null and
+   terminate these steps.
 
-   <li><p>If the <span>error flag</span> is true return null
-   and terminate these steps.</p></li>
+   <li><p>If the <span>error flag</span> is set, return null and terminate
+   these steps.
 
    <li><p>If any code point in <var>header</var> is higher than
-   U+00FF LATIN SMALL LETTER Y WITH DIAERESIS return null and terminate
+   U+00FF LATIN SMALL LETTER Y WITH DIAERESIS, return null and terminate
    these steps.</p></li>
 
    <li><p>Let <var>header</var> be the result of
@@ -2075,7 +2076,7 @@ X-Test: one, two</code></pre>
    <var>header</var>.</p></li> <!-- This sounds lame, but it works. -->
 
    <li><p>If <var>header</var> is a case-insensitive match for
-   <code>Set-Cookie</code> or <code>Set-Cookie2</code> return null and
+   <code>Set-Cookie</code> or <code>Set-Cookie2</code>, return null and
    terminate these steps.</p></li>
 
    <li><p>If <var>header</var> is a case-insensitive match for multiple HTTP
@@ -2135,12 +2136,13 @@ client.onreadystatechange = function() {
   method must run these steps:</p>
 
   <ol>
-   <li><p>If the state is <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span> or
-   <span title="dom-XMLHttpRequest-OPENED">OPENED</span> return the empty string and
-   terminate these steps.</p></li>
+   <li><p>If the state is
+   <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span> or
+   <span title="dom-XMLHttpRequest-OPENED">OPENED</span>, return the empty
+   string and terminate these steps.
 
-   <li><p>If the <span>error flag</span> is true return the empty string and
-   terminate these steps.</p></li>
+   <li><p>If the <span>error flag</span> is set, return the empty string and
+   terminate these steps.
 
    <li><p>Return all the HTTP headers, excluding headers that are a
    case-insensitive match for <code>Set-Cookie</code> or
@@ -2250,8 +2252,8 @@ Content-Type: text/plain; charset=utf-8</code></pre>
    <li><p>If the <span>response entity body</span> is null, return an empty
    <code data-anolis-spec=fileapi>Blob</code> object and terminate these steps.</p></li>
 
-   <li><p>Return a <code data-anolis-spec=fileapi>Blob</code> object representing the
-   <span>response entity body</span>.</p></li>
+   <li><p>Return a <code data-anolis-spec=fileapi>Blob</code> object
+   representing the <span>response entity body</span>.
   </ol>
 
 
@@ -2300,7 +2302,7 @@ Content-Type: text/plain; charset=utf-8</code></pre>
     that represents the result of parsing the
     <span>response entity body</span> following the rules set forth in the
     XML specifications. If that fails (unsupported character encoding,
-    namespace well-formedness error, etc.) return null and terminate these
+    namespace well-formedness error, etc.), return null and terminate these
     steps.
     <span data-anolis-ref>XML</span> <span data-anolis-ref>XMLNS</span>
 
@@ -2530,10 +2532,10 @@ algorithm:</p>
     <ol>
      <li><p>If the state is not
      <span title="dom-XMLHttpRequest-LOADING">LOADING</span> or
-     <span title="dom-XMLHttpRequest-DONE">DONE</span> return the empty
+     <span title="dom-XMLHttpRequest-DONE">DONE</span>, return the empty
      string and terminate these steps.</p></li>
 
-     <li><p>If the <span>error flag</span> is true return the empty string
+     <li><p>If the <span>error flag</span> is set, return the empty string
      and terminate these steps.</p></li>
 
      <li><p>Return the <span>text response entity body</span>.</p></li>
@@ -2543,10 +2545,10 @@ algorithm:</p>
    <dd>
     <ol>
      <li><p>If the state is not
-     <span title="dom-XMLHttpRequest-DONE">DONE</span> return null and
+     <span title="dom-XMLHttpRequest-DONE">DONE</span>, return null and
      terminate these steps.</p></li>
 
-     <li><p>If the <span>error flag</span> is true return null and terminate
+     <li><p>If the <span>error flag</span> is set, return null and terminate
      these steps.</p></li>
 
      <li>
@@ -2612,11 +2614,12 @@ algorithm:</p>
    terminate these steps.
 
 
-   <li><p>If the state is not <span title="dom-XMLHttpRequest-LOADING">LOADING</span> or
-   <span title="dom-XMLHttpRequest-DONE">DONE</span> return the empty string and
-   terminate these steps.</p></li>
+   <li><p>If the state is not
+   <span title="dom-XMLHttpRequest-LOADING">LOADING</span> or
+   <span title="dom-XMLHttpRequest-DONE">DONE</span>, return the empty
+   string and terminate these steps.</p></li>
 
-   <li><p>If the <span>error flag</span> is true return the empty string and
+   <li><p>If the <span>error flag</span> is set, return the empty string and
    terminate these steps.</p></li>
 
    <li><p>Return the <span>text response entity body</span>.</p></li>
@@ -2652,11 +2655,12 @@ algorithm:</p>
    terminate these steps.</p></li>
 
 
-   <li><p>If the state is not <span title="dom-XMLHttpRequest-DONE">DONE</span> return
-   null and terminate these steps.</p></li>
+   <li><p>If the state is not
+   <span title="dom-XMLHttpRequest-DONE">DONE</span>, return null and
+   terminate these steps.
 
-   <li><p>If the <span>error flag</span> is true return null and terminate
-   these steps.</p></li>
+   <li><p>If the <span>error flag</span> is set, return null and terminate
+   these steps.
 
    <li><p>Return the <span>document response entity body</span>.</p></li>
   </ol>
