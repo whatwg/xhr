@@ -1357,13 +1357,13 @@ X-Test: one, two</code></pre>
     to be included as the first parameter for compatibility reasons -->
    </li>
 
-   <li><p>If the <span>synchronous flag</span> is set release the
+   <li><p>If the <span>synchronous flag</span> is set, release the
    <span data-anolis-spec=html>storage mutex</span>.</p></li>
 
 
    <li><p>If the <span>synchronous flag</span> is unset and one or more
    event listeners are registered on the <code>XMLHttpRequestUpload</code>
-   object set the <span>upload events flag</span>.
+   object, set the <span>upload events flag</span>.
 
 
    <li><p>Unset the <span>error flag</span>.</p></li>
@@ -1856,6 +1856,8 @@ X-Test: one, two</code></pre>
    <li><p>If the <span>synchronous flag</span> is set, update the
    <span>response entity body</span>.</p></li>
 
+   <li><p>Unset the <span>synchronous flag</span>.
+
    <li><p>Change the state to <span title="dom-XMLHttpRequest-DONE">DONE</span>.</p></li>
 
    <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.</p></li>
@@ -1944,6 +1946,8 @@ X-Test: one, two</code></pre>
    then remove them.
 
    <li><p>Set the <span>error flag</span>.
+
+   <li><p>Unset the <span>synchronous flag</span>.
 
    <li>
     <p>If the state is <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span>,
