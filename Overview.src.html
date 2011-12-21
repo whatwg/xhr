@@ -1120,6 +1120,12 @@ X-Test: one, two</code></pre>
    <li><p>Set its value to the new value.
   </ol>
 
+  <p class=note>This implies that the
+  <code title="dom-XMLHttpRequest-timeout">timeout</code> attribute can be
+  set while <span data-anolis-spec=html title=fetch>fetching</span> is in
+  progress. If that occurs it will still be measured relative to the start
+  of <span data-anolis-spec=html title=fetch>fetching</span>.
+
 
   <h4>The <code title>withCredentials</code> attribute</h4>
 
@@ -2850,6 +2856,7 @@ interface <dfn>FormData</dfn> {
   Ian Davis,
   Ian Hickson,
   Ivan Herman,
+  Jarred Nicholls,
   Jeff Walden,
   Jens Lindstr&ouml;m,
   Jim Deegan,

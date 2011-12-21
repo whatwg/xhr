@@ -1112,6 +1112,12 @@ X-Test: one, two</code></pre>
    <li><p>Set its value to the new value.
   </ol>
 
+  <p class="note">This implies that the
+  <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code> attribute can be
+  set while <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/fetching-resources.html#fetch" title="fetch">fetching</a> is in
+  progress. If that occurs it will still be measured relative to the start
+  of <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/fetching-resources.html#fetch" title="fetch">fetching</a>.
+
 
   <h4 id="the-withcredentials-attribute"><span class="secno">4.7.4 </span>The <code title="">withCredentials</code> attribute</h4>
 
@@ -2891,6 +2897,7 @@ interface <dfn id="formdata">FormData</dfn> {
   Ian Davis,
   Ian Hickson,
   Ivan Herman,
+  Jarred Nicholls,
   Jeff Walden,
   Jens Lindstr&ouml;m,
   Jim Deegan,
