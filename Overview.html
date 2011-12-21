@@ -1,6 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"><html lang="en-US"><head>
+<!DOCTYPE html><html lang="en-US"><head>
+  <meta charset="utf-8">
   <title>XMLHttpRequest</title>
-  <style type="text/css">
+  <style>
    pre.idl { border:solid thin; background:#eee; color:#000; padding:0.5em }
    pre.idl :link, pre.idl :visited { color:inherit; background:transparent }
    pre code { color:inherit; background:transparent }
@@ -39,13 +40,13 @@
 
    <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
 
-   <h2 class="no-num no-toc" id="w3c-doctype">Editor's Draft 18 December 2011</h2>
+   <h2 class="no-num no-toc" id="w3c-doctype">Editor's Draft 21 December 2011</h2>
 
    <dl>
     <dt>This Version:</dt>
     <dd class="dontpublish"><a href="http://dvcs.w3.org/hg/xhr/raw-file/tip/Overview.html">http://dvcs.w3.org/hg/xhr/raw-file/tip/Overview.html</a></dd>
     <dt class="dontpublish">Participate:</dt>
-    <dd class="dontpublish"><a href="mailto:public-webapps@w3.org?subject=[XHR]%20">public-webapps@w3.org</a>
+    <dd class="dontpublish"><a href="mailto:public-webapps@w3.org?subject==%5Bxhr%5D%20">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>)
     <dd class="dontpublish"><a href="http://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
 
     <dt>Previous Versions:</dt>
@@ -70,7 +71,7 @@
 <p class="dontpublish copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-18 December 2011, the editor has made this specification available
+21 December 2011, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -103,22 +104,22 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
    <li><a href="#states"><span class="secno">4.6 </span>States</a></li>
    <li><a href="#request"><span class="secno">4.7 </span>Request</a>
     <ol class="toc">
-     <li><a href="#the-open-method"><span class="secno">4.7.1 </span>The <code title="">open()</code> method</a></li>
-     <li><a href="#the-setrequestheader-method"><span class="secno">4.7.2 </span>The <code title="">setRequestHeader()</code> method</a></li>
+     <li><a href="#the-open()-method"><span class="secno">4.7.1 </span>The <code title="">open()</code> method</a></li>
+     <li><a href="#the-setrequestheader()-method"><span class="secno">4.7.2 </span>The <code title="">setRequestHeader()</code> method</a></li>
      <li><a href="#the-timeout-attribute"><span class="secno">4.7.3 </span>The <code title="">timeout</code> attribute</a></li>
      <li><a href="#the-withcredentials-attribute"><span class="secno">4.7.4 </span>The <code title="">withCredentials</code> attribute</a></li>
      <li><a href="#the-upload-attribute"><span class="secno">4.7.5 </span>The <code title="">upload</code> attribute</a></li>
-     <li><a href="#the-send-method"><span class="secno">4.7.6 </span>The <code title="">send()</code> method</a></li>
-     <li><a href="#infrastructure-for-the-send-method"><span class="secno">4.7.7 </span>Infrastructure for the <code title="">send()</code> method</a></li>
-     <li><a href="#the-abort-method"><span class="secno">4.7.8 </span>The <code title="">abort()</code> method</a></ol></li>
+     <li><a href="#the-send()-method"><span class="secno">4.7.6 </span>The <code title="">send()</code> method</a></li>
+     <li><a href="#infrastructure-for-the-send()-method"><span class="secno">4.7.7 </span>Infrastructure for the <code title="">send()</code> method</a></li>
+     <li><a href="#the-abort()-method"><span class="secno">4.7.8 </span>The <code title="">abort()</code> method</a></ol></li>
    <li><a href="#response"><span class="secno">4.8 </span>Response</a>
     <ol class="toc">
      <li><a href="#the-status-attribute"><span class="secno">4.8.1 </span>The <code title="">status</code> attribute</a></li>
      <li><a href="#the-statustext-attribute"><span class="secno">4.8.2 </span>The <code title="">statusText</code> attribute</a></li>
-     <li><a href="#the-getresponseheader-method"><span class="secno">4.8.3 </span>The <code title="">getResponseHeader()</code> method</a></li>
-     <li><a href="#the-getallresponseheaders-method"><span class="secno">4.8.4 </span>The <code title="">getAllResponseHeaders()</code> method</a></li>
+     <li><a href="#the-getresponseheader()-method"><span class="secno">4.8.3 </span>The <code title="">getResponseHeader()</code> method</a></li>
+     <li><a href="#the-getallresponseheaders()-method"><span class="secno">4.8.4 </span>The <code title="">getAllResponseHeaders()</code> method</a></li>
      <li><a href="#response-entity-body-0"><span class="secno">4.8.5 </span>Response entity body</a></li>
-     <li><a href="#the-overridemimetype-method"><span class="secno">4.8.6 </span>The <code title="">overrideMimeType()</code> method</a></li>
+     <li><a href="#the-overridemimetype()-method"><span class="secno">4.8.6 </span>The <code title="">overrideMimeType()</code> method</a></li>
      <li><a href="#the-responsetype-attribute"><span class="secno">4.8.7 </span>The <code title="">responseType</code> attribute</a></li>
      <li><a href="#the-response-attribute"><span class="secno">4.8.8 </span>The <code title="">response</code> attribute</a></li>
      <li><a href="#the-responsetext-attribute"><span class="secno">4.8.9 </span>The <code title="">responseText</code> attribute</a></li>
@@ -127,7 +128,7 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
  <li><a href="#interface-formdata"><span class="secno">5 </span>Interface <code title="">FormData</code></a>
   <ol class="toc">
    <li><a href="#formdata-constructors"><span class="secno">5.1 </span>Constructors</a></li>
-   <li><a href="#the-append-method"><span class="secno">5.2 </span>The <code title="">append()</code> method</a></ol></li>
+   <li><a href="#the-append()-method"><span class="secno">5.2 </span>The <code title="">append()</code> method</a></ol></li>
  <li><a class="no-num" href="#references">References</a>
   <ol class="toc">
    <li><a class="no-num" href="#normative-references">Normative references</a></ol></li>
@@ -676,7 +677,7 @@ discarding any further data received from the network for them.
 
 
 
-  <h4 id="the-open-method"><span class="secno">4.7.1 </span>The <code title="">open()</code> method</h4>
+  <h4 id="the-open()-method"><span class="secno">4.7.1 </span>The <code title="">open()</code> method</h4>
 
   <dl class="domintro">
    <dt><var title="">client</var> . <code title="dom-XMLHttpRequest-open"><a href="#dom-xmlhttprequest-open">open(<var title="">method</var>,
@@ -883,9 +884,9 @@ discarding any further data received from the network for them.
     the <var title="">url</var> argument.</p>
    </li>
 
-   <li><p><a href="#terminate-abort" title="terminate abort()">Terminate the <code>abort()</code> algorithm</a>.</li>
+   <li><p><a href="#terminate-abort()" title="terminate abort()">Terminate the <code>abort()</code> algorithm</a>.</li>
 
-   <li><p><a href="#terminate-send" title="terminate send()">Terminate the <code>send()</code> algorithm</a>.</li>
+   <li><p><a href="#terminate-send()" title="terminate send()">Terminate the <code>send()</code> algorithm</a>.</li>
 
    <li><p>The user agent should cancel any network
    activity for which the object is responsible.</li>
@@ -929,7 +930,7 @@ discarding any further data received from the network for them.
 
 
 
-  <h4 id="the-setrequestheader-method"><span class="secno">4.7.2 </span>The <code title="">setRequestHeader()</code> method</h4>
+  <h4 id="the-setrequestheader()-method"><span class="secno">4.7.2 </span>The <code title="">setRequestHeader()</code> method</h4>
 
   <dl class="domintro">
    <dt><var title="">client</var> . <code title="dom-XMLHttpRequest-setRequestHeader"><a href="#dom-xmlhttprequest-setrequestheader">setRequestHeader(<var title="">header</var>, <var title="">value</var>)</a></code></dt>
@@ -1195,7 +1196,7 @@ X-Test: one, two</code></pre>
 
 
 
-  <h4 id="the-send-method"><span class="secno">4.7.6 </span>The <code title="">send()</code> method</h4>
+  <h4 id="the-send()-method"><span class="secno">4.7.6 </span>The <code title="">send()</code> method</h4>
 
   <dl class="domintro">
    <dt><var title="">client</var> . <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send(<var title="">data</var>)</a></code></dt>
@@ -1215,10 +1216,10 @@ X-Test: one, two</code></pre>
   <p>The
   <dfn id="dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send"><code>send(<var>data</var>)</code></dfn>
   method must run these steps (unless otherwise noted). This algorithm can
-  be <dfn id="terminate-send" title="terminate send()">terminated</dfn> by invoking the
+  be <dfn id="terminate-send()" title="terminate send()">terminated</dfn> by invoking the
   <code title="dom-XMLHttpRequest-open"><a href="#dom-xmlhttprequest-open">open()</a></code> or
   <code title="dom-XMLHttpRequest-abort"><a href="#dom-xmlhttprequest-abort">abort()</a></code> method. When it is
-  <a href="#terminate-send" title="terminate send()">terminated</a> the user agent
+  <a href="#terminate-send()" title="terminate send()">terminated</a> the user agent
   must terminate the algorithm after finishing the step it is on.</p>
 
   <p class="note">The <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code>
@@ -1614,7 +1615,7 @@ X-Test: one, two</code></pre>
   This ensures that authors have a predictable API.</p>
 
 
-  <h4 id="infrastructure-for-the-send-method"><span class="secno">4.7.7 </span>Infrastructure for the <code title="">send()</code> method</h4>
+  <h4 id="infrastructure-for-the-send()-method"><span class="secno">4.7.7 </span>Infrastructure for the <code title="">send()</code> method</h4>
 
   <p>The <dfn id="same-origin-request-event-rules">same-origin request event rules</dfn> are as follows:</p>
 
@@ -1905,7 +1906,7 @@ X-Test: one, two</code></pre>
 
 
 
-  <h4 id="the-abort-method"><span class="secno">4.7.8 </span>The <code title="">abort()</code> method</h4>
+  <h4 id="the-abort()-method"><span class="secno">4.7.8 </span>The <code title="">abort()</code> method</h4>
 
   <dl class="domintro">
    <dt><var title="">client</var> . <code title="dom-XMLHttpRequest-abort"><a href="#dom-xmlhttprequest-abort">abort()</a></code></dt>
@@ -1915,9 +1916,9 @@ X-Test: one, two</code></pre>
   <p>The
   <dfn id="dom-xmlhttprequest-abort" title="dom-XMLHttpRequest-abort"><code>abort()</code></dfn>
   method must run these steps (unless otherwise noted). This algorithm can
-  be <dfn id="terminate-abort" title="terminate abort()">terminated</dfn> by invoking the
+  be <dfn id="terminate-abort()" title="terminate abort()">terminated</dfn> by invoking the
   <code title="dom-XMLHttpRequest-open"><a href="#dom-xmlhttprequest-open">open()</a></code> method. When it is
-  <a href="#terminate-abort" title="terminate abort()">terminated</a> the user agent
+  <a href="#terminate-abort()" title="terminate abort()">terminated</a> the user agent
   must terminate the algorithm after finishing the step it is on.
 
   <p class="note">The <code title="dom-XMLHttpRequest-abort"><a href="#dom-xmlhttprequest-abort">abort()</a></code>
@@ -1926,7 +1927,7 @@ X-Test: one, two</code></pre>
   handler.</p>
 
   <ol>
-   <li><p><a href="#terminate-send" title="terminate send()">Terminate the <code>send()</code> algorithm</a>.</li>
+   <li><p><a href="#terminate-send()" title="terminate send()">Terminate the <code>send()</code> algorithm</a>.</li>
 
    <li><p>The user agent should cancel any network
    activity for which the object is responsible.</li>
@@ -2041,7 +2042,7 @@ X-Test: one, two</code></pre>
   </ol>
 
 
-  <h4 id="the-getresponseheader-method"><span class="secno">4.8.3 </span>The <code title="">getResponseHeader()</code> method</h4>
+  <h4 id="the-getresponseheader()-method"><span class="secno">4.8.3 </span>The <code title="">getResponseHeader()</code> method</h4>
 
   <dl class="domintro">
    <dt><var title="">client</var> . <code title="dom-XMLHttpRequest-getResponseHeader"><a href="#dom-xmlhttprequest-getresponseheader">getResponseHeader(<var title="">header</var>)</a></code></dt>
@@ -2118,7 +2119,7 @@ client.onreadystatechange = function() {
   </div>
 
 
-  <h4 id="the-getallresponseheaders-method"><span class="secno">4.8.4 </span>The <code title="">getAllResponseHeaders()</code> method</h4>
+  <h4 id="the-getallresponseheaders()-method"><span class="secno">4.8.4 </span>The <code title="">getAllResponseHeaders()</code> method</h4>
 
   <dl class="domintro">
    <dt><var title="">client</var> . <code title="dom-XMLHttpRequest-getAllResponseHeaders"><a href="#dom-xmlhttprequest-getallresponseheaders">getAllResponseHeaders()</a></code></dt>
@@ -2398,7 +2399,7 @@ algorithm:</p>
 
 
 
-  <h4 id="the-overridemimetype-method"><span class="secno">4.8.6 </span>The <code title="">overrideMimeType()</code> method</h4>
+  <h4 id="the-overridemimetype()-method"><span class="secno">4.8.6 </span>The <code title="">overrideMimeType()</code> method</h4>
 
   <dl class="domintro">
    <dt><var title="">client</var> . <code title="dom-XMLHttpRequest-overrideMimeType"><a href="#dom-xmlhttprequest-overridemimetype">overrideMimeType(<var title="">mime</var>)</a></code></dt>
@@ -2763,7 +2764,7 @@ interface <dfn id="formdata">FormData</dfn> {
   <var>form</var>.
 
 
-  <h3 id="the-append-method"><span class="secno">5.2 </span>The <code title="">append()</code> method</h3>
+  <h3 id="the-append()-method"><span class="secno">5.2 </span>The <code title="">append()</code> method</h3>
 
   <dl class="domintro">
    <dt><var title="">fd</var> . <code title="dom-FormData-append"><a href="#dom-formdata-append">append(<var title="">name</var>, <var title="">value</var> [, <var title="">filename</var>])</a></code></dt>
@@ -2896,6 +2897,7 @@ interface <dfn id="formdata">FormData</dfn> {
   Joe Farro,
   Jonas Sicking,
   Julian Reschke,
+  &#21570;&#24247;&#35946;&#65288;Kang-Hao Lu&#65289;,
   Karl Dubost,
   Lachlan Hunt,
   Maciej Stachowiak,
