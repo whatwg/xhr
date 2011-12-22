@@ -40,7 +40,7 @@
 
    <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
 
-   <h2 class="no-num no-toc" id="w3c-doctype">Editor's Draft 21 December 2011</h2>
+   <h2 class="no-num no-toc" id="w3c-doctype">Editor's Draft 22 December 2011</h2>
 
    <dl>
     <dt>This Version:</dt>
@@ -72,7 +72,7 @@
 <p class="dontpublish copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-21 December 2011, the editor has made this specification available
+22 December 2011, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -361,6 +361,15 @@ interface <dfn id="xmlhttprequestupload">XMLHttpRequestUpload</dfn> : <a href="#
 
 };
 
+enum <dfn id="xmlhttprequestresponsetype">XMLHttpRequestResponseType</dfn> {
+  "",
+  "arraybuffer",
+  "blob",
+  "document",
+  "json",
+  "text"
+}
+
 [<a href="#dom-xmlhttprequest" title="dom-XMLHttpRequest">Constructor</a>]
 interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <a href="#xmlhttprequesteventtarget">XMLHttpRequestEventTarget</a> {
   // <a href="#event-handlers">event handler</a>
@@ -384,7 +393,7 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <a href="#xmlhttpreque
   void <a href="#dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send">send</a>(<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#5">ArrayBuffer</a> <var>data</var>);
   void <a href="#dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send">send</a>(<a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> <var>data</var>);
   void <a href="#dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send">send</a>(<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a> <var>data</var>);
-  void <a href="#dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send">send</a>([AllowAny] DOMString? <var>data</var>);
+  void <a href="#dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send">send</a>(DOMString? <var>data</var>);
   void <a href="#dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send">send</a>(<a href="#formdata">FormData</a> <var>data</var>);
   void <a href="#dom-xmlhttprequest-abort" title="dom-XMLHttpRequest-abort">abort</a>();
 
@@ -394,7 +403,7 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <a href="#xmlhttpreque
   DOMString <a href="#dom-xmlhttprequest-getresponseheader" title="dom-XMLHttpRequest-getResponseHeader">getResponseHeader</a>(DOMString <var>header</var>);
   DOMString <a href="#dom-xmlhttprequest-getallresponseheaders" title="dom-XMLHttpRequest-getAllResponseHeaders">getAllResponseHeaders</a>();
   void <a href="#dom-xmlhttprequest-overridemimetype" title="dom-XMLHttpRequest-overrideMimeType">overrideMimeType</a>(DOMString <var>mime</var>);
-           attribute DOMString <a href="#dom-xmlhttprequest-responsetype" title="dom-XMLHttpRequest-responseType">responseType</a>;
+           attribute <a href="#xmlhttprequestresponsetype">XMLHttpRequestResponseType</a> <a href="#dom-xmlhttprequest-responsetype" title="dom-XMLHttpRequest-responseType">responseType</a>;
   readonly attribute any <a href="#dom-xmlhttprequest-response" title="dom-XMLHttpRequest-response">response</a>;
   readonly attribute DOMString <a href="#dom-xmlhttprequest-responsetext" title="dom-XMLHttpRequest-responseText">responseText</a>;
   readonly attribute <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a> <a href="#dom-xmlhttprequest-responsexml" title="dom-XMLHttpRequest-responseXML">responseXML</a>;
@@ -2499,15 +2508,6 @@ algorithm:</p>
    <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> an
    "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidaccesserror">InvalidAccessError</a></code>" exception and
    terminate these steps.
-
-   <li><p>If the given value is not
-    the empty string,
-    "<code title="">arraybuffer</code>",
-    "<code title="">blob</code>",
-    "<code title="">document</code>",
-    "<code title="">json</code>", or
-    "<code title="">text</code>"
-    terminate these steps.</li>
 
    <li><p>Set the
    <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code>

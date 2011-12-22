@@ -369,6 +369,15 @@ interface <dfn id="xmlhttprequestupload">XMLHttpRequestUpload</dfn> : <span>XMLH
 
 };
 
+enum <dfn>XMLHttpRequestResponseType</dfn> {
+  "",
+  "arraybuffer",
+  "blob",
+  "document",
+  "json",
+  "text"
+}
+
 [<span title="dom-XMLHttpRequest">Constructor</span>]
 interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEventTarget</span> {
   // <a href="#event-handlers">event handler</a>
@@ -392,7 +401,7 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
   void <span title="dom-XMLHttpRequest-send">send</span>(<span data-anolis-spec=typedarray>ArrayBuffer</span> <var>data</var>);
   void <span title="dom-XMLHttpRequest-send">send</span>(<span data-anolis-spec=fileapi>Blob</span> <var>data</var>);
   void <span title="dom-XMLHttpRequest-send">send</span>(<span data-anolis-spec=dom>Document</span> <var>data</var>);
-  void <span title="dom-XMLHttpRequest-send">send</span>([AllowAny] DOMString? <var>data</var>);
+  void <span title="dom-XMLHttpRequest-send">send</span>(DOMString? <var>data</var>);
   void <span title="dom-XMLHttpRequest-send">send</span>(<span>FormData</span> <var>data</var>);
   void <span title="dom-XMLHttpRequest-abort">abort</span>();
 
@@ -402,7 +411,7 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
   DOMString <span title="dom-XMLHttpRequest-getResponseHeader">getResponseHeader</span>(DOMString <var>header</var>);
   DOMString <span title="dom-XMLHttpRequest-getAllResponseHeaders">getAllResponseHeaders</span>();
   void <span title="dom-XMLHttpRequest-overrideMimeType">overrideMimeType</span>(DOMString <var>mime</var>);
-           attribute DOMString <span title="dom-XMLHttpRequest-responseType">responseType</span>;
+           attribute <span>XMLHttpRequestResponseType</span> <span title="dom-XMLHttpRequest-responseType">responseType</span>;
   readonly attribute any <span title="dom-XMLHttpRequest-response">response</span>;
   readonly attribute DOMString <span title="dom-XMLHttpRequest-responseText">responseText</span>;
   readonly attribute <span data-anolis-spec=dom>Document</span> <span title="dom-XMLHttpRequest-responseXML">responseXML</span>;
@@ -2507,15 +2516,6 @@ algorithm:</p>
    <span data-anolis-spec=dom title=concept-throw>throw</span> an
    "<code data-anolis-spec=dom>InvalidAccessError</code>" exception and
    terminate these steps.
-
-   <li><p>If the given value is not
-    the empty string,
-    "<code title>arraybuffer</code>",
-    "<code title>blob</code>",
-    "<code title>document</code>",
-    "<code title>json</code>", or
-    "<code title>text</code>"
-    terminate these steps.</p></li>
 
    <li><p>Set the
    <code title="dom-XMLHttpRequest-responseType">responseType</code>
