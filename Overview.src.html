@@ -2481,13 +2481,13 @@ algorithm:</p>
     "<code title>document</code>",
     "<code title>json</code>", and
     "<code title>text</code>".</p>
-    <p>Throws an "<code data-anolis-spec=dom>InvalidStateError</code>"
-    exception if the state is
-    <span title="dom-XMLHttpRequest-LOADING">LOADING</span> or
+    <p>When set: throws an
+    "<code data-anolis-spec=dom>InvalidStateError</code>" exception if the
+    state is <span title="dom-XMLHttpRequest-LOADING">LOADING</span> or
     <span title="dom-XMLHttpRequest-DONE">DONE</span>.
     <p>When set: throws an
     "<code data-anolis-spec=dom>InvalidAccessError</code>" exception if the
-    <span>synchronous flag</span> is set when there is an associated
+    <span>synchronous flag</span> is set and there is an associated
     <span><code>XMLHttpRequest</code> document</span>.</p>
   </dl>
 

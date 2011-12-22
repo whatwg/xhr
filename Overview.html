@@ -2473,13 +2473,13 @@ algorithm:</p>
     "<code title="">document</code>",
     "<code title="">json</code>", and
     "<code title="">text</code>".</p>
-    <p>Throws an "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>"
-    exception if the state is
-    <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a> or
+    <p>When set: throws an
+    "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>" exception if the
+    state is <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a> or
     <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>.
     <p>When set: throws an
     "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidaccesserror">InvalidAccessError</a></code>" exception if the
-    <a href="#synchronous-flag">synchronous flag</a> is set when there is an associated
+    <a href="#synchronous-flag">synchronous flag</a> is set and there is an associated
     <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a>.</p>
   </dl>
 
