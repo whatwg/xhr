@@ -2203,11 +2203,15 @@ Content-Type: text/plain; charset=utf-8</code></pre>
 
   <p>The <dfn id="response-mime-type">response MIME type</dfn> is the
   MIME type the <code>Content-Type</code> header contains excluding any
-  parameters, or null if the response header can not be parsed or was
-  omitted. The <dfn id="override-mime-type">override MIME type</dfn> is
-  initially null and can get a value if <code title="dom-XMLHttpRequest-overrideMimeType"><a href="#dom-xmlhttprequest-overridemimetype">overrideMimeType()</a></code> is
-  invoked. <dfn id="final-mime-type">Final MIME type</dfn> is the
-  <a href="#override-mime-type">override MIME type</a> unless that is null in which case it is the <a href="#response-mime-type">response MIME type</a>.</p>
+  parameters and
+  <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#converted-to-ascii-lowercase">converted to ASCII lowercase</a>, or null if
+  the response header can not be parsed or was omitted. The
+  <dfn id="override-mime-type">override MIME type</dfn> is initially null
+  and can get a value if
+  <code title="dom-XMLHttpRequest-overrideMimeType"><a href="#dom-xmlhttprequest-overridemimetype">overrideMimeType()</a></code>
+  is invoked. <dfn id="final-mime-type">Final MIME type</dfn> is the
+  <a href="#override-mime-type">override MIME type</a> unless that is null in which case it is
+  the <a href="#response-mime-type">response MIME type</a>.
 
   <p>The <dfn id="response-charset">response charset</dfn> is the value of
   the <code>charset</code> parameter of the <code>Content-Type</code> header
@@ -2274,10 +2278,7 @@ Content-Type: text/plain; charset=utf-8</code></pre>
   <dfn id="document-response-entity-body">document response entity body</dfn>
   is either a
   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a>
-  representing the <a href="#response-entity-body">response entity body</a> or null. If it is a
-  <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a>, its
-  <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a> is the
-  <a href="#xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</a>. If the
+  representing the <a href="#response-entity-body">response entity body</a> or null. If the
   <a href="#document-response-entity-body">document response entity body</a> has no value assigned to it let
   it be the return value of the following algorithm:</p>
 
@@ -2323,8 +2324,22 @@ Content-Type: text/plain; charset=utf-8</code></pre>
     will be applied.</p> <!-- XXX more formally?! -->
    </li>
 
+   <li><p>Set <var title="">document</var>'s
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a> to the
+   <a href="#xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</a>.
+
+   <li><p>Set <var title="">document</var>'s
+   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document-content-type" title="concept-document-content-type">content type</a>
+   to <a href="#final-mime-type">final MIME type</a>.
+
+   <li><p>Set <var title="">document</var>'s
+   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document-url" title="concept-document-url">URL</a> to
+   <a href="#request-url">request URL</a>.
+
    <li><p>Return <var title="">document</var>.
   </ol>
+
+<!-- XXX what about document's encoding? -->
 
 
 <p>The <dfn id="json-response-entity-body">JSON response entity body</dfn> is an ECMAScript value
@@ -2355,15 +2370,13 @@ algorithm:</p>
 
    <li><p>Let <var>charset</var> be the <a href="#final-charset">final charset</a>.</li>
 
-   <li><p>Let <var>mime</var> be the <a href="#final-mime-type">final MIME type</a>.</li>
-
    <li>
     <p>If <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code> is
-    the empty string, <var>charset</var> is null, and <var>mime</var> is
-    either null, <code>text/xml</code>, <code>application/xml</code> or ends
-    in <code title="">+xml</code>, use the rules set forth in the XML
-    specifications to determine the character encoding. Let
-    <var>charset</var> be the determined character encoding.
+    the empty string, <var>charset</var> is null, and
+    <a href="#final-mime-type">final MIME type</a> is either null, <code>text/xml</code>,
+    <code>application/xml</code> or ends in <code title="">+xml</code>, use the
+    rules set forth in the XML specifications to determine the encoding. Let
+    <var>charset</var> be the determined encoding.
     <a href="#refsXML">[XML]</a> <a href="#refsXMLNS">[XMLNS]</a>
 
     <p class="note">This is restricted to
@@ -2450,10 +2463,12 @@ algorithm:</p>
    "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror">SyntaxError</a></code>" exception and terminate
    these steps.
 
-   <li><p>If a MIME type is successfully parsed set
-   <a href="#override-mime-type">override MIME type</a> to that MIME type, excluding any parameters.
+   <li><p>If a MIME type is successfully parsed, set
+   <a href="#override-mime-type">override MIME type</a> to that MIME type,
+   excluding any parameters, and
+   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#converted-to-ascii-lowercase">converted to ASCII lowercase</a>.
 
-   <li><p>If a <code>charset</code> parameter is successfully parsed set
+   <li><p>If a <code>charset</code> parameter is successfully parsed, set
    <a href="#override-charset">override charset</a> to its value.</li>
   </ol>
 

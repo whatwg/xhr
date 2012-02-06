@@ -2211,11 +2211,15 @@ Content-Type: text/plain; charset=utf-8</code></pre>
 
   <p>The <dfn id="response-mime-type">response MIME type</dfn> is the
   MIME type the <code>Content-Type</code> header contains excluding any
-  parameters, or null if the response header can not be parsed or was
-  omitted. The <dfn id="override-mime-type">override MIME type</dfn> is
-  initially null and can get a value if <code title="dom-XMLHttpRequest-overrideMimeType">overrideMimeType()</code> is
-  invoked. <dfn id="final-mime-type">Final MIME type</dfn> is the
-  <span>override MIME type</span> unless that is null in which case it is the <span>response MIME type</span>.</p>
+  parameters and
+  <span data-anolis-spec=dom>converted to ASCII lowercase</span>, or null if
+  the response header can not be parsed or was omitted. The
+  <dfn id="override-mime-type">override MIME type</dfn> is initially null
+  and can get a value if
+  <code title="dom-XMLHttpRequest-overrideMimeType">overrideMimeType()</code>
+  is invoked. <dfn id="final-mime-type">Final MIME type</dfn> is the
+  <span>override MIME type</span> unless that is null in which case it is
+  the <span>response MIME type</span>.
 
   <p>The <dfn id="response-charset">response charset</dfn> is the value of
   the <code>charset</code> parameter of the <code>Content-Type</code> header
@@ -2282,10 +2286,7 @@ Content-Type: text/plain; charset=utf-8</code></pre>
   <dfn id="document-response-entity-body">document response entity body</dfn>
   is either a
   <span data-anolis-spec=dom title=concept-document>document</span>
-  representing the <span>response entity body</span> or null. If it is a
-  <span data-anolis-spec=dom title=concept-document>document</span>, its
-  <span data-anolis-spec=html>origin</span> is the
-  <span><code>XMLHttpRequest</code> origin</span>. If the
+  representing the <span>response entity body</span> or null. If the
   <span>document response entity body</span> has no value assigned to it let
   it be the return value of the following algorithm:</p>
 
@@ -2331,8 +2332,22 @@ Content-Type: text/plain; charset=utf-8</code></pre>
     will be applied.</p> <!-- XXX more formally?! -->
    </li>
 
+   <li><p>Set <var title>document</var>'s
+   <span data-anolis-spec=html>origin</span> to the
+   <span><code>XMLHttpRequest</code> origin</span>.
+
+   <li><p>Set <var title>document</var>'s
+   <span data-anolis-spec=dom title=concept-document-content-type>content type</span>
+   to <span>final MIME type</span>.
+
+   <li><p>Set <var title>document</var>'s
+   <span data-anolis-spec=dom title=concept-document-url>URL</span> to
+   <span>request URL</span>.
+
    <li><p>Return <var title>document</var>.
   </ol>
+
+<!-- XXX what about document's encoding? -->
 
 
 <p>The <dfn>JSON response entity body</dfn> is an ECMAScript value
@@ -2363,15 +2378,13 @@ algorithm:</p>
 
    <li><p>Let <var>charset</var> be the <span>final charset</span>.</p></li>
 
-   <li><p>Let <var>mime</var> be the <span>final MIME type</span>.</p></li>
-
    <li>
     <p>If <code title=dom-XMLHttpRequest-responseType>responseType</code> is
-    the empty string, <var>charset</var> is null, and <var>mime</var> is
-    either null, <code>text/xml</code>, <code>application/xml</code> or ends
-    in <code title>+xml</code>, use the rules set forth in the XML
-    specifications to determine the character encoding. Let
-    <var>charset</var> be the determined character encoding.
+    the empty string, <var>charset</var> is null, and
+    <span>final MIME type</span> is either null, <code>text/xml</code>,
+    <code>application/xml</code> or ends in <code title>+xml</code>, use the
+    rules set forth in the XML specifications to determine the encoding. Let
+    <var>charset</var> be the determined encoding.
     <span data-anolis-ref>XML</span> <span data-anolis-ref>XMLNS</span>
 
     <p class=note>This is restricted to
@@ -2458,10 +2471,12 @@ algorithm:</p>
    "<code data-anolis-spec=dom>SyntaxError</code>" exception and terminate
    these steps.
 
-   <li><p>If a MIME type is successfully parsed set
-   <span>override MIME type</span> to that MIME type, excluding any parameters.
+   <li><p>If a MIME type is successfully parsed, set
+   <span>override MIME type</span> to that MIME type,
+   excluding any parameters, and
+   <span data-anolis-spec=dom>converted to ASCII lowercase</span>.
 
-   <li><p>If a <code>charset</code> parameter is successfully parsed set
+   <li><p>If a <code>charset</code> parameter is successfully parsed, set
    <span>override charset</span> to its value.</p></li>
   </ol>
 
