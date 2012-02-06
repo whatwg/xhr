@@ -40,7 +40,7 @@
 
    <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
 
-   <h2 class="no-num no-toc" id="w3c-doctype">Editor's Draft 6 January 2012</h2>
+   <h2 class="no-num no-toc" id="w3c-doctype">Editor's Draft 6 February 2012</h2>
 
    <dl>
     <dt>This Version:</dt>
@@ -72,7 +72,7 @@
 <p class="dontpublish copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-6 January 2012, the editor has made this specification available
+6 February 2012, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -1289,7 +1289,7 @@ X-Test: one, two</code></pre>
      <dd>
       <p>Let <var>encoding</var> be the
       <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#preferred-mime-name">preferred MIME name</a> of the
-      <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document-character-encoding" title="concept-document-character-encoding">character encoding</a>
+      <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document-encoding" title="concept-document-encoding">encoding</a>
       of <var>data</var>. If <var>encoding</var> is UTF-16 change it to
       UTF-8.</p>
 
@@ -1468,7 +1468,7 @@ X-Test: one, two</code></pre>
 
 
 
-      <p>Make a <a class="external" href="http://dev.w3.org/2006/waf/access-control/#cross-origin-request">cross-origin request</a>,
+      <p>Make a <a class="external" href="http://dvcs.w3.org/hg/cors/raw-file/tip/Overview.html#cross-origin-request">cross-origin request</a>,
       passing these as parameters:</p>
 
       <dl>
@@ -1499,7 +1499,7 @@ X-Test: one, two</code></pre>
 
       <p class="note"><a href="#request-username">Request username</a> and
       <a href="#request-password">request password</a> are always ignored as part of a
-      <a class="external" href="http://dev.w3.org/2006/waf/access-control/#cross-origin-request">cross-origin request</a>; including
+      <a class="external" href="http://dvcs.w3.org/hg/cors/raw-file/tip/Overview.html#cross-origin-request">cross-origin request</a>; including
       them would allow a site to perform a distributed password search.
       However, user agents will include <a href="#user-credentials">user credentials</a> in the
       request (if the user has any and if
@@ -1711,16 +1711,16 @@ X-Test: one, two</code></pre>
   <p>The <dfn id="cross-origin-request-event-rules">cross-origin request event rules</dfn> are as follows:</p>
 
   <dl class="switch">
-   <dt>If the <a class="external" href="http://dev.w3.org/2006/waf/access-control/#cross-origin-request-status">cross-origin request status</a>
+   <dt>If the <a class="external" href="http://dvcs.w3.org/hg/cors/raw-file/tip/Overview.html#cross-origin-request-status">cross-origin request status</a>
    is <i>preflight complete</i> and the <a href="#synchronous-flag">synchronous flag</a> is
    unset</dt>
    <dd><p><a href="#make-upload-progress-notifications">Make upload progress notifications</a>.</dd>
 
-   <dt>If the <a class="external" href="http://dev.w3.org/2006/waf/access-control/#cross-origin-request-status">cross-origin request status</a>
+   <dt>If the <a class="external" href="http://dvcs.w3.org/hg/cors/raw-file/tip/Overview.html#cross-origin-request-status">cross-origin request status</a>
    is <i title="">network error</i></dt>
    <dd><p>This is a <a href="#network-error">network error</a>.</dd>
 
-   <dt>If the <a class="external" href="http://dev.w3.org/2006/waf/access-control/#cross-origin-request-status">cross-origin request status</a>
+   <dt>If the <a class="external" href="http://dvcs.w3.org/hg/cors/raw-file/tip/Overview.html#cross-origin-request-status">cross-origin request status</a>
    is <i title="">abort error</i></dt>
    <dd><p>This is an <a href="#abort-error">abort error</a>.</dd>
 
@@ -1730,7 +1730,7 @@ X-Test: one, two</code></pre>
    <dd><p>This is a <a href="#timeout-error">timeout error</a>.</dd>
 
    <dt>Once all HTTP headers have been received, the
-   <a class="external" href="http://dev.w3.org/2006/waf/access-control/#cross-origin-request-status">cross-origin request status</a> is
+   <a class="external" href="http://dvcs.w3.org/hg/cors/raw-file/tip/Overview.html#cross-origin-request-status">cross-origin request status</a> is
    <i>success</i>, and the <a href="#synchronous-flag">synchronous flag</a> is unset</dt>
    <dd>
     <p><a href="#switch-headers-received">Switch to the HEADERS_RECEIVED state</a>.</p>
@@ -1740,22 +1740,22 @@ X-Test: one, two</code></pre>
 
    <dt>Once the first byte (or more) of the
    <a href="#response-entity-body">response entity body</a> has been received, the
-   <a class="external" href="http://dev.w3.org/2006/waf/access-control/#cross-origin-request-status">cross-origin request status</a> is
+   <a class="external" href="http://dvcs.w3.org/hg/cors/raw-file/tip/Overview.html#cross-origin-request-status">cross-origin request status</a> is
    <i>success</i>, and the <a href="#synchronous-flag">synchronous flag</a> is unset</dt>
    <dt>If there is no <a href="#response-entity-body">response entity body</a>, the
-   <a class="external" href="http://dev.w3.org/2006/waf/access-control/#cross-origin-request-status">cross-origin request status</a> is
+   <a class="external" href="http://dvcs.w3.org/hg/cors/raw-file/tip/Overview.html#cross-origin-request-status">cross-origin request status</a> is
    <i>success</i>, and the <a href="#synchronous-flag">synchronous flag</a> is unset</dt>
    <dd><p><a href="#switch-loading">Switch to the LOADING state</a>.</dd>
 
    <dt>Once the whole <a href="#response-entity-body">response entity body</a> has been received
-   and the <a class="external" href="http://dev.w3.org/2006/waf/access-control/#cross-origin-request-status">cross-origin request status</a> is
+   and the <a class="external" href="http://dvcs.w3.org/hg/cors/raw-file/tip/Overview.html#cross-origin-request-status">cross-origin request status</a> is
    <i>success</i></dt>
    <dt>If there is no <a href="#response-entity-body">response entity body</a>, the
-   <a class="external" href="http://dev.w3.org/2006/waf/access-control/#cross-origin-request-status">cross-origin request status</a> is
+   <a class="external" href="http://dvcs.w3.org/hg/cors/raw-file/tip/Overview.html#cross-origin-request-status">cross-origin request status</a> is
    <i>success</i>, and the state is
    <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a></dt>
    <dt>If there is no <a href="#response-entity-body">response entity body</a>, the
-   <a class="external" href="http://dev.w3.org/2006/waf/access-control/#cross-origin-request-status">cross-origin request status</a> is
+   <a class="external" href="http://dvcs.w3.org/hg/cors/raw-file/tip/Overview.html#cross-origin-request-status">cross-origin request status</a> is
    <i>success</i>, and the <a href="#synchronous-flag">synchronous flag</a> is set</dt>
    <dd><p><a href="#switch-done">Switch to the DONE state</a>.</dd>
   </dl>
@@ -2807,7 +2807,7 @@ interface <dfn id="formdata">FormData</dfn> {
 <dd><cite><a href="http://tools.ietf.org/html/rfc6265">HTTP State Management Mechanism</a></cite>, Adam Barth. IETF.
 
 <dt id="refsCORS">[CORS]
-<dd><cite><a href="http://dev.w3.org/2006/waf/access-control/">Cross-Origin Resource Sharing</a></cite>, Anne van Kesteren. W3C.
+<dd><cite><a href="http://dvcs.w3.org/hg/cors/raw-file/tip/Overview.html">Cross-Origin Resource Sharing</a></cite>, Anne van Kesteren. W3C.
 
 <dt id="refsDOM">[DOM]
 <dd><cite><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html">DOM4</a></cite>, Anne van Kesteren, Aryeh Gregor and Ms2ger. W3C.
@@ -2819,7 +2819,7 @@ interface <dfn id="formdata">FormData</dfn> {
 <dd><cite><a href="http://dev.w3.org/2006/webapi/FileAPI/">File API</a></cite>, Arun Ranganathan and Jonas Sicking. W3C.
 
 <dt id="refsHTML">[HTML]
-<dd><cite><a href="http://www.whatwg.org/html">HTML</a></cite>, Ian Hickson. WHATWG.
+<dd><cite><a href="http://www.whatwg.org/C">HTML</a></cite>, Ian Hickson. WHATWG.
 
 <dt id="refsHTTP">[HTTP]
 <dd><cite><a href="http://tools.ietf.org/html/rfc2616">Hypertext Transfer Protocol -- HTTP/1.1</a></cite>, Roy Fielding, James Gettys, Jeffrey Mogul et al.. IETF.
