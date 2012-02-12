@@ -40,7 +40,7 @@
 
    <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
 
-   <h2 class="no-num no-toc" id="w3c-doctype">Editor's Draft 6 February 2012</h2>
+   <h2 class="no-num no-toc" id="w3c-doctype">Editor's Draft 12 February 2012</h2>
 
    <dl>
     <dt>This Version:</dt>
@@ -72,7 +72,7 @@
 <p class="dontpublish copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-6 February 2012, the editor has made this specification available
+12 February 2012, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -399,13 +399,13 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <a href="#xmlhttpreque
   // <a href="#response">response</a>
   readonly attribute unsigned short <a href="#dom-xmlhttprequest-status" title="dom-XMLHttpRequest-status">status</a>;
   readonly attribute DOMString <a href="#dom-xmlhttprequest-statustext" title="dom-XMLHttpRequest-statusText">statusText</a>;
-  DOMString <a href="#dom-xmlhttprequest-getresponseheader" title="dom-XMLHttpRequest-getResponseHeader">getResponseHeader</a>(DOMString <var>header</var>);
+  DOMString? <a href="#dom-xmlhttprequest-getresponseheader" title="dom-XMLHttpRequest-getResponseHeader">getResponseHeader</a>(DOMString <var>header</var>);
   DOMString <a href="#dom-xmlhttprequest-getallresponseheaders" title="dom-XMLHttpRequest-getAllResponseHeaders">getAllResponseHeaders</a>();
   void <a href="#dom-xmlhttprequest-overridemimetype" title="dom-XMLHttpRequest-overrideMimeType">overrideMimeType</a>(DOMString <var>mime</var>);
            attribute <a href="#xmlhttprequestresponsetype">XMLHttpRequestResponseType</a> <a href="#dom-xmlhttprequest-responsetype" title="dom-XMLHttpRequest-responseType">responseType</a>;
   readonly attribute any <a href="#dom-xmlhttprequest-response" title="dom-XMLHttpRequest-response">response</a>;
   readonly attribute DOMString <a href="#dom-xmlhttprequest-responsetext" title="dom-XMLHttpRequest-responseText">responseText</a>;
-  readonly attribute <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a> <a href="#dom-xmlhttprequest-responsexml" title="dom-XMLHttpRequest-responseXML">responseXML</a>;
+  readonly attribute <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a>? <a href="#dom-xmlhttprequest-responsexml" title="dom-XMLHttpRequest-responseXML">responseXML</a>;
 };
 
 [<a href="#dom-anonxmlhttprequest" title="dom-AnonXMLHttpRequest">Constructor</a>]

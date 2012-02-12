@@ -407,13 +407,13 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
   // <a href="#response">response</a>
   readonly attribute unsigned short <span title="dom-XMLHttpRequest-status">status</span>;
   readonly attribute DOMString <span title="dom-XMLHttpRequest-statusText">statusText</span>;
-  DOMString <span title="dom-XMLHttpRequest-getResponseHeader">getResponseHeader</span>(DOMString <var>header</var>);
+  DOMString? <span title="dom-XMLHttpRequest-getResponseHeader">getResponseHeader</span>(DOMString <var>header</var>);
   DOMString <span title="dom-XMLHttpRequest-getAllResponseHeaders">getAllResponseHeaders</span>();
   void <span title="dom-XMLHttpRequest-overrideMimeType">overrideMimeType</span>(DOMString <var>mime</var>);
            attribute <span>XMLHttpRequestResponseType</span> <span title="dom-XMLHttpRequest-responseType">responseType</span>;
   readonly attribute any <span title="dom-XMLHttpRequest-response">response</span>;
   readonly attribute DOMString <span title="dom-XMLHttpRequest-responseText">responseText</span>;
-  readonly attribute <span data-anolis-spec=dom>Document</span> <span title="dom-XMLHttpRequest-responseXML">responseXML</span>;
+  readonly attribute <span data-anolis-spec=dom>Document</span>? <span title="dom-XMLHttpRequest-responseXML">responseXML</span>;
 };
 
 [<span title="dom-AnonXMLHttpRequest">Constructor</span>]
