@@ -40,7 +40,7 @@
 
    <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
 
-   <h2 class="no-num no-toc" id="w3c-doctype">Editor's Draft 12 February 2012</h2>
+   <h2 class="no-num no-toc" id="w3c-doctype">Editor's Draft 13 February 2012</h2>
 
    <dl>
     <dt>This Version:</dt>
@@ -72,7 +72,7 @@
 <p class="dontpublish copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-12 February 2012, the editor has made this specification available
+13 February 2012, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -261,6 +261,12 @@ not appear in all uppercase letters in this specification.
    support at least the subset of the functionality defined in DOM4 that
    this specification relies upon, such as various exceptions and
    <code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#eventtarget">EventTarget</a></code>. <a href="#refsDOM">[DOM]</a></dd>
+
+   <dt>DOM Parsing and Serialization
+   <dd><p>A <span>conforming user agent</span> must support at least the
+   <a class="external" href="http://html5.org/specs/dom-parsing.html#concept-serialize" title="concept-serialize">serialize</a>
+   concept from DOM Parsing and Serialization.
+   <a href="#refsDOMPS">[DOMPS]</a>
 
    <dt>File API</dt>
    <dd><p>A <span>conforming user agent</span> must
@@ -1299,12 +1305,11 @@ X-Test: one, two</code></pre>
       <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-document">HTML document</a>, followed by
       "<code>;charset=</code>", followed by <var>encoding</var>.</p>
 
-      <p>Let the <a href="#request-entity-body">request entity body</a> be the result of getting
-      the <code>innerHTML</code>
-      attribute on <var>data</var>
+      <p><a class="external" href="http://html5.org/specs/dom-parsing.html#concept-serialize" title="concept-serialize">Serialize</a>
+      <var>data</var>, and let the <a href="#request-entity-body">request entity body</a> be the result,
       <a class="external" href="http://dev.w3.org/2006/webapi/WebIDL/#dfn-obtain-unicode" title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</a>
       and encoded as <var>encoding</var>. Re-throw any exception this
-      throws.</p> <!-- XXX replace innerHTML somehow -->
+      throws.</p>
 
       <p class="note">In particular, if the document cannot be serialized an
       "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>" exception is
@@ -2826,6 +2831,9 @@ interface <dfn id="formdata">FormData</dfn> {
 
 <dt id="refsDOM">[DOM]
 <dd><cite><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html">DOM4</a></cite>, Anne van Kesteren, Aryeh Gregor and Ms2ger. W3C.
+
+<dt id="refsDOMPS">[DOMPS]
+<dd><cite><a href="http://html5.org/specs/dom-parsing.html">DOM Parsing and Serialization</a></cite>, Ms2ger. WHATWG.
 
 <dt id="refsECMASCRIPT">[ECMASCRIPT]
 <dd><cite><a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">ECMAScript Language Specification</a></cite>. ECMA.

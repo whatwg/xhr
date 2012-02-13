@@ -270,6 +270,12 @@ not appear in all uppercase letters in this specification.
    this specification relies upon, such as various exceptions and
    <code data-anolis-spec=dom>EventTarget</code>. <span data-anolis-ref>DOM</span></p></dd>
 
+   <dt>DOM Parsing and Serialization
+   <dd><p>A <span>conforming user agent</span> must support at least the
+   <span data-anolis-spec=domps title=concept-serialize>serialize</span>
+   concept from DOM Parsing and Serialization.
+   <span data-anolis-ref>DOMPS</span>
+
    <dt>File API</dt>
    <dd><p>A <span>conforming user agent</span> must
    support at least the subset of the functionality defined in File API that
@@ -1307,12 +1313,11 @@ X-Test: one, two</code></pre>
       <span data-anolis-spec=dom>HTML document</span>, followed by
       "<code>;charset=</code>", followed by <var>encoding</var>.</p>
 
-      <p>Let the <span>request entity body</span> be the result of getting
-      the <code>innerHTML</code>
-      attribute on <var>data</var>
+      <p><span data-anolis-spec=domps title=concept-serialize>Serialize</span>
+      <var>data</var>, and let the <span>request entity body</span> be the result,
       <span data-anolis-spec=webidl title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</span>
       and encoded as <var>encoding</var>. Re-throw any exception this
-      throws.</p> <!-- XXX replace innerHTML somehow -->
+      throws.</p>
 
       <p class=note>In particular, if the document cannot be serialized an
       "<code data-anolis-spec=dom>InvalidStateError</code>" exception is
