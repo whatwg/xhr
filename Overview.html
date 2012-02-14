@@ -40,7 +40,7 @@
 
    <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
 
-   <h2 class="no-num no-toc" id="w3c-doctype">Editor's Draft 13 February 2012</h2>
+   <h2 class="no-num no-toc" id="w3c-doctype">Editor's Draft 14 February 2012</h2>
 
    <dl>
     <dt>This Version:</dt>
@@ -72,7 +72,7 @@
 <p class="dontpublish copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-13 February 2012, the editor has made this specification available
+14 February 2012, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -1492,14 +1492,13 @@ X-Test: one, two</code></pre>
        <dt>source origin</dt>
        <dd>The <a href="#xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</a>.</dd>
 
-       <dt>credentials flag</dt>
-       <dd>The
+       <dt>omit credentials flag</dt>
+       <dd>Set if
        <code title="dom-XMLHttpRequest-withCredentials"><a href="#dom-xmlhttprequest-withcredentials">withCredentials</a></code>
-       attribute's value.</dd>
+       attribute's value is false.
 
        <dt>force preflight flag</dt>
-       <dd>True if the <a href="#upload-events-flag">upload events flag</a> is set, or false
-       otherwise.
+       <dd>Set if the <a href="#upload-events-flag">upload events flag</a> is set.
       </dl>
 
       <p class="note"><a href="#request-username">Request username</a> and
