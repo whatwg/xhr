@@ -2405,7 +2405,23 @@ algorithm:</p>
    <li><p>If the <a href="#response-entity-body">response entity body</a> is null, return the empty
    string and terminate these steps.</p>
 
-   <li><p>Let <var>charset</var> be the <a href="#final-charset">final charset</a>.</li>
+   <li><!-- XXX this needs to move to Encoding -->
+    <p>For each of the rows in the following table, starting with the first
+    one and going down, if the first bytes of the
+    <a href="#response-entity-body">response entity body</a> match the bytes given in the first
+    column, then let <var>charset</var> be the encoding given in the cell in
+    the second column of that row. Otherwise, let <var>charset</var> be
+    null.
+
+    <table>
+     <tr><th>Bytes<th>Encoding
+     <tr><td>0xFE 0xFF<td>UTF-16BE
+     <tr><td>0xFF 0xFE<td>UTF-16LE
+     <tr><td>0xEF 0xBB 0xBF<td>UTF-8
+    </table>
+
+   <li><p>If <var>charset</var> is null, let <var>charset</var> be the
+   <a href="#final-charset">final charset</a>.
 
    <li>
     <p>If <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code> is
@@ -2422,24 +2438,9 @@ algorithm:</p>
     <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code> value
     "<code title="">text</code>" simple.
 
-   <li>
-    <p>If <var>charset</var> is null then, for each of the rows in the
-    following table, starting with the first one and going down, if the first
-    bytes of the <a href="#response-entity-body">response entity body</a> match the bytes given in
-    the first column, then let <var>charset</var> be the encoding given in
-    the cell in the second column of that row. If there is no match
-    <var>charset</var> remains null.
+   <li><p>If <var>charset</var> is null, let <var>charset</var> be UTF-8.
 
-    <table>
-     <tr><th>Bytes<th>Encoding
-     <tr><td>0xFE 0xFF<td>UTF-16BE
-     <tr><td>0xFF 0xFE<td>UTF-16LE
-     <tr><td>0xEF 0xBB 0xBF<td>UTF-8
-    </table>
-
-   <li><p>If <var>charset</var> is null let <var>charset</var> be
-   UTF-8.</li>
-
+   <!-- XXX this needs to move to Encoding -->
    <li><p>Return the result of decoding the
    <a href="#response-entity-body">response entity body</a> using <var>charset</var>. Replace bytes
    or sequences of bytes that are not valid according to the
