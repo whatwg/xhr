@@ -1333,7 +1333,6 @@ X-Test: one, two</code></pre>
       and encoded as UTF-8.</p>
      </dd>
 
-
      <dt>If <var>data</var> is a <code><a href="#formdata">FormData</a></code></dt>
 
      <dd>
@@ -1374,14 +1373,11 @@ X-Test: one, two</code></pre>
    <li><p>If the <a href="#synchronous-flag">synchronous flag</a> is set, release the
    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#storage-mutex">storage mutex</a>.</li>
 
-
    <li><p>If the <a href="#synchronous-flag">synchronous flag</a> is unset and one or more
    event listeners are registered on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code>
    object, set the <a href="#upload-events-flag">upload events flag</a>.
 
-
    <li><p>Unset the <a href="#error-flag">error flag</a>.</li>
-
 
    <li><p>Set the <a href="#upload-complete-flag">upload complete flag</a> if there is no
    <a href="#request-entity-body">request entity body</a> or if the
@@ -1401,13 +1397,11 @@ X-Test: one, two</code></pre>
       historical reasons.</p>
      </li>
 
-
      <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadstart"><a href="#event-xhr-loadstart">loadstart</a></code>.</li>
 
      <li><p>If the <a href="#upload-complete-flag">upload complete flag</a> is unset,
      <a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">fire a progress event</a> named <code title="event-xhr-loadstart"><a href="#event-xhr-loadstart">loadstart</a></code>
      on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.</li>
-
 
      <li><p>Return the <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code>
      method call, but continue running the steps in this algorithm.</li>
@@ -1823,22 +1817,23 @@ X-Test: one, two</code></pre>
     <ol>
      <li><p>Set the <a href="#upload-complete-flag">upload complete flag</a>.
 
-     <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <var title="">event</var>
-     on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
+     <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
+     <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code> on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
 
      <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
-     <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code> on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code>
-     object.
+     <var title="">event</var> on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
+
+     <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
+     <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code> on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
     </ol>
    </li>
+
+   <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>.
 
    <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <var title="">event</var>.
 
    <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>.
-
   </ol>
-
-
 
   <hr>
 
@@ -1875,6 +1870,7 @@ X-Test: one, two</code></pre>
 
    <li><p><a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.</li>
 
+   <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>.
 
    <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-load"><a href="#event-xhr-load">load</a></code>.</li>
 
@@ -1900,7 +1896,7 @@ X-Test: one, two</code></pre>
    <li><p>While the request entity body is being transmitted and the
    <a href="#upload-complete-flag">upload complete flag</a> is unset,
    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to
-   <a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code> at
+   <a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code> on
    the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object about every 50ms or for
    every byte transmitted, whichever is <em>least</em> frequent.</li>
 
@@ -1914,14 +1910,15 @@ X-Test: one, two</code></pre>
     <ol>
      <li><p>Set the <a href="#upload-complete-flag">upload complete flag</a>.
 
-     <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-load"><a href="#event-xhr-load">load</a></code>
-     at the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.</li>
+     <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>
+     on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
 
-     <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
-     <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code> at the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code>
-     object.</li>
+     <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-load"><a href="#event-xhr-load">load</a></code>
+     on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
+
+     <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>
+     on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
     </ol>
-   </li>
   </ul>
 
 
@@ -1977,6 +1974,7 @@ X-Test: one, two</code></pre>
 
      <li><p><a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.</li>
 
+     <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>.
 
      <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-abort"><a href="#event-xhr-abort">abort</a></code>.</li>
 
@@ -1988,6 +1986,9 @@ X-Test: one, two</code></pre>
 
       <ol>
        <li><p>Set the <a href="#upload-complete-flag">upload complete flag</a> to true.</li>
+
+       <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>
+       on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
 
        <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-abort"><a href="#event-xhr-abort">abort</a></code>
        on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.</li>

@@ -1340,7 +1340,6 @@ X-Test: one, two</code></pre>
       and encoded as UTF-8.</p>
      </dd>
 
-
      <dt>If <var>data</var> is a <code>FormData</code></dt>
 
      <dd>
@@ -1381,14 +1380,11 @@ X-Test: one, two</code></pre>
    <li><p>If the <span>synchronous flag</span> is set, release the
    <span data-anolis-spec=html>storage mutex</span>.</p></li>
 
-
    <li><p>If the <span>synchronous flag</span> is unset and one or more
    event listeners are registered on the <code>XMLHttpRequestUpload</code>
    object, set the <span>upload events flag</span>.
 
-
    <li><p>Unset the <span>error flag</span>.</p></li>
-
 
    <li><p>Set the <span>upload complete flag</span> if there is no
    <span>request entity body</span> or if the
@@ -1408,13 +1404,11 @@ X-Test: one, two</code></pre>
       historical reasons.</p>
      </li>
 
-
      <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadstart">loadstart</code>.</p></li>
 
      <li><p>If the <span>upload complete flag</span> is unset,
      <span data-anolis-spec=progress-events title=concept-event-fire-progress>fire a progress event</span> named <code title="event-xhr-loadstart">loadstart</code>
      on the <code>XMLHttpRequestUpload</code> object.</p></li>
-
 
      <li><p>Return the <code title="dom-XMLHttpRequest-send">send()</code>
      method call, but continue running the steps in this algorithm.</p></li>
@@ -1830,22 +1824,23 @@ X-Test: one, two</code></pre>
     <ol>
      <li><p>Set the <span>upload complete flag</span>.
 
-     <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <var title>event</var>
-     on the <code>XMLHttpRequestUpload</code> object.
+     <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named
+     <code title=event-xhr-progress>progress</code> on the <code>XMLHttpRequestUpload</code> object.
 
      <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named
-     <code title="event-xhr-loadend">loadend</code> on the <code>XMLHttpRequestUpload</code>
-     object.
+     <var title>event</var> on the <code>XMLHttpRequestUpload</code> object.
+
+     <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named
+     <code title="event-xhr-loadend">loadend</code> on the <code>XMLHttpRequestUpload</code> object.
     </ol>
    </li>
+
+   <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>.
 
    <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <var title>event</var>.
 
    <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadend">loadend</code>.
-
   </ol>
-
-
 
   <hr>
 
@@ -1882,6 +1877,7 @@ X-Test: one, two</code></pre>
 
    <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.</p></li>
 
+   <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>.
 
    <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-load">load</code>.</p></li>
 
@@ -1907,7 +1903,7 @@ X-Test: one, two</code></pre>
    <li><p>While the request entity body is being transmitted and the
    <span>upload complete flag</span> is unset,
    <span data-anolis-spec=html>queue a task</span> to
-   <span data-anolis-spec=progress-events title=concept-event-fire-progress>fire a progress event</span> named <code title="event-xhr-progress">progress</code> at
+   <span data-anolis-spec=progress-events title=concept-event-fire-progress>fire a progress event</span> named <code title="event-xhr-progress">progress</code> on
    the <code>XMLHttpRequestUpload</code> object about every 50ms or for
    every byte transmitted, whichever is <em>least</em> frequent.</p></li>
 
@@ -1921,14 +1917,15 @@ X-Test: one, two</code></pre>
     <ol>
      <li><p>Set the <span>upload complete flag</span>.
 
-     <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-load">load</code>
-     at the <code>XMLHttpRequestUpload</code> object.</p></li>
+     <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>
+     on the <code>XMLHttpRequestUpload</code> object.
 
-     <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named
-     <code title="event-xhr-loadend">loadend</code> at the <code>XMLHttpRequestUpload</code>
-     object.</p></li>
+     <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-load">load</code>
+     on the <code>XMLHttpRequestUpload</code> object.
+
+     <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadend">loadend</code>
+     on the <code>XMLHttpRequestUpload</code> object.
     </ol>
-   </li>
   </ul>
 
 
@@ -1984,6 +1981,7 @@ X-Test: one, two</code></pre>
 
      <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.</p></li>
 
+     <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>.
 
      <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-abort">abort</code>.</p></li>
 
@@ -1995,6 +1993,9 @@ X-Test: one, two</code></pre>
 
       <ol>
        <li><p>Set the <span>upload complete flag</span> to true.</p></li>
+
+       <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>
+       on the <code>XMLHttpRequestUpload</code> object.
 
        <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-abort">abort</code>
        on the <code>XMLHttpRequestUpload</code> object.</p></li>
