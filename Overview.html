@@ -130,6 +130,7 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
   <ol class="toc">
    <li><a href="#formdata-constructors"><span class="secno">5.1 </span>Constructors</a></li>
    <li><a href="#the-append()-method"><span class="secno">5.2 </span>The <code title="">append()</code> method</a></ol></li>
+ <li><a href="#data:-urls-and-http"><span class="secno">6 </span><code>data:</code> URLs and HTTP</a></li>
  <li><a class="no-num" href="#references">References</a>
   <ol class="toc">
    <li><a class="no-num" href="#normative-references">Normative references</a></ol></li>
@@ -2841,6 +2842,54 @@ interface <dfn id="formdata">FormData</dfn> {
    filename to <var title="">filename</var>.
   </ul>
 
+
+
+<h2 id="data:-urls-and-http"><span class="secno">6 </span><code>data:</code> URLs and HTTP</h2>
+
+<p class="note">To ensure
+<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#data-protocol" title="data-protocol"><code>data:</code> URLs</a>
+can function in APIs designed around HTTP, such as
+<code><a href="#xmlhttprequest">XMLHttpRequest</a></code>, this section details how they work.
+Specifications defining similar URL schemes ought to take inspiration from
+this section.
+
+<p>When a
+<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#data-protocol" title="data-protocol"><code>data:</code> URL</a> is
+<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/fetching-resources.html#fetch" title="fetch">fetched</a> using the HTTP method
+<code>GET</code>, determine the response as follows:
+
+<ul>
+ <li><p>Ignore any request headers.
+
+ <li><p>Set the HTTP status code to 200.
+
+ <li><p>Set the HTTP status text to "<code title="">OK</code>".
+
+ <li><p>Include a single response header whose header field name is
+ "<code title="">content-type</code>" and whose value is the
+ <span>MIME type</span> given in the <span><code>data:</code> URL</span>.
+
+ <li><p>Set the <a href="#response-entity-body">response entity body</a> to the data the
+ <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/urls.html#url">URL</a> encodes, base64 decoded if the
+ "<code title="">;base64</code>" flag is present.
+</ul>
+
+<p>When a
+<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#data-protocol" title="data-protocol"><code>data:</code> URL</a> is
+<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/fetching-resources.html#fetch" title="fetch">fetched</a> using the HTTP method
+that is <em>not</em> <code>GET</code>, determine the response as follows:
+
+<ul>
+ <li><p>Ignore any request headers.
+
+ <li><p>Set the HTTP status code to 501.
+
+ <li><p>Set the HTTP status text to "<code title="">Not Implemented</code>".
+
+ <li><p>Include no response headers.
+
+ <li><p>Set the <a href="#response-entity-body">response entity body</a> to null.
+</ul>
 
 
 <h2 class="no-num" id="references">References</h2>
