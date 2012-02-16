@@ -1904,7 +1904,7 @@ X-Test: one, two</code></pre>
   these steps:</p>
 
   <ul>
-   <li><p>While the request entity body is being uploaded and the
+   <li><p>While the request entity body is being transmitted and the
    <span>upload complete flag</span> is unset,
    <span data-anolis-spec=html>queue a task</span> to
    <span data-anolis-spec=progress-events title=concept-event-fire-progress>fire a progress event</span> named <code title="event-xhr-progress">progress</code> at
@@ -1912,9 +1912,11 @@ X-Test: one, two</code></pre>
    every byte transmitted, whichever is <em>least</em> frequent.</p></li>
 
    <li>
-    <p>If the <span>request entity body</span> has been successfully
-    uploaded and the <span>upload complete flag</span> is still unset,
-    <span data-anolis-spec=html>queue a task</span> to run these substeps:</p>
+    <p>If the <span>request entity body</span> has been fully transmitted
+    (irrespective of whether the server has started transmitting a response
+    or the status code of such a response) and the
+    <span>upload complete flag</span> is still unset,
+    <span data-anolis-spec=html>queue a task</span> to run these substeps:
 
     <ol>
      <li><p>Set the <span>upload complete flag</span>.
@@ -1928,8 +1930,6 @@ X-Test: one, two</code></pre>
     </ol>
    </li>
   </ul>
-
-  <!-- XXX successfully uploaded? -->
 
 
 

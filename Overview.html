@@ -1897,7 +1897,7 @@ X-Test: one, two</code></pre>
   these steps:</p>
 
   <ul>
-   <li><p>While the request entity body is being uploaded and the
+   <li><p>While the request entity body is being transmitted and the
    <a href="#upload-complete-flag">upload complete flag</a> is unset,
    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to
    <a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code> at
@@ -1905,9 +1905,11 @@ X-Test: one, two</code></pre>
    every byte transmitted, whichever is <em>least</em> frequent.</li>
 
    <li>
-    <p>If the <a href="#request-entity-body">request entity body</a> has been successfully
-    uploaded and the <a href="#upload-complete-flag">upload complete flag</a> is still unset,
-    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to run these substeps:</p>
+    <p>If the <a href="#request-entity-body">request entity body</a> has been fully transmitted
+    (irrespective of whether the server has started transmitting a response
+    or the status code of such a response) and the
+    <a href="#upload-complete-flag">upload complete flag</a> is still unset,
+    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to run these substeps:
 
     <ol>
      <li><p>Set the <a href="#upload-complete-flag">upload complete flag</a>.
@@ -1921,8 +1923,6 @@ X-Test: one, two</code></pre>
     </ol>
    </li>
   </ul>
-
-  <!-- XXX successfully uploaded? -->
 
 
 
