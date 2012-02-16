@@ -40,7 +40,7 @@
 
    <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
 
-   <h2 class="no-num no-toc" id="w3c-doctype">Editor's Draft 14 February 2012</h2>
+   <h2 class="no-num no-toc" id="w3c-doctype">Editor's Draft 16 February 2012</h2>
 
    <dl>
     <dt>This Version:</dt>
@@ -72,7 +72,7 @@
 <p class="dontpublish copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-14 February 2012, the editor has made this specification available
+16 February 2012, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -2306,12 +2306,47 @@ Content-Type: text/plain; charset=utf-8</code></pre>
     content.
 
    <li>
-    <p>If <a href="#final-mime-type">final MIME type</a> is <code>text/html</code> let,
-    <var title="">document</var> be a
-    <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a> that
-    represents the <a href="#response-entity-body">response entity body</a> parsed following the
-    rules set forth in the HTML specification for an HTML parser with
-    scripting disabled. <a href="#refsHTML">[HTML]</a>
+    <p>If <a href="#final-mime-type">final MIME type</a> is <code>text/html</code>, run these
+    substeps:
+
+    <ol>
+     <li><!-- XXX this step should move to Encoding -->
+      <p>For each of the rows in the following table, starting with the
+      first one and going down, if the first bytes of the
+      <a href="#response-entity-body">response entity body</a> match the bytes given in the first
+      column, then let <var>charset</var> be the encoding given in the cell
+      in the second column of that row. Otherwise, let <var>charset</var> be
+      null.
+
+      <table>
+       <tr><th>Bytes<th>Encoding
+       <tr><td>0xFE 0xFF<td>UTF-16BE
+       <tr><td>0xFF 0xFE<td>UTF-16LE
+       <tr><td>0xEF 0xBB 0xBF<td>UTF-8
+      </table>
+
+     <li><p>If <var>charset</var> is null, let <var>charset</var> be the
+     <a href="#final-charset">final charset</a>.
+
+     <li><p>If <var>charset</var> is null,
+     <span title="prescan a byte stream to determine its encoding">prescan</span>
+     the first 1024 bytes of the <a href="#response-entity-body">response entity body</a> and if
+     that does not abort unsuccessfully let <var>charset</var> be the return
+     value.
+
+     <li><p>If <var>charset</var> is null, let <var>charset</var> be UTF-8.
+
+     <li><p>Decode the <a href="#response-entity-body">response entity body</a> using
+     <var>charset</var> and then let <var title="">document</var> be a
+     <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a> that
+     represents the result of that decoding, parsed following the rules set
+     forth in the HTML specification for an HTML parser with scripting
+     disabled. <a href="#refsHTML">[HTML]</a>
+
+     <li><p>Set <var title="">document</var>'s
+     <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document-encoding" title="concept-document-encoding">encoding</a>
+     to <var>charset</var>.
+    </ol>
 
    <li>
     <p>Otherwise, let <var title="">document</var> be a
@@ -2326,7 +2361,8 @@ Content-Type: text/plain; charset=utf-8</code></pre>
     <p class="note">Scripts in the resulting document tree will not be
     executed, resources referenced will not be loaded and no associated XSLT
     will be applied.</p> <!-- XXX more formally?! -->
-   </li>
+
+    <!-- XXX what about document's encoding? -->
 
    <li><p>Set <var title="">document</var>'s
    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a> to the
@@ -2342,9 +2378,6 @@ Content-Type: text/plain; charset=utf-8</code></pre>
 
    <li><p>Return <var title="">document</var>.
   </ol>
-
-<!-- XXX what about document's encoding? -->
-
 
 <p>The <dfn id="json-response-entity-body">JSON response entity body</dfn> is an ECMAScript value
 representing the <a href="#response-entity-body">response entity body</a>. The

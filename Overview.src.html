@@ -2314,12 +2314,47 @@ Content-Type: text/plain; charset=utf-8</code></pre>
     content.
 
    <li>
-    <p>If <span>final MIME type</span> is <code>text/html</code> let,
-    <var title>document</var> be a
-    <span data-anolis-spec=dom title=concept-document>document</span> that
-    represents the <span>response entity body</span> parsed following the
-    rules set forth in the HTML specification for an HTML parser with
-    scripting disabled. <span data-anolis-ref>HTML</span>
+    <p>If <span>final MIME type</span> is <code>text/html</code>, run these
+    substeps:
+
+    <ol>
+     <li><!-- XXX this step should move to Encoding -->
+      <p>For each of the rows in the following table, starting with the
+      first one and going down, if the first bytes of the
+      <span>response entity body</span> match the bytes given in the first
+      column, then let <var>charset</var> be the encoding given in the cell
+      in the second column of that row. Otherwise, let <var>charset</var> be
+      null.
+
+      <table>
+       <tr><th>Bytes<th>Encoding
+       <tr><td>0xFE 0xFF<td>UTF-16BE
+       <tr><td>0xFF 0xFE<td>UTF-16LE
+       <tr><td>0xEF 0xBB 0xBF<td>UTF-8
+      </table>
+
+     <li><p>If <var>charset</var> is null, let <var>charset</var> be the
+     <span>final charset</span>.
+
+     <li><p>If <var>charset</var> is null,
+     <span title="prescan a byte stream to determine its encoding">prescan</span>
+     the first 1024 bytes of the <span>response entity body</span> and if
+     that does not abort unsuccessfully let <var>charset</var> be the return
+     value.
+
+     <li><p>If <var>charset</var> is null, let <var>charset</var> be UTF-8.
+
+     <li><p>Decode the <span>response entity body</span> using
+     <var>charset</var> and then let <var title>document</var> be a
+     <span data-anolis-spec=dom title=concept-document>document</span> that
+     represents the result of that decoding, parsed following the rules set
+     forth in the HTML specification for an HTML parser with scripting
+     disabled. <span data-anolis-ref>HTML</span>
+
+     <li><p>Set <var title>document</var>'s
+     <span data-anolis-spec=dom title=concept-document-encoding>encoding</span>
+     to <var>charset</var>.
+    </ol>
 
    <li>
     <p>Otherwise, let <var title>document</var> be a
@@ -2334,7 +2369,8 @@ Content-Type: text/plain; charset=utf-8</code></pre>
     <p class=note>Scripts in the resulting document tree will not be
     executed, resources referenced will not be loaded and no associated XSLT
     will be applied.</p> <!-- XXX more formally?! -->
-   </li>
+
+    <!-- XXX what about document's encoding? -->
 
    <li><p>Set <var title>document</var>'s
    <span data-anolis-spec=html>origin</span> to the
@@ -2350,9 +2386,6 @@ Content-Type: text/plain; charset=utf-8</code></pre>
 
    <li><p>Return <var title>document</var>.
   </ol>
-
-<!-- XXX what about document's encoding? -->
-
 
 <p>The <dfn>JSON response entity body</dfn> is an ECMAScript value
 representing the <span>response entity body</span>. The
