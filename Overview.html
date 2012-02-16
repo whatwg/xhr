@@ -2425,28 +2425,17 @@ algorithm:</p>
    <li>
     <p>If <var>charset</var> is null then, for each of the rows in the
     following table, starting with the first one and going down, if the first
-    bytes of <var>bytes</var> match the bytes given in the first column, then
-    let <var>charset</var> be the encoding given in the cell in the second
-    column of that row. If there is no match <var>charset</var> remains
-    null.</p>
+    bytes of the <a href="#response-entity-body">response entity body</a> match the bytes given in
+    the first column, then let <var>charset</var> be the encoding given in
+    the cell in the second column of that row. If there is no match
+    <var>charset</var> remains null.
 
     <table>
-     <thead>
-      <tr>
-       <th>Bytes in Hexadecimal
-       <th>Description
-     <tbody>
-      <tr>
-       <td>FE FF
-       <td>UTF-16BE BOM
-      <tr>
-       <td>FF FE
-       <td>UTF-16LE BOM
-      <tr>
-       <td>EF BB BF
-       <td>UTF-8 BOM
+     <tr><th>Bytes<th>Encoding
+     <tr><td>0xFE 0xFF<td>UTF-16BE
+     <tr><td>0xFF 0xFE<td>UTF-16LE
+     <tr><td>0xEF 0xBB 0xBF<td>UTF-8
     </table>
-   </li>
 
    <li><p>If <var>charset</var> is null let <var>charset</var> be
    UTF-8.</li>
