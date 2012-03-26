@@ -1323,11 +1323,12 @@ X-Test: one, two</code></pre>
       of <var>data</var>. If <var>encoding</var> is UTF-16 change it to
       UTF-8.</p>
 
-      <p>Let <var>mime type</var> be "<code>application/xml</code>" or
-      "<code>text/html</code>" if
-      <code data-anolis-spec=dom>Document</code> is an
-      <span data-anolis-spec=dom>HTML document</span>, followed by
-      "<code>;charset=</code>", followed by <var>encoding</var>.</p>
+      <p>If <code data-anolis-spec=dom>Document</code> is an
+      <span data-anolis-spec=dom>HTML document</span>, let
+      <var>mime type</var> be "<code>text/html</code>", or let
+      <var>mime type</var> be "<code>application/xml</code>" otherwise. Then
+      append "<code>;charset=<var>encoding</var></code>" to
+      <var>mime type</var>.
 
       <p><span data-anolis-spec=domps title=concept-serialize>Serialize</span>
       <var>data</var>, and let the <span>request entity body</span> be the result,

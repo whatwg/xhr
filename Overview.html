@@ -1316,11 +1316,12 @@ X-Test: one, two</code></pre>
       of <var>data</var>. If <var>encoding</var> is UTF-16 change it to
       UTF-8.</p>
 
-      <p>Let <var>mime type</var> be "<code>application/xml</code>" or
-      "<code>text/html</code>" if
-      <code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a></code> is an
-      <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-document">HTML document</a>, followed by
-      "<code>;charset=</code>", followed by <var>encoding</var>.</p>
+      <p>If <code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a></code> is an
+      <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-document">HTML document</a>, let
+      <var>mime type</var> be "<code>text/html</code>", or let
+      <var>mime type</var> be "<code>application/xml</code>" otherwise. Then
+      append "<code>;charset=<var>encoding</var></code>" to
+      <var>mime type</var>.
 
       <p><a class="external" href="http://html5.org/specs/dom-parsing.html#concept-serialize" title="concept-serialize">Serialize</a>
       <var>data</var>, and let the <a href="#request-entity-body">request entity body</a> be the result,
