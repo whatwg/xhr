@@ -700,7 +700,7 @@ discarding any further data received from the network for them.
   </dl>
 
 
-  <p>The <code>XMLHttpRequest</code> object also has an associated
+  <p>Each <code>XMLHttpRequest</code> object also has an associated
   <code>XMLHttpRequestUpload</code> object.</p>
 
 
@@ -1228,7 +1228,8 @@ X-Test: one, two</code></pre>
   <dl class="domintro">
    <dt><var title>client</var> . <code title="dom-XMLHttpRequest-upload">upload</code></dt>
    <dd><p>Returns the associated <code>XMLHttpRequestUpload</code>
-   object.</p></dd>
+   object. It can be used to gather transmission information when data is
+   transferred to a server.
   </dl>
 
   <p>The
@@ -1236,6 +1237,8 @@ X-Test: one, two</code></pre>
   attribute must return the associated
   <code>XMLHttpRequestUpload</code> object.</p>
 
+  <p class=note>As indicated earlier, each <code>XMLHttpRequest</code>
+  object has an associated <code>XMLHttpRequestUpload</code> object.
 
 
   <h4>The <code title>send()</code> method</h4>
