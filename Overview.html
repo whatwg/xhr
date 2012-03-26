@@ -1106,12 +1106,19 @@ X-Test: one, two</code></pre>
   <dl class="domintro">
    <dt><var title="">client</var> . <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code></dt>
    <dd>
-    <p>The amount of milliseconds a request can take before being
-    terminated. Initially zero. Zero means there is no timeout.</p>
+    <p>Can be set to a time in milliseconds. When set to a non-zero value
+    will cause <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/fetching-resources.html#fetch" title="fetch">fetching</a> to
+    terminate after the given time has passed. When the time has passed, if
+    the <a href="#synchronous-flag">synchronous flag</a> is unset, a
+    <code title="event-xhr-timeout"><a href="#event-xhr-timeout">timeout</a></code> event will then be
+    <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>,
+    or a "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#timeouterror">TimeoutError</a></code>" exception will be
+    <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">thrown</a> otherwise
+    (for the <code title="dom-XMLHttpRequest"><a href="#dom-xmlhttprequest">send()</a></code> method).
     <p>When set: throws an
     "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidaccesserror">InvalidAccessError</a></code>" exception if
     the <a href="#synchronous-flag">synchronous flag</a> is set when there is an
-    associated <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a>.</p>
+    associated <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a>.
    </dd>
   </dl>
 

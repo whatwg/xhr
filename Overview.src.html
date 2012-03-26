@@ -1113,12 +1113,19 @@ X-Test: one, two</code></pre>
   <dl class="domintro">
    <dt><var title>client</var> . <code title="dom-XMLHttpRequest-timeout">timeout</code></dt>
    <dd>
-    <p>The amount of milliseconds a request can take before being
-    terminated. Initially zero. Zero means there is no timeout.</p>
+    <p>Can be set to a time in milliseconds. When set to a non-zero value
+    will cause <span title=fetch data-anolis-spec=html>fetching</span> to
+    terminate after the given time has passed. When the time has passed, if
+    the <span>synchronous flag</span> is unset, a
+    <code title=event-xhr-timeout>timeout</code> event will then be
+    <span title=concept-event-dispatch data-anolis-spec=dom>dispatched</span>,
+    or a "<code data-anolis-spec=dom>TimeoutError</code>" exception will be
+    <span data-anolis-spec=dom title=concept-throw>thrown</span> otherwise
+    (for the <code title=dom-XMLHttpRequest>send()</code> method).
     <p>When set: throws an
     "<code data-anolis-spec=dom>InvalidAccessError</code>" exception if
     the <span>synchronous flag</span> is set when there is an
-    associated <span><code>XMLHttpRequest</code> document</span>.</p>
+    associated <span><code>XMLHttpRequest</code> document</span>.
    </dd>
   </dl>
 
