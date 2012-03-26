@@ -437,11 +437,13 @@ interface <dfn id="anonxmlhttprequest">AnonXMLHttpRequest</dfn> : <span>XMLHttpR
   <dfn><code>XMLHttpRequest</code> origin</dfn> and an
   <dfn><code>XMLHttpRequest</code> base URL</dfn>.
 
-  <p>This specification defines their values when the global object is
-  represented by the <code data-anolis-spec=html>Window</code> object. When
-  the <code>XMLHttpRequest</code> object is used in other contexts their
-  values will have to be defined as appropriate for that context. That is
-  considered to be out of scope for this specification.</p>
+  <p class=note>The XMLHttpRequest standard defines
+  <span><code>XMLHttpRequest</code> origin</span> and
+  <span><code>XMLHttpRequest</code> base URL</span> when the global object
+  is represented by the <code data-anolis-spec=html>Window</code> object.
+  Other contexts will have to define them as appropriate for
+  <code>XMLHttpRequest</code> to function as other contexts are considered
+  out of scope for this document.</p>
 
   <p>In environments where the global object is represented by the
   <code data-anolis-spec=html>Window</code> object the

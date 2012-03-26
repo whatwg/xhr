@@ -40,7 +40,7 @@
 
    <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
 
-   <h2 class="no-num no-toc" id="w3c-doctype">Editor's Draft 29 February 2012</h2>
+   <h2 class="no-num no-toc" id="w3c-doctype">Editor's Draft 26 March 2012</h2>
 
    <dl>
     <dt>This Version:</dt>
@@ -75,7 +75,7 @@
 <p class="dontpublish copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-29 February 2012, the editor has made this specification available
+26 March 2012, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -430,11 +430,13 @@ interface <dfn id="anonxmlhttprequest">AnonXMLHttpRequest</dfn> : <a href="#xmlh
   <dfn id="xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</dfn> and an
   <dfn id="xmlhttprequest-base-url"><code>XMLHttpRequest</code> base URL</dfn>.
 
-  <p>This specification defines their values when the global object is
-  represented by the <code class="external"><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#window">Window</a></code> object. When
-  the <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object is used in other contexts their
-  values will have to be defined as appropriate for that context. That is
-  considered to be out of scope for this specification.</p>
+  <p class="note">The XMLHttpRequest standard defines
+  <a href="#xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</a> and
+  <a href="#xmlhttprequest-base-url"><code>XMLHttpRequest</code> base URL</a> when the global object
+  is represented by the <code class="external"><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#window">Window</a></code> object.
+  Other contexts will have to define them as appropriate for
+  <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> to function as other contexts are considered
+  out of scope for this document.</p>
 
   <p>In environments where the global object is represented by the
   <code class="external"><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#window">Window</a></code> object the
@@ -2927,7 +2929,7 @@ that is <em>not</em> <code>GET</code>, determine the response as follows:
 <dd><cite><a href="http://www.kb.cert.org/vuls/id/150227">HTTP proxy default configurations allow arbitrary TCP connections</a></cite>. US-CERT.
 
 <dt id="refsPROGRESSEVENTS">[PROGRESSEVENTS]
-<dd><cite><a href="http://dev.w3.org/2006/webapi/progress/">Progress Events</a></cite>, Anne van Kesteren. W3C.
+<dd><cite><a href="http://dvcs.w3.org/hg/progress/raw-file/tip/Overview.html">Progress Events</a></cite>, Anne van Kesteren. W3C.
 
 <dt id="refsRFC2119">[RFC2119]
 <dd><cite><a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner. IETF.
