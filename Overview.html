@@ -1069,15 +1069,19 @@ discarding any further data received from the network for them.
    </li>
 
    <li><p>If <var>header</var> is not in the
-   <a href="#author-request-headers">author request headers</a> list append <var>header</var> with
+   <a href="#author-request-headers">author request headers</a> list, append <var>header</var> with
    its associated <var>value</var> to the list and terminate these
    steps.</li>
 
-   <li><p>If <var>header</var> is in the <a href="#author-request-headers">author request headers</a>
-   list either use multiple headers, combine the values or use a combination
-   of those (section 4.2, RFC 2616).
-   <a href="#refsHTTP">[HTTP]</a>
-   <!-- XXX it seems UAs always combine the values -->
+   <li>
+    <p>If <var>header</var> is in the <a href="#author-request-headers">author request headers</a>
+    list, combine <var title="">value</var> with the value of the header
+    matching <var>header</var> in the <a href="#author-request-headers">author request headers</a>
+    list (for combine see section 4.2, RFC 2616).
+    <a href="#refsHTTP">[HTTP]</a>
+
+    <p class="note">The XMLHttpRequest standard intentionally constraints the
+    use of HTTP here in line with contemporary implementations.
   </ol>
 
   <p class="note">See also the

@@ -1076,15 +1076,19 @@ discarding any further data received from the network for them.
    </li>
 
    <li><p>If <var>header</var> is not in the
-   <span>author request headers</span> list append <var>header</var> with
+   <span>author request headers</span> list, append <var>header</var> with
    its associated <var>value</var> to the list and terminate these
    steps.</p></li>
 
-   <li><p>If <var>header</var> is in the <span>author request headers</span>
-   list either use multiple headers, combine the values or use a combination
-   of those (section 4.2, RFC 2616).
-   <span data-anolis-ref>HTTP</span>
-   <!-- XXX it seems UAs always combine the values -->
+   <li>
+    <p>If <var>header</var> is in the <span>author request headers</span>
+    list, combine <var title>value</var> with the value of the header
+    matching <var>header</var> in the <span>author request headers</span>
+    list (for combine see section 4.2, RFC 2616).
+    <span data-anolis-ref>HTTP</span>
+
+    <p class=note>The XMLHttpRequest standard intentionally constraints the
+    use of HTTP here in line with contemporary implementations.
   </ol>
 
   <p class=note>See also the
