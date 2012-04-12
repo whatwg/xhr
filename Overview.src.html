@@ -400,17 +400,12 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
   readonly attribute unsigned short <span title="dom-XMLHttpRequest-readyState">readyState</span>;
 
   // <a href="#request">request</a>
-  void <span title="dom-XMLHttpRequest-open">open</span>(DOMString <var>method</var>, DOMString <var title>url</var>, optional boolean <var>async</var>, optional DOMString? <var>user</var>, optional DOMString? <var>password</var>);
+  void <span title="dom-XMLHttpRequest-open">open</span>(DOMString <var>method</var>, DOMString <var title>url</var>, optional boolean <var>async</var> = true, optional DOMString? <var>user</var>, optional DOMString? <var>password</var>);
   void <span title="dom-XMLHttpRequest-setRequestHeader">setRequestHeader</span>(DOMString <var>header</var>, DOMString <var>value</var>);
            attribute unsigned long <span title="dom-XMLHttpRequest-timeout">timeout</span>;
            attribute boolean <span title="dom-XMLHttpRequest-withCredentials">withCredentials</span>;
   readonly attribute <span>XMLHttpRequestUpload</span> <span title="dom-XMLHttpRequest-upload">upload</span>;
-  void <span title="dom-XMLHttpRequest-send">send</span>();
-  void <span title="dom-XMLHttpRequest-send">send</span>(<span data-anolis-spec=typedarray>ArrayBuffer</span> <var>data</var>);
-  void <span title="dom-XMLHttpRequest-send">send</span>(<span data-anolis-spec=fileapi>Blob</span> <var>data</var>);
-  void <span title="dom-XMLHttpRequest-send">send</span>(<span data-anolis-spec=dom>Document</span> <var>data</var>);
-  void <span title="dom-XMLHttpRequest-send">send</span>(DOMString? <var>data</var>);
-  void <span title="dom-XMLHttpRequest-send">send</span>(<span>FormData</span> <var>data</var>);
+  void <span title="dom-XMLHttpRequest-send">send</span>(optional (<span data-anolis-spec=typedarray>ArrayBuffer</span> or <span data-anolis-spec=fileapi>Blob</span> or <span data-anolis-spec=dom>Document</span> or DOMString or <span>FormData</span>)? <var>data</var> = null);
   void <span title="dom-XMLHttpRequest-abort">abort</span>();
 
   // <a href="#response">response</a>
@@ -855,23 +850,17 @@ discarding any further data received from the network for them.
    <li><p>If <var title>url</var> just contains the <code>"user"</code>
    format let <var>temp user</var> be the user part.</p></li>
 
-   <li>
-    <p>Let <var>async</var> be the value of the <var>async</var> argument or
-    true if it was omitted.
-
-
-    <p>If <var>async</var> is false, there is an associated
-    <span><code>XMLHttpRequest</code> document</span> and either the
-    <code title=dom-XMLHttpRequest-timeout>timeout</code> attribute value is
-    not zero, the
-    <code title=dom-XMLHttpRequest-withCredentials>withCredentials</code>
-    attribute value is true, or the
-    <code title=dom-XMLHttpRequest-responseType>responseType</code>
-    attribute value is not the empty string,
-    <span data-anolis-spec=dom title=concept-throw>throw</span> an
-    "<code data-anolis-spec=dom>InvalidAccessError</code>" exception and
-    terminate these steps.
-
+   <li><p>If <var>async</var> is false, there is an associated
+   <span><code>XMLHttpRequest</code> document</span> and either the
+   <code title=dom-XMLHttpRequest-timeout>timeout</code> attribute value is
+   not zero, the
+   <code title=dom-XMLHttpRequest-withCredentials>withCredentials</code>
+   attribute value is true, or the
+   <code title=dom-XMLHttpRequest-responseType>responseType</code>
+   attribute value is not the empty string,
+   <span data-anolis-spec=dom title=concept-throw>throw</span> an
+   "<code data-anolis-spec=dom>InvalidAccessError</code>" exception and
+   terminate these steps.
 
    <li>
     <p>If the <var title>user</var> argument was not omitted follow these
@@ -1287,14 +1276,12 @@ X-Test: one, two</code></pre>
    "<code data-anolis-spec=dom>InvalidStateError</code>" exception and
    terminate these steps.
 
-   <li>
-    <p>If the <span>request method</span> is a case-sensitive match for
-    <code>GET</code> or <code>HEAD</code> act as if <var title>data</var>
-    is null.</p>
+   <li><p>If the <span>request method</span> is <code>GET</code> or
+   <code>HEAD</code>, set <var title>data</var> to null.
 
-    <p>If the <var>data</var> argument has been omitted or is
-    null, do not include a <span>request entity body</span>
-    and go to the next step.</p>
+   <li>
+    <p>If <var title>data</var> is null, do not include a
+    <span>request entity body</span> and go to the next step.
 
     <p>Otherwise, let <var>encoding</var> be null, <var>mime type</var> be
     null, and then follow these rules:</p>
