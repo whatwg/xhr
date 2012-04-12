@@ -1277,16 +1277,15 @@ X-Test: one, two</code></pre>
     <a href="#request-entity-body">request entity body</a> and go to the next step.
 
     <p>Otherwise, let <var>encoding</var> be null, <var>mime type</var> be
-    null, and then follow these rules:</p>
+    null, and then follow these rules, depending on <var title="">data</var>:
 
     <dl class="switch">
 
-     <dt>If <var>data</var> is a <code class="external"><a href="http://www.khronos.org/registry/typedarray/specs/latest/#5">ArrayBuffer</a></code></dt>
+     <dt><code class="external"><a href="http://www.khronos.org/registry/typedarray/specs/latest/#5">ArrayBuffer</a></code>
      <dd><p>Let the <a href="#request-entity-body">request entity body</a> be the raw data
-     represented by <var>data</var>.</dd>
+     represented by <var title="">data</var>.</dd>
 
-     <dt>If <var>data</var> is a <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code></dt>
-
+     <dt><code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code>
      <dd>
       <p>If the object's
       <code class="external" title="dom-Blob-type"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-type">type</a></code>
@@ -1298,16 +1297,15 @@ X-Test: one, two</code></pre>
      </dd>
 
 
-     <dt>If <var>data</var> is a <code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a></code>
-
+     <dt><a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a>
      <dd>
-      <p>Let <var>encoding</var> be the
+      <p>Let <var title="">encoding</var> be the
       <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#preferred-mime-name">preferred MIME name</a> of the
       <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document-encoding" title="concept-document-encoding">encoding</a>
-      of <var>data</var>. If <var>encoding</var> is UTF-16 change it to
-      UTF-8.</p>
+      of <var title="">data</var>. If <var title="">encoding</var> is utf-16 change it to
+      utf-8.
 
-      <p>If <code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a></code> is an
+      <p>If <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a> is an
       <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-document">HTML document</a>, let
       <var>mime type</var> be "<code>text/html</code>", or let
       <var>mime type</var> be "<code>application/xml</code>" otherwise. Then
@@ -1315,7 +1313,7 @@ X-Test: one, two</code></pre>
       <var>mime type</var>.
 
       <p><a class="external" href="http://html5.org/specs/dom-parsing.html#concept-serialize" title="concept-serialize">Serialize</a>
-      <var>data</var>, and let the <a href="#request-entity-body">request entity body</a> be the result,
+      <var title="">data</var>, and let the <a href="#request-entity-body">request entity body</a> be the result,
       <a class="external" href="http://dev.w3.org/2006/webapi/WebIDL/#dfn-obtain-unicode" title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</a>
       and encoded as <var>encoding</var>. Re-throw any exception this
       throws.</p>
@@ -1325,24 +1323,22 @@ X-Test: one, two</code></pre>
       thrown.</p>
 
       <p class="note">Subsequent changes to the
-      <code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a></code> have no effect on what
-      is transferred.</p>
+      <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a> have
+      no effect on what is transferred.
      </dd>
 
-     <dt>If <var>data</var> is a string</dt>
-
+     <dt>a string
      <dd>
       <p>Let <var>encoding</var> be UTF-8.</p>
 
       <p>Let <var>mime type</var> be "<code>text/plain;charset=UTF-8</code>".</p>
 
-      <p>Let the <a href="#request-entity-body">request entity body</a> be <var>data</var>
+      <p>Let the <a href="#request-entity-body">request entity body</a> be <var title="">data</var>
       <a class="external" href="http://dev.w3.org/2006/webapi/WebIDL/#dfn-obtain-unicode" title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</a>
-      and encoded as UTF-8.</p>
+      and encoded as utf-8.</p>
      </dd>
 
-     <dt>If <var>data</var> is a <code><a href="#formdata">FormData</a></code></dt>
-
+     <dt><code><a href="#formdata">FormData</a></code>
      <dd>
       <p>Let the <a href="#request-entity-body">request entity body</a> be the result of running
       the

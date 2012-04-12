@@ -1284,16 +1284,15 @@ X-Test: one, two</code></pre>
     <span>request entity body</span> and go to the next step.
 
     <p>Otherwise, let <var>encoding</var> be null, <var>mime type</var> be
-    null, and then follow these rules:</p>
+    null, and then follow these rules, depending on <var title>data</var>:
 
     <dl class=switch>
 
-     <dt>If <var>data</var> is a <code data-anolis-spec=typedarray>ArrayBuffer</code></dt>
+     <dt><code data-anolis-spec=typedarray>ArrayBuffer</code>
      <dd><p>Let the <span>request entity body</span> be the raw data
-     represented by <var>data</var>.</p></dd>
+     represented by <var title>data</var>.</p></dd>
 
-     <dt>If <var>data</var> is a <code data-anolis-spec=fileapi>Blob</code></dt>
-
+     <dt><code data-anolis-spec=fileapi>Blob</code>
      <dd>
       <p>If the object's
       <code data-anolis-spec=fileapi title=dom-Blob-type>type</code>
@@ -1305,16 +1304,15 @@ X-Test: one, two</code></pre>
      </dd>
 
 
-     <dt>If <var>data</var> is a <code data-anolis-spec=dom>Document</code>
-
+     <dt><span data-anolis-spec=dom title=concept-document>document</span>
      <dd>
-      <p>Let <var>encoding</var> be the
+      <p>Let <var title>encoding</var> be the
       <span data-anolis-spec=dom>preferred MIME name</span> of the
       <span data-anolis-spec=dom title=concept-document-encoding>encoding</span>
-      of <var>data</var>. If <var>encoding</var> is UTF-16 change it to
-      UTF-8.</p>
+      of <var title>data</var>. If <var title>encoding</var> is utf-16 change it to
+      utf-8.
 
-      <p>If <code data-anolis-spec=dom>Document</code> is an
+      <p>If <span data-anolis-spec=dom title=concept-document>document</span> is an
       <span data-anolis-spec=dom>HTML document</span>, let
       <var>mime type</var> be "<code>text/html</code>", or let
       <var>mime type</var> be "<code>application/xml</code>" otherwise. Then
@@ -1322,7 +1320,7 @@ X-Test: one, two</code></pre>
       <var>mime type</var>.
 
       <p><span data-anolis-spec=domps title=concept-serialize>Serialize</span>
-      <var>data</var>, and let the <span>request entity body</span> be the result,
+      <var title>data</var>, and let the <span>request entity body</span> be the result,
       <span data-anolis-spec=webidl title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</span>
       and encoded as <var>encoding</var>. Re-throw any exception this
       throws.</p>
@@ -1332,24 +1330,22 @@ X-Test: one, two</code></pre>
       thrown.</p>
 
       <p class=note>Subsequent changes to the
-      <code data-anolis-spec=dom>Document</code> have no effect on what
-      is transferred.</p>
+      <span data-anolis-spec=dom title=concept-document>document</span> have
+      no effect on what is transferred.
      </dd>
 
-     <dt>If <var>data</var> is a string</dt>
-
+     <dt>a string
      <dd>
       <p>Let <var>encoding</var> be UTF-8.</p>
 
       <p>Let <var>mime type</var> be "<code>text/plain;charset=UTF-8</code>".</p>
 
-      <p>Let the <span>request entity body</span> be <var>data</var>
+      <p>Let the <span>request entity body</span> be <var title>data</var>
       <span data-anolis-spec=webidl title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</span>
-      and encoded as UTF-8.</p>
+      and encoded as utf-8.</p>
      </dd>
 
-     <dt>If <var>data</var> is a <code>FormData</code></dt>
-
+     <dt><code>FormData</code>
      <dd>
       <p>Let the <span>request entity body</span> be the result of running
       the
