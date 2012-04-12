@@ -260,12 +260,10 @@ not appear in all uppercase letters in this specification.
   <p>This specification relies on several underlying specifications.</p>
 
   <dl>
-
    <dt>Cross-Origin Resource Sharing</dt>
    <dd><p>A <span>conforming user agent</span> must
    support the algorithms of the Cross-Origin Resource Sharing
    specification. <span data-anolis-ref>CORS</span></p></dd>
-
 
    <dt>DOM4</dt>
    <dd><p>A <span>conforming user agent</span> must
@@ -285,7 +283,6 @@ not appear in all uppercase letters in this specification.
    this specification relies upon, such as the <code data-anolis-spec=fileapi>Blob</code> and
    <code data-anolis-spec=fileapi>File</code> interfaces. <span data-anolis-ref>FILEAPI</span></p>
 
-
    <dt>HTML</dt>
    <dd><p>A <span>conforming user agent</span> must
    support at least the subset of the functionality defined in HTML that
@@ -298,7 +295,6 @@ not appear in all uppercase letters in this specification.
    support some version of the HTTP protocol. Requirements regarding HTTP
    are made throughout the specification. <span data-anolis-ref>HTTP</span>
 
-
    <dt>Progress Events</dt>
    <dd><p>A <span>conforming user agent</span> must support the
    Progress Events specification.
@@ -306,9 +302,9 @@ not appear in all uppercase letters in this specification.
 
    <dt>Typed Array</dt>
    <dd><p>A <span>conforming user agent</span> must support the
-   <code data-anolis-spec=typedarray>ArrayBuffer</code> object.
+   <code data-anolis-spec=typedarray>ArrayBuffer</code> and
+   <code data-anolis-spec=typedarray>ArrayBufferView</code> objects.
    <span data-anolis-ref>TYPEDARRAY</span>
-
 
    <dt>Web IDL</dt>
    <dd><p>A <span>conforming user agent</span> must also
@@ -405,7 +401,7 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
            attribute unsigned long <span title="dom-XMLHttpRequest-timeout">timeout</span>;
            attribute boolean <span title="dom-XMLHttpRequest-withCredentials">withCredentials</span>;
   readonly attribute <span>XMLHttpRequestUpload</span> <span title="dom-XMLHttpRequest-upload">upload</span>;
-  void <span title="dom-XMLHttpRequest-send">send</span>(optional (<span data-anolis-spec=typedarray>ArrayBuffer</span> or <span data-anolis-spec=fileapi>Blob</span> or <span data-anolis-spec=dom>Document</span> or DOMString or <span>FormData</span>)? <var>data</var> = null);
+  void <span title="dom-XMLHttpRequest-send">send</span>(optional (<span data-anolis-spec=typedarray>ArrayBufferView</span> or <span data-anolis-spec=fileapi>Blob</span> or <span data-anolis-spec=dom>Document</span> or DOMString or <span>FormData</span>)? <var>data</var> = null);
   void <span title="dom-XMLHttpRequest-abort">abort</span>();
 
   // <a href="#response">response</a>
@@ -1288,7 +1284,7 @@ X-Test: one, two</code></pre>
 
     <dl class=switch>
 
-     <dt><code data-anolis-spec=typedarray>ArrayBuffer</code>
+     <dt><code data-anolis-spec=typedarray>ArrayBufferView</code>
      <dd><p>Let the <span>request entity body</span> be the raw data
      represented by <var title>data</var>.</p></dd>
 

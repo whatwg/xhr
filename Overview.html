@@ -253,12 +253,10 @@ not appear in all uppercase letters in this specification.
   <p>This specification relies on several underlying specifications.</p>
 
   <dl>
-
    <dt>Cross-Origin Resource Sharing</dt>
    <dd><p>A <span>conforming user agent</span> must
    support the algorithms of the Cross-Origin Resource Sharing
    specification. <a href="#refsCORS">[CORS]</a></dd>
-
 
    <dt>DOM4</dt>
    <dd><p>A <span>conforming user agent</span> must
@@ -278,7 +276,6 @@ not appear in all uppercase letters in this specification.
    this specification relies upon, such as the <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code> and
    <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a></code> interfaces. <a href="#refsFILEAPI">[FILEAPI]</a></p>
 
-
    <dt>HTML</dt>
    <dd><p>A <span>conforming user agent</span> must
    support at least the subset of the functionality defined in HTML that
@@ -291,7 +288,6 @@ not appear in all uppercase letters in this specification.
    support some version of the HTTP protocol. Requirements regarding HTTP
    are made throughout the specification. <a href="#refsHTTP">[HTTP]</a>
 
-
    <dt>Progress Events</dt>
    <dd><p>A <span>conforming user agent</span> must support the
    Progress Events specification.
@@ -299,9 +295,9 @@ not appear in all uppercase letters in this specification.
 
    <dt>Typed Array</dt>
    <dd><p>A <span>conforming user agent</span> must support the
-   <code class="external"><a href="http://www.khronos.org/registry/typedarray/specs/latest/#5">ArrayBuffer</a></code> object.
+   <code class="external"><a href="http://www.khronos.org/registry/typedarray/specs/latest/#5">ArrayBuffer</a></code> and
+   <code class="external"><a href="http://www.khronos.org/registry/typedarray/specs/latest/#6">ArrayBufferView</a></code> objects.
    <a href="#refsTYPEDARRAY">[TYPEDARRAY]</a>
-
 
    <dt>Web IDL</dt>
    <dd><p>A <span>conforming user agent</span> must also
@@ -398,7 +394,7 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <a href="#xmlhttpreque
            attribute unsigned long <a href="#dom-xmlhttprequest-timeout" title="dom-XMLHttpRequest-timeout">timeout</a>;
            attribute boolean <a href="#dom-xmlhttprequest-withcredentials" title="dom-XMLHttpRequest-withCredentials">withCredentials</a>;
   readonly attribute <a href="#xmlhttprequestupload">XMLHttpRequestUpload</a> <a href="#dom-xmlhttprequest-upload" title="dom-XMLHttpRequest-upload">upload</a>;
-  void <a href="#dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send">send</a>(optional (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#5">ArrayBuffer</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a> or DOMString or <a href="#formdata">FormData</a>)? <var>data</var> = null);
+  void <a href="#dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send">send</a>(optional (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#6">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a> or DOMString or <a href="#formdata">FormData</a>)? <var>data</var> = null);
   void <a href="#dom-xmlhttprequest-abort" title="dom-XMLHttpRequest-abort">abort</a>();
 
   // <a href="#response">response</a>
@@ -1281,7 +1277,7 @@ X-Test: one, two</code></pre>
 
     <dl class="switch">
 
-     <dt><code class="external"><a href="http://www.khronos.org/registry/typedarray/specs/latest/#5">ArrayBuffer</a></code>
+     <dt><code class="external"><a href="http://www.khronos.org/registry/typedarray/specs/latest/#6">ArrayBufferView</a></code>
      <dd><p>Let the <a href="#request-entity-body">request entity body</a> be the raw data
      represented by <var title="">data</var>.</dd>
 
