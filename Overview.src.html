@@ -2062,7 +2062,13 @@ X-Test: one, two</code></pre>
    <li><p>If the <span>error flag</span> is set, return the empty string and
    terminate these steps.
 
-   <li><p>Return the HTTP status text.</p></li>
+   <li>
+    <p>Return the HTTP status text,
+    <span title="inflate a byte sequence into a DOMString">inflated</span>.
+
+    <p class=note>It has to be
+    <span title="inflate a byte sequence into a DOMString">inflated</span>
+    as the HTTP status text consists of bytes.
   </ol>
 
 
@@ -2898,12 +2904,7 @@ that is <em>not</em> <code>GET</code>, determine the response as follows:
 
 
 <h2 class=no-num>References</h2>
-<h3 class=no-num>Normative references</h3>
-<div id=anolis-references-normative></div>
-
-<!--<h3 class=no-num>Informative references</h3>
-<div id=anolis-references-informative></div>-->
-
+<div id=anolis-references></div>
 
 
   <h2 class="no-num" id="acknowledgments">Acknowledgments</h2>

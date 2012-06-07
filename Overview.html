@@ -40,7 +40,7 @@
 
    <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
 
-   <h2 class="no-num no-toc" id="w3c-doctype">Editor's Draft 14 May 2012</h2>
+   <h2 class="no-num no-toc" id="w3c-doctype">Editor's Draft 7 June 2012</h2>
 
    <dl>
     <dt>This Version:</dt>
@@ -134,9 +134,7 @@
    <li><a href="#formdata-constructors"><span class="secno">5.1 </span>Constructors</a></li>
    <li><a href="#the-append()-method"><span class="secno">5.2 </span>The <code title="">append()</code> method</a></ol></li>
  <li><a href="#data:-urls-and-http"><span class="secno">6 </span><code>data:</code> URLs and HTTP</a></li>
- <li><a class="no-num" href="#references">References</a>
-  <ol class="toc">
-   <li><a class="no-num" href="#normative-references">Normative references</a></ol></li>
+ <li><a class="no-num" href="#references">References</a></li>
  <li><a class="no-num" href="#acknowledgments">Acknowledgments</a></ol>
 <!--end-toc-->
 
@@ -2052,7 +2050,13 @@ X-Test: one, two</code></pre>
    <li><p>If the <a href="#error-flag">error flag</a> is set, return the empty string and
    terminate these steps.
 
-   <li><p>Return the HTTP status text.</li>
+   <li>
+    <p>Return the HTTP status text,
+    <a href="#inflate-a-byte-sequence-into-a-domstring" title="inflate a byte sequence into a DOMString">inflated</a>.
+
+    <p class="note">It has to be
+    <a href="#inflate-a-byte-sequence-into-a-domstring" title="inflate a byte sequence into a DOMString">inflated</a>
+    as the HTTP status text consists of bytes.
   </ol>
 
 
@@ -2888,8 +2892,7 @@ that is <em>not</em> <code>GET</code>, determine the response as follows:
 
 
 <h2 class="no-num" id="references">References</h2>
-<h3 class="no-num" id="normative-references">Normative references</h3>
-<div id="anolis-references-normative"><dl><dt id="refsCOOKIES">[COOKIES]
+<div id="anolis-references"><dl><dt id="refsCOOKIES">[COOKIES]
 <dd><cite><a href="http://tools.ietf.org/html/rfc6265">HTTP State Management Mechanism</a></cite>, Adam Barth. IETF.
 
 <dt id="refsCORS">[CORS]
@@ -2942,10 +2945,6 @@ that is <em>not</em> <code>GET</code>, determine the response as follows:
 <dd><cite><a href="http://www.w3.org/TR/xml-names/">Namespaces in XML</a></cite>, Tim Bray, Dave Hollander, Andrew Layman et al.. W3C.
 
 </dl></div>
-
-<!--<h3 class=no-num>Informative references</h3>
-<div id=anolis-references-informative></div>-->
-
 
 
   <h2 class="no-num" id="acknowledgments">Acknowledgments</h2>
