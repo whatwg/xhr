@@ -346,18 +346,6 @@ not appear in all uppercase letters in this specification.
   <span data-anolis-ref>COOKIES</span> <!-- XXX ref? --></p>
 
 
-  <p>To <dfn>deflate a DOMString into a byte sequence</dfn> means to create
-  a sequence of bytes such that the <var title>n</var>th byte of the
-  sequence is equal to the low-order byte of the <var title>n</var>th
-  code point in the original DOMString.</p>
-
-  <p>To <dfn>inflate a byte sequence into a DOMString</dfn> means to create
-  a DOMString such that the <var title>n</var>th code point has 0x00 as
-  the high-order byte and the <var title>n</var>th byte of the byte
-  sequence as the low-order byte.</p>
-
-
-
   <h2>Interface <code title>XMLHttpRequest</code></h2>
 
   <pre class="idl">[NoInterfaceObject]
@@ -399,8 +387,8 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
   readonly attribute unsigned short <span title="dom-XMLHttpRequest-readyState">readyState</span>;
 
   // <a href="#request">request</a>
-  void <span title="dom-XMLHttpRequest-open">open</span>(DOMString <var>method</var>, DOMString <var title>url</var>, optional boolean <var>async</var> = true, optional DOMString? <var>user</var>, optional DOMString? <var>password</var>);
-  void <span title="dom-XMLHttpRequest-setRequestHeader">setRequestHeader</span>(DOMString <var>header</var>, DOMString <var>value</var>);
+  void <span title="dom-XMLHttpRequest-open">open</span>(ByteString <var>method</var>, DOMString <var title>url</var>, optional boolean <var>async</var> = true, optional DOMString? <var>user</var>, optional DOMString? <var>password</var>);
+  void <span title="dom-XMLHttpRequest-setRequestHeader">setRequestHeader</span>(ByteString <var>header</var>, ByteString <var>value</var>);
            attribute unsigned long <span title="dom-XMLHttpRequest-timeout">timeout</span>;
            attribute boolean <span title="dom-XMLHttpRequest-withCredentials">withCredentials</span>;
   readonly attribute <span>XMLHttpRequestUpload</span> <span title="dom-XMLHttpRequest-upload">upload</span>;
@@ -409,9 +397,9 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
 
   // <a href="#response">response</a>
   readonly attribute unsigned short <span title="dom-XMLHttpRequest-status">status</span>;
-  readonly attribute DOMString <span title="dom-XMLHttpRequest-statusText">statusText</span>;
-  DOMString? <span title="dom-XMLHttpRequest-getResponseHeader">getResponseHeader</span>(DOMString <var>header</var>);
-  DOMString <span title="dom-XMLHttpRequest-getAllResponseHeaders">getAllResponseHeaders</span>();
+  readonly attribute ByteString <span title="dom-XMLHttpRequest-statusText">statusText</span>;
+  ByteString? <span title="dom-XMLHttpRequest-getResponseHeader">getResponseHeader</span>(ByteString <var>header</var>);
+  ByteString <span title="dom-XMLHttpRequest-getAllResponseHeaders">getAllResponseHeaders</span>();
   void <span title="dom-XMLHttpRequest-overrideMimeType">overrideMimeType</span>(DOMString <var>mime</var>);
            attribute <span>XMLHttpRequestResponseType</span> <span title="dom-XMLHttpRequest-responseType">responseType</span>;
   readonly attribute any <span title="dom-XMLHttpRequest-response">response</span>;
@@ -775,16 +763,11 @@ discarding any further data received from the network for them.
     </ol>
    </li>
 
-   <li><p>If any code point in <var>method</var> is greater than
-   U+00FF LATIN SMALL LETTER Y WITH DIAERESIS or after
-   <span title="deflate a DOMString into a byte sequence">deflating</span>
-   <var>method</var> it does not match the
+   <li><p>If <var>method</var> does not match the
    <span data-anolis-spec=http>Method</span> token production,
    <span data-anolis-spec=dom title=concept-throw>throw</span> a
    "<code data-anolis-spec=dom>SyntaxError</code>" exception and terminate
-   these steps. Otherwise let <var>method</var> be the result of
-   <span title="deflate a DOMString into a byte sequence">deflating</span>
-   <var>method</var>.</p></li> <!-- This sounds lame, but it works. -->
+   these steps.
 
    <li>
     <p>If <var>method</var> is a case-insensitive match for
@@ -807,7 +790,7 @@ discarding any further data received from the network for them.
     "<code data-anolis-spec=dom>SecurityError</code>" exception and
     terminate these steps.
 
-    <p class=note>Allowing these methods poses a security risk.
+    <p class=note>Allowing these methods would pose a security risk.
     <span data-anolis-ref>HTTPVERBSEC</span>
    </li>
 
@@ -997,28 +980,18 @@ discarding any further data received from the network for them.
    "<code data-anolis-spec=dom>InvalidStateError</code>" exception and
    terminate these steps.
 
-   <li><p>If any code point in <var>header</var> is greater than
-   U+00FF LATIN SMALL LETTER Y WITH DIAERESIS or after
-   <span title="deflate a DOMString into a byte sequence">deflating</span>
-   <var>header</var> it does not match the
+   <li><p>If <var>header</var> does not match the
    <span data-anolis-spec=http>field-name</span> production,
    <span data-anolis-spec=dom title=concept-throw>throw</span> a
    "<code data-anolis-spec=dom>SyntaxError</code>" exception and terminate
-   these steps. Otherwise let <var>header</var> be the result of
-   <span title="deflate a DOMString into a byte sequence">deflating</span>
-   <var>header</var>.</p></li> <!-- This sounds lame, but it works. -->
+   these steps.
 
    <li>
-    <p>If any code point in <var>value</var> is greater than
-    U+00FF LATIN SMALL LETTER Y WITH DIAERESIS or after
-    <span title="deflate a DOMString into a byte sequence">deflating</span>
-    <var>value</var> it does not match the
+    <p>If <var>value</var> does not match the
     <span data-anolis-spec=http>field-value</span> production,
     <span data-anolis-spec=dom title=concept-throw>throw</span> a
     "<code data-anolis-spec=dom>SyntaxError</code>" exception and terminate
-    these steps. Otherwise let <var>value</var> be the result of
-    <span title="deflate a DOMString into a byte sequence">deflating</span>
-    <var>value</var>.</p> <!-- This sounds lame, but it works. -->
+    these steps.
 
     <p class=note>The empty string is legal and represents the empty
     header value.</p>
@@ -2062,13 +2035,7 @@ X-Test: one, two</code></pre>
    <li><p>If the <span>error flag</span> is set, return the empty string and
    terminate these steps.
 
-   <li>
-    <p>Return the HTTP status text,
-    <span title="inflate a byte sequence into a DOMString">inflated</span>.
-
-    <p class=note>It has to be
-    <span title="inflate a byte sequence into a DOMString">inflated</span>
-    as the HTTP status text consists of bytes.
+   <li><p>Return the HTTP status text.
   </ol>
 
 
@@ -2094,29 +2061,17 @@ X-Test: one, two</code></pre>
    <li><p>If the <span>error flag</span> is set, return null and terminate
    these steps.
 
-   <li><p>If any code point in <var>header</var> is greater than
-   U+00FF LATIN SMALL LETTER Y WITH DIAERESIS, return null and terminate
-   these steps.</p></li>
-
-   <li><p>Let <var>header</var> be the result of
-   <span title="deflate a DOMString into a byte sequence">deflating</span>
-   <var>header</var>.</p></li> <!-- This sounds lame, but it works. -->
-
    <li><p>If <var>header</var> is a case-insensitive match for
    <code>Set-Cookie</code> or <code>Set-Cookie2</code>, return null and
    terminate these steps.</p></li>
 
    <li><p>If <var>header</var> is a case-insensitive match for multiple HTTP
-   response headers, return the
-   <span title="inflate a byte sequence into a DOMString">inflated</span>
-   values of these headers as a single concatenated string separated from
-   each other by a U+002C COMMA U+0020 SPACE character pair and terminate
-   these steps.</p></li>
+   response headers, return the values of these headers as a single
+   concatenated string separated from each other by a
+   U+002C COMMA U+0020 SPACE character pair and terminate these steps.
 
    <li><p>If <var>header</var> is a case-insensitive match for a single HTTP
-   response header, return the
-   <span title="inflate a byte sequence into a DOMString">inflated</span>
-   value of that header and terminate these steps.</p></li>
+   response header, return the value of that header and terminate these steps.
 
    <li><p>Return null.</p></li>
   </ol>
@@ -2173,9 +2128,7 @@ client.onreadystatechange = function() {
 
    <li><p>Return all the HTTP headers, excluding headers that are a
    case-insensitive match for <code>Set-Cookie</code> or
-   <code>Set-Cookie2</code>,
-   <span title="inflate a byte sequence into a DOMString">inflated</span>,
-   as a single string, with each header line
+   <code>Set-Cookie2</code>, as a single string, with each header line
    separated by a U+000D CR U+000A LF pair, excluding the status line, and
    with each header name and header value separated by a
    U+003A COLON U+0020 SPACE pair.</p></li>

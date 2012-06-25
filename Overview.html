@@ -40,7 +40,7 @@
 
    <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
 
-   <h2 class="no-num no-toc" id="w3c-doctype">Editor's Draft 7 June 2012</h2>
+   <h2 class="no-num no-toc" id="w3c-doctype">Editor's Draft 25 June 2012</h2>
 
    <dl>
     <dt>This Version:</dt>
@@ -334,18 +334,6 @@ not appear in all uppercase letters in this specification.
   <a href="#refsCOOKIES">[COOKIES]</a> <!-- XXX ref? --></p>
 
 
-  <p>To <dfn id="deflate-a-domstring-into-a-byte-sequence">deflate a DOMString into a byte sequence</dfn> means to create
-  a sequence of bytes such that the <var title="">n</var>th byte of the
-  sequence is equal to the low-order byte of the <var title="">n</var>th
-  code point in the original DOMString.</p>
-
-  <p>To <dfn id="inflate-a-byte-sequence-into-a-domstring">inflate a byte sequence into a DOMString</dfn> means to create
-  a DOMString such that the <var title="">n</var>th code point has 0x00 as
-  the high-order byte and the <var title="">n</var>th byte of the byte
-  sequence as the low-order byte.</p>
-
-
-
   <h2 id="interface-xmlhttprequest"><span class="secno">4 </span>Interface <code title="">XMLHttpRequest</code></h2>
 
   <pre class="idl">[NoInterfaceObject]
@@ -387,8 +375,8 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <a href="#xmlhttpreque
   readonly attribute unsigned short <a href="#dom-xmlhttprequest-readystate" title="dom-XMLHttpRequest-readyState">readyState</a>;
 
   // <a href="#request">request</a>
-  void <a href="#dom-xmlhttprequest-open" title="dom-XMLHttpRequest-open">open</a>(DOMString <var>method</var>, DOMString <var title="">url</var>, optional boolean <var>async</var> = true, optional DOMString? <var>user</var>, optional DOMString? <var>password</var>);
-  void <a href="#dom-xmlhttprequest-setrequestheader" title="dom-XMLHttpRequest-setRequestHeader">setRequestHeader</a>(DOMString <var>header</var>, DOMString <var>value</var>);
+  void <a href="#dom-xmlhttprequest-open" title="dom-XMLHttpRequest-open">open</a>(ByteString <var>method</var>, DOMString <var title="">url</var>, optional boolean <var>async</var> = true, optional DOMString? <var>user</var>, optional DOMString? <var>password</var>);
+  void <a href="#dom-xmlhttprequest-setrequestheader" title="dom-XMLHttpRequest-setRequestHeader">setRequestHeader</a>(ByteString <var>header</var>, ByteString <var>value</var>);
            attribute unsigned long <a href="#dom-xmlhttprequest-timeout" title="dom-XMLHttpRequest-timeout">timeout</a>;
            attribute boolean <a href="#dom-xmlhttprequest-withcredentials" title="dom-XMLHttpRequest-withCredentials">withCredentials</a>;
   readonly attribute <a href="#xmlhttprequestupload">XMLHttpRequestUpload</a> <a href="#dom-xmlhttprequest-upload" title="dom-XMLHttpRequest-upload">upload</a>;
@@ -397,9 +385,9 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <a href="#xmlhttpreque
 
   // <a href="#response">response</a>
   readonly attribute unsigned short <a href="#dom-xmlhttprequest-status" title="dom-XMLHttpRequest-status">status</a>;
-  readonly attribute DOMString <a href="#dom-xmlhttprequest-statustext" title="dom-XMLHttpRequest-statusText">statusText</a>;
-  DOMString? <a href="#dom-xmlhttprequest-getresponseheader" title="dom-XMLHttpRequest-getResponseHeader">getResponseHeader</a>(DOMString <var>header</var>);
-  DOMString <a href="#dom-xmlhttprequest-getallresponseheaders" title="dom-XMLHttpRequest-getAllResponseHeaders">getAllResponseHeaders</a>();
+  readonly attribute ByteString <a href="#dom-xmlhttprequest-statustext" title="dom-XMLHttpRequest-statusText">statusText</a>;
+  ByteString? <a href="#dom-xmlhttprequest-getresponseheader" title="dom-XMLHttpRequest-getResponseHeader">getResponseHeader</a>(ByteString <var>header</var>);
+  ByteString <a href="#dom-xmlhttprequest-getallresponseheaders" title="dom-XMLHttpRequest-getAllResponseHeaders">getAllResponseHeaders</a>();
   void <a href="#dom-xmlhttprequest-overridemimetype" title="dom-XMLHttpRequest-overrideMimeType">overrideMimeType</a>(DOMString <var>mime</var>);
            attribute <a href="#xmlhttprequestresponsetype">XMLHttpRequestResponseType</a> <a href="#dom-xmlhttprequest-responsetype" title="dom-XMLHttpRequest-responseType">responseType</a>;
   readonly attribute any <a href="#dom-xmlhttprequest-response" title="dom-XMLHttpRequest-response">response</a>;
@@ -763,16 +751,11 @@ discarding any further data received from the network for them.
     </ol>
    </li>
 
-   <li><p>If any code point in <var>method</var> is greater than
-   U+00FF LATIN SMALL LETTER Y WITH DIAERESIS or after
-   <a href="#deflate-a-domstring-into-a-byte-sequence" title="deflate a DOMString into a byte sequence">deflating</a>
-   <var>method</var> it does not match the
+   <li><p>If <var>method</var> does not match the
    <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-5.1.1">Method</a> token production,
    <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> a
    "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror">SyntaxError</a></code>" exception and terminate
-   these steps. Otherwise let <var>method</var> be the result of
-   <a href="#deflate-a-domstring-into-a-byte-sequence" title="deflate a DOMString into a byte sequence">deflating</a>
-   <var>method</var>.</li> <!-- This sounds lame, but it works. -->
+   these steps.
 
    <li>
     <p>If <var>method</var> is a case-insensitive match for
@@ -795,7 +778,7 @@ discarding any further data received from the network for them.
     "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#securityerror">SecurityError</a></code>" exception and
     terminate these steps.
 
-    <p class="note">Allowing these methods poses a security risk.
+    <p class="note">Allowing these methods would pose a security risk.
     <a href="#refsHTTPVERBSEC">[HTTPVERBSEC]</a>
    </li>
 
@@ -985,28 +968,18 @@ discarding any further data received from the network for them.
    "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>" exception and
    terminate these steps.
 
-   <li><p>If any code point in <var>header</var> is greater than
-   U+00FF LATIN SMALL LETTER Y WITH DIAERESIS or after
-   <a href="#deflate-a-domstring-into-a-byte-sequence" title="deflate a DOMString into a byte sequence">deflating</a>
-   <var>header</var> it does not match the
+   <li><p>If <var>header</var> does not match the
    <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-4.2">field-name</a> production,
    <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> a
    "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror">SyntaxError</a></code>" exception and terminate
-   these steps. Otherwise let <var>header</var> be the result of
-   <a href="#deflate-a-domstring-into-a-byte-sequence" title="deflate a DOMString into a byte sequence">deflating</a>
-   <var>header</var>.</li> <!-- This sounds lame, but it works. -->
+   these steps.
 
    <li>
-    <p>If any code point in <var>value</var> is greater than
-    U+00FF LATIN SMALL LETTER Y WITH DIAERESIS or after
-    <a href="#deflate-a-domstring-into-a-byte-sequence" title="deflate a DOMString into a byte sequence">deflating</a>
-    <var>value</var> it does not match the
+    <p>If <var>value</var> does not match the
     <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-4.2">field-value</a> production,
     <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> a
     "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror">SyntaxError</a></code>" exception and terminate
-    these steps. Otherwise let <var>value</var> be the result of
-    <a href="#deflate-a-domstring-into-a-byte-sequence" title="deflate a DOMString into a byte sequence">deflating</a>
-    <var>value</var>.</p> <!-- This sounds lame, but it works. -->
+    these steps.
 
     <p class="note">The empty string is legal and represents the empty
     header value.</p>
@@ -2050,13 +2023,7 @@ X-Test: one, two</code></pre>
    <li><p>If the <a href="#error-flag">error flag</a> is set, return the empty string and
    terminate these steps.
 
-   <li>
-    <p>Return the HTTP status text,
-    <a href="#inflate-a-byte-sequence-into-a-domstring" title="inflate a byte sequence into a DOMString">inflated</a>.
-
-    <p class="note">It has to be
-    <a href="#inflate-a-byte-sequence-into-a-domstring" title="inflate a byte sequence into a DOMString">inflated</a>
-    as the HTTP status text consists of bytes.
+   <li><p>Return the HTTP status text.
   </ol>
 
 
@@ -2082,29 +2049,17 @@ X-Test: one, two</code></pre>
    <li><p>If the <a href="#error-flag">error flag</a> is set, return null and terminate
    these steps.
 
-   <li><p>If any code point in <var>header</var> is greater than
-   U+00FF LATIN SMALL LETTER Y WITH DIAERESIS, return null and terminate
-   these steps.</li>
-
-   <li><p>Let <var>header</var> be the result of
-   <a href="#deflate-a-domstring-into-a-byte-sequence" title="deflate a DOMString into a byte sequence">deflating</a>
-   <var>header</var>.</li> <!-- This sounds lame, but it works. -->
-
    <li><p>If <var>header</var> is a case-insensitive match for
    <code>Set-Cookie</code> or <code>Set-Cookie2</code>, return null and
    terminate these steps.</li>
 
    <li><p>If <var>header</var> is a case-insensitive match for multiple HTTP
-   response headers, return the
-   <a href="#inflate-a-byte-sequence-into-a-domstring" title="inflate a byte sequence into a DOMString">inflated</a>
-   values of these headers as a single concatenated string separated from
-   each other by a U+002C COMMA U+0020 SPACE character pair and terminate
-   these steps.</li>
+   response headers, return the values of these headers as a single
+   concatenated string separated from each other by a
+   U+002C COMMA U+0020 SPACE character pair and terminate these steps.
 
    <li><p>If <var>header</var> is a case-insensitive match for a single HTTP
-   response header, return the
-   <a href="#inflate-a-byte-sequence-into-a-domstring" title="inflate a byte sequence into a DOMString">inflated</a>
-   value of that header and terminate these steps.</li>
+   response header, return the value of that header and terminate these steps.
 
    <li><p>Return null.</li>
   </ol>
@@ -2161,9 +2116,7 @@ client.onreadystatechange = function() {
 
    <li><p>Return all the HTTP headers, excluding headers that are a
    case-insensitive match for <code>Set-Cookie</code> or
-   <code>Set-Cookie2</code>,
-   <a href="#inflate-a-byte-sequence-into-a-domstring" title="inflate a byte sequence into a DOMString">inflated</a>,
-   as a single string, with each header line
+   <code>Set-Cookie2</code>, as a single string, with each header line
    separated by a U+000D CR U+000A LF pair, excluding the status line, and
    with each header name and header value separated by a
    U+003A COLON U+0020 SPACE pair.</li>
