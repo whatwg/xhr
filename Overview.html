@@ -1,50 +1,17 @@
-<!DOCTYPE html><html lang="en-US"><head>
-  <meta charset="utf-8">
-  <title>XMLHttpRequest</title>
-  <style>
-   pre.idl { border:solid thin; background:#eee; color:#000; padding:0.5em }
-   pre.idl :link, pre.idl :visited { color:inherit; background:transparent }
-   pre code { color:inherit; background:transparent }
-   .example { margin-left:1em; padding-left:1em; border-left:double; color:#222; background:#fcfcfc }
-   .note { margin-left:2em; font-weight:bold; font-style:italic; color:#008000 }
-   p.note::before { content:"Note: " }
-   .XXX { padding:.5em; border:solid #f00 }
-   p.XXX::before { content:"Issue: " }
-   dl.switch { padding-left:2em }
-   dl.switch > dt { text-indent:-1.5em }
-   dl.switch > dt:before { content:'\21AA'; padding:0 0.5em 0 0; display:inline-block; width:1em; text-align:right; line-height:0.5em }
-   dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
-   dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
-   dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
-   dl.domintro dd p { margin: 0.5em 0; }
-   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: red; border: solid 2px; background: white; padding: 0 0.25em; }
-   em.ct { text-transform:lowercase; font-variant:small-caps; font-style:normal }
-   dfn { font-weight:bold; font-style:normal }
-   code { color:orangered }
-   code :link, code :visited { color:inherit }
-   hr:not(.top) { display:block; background:none; border:none; padding:0; margin:2em 0; height:auto }
-   table { border-collapse:collapse; border-style:hidden hidden none hidden }
-   table thead { border-bottom:solid }
-   table tbody th:first-child { border-left:solid }
-   table td, table th { border-left:solid; border-right:solid; border-bottom:solid thin; vertical-align:top; padding:0.2em }
-  </style>
-  <link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet">
- </head>
- <body>
-  <div class="head">
+<!DOCTYPE html><html lang="en-US"><meta charset="utf-8">
+<title>XMLHttpRequest</title>
+<link href="http://www.whatwg.org/style/specification" rel="stylesheet">
+<link href="http://www.whatwg.org/images/icon" rel="icon">
 
-<!--begin-logo-->
-<p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
-<!--end-logo-->
+<div class="head">
+ <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
 
-
-   <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-
-   <h2 class="no-num no-toc" id="w3c-doctype">Editor's Draft 27 June 2012</h2>
+ <h2 class="no-num no-toc" id="living-standard-&mdash;-last-updated-11-september-2012">Living Standard &mdash; Last Updated 11 September 2012</h2>
 
    <dl>
     <dt>This Version:</dt>
-    <dd class="dontpublish"><a href="http://dvcs.w3.org/hg/xhr/raw-file/tip/Overview.html">http://dvcs.w3.org/hg/xhr/raw-file/tip/Overview.html</a></dd>
+    <dd><a href="http://xhr.spec.whatwg.org">http://xhr.spec.whatwg.org</a></dd>
+
     <dt class="dontpublish">Participate:</dt>
     <dd class="dontpublish">Send feedback to
     <a href="mailto:public-webapps@w3.org?subject==%5Bxhr%5D%20">public-webapps@w3.org</a>
@@ -53,41 +20,36 @@
     (<a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=XHR&amp;resolution=---">open bugs</a>)
     <dd class="dontpublish"><a href="http://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
 
-    <dt class="dontpublish">Version History:
-    <dd class="dontpublish"><a href="http://dvcs.w3.org/hg/xhr/shortlog">http://dvcs.w3.org/hg/xhr/shortlog</a>
-
-    <dt>Previous Versions:</dt>
-    <dd><a href="http://www.w3.org/TR/2011/WD-XMLHttpRequest2-20110816/">http://www.w3.org/TR/2011/WD-XMLHttpRequest2-20110816/</a></dd>
-    <dd><a href="http://www.w3.org/TR/2010/WD-XMLHttpRequest2-20100907/">http://www.w3.org/TR/2010/WD-XMLHttpRequest2-20100907/</a></dd>
-    <dd><a href="http://www.w3.org/TR/2009/WD-XMLHttpRequest2-20090820/">http://www.w3.org/TR/2009/WD-XMLHttpRequest2-20090820/</a></dd>
-    <dd><a href="http://www.w3.org/TR/2008/WD-XMLHttpRequest2-20080930/">http://www.w3.org/TR/2008/WD-XMLHttpRequest2-20080930/</a></dd>
-    <dd><a href="http://www.w3.org/TR/2008/WD-XMLHttpRequest2-20080225/">http://www.w3.org/TR/2008/WD-XMLHttpRequest2-20080225/</a></dd>
-    <dd><a href="http://www.w3.org/TR/2007/WD-XMLHttpRequest-20071026/">http://www.w3.org/TR/2007/WD-XMLHttpRequest-20071026/</a>
-    <dd><a href="http://www.w3.org/TR/2007/WD-XMLHttpRequest-20070618/">http://www.w3.org/TR/2007/WD-XMLHttpRequest-20070618/</a>
-    <dd><a href="http://www.w3.org/TR/2007/WD-XMLHttpRequest-20070227/">http://www.w3.org/TR/2007/WD-XMLHttpRequest-20070227/</a>
-    <dd><a href="http://www.w3.org/TR/2006/WD-XMLHttpRequest-20060927/">http://www.w3.org/TR/2006/WD-XMLHttpRequest-20060927/</a>
-    <dd><a href="http://www.w3.org/TR/2006/WD-XMLHttpRequest-20060619/">http://www.w3.org/TR/2006/WD-XMLHttpRequest-20060619/</a>
-    <dd><a href="http://www.w3.org/TR/2006/WD-XMLHttpRequest-20060405/">http://www.w3.org/TR/2006/WD-XMLHttpRequest-20060405/</a>
+    <dt>Version History:
+    <dd><a href="https://github.com/whatwg/xhr/commits">https://github.com/whatwg/xhr/commits</a>
 
     <dt>Editor:</dt>
     <dd><a href="http://annevankesteren.nl/">Anne van Kesteren</a>
-     (<a href="http://www.opera.com/">Opera Software ASA</a>)
      &lt;<a href="mailto:annevk@annevk.nl">annevk@annevk.nl</a>&gt;</dd>
    </dl>
 
-<div class="w3conly">
-<!--begin-copyright-->
-<p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2012 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p>
-<!--end-copyright--></div>
+<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
+To the extent possible under law, the editor has waived all copyright and
+related or neighboring rights to this work. In addition, as of
+11 September 2012, the editor has made this specification available
+under the
+<a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
+which is available at
+http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
-  </div>
+</div>
 
-  <hr>
+
+<h2 class="no-num no-toc" id="specabstract">Abstract</h2>
+
+<p>The XMLHttpRequest specification defines an API that provides scripted
+client functionality for transferring data between a client and a server.
+
 
 
 <h2 class="no-num no-toc" id="toc">Table of Contents</h2>
 
-  
+
 <!--begin-toc-->
 <ol class="toc">
  <li><a href="#introduction"><span class="secno">1 </span>Introduction</a>
@@ -1013,7 +975,7 @@ discarding any further data received from the network for them.
      <li><code>Via</code></li>
     </ul>
 
-    <p>&hellip; or if the start of <var>header</var> is a case-insensitive
+    <p>&mldr; or if the start of <var>header</var> is a case-insensitive
     match for <code>Proxy-</code> or <code>Sec-</code> (including when
     <var>header</var> is just <code>Proxy-</code> or <code>Sec-</code>).</p>
 
@@ -1056,7 +1018,7 @@ client.setRequestHeader('X-Test', 'one');
 client.setRequestHeader('X-Test', 'two');
 client.send();
 
-// &hellip;results in the following header being sent:
+// &mldr;results in the following header being sent:
 X-Test: one, two</code></pre>
   </div>
 
@@ -2681,7 +2643,7 @@ algorithm:</p>
     <tr>
      <th>Event name</th>
      <th>Interface</th>
-     <th>Dispatched when&hellip;</th>
+     <th>Dispatched when&mldr;</th>
     </tr>
    </thead>
    <tbody>
@@ -2864,7 +2826,7 @@ that is <em>not</em> <code>GET</code>, determine the response as follows:
 <dd><cite><a href="http://dev.w3.org/2006/webapi/FileAPI/">File API</a></cite>, Arun Ranganathan and Jonas Sicking. W3C.
 
 <dt id="refsHTML">[HTML]
-<dd><cite><a href="http://www.whatwg.org/C">HTML</a></cite>, Ian Hickson. WHATWG.
+<dd><cite><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/">HTML</a></cite>, Ian Hickson. WHATWG.
 
 <dt id="refsHTTP">[HTTP]
 <dd><cite><a href="http://tools.ietf.org/html/rfc2616">Hypertext Transfer Protocol -- HTTP/1.1</a></cite>, Roy Fielding, James Gettys, Jeffrey Mogul et al.. IETF.
@@ -2948,7 +2910,7 @@ that is <em>not</em> <code>GET</code>, determine the response as follows:
   Joe Farro,
   Jonas Sicking,
   Julian Reschke,
-  &#21570;&#24247;&#35946; (Kang-Hao Lu),
+  &#x5442;&#x5eb7;&#x8c6a; (Kang-Hao Lu),
   Karl Dubost,
   Lachlan Hunt,
   Maciej Stachowiak,

@@ -1,50 +1,18 @@
 <!doctype html>
 <html lang="en-US">
- <head>
-  <meta charset=utf-8>
-  <title>XMLHttpRequest</title>
-  <style>
-   pre.idl { border:solid thin; background:#eee; color:#000; padding:0.5em }
-   pre.idl :link, pre.idl :visited { color:inherit; background:transparent }
-   pre code { color:inherit; background:transparent }
-   .example { margin-left:1em; padding-left:1em; border-left:double; color:#222; background:#fcfcfc }
-   .note { margin-left:2em; font-weight:bold; font-style:italic; color:#008000 }
-   p.note::before { content:"Note: " }
-   .XXX { padding:.5em; border:solid #f00 }
-   p.XXX::before { content:"Issue: " }
-   dl.switch { padding-left:2em }
-   dl.switch > dt { text-indent:-1.5em }
-   dl.switch > dt:before { content:'\21AA'; padding:0 0.5em 0 0; display:inline-block; width:1em; text-align:right; line-height:0.5em }
-   dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
-   dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
-   dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
-   dl.domintro dd p { margin: 0.5em 0; }
-   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: red; border: solid 2px; background: white; padding: 0 0.25em; }
-   em.ct { text-transform:lowercase; font-variant:small-caps; font-style:normal }
-   dfn { font-weight:bold; font-style:normal }
-   code { color:orangered }
-   code :link, code :visited { color:inherit }
-   hr:not(.top) { display:block; background:none; border:none; padding:0; margin:2em 0; height:auto }
-   table { border-collapse:collapse; border-style:hidden hidden none hidden }
-   table thead { border-bottom:solid }
-   table tbody th:first-child { border-left:solid }
-   table td, table th { border-left:solid; border-right:solid; border-bottom:solid thin; vertical-align:top; padding:0.2em }
-  </style>
-  <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-[STATUS]">
- </head>
- <body>
-  <div class="head">
-<!--logo-->
+<meta charset=utf-8>
+<title>XMLHttpRequest</title>
+<link href=http://www.whatwg.org/style/specification rel=stylesheet>
+<link href=http://www.whatwg.org/images/icon rel=icon>
 
+<div class="head">
+ <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
 
-   <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-
-   <h2 class="no-num no-toc" id="w3c-doctype">[LONGSTATUS] [DATE: 3 August 2002]</h2>
+ <h2 class="no-num no-toc">Living Standard &mdash; Last Updated [DATE: 3 August 2002]</h2>
 
    <dl>
     <dt>This Version:</dt>
-    <dd class=dontpublish><a href="http://dvcs.w3.org/hg/xhr/raw-file/tip/Overview.html">http://dvcs.w3.org/hg/xhr/raw-file/tip/Overview.html</a></dd>
-    <dd class=publish><a href="[VERSION]">[VERSION]</a></dd>
+    <dd><a href=http://xhr.spec.whatwg.org>http://xhr.spec.whatwg.org</a></dd>
 
     <dt class=dontpublish>Participate:</dt>
     <dd class=dontpublish>Send feedback to
@@ -54,35 +22,15 @@
     (<a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=XHR&amp;resolution=---">open bugs</a>)
     <dd class=dontpublish><a href="http://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
 
-    <dt class=dontpublish>Version History:
-    <dd class=dontpublish><a href="http://dvcs.w3.org/hg/xhr/shortlog">http://dvcs.w3.org/hg/xhr/shortlog</a>
-
-    <dt class=publish>Latest Version:</dt>
-    <dd class=publish><a href="[LATEST]">[LATEST]</a></dd>
-
-    <dt class=publish>Latest Editor Draft:</dt>
-    <dd class=publish><a href="http://dvcs.w3.org/hg/xhr/raw-file/tip/Overview.html">http://dvcs.w3.org/hg/xhr/raw-file/tip/Overview.html</a></dd>
-
-    <dt>Previous Versions:</dt>
-    <dd><a href="http://www.w3.org/TR/2011/WD-XMLHttpRequest2-20110816/">http://www.w3.org/TR/2011/WD-XMLHttpRequest2-20110816/</a></dd>
-    <dd><a href="http://www.w3.org/TR/2010/WD-XMLHttpRequest2-20100907/">http://www.w3.org/TR/2010/WD-XMLHttpRequest2-20100907/</a></dd>
-    <dd><a href="http://www.w3.org/TR/2009/WD-XMLHttpRequest2-20090820/">http://www.w3.org/TR/2009/WD-XMLHttpRequest2-20090820/</a></dd>
-    <dd><a href="http://www.w3.org/TR/2008/WD-XMLHttpRequest2-20080930/">http://www.w3.org/TR/2008/WD-XMLHttpRequest2-20080930/</a></dd>
-    <dd><a href="http://www.w3.org/TR/2008/WD-XMLHttpRequest2-20080225/">http://www.w3.org/TR/2008/WD-XMLHttpRequest2-20080225/</a></dd>
-    <dd><a href="http://www.w3.org/TR/2007/WD-XMLHttpRequest-20071026/">http://www.w3.org/TR/2007/WD-XMLHttpRequest-20071026/</a>
-    <dd><a href="http://www.w3.org/TR/2007/WD-XMLHttpRequest-20070618/">http://www.w3.org/TR/2007/WD-XMLHttpRequest-20070618/</a>
-    <dd><a href="http://www.w3.org/TR/2007/WD-XMLHttpRequest-20070227/">http://www.w3.org/TR/2007/WD-XMLHttpRequest-20070227/</a>
-    <dd><a href="http://www.w3.org/TR/2006/WD-XMLHttpRequest-20060927/">http://www.w3.org/TR/2006/WD-XMLHttpRequest-20060927/</a>
-    <dd><a href="http://www.w3.org/TR/2006/WD-XMLHttpRequest-20060619/">http://www.w3.org/TR/2006/WD-XMLHttpRequest-20060619/</a>
-    <dd><a href="http://www.w3.org/TR/2006/WD-XMLHttpRequest-20060405/">http://www.w3.org/TR/2006/WD-XMLHttpRequest-20060405/</a>
+    <dt>Version History:
+    <dd><a href=https://github.com/whatwg/xhr/commits>https://github.com/whatwg/xhr/commits</a>
 
     <dt>Editor:</dt>
     <dd><a href="http://annevankesteren.nl/">Anne van Kesteren</a>
-     (<a href="http://www.opera.com/">Opera Software ASA</a>)
      &lt;<a href="mailto:annevk@annevk.nl">annevk@annevk.nl</a>&gt;</dd>
    </dl>
 
-<p class="now3c copyright"><a rel=license href="http://creativecommons.org/publicdomain/zero/1.0/"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt=CC0></a>
+<p class=copyright><a rel=license href="http://creativecommons.org/publicdomain/zero/1.0/"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt=CC0></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
 [DATE: 01 Jan 1901], the editor has made this specification available
@@ -91,64 +39,20 @@ under the
 href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
 http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
-<div class=w3conly><!--copyright--></div>
 
-  </div>
-
-  <hr>
-
-
-<div class=publish>
-  <h2 class="no-num no-toc" id="specabstract">Abstract</h2>
-
-  <p>The XMLHttpRequest specification defines an API that provides scripted
-  client functionality for transferring data between a client and a server.
-
-  <h2 class="no-num no-toc" id="sotd">Status of this Document</h2>
-
-  <p><em>This section describes the status of this document at the time of its
-  publication. Other documents may supersede this document. A list of current
-  W3C publications and the latest revision of this technical report can be
-  found in the <a href="http://www.w3.org/TR/">W3C technical reports index</a>
-  at http://www.w3.org/TR/.</em></p>
-
-  <p>This is the [DATE: 3 August 2002] [LONGSTATUS] of XMLHttpRequest.
-  Please send comments to
-  <a href="mailto:public-webapps@w3.org?subject=[XHR]%20">public-webapps@w3.org</a>
-  (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archived</a>)
-  with <samp>[XHR]</samp> at the start of the subject line.</p>
-  <!-- XXX bug database link -->
-
-  <p>This document is produced by the
-  <a href="http://www.w3.org/2008/webapps/">Web Applications</a> (WebApps) Working Group.
-  The WebApps Working Group is part of the
-  <a href="http://www.w3.org/2006/rwc/Activity">Rich Web Clients Activity</a>
-  in the W3C <a href="http://www.w3.org/Interaction/">Interaction Domain</a>.</p>
-
-  <p>This document was produced by a group operating under the
-  <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004
-  W3C Patent Policy</a>. W3C maintains a
-  <a rel="disclosure" href="http://www.w3.org/2004/01/pp-impl/42538/status">public
-  list of any patent disclosures</a> made in connection with the deliverables of
-  the group; that page also includes instructions for disclosing a patent. An
-  individual who has actual knowledge of a patent which the individual believes
-  contains
-  <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
-  Claim(s)</a> must disclose the information in accordance with
-  <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
-  6 of the W3C Patent Policy</a>.</p>
-
-  <p>Publication as a Working Draft does not imply endorsement by the W3C
-  Membership. This is a draft document and may be updated, replaced or
-  obsoleted by other documents at any time. It is inappropriate to cite this
-  document as other than work in progress.</p>
 </div>
 
 
+<h2 class="no-num no-toc" id="specabstract">Abstract</h2>
 
-  <h2 class="no-num no-toc" id="toc">Table of Contents</h2>
+<p>The XMLHttpRequest specification defines an API that provides scripted
+client functionality for transferring data between a client and a server.
 
-  <!--toc-->
+
+
+<h2 class="no-num no-toc" id="toc">Table of Contents</h2>
+
+<!--toc-->
 
 
 
