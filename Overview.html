@@ -234,7 +234,7 @@ not appear in all uppercase letters in this specification.
    <dd><p>A <span>conforming user agent</span> must
    support at least the subset of the functionality defined in DOM4 that
    this specification relies upon, such as various exceptions and
-   <code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#eventtarget">EventTarget</a></code>. <a href="#refsDOM">[DOM]</a></dd>
+   <code class="external"><a href="http://dom.spec.whatwg.org/#eventtarget">EventTarget</a></code>. <a href="#refsDOM">[DOM]</a></dd>
 
    <dt>DOM Parsing and Serialization
    <dd><p>A <span>conforming user agent</span> must support at least the
@@ -252,7 +252,7 @@ not appear in all uppercase letters in this specification.
    <dd><p>A <span>conforming user agent</span> must
    support at least the subset of the functionality defined in HTML that
    this specification relies upon, such as the basics of the
-   <code class="external"><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#window">Window</a></code> object and serializing a <code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a></code>
+   <code class="external"><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#window">Window</a></code> object and serializing a <code class="external"><a href="http://dom.spec.whatwg.org/#document">Document</a></code>
    object. <a href="#refsHTML">[HTML]</a>
 
    <dt>HTTP</dt>
@@ -306,7 +306,7 @@ not appear in all uppercase letters in this specification.
   <h2 id="interface-xmlhttprequest"><span class="secno">4 </span>Interface <code title="">XMLHttpRequest</code></h2>
 
   <pre class="idl">[NoInterfaceObject]
-interface <dfn id="xmlhttprequesteventtarget">XMLHttpRequestEventTarget</dfn> : <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#eventtarget">EventTarget</a> {
+interface <dfn id="xmlhttprequesteventtarget">XMLHttpRequestEventTarget</dfn> : <a class="external" href="http://dom.spec.whatwg.org/#eventtarget">EventTarget</a> {
   // <a href="#event-handlers">event handlers</a>
   attribute <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#eventhandler">EventHandler</a> <a href="#handler-xhr-onloadstart" title="handler-xhr-onloadstart">onloadstart</a>;
   attribute <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#eventhandler">EventHandler</a> <a href="#handler-xhr-onprogress" title="handler-xhr-onprogress">onprogress</a>;
@@ -349,7 +349,7 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <a href="#xmlhttpreque
            attribute unsigned long <a href="#dom-xmlhttprequest-timeout" title="dom-XMLHttpRequest-timeout">timeout</a>;
            attribute boolean <a href="#dom-xmlhttprequest-withcredentials" title="dom-XMLHttpRequest-withCredentials">withCredentials</a>;
   readonly attribute <a href="#xmlhttprequestupload">XMLHttpRequestUpload</a> <a href="#dom-xmlhttprequest-upload" title="dom-XMLHttpRequest-upload">upload</a>;
-  void <a href="#dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send">send</a>(optional (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#6">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a> or DOMString or <a href="#formdata">FormData</a>)? <var>data</var> = null);
+  void <a href="#dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send">send</a>(optional (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#6">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or <a class="external" href="http://dom.spec.whatwg.org/#document">Document</a> or DOMString or <a href="#formdata">FormData</a>)? <var>data</var> = null);
   void <a href="#dom-xmlhttprequest-abort" title="dom-XMLHttpRequest-abort">abort</a>();
 
   // <a href="#response">response</a>
@@ -361,7 +361,7 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <a href="#xmlhttpreque
            attribute <a href="#xmlhttprequestresponsetype">XMLHttpRequestResponseType</a> <a href="#dom-xmlhttprequest-responsetype" title="dom-XMLHttpRequest-responseType">responseType</a>;
   readonly attribute any <a href="#dom-xmlhttprequest-response" title="dom-XMLHttpRequest-response">response</a>;
   readonly attribute DOMString <a href="#dom-xmlhttprequest-responsetext" title="dom-XMLHttpRequest-responseText">responseText</a>;
-  readonly attribute <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a>? <a href="#dom-xmlhttprequest-responsexml" title="dom-XMLHttpRequest-responseXML">responseXML</a>;
+  readonly attribute <a class="external" href="http://dom.spec.whatwg.org/#document">Document</a>? <a href="#dom-xmlhttprequest-responsexml" title="dom-XMLHttpRequest-responseXML">responseXML</a>;
 };
 
 [<a href="#dom-anonxmlhttprequest" title="dom-AnonXMLHttpRequest">Constructor</a>]
@@ -388,7 +388,7 @@ interface <dfn id="anonxmlhttprequest">AnonXMLHttpRequest</dfn> : <a href="#xmlh
   <code class="external"><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#window">Window</a></code> object the
   <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object has an associated
   <dfn id="xmlhttprequest-document"><code>XMLHttpRequest</code> document</dfn> which is the
-  <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a>
+  <a class="external" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>
   associated with the <code class="external"><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#window">Window</a></code> object for
   which the <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> interface object was created.</p>
 
@@ -454,7 +454,7 @@ one of the following is true:
 
 <ul>
  <li><p>It has one or more
- <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-listener" title="concept-event-listener">event listeners</a>
+ <a class="external" href="http://dom.spec.whatwg.org/#concept-event-listener" title="concept-event-listener">event listeners</a>
  registered whose <b>type</b> is
  <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>,
  <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>,
@@ -465,7 +465,7 @@ one of the following is true:
  <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>.
  <li><p>The <a href="#upload-complete-flag">upload complete flag</a> is unset and the associated
  <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object has one or more
- <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-listener" title="concept-event-listener">event listeners</a>
+ <a class="external" href="http://dom.spec.whatwg.org/#concept-event-listener" title="concept-event-listener">event listeners</a>
  registered whose <b>type</b> is
  <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>,
  <code title="event-xhr-abort"><a href="#event-xhr-abort">abort</a></code>,
@@ -656,7 +656,7 @@ discarding any further data received from the network for them.
     <a href="#synchronous-flag">synchronous flag</a>, <a href="#request-username">request username</a>, and
     <a href="#request-password">request password</a>.</p>
 
-    <p>Throws a "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror">SyntaxError</a></code>" exception if
+    <p>Throws a "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" exception if
     one of the following is true:</p>
 
     <ul>
@@ -666,11 +666,11 @@ discarding any further data received from the network for them.
      format in the <code class="external"><a href="http://tools.ietf.org/html/rfc2616/#section-3.2.1">userinfo</a></code> production.
     </ul>
 
-    <p>Throws a "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#securityerror">SecurityError</a></code>" exception
+    <p>Throws a "<code class="external"><a href="http://dom.spec.whatwg.org/#securityerror">SecurityError</a></code>" exception
     if <var title="">method</var> is a case-insensitive match for
     <code>CONNECT</code>, <code>TRACE</code> or <code>TRACK</code>.</p>
 
-    <p>Throws an "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidaccesserror">InvalidAccessError</a></code>"
+    <p>Throws an "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>"
     exception if one of the following is true:</p>
 
     <ul>
@@ -704,8 +704,8 @@ discarding any further data received from the network for them.
      <li><p>If the
      <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a> is not
      <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#fully-active">fully active</a>,
-     <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> an
-     "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>" exception and
+     <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
+     "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception and
      terminate the overall set of steps.
 
      <li><p>Let <a href="#xmlhttprequest-base-url"><code>XMLHttpRequest</code> base URL</a> be the
@@ -722,8 +722,8 @@ discarding any further data received from the network for them.
 
    <li><p>If <var>method</var> does not match the
    <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-5.1.1">Method</a> token production,
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> a
-   "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror">SyntaxError</a></code>" exception and terminate
+   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
+   "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" exception and terminate
    these steps.
 
    <li>
@@ -743,8 +743,8 @@ discarding any further data received from the network for them.
    <li>
     <p>If <var>method</var> is a case-sensitive match for
     <code>CONNECT</code>, <code>TRACE</code>, or <code>TRACK</code>,
-    <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> a
-    "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#securityerror">SecurityError</a></code>" exception and
+    <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
+    "<code class="external"><a href="http://dom.spec.whatwg.org/#securityerror">SecurityError</a></code>" exception and
     terminate these steps.
 
     <p class="note">Allowing these methods would pose a security risk.
@@ -758,8 +758,8 @@ discarding any further data received from the network for them.
    <var title="">url</var> relative to the
    <a href="#xmlhttprequest-base-url"><code>XMLHttpRequest</code> base URL</a>. If the algorithm
    returns an error,
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> a
-   "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror">SyntaxError</a></code>" exception and terminate
+   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
+   "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" exception and terminate
    these steps.
 
    <!-- Presto and Gecko override the encoding. WebKit does not. Trident
@@ -775,8 +775,8 @@ discarding any further data received from the network for them.
    for the relevant
    <code class="external" title="url-scheme"><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/urls.html#url-scheme">&lt;scheme&gt;</a></code> and
    <var title="">url</var> contains this format,
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> a
-   "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror">SyntaxError</a></code>" and terminate these
+   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
+   "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" and terminate these
    steps.
 
    <!-- XXX need to throw here for "user:password" or just "user" for
@@ -797,8 +797,8 @@ discarding any further data received from the network for them.
    attribute value is true, or the
    <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code>
    attribute value is not the empty string,
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> an
-   "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidaccesserror">InvalidAccessError</a></code>" exception and
+   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
+   "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception and
    terminate these steps.
 
    <li>
@@ -810,8 +810,8 @@ discarding any further data received from the network for them.
      <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a> of <var title="">url</var> is not
      <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#same-origin">same origin</a> with the
      <a href="#xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</a>,
-     <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> an
-     "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidaccesserror">InvalidAccessError</a></code>" exception and
+     <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
+     "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception and
      terminate the overall set of steps.
 
      <li><p>Let <var>temp user</var> be <var>user</var>.</li>
@@ -830,8 +830,8 @@ discarding any further data received from the network for them.
      <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a> of <var title="">url</var> is not
      <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#same-origin">same origin</a> with the
      <a href="#xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</a>,
-     <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> an
-     "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidaccesserror">InvalidAccessError</a></code>" exception and
+     <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
+     "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception and
      terminate the overall set of steps.</li>
 
      <li><p>Let <var>temp password</var> be <var>password</var>.</li>
@@ -882,7 +882,7 @@ discarding any further data received from the network for them.
    <li><p>Change the state to
    <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a>.</li>
 
-   <li><p><a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.</li>
+   <li><p><a class="external" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.</li>
   </ol>
 
 
@@ -898,12 +898,12 @@ discarding any further data received from the network for them.
     in the list of <a href="#author-request-headers">author request headers</a>, combines its value
     with <var>value</var>.</p>
 
-    <p>Throws an "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>"
+    <p>Throws an "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>"
     exception if the state is not
     <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a> or if the
     <a href="#send-flag"><code>send()</code> flag</a> is set.</p>
 
-    <p>Throws a "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror">SyntaxError</a></code>" exception if
+    <p>Throws a "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" exception if
     <var title="">header</var> is not a valid HTTP header field name or if
     <var title="">value</var> is not a valid HTTP header field value.</p>
    </dd>
@@ -928,26 +928,26 @@ discarding any further data received from the network for them.
   <ol>
    <li><p>If the state is not
    <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a>,
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> an
-   "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>" exception and
+   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
+   "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception and
    terminate these steps.
 
    <li><p>If the <a href="#send-flag"><code>send()</code> flag</a> is set,
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> an
-   "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>" exception and
+   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
+   "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception and
    terminate these steps.
 
    <li><p>If <var>header</var> does not match the
    <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-4.2">field-name</a> production,
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> a
-   "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror">SyntaxError</a></code>" exception and terminate
+   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
+   "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" exception and terminate
    these steps.
 
    <li>
     <p>If <var>value</var> does not match the
     <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-4.2">field-value</a> production,
-    <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> a
-    "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror">SyntaxError</a></code>" exception and terminate
+    <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
+    "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" exception and terminate
     these steps.
 
     <p class="note">The empty string is legal and represents the empty
@@ -1040,12 +1040,12 @@ X-Test: one, two</code></pre>
     terminate after the given time has passed. When the time has passed, if
     the <a href="#synchronous-flag">synchronous flag</a> is unset, a
     <code title="event-xhr-timeout"><a href="#event-xhr-timeout">timeout</a></code> event will then be
-    <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>,
-    or a "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#timeouterror">TimeoutError</a></code>" exception will be
-    <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">thrown</a> otherwise
+    <a class="external" href="http://dom.spec.whatwg.org/#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>,
+    or a "<code class="external"><a href="http://dom.spec.whatwg.org/#timeouterror">TimeoutError</a></code>" exception will be
+    <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">thrown</a> otherwise
     (for the <code title="dom-XMLHttpRequest"><a href="#dom-xmlhttprequest">send()</a></code> method).
     <p>When set: throws an
-    "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidaccesserror">InvalidAccessError</a></code>" exception if
+    "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception if
     the <a href="#synchronous-flag">synchronous flag</a> is set when there is an
     associated <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a>.
    </dd>
@@ -1062,8 +1062,8 @@ X-Test: one, two</code></pre>
    <li><p>If there is an associated
    <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a> and the
    <a href="#synchronous-flag">synchronous flag</a> is set,
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> an
-   "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidaccesserror">InvalidAccessError</a></code>" exception and
+   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
+   "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception and
    terminate these steps.
 
    <li><p>Set its value to the new value.
@@ -1087,12 +1087,12 @@ X-Test: one, two</code></pre>
     Initially false.
 
     <p>When set: throws an
-    "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>" exception if the
+    "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception if the
     state is not <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a> or
     <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a>, or if
     the <a href="#send-flag"><code>send()</code> flag</a> is set.</p>
     <p>When set: throws an
-    "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidaccesserror">InvalidAccessError</a></code>" exception if
+    "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception if
     either the <a href="#synchronous-flag">synchronous flag</a> is set when there is an
     associated <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a> or if the
     <a href="#anonymous-flag">anonymous flag</a> is set.</p>
@@ -1111,25 +1111,25 @@ X-Test: one, two</code></pre>
    <li><p>If the state is not
    <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a> or
    <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a>,
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> an
-   "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>" exception and
+   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
+   "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception and
    terminate these steps.
 
    <li><p>If the <a href="#send-flag"><code>send()</code> flag</a> is set,
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> an
-   "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>" exception and
+   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
+   "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception and
    terminate these steps.
 
    <li><p>If the <a href="#anonymous-flag">anonymous flag</a> is set,
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> an
-   "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidaccesserror">InvalidAccessError</a></code>" exception and
+   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
+   "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception and
    terminate these steps.
 
    <li><p>If there is an associated
    <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a> and the
    <a href="#synchronous-flag">synchronous flag</a> is set,
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> an
-   "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidaccesserror">InvalidAccessError</a></code>" exception and
+   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
+   "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception and
    terminate these steps.
 
    <li><p>Set the
@@ -1173,7 +1173,7 @@ X-Test: one, two</code></pre>
     <a href="#request-method">request method</a> is <code>GET</code> or
     <code>HEAD</code>.</p>
 
-    <p>Throws an "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>"
+    <p>Throws an "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>"
     exception if the state is not
     <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a> or if the
     <a href="#send-flag"><code>send()</code> flag</a> is set.</p>
@@ -1196,13 +1196,13 @@ X-Test: one, two</code></pre>
   <ol>
    <li><p>If the state is not
    <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a>,
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> an
-   "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>" exception and
+   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
+   "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception and
    terminate these steps.
 
    <li><p>If the <a href="#send-flag"><code>send()</code> flag</a> is set,
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> an
-   "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>" exception and
+   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
+   "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception and
    terminate these steps.
 
    <li><p>If the <a href="#request-method">request method</a> is <code>GET</code> or
@@ -1233,16 +1233,16 @@ X-Test: one, two</code></pre>
      </dd>
 
 
-     <dt><a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a>
+     <dt><a class="external" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>
      <dd>
       <p>Let <var title="">encoding</var> be the
-      <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#preferred-mime-name">preferred MIME name</a> of the
-      <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document-encoding" title="concept-document-encoding">encoding</a>
+      <a class="external" href="http://dom.spec.whatwg.org/#preferred-mime-name">preferred MIME name</a> of the
+      <a class="external" href="http://dom.spec.whatwg.org/#concept-document-encoding" title="concept-document-encoding">encoding</a>
       of <var title="">data</var>. If <var title="">encoding</var> is utf-16 change it to
       utf-8.
 
-      <p>If <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a> is an
-      <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-document">HTML document</a>, let
+      <p>If <a class="external" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> is an
+      <a class="external" href="http://dom.spec.whatwg.org/#html-document">HTML document</a>, let
       <var>mime type</var> be "<code>text/html</code>", or let
       <var>mime type</var> be "<code>application/xml</code>" otherwise. Then
       append "<code>;charset=<var>encoding</var></code>" to
@@ -1255,11 +1255,11 @@ X-Test: one, two</code></pre>
       throws.</p>
 
       <p class="note">In particular, if the document cannot be serialized an
-      "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>" exception is
+      "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception is
       thrown.</p>
 
       <p class="note">Subsequent changes to the
-      <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a> have
+      <a class="external" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> have
       no effect on what is transferred.
      </dd>
 
@@ -1401,7 +1401,7 @@ X-Test: one, two</code></pre>
 
 
 
-      <p>Make a <a class="external" href="http://dvcs.w3.org/hg/cors/raw-file/tip/Overview.html#cross-origin-request">cross-origin request</a>,
+      <p>Make a <a class="external" href="http://fetch.spec.whatwg.org/#cross-origin-request">cross-origin request</a>,
       passing these as parameters:</p>
 
       <dl>
@@ -1431,7 +1431,7 @@ X-Test: one, two</code></pre>
 
       <p class="note"><a href="#request-username">Request username</a> and
       <a href="#request-password">request password</a> are always ignored as part of a
-      <a class="external" href="http://dvcs.w3.org/hg/cors/raw-file/tip/Overview.html#cross-origin-request">cross-origin request</a>; including
+      <a class="external" href="http://fetch.spec.whatwg.org/#cross-origin-request">cross-origin request</a>; including
       them would allow a site to perform a distributed password search.
       However, user agents will include <a href="#user-credentials">user credentials</a> in the
       request (if the user has any and if
@@ -1643,16 +1643,16 @@ X-Test: one, two</code></pre>
   <p>The <dfn id="cross-origin-request-event-rules">cross-origin request event rules</dfn> are as follows:</p>
 
   <dl class="switch">
-   <dt>If the <a class="external" href="http://dvcs.w3.org/hg/cors/raw-file/tip/Overview.html#cross-origin-request-status">cross-origin request status</a>
+   <dt>If the <a class="external" href="http://fetch.spec.whatwg.org/#cross-origin-request-status">cross-origin request status</a>
    is <i>preflight complete</i> and the <a href="#synchronous-flag">synchronous flag</a> is
    unset</dt>
    <dd><p><a href="#make-upload-progress-notifications">Make upload progress notifications</a>.</dd>
 
-   <dt>If the <a class="external" href="http://dvcs.w3.org/hg/cors/raw-file/tip/Overview.html#cross-origin-request-status">cross-origin request status</a>
+   <dt>If the <a class="external" href="http://fetch.spec.whatwg.org/#cross-origin-request-status">cross-origin request status</a>
    is <i title="">network error</i></dt>
    <dd><p>This is a <a href="#network-error">network error</a>.</dd>
 
-   <dt>If the <a class="external" href="http://dvcs.w3.org/hg/cors/raw-file/tip/Overview.html#cross-origin-request-status">cross-origin request status</a>
+   <dt>If the <a class="external" href="http://fetch.spec.whatwg.org/#cross-origin-request-status">cross-origin request status</a>
    is <i title="">abort error</i></dt>
    <dd><p>This is an <a href="#abort-error">abort error</a>.</dd>
 
@@ -1662,7 +1662,7 @@ X-Test: one, two</code></pre>
    <dd><p>This is a <a href="#timeout-error">timeout error</a>.</dd>
 
    <dt>Once all HTTP headers have been received, the
-   <a class="external" href="http://dvcs.w3.org/hg/cors/raw-file/tip/Overview.html#cross-origin-request-status">cross-origin request status</a> is
+   <a class="external" href="http://fetch.spec.whatwg.org/#cross-origin-request-status">cross-origin request status</a> is
    <i>success</i>, and the <a href="#synchronous-flag">synchronous flag</a> is unset</dt>
    <dd>
     <p><a href="#switch-headers-received">Switch to the HEADERS_RECEIVED state</a>.</p>
@@ -1672,22 +1672,22 @@ X-Test: one, two</code></pre>
 
    <dt>Once the first byte (or more) of the
    <a href="#response-entity-body">response entity body</a> has been received, the
-   <a class="external" href="http://dvcs.w3.org/hg/cors/raw-file/tip/Overview.html#cross-origin-request-status">cross-origin request status</a> is
+   <a class="external" href="http://fetch.spec.whatwg.org/#cross-origin-request-status">cross-origin request status</a> is
    <i>success</i>, and the <a href="#synchronous-flag">synchronous flag</a> is unset</dt>
    <dt>If there is no <a href="#response-entity-body">response entity body</a>, the
-   <a class="external" href="http://dvcs.w3.org/hg/cors/raw-file/tip/Overview.html#cross-origin-request-status">cross-origin request status</a> is
+   <a class="external" href="http://fetch.spec.whatwg.org/#cross-origin-request-status">cross-origin request status</a> is
    <i>success</i>, and the <a href="#synchronous-flag">synchronous flag</a> is unset</dt>
    <dd><p><a href="#switch-loading">Switch to the LOADING state</a>.</dd>
 
    <dt>Once the whole <a href="#response-entity-body">response entity body</a> has been received
-   and the <a class="external" href="http://dvcs.w3.org/hg/cors/raw-file/tip/Overview.html#cross-origin-request-status">cross-origin request status</a> is
+   and the <a class="external" href="http://fetch.spec.whatwg.org/#cross-origin-request-status">cross-origin request status</a> is
    <i>success</i></dt>
    <dt>If there is no <a href="#response-entity-body">response entity body</a>, the
-   <a class="external" href="http://dvcs.w3.org/hg/cors/raw-file/tip/Overview.html#cross-origin-request-status">cross-origin request status</a> is
+   <a class="external" href="http://fetch.spec.whatwg.org/#cross-origin-request-status">cross-origin request status</a> is
    <i>success</i>, and the state is
    <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a></dt>
    <dt>If there is no <a href="#response-entity-body">response entity body</a>, the
-   <a class="external" href="http://dvcs.w3.org/hg/cors/raw-file/tip/Overview.html#cross-origin-request-status">cross-origin request status</a> is
+   <a class="external" href="http://fetch.spec.whatwg.org/#cross-origin-request-status">cross-origin request status</a> is
    <i>success</i>, and the <a href="#synchronous-flag">synchronous flag</a> is set</dt>
    <dd><p><a href="#switch-done">Switch to the DONE state</a>.</dd>
   </dl>
@@ -1697,18 +1697,18 @@ X-Test: one, two</code></pre>
 
   <p>When something is said to be a <dfn id="network-error">network error</dfn> run the
   <a href="#request-error">request error</a> steps for exception
-  "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#networkerror">NetworkError</a></code>" and
+  "<code class="external"><a href="http://dom.spec.whatwg.org/#networkerror">NetworkError</a></code>" and
   event <code title="event-xhr-error"><a href="#event-xhr-error">error</a></code>.</p>
 
   <p>When something is said to be an <dfn id="abort-error">abort error</dfn> run the
   <a href="#request-error">request error</a> steps for exception
-  "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#aborterror">AbortError</a></code>" and event
+  "<code class="external"><a href="http://dom.spec.whatwg.org/#aborterror">AbortError</a></code>" and event
   <code title="event-xhr-abort"><a href="#event-xhr-abort">abort</a></code>.</p>
 
 
   <p>When something is said to be an <dfn id="timeout-error">timeout error</dfn> run the
   <a href="#request-error">request error</a> steps for exception
-  "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#timeouterror">TimeoutError</a></code>" and event
+  "<code class="external"><a href="http://dom.spec.whatwg.org/#timeouterror">TimeoutError</a></code>" and event
   <code title="event-xhr-timeout"><a href="#event-xhr-timeout">timeout</a></code>.</p>
 
 
@@ -1731,12 +1731,12 @@ X-Test: one, two</code></pre>
    <li><p>Change the state to <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>.</li>
 
    <li><p>If the <a href="#synchronous-flag">synchronous flag</a> is set,
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> an
+   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
    <var>exception</var> exception and terminate the overall set of
    steps.</li>
 
    <li>
-    <p><a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.</p>
+    <p><a class="external" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.</p>
 
     <p class="note">At this point it is clear that the
     <a href="#synchronous-flag">synchronous flag</a> is unset.</p>
@@ -1777,7 +1777,7 @@ X-Test: one, two</code></pre>
   <ol>
    <li><p>Change the state to <a href="#dom-xmlhttprequest-headers_received" title="dom-XMLHttpRequest-HEADERS_RECEIVED">HEADERS_RECEIVED</a>.</li>
 
-   <li><p><a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.</li>
+   <li><p><a class="external" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.</li>
   </ol>
 
   <p>When it is said to
@@ -1787,7 +1787,7 @@ X-Test: one, two</code></pre>
   <ol>
    <li><p>Change the state to <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a>.</li>
 
-   <li><p><a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.</li>
+   <li><p><a class="external" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.</li>
   </ol>
 
   <p>When it is said to
@@ -1801,7 +1801,7 @@ X-Test: one, two</code></pre>
 
    <li><p>Change the state to <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>.</li>
 
-   <li><p><a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.</li>
+   <li><p><a class="external" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.</li>
 
    <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>.
 
@@ -1905,7 +1905,7 @@ X-Test: one, two</code></pre>
 
      <li><p>Unset the <a href="#send-flag"><code>send()</code> flag</a>.
 
-     <li><p><a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.</li>
+     <li><p><a class="external" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.</li>
 
      <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>.
 
@@ -2129,7 +2129,7 @@ Content-Type: text/plain; charset=utf-8</code></pre>
   <p>The <dfn id="response-mime-type">response MIME type</dfn> is the
   MIME type the <code>Content-Type</code> header contains excluding any
   parameters and
-  <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#converted-to-ascii-lowercase">converted to ASCII lowercase</a>, or null if
+  <a class="external" href="http://dom.spec.whatwg.org/#converted-to-ascii-lowercase">converted to ASCII lowercase</a>, or null if
   the response header can not be parsed or was omitted. The
   <dfn id="override-mime-type">override MIME type</dfn> is initially null
   and can get a value if
@@ -2202,7 +2202,7 @@ Content-Type: text/plain; charset=utf-8</code></pre>
   <p>The
   <dfn id="document-response-entity-body">document response entity body</dfn>
   is either a
-  <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a>
+  <a class="external" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>
   representing the <a href="#response-entity-body">response entity body</a> or null. If the
   <a href="#document-response-entity-body">document response entity body</a> has no value assigned to it let
   it be the return value of the following algorithm:</p>
@@ -2259,19 +2259,19 @@ Content-Type: text/plain; charset=utf-8</code></pre>
 
      <li><p>Decode the <a href="#response-entity-body">response entity body</a> using
      <var>charset</var> and then let <var title="">document</var> be a
-     <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a> that
+     <a class="external" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> that
      represents the result of that decoding, parsed following the rules set
      forth in the HTML specification for an HTML parser with scripting
      disabled. <a href="#refsHTML">[HTML]</a>
 
      <li><p>Set <var title="">document</var>'s
-     <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document-encoding" title="concept-document-encoding">encoding</a>
+     <a class="external" href="http://dom.spec.whatwg.org/#concept-document-encoding" title="concept-document-encoding">encoding</a>
      to <var>charset</var>.
     </ol>
 
    <li>
     <p>Otherwise, let <var title="">document</var> be a
-    <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a>
+    <a class="external" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>
     that represents the result of parsing the
     <a href="#response-entity-body">response entity body</a> following the rules set forth in the
     XML specifications. If that fails (unsupported character encoding,
@@ -2290,11 +2290,11 @@ Content-Type: text/plain; charset=utf-8</code></pre>
    <a href="#xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</a>.
 
    <li><p>Set <var title="">document</var>'s
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document-content-type" title="concept-document-content-type">content type</a>
+   <a class="external" href="http://dom.spec.whatwg.org/#concept-document-content-type" title="concept-document-content-type">content type</a>
    to <a href="#final-mime-type">final MIME type</a>.
 
    <li><p>Set <var title="">document</var>'s
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document-url" title="concept-document-url">URL</a> to
+   <a class="external" href="http://dom.spec.whatwg.org/#concept-document-url" title="concept-document-url">URL</a> to
    <a href="#request-url">request URL</a>.
 
    <li><p>Return <var title="">document</var>.
@@ -2383,12 +2383,12 @@ algorithm:</p>
     <p>Sets the <code>Content-Type</code> header for the response to
     <var title="">mime</var>.</p>
 
-    <p>Throws an "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>"
+    <p>Throws an "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>"
     exception if the state is
     <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a> or
     <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>.
 
-    <p>Throws a "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror">SyntaxError</a></code>" exception if
+    <p>Throws a "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" exception if
     <var title="">mime</var> is not a valid media type.</p>
    </dd>
   </dl>
@@ -2401,20 +2401,20 @@ algorithm:</p>
    <li><p>If the state is
    <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a> or
    <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>,
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> an
-   "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>" exception and
+   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
+   "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception and
    terminate these steps.
 
    <li><p>If parsing <var title="">mime</var> analogously to the value of
    the <code>Content-Type</code> headers fails,
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> a
-   "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror">SyntaxError</a></code>" exception and terminate
+   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
+   "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" exception and terminate
    these steps.
 
    <li><p>If a MIME type is successfully parsed, set
    <a href="#override-mime-type">override MIME type</a> to that MIME type,
    excluding any parameters, and
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#converted-to-ascii-lowercase">converted to ASCII lowercase</a>.
+   <a class="external" href="http://dom.spec.whatwg.org/#converted-to-ascii-lowercase">converted to ASCII lowercase</a>.
 
    <li><p>If a <code>charset</code> parameter is successfully parsed, set
    <a href="#override-charset">override charset</a> to its value.</li>
@@ -2437,11 +2437,11 @@ algorithm:</p>
     "<code title="">json</code>", and
     "<code title="">text</code>".</p>
     <p>When set: throws an
-    "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>" exception if the
+    "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception if the
     state is <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a> or
     <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>.
     <p>When set: throws an
-    "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidaccesserror">InvalidAccessError</a></code>" exception if the
+    "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception if the
     <a href="#synchronous-flag">synchronous flag</a> is set and there is an associated
     <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a>.</p>
   </dl>
@@ -2460,15 +2460,15 @@ algorithm:</p>
    <li><p>If the state is
    <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a> or
    <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>,
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> an
-   "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>" exception and
+   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
+   "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception and
    terminate these steps.
 
    <li><p>If there is an associated
    <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a> and the
    <a href="#synchronous-flag">synchronous flag</a> is set,
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> an
-   "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidaccesserror">InvalidAccessError</a></code>" exception and
+   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
+   "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception and
    terminate these steps.
 
    <li><p>Set the
@@ -2557,7 +2557,7 @@ algorithm:</p>
    <dd>
     <p>Returns the <a href="#text-response-entity-body">text response entity body</a>.</p>
 
-    <p>Throws an "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>"
+    <p>Throws an "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>"
     exception if
     <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code> is not
     the empty string or "<code title="">text</code>".
@@ -2575,8 +2575,8 @@ algorithm:</p>
    <li><p>If
    <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code> is not
    the empty string or "<code title="">text</code>",
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> an
-   "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>" exception and
+   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
+   "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception and
    terminate these steps.
 
 
@@ -2599,7 +2599,7 @@ algorithm:</p>
    <dd>
     <p>Returns the <a href="#document-response-entity-body">document response entity body</a>.</p>
 
-    <p>Throws an "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>"
+    <p>Throws an "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>"
     exception if
     <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code> is not
     the empty string or "<code title="">document</code>".
@@ -2616,8 +2616,8 @@ algorithm:</p>
    <li><p>If
    <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code> is not
    the empty string or "<code title="">document</code>",
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-throw" title="concept-throw">throw</a> an
-   "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>" exception and
+   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
+   "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception and
    terminate these steps.</li>
 
 
@@ -2656,7 +2656,7 @@ algorithm:</p>
    <tbody>
     <tr>
      <td><dfn id="event-xhr-readystatechange" title="event-xhr-readystatechange"><code>readystatechange</code></dfn></td>
-     <td><code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#event">Event</a></code></td>
+     <td><code class="external"><a href="http://dom.spec.whatwg.org/#event">Event</a></code></td>
      <td>The <code title="dom-XMLHttpRequest-readyState"><a href="#dom-xmlhttprequest-readystate">readyState</a></code>
      attribute changes at some seemingly arbitrary times for historical
      reasons.</td>
@@ -2767,33 +2767,33 @@ interface <dfn id="formdata">FormData</dfn> {
 <h2 id="interface-progressevent"><span class="secno">6 </span>Interface <code title="">ProgressEvent</code></h2>
 
 <pre class="idl">[Constructor(DOMString <var title="">type</var>, optional <a href="#progresseventinit">ProgressEventInit</a> <var title="">eventInitDict</var>)]
-interface <dfn id="progressevent">ProgressEvent</dfn> : <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#event">Event</a> {
+interface <dfn id="progressevent">ProgressEvent</dfn> : <a class="external" href="http://dom.spec.whatwg.org/#event">Event</a> {
   readonly attribute boolean <a href="#dom-progressevent-lengthcomputable" title="dom-ProgressEvent-lengthComputable">lengthComputable</a>;
   readonly attribute unsigned long long <a href="#dom-progressevent-loaded" title="dom-ProgressEvent-loaded">loaded</a>;
   readonly attribute unsigned long long <a href="#dom-progressevent-total" title="dom-ProgressEvent-total">total</a>;
 };
 
-dictionary <dfn id="progresseventinit">ProgressEventInit</dfn> : <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#eventinit">EventInit</a> {
+dictionary <dfn id="progresseventinit">ProgressEventInit</dfn> : <a class="external" href="http://dom.spec.whatwg.org/#eventinit">EventInit</a> {
   boolean <span title="dom-ProgressEventInit-lengthComputable">lengthComputable</span>;
   unsigned long long <span title="dom-ProgressEventInit-loaded">loaded</span>;
   unsigned long long <span title="dom-ProgressEventInit-total">total</span>;
 }</pre>
 
-<p><a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event" title="concept-event">Events</a> using
+<p><a class="external" href="http://dom.spec.whatwg.org/#concept-event" title="concept-event">Events</a> using
 the <code><a href="#progressevent">ProgressEvent</a></code> interface indicate some kind of
 progression.</p>
 
 <p>The
 <dfn id="dom-progressevent-lengthcomputable" title="dom-ProgressEvent-lengthComputable"><code>lengthComputable</code></dfn>
 attribute must return the value it was initialized to. When an
-<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event" title="concept-event">event</a> is created
+<a class="external" href="http://dom.spec.whatwg.org/#concept-event" title="concept-event">event</a> is created
 the attribute must be initialized to false.</p>
 
 <p>The
 <dfn id="dom-progressevent-loaded" title="dom-ProgressEvent-loaded"><code>loaded</code></dfn> and
 <dfn id="dom-progressevent-total" title="dom-ProgressEvent-total"><code>total</code></dfn>
 attributes must return the value they were initialized to. When an
-<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event" title="concept-event">event</a> is created
+<a class="external" href="http://dom.spec.whatwg.org/#concept-event" title="concept-event">event</a> is created
 the attributes must be initialized to 0.</p>
 
 
@@ -2802,8 +2802,8 @@ the attributes must be initialized to 0.</p>
 <p>To
 <dfn id="concept-event-fire-progress" title="concept-event-fire-progress">fire a progress event named <var>e</var></dfn>
 means to
-<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">fire an event named <var>e</var></a>
-with an <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event" title="concept-event">event</a>
+<a class="external" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event named <var>e</var></a>
+with an <a class="external" href="http://dom.spec.whatwg.org/#concept-event" title="concept-event">event</a>
 using the <code><a href="#progressevent">ProgressEvent</a></code> interface that also meets these
 conditions:
 
@@ -2834,9 +2834,9 @@ consistent with this and other specifications that utilize
 
 <p><em>This section is non-normative.</em></p>
 
-<p>The suggested <code class="external" title="dom-Event-type"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-event-type">type</a></code>
+<p>The suggested <code class="external" title="dom-Event-type"><a href="http://dom.spec.whatwg.org/#dom-event-type">type</a></code>
 attribute values for use with
-<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event" title="concept-event">events</a> using the
+<a class="external" href="http://dom.spec.whatwg.org/#concept-event" title="concept-event">events</a> using the
 <code><a href="#progressevent">ProgressEvent</a></code> interface are summarized in the table below.
 Specification editors are free to tune the details to their specific
 scenarios, though are strongly encouraged to discuss their usage with the
@@ -2845,7 +2845,7 @@ WHATWG community to ensure input from people familiar with the subject.
 <table>
  <tbody>
   <tr>
-   <th><code class="external" title="dom-Event-type"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-event-type">type</a></code> attribute value
+   <th><code class="external" title="dom-Event-type"><a href="http://dom.spec.whatwg.org/#dom-event-type">type</a></code> attribute value
    <th>Description
    <th>Times
    <th>When
@@ -2859,18 +2859,18 @@ WHATWG community to ensure input from people familiar with the subject.
    <td>In progress.
    <td>Zero or more.
    <td>After <code title="">loadstart</code> has been
-    <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>.
+    <a class="external" href="http://dom.spec.whatwg.org/#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>.
   <tr>
    <th><code title="">error</code>
    <td>Progression failed.
    <td>Zero or once.
    <td rowspan="3">After the last <code title="">progress</code> has
     been
-    <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>,
+    <a class="external" href="http://dom.spec.whatwg.org/#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>,
     or after <code title="">loadstart</code> has been
-    <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>
+    <a class="external" href="http://dom.spec.whatwg.org/#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>
     if <code title="">progress</code> has not been
-    <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>.
+    <a class="external" href="http://dom.spec.whatwg.org/#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>.
   <tr>
    <th><code>abort</code>
    <td>Progression is terminated.
@@ -2885,7 +2885,7 @@ WHATWG community to ensure input from people familiar with the subject.
    <td>Once.</td>
    <td>After one of <code title="">error</code>,
     <code title="">abort</code>, or <code title="">load</code> has been
-    <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>.
+    <a class="external" href="http://dom.spec.whatwg.org/#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>.
 </table>
 
 <p>The <code title="">error</code>, <code title="">abort</code>, and
@@ -2893,10 +2893,10 @@ WHATWG community to ensure input from people familiar with the subject.
 
 <p>Throughout the web platform the <code title="">error</code>,
 <code title="">abort</code>, and <code title="">load</code> event types have
-their <code class="external" title="dom-Event-bubbles"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-event-bubbles">bubbles</a></code> and
-<code class="external" title="dom-Event-cancelable"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-event-cancelable">cancelable</a></code>
+their <code class="external" title="dom-Event-bubbles"><a href="http://dom.spec.whatwg.org/#dom-event-bubbles">bubbles</a></code> and
+<code class="external" title="dom-Event-cancelable"><a href="http://dom.spec.whatwg.org/#dom-event-cancelable">cancelable</a></code>
 attributes initialized to false, so it is suggested that for consistency all
-<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event" title="concept-event">events</a> using the
+<a class="external" href="http://dom.spec.whatwg.org/#concept-event" title="concept-event">events</a> using the
 <code><a href="#progressevent">ProgressEvent</a></code> interface do the same.
 
 
@@ -2904,9 +2904,9 @@ attributes initialized to false, so it is suggested that for consistency all
 
 <p>For cross-origin requests some kind of opt-in, e.g.
 Cross-Origin Resource Sharing, has to be used before
-<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event" title="concept-event">events</a> using the
+<a class="external" href="http://dom.spec.whatwg.org/#concept-event" title="concept-event">events</a> using the
 <code><a href="#progressevent">ProgressEvent</a></code> interface are
-<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>
+<a class="external" href="http://dom.spec.whatwg.org/#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>
 as information (e.g. size) would be revealed that cannot be obtained
 otherwise. <a class="informative" href="#refsCORS">[CORS]</a>
 
@@ -2998,10 +2998,10 @@ that is <em>not</em> <code>GET</code>, determine the response as follows:
 <dd><cite><a href="http://tools.ietf.org/html/rfc6265">HTTP State Management Mechanism</a></cite>, Adam Barth. IETF.
 
 <dt id="refsCORS">[CORS]
-<dd><cite><a href="http://dvcs.w3.org/hg/cors/raw-file/tip/Overview.html">Cross-Origin Resource Sharing</a></cite>, Anne van Kesteren. W3C.
+<dd><cite><a href="http://fetch.spec.whatwg.org/">Cross-Origin Resource Sharing</a></cite>, Anne van Kesteren. WHATWG.
 
 <dt id="refsDOM">[DOM]
-<dd><cite><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html">DOM4</a></cite>, Anne van Kesteren, Aryeh Gregor and Ms2ger. W3C.
+<dd><cite><a href="http://dom.spec.whatwg.org/">DOM</a></cite>, Anne van Kesteren, Aryeh Gregor and Ms2ger. WHATWG.
 
 <dt id="refsDOMPS">[DOMPS]
 <dd><cite><a href="http://html5.org/specs/dom-parsing.html">DOM Parsing and Serialization</a></cite>, Ms2ger. WHATWG.
