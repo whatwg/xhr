@@ -1,43 +1,47 @@
 <!DOCTYPE html><html lang="en-US"><meta charset="utf-8">
-<title>XMLHttpRequest</title>
+<title>XMLHttpRequest Standard</title>
 <link href="http://www.whatwg.org/style/specification" rel="stylesheet">
 <link href="http://www.whatwg.org/images/icon" rel="icon">
 
 <div class="head">
- <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
 
- <h2 class="no-num no-toc" id="living-standard-&mdash;-last-updated-11-september-2012">Living Standard &mdash; Last Updated 11 September 2012</h2>
+<h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
+<h2 class="no-num no-toc" id="living-standard-&mdash;-last-updated-12-september-2012">Living Standard &mdash; Last Updated 12 September 2012</h2>
 
-   <dl>
-    <dt>This Version:</dt>
-    <dd><a href="http://xhr.spec.whatwg.org">http://xhr.spec.whatwg.org</a></dd>
+<dl>
+ <dt>This Version:</dt>
+ <dd><a href="http://xhr.spec.whatwg.org">http://xhr.spec.whatwg.org</a></dd>
 
-    <dt class="dontpublish">Participate:</dt>
-    <dd class="dontpublish">Send feedback to
-    <a href="mailto:public-webapps@w3.org?subject==%5Bxhr%5D%20">public-webapps@w3.org</a>
-    (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>) or
-    <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=XHR">file a bug</a>
-    (<a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=XHR&amp;resolution=---">open bugs</a>)
-    <dd class="dontpublish"><a href="http://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
+ <dt>Participate:</dt>
+ <dd>Send feedback to
+  <a href="mailto:public-webapps@w3.org?subject==%5Bxhr%5D%20">public-webapps@w3.org</a>
+  (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>) or
+  <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=XHR">file a bug</a>
+  (<a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=XHR&amp;resolution=---">open bugs</a>)
 
-    <dt>Version History:
-    <dd><a href="https://github.com/whatwg/xhr/commits">https://github.com/whatwg/xhr/commits</a>
+ <dd><a href="http://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
 
-    <dt>Editor:</dt>
-    <dd><a href="http://annevankesteren.nl/">Anne van Kesteren</a>
-     &lt;<a href="mailto:annevk@annevk.nl">annevk@annevk.nl</a>&gt;</dd>
-   </dl>
+ <dt>Version History:
+ <dd><a href="https://github.com/whatwg/xhr/commits">https://github.com/whatwg/xhr/commits</a>
+
+ <dt>Editor:</dt>
+ <dd><a href="http://annevankesteren.nl/">Anne van Kesteren</a>
+  &lt;<a href="mailto:annevk@annevk.nl">annevk@annevk.nl</a>&gt;</dd>
+</dl>
+
+<script async="" src="//dvcs.w3.org/hg/quirks-mode/raw-file/tip/file-bug.js"></script>
 
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-11 September 2012, the editor has made this specification available
+12 September 2012, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
 http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
 </div>
+
 
 
 <h2 class="no-num no-toc" id="specabstract">Abstract</h2>
@@ -180,7 +184,8 @@ It moved to the W3C in 2006. Extensions (e.g. progress events and
 cross-origin requests) to <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> were developed in a
 separate draft (XMLHttpRequest Level 2) until end of 2011, at which point
 the two drafts were merged and <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> became a single
-entity again from a standards perspective.
+entity again from a standards perspective. End of 2012 it moved back to the
+WHATWG.
 
 <p>Historical discussion can be found in the following mailing list
 archives:
