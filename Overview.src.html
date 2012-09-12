@@ -207,11 +207,6 @@ not appear in all uppercase letters in this specification.
    support some version of the HTTP protocol. Requirements regarding HTTP
    are made throughout the specification. <span data-anolis-ref>HTTP</span>
 
-   <dt>Progress Events</dt>
-   <dd><p>A <span>conforming user agent</span> must support the
-   Progress Events specification.
-   <span data-anolis-ref>PROGRESSEVENTS</span>
-
    <dt>Typed Array</dt>
    <dd><p>A <span>conforming user agent</span> must support the
    <code data-anolis-spec=typedarray>ArrayBuffer</code> and
@@ -1282,10 +1277,10 @@ X-Test: one, two</code></pre>
     <ol>
      <li><p>Set the <span><code>send()</code> flag</span>.
 
-     <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadstart">loadstart</code>.</p></li>
+     <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadstart">loadstart</code>.</p></li>
 
      <li><p>If the <span>upload complete flag</span> is unset,
-     <span data-anolis-spec=progress-events title=concept-event-fire-progress>fire a progress event</span> named <code title="event-xhr-loadstart">loadstart</code>
+     <span title=concept-event-fire-progress>fire a progress event</span> named <code title="event-xhr-loadstart">loadstart</code>
      on the <code>XMLHttpRequestUpload</code> object.</p></li>
 
      <li><p>Return the <code title="dom-XMLHttpRequest-send">send()</code>
@@ -1702,22 +1697,22 @@ X-Test: one, two</code></pre>
     <ol>
      <li><p>Set the <span>upload complete flag</span>.
 
-     <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named
+     <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named
      <code title=event-xhr-progress>progress</code> on the <code>XMLHttpRequestUpload</code> object.
 
-     <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named
+     <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named
      <var title>event</var> on the <code>XMLHttpRequestUpload</code> object.
 
-     <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named
+     <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named
      <code title="event-xhr-loadend">loadend</code> on the <code>XMLHttpRequestUpload</code> object.
     </ol>
    </li>
 
-   <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>.
+   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>.
 
-   <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <var title>event</var>.
+   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <var title>event</var>.
 
-   <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadend">loadend</code>.
+   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadend">loadend</code>.
   </ol>
 
   <hr>
@@ -1755,11 +1750,11 @@ X-Test: one, two</code></pre>
 
    <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.</p></li>
 
-   <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>.
+   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>.
 
-   <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-load">load</code>.</p></li>
+   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-load">load</code>.</p></li>
 
-   <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadend">loadend</code>.</p></li>
+   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadend">loadend</code>.</p></li>
 
   </ol>
 
@@ -1768,7 +1763,7 @@ X-Test: one, two</code></pre>
 
   <p>When it is said to <dfn>make progress notifications</dfn>, while the
   download is progressing, <span data-anolis-spec=html>queue a task</span> to
-  <span data-anolis-spec=progress-events title=concept-event-fire-progress>fire a progress event</span> named <code title="event-xhr-progress">progress</code>
+  <span title=concept-event-fire-progress>fire a progress event</span> named <code title="event-xhr-progress">progress</code>
   about every 50ms or for every byte received, whichever is <em>least</em>
   frequent.</p>
 
@@ -1781,7 +1776,7 @@ X-Test: one, two</code></pre>
    <li><p>While the request entity body is being transmitted and the
    <span>upload complete flag</span> is unset,
    <span data-anolis-spec=html>queue a task</span> to
-   <span data-anolis-spec=progress-events title=concept-event-fire-progress>fire a progress event</span> named <code title="event-xhr-progress">progress</code> on
+   <span title=concept-event-fire-progress>fire a progress event</span> named <code title="event-xhr-progress">progress</code> on
    the <code>XMLHttpRequestUpload</code> object about every 50ms or for
    every byte transmitted, whichever is <em>least</em> frequent.</p></li>
 
@@ -1795,13 +1790,13 @@ X-Test: one, two</code></pre>
     <ol>
      <li><p>Set the <span>upload complete flag</span>.
 
-     <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>
+     <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>
      on the <code>XMLHttpRequestUpload</code> object.
 
-     <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-load">load</code>
+     <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-load">load</code>
      on the <code>XMLHttpRequestUpload</code> object.
 
-     <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadend">loadend</code>
+     <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadend">loadend</code>
      on the <code>XMLHttpRequestUpload</code> object.
     </ol>
   </ul>
@@ -1859,11 +1854,11 @@ X-Test: one, two</code></pre>
 
      <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.</p></li>
 
-     <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>.
+     <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>.
 
-     <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-abort">abort</code>.</p></li>
+     <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-abort">abort</code>.</p></li>
 
-     <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadend">loadend</code>.</p></li>
+     <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadend">loadend</code>.</p></li>
 
      <li>
       <p>If the <span>upload complete flag</span> is false run these
@@ -1872,13 +1867,13 @@ X-Test: one, two</code></pre>
       <ol>
        <li><p>Set the <span>upload complete flag</span> to true.</p></li>
 
-       <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>
+       <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>
        on the <code>XMLHttpRequestUpload</code> object.
 
-       <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-abort">abort</code>
+       <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-abort">abort</code>
        on the <code>XMLHttpRequestUpload</code> object.</p></li>
 
-       <li><p><span data-anolis-spec=progress-events title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadend">loadend</code>
+       <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadend">loadend</code>
        on the <code>XMLHttpRequestUpload</code> object.</p></li>
       </ol>
      </li>
@@ -2615,39 +2610,39 @@ algorithm:</p>
     </tr>
     <tr>
      <td><dfn title="event-xhr-loadstart"><code>loadstart</code></dfn></td>
-     <td><code data-anolis-spec=progress-events>ProgressEvent</code></td>
+     <td><code>ProgressEvent</code></td>
      <td>When the request starts.</td>
     </tr>
     <tr>
      <td><dfn title="event-xhr-progress"><code>progress</code></dfn></td>
-     <td><code data-anolis-spec=progress-events>ProgressEvent</code></td>
+     <td><code>ProgressEvent</code></td>
      <td>While sending and loading data.</td>
     </tr>
     <tr>
      <td><dfn title="event-xhr-abort"><code>abort</code></dfn></td>
-     <td><code data-anolis-spec=progress-events>ProgressEvent</code></td>
+     <td><code>ProgressEvent</code></td>
      <td>When the request has been aborted. For instance, by invoking the
      <code title="dom-XMLHttpRequest-abort">abort()</code> method.</td>
     </tr>
     <tr>
      <td><dfn title="event-xhr-error"><code>error</code></dfn></td>
-     <td><code data-anolis-spec=progress-events>ProgressEvent</code></td>
+     <td><code>ProgressEvent</code></td>
      <td>When the request has failed.</td>
     </tr>
     <tr>
      <td><dfn title="event-xhr-load"><code>load</code></dfn></td>
-     <td><code data-anolis-spec=progress-events>ProgressEvent</code></td>
+     <td><code>ProgressEvent</code></td>
      <td>When the request has successfully completed.</td>
     </tr>
     <tr>
      <td><dfn title="event-xhr-timeout"><code>timeout</code></dfn></td>
-     <td><code data-anolis-spec=progress-events>ProgressEvent</code></td>
+     <td><code>ProgressEvent</code></td>
      <td>When the author specified timeout has passed before the request
      could complete.</td>
     </tr>
     <tr>
      <td><dfn title="event-xhr-loadend"><code>loadend</code></dfn></td>
-     <td><code data-anolis-spec=progress-events>ProgressEvent</code></td>
+     <td><code>ProgressEvent</code></td>
      <td>When the request has completed (either in success or failure).</td>
     </tr>
    </tbody>
@@ -2716,6 +2711,186 @@ interface <dfn>FormData</dfn> {
 
 
 
+<h2>Interface <code title="">ProgressEvent</code></h2>
+
+<pre class="idl">[Constructor(DOMString <var title>type</var>, optional <span>ProgressEventInit</span> <var title>eventInitDict</var>)]
+interface <dfn>ProgressEvent</dfn> : <span data-anolis-spec=dom>Event</span> {
+  readonly attribute boolean <span title="dom-ProgressEvent-lengthComputable">lengthComputable</span>;
+  readonly attribute unsigned long long <span title="dom-ProgressEvent-loaded">loaded</span>;
+  readonly attribute unsigned long long <span title="dom-ProgressEvent-total">total</span>;
+};
+
+dictionary <dfn>ProgressEventInit</dfn> : <span data-anolis-spec=dom>EventInit</span> {
+  boolean <span title="dom-ProgressEventInit-lengthComputable">lengthComputable</span>;
+  unsigned long long <span title="dom-ProgressEventInit-loaded">loaded</span>;
+  unsigned long long <span title="dom-ProgressEventInit-total">total</span>;
+}</pre>
+
+<p><span data-anolis-spec=dom title=concept-event>Events</span> using
+the <code>ProgressEvent</code> interface indicate some kind of
+progression.</p>
+
+<p>The
+<dfn id="dom-progressevent-lengthcomputable" title="dom-ProgressEvent-lengthComputable"><code>lengthComputable</code></dfn>
+attribute must return the value it was initialized to. When an
+<span data-anolis-spec=dom title=concept-event>event</span> is created
+the attribute must be initialized to false.</p>
+
+<p>The
+<dfn id="dom-progressevent-loaded" title="dom-ProgressEvent-loaded"><code>loaded</code></dfn> and
+<dfn id="dom-progressevent-total" title="dom-ProgressEvent-total"><code>total</code></dfn>
+attributes must return the value they were initialized to. When an
+<span data-anolis-spec=dom title=concept-event>event</span> is created
+the attributes must be initialized to 0.</p>
+
+
+<h3>Firing events using the <code title="">ProgressEvent</code> interface for HTTP</h3>
+
+<p>To
+<dfn id=concept-event-fire-progress title=concept-event-fire-progress>fire a progress event named <var>e</var></dfn>
+means to
+<span data-anolis-spec=dom title=concept-event-fire>fire an event named <var>e</var></span>
+with an <span data-anolis-spec=dom title=concept-event>event</span>
+using the <code>ProgressEvent</code> interface that also meets these
+conditions:
+
+<ul>
+ <li>Initialize the <code title=dom-ProgressEvent-loaded>loaded</code>
+ attribute to the number of HTTP
+ <span data-anolis-spec=http>entity body</span> octets transferred.
+ <li>If the length of the HTTP
+ <span data-anolis-spec=http>entity body</span> is known through the
+ <code data-anolis-spec=http title=http-content-length>Content-Length</code>
+ header, initialize the
+ <code title=dom-ProgressEvent-lengthComputable>lengthComputable</code>
+ attribute to true and initialize the
+ <code title=dom-ProgressEvent-total>total</code> attribute to the length.
+</ul>
+
+
+<h3>Firing events using the <code title="">ProgressEvent</code> interface for other contexts</h3>
+
+<p>This is left as an exercise for the editor of the specification that
+introduces such a context. The editor is encouraged to define it in a way
+consistent with this and other specifications that utilize
+<span title=concept-event>events</span> using the
+<code>ProgressEvent</code> interface.</p>
+
+
+<h3>Suggested names for events using the <code title="">ProgressEvent</code> interface</h3>
+
+<p><em>This section is non-normative.</em></p>
+
+<p>The suggested <code data-anolis-spec=dom title=dom-Event-type>type</code>
+attribute values for use with
+<span data-anolis-spec=dom title=concept-event>events</span> using the
+<code>ProgressEvent</code> interface are summarized in the table below.
+Specification editors are free to tune the details to their specific
+scenarios, though are strongly encouraged to discuss their usage with the
+WHATWG community to ensure input from people familiar with the subject.
+
+<table>
+ <tbody>
+  <tr>
+   <th><code data-anolis-spec=dom title=dom-Event-type>type</code> attribute value
+   <th>Description
+   <th>Times
+   <th>When
+  <tr>
+   <th><code title="">loadstart</code>
+   <td>Progress has begun.
+   <td>Once.
+   <td>First.
+  <tr>
+   <th><code title="">progress</code>
+   <td>In progress.
+   <td>Zero or more.
+   <td>After <code title="">loadstart</code> has been
+    <span data-anolis-spec=dom title=concept-event-dispatch>dispatched</span>.
+  <tr>
+   <th><code title="">error</code>
+   <td>Progression failed.
+   <td>Zero or once.
+   <td rowspan="3">After the last <code title="">progress</code> has
+    been
+    <span data-anolis-spec=dom title=concept-event-dispatch>dispatched</span>,
+    or after <code title="">loadstart</code> has been
+    <span data-anolis-spec=dom title=concept-event-dispatch>dispatched</span>
+    if <code title="">progress</code> has not been
+    <span data-anolis-spec=dom title=concept-event-dispatch>dispatched</span>.
+  <tr>
+   <th><code>abort</code>
+   <td>Progression is terminated.
+   <td>Zero or once.
+  <tr>
+   <th><code>load</code>
+   <td>Progression is successful.
+   <td>Zero or once.
+  <tr>
+   <th><code title="">loadend</code>
+   <td>Progress has stopped.
+   <td>Once.</td>
+   <td>After one of <code title="">error</code>,
+    <code title="">abort</code>, or <code title="">load</code> has been
+    <span data-anolis-spec=dom title=concept-event-dispatch>dispatched</span>.
+</table>
+
+<p>The <code title="">error</code>, <code title="">abort</code>, and
+<code title="">load</code> event types are mutually exclusive.</p>
+
+<p>Throughout the web platform the <code title="">error</code>,
+<code title="">abort</code>, and <code title="">load</code> event types have
+their <code data-anolis-spec=dom title=dom-Event-bubbles>bubbles</code> and
+<code data-anolis-spec=dom title=dom-Event-cancelable>cancelable</code>
+attributes initialized to false, so it is suggested that for consistency all
+<span data-anolis-spec=dom title=concept-event>events</span> using the
+<code>ProgressEvent</code> interface do the same.
+
+
+<h3>Security Considerations</h3>
+
+<p>For cross-origin requests some kind of opt-in, e.g.
+Cross-Origin Resource Sharing, has to be used before
+<span data-anolis-spec=dom title=concept-event>events</span> using the
+<code>ProgressEvent</code> interface are
+<span data-anolis-spec=dom title=concept-event-dispatch>dispatched</span>
+as information (e.g. size) would be revealed that cannot be obtained
+otherwise. <span data-anolis-ref class=informative>CORS</span>
+
+
+<h3>Example</h3>
+
+<div class="example">
+ <p>In this example <code>XMLHttpRequest</code>, combined with concepts
+ defined in the sections before, and the HTML
+ <code data-anolis-spec=html>progress</code> element are used together to
+ display the process of fetching a resource.
+
+ <pre>&lt;!DOCTYPE html>
+&lt;title>Waiting for Magical Unicorns&lt;/title>
+&lt;progress id=p>&lt;/progress>
+&lt;script>
+  var progressBar = document.getElementById("p"),
+      client = new XMLHttpRequest()
+  client.open("GET", "magical-unicorns")
+  client.onprogress = function(pe) {
+    if(pe.lengthComputable) {
+      progressBar.max = pe.total
+      progressBar.value = pe.loaded
+    }
+  }
+  client.onloadend = function(pe) {
+    progressBar.value = pe.loaded
+  }
+  client.send()
+&lt;/script></pre>
+
+ <p>Fully working code would of course be more elaborate and deal with more
+ scenarios, such as network errors or the end user terminating the request.
+</div>
+
+
+
 <h2><code>data:</code> URLs and HTTP</h2>
 
 <p class=note>To ensure
@@ -2769,9 +2944,10 @@ that is <em>not</em> <code>GET</code>, determine the response as follows:
 <div id=anolis-references></div>
 
 
-  <h2 class="no-num" id="acknowledgments">Acknowledgments</h2>
 
-  <p>The editor would like to thank
+<h2 class="no-num" id="acknowledgments">Acknowledgments</h2>
+
+<p>The editor would like to thank
 
   Addison Phillips,
   Ahmed Kamel,
@@ -2859,8 +3035,10 @@ that is <em>not</em> <code>GET</code>, determine the response as follows:
   this specification in their Web Applications 1.0 document (now renamed to
   HTML). <span data-anolis-ref>HTML</span></p>
 
-  <p>Thanks also to all those who have helped to improve this specification
-  by sending suggestions and corrections. (Please, keep bugging us with your
-  issues!)</p>
- </body>
-</html>
+<p>Special thanks to the SVG WG for drafting the original
+<code title="">ProgressEvent</code> interface as part of the
+<a href="http://www.w3.org/TR/2008/REC-SVGTiny12-20081222/svgudom.html">SVG Micro DOM</a>.
+
+<p>Thanks also to all those who have helped to improve this specification by
+sending suggestions and corrections. (Please, keep bugging us with your
+issues!)

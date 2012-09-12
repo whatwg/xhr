@@ -6,7 +6,7 @@
 <div class="head">
 
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-&mdash;-last-updated-12-september-2012">Living Standard &mdash; Last Updated 12 September 2012</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-12-september-2012">Living Standard — Last Updated 12 September 2012</h2>
 
 <dl>
  <dt>This Version:</dt>
@@ -99,7 +99,14 @@ client functionality for transferring data between a client and a server.
   <ol class="toc">
    <li><a href="#formdata-constructors"><span class="secno">5.1 </span>Constructors</a></li>
    <li><a href="#the-append()-method"><span class="secno">5.2 </span>The <code title="">append()</code> method</a></ol></li>
- <li><a href="#data:-urls-and-http"><span class="secno">6 </span><code>data:</code> URLs and HTTP</a></li>
+ <li><a href="#interface-progressevent"><span class="secno">6 </span>Interface <code title="">ProgressEvent</code></a>
+  <ol class="toc">
+   <li><a href="#firing-events-using-the-progressevent-interface-for-http"><span class="secno">6.1 </span>Firing events using the <code title="">ProgressEvent</code> interface for HTTP</a></li>
+   <li><a href="#firing-events-using-the-progressevent-interface-for-other-contexts"><span class="secno">6.2 </span>Firing events using the <code title="">ProgressEvent</code> interface for other contexts</a></li>
+   <li><a href="#suggested-names-for-events-using-the-progressevent-interface"><span class="secno">6.3 </span>Suggested names for events using the <code title="">ProgressEvent</code> interface</a></li>
+   <li><a href="#security-considerations"><span class="secno">6.4 </span>Security Considerations</a></li>
+   <li><a href="#example"><span class="secno">6.5 </span>Example</a></ol></li>
+ <li><a href="#data:-urls-and-http"><span class="secno">7 </span><code>data:</code> URLs and HTTP</a></li>
  <li><a class="no-num" href="#references">References</a></li>
  <li><a class="no-num" href="#acknowledgments">Acknowledgments</a></ol>
 <!--end-toc-->
@@ -252,11 +259,6 @@ not appear in all uppercase letters in this specification.
    <dd><p>A <span>conforming user agent</span> must
    support some version of the HTTP protocol. Requirements regarding HTTP
    are made throughout the specification. <a href="#refsHTTP">[HTTP]</a>
-
-   <dt>Progress Events</dt>
-   <dd><p>A <span>conforming user agent</span> must support the
-   Progress Events specification.
-   <a href="#refsPROGRESSEVENTS">[PROGRESSEVENTS]</a>
 
    <dt>Typed Array</dt>
    <dd><p>A <span>conforming user agent</span> must support the
@@ -980,7 +982,7 @@ discarding any further data received from the network for them.
      <li><code>Via</code></li>
     </ul>
 
-    <p>&mldr; or if the start of <var>header</var> is a case-insensitive
+    <p>… or if the start of <var>header</var> is a case-insensitive
     match for <code>Proxy-</code> or <code>Sec-</code> (including when
     <var>header</var> is just <code>Proxy-</code> or <code>Sec-</code>).</p>
 
@@ -1023,7 +1025,7 @@ client.setRequestHeader('X-Test', 'one');
 client.setRequestHeader('X-Test', 'two');
 client.send();
 
-// &mldr;results in the following header being sent:
+// …results in the following header being sent:
 X-Test: one, two</code></pre>
   </div>
 
@@ -1328,10 +1330,10 @@ X-Test: one, two</code></pre>
     <ol>
      <li><p>Set the <a href="#send-flag"><code>send()</code> flag</a>.
 
-     <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadstart"><a href="#event-xhr-loadstart">loadstart</a></code>.</li>
+     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadstart"><a href="#event-xhr-loadstart">loadstart</a></code>.</li>
 
      <li><p>If the <a href="#upload-complete-flag">upload complete flag</a> is unset,
-     <a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">fire a progress event</a> named <code title="event-xhr-loadstart"><a href="#event-xhr-loadstart">loadstart</a></code>
+     <a href="#concept-event-fire-progress" title="concept-event-fire-progress">fire a progress event</a> named <code title="event-xhr-loadstart"><a href="#event-xhr-loadstart">loadstart</a></code>
      on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.</li>
 
      <li><p>Return the <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code>
@@ -1748,22 +1750,22 @@ X-Test: one, two</code></pre>
     <ol>
      <li><p>Set the <a href="#upload-complete-flag">upload complete flag</a>.
 
-     <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
+     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
      <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code> on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
 
-     <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
+     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
      <var title="">event</var> on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
 
-     <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
+     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
      <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code> on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
     </ol>
    </li>
 
-   <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>.
+   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>.
 
-   <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <var title="">event</var>.
+   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <var title="">event</var>.
 
-   <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>.
+   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>.
   </ol>
 
   <hr>
@@ -1801,11 +1803,11 @@ X-Test: one, two</code></pre>
 
    <li><p><a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.</li>
 
-   <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>.
+   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>.
 
-   <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-load"><a href="#event-xhr-load">load</a></code>.</li>
+   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-load"><a href="#event-xhr-load">load</a></code>.</li>
 
-   <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>.</li>
+   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>.</li>
 
   </ol>
 
@@ -1814,7 +1816,7 @@ X-Test: one, two</code></pre>
 
   <p>When it is said to <dfn id="make-progress-notifications">make progress notifications</dfn>, while the
   download is progressing, <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to
-  <a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>
+  <a href="#concept-event-fire-progress" title="concept-event-fire-progress">fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>
   about every 50ms or for every byte received, whichever is <em>least</em>
   frequent.</p>
 
@@ -1827,7 +1829,7 @@ X-Test: one, two</code></pre>
    <li><p>While the request entity body is being transmitted and the
    <a href="#upload-complete-flag">upload complete flag</a> is unset,
    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to
-   <a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code> on
+   <a href="#concept-event-fire-progress" title="concept-event-fire-progress">fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code> on
    the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object about every 50ms or for
    every byte transmitted, whichever is <em>least</em> frequent.</li>
 
@@ -1841,13 +1843,13 @@ X-Test: one, two</code></pre>
     <ol>
      <li><p>Set the <a href="#upload-complete-flag">upload complete flag</a>.
 
-     <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>
+     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>
      on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
 
-     <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-load"><a href="#event-xhr-load">load</a></code>
+     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-load"><a href="#event-xhr-load">load</a></code>
      on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
 
-     <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>
+     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>
      on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
     </ol>
   </ul>
@@ -1905,11 +1907,11 @@ X-Test: one, two</code></pre>
 
      <li><p><a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.</li>
 
-     <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>.
+     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>.
 
-     <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-abort"><a href="#event-xhr-abort">abort</a></code>.</li>
+     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-abort"><a href="#event-xhr-abort">abort</a></code>.</li>
 
-     <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>.</li>
+     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>.</li>
 
      <li>
       <p>If the <a href="#upload-complete-flag">upload complete flag</a> is false run these
@@ -1918,13 +1920,13 @@ X-Test: one, two</code></pre>
       <ol>
        <li><p>Set the <a href="#upload-complete-flag">upload complete flag</a> to true.</li>
 
-       <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>
+       <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>
        on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
 
-       <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-abort"><a href="#event-xhr-abort">abort</a></code>
+       <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-abort"><a href="#event-xhr-abort">abort</a></code>
        on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.</li>
 
-       <li><p><a class="external" href="http://dev.w3.org/2006/webapi/progress/#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>
+       <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>
        on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.</li>
       </ol>
      </li>
@@ -2648,7 +2650,7 @@ algorithm:</p>
     <tr>
      <th>Event name</th>
      <th>Interface</th>
-     <th>Dispatched when&mldr;</th>
+     <th>Dispatched when…</th>
     </tr>
    </thead>
    <tbody>
@@ -2661,39 +2663,39 @@ algorithm:</p>
     </tr>
     <tr>
      <td><dfn id="event-xhr-loadstart" title="event-xhr-loadstart"><code>loadstart</code></dfn></td>
-     <td><code class="external"><a href="http://dev.w3.org/2006/webapi/progress/#progressevent">ProgressEvent</a></code></td>
+     <td><code><a href="#progressevent">ProgressEvent</a></code></td>
      <td>When the request starts.</td>
     </tr>
     <tr>
      <td><dfn id="event-xhr-progress" title="event-xhr-progress"><code>progress</code></dfn></td>
-     <td><code class="external"><a href="http://dev.w3.org/2006/webapi/progress/#progressevent">ProgressEvent</a></code></td>
+     <td><code><a href="#progressevent">ProgressEvent</a></code></td>
      <td>While sending and loading data.</td>
     </tr>
     <tr>
      <td><dfn id="event-xhr-abort" title="event-xhr-abort"><code>abort</code></dfn></td>
-     <td><code class="external"><a href="http://dev.w3.org/2006/webapi/progress/#progressevent">ProgressEvent</a></code></td>
+     <td><code><a href="#progressevent">ProgressEvent</a></code></td>
      <td>When the request has been aborted. For instance, by invoking the
      <code title="dom-XMLHttpRequest-abort"><a href="#dom-xmlhttprequest-abort">abort()</a></code> method.</td>
     </tr>
     <tr>
      <td><dfn id="event-xhr-error" title="event-xhr-error"><code>error</code></dfn></td>
-     <td><code class="external"><a href="http://dev.w3.org/2006/webapi/progress/#progressevent">ProgressEvent</a></code></td>
+     <td><code><a href="#progressevent">ProgressEvent</a></code></td>
      <td>When the request has failed.</td>
     </tr>
     <tr>
      <td><dfn id="event-xhr-load" title="event-xhr-load"><code>load</code></dfn></td>
-     <td><code class="external"><a href="http://dev.w3.org/2006/webapi/progress/#progressevent">ProgressEvent</a></code></td>
+     <td><code><a href="#progressevent">ProgressEvent</a></code></td>
      <td>When the request has successfully completed.</td>
     </tr>
     <tr>
      <td><dfn id="event-xhr-timeout" title="event-xhr-timeout"><code>timeout</code></dfn></td>
-     <td><code class="external"><a href="http://dev.w3.org/2006/webapi/progress/#progressevent">ProgressEvent</a></code></td>
+     <td><code><a href="#progressevent">ProgressEvent</a></code></td>
      <td>When the author specified timeout has passed before the request
      could complete.</td>
     </tr>
     <tr>
      <td><dfn id="event-xhr-loadend" title="event-xhr-loadend"><code>loadend</code></dfn></td>
-     <td><code class="external"><a href="http://dev.w3.org/2006/webapi/progress/#progressevent">ProgressEvent</a></code></td>
+     <td><code><a href="#progressevent">ProgressEvent</a></code></td>
      <td>When the request has completed (either in success or failure).</td>
     </tr>
    </tbody>
@@ -2762,7 +2764,187 @@ interface <dfn id="formdata">FormData</dfn> {
 
 
 
-<h2 id="data:-urls-and-http"><span class="secno">6 </span><code>data:</code> URLs and HTTP</h2>
+<h2 id="interface-progressevent"><span class="secno">6 </span>Interface <code title="">ProgressEvent</code></h2>
+
+<pre class="idl">[Constructor(DOMString <var title="">type</var>, optional <a href="#progresseventinit">ProgressEventInit</a> <var title="">eventInitDict</var>)]
+interface <dfn id="progressevent">ProgressEvent</dfn> : <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#event">Event</a> {
+  readonly attribute boolean <a href="#dom-progressevent-lengthcomputable" title="dom-ProgressEvent-lengthComputable">lengthComputable</a>;
+  readonly attribute unsigned long long <a href="#dom-progressevent-loaded" title="dom-ProgressEvent-loaded">loaded</a>;
+  readonly attribute unsigned long long <a href="#dom-progressevent-total" title="dom-ProgressEvent-total">total</a>;
+};
+
+dictionary <dfn id="progresseventinit">ProgressEventInit</dfn> : <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#eventinit">EventInit</a> {
+  boolean <span title="dom-ProgressEventInit-lengthComputable">lengthComputable</span>;
+  unsigned long long <span title="dom-ProgressEventInit-loaded">loaded</span>;
+  unsigned long long <span title="dom-ProgressEventInit-total">total</span>;
+}</pre>
+
+<p><a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event" title="concept-event">Events</a> using
+the <code><a href="#progressevent">ProgressEvent</a></code> interface indicate some kind of
+progression.</p>
+
+<p>The
+<dfn id="dom-progressevent-lengthcomputable" title="dom-ProgressEvent-lengthComputable"><code>lengthComputable</code></dfn>
+attribute must return the value it was initialized to. When an
+<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event" title="concept-event">event</a> is created
+the attribute must be initialized to false.</p>
+
+<p>The
+<dfn id="dom-progressevent-loaded" title="dom-ProgressEvent-loaded"><code>loaded</code></dfn> and
+<dfn id="dom-progressevent-total" title="dom-ProgressEvent-total"><code>total</code></dfn>
+attributes must return the value they were initialized to. When an
+<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event" title="concept-event">event</a> is created
+the attributes must be initialized to 0.</p>
+
+
+<h3 id="firing-events-using-the-progressevent-interface-for-http"><span class="secno">6.1 </span>Firing events using the <code title="">ProgressEvent</code> interface for HTTP</h3>
+
+<p>To
+<dfn id="concept-event-fire-progress" title="concept-event-fire-progress">fire a progress event named <var>e</var></dfn>
+means to
+<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">fire an event named <var>e</var></a>
+with an <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event" title="concept-event">event</a>
+using the <code><a href="#progressevent">ProgressEvent</a></code> interface that also meets these
+conditions:
+
+<ul>
+ <li>Initialize the <code title="dom-ProgressEvent-loaded"><a href="#dom-progressevent-loaded">loaded</a></code>
+ attribute to the number of HTTP
+ <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-7.2">entity body</a> octets transferred.
+ <li>If the length of the HTTP
+ <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-7.2">entity body</a> is known through the
+ <code class="external" title="http-content-length"><a href="http://tools.ietf.org/html/rfc2616/#section-14.13">Content-Length</a></code>
+ header, initialize the
+ <code title="dom-ProgressEvent-lengthComputable"><a href="#dom-progressevent-lengthcomputable">lengthComputable</a></code>
+ attribute to true and initialize the
+ <code title="dom-ProgressEvent-total"><a href="#dom-progressevent-total">total</a></code> attribute to the length.
+</ul>
+
+
+<h3 id="firing-events-using-the-progressevent-interface-for-other-contexts"><span class="secno">6.2 </span>Firing events using the <code title="">ProgressEvent</code> interface for other contexts</h3>
+
+<p>This is left as an exercise for the editor of the specification that
+introduces such a context. The editor is encouraged to define it in a way
+consistent with this and other specifications that utilize
+<span title="concept-event">events</span> using the
+<code><a href="#progressevent">ProgressEvent</a></code> interface.</p>
+
+
+<h3 id="suggested-names-for-events-using-the-progressevent-interface"><span class="secno">6.3 </span>Suggested names for events using the <code title="">ProgressEvent</code> interface</h3>
+
+<p><em>This section is non-normative.</em></p>
+
+<p>The suggested <code class="external" title="dom-Event-type"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-event-type">type</a></code>
+attribute values for use with
+<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event" title="concept-event">events</a> using the
+<code><a href="#progressevent">ProgressEvent</a></code> interface are summarized in the table below.
+Specification editors are free to tune the details to their specific
+scenarios, though are strongly encouraged to discuss their usage with the
+WHATWG community to ensure input from people familiar with the subject.
+
+<table>
+ <tbody>
+  <tr>
+   <th><code class="external" title="dom-Event-type"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-event-type">type</a></code> attribute value
+   <th>Description
+   <th>Times
+   <th>When
+  <tr>
+   <th><code title="">loadstart</code>
+   <td>Progress has begun.
+   <td>Once.
+   <td>First.
+  <tr>
+   <th><code title="">progress</code>
+   <td>In progress.
+   <td>Zero or more.
+   <td>After <code title="">loadstart</code> has been
+    <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>.
+  <tr>
+   <th><code title="">error</code>
+   <td>Progression failed.
+   <td>Zero or once.
+   <td rowspan="3">After the last <code title="">progress</code> has
+    been
+    <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>,
+    or after <code title="">loadstart</code> has been
+    <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>
+    if <code title="">progress</code> has not been
+    <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>.
+  <tr>
+   <th><code>abort</code>
+   <td>Progression is terminated.
+   <td>Zero or once.
+  <tr>
+   <th><code>load</code>
+   <td>Progression is successful.
+   <td>Zero or once.
+  <tr>
+   <th><code title="">loadend</code>
+   <td>Progress has stopped.
+   <td>Once.</td>
+   <td>After one of <code title="">error</code>,
+    <code title="">abort</code>, or <code title="">load</code> has been
+    <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>.
+</table>
+
+<p>The <code title="">error</code>, <code title="">abort</code>, and
+<code title="">load</code> event types are mutually exclusive.</p>
+
+<p>Throughout the web platform the <code title="">error</code>,
+<code title="">abort</code>, and <code title="">load</code> event types have
+their <code class="external" title="dom-Event-bubbles"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-event-bubbles">bubbles</a></code> and
+<code class="external" title="dom-Event-cancelable"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-event-cancelable">cancelable</a></code>
+attributes initialized to false, so it is suggested that for consistency all
+<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event" title="concept-event">events</a> using the
+<code><a href="#progressevent">ProgressEvent</a></code> interface do the same.
+
+
+<h3 id="security-considerations"><span class="secno">6.4 </span>Security Considerations</h3>
+
+<p>For cross-origin requests some kind of opt-in, e.g.
+Cross-Origin Resource Sharing, has to be used before
+<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event" title="concept-event">events</a> using the
+<code><a href="#progressevent">ProgressEvent</a></code> interface are
+<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>
+as information (e.g. size) would be revealed that cannot be obtained
+otherwise. <a class="informative" href="#refsCORS">[CORS]</a>
+
+
+<h3 id="example"><span class="secno">6.5 </span>Example</h3>
+
+<div class="example">
+ <p>In this example <code><a href="#xmlhttprequest">XMLHttpRequest</a></code>, combined with concepts
+ defined in the sections before, and the HTML
+ <code class="external"><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/the-button-element.html#the-progress-element">progress</a></code> element are used together to
+ display the process of fetching a resource.
+
+ <pre>&lt;!DOCTYPE html&gt;
+&lt;title&gt;Waiting for Magical Unicorns&lt;/title&gt;
+&lt;progress id=p&gt;&lt;/progress&gt;
+&lt;script&gt;
+  var progressBar = document.getElementById("p"),
+      client = new XMLHttpRequest()
+  client.open("GET", "magical-unicorns")
+  client.onprogress = function(pe) {
+    if(pe.lengthComputable) {
+      progressBar.max = pe.total
+      progressBar.value = pe.loaded
+    }
+  }
+  client.onloadend = function(pe) {
+    progressBar.value = pe.loaded
+  }
+  client.send()
+&lt;/script&gt;</pre>
+
+ <p>Fully working code would of course be more elaborate and deal with more
+ scenarios, such as network errors or the end user terminating the request.
+</div>
+
+
+
+<h2 id="data:-urls-and-http"><span class="secno">7 </span><code>data:</code> URLs and HTTP</h2>
 
 <p class="note">To ensure
 <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#data-protocol" title="data-protocol"><code>data:</code> URLs</a>
@@ -2846,9 +3028,6 @@ that is <em>not</em> <code>GET</code>, determine the response as follows:
 
 <dd><cite><a href="http://www.kb.cert.org/vuls/id/150227">HTTP proxy default configurations allow arbitrary TCP connections</a></cite>. US-CERT.
 
-<dt id="refsPROGRESSEVENTS">[PROGRESSEVENTS]
-<dd><cite><a href="http://dvcs.w3.org/hg/progress/raw-file/tip/Overview.html">Progress Events</a></cite>, Anne van Kesteren. W3C.
-
 <dt id="refsRFC2119">[RFC2119]
 <dd><cite><a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner. IETF.
 
@@ -2867,18 +3046,19 @@ that is <em>not</em> <code>GET</code>, determine the response as follows:
 </dl></div>
 
 
-  <h2 class="no-num" id="acknowledgments">Acknowledgments</h2>
 
-  <p>The editor would like to thank
+<h2 class="no-num" id="acknowledgments">Acknowledgments</h2>
+
+<p>The editor would like to thank
 
   Addison Phillips,
   Ahmed Kamel,
   Alex Hopmann,
   Alex Vincent,
   Alexey Proskuryakov,
-  Asbj&oslash;rn Ulsberg,
+  Asbjørn Ulsberg,
   Boris Zbarsky,
-  Bj&ouml;rn H&ouml;hrmann,
+  Björn Höhrmann,
   Cameron McCormack,
   Chris Marrin,
   Christophe Jolif,
@@ -2886,7 +3066,7 @@ that is <em>not</em> <code>GET</code>, determine the response as follows:
   Dan Winship,
   David Andersson,
   David Flanagan,
-  David H&aring;s&auml;ther,
+  David Håsäther,
   David Levin,
   Dean Jackson,
   Denis Sureau,
@@ -2895,12 +3075,12 @@ that is <em>not</em> <code>GET</code>, determine the response as follows:
   Elliotte Harold,
   Eric Lawrence,
   Eric Uhrhane,
-  Erik Dahlstr&ouml;m,
+  Erik Dahlström,
   Geoffrey Sneddon,
   Gideon Cohn,
   Glenn Adams,
   Gorm Haug Eriksen,
-  H&aring;kon Wium Lie,
+  Håkon Wium Lie,
   Hallvord R. M. Steen,
   Henri Sivonen,
   Huub Schaeks,
@@ -2909,13 +3089,13 @@ that is <em>not</em> <code>GET</code>, determine the response as follows:
   Ivan Herman,
   Jarred Nicholls,
   Jeff Walden,
-  Jens Lindstr&ouml;m,
+  Jens Lindström,
   Jim Deegan,
   Jim Ley,
   Joe Farro,
   Jonas Sicking,
   Julian Reschke,
-  &#x5442;&#x5eb7;&#x8c6a; (Kang-Hao Lu),
+  呂康豪 (Kang-Hao Lu),
   Karl Dubost,
   Lachlan Hunt,
   Maciej Stachowiak,
@@ -2929,7 +3109,7 @@ that is <em>not</em> <code>GET</code>, determine the response as follows:
   Martin Hassman,
   Mohamed Zergaoui,
   Ms2ger,
-  Odin H&oslash;rthe Omdal,
+  Odin Hørthe Omdal,
   Olli Pettay,
   Pawel Glowacki,
   Peter Michaux,
@@ -2938,7 +3118,7 @@ that is <em>not</em> <code>GET</code>, determine the response as follows:
   Rune Halvorsen,
   Ruud Steltenpool,
   Sergiu Dumitriu,
-  Sigbj&oslash;rn Finne,
+  Sigbjørn Finne,
   Simon Pieters,
   Stewart Brodie,
   Sunava Dutta,
@@ -2957,8 +3137,10 @@ that is <em>not</em> <code>GET</code>, determine the response as follows:
   this specification in their Web Applications 1.0 document (now renamed to
   HTML). <a href="#refsHTML">[HTML]</a></p>
 
-  <p>Thanks also to all those who have helped to improve this specification
-  by sending suggestions and corrections. (Please, keep bugging us with your
-  issues!)</p>
- 
+<p>Special thanks to the SVG WG for drafting the original
+<code title="">ProgressEvent</code> interface as part of the
+<a href="http://www.w3.org/TR/2008/REC-SVGTiny12-20081222/svgudom.html">SVG Micro DOM</a>.
 
+<p>Thanks also to all those who have helped to improve this specification by
+sending suggestions and corrections. (Please, keep bugging us with your
+issues!)
