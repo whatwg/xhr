@@ -6,7 +6,7 @@
 <div class="head">
 
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-12-september-2012">Living Standard — Last Updated 12 September 2012</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-13-september-2012">Living Standard — Last Updated 13 September 2012</h2>
 
 <dl>
  <dt>This Version:</dt>
@@ -34,7 +34,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-12 September 2012, the editor has made this specification available
+13 September 2012, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -66,7 +66,7 @@ client functionality for transferring data between a client and a server.
  <li><a href="#terminology"><span class="secno">3 </span>Terminology</a></li>
  <li><a href="#interface-xmlhttprequest"><span class="secno">4 </span>Interface <code title="">XMLHttpRequest</code></a>
   <ol class="toc">
-   <li><a href="#origin-and-base-url"><span class="secno">4.1 </span>Origin and base URL</a></li>
+   <li><a href="#base-url,-origin,-and-referrer"><span class="secno">4.1 </span>Base URL, origin, and referrer</a></li>
    <li><a href="#task-sources"><span class="secno">4.2 </span>Task sources</a></li>
    <li><a href="#constructors"><span class="secno">4.3 </span>Constructors</a></li>
    <li><a href="#garbage-collection"><span class="secno">4.4 </span>Garbage collection</a></li>
@@ -370,17 +370,19 @@ interface <dfn id="anonxmlhttprequest">AnonXMLHttpRequest</dfn> : <a href="#xmlh
 
 
 
-  <h3 id="origin-and-base-url"><span class="secno">4.1 </span>Origin and base URL</h3>
+  <h3 id="base-url,-origin,-and-referrer"><span class="secno">4.1 </span>Base URL, origin, and referrer</h3>
 
   <p>Each <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object has an associated
-  <dfn id="xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</dfn> and an
-  <dfn id="xmlhttprequest-base-url"><code>XMLHttpRequest</code> base URL</dfn>.
+  <dfn id="xmlhttprequest-base-url"><code>XMLHttpRequest</code> base URL</dfn>,
+  <dfn id="xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</dfn>, and
+  <dfn id="xmlhttprequest-referrer-source"><code>XMLHttpRequest</code> referrer source</dfn>.
 
   <p class="note">The XMLHttpRequest standard defines
-  <a href="#xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</a> and
-  <a href="#xmlhttprequest-base-url"><code>XMLHttpRequest</code> base URL</a> when the global object
-  is represented by the <code class="external"><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#window">Window</a></code> object.
-  Other contexts will have to define them as appropriate for
+  <a href="#xmlhttprequest-base-url"><code>XMLHttpRequest</code> base URL</a>,
+  <a href="#xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</a>, and
+  <a href="#xmlhttprequest-referrer-source"><code>XMLHttpRequest</code> referrer source</a> when the global
+  object is represented by the <code class="external"><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#window">Window</a></code>
+  object. Other contexts will have to define them as appropriate for
   <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> to function as other contexts are considered
   out of scope for this document.</p>
 
@@ -392,10 +394,14 @@ interface <dfn id="anonxmlhttprequest">AnonXMLHttpRequest</dfn> : <a href="#xmlh
   associated with the <code class="external"><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#window">Window</a></code> object for
   which the <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> interface object was created.</p>
 
+  <p>In these environments the
+  <a href="#xmlhttprequest-referrer-source"><code>XMLHttpRequest</code> referrer source</a> is that
+  <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a>.
+
   <p class="note">The
-  <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a> is used to
-  determine the <a href="#xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</a> and
-  <a href="#xmlhttprequest-base-url"><code>XMLHttpRequest</code> base URL</a> at a later stage.</p>
+  <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a> is also used to
+  determine the <a href="#xmlhttprequest-base-url"><code>XMLHttpRequest</code> base URL</a> and
+  <a href="#xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</a> at a later stage.
 
 
 
@@ -1351,7 +1357,9 @@ X-Test: one, two</code></pre>
 
       <p><a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/fetching-resources.html#fetch">Fetch</a> the
       <a href="#request-url">request URL</a> from <i title="">origin</i>
-      <a href="#xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</a>, with the
+      <a href="#xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</a>, using
+      <a href="#xmlhttprequest-referrer-source"><code>XMLHttpRequest</code> referrer source</a> as
+      <i title="">override referrer source</i>, with the
       <i title="">synchronous flag</i> set if the
       <a href="#synchronous-flag">synchronous flag</a> is set, using HTTP method
       <a href="#request-method">request method</a>, user <a href="#request-username">request username</a> (if
@@ -2917,7 +2925,8 @@ otherwise. <a class="informative" href="#refsCORS">[CORS]</a>
  <p>In this example <code><a href="#xmlhttprequest">XMLHttpRequest</a></code>, combined with concepts
  defined in the sections before, and the HTML
  <code class="external"><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/the-button-element.html#the-progress-element">progress</a></code> element are used together to
- display the process of fetching a resource.
+ display the process of
+ <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/fetching-resources.html#fetch" title="fetch">fetching</a> a resource.
 
  <pre>&lt;!DOCTYPE html&gt;
 &lt;title&gt;Waiting for Magical Unicorns&lt;/title&gt;
