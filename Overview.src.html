@@ -1480,7 +1480,7 @@ X-Test: one, two</code></pre>
   <p>The <dfn>same-origin request event rules</dfn> are as follows:</p>
 
   <dl class=switch>
-   <dt>If the response has an HTTP status code of 301, 302, 303, or 307</dt>
+   <dt>If the response has an HTTP status code of 301, 302, 303, 307, or 308
    <dd>
     <p>If the redirect violates infinite loop precautions this is a
     <span>network error</span>.</p>
@@ -1531,7 +1531,7 @@ X-Test: one, two</code></pre>
 
    <dt>Once all HTTP headers have been received, the
    <span>synchronous flag</span> is unset, and the HTTP status code of the
-   response is not 301, 302, 303, or 307</dt>
+   response is not one of 301, 302, 303, 307, and 308
    <dd><p><span>Switch to the HEADERS_RECEIVED state</span>.</p></dd>
 
    <dt>Once the first byte (or more) of the
