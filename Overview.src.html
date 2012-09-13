@@ -177,9 +177,9 @@ not appear in all uppercase letters in this specification.
    support the algorithms of the Cross-Origin Resource Sharing
    specification. <span data-anolis-ref>CORS</span></p></dd>
 
-   <dt>DOM4</dt>
+   <dt>DOM</dt>
    <dd><p>A <span>conforming user agent</span> must
-   support at least the subset of the functionality defined in DOM4 that
+   support at least the subset of the functionality defined in DOM that
    this specification relies upon, such as various exceptions and
    <code data-anolis-spec=dom>EventTarget</code>. <span data-anolis-ref>DOM</span></p></dd>
 
@@ -227,21 +227,15 @@ not appear in all uppercase letters in this specification.
   </dl>
 
 
-  <h3 id="extensibility">Extensibility</h3>
+<h3 id="extensibility">Extensibility</h3>
 
-  <p>User agents, Working Groups, and other interested parties are
-  <em>strongly encouraged</em> to discuss new features on a relevant public
-  forum, preferably
-  <a href="mailto:public-webapps@w3.org">public-webapps@w3.org</a>. If this
-  is for some reason not possible prefix the extension in some way. E.g. if
-  company Foo wants to add a proprietary method <code>bar()</code> it could
-  be named <code>fooBar()</code> to prevent clashes with a potential
-  non-proprietary method <code>bar()</code>.</p>
+<p>User agents, Working Groups, and other interested parties are
+<em>strongly encouraged</em> to discuss new features with the WHATWG
+community.
 
 
 
-  <h2 id="terminology">Terminology</h2>
-
+<h2 id="terminology">Terminology</h2>
 
   <p>The term <dfn>user credentials</dfn> for the purposes of this
   specification means cookies, HTTP authentication, and client-side SSL
@@ -250,9 +244,10 @@ not appear in all uppercase letters in this specification.
   <span data-anolis-ref>COOKIES</span> <!-- XXX ref? --></p>
 
 
-  <h2>Interface <code title>XMLHttpRequest</code></h2>
 
-  <pre class="idl">[NoInterfaceObject]
+<h2>Interface <code title>XMLHttpRequest</code></h2>
+
+<pre class="idl">[NoInterfaceObject]
 interface <dfn id="xmlhttprequesteventtarget">XMLHttpRequestEventTarget</dfn> : <span data-anolis-spec=dom>EventTarget</span> {
   // <a href="#event-handlers">event handlers</a>
   attribute <span data-anolis-spec=html>EventHandler</span> <span title="handler-xhr-onloadstart">onloadstart</span>;
