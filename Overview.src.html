@@ -12,7 +12,7 @@
 
 <dl>
  <dt>This Version:</dt>
- <dd><a href=http://xhr.spec.whatwg.org>http://xhr.spec.whatwg.org</a></dd>
+ <dd><a href=http://xhr.spec.whatwg.org/>http://xhr.spec.whatwg.org/</a></dd>
 
  <dt>Participate:</dt>
  <dd>Send feedback to
@@ -167,66 +167,6 @@ not appear in all uppercase letters in this specification.
 <span data-anolis-ref>RFC2119</span>
 
 
-  <h3 id="dependencies">Dependencies</h3>
-
-  <p>This specification relies on several underlying specifications.</p>
-
-  <dl>
-   <dt>Cross-Origin Resource Sharing</dt>
-   <dd><p>A <span>conforming user agent</span> must
-   support the algorithms of the Cross-Origin Resource Sharing
-   specification. <span data-anolis-ref>CORS</span></p></dd>
-
-   <dt>DOM</dt>
-   <dd><p>A <span>conforming user agent</span> must
-   support at least the subset of the functionality defined in DOM that
-   this specification relies upon, such as various exceptions and
-   <code data-anolis-spec=dom>EventTarget</code>. <span data-anolis-ref>DOM</span></p></dd>
-
-   <dt>DOM Parsing and Serialization
-   <dd><p>A <span>conforming user agent</span> must support at least the
-   <span data-anolis-spec=domps title=concept-serialize>serialize</span>
-   concept from DOM Parsing and Serialization.
-   <span data-anolis-ref>DOMPS</span>
-
-   <dt>File API</dt>
-   <dd><p>A <span>conforming user agent</span> must
-   support at least the subset of the functionality defined in File API that
-   this specification relies upon, such as the <code data-anolis-spec=fileapi>Blob</code> and
-   <code data-anolis-spec=fileapi>File</code> interfaces. <span data-anolis-ref>FILEAPI</span></p>
-
-   <dt>HTML</dt>
-   <dd><p>A <span>conforming user agent</span> must
-   support at least the subset of the functionality defined in HTML that
-   this specification relies upon, such as the basics of the
-   <code data-anolis-spec=html>Window</code> object and serializing a <code data-anolis-spec=dom>Document</code>
-   object. <span data-anolis-ref>HTML</span>
-
-   <dt>HTTP</dt>
-   <dd><p>A <span>conforming user agent</span> must
-   support some version of the HTTP protocol. Requirements regarding HTTP
-   are made throughout the specification. <span data-anolis-ref>HTTP</span>
-
-   <dt>Typed Array</dt>
-   <dd><p>A <span>conforming user agent</span> must support the
-   <code data-anolis-spec=typedarray>ArrayBuffer</code> and
-   <code data-anolis-spec=typedarray>ArrayBufferView</code> objects.
-   <span data-anolis-ref>TYPEDARRAY</span>
-
-   <dt>Web IDL</dt>
-   <dd><p>A <span>conforming user agent</span> must also
-   be a conforming implementation of the IDL fragments in this
-   specification, as described in the Web IDL specification.
-   <span data-anolis-ref>WEBIDL</span>
-
-   <dt>XML</dt>
-   <dd><p>A <span>conforming user agent</span> must be a
-   conforming XML processor that reports violations of namespace
-   well-formedness. <span data-anolis-ref>XML</span>
-   <span data-anolis-ref>XMLNS</span>
-  </dl>
-
-
 <h3 id="extensibility">Extensibility</h3>
 
 <p>User agents, Working Groups, and other interested parties are
@@ -237,11 +177,25 @@ community.
 
 <h2 id="terminology">Terminology</h2>
 
-  <p>The term <dfn>user credentials</dfn> for the purposes of this
-  specification means cookies, HTTP authentication, and client-side SSL
-  certificates. Specifically it does not refer to proxy authentication or
-  the <code title="http-origin">Origin</code> header.
-  <span data-anolis-ref>COOKIES</span> <!-- XXX ref? --></p>
+<p>This specification heavily borrows terminology, from
+Cross-Origin Resource Sharing, DOM, DOM Parsing and Serialization, File API,
+HTML, HTTP, Typed Array, Web IDL, and XML.
+
+<span data-anolis-ref>CORS</span>
+<span data-anolis-ref>DOM</span>
+<span data-anolis-ref>DOMPS</span>
+<span data-anolis-ref>FILEAPI</span></p>
+<span data-anolis-ref>HTML</span>
+<span data-anolis-ref>HTTP</span>
+<span data-anolis-ref>TYPEDARRAY</span>
+<span data-anolis-ref>WEBIDL</span>
+<span data-anolis-ref>XML</span> <span data-anolis-ref>XMLNS</span>
+
+<p>The term <dfn>user credentials</dfn> for the purposes of this
+specification means cookies, HTTP authentication, and client-side SSL
+certificates. Specifically it does not refer to proxy authentication or the
+<code title="http-origin">Origin</code> header.
+<span data-anolis-ref>COOKIES</span> <!-- XXX ref? -->
 
 
 

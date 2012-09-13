@@ -10,7 +10,7 @@
 
 <dl>
  <dt>This Version:</dt>
- <dd><a href="http://xhr.spec.whatwg.org">http://xhr.spec.whatwg.org</a></dd>
+ <dd><a href="http://xhr.spec.whatwg.org/">http://xhr.spec.whatwg.org/</a></dd>
 
  <dt>Participate:</dt>
  <dd>Send feedback to
@@ -61,8 +61,7 @@ client functionality for transferring data between a client and a server.
    <li><a href="#specification-history"><span class="secno">1.1 </span>Specification history</a></ol></li>
  <li><a href="#conformance"><span class="secno">2 </span>Conformance</a>
   <ol class="toc">
-   <li><a href="#dependencies"><span class="secno">2.1 </span>Dependencies</a></li>
-   <li><a href="#extensibility"><span class="secno">2.2 </span>Extensibility</a></ol></li>
+   <li><a href="#extensibility"><span class="secno">2.1 </span>Extensibility</a></ol></li>
  <li><a href="#terminology"><span class="secno">3 </span>Terminology</a></li>
  <li><a href="#interface-xmlhttprequest"><span class="secno">4 </span>Interface <code title="">XMLHttpRequest</code></a>
   <ol class="toc">
@@ -220,67 +219,7 @@ not appear in all uppercase letters in this specification.
 <a href="#refsRFC2119">[RFC2119]</a>
 
 
-  <h3 id="dependencies"><span class="secno">2.1 </span>Dependencies</h3>
-
-  <p>This specification relies on several underlying specifications.</p>
-
-  <dl>
-   <dt>Cross-Origin Resource Sharing</dt>
-   <dd><p>A <span>conforming user agent</span> must
-   support the algorithms of the Cross-Origin Resource Sharing
-   specification. <a href="#refsCORS">[CORS]</a></dd>
-
-   <dt>DOM</dt>
-   <dd><p>A <span>conforming user agent</span> must
-   support at least the subset of the functionality defined in DOM that
-   this specification relies upon, such as various exceptions and
-   <code class="external"><a href="http://dom.spec.whatwg.org/#eventtarget">EventTarget</a></code>. <a href="#refsDOM">[DOM]</a></dd>
-
-   <dt>DOM Parsing and Serialization
-   <dd><p>A <span>conforming user agent</span> must support at least the
-   <a class="external" href="http://html5.org/specs/dom-parsing.html#concept-serialize" title="concept-serialize">serialize</a>
-   concept from DOM Parsing and Serialization.
-   <a href="#refsDOMPS">[DOMPS]</a>
-
-   <dt>File API</dt>
-   <dd><p>A <span>conforming user agent</span> must
-   support at least the subset of the functionality defined in File API that
-   this specification relies upon, such as the <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code> and
-   <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a></code> interfaces. <a href="#refsFILEAPI">[FILEAPI]</a></p>
-
-   <dt>HTML</dt>
-   <dd><p>A <span>conforming user agent</span> must
-   support at least the subset of the functionality defined in HTML that
-   this specification relies upon, such as the basics of the
-   <code class="external"><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#window">Window</a></code> object and serializing a <code class="external"><a href="http://dom.spec.whatwg.org/#document">Document</a></code>
-   object. <a href="#refsHTML">[HTML]</a>
-
-   <dt>HTTP</dt>
-   <dd><p>A <span>conforming user agent</span> must
-   support some version of the HTTP protocol. Requirements regarding HTTP
-   are made throughout the specification. <a href="#refsHTTP">[HTTP]</a>
-
-   <dt>Typed Array</dt>
-   <dd><p>A <span>conforming user agent</span> must support the
-   <code class="external"><a href="http://www.khronos.org/registry/typedarray/specs/latest/#5">ArrayBuffer</a></code> and
-   <code class="external"><a href="http://www.khronos.org/registry/typedarray/specs/latest/#6">ArrayBufferView</a></code> objects.
-   <a href="#refsTYPEDARRAY">[TYPEDARRAY]</a>
-
-   <dt>Web IDL</dt>
-   <dd><p>A <span>conforming user agent</span> must also
-   be a conforming implementation of the IDL fragments in this
-   specification, as described in the Web IDL specification.
-   <a href="#refsWEBIDL">[WEBIDL]</a>
-
-   <dt>XML</dt>
-   <dd><p>A <span>conforming user agent</span> must be a
-   conforming XML processor that reports violations of namespace
-   well-formedness. <a href="#refsXML">[XML]</a>
-   <a href="#refsXMLNS">[XMLNS]</a>
-  </dl>
-
-
-<h3 id="extensibility"><span class="secno">2.2 </span>Extensibility</h3>
+<h3 id="extensibility"><span class="secno">2.1 </span>Extensibility</h3>
 
 <p>User agents, Working Groups, and other interested parties are
 <em>strongly encouraged</em> to discuss new features with the WHATWG
@@ -290,11 +229,25 @@ community.
 
 <h2 id="terminology"><span class="secno">3 </span>Terminology</h2>
 
-  <p>The term <dfn id="user-credentials">user credentials</dfn> for the purposes of this
-  specification means cookies, HTTP authentication, and client-side SSL
-  certificates. Specifically it does not refer to proxy authentication or
-  the <code title="http-origin">Origin</code> header.
-  <a href="#refsCOOKIES">[COOKIES]</a> <!-- XXX ref? --></p>
+<p>This specification heavily borrows terminology, from
+Cross-Origin Resource Sharing, DOM, DOM Parsing and Serialization, File API,
+HTML, HTTP, Typed Array, Web IDL, and XML.
+
+<a href="#refsCORS">[CORS]</a>
+<a href="#refsDOM">[DOM]</a>
+<a href="#refsDOMPS">[DOMPS]</a>
+<a href="#refsFILEAPI">[FILEAPI]</a></p>
+<a href="#refsHTML">[HTML]</a>
+<a href="#refsHTTP">[HTTP]</a>
+<a href="#refsTYPEDARRAY">[TYPEDARRAY]</a>
+<a href="#refsWEBIDL">[WEBIDL]</a>
+<a href="#refsXML">[XML]</a> <a href="#refsXMLNS">[XMLNS]</a>
+
+<p>The term <dfn id="user-credentials">user credentials</dfn> for the purposes of this
+specification means cookies, HTTP authentication, and client-side SSL
+certificates. Specifically it does not refer to proxy authentication or the
+<code title="http-origin">Origin</code> header.
+<a href="#refsCOOKIES">[COOKIES]</a> <!-- XXX ref? -->
 
 
 
