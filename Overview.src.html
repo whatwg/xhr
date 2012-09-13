@@ -860,7 +860,7 @@ discarding any further data received from the network for them.
     <p>Terminate these steps if <var>header</var> is a case-insensitive
     match for one of the following headers:</p>
 
-    <ul>
+    <ul class=brief>
      <li><code>Accept-Charset</code></li>
      <li><code>Accept-Encoding</code></li>
      <li><code>Access-Control-Request-Headers</code></li>
@@ -1363,8 +1363,8 @@ X-Test: one, two</code></pre>
        <dd>
         <p>While processing the request, as data becomes available and when
         the end user interferes with the request,
-        <span title="queue a task">queue tasks</span> to update the
-        <span>response entity body</span> and follow the
+        <span data-anolis-spec=html title="queue a task">queue tasks</span>
+        to update the <span>response entity body</span> and follow the
         <span>cross-origin request event rules</span>.</p>
        </dd>
       </dl>
@@ -2154,7 +2154,7 @@ Content-Type: text/plain; charset=utf-8</code></pre>
      <span>final charset</span>.
 
      <li><p>If <var>charset</var> is null,
-     <span title="prescan a byte stream to determine its encoding">prescan</span>
+     <span data-anolis-spec=html title="prescan a byte stream to determine its encoding">prescan</span>
      the first 1024 bytes of the <span>response entity body</span> and if
      that does not abort unsuccessfully let <var>charset</var> be the return
      value.
@@ -2730,7 +2730,7 @@ conditions:
 <p>This is left as an exercise for the editor of the specification that
 introduces such a context. The editor is encouraged to define it in a way
 consistent with this and other specifications that utilize
-<span title=concept-event>events</span> using the
+<span data-anolis-spec=dom title=concept-event>events</span> using the
 <code>ProgressEvent</code> interface.</p>
 
 
@@ -2872,8 +2872,9 @@ this section.
 
  <li><p>Include a single response header whose header field name is
  "<code title>content-type</code>" and whose value is the
- <span>MIME type</span> (including any parameters) given in the
- <span><code>data:</code> URL</span>, or the default otherwise.
+ MIME type (including any parameters) given in the
+ <span data-anolis-spec=html title=data-protocol><code>data:</code> URL</span>,
+ or the default otherwise.
 
  <li><p>Set the <span>response entity body</span> to the data the
  <span data-anolis-spec=html>URL</span> encodes, base64 decoded if the

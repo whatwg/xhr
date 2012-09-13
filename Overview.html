@@ -912,7 +912,7 @@ discarding any further data received from the network for them.
     <p>Terminate these steps if <var>header</var> is a case-insensitive
     match for one of the following headers:</p>
 
-    <ul>
+    <ul class="brief">
      <li><code>Accept-Charset</code></li>
      <li><code>Accept-Encoding</code></li>
      <li><code>Access-Control-Request-Headers</code></li>
@@ -1415,8 +1415,8 @@ X-Test: one, two</code></pre>
        <dd>
         <p>While processing the request, as data becomes available and when
         the end user interferes with the request,
-        <span title="queue a task">queue tasks</span> to update the
-        <a href="#response-entity-body">response entity body</a> and follow the
+        <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task" title="queue a task">queue tasks</a>
+        to update the <a href="#response-entity-body">response entity body</a> and follow the
         <a href="#cross-origin-request-event-rules">cross-origin request event rules</a>.</p>
        </dd>
       </dl>
@@ -2206,7 +2206,7 @@ Content-Type: text/plain; charset=utf-8</code></pre>
      <a href="#final-charset">final charset</a>.
 
      <li><p>If <var>charset</var> is null,
-     <span title="prescan a byte stream to determine its encoding">prescan</span>
+     <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/parsing.html#prescan-a-byte-stream-to-determine-its-encoding" title="prescan a byte stream to determine its encoding">prescan</a>
      the first 1024 bytes of the <a href="#response-entity-body">response entity body</a> and if
      that does not abort unsuccessfully let <var>charset</var> be the return
      value.
@@ -2782,7 +2782,7 @@ conditions:
 <p>This is left as an exercise for the editor of the specification that
 introduces such a context. The editor is encouraged to define it in a way
 consistent with this and other specifications that utilize
-<span title="concept-event">events</span> using the
+<a class="external" href="http://dom.spec.whatwg.org/#concept-event" title="concept-event">events</a> using the
 <code><a href="#progressevent">ProgressEvent</a></code> interface.</p>
 
 
@@ -2924,8 +2924,9 @@ this section.
 
  <li><p>Include a single response header whose header field name is
  "<code title="">content-type</code>" and whose value is the
- <span>MIME type</span> (including any parameters) given in the
- <span><code>data:</code> URL</span>, or the default otherwise.
+ MIME type (including any parameters) given in the
+ <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#data-protocol" title="data-protocol"><code>data:</code> URL</a>,
+ or the default otherwise.
 
  <li><p>Set the <a href="#response-entity-body">response entity body</a> to the data the
  <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/urls.html#url">URL</a> encodes, base64 decoded if the
