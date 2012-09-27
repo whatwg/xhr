@@ -178,13 +178,14 @@ community.
 <h2 id="terminology">Terminology</h2>
 
 <p>This specification heavily borrows terminology, from
-Cross-Origin Resource Sharing, DOM, DOM Parsing and Serialization, File API,
-HTML, HTTP, Typed Array, Web IDL, and XML.
+Cross-Origin Resource Sharing, DOM, DOM Parsing and Serialization, Encoding,
+File API, HTML, HTTP, Typed Array, Web IDL, and XML.
 
 <span data-anolis-ref>CORS</span>
 <span data-anolis-ref>DOM</span>
 <span data-anolis-ref>DOMPS</span>
-<span data-anolis-ref>FILEAPI</span></p>
+<span data-anolis-ref>ENCODING</span>
+<span data-anolis-ref>FILEAPI</span>
 <span data-anolis-ref>HTML</span>
 <span data-anolis-ref>HTTP</span>
 <span data-anolis-ref>TYPEDARRAY</span>
@@ -1138,12 +1139,14 @@ X-Test: one, two</code></pre>
      <dt><span data-anolis-spec=dom title=concept-document>document</span>
      <dd>
       <p>Let <var title>encoding</var> be the
-      <span data-anolis-spec=dom>preferred MIME name</span> of the
       <span data-anolis-spec=dom title=concept-document-encoding>encoding</span>
-      of <var title>data</var>. If <var title>encoding</var> is utf-16 change it to
-      utf-8.
+      of <var title>data</var>. If <var title>encoding</var> is
+      <span data-anolis-spec=encoding>utf-16</span> or
+      <span data-anolis-spec=encoding>utf-16be</span>, set
+      <var title>encoding</var> to
+      <span data-anolis-spec=encoding>utf-8</span>.
 
-      <p>If <span data-anolis-spec=dom title=concept-document>document</span> is an
+      <p>If <var title>data</var> is an
       <span data-anolis-spec=dom>HTML document</span>, let
       <var>mime type</var> be "<code>text/html</code>", or let
       <var>mime type</var> be "<code>application/xml</code>" otherwise. Then
@@ -1153,8 +1156,12 @@ X-Test: one, two</code></pre>
       <p><span data-anolis-spec=domps title=concept-serialize>Serialize</span>
       <var title>data</var>, and let the <span>request entity body</span> be the result,
       <span data-anolis-spec=webidl title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</span>
-      and encoded as <var>encoding</var>. Re-throw any exception this
+      and <span data-anolis-spec=encoding title=encode>encoded</span> using
+      encoding <var>encoding</var>. Re-throw any exception this
       throws.</p>
+
+      <p class=XXX>Should we only encode as utf-8? What happens in the face
+      of an <span data-anolis-spec=encoding>encoder error</span>?
 
       <p class=note>In particular, if the document cannot be serialized an
       "<code data-anolis-spec=dom>InvalidStateError</code>" exception is
@@ -2144,36 +2151,22 @@ Content-Type: text/plain; charset=utf-8</code></pre>
     substeps:
 
     <ol>
-     <li><!-- XXX this step should move to Encoding -->
-      <p>For each of the rows in the following table, starting with the
-      first one and going down, if the first bytes of the
-      <span>response entity body</span> match the bytes given in the first
-      column, then let <var>charset</var> be the encoding given in the cell
-      in the second column of that row. Otherwise, let <var>charset</var> be
-      null.
-
-      <table>
-       <tr><th>Bytes<th>Encoding
-       <tr><td>0xFE 0xFF<td>UTF-16BE
-       <tr><td>0xFF 0xFE<td>UTF-16LE
-       <tr><td>0xEF 0xBB 0xBF<td>UTF-8
-      </table>
-
-     <li><p>If <var>charset</var> is null, let <var>charset</var> be the
-     <span>final charset</span>.
+     <li><p>Let <var>charset</var> be the <span>final charset</span>.
 
      <li><p>If <var>charset</var> is null,
      <span data-anolis-spec=html title="prescan a byte stream to determine its encoding">prescan</span>
      the first 1024 bytes of the <span>response entity body</span> and if
-     that does not abort unsuccessfully let <var>charset</var> be the return
-     value.
+     that does not terminate unsuccessfully then let <var>charset</var> be
+     the return value.
 
-     <li><p>If <var>charset</var> is null, let <var>charset</var> be UTF-8.
+     <li><p>If <var>charset</var> is null, set <var>charset</var> to
+     <span data-anolis-spec=encoding>utf-8</span>.
 
-     <li><p>Decode the <span>response entity body</span> using
+     <li><p><span data-anolis-spec=encoding>Decode</span> the byte stream
+     <span>response entity body</span> using fallback encoding
      <var>charset</var> and then let <var title>document</var> be a
      <span data-anolis-spec=dom title=concept-document>document</span> that
-     represents the result of that decoding, parsed following the rules set
+     represents the result of that, parsed following the rules set
      forth in the HTML specification for an HTML parser with scripting
      disabled. <span data-anolis-ref>HTML</span>
 
@@ -2237,25 +2230,9 @@ algorithm:</p>
 
   <ol>
    <li><p>If the <span>response entity body</span> is null, return the empty
-   string and terminate these steps.</p>
+   string and terminate these steps.
 
-   <li><!-- XXX this needs to move to Encoding -->
-    <p>For each of the rows in the following table, starting with the first
-    one and going down, if the first bytes of the
-    <span>response entity body</span> match the bytes given in the first
-    column, then let <var>charset</var> be the encoding given in the cell in
-    the second column of that row. Otherwise, let <var>charset</var> be
-    null.
-
-    <table>
-     <tr><th>Bytes<th>Encoding
-     <tr><td>0xFE 0xFF<td>UTF-16BE
-     <tr><td>0xFF 0xFE<td>UTF-16LE
-     <tr><td>0xEF 0xBB 0xBF<td>UTF-8
-    </table>
-
-   <li><p>If <var>charset</var> is null, let <var>charset</var> be the
-   <span>final charset</span>.
+   <li><p>Let <var>charset</var> be the <span>final charset</span>.
 
    <li>
     <p>If <code title=dom-XMLHttpRequest-responseType>responseType</code> is
@@ -2272,15 +2249,13 @@ algorithm:</p>
     <code title=dom-XMLHttpRequest-responseType>responseType</code> value
     "<code title>text</code>" simple.
 
-   <li><p>If <var>charset</var> is null, let <var>charset</var> be UTF-8.
+   <li><p>If <var>charset</var> is null, set <var>charset</var> to
+   <span data-anolis-spec=encoding>utf-8</span>.
 
-   <!-- XXX this needs to move to Encoding -->
-   <li><p>Return the result of decoding the
-   <span>response entity body</span> using <var>charset</var>. Replace bytes
-   or sequences of bytes that are not valid according to the
-   <var>charset</var> with a single
-   U+FFFD REPLACEMENT CHARACTER character. Remove one leading
-   U+FEFF BYTE ORDER MARK character, if present.
+   <li><p>Return the result of
+   <span data-anolis-spec=encoding title=decode>decoding</span> the
+   byte stream <span>response entity body</span> using fallback encoding
+   <var>charset</var>.
   </ol>
 
   <p class=note>Authors are strongly encouraged to always encode their
@@ -2723,7 +2698,7 @@ conditions:
 <ul>
  <li>Initialize the <code title=dom-ProgressEvent-loaded>loaded</code>
  attribute to the number of HTTP
- <span data-anolis-spec=http>entity body</span> octets transferred.
+ <span data-anolis-spec=http>entity body</span> bytes transferred.
  <li>If the length of the HTTP
  <span data-anolis-spec=http>entity body</span> is known through the
  <code data-anolis-spec=http title=http-content-length>Content-Length</code>

@@ -6,7 +6,7 @@
 <div class="head">
 
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-13-september-2012">Living Standard — Last Updated 13 September 2012</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-27-september-2012">Living Standard — Last Updated 27 September 2012</h2>
 
 <dl>
  <dt>This Version:</dt>
@@ -34,7 +34,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-13 September 2012, the editor has made this specification available
+27 September 2012, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -230,13 +230,14 @@ community.
 <h2 id="terminology"><span class="secno">3 </span>Terminology</h2>
 
 <p>This specification heavily borrows terminology, from
-Cross-Origin Resource Sharing, DOM, DOM Parsing and Serialization, File API,
-HTML, HTTP, Typed Array, Web IDL, and XML.
+Cross-Origin Resource Sharing, DOM, DOM Parsing and Serialization, Encoding,
+File API, HTML, HTTP, Typed Array, Web IDL, and XML.
 
 <a href="#refsCORS">[CORS]</a>
 <a href="#refsDOM">[DOM]</a>
 <a href="#refsDOMPS">[DOMPS]</a>
-<a href="#refsFILEAPI">[FILEAPI]</a></p>
+<a href="#refsENCODING">[ENCODING]</a>
+<a href="#refsFILEAPI">[FILEAPI]</a>
 <a href="#refsHTML">[HTML]</a>
 <a href="#refsHTTP">[HTTP]</a>
 <a href="#refsTYPEDARRAY">[TYPEDARRAY]</a>
@@ -1190,12 +1191,14 @@ X-Test: one, two</code></pre>
      <dt><a class="external" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>
      <dd>
       <p>Let <var title="">encoding</var> be the
-      <a class="external" href="http://dom.spec.whatwg.org/#preferred-mime-name">preferred MIME name</a> of the
       <a class="external" href="http://dom.spec.whatwg.org/#concept-document-encoding" title="concept-document-encoding">encoding</a>
-      of <var title="">data</var>. If <var title="">encoding</var> is utf-16 change it to
-      utf-8.
+      of <var title="">data</var>. If <var title="">encoding</var> is
+      <a class="external" href="http://encoding.spec.whatwg.org/#utf-16">utf-16</a> or
+      <a class="external" href="http://encoding.spec.whatwg.org/#utf-16be">utf-16be</a>, set
+      <var title="">encoding</var> to
+      <a class="external" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
 
-      <p>If <a class="external" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> is an
+      <p>If <var title="">data</var> is an
       <a class="external" href="http://dom.spec.whatwg.org/#html-document">HTML document</a>, let
       <var>mime type</var> be "<code>text/html</code>", or let
       <var>mime type</var> be "<code>application/xml</code>" otherwise. Then
@@ -1205,8 +1208,12 @@ X-Test: one, two</code></pre>
       <p><a class="external" href="http://html5.org/specs/dom-parsing.html#concept-serialize" title="concept-serialize">Serialize</a>
       <var title="">data</var>, and let the <a href="#request-entity-body">request entity body</a> be the result,
       <a class="external" href="http://dev.w3.org/2006/webapi/WebIDL/#dfn-obtain-unicode" title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</a>
-      and encoded as <var>encoding</var>. Re-throw any exception this
+      and <a class="external" href="http://encoding.spec.whatwg.org/#encode" title="encode">encoded</a> using
+      encoding <var>encoding</var>. Re-throw any exception this
       throws.</p>
+
+      <p class="XXX">Should we only encode as utf-8? What happens in the face
+      of an <a class="external" href="http://encoding.spec.whatwg.org/#encoder-error">encoder error</a>?
 
       <p class="note">In particular, if the document cannot be serialized an
       "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception is
@@ -2196,36 +2203,22 @@ Content-Type: text/plain; charset=utf-8</code></pre>
     substeps:
 
     <ol>
-     <li><!-- XXX this step should move to Encoding -->
-      <p>For each of the rows in the following table, starting with the
-      first one and going down, if the first bytes of the
-      <a href="#response-entity-body">response entity body</a> match the bytes given in the first
-      column, then let <var>charset</var> be the encoding given in the cell
-      in the second column of that row. Otherwise, let <var>charset</var> be
-      null.
-
-      <table>
-       <tr><th>Bytes<th>Encoding
-       <tr><td>0xFE 0xFF<td>UTF-16BE
-       <tr><td>0xFF 0xFE<td>UTF-16LE
-       <tr><td>0xEF 0xBB 0xBF<td>UTF-8
-      </table>
-
-     <li><p>If <var>charset</var> is null, let <var>charset</var> be the
-     <a href="#final-charset">final charset</a>.
+     <li><p>Let <var>charset</var> be the <a href="#final-charset">final charset</a>.
 
      <li><p>If <var>charset</var> is null,
      <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/parsing.html#prescan-a-byte-stream-to-determine-its-encoding" title="prescan a byte stream to determine its encoding">prescan</a>
      the first 1024 bytes of the <a href="#response-entity-body">response entity body</a> and if
-     that does not abort unsuccessfully let <var>charset</var> be the return
-     value.
+     that does not terminate unsuccessfully then let <var>charset</var> be
+     the return value.
 
-     <li><p>If <var>charset</var> is null, let <var>charset</var> be UTF-8.
+     <li><p>If <var>charset</var> is null, set <var>charset</var> to
+     <a class="external" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
 
-     <li><p>Decode the <a href="#response-entity-body">response entity body</a> using
+     <li><p><a class="external" href="http://encoding.spec.whatwg.org/#decode">Decode</a> the byte stream
+     <a href="#response-entity-body">response entity body</a> using fallback encoding
      <var>charset</var> and then let <var title="">document</var> be a
      <a class="external" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> that
-     represents the result of that decoding, parsed following the rules set
+     represents the result of that, parsed following the rules set
      forth in the HTML specification for an HTML parser with scripting
      disabled. <a href="#refsHTML">[HTML]</a>
 
@@ -2289,25 +2282,9 @@ algorithm:</p>
 
   <ol>
    <li><p>If the <a href="#response-entity-body">response entity body</a> is null, return the empty
-   string and terminate these steps.</p>
+   string and terminate these steps.
 
-   <li><!-- XXX this needs to move to Encoding -->
-    <p>For each of the rows in the following table, starting with the first
-    one and going down, if the first bytes of the
-    <a href="#response-entity-body">response entity body</a> match the bytes given in the first
-    column, then let <var>charset</var> be the encoding given in the cell in
-    the second column of that row. Otherwise, let <var>charset</var> be
-    null.
-
-    <table>
-     <tr><th>Bytes<th>Encoding
-     <tr><td>0xFE 0xFF<td>UTF-16BE
-     <tr><td>0xFF 0xFE<td>UTF-16LE
-     <tr><td>0xEF 0xBB 0xBF<td>UTF-8
-    </table>
-
-   <li><p>If <var>charset</var> is null, let <var>charset</var> be the
-   <a href="#final-charset">final charset</a>.
+   <li><p>Let <var>charset</var> be the <a href="#final-charset">final charset</a>.
 
    <li>
     <p>If <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code> is
@@ -2324,15 +2301,13 @@ algorithm:</p>
     <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code> value
     "<code title="">text</code>" simple.
 
-   <li><p>If <var>charset</var> is null, let <var>charset</var> be UTF-8.
+   <li><p>If <var>charset</var> is null, set <var>charset</var> to
+   <a class="external" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
 
-   <!-- XXX this needs to move to Encoding -->
-   <li><p>Return the result of decoding the
-   <a href="#response-entity-body">response entity body</a> using <var>charset</var>. Replace bytes
-   or sequences of bytes that are not valid according to the
-   <var>charset</var> with a single
-   U+FFFD REPLACEMENT CHARACTER character. Remove one leading
-   U+FEFF BYTE ORDER MARK character, if present.
+   <li><p>Return the result of
+   <a class="external" href="http://encoding.spec.whatwg.org/#decode" title="decode">decoding</a> the
+   byte stream <a href="#response-entity-body">response entity body</a> using fallback encoding
+   <var>charset</var>.
   </ol>
 
   <p class="note">Authors are strongly encouraged to always encode their
@@ -2775,7 +2750,7 @@ conditions:
 <ul>
  <li>Initialize the <code title="dom-ProgressEvent-loaded"><a href="#dom-progressevent-loaded">loaded</a></code>
  attribute to the number of HTTP
- <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-7.2">entity body</a> octets transferred.
+ <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-7.2">entity body</a> bytes transferred.
  <li>If the length of the HTTP
  <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-7.2">entity body</a> is known through the
  <code class="external" title="http-content-length"><a href="http://tools.ietf.org/html/rfc2616/#section-14.13">Content-Length</a></code>
@@ -2975,6 +2950,9 @@ that is <em>not</em> <code>GET</code>, determine the response as follows:
 
 <dt id="refsECMASCRIPT">[ECMASCRIPT]
 <dd><cite><a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">ECMAScript Language Specification</a></cite>. ECMA.
+
+<dt id="refsENCODING">[ENCODING]
+<dd><cite><a href="http://encoding.spec.whatwg.org/">Encoding Standard</a></cite>, Anne van Kesteren. WHATWG.
 
 <dt id="refsFILEAPI">[FILEAPI]
 <dd><cite><a href="http://dev.w3.org/2006/webapi/FileAPI/">File API</a></cite>, Arun Ranganathan and Jonas Sicking. W3C.
