@@ -1135,13 +1135,14 @@ X-Test: one, two</code></pre>
 
      <dt>a string
      <dd>
-      <p>Let <var>encoding</var> be UTF-8.</p>
+      <p>Let <var>encoding</var> be "<code title>UTF-8</code>".
 
       <p>Let <var>mime type</var> be "<code>text/plain;charset=UTF-8</code>".</p>
 
       <p>Let the <span>request entity body</span> be <var title>data</var>
       <span data-anolis-spec=webidl title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</span>
-      and encoded as utf-8.</p>
+      and <span data-anolis-spec=encoding title=encode>encoded</span> as
+      <span data-anolis-spec=encoding>utf-8</span>.
      </dd>
 
      <dt><code>FormData</code>
@@ -1149,8 +1150,11 @@ X-Test: one, two</code></pre>
       <p>Let the <span>request entity body</span> be the result of running
       the
       <span data-anolis-spec=html><code>multipart/form-data</code> encoding algorithm</span>
-      with <var>data</var> as <var>form data set</var> and with UTF-8 as the
-      explicit character encoding.</p>
+      with <var>data</var> as <var>form data set</var> and with
+      <span data-anolis-spec=encoding>utf-8</span> as the
+      explicit character encoding.
+      <!-- need to provide explicit character encoding because otherwise the
+           encoding of the document is used -->
 
       <p>Let <var>mime type</var> be the concatenation of
       "<code title>multipart/form-data;</code>",
@@ -2228,7 +2232,7 @@ following algorithm:
   </ol>
 
   <p class=note>Authors are strongly encouraged to always encode their
-  resources using UTF-8.</p>
+  resources using <span data-anolis-spec=encoding>utf-8</span>.
 
 
 

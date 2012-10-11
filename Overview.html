@@ -1187,13 +1187,14 @@ X-Test: one, two</code></pre>
 
      <dt>a string
      <dd>
-      <p>Let <var>encoding</var> be UTF-8.</p>
+      <p>Let <var>encoding</var> be "<code title="">UTF-8</code>".
 
       <p>Let <var>mime type</var> be "<code>text/plain;charset=UTF-8</code>".</p>
 
       <p>Let the <a href="#request-entity-body">request entity body</a> be <var title="">data</var>
       <a class="external" href="http://dev.w3.org/2006/webapi/WebIDL/#dfn-obtain-unicode" title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</a>
-      and encoded as utf-8.</p>
+      and <a class="external" href="http://encoding.spec.whatwg.org/#encode" title="encode">encoded</a> as
+      <a class="external" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
      </dd>
 
      <dt><code><a href="#formdata">FormData</a></code>
@@ -1201,8 +1202,11 @@ X-Test: one, two</code></pre>
       <p>Let the <a href="#request-entity-body">request entity body</a> be the result of running
       the
       <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#multipart/form-data-encoding-algorithm"><code>multipart/form-data</code> encoding algorithm</a>
-      with <var>data</var> as <var>form data set</var> and with UTF-8 as the
-      explicit character encoding.</p>
+      with <var>data</var> as <var>form data set</var> and with
+      <a class="external" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a> as the
+      explicit character encoding.
+      <!-- need to provide explicit character encoding because otherwise the
+           encoding of the document is used -->
 
       <p>Let <var>mime type</var> be the concatenation of
       "<code title="">multipart/form-data;</code>",
@@ -2280,7 +2284,7 @@ following algorithm:
   </ol>
 
   <p class="note">Authors are strongly encouraged to always encode their
-  resources using UTF-8.</p>
+  resources using <a class="external" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
 
 
 
