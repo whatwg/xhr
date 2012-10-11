@@ -227,7 +227,11 @@ enum <dfn>XMLHttpRequestResponseType</dfn> {
   "text"
 };
 
-[<span title="dom-XMLHttpRequest">Constructor</span>]
+dictionary <dfn>XMLHttpRequestOptions</dfn> {
+  boolean anon = false;
+};
+
+[<span title="dom-XMLHttpRequest">Constructor</span>(optional <span>XMLHttpRequestOptions</span> <var title>options</var>)]
 interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEventTarget</span> {
   // <a href="#event-handlers">event handler</a>
   attribute <span data-anolis-spec=html>EventHandler</span> <span title="handler-xhr-onreadystatechange">onreadystatechange</span>;
@@ -259,10 +263,6 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
   readonly attribute any <span title="dom-XMLHttpRequest-response">response</span>;
   readonly attribute DOMString <span title="dom-XMLHttpRequest-responseText">responseText</span>;
   readonly attribute <span data-anolis-spec=dom>Document</span>? <span title="dom-XMLHttpRequest-responseXML">responseXML</span>;
-};
-
-[<span title="dom-AnonXMLHttpRequest">Constructor</span>]
-interface <dfn id="anonxmlhttprequest">AnonXMLHttpRequest</dfn> : <span>XMLHttpRequest</span> {
 };</pre>
 
 
@@ -309,44 +309,36 @@ interface <dfn id="anonxmlhttprequest">AnonXMLHttpRequest</dfn> : <span>XMLHttpR
 <dfn><code>XMLHttpRequest</code> task source</dfn>.
 
 
-  <h3 id="constructors">Constructors</h3>
+<h3 id="constructors">Constructors</h3>
 
+<p>The <code>XMLHttpRequest</code> object has an associated
+<dfn>anonymous flag</dfn>. If the <span>anonymous flag</span> is set,
+<span>user credentials</span> and the
+<span><code>XMLHttpRequest</code> origin</span> are not exposed when
+<span data-anolis-spec=html title=fetch>fetching</span> resources.
 
-  <p>The <code>XMLHttpRequest</code> object has an associated
-  <dfn>anonymous flag</dfn>. If the <span>anonymous flag</span> is set,
-  <span>user credentials</span> and the
-  <span><code>XMLHttpRequest</code> origin</span> are not exposed when
-  <span data-anolis-spec=html title=fetch>fetching</span> resources. It can
-  only be set to true by using the
-  <code title="dom-AnonXMLHttpRequest">AnonXMLHttpRequest()</code>
-  constructor.</p>
+<dl class="domintro">
+ <dt><code><var title>client</var> = new <span title="dom-XMLHttpRequest">XMLHttpRequest</span>()</code>
+ <dd>Returns a new <code>XMLHttpRequest</code> object.
 
-  <p class=XXX>We
-  <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=17242">might remove</a>
-  the <code title="dom-AnonXMLHttpRequest">AnonXMLHttpRequest()</code>
-  constructor.
+ <dt><code><var title>client</var> = new <span title="dom-XMLHttpRequest">XMLHttpRequest</span>({anon:true})</code>
+ <dd>Returns a new <code>XMLHttpRequest</code> object that has its
+ <span>anonymous flag</span> set.
+</dl>
 
+<p>The
+<dfn title="dom-XMLHttpRequest"><code>XMLHttpRequest(<var title>options</var>)</code></dfn>
+constructor must run these steps:
 
-  <dl class="domintro">
-   <dt><var title>client</var> = new <code title="dom-XMLHttpRequest">XMLHttpRequest</code>()</dt>
-   <dd>Returns a new <code>XMLHttpRequest</code> object.</dd>
+<ol>
+ <li><p>Let <var title>xhr</var> be a new <code>XMLHttpRequest</code>
+ object.
 
-   <dt><var title>client</var> = new <code title="dom-AnonXMLHttpRequest">AnonXMLHttpRequest</code>()</dt>
-   <dd>Returns a new <code>AnonXMLHttpRequest</code> object that has the
-   <span>anonymous flag</span> set.</dd>
+ <li><p>If <var title>options</var>'s <code title>anon</code> member is
+ true, set <var title>xhr</var>'s <span>anonymous flag</span>.
 
-  </dl>
-
-  <p>The <dfn title="dom-XMLHttpRequest"><code>XMLHttpRequest()</code></dfn>
-  constructor must return a new <code>XMLHttpRequest</code> object.
-
-
-  <p>The
-  <dfn title="dom-AnonXMLHttpRequest"><code>AnonXMLHttpRequest()</code></dfn>
-  constructor must return a new <code>AnonXMLHttpRequest</code> object with
-  its <span>anonymous flag</span> set.</p>
-
-
+ <li><p>Return <var title>xhr</var>.
+</ol>
 
 
 <h3>Garbage collection</h3>

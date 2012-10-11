@@ -279,7 +279,11 @@ enum <dfn id="xmlhttprequestresponsetype">XMLHttpRequestResponseType</dfn> {
   "text"
 };
 
-[<a href="#dom-xmlhttprequest" title="dom-XMLHttpRequest">Constructor</a>]
+dictionary <dfn id="xmlhttprequestoptions">XMLHttpRequestOptions</dfn> {
+  boolean anon = false;
+};
+
+[<a href="#dom-xmlhttprequest" title="dom-XMLHttpRequest">Constructor</a>(optional <a href="#xmlhttprequestoptions">XMLHttpRequestOptions</a> <var title="">options</var>)]
 interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <a href="#xmlhttprequesteventtarget">XMLHttpRequestEventTarget</a> {
   // <a href="#event-handlers">event handler</a>
   attribute <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#eventhandler">EventHandler</a> <a href="#handler-xhr-onreadystatechange" title="handler-xhr-onreadystatechange">onreadystatechange</a>;
@@ -311,10 +315,6 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <a href="#xmlhttpreque
   readonly attribute any <a href="#dom-xmlhttprequest-response" title="dom-XMLHttpRequest-response">response</a>;
   readonly attribute DOMString <a href="#dom-xmlhttprequest-responsetext" title="dom-XMLHttpRequest-responseText">responseText</a>;
   readonly attribute <a class="external" href="http://dom.spec.whatwg.org/#document">Document</a>? <a href="#dom-xmlhttprequest-responsexml" title="dom-XMLHttpRequest-responseXML">responseXML</a>;
-};
-
-[<a href="#dom-anonxmlhttprequest" title="dom-AnonXMLHttpRequest">Constructor</a>]
-interface <dfn id="anonxmlhttprequest">AnonXMLHttpRequest</dfn> : <a href="#xmlhttprequest">XMLHttpRequest</a> {
 };</pre>
 
 
@@ -361,44 +361,36 @@ interface <dfn id="anonxmlhttprequest">AnonXMLHttpRequest</dfn> : <a href="#xmlh
 <dfn id="xmlhttprequest-task-source"><code>XMLHttpRequest</code> task source</dfn>.
 
 
-  <h3 id="constructors"><span class="secno">4.3 </span>Constructors</h3>
+<h3 id="constructors"><span class="secno">4.3 </span>Constructors</h3>
 
+<p>The <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object has an associated
+<dfn id="anonymous-flag">anonymous flag</dfn>. If the <a href="#anonymous-flag">anonymous flag</a> is set,
+<a href="#user-credentials">user credentials</a> and the
+<a href="#xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</a> are not exposed when
+<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/fetching-resources.html#fetch" title="fetch">fetching</a> resources.
 
-  <p>The <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object has an associated
-  <dfn id="anonymous-flag">anonymous flag</dfn>. If the <a href="#anonymous-flag">anonymous flag</a> is set,
-  <a href="#user-credentials">user credentials</a> and the
-  <a href="#xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</a> are not exposed when
-  <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/fetching-resources.html#fetch" title="fetch">fetching</a> resources. It can
-  only be set to true by using the
-  <code title="dom-AnonXMLHttpRequest"><a href="#dom-anonxmlhttprequest">AnonXMLHttpRequest()</a></code>
-  constructor.</p>
+<dl class="domintro">
+ <dt><code><var title="">client</var> = new <a href="#dom-xmlhttprequest" title="dom-XMLHttpRequest">XMLHttpRequest</a>()</code>
+ <dd>Returns a new <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object.
 
-  <p class="XXX">We
-  <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=17242">might remove</a>
-  the <code title="dom-AnonXMLHttpRequest"><a href="#dom-anonxmlhttprequest">AnonXMLHttpRequest()</a></code>
-  constructor.
+ <dt><code><var title="">client</var> = new <a href="#dom-xmlhttprequest" title="dom-XMLHttpRequest">XMLHttpRequest</a>({anon:true})</code>
+ <dd>Returns a new <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object that has its
+ <a href="#anonymous-flag">anonymous flag</a> set.
+</dl>
 
+<p>The
+<dfn id="dom-xmlhttprequest" title="dom-XMLHttpRequest"><code>XMLHttpRequest(<var title="">options</var>)</code></dfn>
+constructor must run these steps:
 
-  <dl class="domintro">
-   <dt><var title="">client</var> = new <code title="dom-XMLHttpRequest"><a href="#dom-xmlhttprequest">XMLHttpRequest</a></code>()</dt>
-   <dd>Returns a new <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object.</dd>
+<ol>
+ <li><p>Let <var title="">xhr</var> be a new <code><a href="#xmlhttprequest">XMLHttpRequest</a></code>
+ object.
 
-   <dt><var title="">client</var> = new <code title="dom-AnonXMLHttpRequest"><a href="#dom-anonxmlhttprequest">AnonXMLHttpRequest</a></code>()</dt>
-   <dd>Returns a new <code><a href="#anonxmlhttprequest">AnonXMLHttpRequest</a></code> object that has the
-   <a href="#anonymous-flag">anonymous flag</a> set.</dd>
+ <li><p>If <var title="">options</var>'s <code title="">anon</code> member is
+ true, set <var title="">xhr</var>'s <a href="#anonymous-flag">anonymous flag</a>.
 
-  </dl>
-
-  <p>The <dfn id="dom-xmlhttprequest" title="dom-XMLHttpRequest"><code>XMLHttpRequest()</code></dfn>
-  constructor must return a new <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object.
-
-
-  <p>The
-  <dfn id="dom-anonxmlhttprequest" title="dom-AnonXMLHttpRequest"><code>AnonXMLHttpRequest()</code></dfn>
-  constructor must return a new <code><a href="#anonxmlhttprequest">AnonXMLHttpRequest</a></code> object with
-  its <a href="#anonymous-flag">anonymous flag</a> set.</p>
-
-
+ <li><p>Return <var title="">xhr</var>.
+</ol>
 
 
 <h3 id="garbage-collection"><span class="secno">4.4 </span>Garbage collection</h3>
