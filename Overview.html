@@ -297,7 +297,7 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <a href="#xmlhttpreque
   readonly attribute unsigned short <a href="#dom-xmlhttprequest-readystate" title="dom-XMLHttpRequest-readyState">readyState</a>;
 
   // <a href="#request">request</a>
-  void <a href="#dom-xmlhttprequest-open" title="dom-XMLHttpRequest-open">open</a>(ByteString <var>method</var>, DOMString <var title="">url</var>, optional boolean <var>async</var> = true, optional DOMString? <var>user</var>, optional DOMString? <var>password</var>);
+  void <a href="#dom-xmlhttprequest-open" title="dom-XMLHttpRequest-open">open</a>(ByteString <var>method</var>, DOMString <var title="">url</var>, optional boolean <var>async</var> = true, optional DOMString? <var>user</var> = null, optional DOMString? <var>password</var> = null);
   void <a href="#dom-xmlhttprequest-setrequestheader" title="dom-XMLHttpRequest-setRequestHeader">setRequestHeader</a>(ByteString <var>header</var>, ByteString <var>value</var>);
            attribute unsigned long <a href="#dom-xmlhttprequest-timeout" title="dom-XMLHttpRequest-timeout">timeout</a>;
            attribute boolean <a href="#dom-xmlhttprequest-withcredentials" title="dom-XMLHttpRequest-withCredentials">withCredentials</a>;
@@ -623,23 +623,14 @@ discarding any further data received from the network for them.
     <code>CONNECT</code>, <code>TRACE</code> or <code>TRACK</code>.</p>
 
     <p>Throws an "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>"
-    exception if one of the following is true:</p>
-
-    <ul>
-     <li>Either <var title="">user</var> or <var title="">password</var> is passed
-     as argument and the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a> of
-     <var title="">url</var> does not match the
-     <a href="#xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</a>.
-     <li>There is an associated
-     <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a> and either the
-     <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code> attribute is not
-     zero, the
-     <code title="dom-XMLHttpRequest-withCredentials"><a href="#dom-xmlhttprequest-withcredentials">withCredentials</a></code>
-     attribute is true, or the
-     <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code>
-     attribute is not the empty string.
-    </ul>
-   </dd>
+    exception if there is an associated
+    <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a> and either the
+    <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code> attribute is not
+    zero, the
+    <code title="dom-XMLHttpRequest-withCredentials"><a href="#dom-xmlhttprequest-withcredentials">withCredentials</a></code>
+    attribute is true, or the
+    <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code>
+    attribute is not the empty string.
   </dl>
 
   <p>The
@@ -753,45 +744,11 @@ discarding any further data received from the network for them.
    "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception and
    terminate these steps.
 
-   <li>
-    <p>If the <var title="">user</var> argument was not omitted follow these
-    substeps:
+   <li><p>If the <var title="">user</var> argument is not null, set
+   <var>temp user</var> to <var>user</var>.
 
-    <ol>
-     <li><p>If <var title="">user</var> is not null and the
-     <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a> of <var title="">url</var> is not
-     <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#same-origin">same origin</a> with the
-     <a href="#xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</a>,
-     <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
-     "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception and
-     terminate the overall set of steps.
-
-     <li><p>Let <var>temp user</var> be <var>user</var>.</li>
-    </ol>
-
-    <p class="note">These steps override anything that may have been set by
-    the <var title="">url</var> argument.</p>
-   </li>
-
-   <li>
-    <p>If the <var title="">password</var> argument was not omitted follow
-    these substeps:
-
-    <ol>
-     <li><p>If <var title="">password</var> is not null and the
-     <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a> of <var title="">url</var> is not
-     <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#same-origin">same origin</a> with the
-     <a href="#xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</a>,
-     <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
-     "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception and
-     terminate the overall set of steps.</li>
-
-     <li><p>Let <var>temp password</var> be <var>password</var>.</li>
-    </ol>
-
-    <p class="note">These steps override anything that may have been set by
-    the <var title="">url</var> argument.</p>
-   </li>
+   <li><p>If the <var title="">password</var> argument is not null, set
+   <var>temp password</var> to <var>password</var>.
 
    <li><p><a href="#terminate-abort()" title="terminate abort()">Terminate the <code>abort()</code> algorithm</a>.</li>
 
@@ -1397,15 +1354,6 @@ X-Test: one, two</code></pre>
        <dt>force preflight flag</dt>
        <dd>Set if the <a href="#upload-events-flag">upload events flag</a> is set.
       </dl>
-
-      <p class="note"><a href="#request-username">Request username</a> and
-      <a href="#request-password">request password</a> are always ignored as part of a
-      <a class="external" href="http://fetch.spec.whatwg.org/#cross-origin-request">cross-origin request</a>; including
-      them would allow a site to perform a distributed password search.
-      However, user agents will include <a href="#user-credentials">user credentials</a> in the
-      request (if the user has any and if
-      <code title="dom-XMLHttpRequest-withCredentials"><a href="#dom-xmlhttprequest-withcredentials">withCredentials</a></code>
-      is true).</p>
 
       <dl class="switch">
        <dt>If the <a href="#synchronous-flag">synchronous flag</a> is set</dt>

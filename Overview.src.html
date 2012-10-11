@@ -245,7 +245,7 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
   readonly attribute unsigned short <span title="dom-XMLHttpRequest-readyState">readyState</span>;
 
   // <a href="#request">request</a>
-  void <span title="dom-XMLHttpRequest-open">open</span>(ByteString <var>method</var>, DOMString <var title>url</var>, optional boolean <var>async</var> = true, optional DOMString? <var>user</var>, optional DOMString? <var>password</var>);
+  void <span title="dom-XMLHttpRequest-open">open</span>(ByteString <var>method</var>, DOMString <var title>url</var>, optional boolean <var>async</var> = true, optional DOMString? <var>user</var> = null, optional DOMString? <var>password</var> = null);
   void <span title="dom-XMLHttpRequest-setRequestHeader">setRequestHeader</span>(ByteString <var>header</var>, ByteString <var>value</var>);
            attribute unsigned long <span title="dom-XMLHttpRequest-timeout">timeout</span>;
            attribute boolean <span title="dom-XMLHttpRequest-withCredentials">withCredentials</span>;
@@ -571,23 +571,14 @@ discarding any further data received from the network for them.
     <code>CONNECT</code>, <code>TRACE</code> or <code>TRACK</code>.</p>
 
     <p>Throws an "<code data-anolis-spec=dom>InvalidAccessError</code>"
-    exception if one of the following is true:</p>
-
-    <ul>
-     <li>Either <var title>user</var> or <var title>password</var> is passed
-     as argument and the <span data-anolis-spec=html>origin</span> of
-     <var title>url</var> does not match the
-     <span><code>XMLHttpRequest</code> origin</span>.
-     <li>There is an associated
-     <span><code>XMLHttpRequest</code> document</span> and either the
-     <code title=dom-XMLHttpRequest-timeout>timeout</code> attribute is not
-     zero, the
-     <code title=dom-XMLHttpRequest-withCredentials>withCredentials</code>
-     attribute is true, or the
-     <code title=dom-XMLHttpRequest-responseType>responseType</code>
-     attribute is not the empty string.
-    </ul>
-   </dd>
+    exception if there is an associated
+    <span><code>XMLHttpRequest</code> document</span> and either the
+    <code title=dom-XMLHttpRequest-timeout>timeout</code> attribute is not
+    zero, the
+    <code title=dom-XMLHttpRequest-withCredentials>withCredentials</code>
+    attribute is true, or the
+    <code title=dom-XMLHttpRequest-responseType>responseType</code>
+    attribute is not the empty string.
   </dl>
 
   <p>The
@@ -701,45 +692,11 @@ discarding any further data received from the network for them.
    "<code data-anolis-spec=dom>InvalidAccessError</code>" exception and
    terminate these steps.
 
-   <li>
-    <p>If the <var title>user</var> argument was not omitted follow these
-    substeps:
+   <li><p>If the <var title>user</var> argument is not null, set
+   <var>temp user</var> to <var>user</var>.
 
-    <ol>
-     <li><p>If <var title>user</var> is not null and the
-     <span data-anolis-spec=html>origin</span> of <var title>url</var> is not
-     <span data-anolis-spec=html>same origin</span> with the
-     <span><code>XMLHttpRequest</code> origin</span>,
-     <span data-anolis-spec=dom title=concept-throw>throw</span> an
-     "<code data-anolis-spec=dom>InvalidAccessError</code>" exception and
-     terminate the overall set of steps.
-
-     <li><p>Let <var>temp user</var> be <var>user</var>.</p></li>
-    </ol>
-
-    <p class=note>These steps override anything that may have been set by
-    the <var title>url</var> argument.</p>
-   </li>
-
-   <li>
-    <p>If the <var title>password</var> argument was not omitted follow
-    these substeps:
-
-    <ol>
-     <li><p>If <var title>password</var> is not null and the
-     <span data-anolis-spec=html>origin</span> of <var title>url</var> is not
-     <span data-anolis-spec=html>same origin</span> with the
-     <span><code>XMLHttpRequest</code> origin</span>,
-     <span data-anolis-spec=dom title=concept-throw>throw</span> an
-     "<code data-anolis-spec=dom>InvalidAccessError</code>" exception and
-     terminate the overall set of steps.</p></li>
-
-     <li><p>Let <var>temp password</var> be <var>password</var>.</p></li>
-    </ol>
-
-    <p class=note>These steps override anything that may have been set by
-    the <var title>url</var> argument.</p>
-   </li>
+   <li><p>If the <var title>password</var> argument is not null, set
+   <var>temp password</var> to <var>password</var>.
 
    <li><p><span title="terminate abort()">Terminate the <code>abort()</code> algorithm</span>.</p></li>
 
@@ -1345,15 +1302,6 @@ X-Test: one, two</code></pre>
        <dt>force preflight flag</dt>
        <dd>Set if the <span>upload events flag</span> is set.
       </dl>
-
-      <p class=note><span>Request username</span> and
-      <span>request password</span> are always ignored as part of a
-      <span data-anolis-spec=cors>cross-origin request</span>; including
-      them would allow a site to perform a distributed password search.
-      However, user agents will include <span>user credentials</span> in the
-      request (if the user has any and if
-      <code title="dom-XMLHttpRequest-withCredentials">withCredentials</code>
-      is true).</p>
 
       <dl class=switch>
        <dt>If the <span>synchronous flag</span> is set</dt>
