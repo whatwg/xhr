@@ -600,7 +600,7 @@ discarding any further data received from the network for them.
 
   <dl class="domintro">
    <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-open" title="dom-XMLHttpRequest-open">open</a>(<var title="">method</var>,
-   <var title="">url</var> [, <var title="">async</var> = false [, <var title="">user</var> = null [,
+   <var title="">url</var> [, <var title="">async</var> = true [, <var title="">user</var> = null [,
    <var title="">password</var> = null]]])</code>
 
    <dd>
@@ -623,8 +623,9 @@ discarding any further data received from the network for them.
     <code>CONNECT</code>, <code>TRACE</code> or <code>TRACK</code>.</p>
 
     <p>Throws an "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>"
-    exception if there is an associated
+    exception if <var title="">async</var> is false, there is an associated
     <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a> and either the
+    <a href="#anonymous-flag">anonymous flag</a> is set, the
     <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code> attribute is not
     zero, the
     <code title="dom-XMLHttpRequest-withCredentials"><a href="#dom-xmlhttprequest-withcredentials">withCredentials</a></code>
@@ -734,6 +735,7 @@ discarding any further data received from the network for them.
 
    <li><p>If <var>async</var> is false, there is an associated
    <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a> and either the
+   <a href="#anonymous-flag">anonymous flag</a> is set, the
    <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code> attribute value is
    not zero, the
    <code title="dom-XMLHttpRequest-withCredentials"><a href="#dom-xmlhttprequest-withcredentials">withCredentials</a></code>

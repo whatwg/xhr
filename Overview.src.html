@@ -548,7 +548,7 @@ discarding any further data received from the network for them.
 
   <dl class=domintro>
    <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-open>open</span>(<var title>method</var>,
-   <var title>url</var> [, <var title>async</var> = false [, <var title>user</var> = null [,
+   <var title>url</var> [, <var title>async</var> = true [, <var title>user</var> = null [,
    <var title>password</var> = null]]])</code>
 
    <dd>
@@ -571,8 +571,9 @@ discarding any further data received from the network for them.
     <code>CONNECT</code>, <code>TRACE</code> or <code>TRACK</code>.</p>
 
     <p>Throws an "<code data-anolis-spec=dom>InvalidAccessError</code>"
-    exception if there is an associated
+    exception if <var title>async</var> is false, there is an associated
     <span><code>XMLHttpRequest</code> document</span> and either the
+    <span>anonymous flag</span> is set, the
     <code title=dom-XMLHttpRequest-timeout>timeout</code> attribute is not
     zero, the
     <code title=dom-XMLHttpRequest-withCredentials>withCredentials</code>
@@ -682,6 +683,7 @@ discarding any further data received from the network for them.
 
    <li><p>If <var>async</var> is false, there is an associated
    <span><code>XMLHttpRequest</code> document</span> and either the
+   <span>anonymous flag</span> is set, the
    <code title=dom-XMLHttpRequest-timeout>timeout</code> attribute value is
    not zero, the
    <code title=dom-XMLHttpRequest-withCredentials>withCredentials</code>
