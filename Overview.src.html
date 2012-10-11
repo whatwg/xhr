@@ -1366,8 +1366,10 @@ X-Test: one, two</code></pre>
   must not prompt the end user for their username and
   password. <span data-anolis-ref>HTTPAUTH</span>
 
-  <p class=note>End users are not prompted for various cases so that
-  authors can implement their own user interface.</p>
+  <p class=note>Unfortunately end users are prompted because of legacy
+  content constraints. However, when possible this behavior is prohibited,
+  as it is bad UI. E.g. that is why the
+  <span data-anolis-spec=html>same origin</span> restriction is made above.
 
   <hr>
 
@@ -2842,6 +2844,7 @@ that is <em>not</em> <code>GET</code>, determine the response as follows:
   Alex Hopmann,
   Alex Vincent,
   Alexey Proskuryakov,
+  Andrea Marchesini,
   Asbj&oslash;rn Ulsberg,
   Boris Zbarsky,
   Bj&ouml;rn H&ouml;hrmann,
