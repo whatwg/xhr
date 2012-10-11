@@ -497,8 +497,8 @@ discarding any further data received from the network for them.
   <h3 id="states"><span class="secno">4.6 </span>States</h3>
 
   <dl class="domintro">
-   <dt><var title="">client</var> . <code title="dom-XMLHttpRequest-readyState"><a href="#dom-xmlhttprequest-readystate">readyState</a></code></dt>
-   <dd><p>Returns the current state.</dd>
+   <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-readystate" title="dom-XMLHttpRequest-readyState">readyState</a></code>
+   <dd><p>Returns the current state.
   </dl>
 
   <p>The <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object can be in several states. The
@@ -599,9 +599,9 @@ discarding any further data received from the network for them.
   <h4 id="the-open()-method"><span class="secno">4.7.1 </span>The <code title="">open()</code> method</h4>
 
   <dl class="domintro">
-   <dt><var title="">client</var> . <code title="dom-XMLHttpRequest-open"><a href="#dom-xmlhttprequest-open">open(<var title="">method</var>,
-   <var title="">url</var>, <var title="">async</var>, <var title="">user</var>,
-   <var title="">password</var>)</a></code></dt>
+   <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-open" title="dom-XMLHttpRequest-open">open</a>(<var title="">method</var>,
+   <var title="">url</var> [, <var title="">async</var> = false [, <var title="">user</var> = null [,
+   <var title="">password</var> = null]]])</code>
 
    <dd>
     <p>Sets the <a href="#request-method">request method</a>, <a href="#request-url">request URL</a>,
@@ -799,7 +799,7 @@ discarding any further data received from the network for them.
   <h4 id="the-setrequestheader()-method"><span class="secno">4.7.2 </span>The <code title="">setRequestHeader()</code> method</h4>
 
   <dl class="domintro">
-   <dt><var title="">client</var> . <code title="dom-XMLHttpRequest-setRequestHeader"><a href="#dom-xmlhttprequest-setrequestheader">setRequestHeader(<var title="">header</var>, <var title="">value</var>)</a></code></dt>
+   <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-setrequestheader" title="dom-XMLHttpRequest-setRequestHeader">setRequestHeader</a>(<var title="">header</var>, <var title="">value</var>)</code>
 
    <dd>
     <p>Appends an header to the list of
@@ -942,7 +942,7 @@ X-Test: one, two</code></pre>
   <h4 id="the-timeout-attribute"><span class="secno">4.7.3 </span>The <code title="">timeout</code> attribute</h4>
 
   <dl class="domintro">
-   <dt><var title="">client</var> . <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code></dt>
+   <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-timeout" title="dom-XMLHttpRequest-timeout">timeout</a></code>
    <dd>
     <p>Can be set to a time in milliseconds. When set to a non-zero value
     will cause <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/fetching-resources.html#fetch" title="fetch">fetching</a> to
@@ -988,7 +988,7 @@ X-Test: one, two</code></pre>
   <h4 id="the-withcredentials-attribute"><span class="secno">4.7.4 </span>The <code title="">withCredentials</code> attribute</h4>
 
   <dl class="domintro">
-   <dt><var title="">client</var> . <code title="dom-XMLHttpRequest-withCredentials"><a href="#dom-xmlhttprequest-withcredentials">withCredentials</a></code></dt>
+   <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-withcredentials" title="dom-XMLHttpRequest-withCredentials">withCredentials</a></code>
    <dd>
     <p>True when <a href="#user-credentials">user credentials</a> are to be included in a
     cross-origin request. False when they are to be excluded in a
@@ -1057,7 +1057,7 @@ X-Test: one, two</code></pre>
   <h4 id="the-upload-attribute"><span class="secno">4.7.5 </span>The <code title="">upload</code> attribute</h4>
 
   <dl class="domintro">
-   <dt><var title="">client</var> . <code title="dom-XMLHttpRequest-upload"><a href="#dom-xmlhttprequest-upload">upload</a></code></dt>
+   <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-upload" title="dom-XMLHttpRequest-upload">upload</a></code>
    <dd><p>Returns the associated <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code>
    object. It can be used to gather transmission information when data is
    transferred to a server.
@@ -1075,7 +1075,7 @@ X-Test: one, two</code></pre>
   <h4 id="the-send()-method"><span class="secno">4.7.6 </span>The <code title="">send()</code> method</h4>
 
   <dl class="domintro">
-   <dt><var title="">client</var> . <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send(<var title="">data</var>)</a></code></dt>
+   <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send">send</a>([<var title="">data</var> = null])</code>
    <dd>
     <p>Initiates the request. The optional argument provides the
     <a href="#request-entity-body">request entity body</a>. The argument is ignored if
@@ -1778,8 +1778,8 @@ X-Test: one, two</code></pre>
   <h4 id="the-abort()-method"><span class="secno">4.7.8 </span>The <code title="">abort()</code> method</h4>
 
   <dl class="domintro">
-   <dt><var title="">client</var> . <code title="dom-XMLHttpRequest-abort"><a href="#dom-xmlhttprequest-abort">abort()</a></code></dt>
-   <dd>Cancels any network activity.</dd>
+   <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-abort" title="dom-XMLHttpRequest-abort">abort</a>()</code>
+   <dd>Cancels any network activity.
   </dl>
 
   <p>The
@@ -1869,8 +1869,8 @@ X-Test: one, two</code></pre>
   <h4 id="the-status-attribute"><span class="secno">4.8.1 </span>The <code title="">status</code> attribute</h4>
 
   <dl class="domintro">
-   <dt><var title="">client</var> . <code title="dom-XMLHttpRequest-status"><a href="#dom-xmlhttprequest-status">status</a></code></dt>
-   <dd><p>Returns the HTTP status code.</dd>
+   <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-status" title="dom-XMLHttpRequest-status">status</a></code>
+   <dd><p>Returns the HTTP status code.
   </dl>
 
   <p>The
@@ -1894,8 +1894,8 @@ X-Test: one, two</code></pre>
   <h4 id="the-statustext-attribute"><span class="secno">4.8.2 </span>The <code title="">statusText</code> attribute</h4>
 
   <dl class="domintro">
-   <dt><var title="">client</var> . <code title="dom-XMLHttpRequest-statusText"><a href="#dom-xmlhttprequest-statustext">statusText</a></code></dt>
-   <dd><p>Returns the HTTP status text.</dd>
+   <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-statustext" title="dom-XMLHttpRequest-statusText">statusText</a></code>
+   <dd><p>Returns the HTTP status text.
   </dl>
 
   <p>The
@@ -1918,10 +1918,10 @@ X-Test: one, two</code></pre>
   <h4 id="the-getresponseheader()-method"><span class="secno">4.8.3 </span>The <code title="">getResponseHeader()</code> method</h4>
 
   <dl class="domintro">
-   <dt><var title="">client</var> . <code title="dom-XMLHttpRequest-getResponseHeader"><a href="#dom-xmlhttprequest-getresponseheader">getResponseHeader(<var title="">header</var>)</a></code></dt>
+   <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-getresponseheader" title="dom-XMLHttpRequest-getResponseHeader">getResponseHeader</a>(<var title="">header</var>)</code>
    <dd><p>Returns the header field value from the response of which the
    field name matches <var title="">header</var>, unless the field name is
-   <code>Set-Cookie</code> or <code>Set-Cookie2</code>.</p>
+   <code>Set-Cookie</code> or <code>Set-Cookie2</code>.
   </dl>
 
   <p>The
@@ -1983,10 +1983,10 @@ client.onreadystatechange = function() {
   <h4 id="the-getallresponseheaders()-method"><span class="secno">4.8.4 </span>The <code title="">getAllResponseHeaders()</code> method</h4>
 
   <dl class="domintro">
-   <dt><var title="">client</var> . <code title="dom-XMLHttpRequest-getAllResponseHeaders"><a href="#dom-xmlhttprequest-getallresponseheaders">getAllResponseHeaders()</a></code></dt>
+   <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-getallresponseheaders" title="dom-XMLHttpRequest-getAllResponseHeaders">getAllResponseHeaders</a>()</code>
    <dd><p>Returns all headers from the response, with the exception of those
    whose field name is <code>Set-Cookie</code> or
-   <code>Set-Cookie2</code>.</dd>
+   <code>Set-Cookie2</code>.
   </dl>
 
   <p>The
@@ -2265,7 +2265,7 @@ algorithm:</p>
   <h4 id="the-overridemimetype()-method"><span class="secno">4.8.6 </span>The <code title="">overrideMimeType()</code> method</h4>
 
   <dl class="domintro">
-   <dt><var title="">client</var> . <code title="dom-XMLHttpRequest-overrideMimeType"><a href="#dom-xmlhttprequest-overridemimetype">overrideMimeType(<var title="">mime</var>)</a></code></dt>
+   <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-overridemimetype" title="dom-XMLHttpRequest-overrideMimeType">overrideMimeType</a>(<var title="">mime</var>)</code>
    <dd>
     <p>Sets the <code>Content-Type</code> header for the response to
     <var title="">mime</var>.</p>
@@ -2313,7 +2313,7 @@ algorithm:</p>
 
 
   <dl class="domintro">
-   <dt><var title="">client</var> . <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code> [ = <var title="">value</var> ]</dt>
+   <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-responsetype" title="dom-XMLHttpRequest-responseType">responseType</a></code> [ = <var title="">value</var> ]
    <dd>
     <p>Returns the response type.</p>
     <p>Can be set to change the response type. Values are:
@@ -2369,8 +2369,8 @@ algorithm:</p>
   <h4 id="the-response-attribute"><span class="secno">4.8.8 </span>The <code title="">response</code> attribute</h4>
 
   <dl class="domintro">
-   <dt><var title="">client</var> . <code title="dom-XMLHttpRequest-response"><a href="#dom-xmlhttprequest-response">response</a></code></dt>
-   <dd><p>Returns the <a href="#response-entity-body">response entity body</a>.</dd>
+   <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-response" title="dom-XMLHttpRequest-response">response</a></code>
+   <dd><p>Returns the <a href="#response-entity-body">response entity body</a>.
   </dl>
 
   <p>The
@@ -2440,16 +2440,14 @@ algorithm:</p>
   <h4 id="the-responsetext-attribute"><span class="secno">4.8.9 </span>The <code title="">responseText</code> attribute</h4>
 
   <dl class="domintro">
-   <dt><var title="">client</var> . <code title="dom-XMLHttpRequest-responseText"><a href="#dom-xmlhttprequest-responsetext">responseText</a></code></dt>
+   <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-responsetext" title="dom-XMLHttpRequest-responseText">responseText</a></code>
    <dd>
-    <p>Returns the <a href="#text-response-entity-body">text response entity body</a>.</p>
+    <p>Returns the <a href="#text-response-entity-body">text response entity body</a>.
 
     <p>Throws an "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>"
     exception if
     <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code> is not
     the empty string or "<code title="">text</code>".
-
-   </dd>
   </dl>
 
   <p>The
@@ -2482,7 +2480,7 @@ algorithm:</p>
   <h4 id="the-responsexml-attribute"><span class="secno">4.8.10 </span>The <code title="">responseXML</code> attribute</h4>
 
   <dl class="domintro">
-   <dt><var title="">client</var> . <code title="dom-XMLHttpRequest-responseXML"><a href="#dom-xmlhttprequest-responsexml">responseXML</a></code></dt>
+   <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-responsexml" title="dom-XMLHttpRequest-responseXML">responseXML</a></code>
    <dd>
     <p>Returns the <a href="#document-response-entity-body">document response entity body</a>.</p>
 
@@ -2490,8 +2488,6 @@ algorithm:</p>
     exception if
     <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code> is not
     the empty string or "<code title="">document</code>".
-
-   </dd>
   </dl>
 
   <p>The
@@ -2607,8 +2603,8 @@ interface <dfn id="formdata">FormData</dfn> {
   <h3 id="formdata-constructors"><span class="secno">5.1 </span>Constructors</h3>
 
   <dl class="domintro">
-   <dt><var title="">fd</var> = new <code title="dom-FormData"><a href="#dom-formdata">FormData()</a></code></dt>
-   <dd><p>Returns a new <code><a href="#formdata">FormData</a></code> object.</dd>
+   <dt><code><var title="">fd</var> = new <a href="#dom-formdata" title="dom-FormData">FormData</a>()</code>
+   <dd><p>Returns a new <code><a href="#formdata">FormData</a></code> object.
   </dl>
 
   <p>The <dfn id="dom-formdata" title="dom-FormData"><code>FormData()</code></dfn> constructor
@@ -2625,9 +2621,9 @@ interface <dfn id="formdata">FormData</dfn> {
   <h3 id="the-append()-method"><span class="secno">5.2 </span>The <code title="">append()</code> method</h3>
 
   <dl class="domintro">
-   <dt><var title="">fd</var> . <code title="dom-FormData-append"><a href="#dom-formdata-append">append(<var title="">name</var>, <var title="">value</var> [, <var title="">filename</var>])</a></code></dt>
+   <dt><code><var title="">fd</var> . <a href="#dom-formdata-append" title="dom-FormData-append">append</a>(<var title="">name</var>, <var title="">value</var> [, <var title="">filename</var>])</code>
    <dd><p>Appends a new name/value-pair to the <code><a href="#formdata">FormData</a></code>
-   object, optionally with a filename.</dd>
+   object, optionally with a filename.
   </dl>
 
   <p>The

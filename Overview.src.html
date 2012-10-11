@@ -317,11 +317,11 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
 <span><code>XMLHttpRequest</code> origin</span> are not exposed when
 <span data-anolis-spec=html title=fetch>fetching</span> resources.
 
-<dl class="domintro">
- <dt><code><var title>client</var> = new <span title="dom-XMLHttpRequest">XMLHttpRequest</span>()</code>
+<dl class=domintro>
+ <dt><code><var title>client</var> = new <span title=dom-XMLHttpRequest>XMLHttpRequest</span>()</code>
  <dd>Returns a new <code>XMLHttpRequest</code> object.
 
- <dt><code><var title>client</var> = new <span title="dom-XMLHttpRequest">XMLHttpRequest</span>({anon:true})</code>
+ <dt><code><var title>client</var> = new <span title=dom-XMLHttpRequest>XMLHttpRequest</span>({anon:true})</code>
  <dd>Returns a new <code>XMLHttpRequest</code> object that has its
  <span>anonymous flag</span> set.
 </dl>
@@ -444,9 +444,9 @@ discarding any further data received from the network for them.
 
   <h3 id="states">States</h3>
 
-  <dl class="domintro">
-   <dt><var title>client</var> . <code title="dom-XMLHttpRequest-readyState">readyState</code></dt>
-   <dd><p>Returns the current state.</p></dd>
+  <dl class=domintro>
+   <dt><code><var title>client</var> . <span title="dom-XMLHttpRequest-readyState">readyState</span></code>
+   <dd><p>Returns the current state.
   </dl>
 
   <p>The <code>XMLHttpRequest</code> object can be in several states. The
@@ -546,10 +546,10 @@ discarding any further data received from the network for them.
 
   <h4>The <code title>open()</code> method</h4>
 
-  <dl class="domintro">
-   <dt><var title>client</var> . <code title="dom-XMLHttpRequest-open">open(<var title>method</var>,
-   <var title>url</var>, <var title>async</var>, <var title>user</var>,
-   <var title>password</var>)</code></dt>
+  <dl class=domintro>
+   <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-open>open</span>(<var title>method</var>,
+   <var title>url</var> [, <var title>async</var> = false [, <var title>user</var> = null [,
+   <var title>password</var> = null]]])</code>
 
    <dd>
     <p>Sets the <span>request method</span>, <span>request URL</span>,
@@ -746,8 +746,8 @@ discarding any further data received from the network for them.
 
   <h4>The <code title>setRequestHeader()</code> method</h4>
 
-  <dl class="domintro">
-   <dt><var title>client</var> . <code title="dom-XMLHttpRequest-setRequestHeader">setRequestHeader(<var title>header</var>, <var title>value</var>)</code></dt>
+  <dl class=domintro>
+   <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-setRequestHeader>setRequestHeader</span>(<var title>header</var>, <var title>value</var>)</code>
 
    <dd>
     <p>Appends an header to the list of
@@ -889,8 +889,8 @@ X-Test: one, two</code></pre>
 
   <h4>The <code title>timeout</code> attribute</h4>
 
-  <dl class="domintro">
-   <dt><var title>client</var> . <code title="dom-XMLHttpRequest-timeout">timeout</code></dt>
+  <dl class=domintro>
+   <dt><code><var title>client</var> . <span title="dom-XMLHttpRequest-timeout">timeout</span></code>
    <dd>
     <p>Can be set to a time in milliseconds. When set to a non-zero value
     will cause <span title=fetch data-anolis-spec=html>fetching</span> to
@@ -935,8 +935,8 @@ X-Test: one, two</code></pre>
 
   <h4>The <code title>withCredentials</code> attribute</h4>
 
-  <dl class="domintro">
-   <dt><var title>client</var> . <code title="dom-XMLHttpRequest-withCredentials">withCredentials</code></dt>
+  <dl class=domintro>
+   <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-withCredentials>withCredentials</span></code>
    <dd>
     <p>True when <span>user credentials</span> are to be included in a
     cross-origin request. False when they are to be excluded in a
@@ -1004,8 +1004,8 @@ X-Test: one, two</code></pre>
 
   <h4>The <code title>upload</code> attribute</h4>
 
-  <dl class="domintro">
-   <dt><var title>client</var> . <code title="dom-XMLHttpRequest-upload">upload</code></dt>
+  <dl class=domintro>
+   <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-upload>upload</span></code>
    <dd><p>Returns the associated <code>XMLHttpRequestUpload</code>
    object. It can be used to gather transmission information when data is
    transferred to a server.
@@ -1022,8 +1022,8 @@ X-Test: one, two</code></pre>
 
   <h4>The <code title>send()</code> method</h4>
 
-  <dl class="domintro">
-   <dt><var title>client</var> . <code title="dom-XMLHttpRequest-send">send(<var title>data</var>)</code></dt>
+  <dl class=domintro>
+   <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-send>send</span>([<var title>data</var> = null])</code>
    <dd>
     <p>Initiates the request. The optional argument provides the
     <span>request entity body</span>. The argument is ignored if
@@ -1725,9 +1725,9 @@ X-Test: one, two</code></pre>
 
   <h4>The <code title>abort()</code> method</h4>
 
-  <dl class="domintro">
-   <dt><var title>client</var> . <code title="dom-XMLHttpRequest-abort">abort()</code></dt>
-   <dd>Cancels any network activity.</dd>
+  <dl class=domintro>
+   <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-abort>abort</span>()</code>
+   <dd>Cancels any network activity.
   </dl>
 
   <p>The
@@ -1816,9 +1816,9 @@ X-Test: one, two</code></pre>
 
   <h4>The <code title>status</code> attribute</h4>
 
-  <dl class="domintro">
-   <dt><var title>client</var> . <code title="dom-XMLHttpRequest-status">status</code></dt>
-   <dd><p>Returns the HTTP status code.</p></dd>
+  <dl class=domintro>
+   <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-status>status</span></code>
+   <dd><p>Returns the HTTP status code.
   </dl>
 
   <p>The
@@ -1841,9 +1841,9 @@ X-Test: one, two</code></pre>
 
   <h4>The <code title>statusText</code> attribute</h4>
 
-  <dl class="domintro">
-   <dt><var title>client</var> . <code title="dom-XMLHttpRequest-statusText">statusText</code></dt>
-   <dd><p>Returns the HTTP status text.</p></dd>
+  <dl class=domintro>
+   <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-statusText>statusText</span></code>
+   <dd><p>Returns the HTTP status text.
   </dl>
 
   <p>The
@@ -1865,11 +1865,11 @@ X-Test: one, two</code></pre>
 
   <h4>The <code title>getResponseHeader()</code> method</h4>
 
-  <dl class="domintro">
-   <dt><var title>client</var> . <code title="dom-XMLHttpRequest-getResponseHeader">getResponseHeader(<var title>header</var>)</code></dt>
+  <dl class=domintro>
+   <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-getResponseHeader>getResponseHeader</span>(<var title>header</var>)</code>
    <dd><p>Returns the header field value from the response of which the
    field name matches <var title>header</var>, unless the field name is
-   <code>Set-Cookie</code> or <code>Set-Cookie2</code>.</p>
+   <code>Set-Cookie</code> or <code>Set-Cookie2</code>.
   </dl>
 
   <p>The
@@ -1930,11 +1930,11 @@ client.onreadystatechange = function() {
 
   <h4>The <code title>getAllResponseHeaders()</code> method</h4>
 
-  <dl class="domintro">
-   <dt><var title>client</var> . <code title="dom-XMLHttpRequest-getAllResponseHeaders">getAllResponseHeaders()</code></dt>
+  <dl class=domintro>
+   <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-getAllResponseHeaders>getAllResponseHeaders</span>()</code>
    <dd><p>Returns all headers from the response, with the exception of those
    whose field name is <code>Set-Cookie</code> or
-   <code>Set-Cookie2</code>.</p></dd>
+   <code>Set-Cookie2</code>.
   </dl>
 
   <p>The
@@ -2212,8 +2212,8 @@ algorithm:</p>
 
   <h4>The <code title>overrideMimeType()</code> method</h4>
 
-  <dl class="domintro">
-   <dt><var title>client</var> . <code title="dom-XMLHttpRequest-overrideMimeType">overrideMimeType(<var title>mime</var>)</code></dt>
+  <dl class=domintro>
+   <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-overrideMimeType>overrideMimeType</span>(<var title>mime</var>)</code>
    <dd>
     <p>Sets the <code>Content-Type</code> header for the response to
     <var title>mime</var>.</p>
@@ -2260,8 +2260,8 @@ algorithm:</p>
   <h4>The <code title>responseType</code> attribute</h4>
 
 
-  <dl class="domintro">
-   <dt><var title>client</var> . <code title="dom-XMLHttpRequest-responseType">responseType</code> [ = <var title>value</var> ]</dt>
+  <dl class=domintro>
+   <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-responseType>responseType</code> [ = <var title>value</var> ]</code>
    <dd>
     <p>Returns the response type.</p>
     <p>Can be set to change the response type. Values are:
@@ -2316,9 +2316,9 @@ algorithm:</p>
 
   <h4>The <code title>response</code> attribute</h4>
 
-  <dl class="domintro">
-   <dt><var title>client</var> . <code title="dom-XMLHttpRequest-response">response</code></dt>
-   <dd><p>Returns the <span>response entity body</span>.</p></dd>
+  <dl class=domintro>
+   <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-response>response</span></code>
+   <dd><p>Returns the <span>response entity body</span>.
   </dl>
 
   <p>The
@@ -2387,17 +2387,15 @@ algorithm:</p>
 
   <h4>The <code title>responseText</code> attribute</h4>
 
-  <dl class="domintro">
-   <dt><var title>client</var> . <code title="dom-XMLHttpRequest-responseText">responseText</code></dt>
+  <dl class=domintro>
+   <dt><code><var title>client</var> . <span title="dom-XMLHttpRequest-responseText">responseText</span></code>
    <dd>
-    <p>Returns the <span>text response entity body</span>.</p>
+    <p>Returns the <span>text response entity body</span>.
 
     <p>Throws an "<code data-anolis-spec=dom>InvalidStateError</code>"
     exception if
     <code title="dom-XMLHttpRequest-responseType">responseType</code> is not
     the empty string or "<code title>text</code>".
-
-   </dd>
   </dl>
 
   <p>The
@@ -2429,8 +2427,8 @@ algorithm:</p>
 
   <h4>The <code title>responseXML</code> attribute</h4>
 
-  <dl class="domintro">
-   <dt><var title>client</var> . <code title="dom-XMLHttpRequest-responseXML">responseXML</code></dt>
+  <dl class=domintro>
+   <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-responseXML>responseXML</span></code>
    <dd>
     <p>Returns the <span>document response entity body</span>.</p>
 
@@ -2438,8 +2436,6 @@ algorithm:</p>
     exception if
     <code title="dom-XMLHttpRequest-responseType">responseType</code> is not
     the empty string or "<code title>document</code>".
-
-   </dd>
   </dl>
 
   <p>The
@@ -2554,9 +2550,9 @@ interface <dfn>FormData</dfn> {
 
   <h3 id="formdata-constructors">Constructors</h3>
 
-  <dl class="domintro">
-   <dt><var title>fd</var> = new <code title="dom-FormData">FormData()</code></dt>
-   <dd><p>Returns a new <code>FormData</code> object.</p></dd>
+  <dl class=domintro>
+   <dt><code><var title>fd</var> = new <span title="dom-FormData">FormData</span>()</code>
+   <dd><p>Returns a new <code>FormData</code> object.
   </dl>
 
   <p>The <dfn title="dom-FormData"><code>FormData()</code></dfn> constructor
@@ -2572,10 +2568,10 @@ interface <dfn>FormData</dfn> {
 
   <h3>The <code title>append()</code> method</h3>
 
-  <dl class="domintro">
-   <dt><var title>fd</var> . <code title="dom-FormData-append">append(<var title>name</var>, <var title>value</var> [, <var title>filename</var>])</code></dt>
+  <dl class=domintro>
+   <dt><code><var title>fd</var> . <span title=dom-FormData-append>append</span>(<var title>name</var>, <var title>value</var> [, <var title>filename</var>])</code>
    <dd><p>Appends a new name/value-pair to the <code>FormData</code>
-   object, optionally with a filename.</p></dd>
+   object, optionally with a filename.
   </dl>
 
   <p>The
