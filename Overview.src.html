@@ -2167,7 +2167,7 @@ Content-Type: text/plain; charset=utf-8</code></pre>
      <li><p>If <var>charset</var> is null, set <var>charset</var> to
      <span data-anolis-spec=encoding>utf-8</span>.
 
-     <li><p><span data-anolis-spec=encoding>Decode</span> the byte stream
+     <li><p><span data-anolis-spec=encoding>Decode</span> byte stream
      <span>response entity body</span> using fallback encoding
      <var>charset</var> and then let <var title>document</var> be a
      <span data-anolis-spec=dom title=concept-document>document</span> that
@@ -2217,9 +2217,9 @@ representing the <span>response entity body</span>. The
 algorithm:</p>
 
 <ol>
- <li><p>Let <var title>JSON text</var> be the
- <span>response entity body</span> decoded using UTF-8. Remove one leading
- U+FEFF BYTE ORDER MARK character, if present.</li>
+ <li><p>Let <var title>JSON text</var> be the result of running
+ <span data-anolis-spec=encoding>utf-8 decode</span> on byte stream
+ <span>response entity body</span>.
 
  <li><p>Return the result of invoking the <code title>parse</code> function
  of the <code title>JSON</code> object defined in ECMAScript, with
@@ -2257,9 +2257,9 @@ algorithm:</p>
    <li><p>If <var>charset</var> is null, set <var>charset</var> to
    <span data-anolis-spec=encoding>utf-8</span>.
 
-   <li><p>Return the result of
-   <span data-anolis-spec=encoding title=decode>decoding</span> the
-   byte stream <span>response entity body</span> using fallback encoding
+   <li><p>Return the result of running
+   <span data-anolis-spec=encoding>decode</span> on byte stream
+   <span>response entity body</span> using fallback encoding
    <var>charset</var>.
   </ol>
 
