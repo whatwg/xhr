@@ -2632,8 +2632,7 @@ following algorithm:
   entries. Each entry has a name, a value, a type, and optionally a
   filename (if type is "file").</p>
 
-  <pre class="idl">[<a href="#dom-formdata" title="dom-FormData">Constructor</a>,
- <a href="#dom-formdata-form" title="dom-FormData-form">Constructor</a>(<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/forms.html#htmlformelement">HTMLFormElement</a> <var>form</var>)]
+  <pre class="idl">[<a href="#dom-formdata" title="dom-FormData">Constructor</a>(optional <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/forms.html#htmlformelement">HTMLFormElement</a> <var>form</var>)]
 interface <dfn id="formdata">FormData</dfn> {
   void <a href="#dom-formdata-append" title="dom-FormData-append">append</a>(DOMString <var>name</var>, <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> <var title="">value</var>, optional DOMString <var title="">filename</var>);
   void <a href="#dom-formdata-append" title="dom-FormData-append">append</a>(DOMString <var>name</var>, DOMString <var>value</var>);
@@ -2643,19 +2642,25 @@ interface <dfn id="formdata">FormData</dfn> {
   <h3 id="formdata-constructors"><span class="secno">5.1 </span>Constructors</h3>
 
   <dl class="domintro">
-   <dt><code><var title="">fd</var> = new <a href="#dom-formdata" title="dom-FormData">FormData</a>()</code>
-   <dd><p>Returns a new <code><a href="#formdata">FormData</a></code> object.
+   <dt><code><var title="">fd</var> = new <a href="#dom-formdata" title="dom-FormData">FormData</a>([<var title="">form</var>])</code>
+   <dd><p>Returns a new <code><a href="#formdata">FormData</a></code> object initialized with the
+   data from <var title="">form</var>.
   </dl>
 
-  <p>The <dfn id="dom-formdata" title="dom-FormData"><code>FormData()</code></dfn> constructor
-  must return a new <code><a href="#formdata">FormData</a></code> object.
+<p>The
+<dfn id="dom-formdata" title="dom-FormData"><code>FormData(<var>form</var>)</code></dfn>
+constructor must run these steps:
 
-  <p>The
-  <dfn id="dom-formdata-form" title="dom-FormData-form"><code>FormData(<var>form</var>)</code></dfn>
-  constructor must return a new <code><a href="#formdata">FormData</a></code> object with as entries
-  the result of
-  <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#constructing-form-data-set">constructing the form data set</a> for
-  <var>form</var>.
+<ol>
+ <li><p>Let <var title="">fd</var> be a new <code><a href="#formdata">FormData</a></code> object.
+
+ <li><p>If <var>form</var> is given, set <var title="">fd</var>'s entries to
+ the result of
+ <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#constructing-form-data-set">constructing the form data set</a> for
+ <var>form</var>.
+
+ <li><p>Return <var title="">fd</var>.
+</ol>
 
 
   <h3 id="the-append()-method"><span class="secno">5.2 </span>The <code title="">append()</code> method</h3>

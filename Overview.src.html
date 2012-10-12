@@ -2580,8 +2580,7 @@ following algorithm:
   entries. Each entry has a name, a value, a type, and optionally a
   filename (if type is "file").</p>
 
-  <pre class="idl">[<span title="dom-FormData">Constructor</span>,
- <span title="dom-FormData-form">Constructor</span>(<span data-anolis-spec=html>HTMLFormElement</span> <var>form</var>)]
+  <pre class="idl">[<span title="dom-FormData">Constructor</span>(optional <span data-anolis-spec=html>HTMLFormElement</span> <var>form</var>)]
 interface <dfn>FormData</dfn> {
   void <span title="dom-FormData-append">append</span>(DOMString <var>name</var>, <span data-anolis-spec=fileapi>Blob</span> <var title>value</var>, optional DOMString <var title>filename</var>);
   void <span title="dom-FormData-append">append</span>(DOMString <var>name</var>, DOMString <var>value</var>);
@@ -2591,19 +2590,25 @@ interface <dfn>FormData</dfn> {
   <h3 id="formdata-constructors">Constructors</h3>
 
   <dl class=domintro>
-   <dt><code><var title>fd</var> = new <span title="dom-FormData">FormData</span>()</code>
-   <dd><p>Returns a new <code>FormData</code> object.
+   <dt><code><var title>fd</var> = new <span title="dom-FormData">FormData</span>([<var title>form</var>])</code>
+   <dd><p>Returns a new <code>FormData</code> object initialized with the
+   data from <var title>form</var>.
   </dl>
 
-  <p>The <dfn title="dom-FormData"><code>FormData()</code></dfn> constructor
-  must return a new <code>FormData</code> object.
+<p>The
+<dfn title="dom-FormData"><code>FormData(<var>form</var>)</code></dfn>
+constructor must run these steps:
 
-  <p>The
-  <dfn title="dom-FormData-form"><code>FormData(<var>form</var>)</code></dfn>
-  constructor must return a new <code>FormData</code> object with as entries
-  the result of
-  <span data-anolis-spec=html>constructing the form data set</span> for
-  <var>form</var>.
+<ol>
+ <li><p>Let <var title>fd</var> be a new <code>FormData</code> object.
+
+ <li><p>If <var>form</var> is given, set <var title>fd</var>'s entries to
+ the result of
+ <span data-anolis-spec=html>constructing the form data set</span> for
+ <var>form</var>.
+
+ <li><p>Return <var title>fd</var>.
+</ol>
 
 
   <h3>The <code title>append()</code> method</h3>
