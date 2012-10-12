@@ -6,7 +6,7 @@
 <div class="head">
 
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-11-october-2012">Living Standard — Last Updated 11 October 2012</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-12-october-2012">Living Standard — Last Updated 12 October 2012</h2>
 
 <dl>
  <dt>This Version:</dt>
@@ -34,7 +34,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-11 October 2012, the editor has made this specification available
+12 October 2012, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -2319,13 +2319,13 @@ following algorithm:
    terminate these steps.
 
    <li><p>If parsing <var title="">mime</var> analogously to the value of
-   the <code>Content-Type</code> headers fails,
+   the <code>Content-Type</code> header fails,
    <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
    "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" exception and terminate
    these steps.
 
-   <li><p>If a MIME type is successfully parsed, set
-   <a href="#override-mime-type">override MIME type</a> to that MIME type,
+   <li><p>If <var title="">mime</var> is successfully parsed, set
+   <a href="#override-mime-type">override MIME type</a> to its MIME type,
    excluding any parameters, and
    <a class="external" href="http://dom.spec.whatwg.org/#converted-to-ascii-lowercase">converted to ASCII lowercase</a>.
 

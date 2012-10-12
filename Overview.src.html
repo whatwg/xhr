@@ -2267,13 +2267,13 @@ following algorithm:
    terminate these steps.
 
    <li><p>If parsing <var title>mime</var> analogously to the value of
-   the <code>Content-Type</code> headers fails,
+   the <code>Content-Type</code> header fails,
    <span data-anolis-spec=dom title=concept-throw>throw</span> a
    "<code data-anolis-spec=dom>SyntaxError</code>" exception and terminate
    these steps.
 
-   <li><p>If a MIME type is successfully parsed, set
-   <span>override MIME type</span> to that MIME type,
+   <li><p>If <var title>mime</var> is successfully parsed, set
+   <span>override MIME type</span> to its MIME type,
    excluding any parameters, and
    <span data-anolis-spec=dom>converted to ASCII lowercase</span>.
 
