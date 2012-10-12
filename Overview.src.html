@@ -2574,26 +2574,26 @@ following algorithm:
 
 
 
-  <h2>Interface <code title>FormData</code></h2>
+<h2>Interface <code title>FormData</code></h2>
 
-  <p>The <code>FormData</code> object represents an ordered collection of
-  entries. Each entry has a name, a value, a type, and optionally a
-  filename (if type is "file").</p>
+<p>The <code>FormData</code> object represents an ordered collection of
+entries. Each entry has a name, a value, a type, and optionally a filename
+(if type is "file").
 
-  <pre class="idl">[<span title="dom-FormData">Constructor</span>(optional <span data-anolis-spec=html>HTMLFormElement</span> <var>form</var>)]
+<pre class="idl">[<span title="dom-FormData">Constructor</span>(optional <span data-anolis-spec=html>HTMLFormElement</span> <var>form</var>)]
 interface <dfn>FormData</dfn> {
   void <span title="dom-FormData-append">append</span>(DOMString <var>name</var>, <span data-anolis-spec=fileapi>Blob</span> <var title>value</var>, optional DOMString <var title>filename</var>);
   void <span title="dom-FormData-append">append</span>(DOMString <var>name</var>, DOMString <var>value</var>);
 };</pre>
 
+<dl class=domintro>
+ <dt><code><var title>fd</var> = new <span title="dom-FormData">FormData</span>([<var title>form</var>])</code>
+ <dd><p>Returns a new <code>FormData</code> object, optionally initialized
+ with the data from <var title>form</var> (if given).
 
-  <h3 id="formdata-constructors">Constructors</h3>
-
-  <dl class=domintro>
-   <dt><code><var title>fd</var> = new <span title="dom-FormData">FormData</span>([<var title>form</var>])</code>
-   <dd><p>Returns a new <code>FormData</code> object initialized with the
-   data from <var title>form</var>.
-  </dl>
+ <dt><code><var title>fd</var> . <span title=dom-FormData-append>append</span>(<var title>name</var>, <var title>value</var> [, <var title>filename</var>])</code>
+ <dd><p>Appends a new entry to the <code>FormData</code> object.
+</dl>
 
 <p>The
 <dfn title="dom-FormData"><code>FormData(<var>form</var>)</code></dfn>
@@ -2610,33 +2610,29 @@ constructor must run these steps:
  <li><p>Return <var title>fd</var>.
 </ol>
 
+<p>The
+<dfn title="dom-FormData-append" id="dom-formdata-append"><code>append(<var>name</var>, <var>value</var>, <var>filename</var>)</code></dfn>
+method must create a new entry with the following parameters set and append
+it to the end of the collection the <code>FormData</code> object represents:
 
-  <h3>The <code title>append()</code> method</h3>
+<ul>
+ <li><p>Set its name to <var>name</var>.
 
-  <dl class=domintro>
-   <dt><code><var title>fd</var> . <span title=dom-FormData-append>append</span>(<var title>name</var>, <var title>value</var> [, <var title>filename</var>])</code>
-   <dd><p>Appends a new name/value-pair to the <code>FormData</code>
-   object, optionally with a filename.
-  </dl>
+ <li><p>Set its value to <var>value</var>.
 
-  <p>The
-  <dfn title="dom-FormData-append" id="dom-formdata-append"><code>append(<var>name</var>, <var>value</var>, <var>filename</var>)</code></dfn>
-  method must create a new entry with the following parameters set and
-  append it to the end of the collection the <code>FormData</code> object
-  represents:</p>
-  <ul>
-   <li>Set its name to <var>name</var>.
-   <li>Set its value to <var>value</var>.
-   <li>Set its type to "text" if <var>value</var> is a string and "file" if
-   it is a <code data-anolis-spec=fileapi>Blob</code>.
-   <li>If its type is "file" set its filename to  "<code title>blob</code>".
-   <li>If its type is "file" and <var>value</var> is a
-   <code data-anolis-spec=fileapi>File</code> whose
-   <code data-anolis-spec=fileapi title=dom-File-name>name</code> attribute
-   is not the empty string, set entry's filename to the attribute's value.
-   <li>If the <var title>filename</var> parameter is not omitted set entry's
-   filename to <var title>filename</var>.
-  </ul>
+ <li><p>Set its type to "text" if <var>value</var> is a string and "file" if
+ it is a <code data-anolis-spec=fileapi>Blob</code>.
+
+ <li><p>If its type is "file" set its filename to "<code title>blob</code>".
+
+ <li><p>If its type is "file" and <var>value</var> is a
+ <code data-anolis-spec=fileapi>File</code> whose
+ <code data-anolis-spec=fileapi title=dom-File-name>name</code> attribute
+ is not the empty string, set entry's filename to the attribute's value.
+
+ <li><p>If the <var title>filename</var> parameter is not omitted set
+ entry's filename to <var title>filename</var>.
+</ul>
 
 
 

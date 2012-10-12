@@ -94,10 +94,7 @@ client functionality for transferring data between a client and a server.
      <li><a href="#the-responsetext-attribute"><span class="secno">4.8.9 </span>The <code title="">responseText</code> attribute</a></li>
      <li><a href="#the-responsexml-attribute"><span class="secno">4.8.10 </span>The <code title="">responseXML</code> attribute</a></ol></li>
    <li><a href="#events"><span class="secno">4.9 </span>Events summary</a></ol></li>
- <li><a href="#interface-formdata"><span class="secno">5 </span>Interface <code title="">FormData</code></a>
-  <ol class="toc">
-   <li><a href="#formdata-constructors"><span class="secno">5.1 </span>Constructors</a></li>
-   <li><a href="#the-append()-method"><span class="secno">5.2 </span>The <code title="">append()</code> method</a></ol></li>
+ <li><a href="#interface-formdata"><span class="secno">5 </span>Interface <code title="">FormData</code></a></li>
  <li><a href="#interface-progressevent"><span class="secno">6 </span>Interface <code title="">ProgressEvent</code></a>
   <ol class="toc">
    <li><a href="#firing-events-using-the-progressevent-interface-for-http"><span class="secno">6.1 </span>Firing events using the <code title="">ProgressEvent</code> interface for HTTP</a></li>
@@ -2626,26 +2623,26 @@ following algorithm:
 
 
 
-  <h2 id="interface-formdata"><span class="secno">5 </span>Interface <code title="">FormData</code></h2>
+<h2 id="interface-formdata"><span class="secno">5 </span>Interface <code title="">FormData</code></h2>
 
-  <p>The <code><a href="#formdata">FormData</a></code> object represents an ordered collection of
-  entries. Each entry has a name, a value, a type, and optionally a
-  filename (if type is "file").</p>
+<p>The <code><a href="#formdata">FormData</a></code> object represents an ordered collection of
+entries. Each entry has a name, a value, a type, and optionally a filename
+(if type is "file").
 
-  <pre class="idl">[<a href="#dom-formdata" title="dom-FormData">Constructor</a>(optional <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/forms.html#htmlformelement">HTMLFormElement</a> <var>form</var>)]
+<pre class="idl">[<a href="#dom-formdata" title="dom-FormData">Constructor</a>(optional <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/forms.html#htmlformelement">HTMLFormElement</a> <var>form</var>)]
 interface <dfn id="formdata">FormData</dfn> {
   void <a href="#dom-formdata-append" title="dom-FormData-append">append</a>(DOMString <var>name</var>, <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> <var title="">value</var>, optional DOMString <var title="">filename</var>);
   void <a href="#dom-formdata-append" title="dom-FormData-append">append</a>(DOMString <var>name</var>, DOMString <var>value</var>);
 };</pre>
 
+<dl class="domintro">
+ <dt><code><var title="">fd</var> = new <a href="#dom-formdata" title="dom-FormData">FormData</a>([<var title="">form</var>])</code>
+ <dd><p>Returns a new <code><a href="#formdata">FormData</a></code> object, optionally initialized
+ with the data from <var title="">form</var> (if given).
 
-  <h3 id="formdata-constructors"><span class="secno">5.1 </span>Constructors</h3>
-
-  <dl class="domintro">
-   <dt><code><var title="">fd</var> = new <a href="#dom-formdata" title="dom-FormData">FormData</a>([<var title="">form</var>])</code>
-   <dd><p>Returns a new <code><a href="#formdata">FormData</a></code> object initialized with the
-   data from <var title="">form</var>.
-  </dl>
+ <dt><code><var title="">fd</var> . <a href="#dom-formdata-append" title="dom-FormData-append">append</a>(<var title="">name</var>, <var title="">value</var> [, <var title="">filename</var>])</code>
+ <dd><p>Appends a new entry to the <code><a href="#formdata">FormData</a></code> object.
+</dl>
 
 <p>The
 <dfn id="dom-formdata" title="dom-FormData"><code>FormData(<var>form</var>)</code></dfn>
@@ -2662,33 +2659,29 @@ constructor must run these steps:
  <li><p>Return <var title="">fd</var>.
 </ol>
 
+<p>The
+<dfn id="dom-formdata-append" title="dom-FormData-append"><code>append(<var>name</var>, <var>value</var>, <var>filename</var>)</code></dfn>
+method must create a new entry with the following parameters set and append
+it to the end of the collection the <code><a href="#formdata">FormData</a></code> object represents:
 
-  <h3 id="the-append()-method"><span class="secno">5.2 </span>The <code title="">append()</code> method</h3>
+<ul>
+ <li><p>Set its name to <var>name</var>.
 
-  <dl class="domintro">
-   <dt><code><var title="">fd</var> . <a href="#dom-formdata-append" title="dom-FormData-append">append</a>(<var title="">name</var>, <var title="">value</var> [, <var title="">filename</var>])</code>
-   <dd><p>Appends a new name/value-pair to the <code><a href="#formdata">FormData</a></code>
-   object, optionally with a filename.
-  </dl>
+ <li><p>Set its value to <var>value</var>.
 
-  <p>The
-  <dfn id="dom-formdata-append" title="dom-FormData-append"><code>append(<var>name</var>, <var>value</var>, <var>filename</var>)</code></dfn>
-  method must create a new entry with the following parameters set and
-  append it to the end of the collection the <code><a href="#formdata">FormData</a></code> object
-  represents:</p>
-  <ul>
-   <li>Set its name to <var>name</var>.
-   <li>Set its value to <var>value</var>.
-   <li>Set its type to "text" if <var>value</var> is a string and "file" if
-   it is a <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code>.
-   <li>If its type is "file" set its filename to  "<code title="">blob</code>".
-   <li>If its type is "file" and <var>value</var> is a
-   <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a></code> whose
-   <code class="external" title="dom-File-name"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-name">name</a></code> attribute
-   is not the empty string, set entry's filename to the attribute's value.
-   <li>If the <var title="">filename</var> parameter is not omitted set entry's
-   filename to <var title="">filename</var>.
-  </ul>
+ <li><p>Set its type to "text" if <var>value</var> is a string and "file" if
+ it is a <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code>.
+
+ <li><p>If its type is "file" set its filename to "<code title="">blob</code>".
+
+ <li><p>If its type is "file" and <var>value</var> is a
+ <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a></code> whose
+ <code class="external" title="dom-File-name"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-name">name</a></code> attribute
+ is not the empty string, set entry's filename to the attribute's value.
+
+ <li><p>If the <var title="">filename</var> parameter is not omitted set
+ entry's filename to <var title="">filename</var>.
+</ul>
 
 
 
