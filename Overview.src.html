@@ -1185,16 +1185,15 @@ X-Test: one, two</code></pre>
    <li><p>If the <span>synchronous flag</span> is set, release the
    <span data-anolis-spec=html>storage mutex</span>.</p></li>
 
+   <li><p>Unset the <span>error flag</span>,
+   <span>upload complete flag</span> and <span>upload events flag</span>.
+
+   <li><p>If there is no <span>request entity body</span> or if it is empty,
+   set the <span>upload complete flag</span>.
+
    <li><p>If the <span>synchronous flag</span> is unset and one or more
    event listeners are registered on the <code>XMLHttpRequestUpload</code>
    object, set the <span>upload events flag</span>.
-
-   <li><p>Unset the <span>error flag</span>.</p></li>
-
-   <li><p>Set the <span>upload complete flag</span> if there is no
-   <span>request entity body</span> or if the
-   <span>request entity body</span> is empty.
-
 
    <li>
     <p>If the <span>synchronous flag</span> is unset, run these substeps:</p>
@@ -1298,7 +1297,7 @@ X-Test: one, two</code></pre>
        <dd>The <span><code>XMLHttpRequest</code> origin</span>.</dd>
 
        <dt>referrer source
-       <dd>If the <span>anonymous flag</span> is set the
+       <dd>If the <span>anonymous flag</span> is set, the
        <span data-anolis-spec=html>URL</span>
        "<code title>about:blank</code>", or the
        <span><code>XMLHttpRequest</code> referrer source</span> otherwise.
