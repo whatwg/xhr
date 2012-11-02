@@ -1077,12 +1077,12 @@ X-Test: one, two</code></pre>
 
     <dl class=switch>
 
-     <dt><code data-anolis-spec=typedarray>ArrayBufferView</code>
+     <dt id="dom-XMLHttpRequest-send-ArrayBufferView"><code data-anolis-spec=typedarray>ArrayBufferView</code>
      <dd><p>Let the <span>request entity body</span> be the raw data
      represented by <var title>data</var>.</p></dd>
 
-     <dt><code data-anolis-spec=fileapi>Blob</code>
-     <dt><code data-anolis-spec=streams>Stream</code>
+     <dt id="dom-XMLHttpRequest-send-Blob"><code data-anolis-spec=fileapi>Blob</code>
+     <dt id="dom-XMLHttpRequest-send-Stream"><code data-anolis-spec=streams>Stream</code>
      <dd>
       <p>If the object's <code title>type</code> attribute value is not
       the empty string, let <var>mime type</var> be its value.
@@ -1097,7 +1097,7 @@ X-Test: one, two</code></pre>
      </dd>
 
 
-     <dt><span data-anolis-spec=dom title=concept-document>document</span>
+     <dt id="dom-XMLHttpRequest-send-document"><span data-anolis-spec=dom title=concept-document>document</span>
      <dd>
       <p>Let <var title>encoding</var> be the
       <span data-anolis-spec=dom title=concept-document-encoding>encoding</span>
@@ -1133,7 +1133,7 @@ X-Test: one, two</code></pre>
       no effect on what is transferred.
      </dd>
 
-     <dt>a string
+     <dt id="dom-XMLHttpRequest-send-a-string">a string
      <dd>
       <p>Let <var>encoding</var> be "<code title>UTF-8</code>".
 
@@ -1145,7 +1145,7 @@ X-Test: one, two</code></pre>
       <span data-anolis-spec=encoding>utf-8</span>.
      </dd>
 
-     <dt><code>FormData</code>
+     <dt id="dom-XMLHttpRequest-send-FormData"><code>FormData</code>
      <dd>
       <p>Let the <span>request entity body</span> be the result of running
       the
