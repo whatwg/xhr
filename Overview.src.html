@@ -2066,6 +2066,11 @@ Content-Type: text/plain; charset=utf-8</code></pre>
    <li><p>If the <span>response entity body</span> is null, return null and
    terminate these steps.</p></li>
 
+   <li><p>If the
+   <span data-anolis-spec=html>JavaScript global environment</span> is a
+   <span data-anolis-spec=html>worker environment</span>, return null and
+   terminate these steps.
+
    <li><p>If <span>final MIME type</span> is not null,
    <code>text/html</code>, <code>text/xml</code>,
    <code>application/xml</code>, or does not end in
@@ -2277,6 +2282,9 @@ following algorithm:
     "<code title>json</code>",
     "<code title>stream</code>", and
     "<code title>text</code>".
+    <p>When set: setting to "<code title>document</code>" is ignored if the
+    <span data-anolis-spec=html>JavaScript global environment</span> is a
+    <span data-anolis-spec=html>worker environment</span>
     <p>When set: throws an
     "<code data-anolis-spec=dom>InvalidStateError</code>" exception if the
     state is <span title="dom-XMLHttpRequest-LOADING">LOADING</span> or
@@ -2313,6 +2321,11 @@ following algorithm:
    <span data-anolis-spec=dom title=concept-throw>throw</span> an
    "<code data-anolis-spec=dom>InvalidAccessError</code>" exception and
    terminate these steps.
+
+   <li><p>If the
+   <span data-anolis-spec=html>JavaScript global environment</span> is a
+   <span data-anolis-spec=html>worker environment</span> and the given
+   value is "<code title>document</code>", terminate these steps.
 
    <li><p>Set the
    <code title="dom-XMLHttpRequest-responseType">responseType</code>
