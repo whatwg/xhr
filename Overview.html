@@ -5,8 +5,9 @@
 
 <div class="head">
 
+<p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" src="//www.whatwg.org/images/logo"></a></p>
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-17-october-2012">Living Standard — Last Updated 17 October 2012</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-7-november-2012">Living Standard — Last Updated 7 November 2012</h2>
 
 <dl>
  <dt>This Version:</dt>
@@ -29,12 +30,12 @@
   &lt;<a href="mailto:annevk@annevk.nl">annevk@annevk.nl</a>&gt;</dd>
 </dl>
 
-<script async="" src="//dvcs.w3.org/hg/quirks-mode/raw-file/tip/file-bug.js"></script>
+<script async="" src="//resources.whatwg.org/file-bug.js"></script>
 
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-17 October 2012, the editor has made this specification available
+7 November 2012, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -570,7 +571,8 @@ discarding any further data received from the network for them.
 
    <dt><dfn id="author-request-headers">author request headers</dfn></dt>
    <dd>A list consisting of HTTP header name/value pairs to be used in the
-   request.
+   request. Checking against the header names in this list must always be
+   done in a case-insensitive manner.
 
    <dt><dfn id="request-entity-body">request entity body</dfn></dt>
    <dd>The <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-7.2">entity body</a> used in the
@@ -1126,12 +1128,12 @@ X-Test: one, two</code></pre>
 
     <dl class="switch">
 
-     <dt><code class="external"><a href="http://www.khronos.org/registry/typedarray/specs/latest/#6">ArrayBufferView</a></code>
+     <dt id="dom-XMLHttpRequest-send-ArrayBufferView"><code class="external"><a href="http://www.khronos.org/registry/typedarray/specs/latest/#6">ArrayBufferView</a></code>
      <dd><p>Let the <a href="#request-entity-body">request entity body</a> be the raw data
      represented by <var title="">data</var>.</dd>
 
-     <dt><code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code>
-     <dt><code class="external"><a href="http://dvcs.w3.org/hg/streams-api/raw-file/tip/Overview.htm#idl-def-Stream">Stream</a></code>
+     <dt id="dom-XMLHttpRequest-send-Blob"><code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code>
+     <dt id="dom-XMLHttpRequest-send-Stream"><code class="external"><a href="http://dvcs.w3.org/hg/streams-api/raw-file/tip/Overview.htm#idl-def-Stream">Stream</a></code>
      <dd>
       <p>If the object's <code title="">type</code> attribute value is not
       the empty string, let <var>mime type</var> be its value.
@@ -1146,7 +1148,7 @@ X-Test: one, two</code></pre>
      </dd>
 
 
-     <dt><a class="external" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>
+     <dt id="dom-XMLHttpRequest-send-document"><a class="external" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>
      <dd>
       <p>Let <var title="">encoding</var> be the
       <a class="external" href="http://dom.spec.whatwg.org/#concept-document-encoding" title="concept-document-encoding">encoding</a>
@@ -1182,7 +1184,7 @@ X-Test: one, two</code></pre>
       no effect on what is transferred.
      </dd>
 
-     <dt>a string
+     <dt id="dom-XMLHttpRequest-send-a-string">a string
      <dd>
       <p>Let <var>encoding</var> be "<code title="">UTF-8</code>".
 
@@ -1194,7 +1196,7 @@ X-Test: one, two</code></pre>
       <a class="external" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
      </dd>
 
-     <dt><code><a href="#formdata">FormData</a></code>
+     <dt id="dom-XMLHttpRequest-send-FormData"><code><a href="#formdata">FormData</a></code>
      <dd>
       <p>Let the <a href="#request-entity-body">request entity body</a> be the result of running
       the

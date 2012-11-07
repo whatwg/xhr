@@ -7,6 +7,7 @@
 
 <div class="head">
 
+<p><a class=logo href=//www.whatwg.org/><img alt=WHATWG src=//www.whatwg.org/images/logo></a></p>
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
 <h2 class="no-num no-toc">Living Standard &mdash; Last Updated [DATE: 3 August 2002]</h2>
 
@@ -31,7 +32,7 @@
   &lt;<a href="mailto:annevk@annevk.nl">annevk@annevk.nl</a>&gt;</dd>
 </dl>
 
-<script src=//dvcs.w3.org/hg/quirks-mode/raw-file/tip/file-bug.js async></script>
+<script src=//resources.whatwg.org/file-bug.js async></script>
 
 <p class=copyright><a rel=license href="http://creativecommons.org/publicdomain/zero/1.0/"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt=CC0></a>
 To the extent possible under law, the editor has waived all copyright and
@@ -521,7 +522,8 @@ discarding any further data received from the network for them.
 
    <dt><dfn id="author-request-headers">author request headers</dfn></dt>
    <dd>A list consisting of HTTP header name/value pairs to be used in the
-   request.
+   request. Checking against the header names in this list must always be
+   done in a case-insensitive manner.
 
    <dt><dfn>request entity body</dfn></dt>
    <dd>The <span data-anolis-spec=http>entity body</span> used in the
