@@ -267,41 +267,8 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
   readonly attribute <span data-anolis-spec=dom>Document</span>? <span title="dom-XMLHttpRequest-responseXML">responseXML</span>;
 };</pre>
 
-
-
-  <h3>Base URL, origin, and referrer</h3>
-
-  <p>Each <code>XMLHttpRequest</code> object has an associated
-  <dfn><code>XMLHttpRequest</code> base URL</dfn>,
-  <dfn><code>XMLHttpRequest</code> origin</dfn>, and
-  <dfn><code>XMLHttpRequest</code> referrer source</dfn>.
-
-  <p class=note>The XMLHttpRequest standard defines
-  <span><code>XMLHttpRequest</code> base URL</span>,
-  <span><code>XMLHttpRequest</code> origin</span>, and
-  <span><code>XMLHttpRequest</code> referrer source</span> when the global
-  object is represented by the <code data-anolis-spec=html>Window</code>
-  object. Other contexts will have to define them as appropriate for
-  <code>XMLHttpRequest</code> to function as other contexts are considered
-  out of scope for this document.</p>
-
-  <p>In environments where the global object is represented by the
-  <code data-anolis-spec=html>Window</code> object the
-  <code>XMLHttpRequest</code> object has an associated
-  <dfn><code>XMLHttpRequest</code> document</dfn> which is the
-  <span data-anolis-spec=dom title=concept-document>document</span>
-  associated with the <code data-anolis-spec=html>Window</code> object for
-  which the <code>XMLHttpRequest</code> interface object was created.</p>
-
-  <p>In these environments the
-  <span><code>XMLHttpRequest</code> referrer source</span> is that
-  <span><code>XMLHttpRequest</code> document</span>.
-
-  <p class=note>The
-  <span><code>XMLHttpRequest</code> document</span> is also used to
-  determine the <span><code>XMLHttpRequest</code> base URL</span> and
-  <span><code>XMLHttpRequest</code> origin</span> at a later stage.
-
+<p>Each <code>XMLHttpRequest</code> object has a unique, associated
+<code>XMLHttpRequestUpload</code> object.
 
 
 <h3>Task sources</h3>
@@ -316,7 +283,7 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
 <p>The <code>XMLHttpRequest</code> object has an associated
 <dfn>anonymous flag</dfn>. If the <span>anonymous flag</span> is set,
 <span>user credentials</span> and the
-<span><code>XMLHttpRequest</code> origin</span> are not exposed when
+<span>source origin</span> are not exposed when
 <span data-anolis-spec=html title=fetch>fetching</span> resources.
 
 <dl class=domintro>
@@ -495,55 +462,32 @@ discarding any further data received from the network for them.
   during the <span title="dom-XMLHttpRequest-DONE">DONE</span> state.
 
 
-  <h3 id="request">Request</h3>
+<h3 id="request">Request</h3>
 
-  <p>Each <code>XMLHttpRequest</code> object has the following
-  request-associated concepts:</p>
+<p>Each <code>XMLHttpRequest</code> object has the following
+request-associated concepts:
 
-  <dl>
-   <dt><dfn>synchronous flag</dfn></dt>
-   <dd>Set when <span data-anolis-spec=html title=fetch>fetching</span> is
-   done synchronously. Initially unset.</dd>
+<dfn>request method</dfn>,
+<dfn>request URL</dfn>,
+<dfn>request username</dfn>,
+<dfn>request password</dfn>,
+<dfn id="author-request-headers">author request headers</dfn>,
+<dfn>request entity body</dfn>,
+<dfn>source origin</dfn>,
+<dfn>referrer source</dfn>,
+<dfn>synchronous flag</dfn>,
+<dfn id="upload-complete-flag">upload complete flag</dfn>, and
+<dfn id="upload-events-flag">upload events flag</dfn>.
 
-   <dt><dfn>request method</dfn></dt>
-   <dd>The HTTP method used in the request.</dd>
+<p>The <span>author request headers</span> is a list of HTTP header names
+and corresponding header values. Comparisons against the HTTP header names
+must be done in a case-insensitive manner. Initially it must be empty.
 
-   <dt><dfn>request URL</dfn></dt>
-   <dd>The resolved <span data-anolis-spec=html>URL</span> used in the
-   request.</dd>
+<p>The <span>request entity body</span> must initially be null.
 
-   <dt><dfn>request username</dfn></dt>
-   <dd>The username used in the request or null if there is no
-   username.</dd>
-
-   <dt><dfn>request password</dfn></dt>
-   <dd>The password used in the request or null if there is no
-   password.</dd>
-
-   <dt><dfn id="author-request-headers">author request headers</dfn></dt>
-   <dd>A list consisting of HTTP header name/value pairs to be used in the
-   request. Checking against the header names in this list must always be
-   done in a case-insensitive manner.
-
-   <dt><dfn>request entity body</dfn></dt>
-   <dd>The <span data-anolis-spec=http>entity body</span> used in the
-   request or null if there is no
-   <span data-anolis-spec=http>entity body</span>.</dd>
-
-   <dt><dfn id="upload-complete-flag">upload complete flag</dfn></dt>
-   <dd>Set when no more events are to be dispatched on the
-   <code>XMLHttpRequestUpload</code> object. Initially unset.
-
-   <dt><dfn id="upload-events-flag">upload events flag</dfn></dt>
-   <dd>Set when event listeners are registered on the
-   <code>XMLHttpRequestUpload</code> object to determine whether a preflight
-   request is needed. Initially unset.</dd>
-
-  </dl>
-
-
-  <p>Each <code>XMLHttpRequest</code> object also has a unique, associated
-  <code>XMLHttpRequestUpload</code> object.
+<p>The <span>synchronous flag</span>,
+<span>upload complete flag</span>, and
+<span>upload events flag</span> must be initially unset.
 
 
 
@@ -574,8 +518,9 @@ discarding any further data received from the network for them.
     <code>CONNECT</code>, <code>TRACE</code> or <code>TRACK</code>.</p>
 
     <p>Throws an "<code data-anolis-spec=dom>InvalidAccessError</code>"
-    exception if <var title>async</var> is false, there is an associated
-    <span><code>XMLHttpRequest</code> document</span> and either the
+    exception if <var title>async</var> is false, the
+    <span data-anolis-spec=html>JavaScript global environment</span> is a
+    <span data-anolis-spec=html>document environment</span>, and either the
     <span>anonymous flag</span> is set, the
     <code title=dom-XMLHttpRequest-timeout>timeout</code> attribute is not
     zero, the
@@ -590,30 +535,57 @@ discarding any further data received from the network for them.
   method must run these steps (unless otherwise indicated):</p>
 
   <ol>
+   <li><p>Let <var title>base</var> be null.
+
    <li>
-    <p>If there is an associated
-    <span><code>XMLHttpRequest</code> document</span> run
-    these substeps:</p>
+    <p>If the
+    <span data-anolis-spec=html>JavaScript global environment</span> is a
+    <span data-anolis-spec=html>document environment</span>, run these steps:
 
     <ol>
-     <li><p>If the
-     <span><code>XMLHttpRequest</code> document</span> is not
+     <li>
+      <p>Let <var title>document</var> be the
+      <span data-anolis-spec=dom title=concept-document>document</span>
+      associated with the global object for which the
+      <code>XMLHttpRequest</code> interface object was created from which
+      this <code>XMLHttpRequest</code> object was created.
+
+      <p class=XXX>Should this move to the constructor phase?
+
+     <li><p>If <var title>document</var> is not
      <span data-anolis-spec=html>fully active</span>,
      <span data-anolis-spec=dom title=concept-throw>throw</span> an
      "<code data-anolis-spec=dom>InvalidStateError</code>" exception and
      terminate the overall set of steps.
 
-     <li><p>Let <span><code>XMLHttpRequest</code> base URL</span> be the
-     <span data-anolis-spec=html>document base URL</span> of the
-     <span><code>XMLHttpRequest</code> document</span>.</p></li>
+     <li><p>Set <var title>base</var> to the
+     <span data-anolis-spec=html>document base URL</span> of
+     <var title>document</var>.
 
-     <li><p>Let <span><code>XMLHttpRequest</code> origin</span> be the
-     <span data-anolis-spec=html>origin</span> of the
-     <span><code>XMLHttpRequest</code> document</span>
-     and let it be a globally unique identifier if the
-     <span>anonymous flag</span> is set.</p></li>
+     <li><p>Set <span>source origin</span> to a globally unique identifier,
+     if the <span>anonymous flag</span> is set, and the
+     <span data-anolis-spec=html>origin</span> of <var title>document</var>
+     otherwise.
+
+     <li><p>Set <span>referrer source</span> to <var title>document</var>.
     </ol>
-   </li>
+
+   <li>
+    <p>If the
+    <span data-anolis-spec=html>JavaScript global environment</span> is a
+    <span data-anolis-spec=html>worker environment</span>, run these steps:
+
+    <ol>
+     <li><p>Set <var title>base</var> to the
+     <span data-anolis-spec=html>script's base URL</span>.
+
+     <li><p>Set <span>source origin</span> to the
+     <span data-anolis-spec=html title=concept-script>script</span>'s
+     <span data-anolis-spec=html>origin</span>.
+
+     <li><p>Set <span>referrer source</span> to the
+     <span data-anolis-spec=html>script's referrer source</span>.
+    </ol>
 
    <li><p>If <var>method</var> does not match the
    <span data-anolis-spec=http>Method</span> token production,
@@ -650,8 +622,7 @@ discarding any further data received from the network for them.
    <span data-anolis-spec=html>URL</span> with character encoding UTF-8.
 
    <li><p><span title="Resolve a URL" data-anolis-spec=html>Resolve</span>
-   <var title>url</var> relative to the
-   <span><code>XMLHttpRequest</code> base URL</span>. If the algorithm
+   <var title>url</var> relative to <var title>base</var>. If the algorithm
    returns an error,
    <span data-anolis-spec=dom title=concept-throw>throw</span> a
    "<code data-anolis-spec=dom>SyntaxError</code>" exception and terminate
@@ -684,8 +655,9 @@ discarding any further data received from the network for them.
    <li><p>If <var title>url</var> just contains the <code>"user"</code>
    format let <var>temp user</var> be the user part.</p></li>
 
-   <li><p>If <var>async</var> is false, there is an associated
-   <span><code>XMLHttpRequest</code> document</span> and either the
+   <li><p>If <var>async</var> is false, the
+   <span data-anolis-spec=html>JavaScript global environment</span> is a
+   <span data-anolis-spec=html>document environment</span>, and either the
    <span>anonymous flag</span> is set, the
    <code title=dom-XMLHttpRequest-timeout>timeout</code> attribute value is
    not zero, the
@@ -866,6 +838,8 @@ discarding any further data received from the network for them.
     matching <var>header</var> in the <span>author request headers</span>
     list (for combine see section 4.2, RFC 2616).
     <span data-anolis-ref>HTTP</span>
+    <!-- XXX "combine" should probably be replaced with
+         'append ", ", followed by value' -->
 
     <p class=note>The XMLHttpRequest standard intentionally constraints the
     use of HTTP here in line with contemporary implementations.
@@ -908,8 +882,9 @@ X-Test: one, two</code></pre>
     (for the <code title=dom-XMLHttpRequest>send()</code> method).
     <p>When set: throws an
     "<code data-anolis-spec=dom>InvalidAccessError</code>" exception if
-    the <span>synchronous flag</span> is set when there is an
-    associated <span><code>XMLHttpRequest</code> document</span>.
+    the <span>synchronous flag</span> is set and the
+    <span data-anolis-spec=html>JavaScript global environment</span> is a
+    <span data-anolis-spec=html>document environment</span>.
    </dd>
   </dl>
 
@@ -921,8 +896,9 @@ X-Test: one, two</code></pre>
   attribute must run these steps:
 
   <ol>
-   <li><p>If there is an associated
-   <span><code>XMLHttpRequest</code> document</span> and the
+   <li><p>If the
+   <span data-anolis-spec=html>JavaScript global environment</span> is a
+   <span data-anolis-spec=html>document environment</span> and the
    <span>synchronous flag</span> is set,
    <span data-anolis-spec=dom title=concept-throw>throw</span> an
    "<code data-anolis-spec=dom>InvalidAccessError</code>" exception and
@@ -955,8 +931,9 @@ X-Test: one, two</code></pre>
     the <span><code>send()</code> flag</span> is set.</p>
     <p>When set: throws an
     "<code data-anolis-spec=dom>InvalidAccessError</code>" exception if
-    either the <span>synchronous flag</span> is set when there is an
-    associated <span><code>XMLHttpRequest</code> document</span> or if the
+    either the <span>synchronous flag</span> is set and the
+    <span data-anolis-spec=html>JavaScript global environment</span> is a
+    <span data-anolis-spec=html>document environment</span> or if the
     <span>anonymous flag</span> is set.</p>
    </dd>
   </dl>
@@ -987,8 +964,9 @@ X-Test: one, two</code></pre>
    "<code data-anolis-spec=dom>InvalidAccessError</code>" exception and
    terminate these steps.
 
-   <li><p>If there is an associated
-   <span><code>XMLHttpRequest</code> document</span> and the
+   <li><p>If the
+   <span data-anolis-spec=html>JavaScript global environment</span> is a
+   <span data-anolis-spec=html>document environment</span> and the
    <span>synchronous flag</span> is set,
    <span data-anolis-spec=dom title=concept-throw>throw</span> an
    "<code data-anolis-spec=dom>InvalidAccessError</code>" exception and
@@ -1216,8 +1194,8 @@ X-Test: one, two</code></pre>
 
    <li>
     <dl class=switch>
-     <dt>If the <span><code>XMLHttpRequest</code> origin</span> and the
-     <span>request URL</span> are <span data-anolis-spec=html>same origin</span></dt>
+     <dt>If the <span>source origin</span> and the <span>request URL</span>
+     are <span data-anolis-spec=html>same origin</span></dt>
      <dt>If the <span>request URL</span>'s
      <code data-anolis-spec=html title=url-scheme>&lt;scheme></code> is
      "<code title>data</code>"
@@ -1227,8 +1205,8 @@ X-Test: one, two</code></pre>
 
       <p><span data-anolis-spec=html>Fetch</span> the
       <span>request URL</span> from <i title>origin</i>
-      <span><code>XMLHttpRequest</code> origin</span>, using
-      <span><code>XMLHttpRequest</code> referrer source</span> as
+      <span>source origin</span>, using
+      <span>referrer source</span> as
       <i title>override referrer source</i>, with the
       <i title>synchronous flag</i> set if the
       <span>synchronous flag</span> is set, using HTTP method
@@ -1296,13 +1274,13 @@ X-Test: one, two</code></pre>
        <dd>The <span>request entity body</span>.</dd>
 
        <dt>source origin</dt>
-       <dd>The <span><code>XMLHttpRequest</code> origin</span>.</dd>
+       <dd>The <span>source origin</span>.</dd>
 
        <dt>referrer source
        <dd>If the <span>anonymous flag</span> is set, the
        <span data-anolis-spec=html>URL</span>
-       "<code title>about:blank</code>", or the
-       <span><code>XMLHttpRequest</code> referrer source</span> otherwise.
+       "<code title>about:blank</code>", and the
+       <span>referrer source</span> otherwise.
 
        <dt>omit credentials flag</dt>
        <dd>Set if
@@ -1364,7 +1342,7 @@ X-Test: one, two</code></pre>
   handle <code>401 Unauthorized</code> requests appropriately.</p>
 
   <p>If authentication fails,
-  <span><code>XMLHttpRequest</code> origin</span> and the
+  <span>source origin</span> and the
   <span>request URL</span> are <span data-anolis-spec=html>same origin</span>,
   <code title="http-authorization">Authorization</code> is not in the list
   of <span>author request headers</span>, <span>request username</span> is
@@ -1456,7 +1434,7 @@ X-Test: one, two</code></pre>
      <span data-anolis-spec=html>URL</span> conveyed by the
      <code>Location</code> header.</p></li>
 
-     <li><p>If the <span><code>XMLHttpRequest</code> origin</span> and the
+     <li><p>If the <span>source origin</span> and the
      <span data-anolis-spec=html>origin</span> of <span>request URL</span>
      are <span data-anolis-spec=html>same origin</span> transparently follow
      the redirect while observing the
@@ -2150,7 +2128,7 @@ Content-Type: text/plain; charset=utf-8</code></pre>
 
    <li><p>Set <var title>document</var>'s
    <span data-anolis-spec=html>origin</span> to the
-   <span><code>XMLHttpRequest</code> origin</span>.
+   <span>source origin</span>.
 
    <li><p>Set <var title>document</var>'s
    <span data-anolis-spec=dom title=concept-document-content-type>content type</span>
@@ -2305,8 +2283,9 @@ following algorithm:
     <span title="dom-XMLHttpRequest-DONE">DONE</span>.
     <p>When set: throws an
     "<code data-anolis-spec=dom>InvalidAccessError</code>" exception if the
-    <span>synchronous flag</span> is set and there is an associated
-    <span><code>XMLHttpRequest</code> document</span>.</p>
+    <span>synchronous flag</span> is set and the
+    <span data-anolis-spec=html>JavaScript global environment</span> is a
+    <span data-anolis-spec=html>document environment</span>.
   </dl>
 
 
@@ -2327,8 +2306,9 @@ following algorithm:
    "<code data-anolis-spec=dom>InvalidStateError</code>" exception and
    terminate these steps.
 
-   <li><p>If there is an associated
-   <span><code>XMLHttpRequest</code> document</span> and the
+   <li><p>If the
+   <span data-anolis-spec=html>JavaScript global environment</span> is a
+   <span data-anolis-spec=html>document environment</span> and the
    <span>synchronous flag</span> is set,
    <span data-anolis-spec=dom title=concept-throw>throw</span> an
    "<code data-anolis-spec=dom>InvalidAccessError</code>" exception and

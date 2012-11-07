@@ -66,35 +66,34 @@ client functionality for transferring data between a client and a server.
  <li><a href="#terminology"><span class="secno">3 </span>Terminology</a></li>
  <li><a href="#interface-xmlhttprequest"><span class="secno">4 </span>Interface <code title="">XMLHttpRequest</code></a>
   <ol class="toc">
-   <li><a href="#base-url,-origin,-and-referrer"><span class="secno">4.1 </span>Base URL, origin, and referrer</a></li>
-   <li><a href="#task-sources"><span class="secno">4.2 </span>Task sources</a></li>
-   <li><a href="#constructors"><span class="secno">4.3 </span>Constructors</a></li>
-   <li><a href="#garbage-collection"><span class="secno">4.4 </span>Garbage collection</a></li>
-   <li><a href="#event-handlers"><span class="secno">4.5 </span>Event handlers</a></li>
-   <li><a href="#states"><span class="secno">4.6 </span>States</a></li>
-   <li><a href="#request"><span class="secno">4.7 </span>Request</a>
+   <li><a href="#task-sources"><span class="secno">4.1 </span>Task sources</a></li>
+   <li><a href="#constructors"><span class="secno">4.2 </span>Constructors</a></li>
+   <li><a href="#garbage-collection"><span class="secno">4.3 </span>Garbage collection</a></li>
+   <li><a href="#event-handlers"><span class="secno">4.4 </span>Event handlers</a></li>
+   <li><a href="#states"><span class="secno">4.5 </span>States</a></li>
+   <li><a href="#request"><span class="secno">4.6 </span>Request</a>
     <ol class="toc">
-     <li><a href="#the-open()-method"><span class="secno">4.7.1 </span>The <code title="">open()</code> method</a></li>
-     <li><a href="#the-setrequestheader()-method"><span class="secno">4.7.2 </span>The <code title="">setRequestHeader()</code> method</a></li>
-     <li><a href="#the-timeout-attribute"><span class="secno">4.7.3 </span>The <code title="">timeout</code> attribute</a></li>
-     <li><a href="#the-withcredentials-attribute"><span class="secno">4.7.4 </span>The <code title="">withCredentials</code> attribute</a></li>
-     <li><a href="#the-upload-attribute"><span class="secno">4.7.5 </span>The <code title="">upload</code> attribute</a></li>
-     <li><a href="#the-send()-method"><span class="secno">4.7.6 </span>The <code title="">send()</code> method</a></li>
-     <li><a href="#infrastructure-for-the-send()-method"><span class="secno">4.7.7 </span>Infrastructure for the <code title="">send()</code> method</a></li>
-     <li><a href="#the-abort()-method"><span class="secno">4.7.8 </span>The <code title="">abort()</code> method</a></ol></li>
-   <li><a href="#response"><span class="secno">4.8 </span>Response</a>
+     <li><a href="#the-open()-method"><span class="secno">4.6.1 </span>The <code title="">open()</code> method</a></li>
+     <li><a href="#the-setrequestheader()-method"><span class="secno">4.6.2 </span>The <code title="">setRequestHeader()</code> method</a></li>
+     <li><a href="#the-timeout-attribute"><span class="secno">4.6.3 </span>The <code title="">timeout</code> attribute</a></li>
+     <li><a href="#the-withcredentials-attribute"><span class="secno">4.6.4 </span>The <code title="">withCredentials</code> attribute</a></li>
+     <li><a href="#the-upload-attribute"><span class="secno">4.6.5 </span>The <code title="">upload</code> attribute</a></li>
+     <li><a href="#the-send()-method"><span class="secno">4.6.6 </span>The <code title="">send()</code> method</a></li>
+     <li><a href="#infrastructure-for-the-send()-method"><span class="secno">4.6.7 </span>Infrastructure for the <code title="">send()</code> method</a></li>
+     <li><a href="#the-abort()-method"><span class="secno">4.6.8 </span>The <code title="">abort()</code> method</a></ol></li>
+   <li><a href="#response"><span class="secno">4.7 </span>Response</a>
     <ol class="toc">
-     <li><a href="#the-status-attribute"><span class="secno">4.8.1 </span>The <code title="">status</code> attribute</a></li>
-     <li><a href="#the-statustext-attribute"><span class="secno">4.8.2 </span>The <code title="">statusText</code> attribute</a></li>
-     <li><a href="#the-getresponseheader()-method"><span class="secno">4.8.3 </span>The <code title="">getResponseHeader()</code> method</a></li>
-     <li><a href="#the-getallresponseheaders()-method"><span class="secno">4.8.4 </span>The <code title="">getAllResponseHeaders()</code> method</a></li>
-     <li><a href="#response-entity-body-0"><span class="secno">4.8.5 </span>Response entity body</a></li>
-     <li><a href="#the-overridemimetype()-method"><span class="secno">4.8.6 </span>The <code title="">overrideMimeType()</code> method</a></li>
-     <li><a href="#the-responsetype-attribute"><span class="secno">4.8.7 </span>The <code title="">responseType</code> attribute</a></li>
-     <li><a href="#the-response-attribute"><span class="secno">4.8.8 </span>The <code title="">response</code> attribute</a></li>
-     <li><a href="#the-responsetext-attribute"><span class="secno">4.8.9 </span>The <code title="">responseText</code> attribute</a></li>
-     <li><a href="#the-responsexml-attribute"><span class="secno">4.8.10 </span>The <code title="">responseXML</code> attribute</a></ol></li>
-   <li><a href="#events"><span class="secno">4.9 </span>Events summary</a></ol></li>
+     <li><a href="#the-status-attribute"><span class="secno">4.7.1 </span>The <code title="">status</code> attribute</a></li>
+     <li><a href="#the-statustext-attribute"><span class="secno">4.7.2 </span>The <code title="">statusText</code> attribute</a></li>
+     <li><a href="#the-getresponseheader()-method"><span class="secno">4.7.3 </span>The <code title="">getResponseHeader()</code> method</a></li>
+     <li><a href="#the-getallresponseheaders()-method"><span class="secno">4.7.4 </span>The <code title="">getAllResponseHeaders()</code> method</a></li>
+     <li><a href="#response-entity-body-0"><span class="secno">4.7.5 </span>Response entity body</a></li>
+     <li><a href="#the-overridemimetype()-method"><span class="secno">4.7.6 </span>The <code title="">overrideMimeType()</code> method</a></li>
+     <li><a href="#the-responsetype-attribute"><span class="secno">4.7.7 </span>The <code title="">responseType</code> attribute</a></li>
+     <li><a href="#the-response-attribute"><span class="secno">4.7.8 </span>The <code title="">response</code> attribute</a></li>
+     <li><a href="#the-responsetext-attribute"><span class="secno">4.7.9 </span>The <code title="">responseText</code> attribute</a></li>
+     <li><a href="#the-responsexml-attribute"><span class="secno">4.7.10 </span>The <code title="">responseXML</code> attribute</a></ol></li>
+   <li><a href="#events"><span class="secno">4.8 </span>Events summary</a></ol></li>
  <li><a href="#interface-formdata"><span class="secno">5 </span>Interface <code title="">FormData</code></a></li>
  <li><a href="#interface-progressevent"><span class="secno">6 </span>Interface <code title="">ProgressEvent</code></a>
   <ol class="toc">
@@ -316,56 +315,23 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <a href="#xmlhttpreque
   readonly attribute <a class="external" href="http://dom.spec.whatwg.org/#document">Document</a>? <a href="#dom-xmlhttprequest-responsexml" title="dom-XMLHttpRequest-responseXML">responseXML</a>;
 };</pre>
 
+<p>Each <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object has a unique, associated
+<code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
 
 
-  <h3 id="base-url,-origin,-and-referrer"><span class="secno">4.1 </span>Base URL, origin, and referrer</h3>
-
-  <p>Each <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object has an associated
-  <dfn id="xmlhttprequest-base-url"><code>XMLHttpRequest</code> base URL</dfn>,
-  <dfn id="xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</dfn>, and
-  <dfn id="xmlhttprequest-referrer-source"><code>XMLHttpRequest</code> referrer source</dfn>.
-
-  <p class="note">The XMLHttpRequest standard defines
-  <a href="#xmlhttprequest-base-url"><code>XMLHttpRequest</code> base URL</a>,
-  <a href="#xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</a>, and
-  <a href="#xmlhttprequest-referrer-source"><code>XMLHttpRequest</code> referrer source</a> when the global
-  object is represented by the <code class="external"><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#window">Window</a></code>
-  object. Other contexts will have to define them as appropriate for
-  <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> to function as other contexts are considered
-  out of scope for this document.</p>
-
-  <p>In environments where the global object is represented by the
-  <code class="external"><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#window">Window</a></code> object the
-  <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object has an associated
-  <dfn id="xmlhttprequest-document"><code>XMLHttpRequest</code> document</dfn> which is the
-  <a class="external" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>
-  associated with the <code class="external"><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#window">Window</a></code> object for
-  which the <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> interface object was created.</p>
-
-  <p>In these environments the
-  <a href="#xmlhttprequest-referrer-source"><code>XMLHttpRequest</code> referrer source</a> is that
-  <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a>.
-
-  <p class="note">The
-  <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a> is also used to
-  determine the <a href="#xmlhttprequest-base-url"><code>XMLHttpRequest</code> base URL</a> and
-  <a href="#xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</a> at a later stage.
-
-
-
-<h3 id="task-sources"><span class="secno">4.2 </span>Task sources</h3>
+<h3 id="task-sources"><span class="secno">4.1 </span>Task sources</h3>
 
 <p>Each <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object has its own
 <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#task-source">task source</a>. Namely, the
 <dfn id="xmlhttprequest-task-source"><code>XMLHttpRequest</code> task source</dfn>.
 
 
-<h3 id="constructors"><span class="secno">4.3 </span>Constructors</h3>
+<h3 id="constructors"><span class="secno">4.2 </span>Constructors</h3>
 
 <p>The <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object has an associated
 <dfn id="anonymous-flag">anonymous flag</dfn>. If the <a href="#anonymous-flag">anonymous flag</a> is set,
 <a href="#user-credentials">user credentials</a> and the
-<a href="#xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</a> are not exposed when
+<a href="#source-origin">source origin</a> are not exposed when
 <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/fetching-resources.html#fetch" title="fetch">fetching</a> resources.
 
 <dl class="domintro">
@@ -392,7 +358,7 @@ constructor must run these steps:
 </ol>
 
 
-<h3 id="garbage-collection"><span class="secno">4.4 </span>Garbage collection</h3>
+<h3 id="garbage-collection"><span class="secno">4.3 </span>Garbage collection</h3>
 
 <!-- Based on EventSource and WebSocket. Not sure what I am doing. -->
 
@@ -435,7 +401,7 @@ discarding any further data received from the network for them.
 
 
 
-  <h3 id="event-handlers"><span class="secno">4.5 </span>Event handlers</h3>
+  <h3 id="event-handlers"><span class="secno">4.4 </span>Event handlers</h3>
 
 
   <p>The following are the
@@ -493,7 +459,7 @@ discarding any further data received from the network for them.
   </table>
 
 
-  <h3 id="states"><span class="secno">4.6 </span>States</h3>
+  <h3 id="states"><span class="secno">4.5 </span>States</h3>
 
   <dl class="domintro">
    <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-readystate" title="dom-XMLHttpRequest-readyState">readyState</a></code>
@@ -544,59 +510,36 @@ discarding any further data received from the network for them.
   during the <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a> state.
 
 
-  <h3 id="request"><span class="secno">4.7 </span>Request</h3>
+<h3 id="request"><span class="secno">4.6 </span>Request</h3>
 
-  <p>Each <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object has the following
-  request-associated concepts:</p>
+<p>Each <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object has the following
+request-associated concepts:
 
-  <dl>
-   <dt><dfn id="synchronous-flag">synchronous flag</dfn></dt>
-   <dd>Set when <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/fetching-resources.html#fetch" title="fetch">fetching</a> is
-   done synchronously. Initially unset.</dd>
+<dfn id="request-method">request method</dfn>,
+<dfn id="request-url">request URL</dfn>,
+<dfn id="request-username">request username</dfn>,
+<dfn id="request-password">request password</dfn>,
+<dfn id="author-request-headers">author request headers</dfn>,
+<dfn id="request-entity-body">request entity body</dfn>,
+<dfn id="source-origin">source origin</dfn>,
+<dfn id="referrer-source">referrer source</dfn>,
+<dfn id="synchronous-flag">synchronous flag</dfn>,
+<dfn id="upload-complete-flag">upload complete flag</dfn>, and
+<dfn id="upload-events-flag">upload events flag</dfn>.
 
-   <dt><dfn id="request-method">request method</dfn></dt>
-   <dd>The HTTP method used in the request.</dd>
+<p>The <a href="#author-request-headers">author request headers</a> is a list of HTTP header names
+and corresponding header values. Comparisons against the HTTP header names
+must be done in a case-insensitive manner. Initially it must be empty.
 
-   <dt><dfn id="request-url">request URL</dfn></dt>
-   <dd>The resolved <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/urls.html#url">URL</a> used in the
-   request.</dd>
+<p>The <a href="#request-entity-body">request entity body</a> must initially be null.
 
-   <dt><dfn id="request-username">request username</dfn></dt>
-   <dd>The username used in the request or null if there is no
-   username.</dd>
-
-   <dt><dfn id="request-password">request password</dfn></dt>
-   <dd>The password used in the request or null if there is no
-   password.</dd>
-
-   <dt><dfn id="author-request-headers">author request headers</dfn></dt>
-   <dd>A list consisting of HTTP header name/value pairs to be used in the
-   request. Checking against the header names in this list must always be
-   done in a case-insensitive manner.
-
-   <dt><dfn id="request-entity-body">request entity body</dfn></dt>
-   <dd>The <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-7.2">entity body</a> used in the
-   request or null if there is no
-   <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-7.2">entity body</a>.</dd>
-
-   <dt><dfn id="upload-complete-flag">upload complete flag</dfn></dt>
-   <dd>Set when no more events are to be dispatched on the
-   <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object. Initially unset.
-
-   <dt><dfn id="upload-events-flag">upload events flag</dfn></dt>
-   <dd>Set when event listeners are registered on the
-   <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object to determine whether a preflight
-   request is needed. Initially unset.</dd>
-
-  </dl>
-
-
-  <p>Each <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object also has a unique, associated
-  <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
+<p>The <a href="#synchronous-flag">synchronous flag</a>,
+<a href="#upload-complete-flag">upload complete flag</a>, and
+<a href="#upload-events-flag">upload events flag</a> must be initially unset.
 
 
 
-  <h4 id="the-open()-method"><span class="secno">4.7.1 </span>The <code title="">open()</code> method</h4>
+  <h4 id="the-open()-method"><span class="secno">4.6.1 </span>The <code title="">open()</code> method</h4>
 
   <dl class="domintro">
    <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-open" title="dom-XMLHttpRequest-open">open</a>(<var title="">method</var>,
@@ -623,8 +566,9 @@ discarding any further data received from the network for them.
     <code>CONNECT</code>, <code>TRACE</code> or <code>TRACK</code>.</p>
 
     <p>Throws an "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>"
-    exception if <var title="">async</var> is false, there is an associated
-    <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a> and either the
+    exception if <var title="">async</var> is false, the
+    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
+    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#document-environment">document environment</a>, and either the
     <a href="#anonymous-flag">anonymous flag</a> is set, the
     <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code> attribute is not
     zero, the
@@ -639,30 +583,57 @@ discarding any further data received from the network for them.
   method must run these steps (unless otherwise indicated):</p>
 
   <ol>
+   <li><p>Let <var title="">base</var> be null.
+
    <li>
-    <p>If there is an associated
-    <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a> run
-    these substeps:</p>
+    <p>If the
+    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
+    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#document-environment">document environment</a>, run these steps:
 
     <ol>
-     <li><p>If the
-     <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a> is not
+     <li>
+      <p>Let <var title="">document</var> be the
+      <a class="external" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>
+      associated with the global object for which the
+      <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> interface object was created from which
+      this <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object was created.
+
+      <p class="XXX">Should this move to the constructor phase?
+
+     <li><p>If <var title="">document</var> is not
      <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#fully-active">fully active</a>,
      <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
      "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception and
      terminate the overall set of steps.
 
-     <li><p>Let <a href="#xmlhttprequest-base-url"><code>XMLHttpRequest</code> base URL</a> be the
-     <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/urls.html#document-base-url">document base URL</a> of the
-     <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a>.</li>
+     <li><p>Set <var title="">base</var> to the
+     <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/urls.html#document-base-url">document base URL</a> of
+     <var title="">document</var>.
 
-     <li><p>Let <a href="#xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</a> be the
-     <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a> of the
-     <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a>
-     and let it be a globally unique identifier if the
-     <a href="#anonymous-flag">anonymous flag</a> is set.</li>
+     <li><p>Set <a href="#source-origin">source origin</a> to a globally unique identifier,
+     if the <a href="#anonymous-flag">anonymous flag</a> is set, and the
+     <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a> of <var title="">document</var>
+     otherwise.
+
+     <li><p>Set <a href="#referrer-source">referrer source</a> to <var title="">document</var>.
     </ol>
-   </li>
+
+   <li>
+    <p>If the
+    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
+    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#worker-environment">worker environment</a>, run these steps:
+
+    <ol>
+     <li><p>Set <var title="">base</var> to the
+     <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#script's-base-url">script's base URL</a>.
+
+     <li><p>Set <a href="#source-origin">source origin</a> to the
+     <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#concept-script" title="concept-script">script</a>'s
+     <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a>.
+
+     <li><p>Set <a href="#referrer-source">referrer source</a> to the
+     <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#script's-referrer-source">script's referrer source</a>.
+    </ol>
 
    <li><p>If <var>method</var> does not match the
    <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-5.1.1">Method</a> token production,
@@ -699,8 +670,7 @@ discarding any further data received from the network for them.
    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/urls.html#url">URL</a> with character encoding UTF-8.
 
    <li><p><a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/urls.html#resolve-a-url" title="Resolve a URL">Resolve</a>
-   <var title="">url</var> relative to the
-   <a href="#xmlhttprequest-base-url"><code>XMLHttpRequest</code> base URL</a>. If the algorithm
+   <var title="">url</var> relative to <var title="">base</var>. If the algorithm
    returns an error,
    <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
    "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" exception and terminate
@@ -733,8 +703,9 @@ discarding any further data received from the network for them.
    <li><p>If <var title="">url</var> just contains the <code>"user"</code>
    format let <var>temp user</var> be the user part.</li>
 
-   <li><p>If <var>async</var> is false, there is an associated
-   <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a> and either the
+   <li><p>If <var>async</var> is false, the
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#document-environment">document environment</a>, and either the
    <a href="#anonymous-flag">anonymous flag</a> is set, the
    <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code> attribute value is
    not zero, the
@@ -798,7 +769,7 @@ discarding any further data received from the network for them.
 
 
 
-  <h4 id="the-setrequestheader()-method"><span class="secno">4.7.2 </span>The <code title="">setRequestHeader()</code> method</h4>
+  <h4 id="the-setrequestheader()-method"><span class="secno">4.6.2 </span>The <code title="">setRequestHeader()</code> method</h4>
 
   <dl class="domintro">
    <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-setrequestheader" title="dom-XMLHttpRequest-setRequestHeader">setRequestHeader</a>(<var title="">header</var>, <var title="">value</var>)</code>
@@ -915,6 +886,8 @@ discarding any further data received from the network for them.
     matching <var>header</var> in the <a href="#author-request-headers">author request headers</a>
     list (for combine see section 4.2, RFC 2616).
     <a href="#refsHTTP">[HTTP]</a>
+    <!-- XXX "combine" should probably be replaced with
+         'append ", ", followed by value' -->
 
     <p class="note">The XMLHttpRequest standard intentionally constraints the
     use of HTTP here in line with contemporary implementations.
@@ -941,7 +914,7 @@ X-Test: one, two</code></pre>
   </div>
 
 
-  <h4 id="the-timeout-attribute"><span class="secno">4.7.3 </span>The <code title="">timeout</code> attribute</h4>
+  <h4 id="the-timeout-attribute"><span class="secno">4.6.3 </span>The <code title="">timeout</code> attribute</h4>
 
   <dl class="domintro">
    <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-timeout" title="dom-XMLHttpRequest-timeout">timeout</a></code>
@@ -957,8 +930,9 @@ X-Test: one, two</code></pre>
     (for the <code title="dom-XMLHttpRequest"><a href="#dom-xmlhttprequest">send()</a></code> method).
     <p>When set: throws an
     "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception if
-    the <a href="#synchronous-flag">synchronous flag</a> is set when there is an
-    associated <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a>.
+    the <a href="#synchronous-flag">synchronous flag</a> is set and the
+    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
+    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#document-environment">document environment</a>.
    </dd>
   </dl>
 
@@ -970,8 +944,9 @@ X-Test: one, two</code></pre>
   attribute must run these steps:
 
   <ol>
-   <li><p>If there is an associated
-   <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a> and the
+   <li><p>If the
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#document-environment">document environment</a> and the
    <a href="#synchronous-flag">synchronous flag</a> is set,
    <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
    "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception and
@@ -987,7 +962,7 @@ X-Test: one, two</code></pre>
   of <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/fetching-resources.html#fetch" title="fetch">fetching</a>.
 
 
-  <h4 id="the-withcredentials-attribute"><span class="secno">4.7.4 </span>The <code title="">withCredentials</code> attribute</h4>
+  <h4 id="the-withcredentials-attribute"><span class="secno">4.6.4 </span>The <code title="">withCredentials</code> attribute</h4>
 
   <dl class="domintro">
    <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-withcredentials" title="dom-XMLHttpRequest-withCredentials">withCredentials</a></code>
@@ -1004,8 +979,9 @@ X-Test: one, two</code></pre>
     the <a href="#send-flag"><code>send()</code> flag</a> is set.</p>
     <p>When set: throws an
     "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception if
-    either the <a href="#synchronous-flag">synchronous flag</a> is set when there is an
-    associated <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a> or if the
+    either the <a href="#synchronous-flag">synchronous flag</a> is set and the
+    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
+    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#document-environment">document environment</a> or if the
     <a href="#anonymous-flag">anonymous flag</a> is set.</p>
    </dd>
   </dl>
@@ -1036,8 +1012,9 @@ X-Test: one, two</code></pre>
    "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception and
    terminate these steps.
 
-   <li><p>If there is an associated
-   <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a> and the
+   <li><p>If the
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#document-environment">document environment</a> and the
    <a href="#synchronous-flag">synchronous flag</a> is set,
    <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
    "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception and
@@ -1056,7 +1033,7 @@ X-Test: one, two</code></pre>
   resources.</p>
 
 
-  <h4 id="the-upload-attribute"><span class="secno">4.7.5 </span>The <code title="">upload</code> attribute</h4>
+  <h4 id="the-upload-attribute"><span class="secno">4.6.5 </span>The <code title="">upload</code> attribute</h4>
 
   <dl class="domintro">
    <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-upload" title="dom-XMLHttpRequest-upload">upload</a></code>
@@ -1074,7 +1051,7 @@ X-Test: one, two</code></pre>
   object has an associated <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
 
 
-  <h4 id="the-send()-method"><span class="secno">4.7.6 </span>The <code title="">send()</code> method</h4>
+  <h4 id="the-send()-method"><span class="secno">4.6.6 </span>The <code title="">send()</code> method</h4>
 
   <dl class="domintro">
    <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send">send</a>([<var title="">data</var> = null])</code>
@@ -1265,8 +1242,8 @@ X-Test: one, two</code></pre>
 
    <li>
     <dl class="switch">
-     <dt>If the <a href="#xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</a> and the
-     <a href="#request-url">request URL</a> are <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#same-origin">same origin</a></dt>
+     <dt>If the <a href="#source-origin">source origin</a> and the <a href="#request-url">request URL</a>
+     are <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#same-origin">same origin</a></dt>
      <dt>If the <a href="#request-url">request URL</a>'s
      <code class="external" title="url-scheme"><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/urls.html#url-scheme">&lt;scheme&gt;</a></code> is
      "<code title="">data</code>"
@@ -1276,8 +1253,8 @@ X-Test: one, two</code></pre>
 
       <p><a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/fetching-resources.html#fetch">Fetch</a> the
       <a href="#request-url">request URL</a> from <i title="">origin</i>
-      <a href="#xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</a>, using
-      <a href="#xmlhttprequest-referrer-source"><code>XMLHttpRequest</code> referrer source</a> as
+      <a href="#source-origin">source origin</a>, using
+      <a href="#referrer-source">referrer source</a> as
       <i title="">override referrer source</i>, with the
       <i title="">synchronous flag</i> set if the
       <a href="#synchronous-flag">synchronous flag</a> is set, using HTTP method
@@ -1345,13 +1322,13 @@ X-Test: one, two</code></pre>
        <dd>The <a href="#request-entity-body">request entity body</a>.</dd>
 
        <dt>source origin</dt>
-       <dd>The <a href="#xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</a>.</dd>
+       <dd>The <a href="#source-origin">source origin</a>.</dd>
 
        <dt>referrer source
        <dd>If the <a href="#anonymous-flag">anonymous flag</a> is set, the
        <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/urls.html#url">URL</a>
-       "<code title="">about:blank</code>", or the
-       <a href="#xmlhttprequest-referrer-source"><code>XMLHttpRequest</code> referrer source</a> otherwise.
+       "<code title="">about:blank</code>", and the
+       <a href="#referrer-source">referrer source</a> otherwise.
 
        <dt>omit credentials flag</dt>
        <dd>Set if
@@ -1413,7 +1390,7 @@ X-Test: one, two</code></pre>
   handle <code>401 Unauthorized</code> requests appropriately.</p>
 
   <p>If authentication fails,
-  <a href="#xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</a> and the
+  <a href="#source-origin">source origin</a> and the
   <a href="#request-url">request URL</a> are <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#same-origin">same origin</a>,
   <code title="http-authorization">Authorization</code> is not in the list
   of <a href="#author-request-headers">author request headers</a>, <a href="#request-username">request username</a> is
@@ -1488,7 +1465,7 @@ X-Test: one, two</code></pre>
   This ensures that authors have a predictable API.</p>
 
 
-  <h4 id="infrastructure-for-the-send()-method"><span class="secno">4.7.7 </span>Infrastructure for the <code title="">send()</code> method</h4>
+  <h4 id="infrastructure-for-the-send()-method"><span class="secno">4.6.7 </span>Infrastructure for the <code title="">send()</code> method</h4>
 
   <p>The <dfn id="same-origin-request-event-rules">same-origin request event rules</dfn> are as follows:</p>
 
@@ -1505,7 +1482,7 @@ X-Test: one, two</code></pre>
      <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/urls.html#url">URL</a> conveyed by the
      <code>Location</code> header.</li>
 
-     <li><p>If the <a href="#xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</a> and the
+     <li><p>If the <a href="#source-origin">source origin</a> and the
      <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a> of <a href="#request-url">request URL</a>
      are <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#same-origin">same origin</a> transparently follow
      the redirect while observing the
@@ -1782,7 +1759,7 @@ X-Test: one, two</code></pre>
 
 
 
-  <h4 id="the-abort()-method"><span class="secno">4.7.8 </span>The <code title="">abort()</code> method</h4>
+  <h4 id="the-abort()-method"><span class="secno">4.6.8 </span>The <code title="">abort()</code> method</h4>
 
   <dl class="domintro">
    <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-abort" title="dom-XMLHttpRequest-abort">abort</a>()</code>
@@ -1871,9 +1848,9 @@ X-Test: one, two</code></pre>
 
 
 
-  <h3 id="response"><span class="secno">4.8 </span>Response</h3>
+  <h3 id="response"><span class="secno">4.7 </span>Response</h3>
 
-  <h4 id="the-status-attribute"><span class="secno">4.8.1 </span>The <code title="">status</code> attribute</h4>
+  <h4 id="the-status-attribute"><span class="secno">4.7.1 </span>The <code title="">status</code> attribute</h4>
 
   <dl class="domintro">
    <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-status" title="dom-XMLHttpRequest-status">status</a></code>
@@ -1898,7 +1875,7 @@ X-Test: one, two</code></pre>
   </ol>
 
 
-  <h4 id="the-statustext-attribute"><span class="secno">4.8.2 </span>The <code title="">statusText</code> attribute</h4>
+  <h4 id="the-statustext-attribute"><span class="secno">4.7.2 </span>The <code title="">statusText</code> attribute</h4>
 
   <dl class="domintro">
    <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-statustext" title="dom-XMLHttpRequest-statusText">statusText</a></code>
@@ -1922,7 +1899,7 @@ X-Test: one, two</code></pre>
   </ol>
 
 
-  <h4 id="the-getresponseheader()-method"><span class="secno">4.8.3 </span>The <code title="">getResponseHeader()</code> method</h4>
+  <h4 id="the-getresponseheader()-method"><span class="secno">4.7.3 </span>The <code title="">getResponseHeader()</code> method</h4>
 
   <dl class="domintro">
    <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-getresponseheader" title="dom-XMLHttpRequest-getResponseHeader">getResponseHeader</a>(<var title="">header</var>)</code>
@@ -1987,7 +1964,7 @@ client.onreadystatechange = function() {
   </div>
 
 
-  <h4 id="the-getallresponseheaders()-method"><span class="secno">4.8.4 </span>The <code title="">getAllResponseHeaders()</code> method</h4>
+  <h4 id="the-getallresponseheaders()-method"><span class="secno">4.7.4 </span>The <code title="">getAllResponseHeaders()</code> method</h4>
 
   <dl class="domintro">
    <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-getallresponseheaders" title="dom-XMLHttpRequest-getAllResponseHeaders">getAllResponseHeaders</a>()</code>
@@ -2050,7 +2027,7 @@ Content-Type: text/plain; charset=utf-8</code></pre>
 
 
 
-  <h4 id="response-entity-body-0"><span class="secno">4.8.5 </span>Response entity body</h4>
+  <h4 id="response-entity-body-0"><span class="secno">4.7.5 </span>Response entity body</h4>
 
   <p>The <dfn id="response-mime-type">response MIME type</dfn> is the
   MIME type the <code>Content-Type</code> header contains excluding any
@@ -2199,7 +2176,7 @@ Content-Type: text/plain; charset=utf-8</code></pre>
 
    <li><p>Set <var title="">document</var>'s
    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a> to the
-   <a href="#xmlhttprequest-origin"><code>XMLHttpRequest</code> origin</a>.
+   <a href="#source-origin">source origin</a>.
 
    <li><p>Set <var title="">document</var>'s
    <a class="external" href="http://dom.spec.whatwg.org/#concept-document-content-type" title="concept-document-content-type">content type</a>
@@ -2286,7 +2263,7 @@ following algorithm:
 
 
 
-  <h4 id="the-overridemimetype()-method"><span class="secno">4.8.6 </span>The <code title="">overrideMimeType()</code> method</h4>
+  <h4 id="the-overridemimetype()-method"><span class="secno">4.7.6 </span>The <code title="">overrideMimeType()</code> method</h4>
 
   <dl class="domintro">
    <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-overridemimetype" title="dom-XMLHttpRequest-overrideMimeType">overrideMimeType</a>(<var title="">mime</var>)</code>
@@ -2333,7 +2310,7 @@ following algorithm:
 
 
 
-  <h4 id="the-responsetype-attribute"><span class="secno">4.8.7 </span>The <code title="">responseType</code> attribute</h4>
+  <h4 id="the-responsetype-attribute"><span class="secno">4.7.7 </span>The <code title="">responseType</code> attribute</h4>
 
 
   <dl class="domintro">
@@ -2354,8 +2331,9 @@ following algorithm:
     <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>.
     <p>When set: throws an
     "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception if the
-    <a href="#synchronous-flag">synchronous flag</a> is set and there is an associated
-    <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a>.</p>
+    <a href="#synchronous-flag">synchronous flag</a> is set and the
+    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
+    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#document-environment">document environment</a>.
   </dl>
 
 
@@ -2376,8 +2354,9 @@ following algorithm:
    "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception and
    terminate these steps.
 
-   <li><p>If there is an associated
-   <a href="#xmlhttprequest-document"><code>XMLHttpRequest</code> document</a> and the
+   <li><p>If the
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#document-environment">document environment</a> and the
    <a href="#synchronous-flag">synchronous flag</a> is set,
    <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
    "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception and
@@ -2391,7 +2370,7 @@ following algorithm:
 
 
 
-  <h4 id="the-response-attribute"><span class="secno">4.8.8 </span>The <code title="">response</code> attribute</h4>
+  <h4 id="the-response-attribute"><span class="secno">4.7.8 </span>The <code title="">response</code> attribute</h4>
 
   <dl class="domintro">
    <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-response" title="dom-XMLHttpRequest-response">response</a></code>
@@ -2475,7 +2454,7 @@ following algorithm:
 
 
 
-  <h4 id="the-responsetext-attribute"><span class="secno">4.8.9 </span>The <code title="">responseText</code> attribute</h4>
+  <h4 id="the-responsetext-attribute"><span class="secno">4.7.9 </span>The <code title="">responseText</code> attribute</h4>
 
   <dl class="domintro">
    <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-responsetext" title="dom-XMLHttpRequest-responseText">responseText</a></code>
@@ -2515,7 +2494,7 @@ following algorithm:
   </ol>
 
 
-  <h4 id="the-responsexml-attribute"><span class="secno">4.8.10 </span>The <code title="">responseXML</code> attribute</h4>
+  <h4 id="the-responsexml-attribute"><span class="secno">4.7.10 </span>The <code title="">responseXML</code> attribute</h4>
 
   <dl class="domintro">
    <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-responsexml" title="dom-XMLHttpRequest-responseXML">responseXML</a></code>
@@ -2559,7 +2538,7 @@ following algorithm:
   as documents.</p>
 
 
-  <h3 id="events"><span class="secno">4.9 </span>Events summary</h3>
+  <h3 id="events"><span class="secno">4.8 </span>Events summary</h3>
 
   <p><em>This section is non-normative.</em></p>
 
