@@ -286,6 +286,11 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
 <span>source origin</span> are not exposed when
 <span data-anolis-spec=html title=fetch>fetching</span> resources.
 
+<p>When the <span data-anolis-spec=html>JavaScript global environment</span>
+is a <span data-anolis-spec=html>document environment</span>, the
+<code>XMLHttpRequest</code> object has an associated
+<dfn title=concept-XMLHttpRequest-document>document</dfn>.
+
 <dl class=domintro>
  <dt><code><var title>client</var> = new <span title=dom-XMLHttpRequest>XMLHttpRequest</span>()</code>
  <dd>Returns a new <code>XMLHttpRequest</code> object.
@@ -305,6 +310,14 @@ constructor must run these steps:
 
  <li><p>If <var title>options</var>'s <code title>anon</code> member is
  true, set <var title>xhr</var>'s <span>anonymous flag</span>.
+
+ <li><p>If the
+ <span data-anolis-spec=html>JavaScript global environment</span> is a
+ <span data-anolis-spec=html>document environment</span>, set
+ <span title=concept-XMLHttpRequest-document>document</span> to the
+ <span title=concept-document data-anolis-spec=dom>document</span>
+ associated with the global object of <var title>xhr</var>'s interface
+ object.
 
  <li><p>Return <var title>xhr</var>.
 </ol>
@@ -543,31 +556,23 @@ must be done in a case-insensitive manner. Initially it must be empty.
     <span data-anolis-spec=html>document environment</span>, run these steps:
 
     <ol>
-     <li>
-      <p>Let <var title>document</var> be the
-      <span data-anolis-spec=dom title=concept-document>document</span>
-      associated with the global object for which the
-      <code>XMLHttpRequest</code> interface object was created from which
-      this <code>XMLHttpRequest</code> object was created.
-
-      <p class=XXX>Should this move to the constructor phase?
-
-     <li><p>If <var title>document</var> is not
-     <span data-anolis-spec=html>fully active</span>,
+     <li><p>If <span title=concept-XMLHttpRequest-document>document</span>
+     is not <span data-anolis-spec=html>fully active</span>,
      <span data-anolis-spec=dom title=concept-throw>throw</span> an
      "<code data-anolis-spec=dom>InvalidStateError</code>" exception and
      terminate the overall set of steps.
 
      <li><p>Set <var title>base</var> to the
      <span data-anolis-spec=html>document base URL</span> of
-     <var title>document</var>.
+     <span title=concept-XMLHttpRequest-document>document</span>.
 
      <li><p>Set <span>source origin</span> to a globally unique identifier,
      if the <span>anonymous flag</span> is set, and the
-     <span data-anolis-spec=html>origin</span> of <var title>document</var>
-     otherwise.
+     <span data-anolis-spec=html>origin</span> of
+     <span title=concept-XMLHttpRequest-document>document</span> otherwise.
 
-     <li><p>Set <span>referrer source</span> to <var title>document</var>.
+     <li><p>Set <span>referrer source</span> to
+     <span title=concept-XMLHttpRequest-document>document</span>.
     </ol>
 
    <li>
