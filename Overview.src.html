@@ -513,12 +513,8 @@ must be done in a case-insensitive manner. Initially it must be empty.
     <span>synchronous flag</span>.</p>
 
     <p>Throws a "<code data-anolis-spec=dom>SyntaxError</code>" exception if
-    one of the following is true:</p>
-
-    <ul>
-     <li><var title>method</var> is not a valid HTTP method.</li>
-     <li><var title>url</var> cannot be parsed.</li>
-    </ul>
+    either <var title>method</var> is not a valid HTTP method or
+    <var title>url</var> cannot be parsed.
 
     <p>Throws a "<code data-anolis-spec=dom>SecurityError</code>" exception
     if <var title>method</var> is a case-insensitive match for
@@ -626,20 +622,6 @@ must be done in a case-insensitive manner. Initially it must be empty.
    "<code data-anolis-spec=dom>SyntaxError</code>" exception and terminate
    these steps.
 
-   <li><p>If <var>async</var> is false, the
-   <span data-anolis-spec=html>JavaScript global environment</span> is a
-   <span data-anolis-spec=html>document environment</span>, and either the
-   <span>anonymous flag</span> is set, the
-   <code title=dom-XMLHttpRequest-timeout>timeout</code> attribute value is
-   not zero, the
-   <code title=dom-XMLHttpRequest-withCredentials>withCredentials</code>
-   attribute value is true, or the
-   <code title=dom-XMLHttpRequest-responseType>responseType</code>
-   attribute value is not the empty string,
-   <span data-anolis-spec=dom title=concept-throw>throw</span> an
-   "<code data-anolis-spec=dom>InvalidAccessError</code>" exception and
-   terminate these steps.
-
    <li>
     <p>If <var title>parsed URL</var>'s
     <span data-anolis-spec=url>relative flag</span> is set, run these
@@ -657,6 +639,20 @@ must be done in a case-insensitive manner. Initially it must be empty.
      to
      <var>password</var>.
     </ol>
+
+   <li><p>If <var>async</var> is false, the
+   <span data-anolis-spec=html>JavaScript global environment</span> is a
+   <span data-anolis-spec=html>document environment</span>, and either the
+   <span>anonymous flag</span> is set, the
+   <code title=dom-XMLHttpRequest-timeout>timeout</code> attribute value is
+   not zero, the
+   <code title=dom-XMLHttpRequest-withCredentials>withCredentials</code>
+   attribute value is true, or the
+   <code title=dom-XMLHttpRequest-responseType>responseType</code>
+   attribute value is not the empty string,
+   <span data-anolis-spec=dom title=concept-throw>throw</span> an
+   "<code data-anolis-spec=dom>InvalidAccessError</code>" exception and
+   terminate these steps.
 
    <li><p><span title="terminate abort()">Terminate the <code>abort()</code> algorithm</span>.</p></li>
 
@@ -1256,7 +1252,7 @@ X-Test: one, two</code></pre>
 
        <dt>referrer source
        <dd>If the <span>anonymous flag</span> is set, the
-       <span data-anolis-spec=html>URL</span>
+       <span data-anolis-spec=url>URL</span>
        "<code title>about:blank</code>", and the
        <span>referrer source</span> otherwise.
 
@@ -1413,8 +1409,10 @@ X-Test: one, two</code></pre>
 
     <ol>
      <li><p>Set the <span>request URL</span> to the
-     <span data-anolis-spec=html>URL</span> conveyed by the
+     <span data-anolis-spec=url>URL</span> conveyed by the
      <code>Location</code> header.</p></li>
+     <!-- XXX fetch: this requires parsing and such too. Either HTTP or
+          Fetch needs to handle this. -->
 
      <li><p>If the <span>source origin</span> and the
      <span data-anolis-spec=html>origin</span> of <span>request URL</span>
@@ -2157,7 +2155,7 @@ following algorithm:
  <li><p>If the <span>response entity body</span> is null, return an empty
  <code data-anolis-spec=streams>Stream</code> object.
 
- <li><p>Return a <code data-anolis-spec=streams>Stream</code> object \
+ <li><p>Return a <code data-anolis-spec=streams>Stream</code> object
  representing the <span>response entity body</span>.
 </ol>
 
@@ -2821,7 +2819,7 @@ this section.
  or the default otherwise.
 
  <li><p>Set the <span>response entity body</span> to the data the
- <span data-anolis-spec=html>URL</span> encodes, base64 decoded if the
+ <span data-anolis-spec=url>URL</span> encodes, base64 decoded if the
  "<code title>;base64</code>" flag is present.
 </ul>
 

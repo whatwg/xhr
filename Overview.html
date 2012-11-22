@@ -561,12 +561,8 @@ must be done in a case-insensitive manner. Initially it must be empty.
     <a href="#synchronous-flag">synchronous flag</a>.</p>
 
     <p>Throws a "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" exception if
-    one of the following is true:</p>
-
-    <ul>
-     <li><var title="">method</var> is not a valid HTTP method.</li>
-     <li><var title="">url</var> cannot be parsed.</li>
-    </ul>
+    either <var title="">method</var> is not a valid HTTP method or
+    <var title="">url</var> cannot be parsed.
 
     <p>Throws a "<code class="external"><a href="http://dom.spec.whatwg.org/#securityerror">SecurityError</a></code>" exception
     if <var title="">method</var> is a case-insensitive match for
@@ -674,20 +670,6 @@ must be done in a case-insensitive manner. Initially it must be empty.
    "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" exception and terminate
    these steps.
 
-   <li><p>If <var>async</var> is false, the
-   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
-   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#document-environment">document environment</a>, and either the
-   <a href="#anonymous-flag">anonymous flag</a> is set, the
-   <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code> attribute value is
-   not zero, the
-   <code title="dom-XMLHttpRequest-withCredentials"><a href="#dom-xmlhttprequest-withcredentials">withCredentials</a></code>
-   attribute value is true, or the
-   <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code>
-   attribute value is not the empty string,
-   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
-   "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception and
-   terminate these steps.
-
    <li>
     <p>If <var title="">parsed URL</var>'s
     <a class="external" href="http://url.spec.whatwg.org/#relative-flag">relative flag</a> is set, run these
@@ -705,6 +687,20 @@ must be done in a case-insensitive manner. Initially it must be empty.
      to
      <var>password</var>.
     </ol>
+
+   <li><p>If <var>async</var> is false, the
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#document-environment">document environment</a>, and either the
+   <a href="#anonymous-flag">anonymous flag</a> is set, the
+   <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code> attribute value is
+   not zero, the
+   <code title="dom-XMLHttpRequest-withCredentials"><a href="#dom-xmlhttprequest-withcredentials">withCredentials</a></code>
+   attribute value is true, or the
+   <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code>
+   attribute value is not the empty string,
+   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
+   "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception and
+   terminate these steps.
 
    <li><p><a href="#terminate-abort()" title="terminate abort()">Terminate the <code>abort()</code> algorithm</a>.</li>
 
@@ -1304,7 +1300,7 @@ X-Test: one, two</code></pre>
 
        <dt>referrer source
        <dd>If the <a href="#anonymous-flag">anonymous flag</a> is set, the
-       <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/urls.html#url">URL</a>
+       <a class="external" href="http://url.spec.whatwg.org/#url">URL</a>
        "<code title="">about:blank</code>", and the
        <a href="#referrer-source">referrer source</a> otherwise.
 
@@ -1461,8 +1457,10 @@ X-Test: one, two</code></pre>
 
     <ol>
      <li><p>Set the <a href="#request-url">request URL</a> to the
-     <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/urls.html#url">URL</a> conveyed by the
+     <a class="external" href="http://url.spec.whatwg.org/#url">URL</a> conveyed by the
      <code>Location</code> header.</li>
+     <!-- XXX fetch: this requires parsing and such too. Either HTTP or
+          Fetch needs to handle this. -->
 
      <li><p>If the <a href="#source-origin">source origin</a> and the
      <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a> of <a href="#request-url">request URL</a>
@@ -2205,7 +2203,7 @@ following algorithm:
  <li><p>If the <a href="#response-entity-body">response entity body</a> is null, return an empty
  <code class="external"><a href="http://dvcs.w3.org/hg/streams-api/raw-file/tip/Overview.htm#idl-def-Stream">Stream</a></code> object.
 
- <li><p>Return a <code class="external"><a href="http://dvcs.w3.org/hg/streams-api/raw-file/tip/Overview.htm#idl-def-Stream">Stream</a></code> object \
+ <li><p>Return a <code class="external"><a href="http://dvcs.w3.org/hg/streams-api/raw-file/tip/Overview.htm#idl-def-Stream">Stream</a></code> object
  representing the <a href="#response-entity-body">response entity body</a>.
 </ol>
 
@@ -2869,7 +2867,7 @@ this section.
  or the default otherwise.
 
  <li><p>Set the <a href="#response-entity-body">response entity body</a> to the data the
- <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/urls.html#url">URL</a> encodes, base64 decoded if the
+ <a class="external" href="http://url.spec.whatwg.org/#url">URL</a> encodes, base64 decoded if the
  "<code title="">;base64</code>" flag is present.
 </ul>
 
