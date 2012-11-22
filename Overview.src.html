@@ -180,7 +180,7 @@ community.
 
 <p>This specification heavily borrows terminology, from
 Cross-Origin Resource Sharing, DOM, DOM Parsing and Serialization, Encoding,
-File API, HTML, HTTP, Streams API, Typed Array, Web IDL, and XML.
+File API, HTML, HTTP, Streams API, Typed Array, URL, Web IDL, and XML.
 
 <span data-anolis-ref>CORS</span>
 <span data-anolis-ref>DOM</span>
@@ -191,6 +191,7 @@ File API, HTML, HTTP, Streams API, Typed Array, Web IDL, and XML.
 <span data-anolis-ref>HTTP</span>
 <span data-anolis-ref>STREAMS</span>
 <span data-anolis-ref>TYPEDARRAY</span>
+<span data-anolis-ref>URL</span>
 <span data-anolis-ref>WEBIDL</span>
 <span data-anolis-ref>XML</span> <span data-anolis-ref>XMLNS</span>
 
@@ -482,8 +483,6 @@ request-associated concepts:
 
 <dfn>request method</dfn>,
 <dfn>request URL</dfn>,
-<dfn>request username</dfn>,
-<dfn>request password</dfn>,
 <dfn id="author-request-headers">author request headers</dfn>,
 <dfn>request entity body</dfn>,
 <dfn>source origin</dfn>,
@@ -512,18 +511,15 @@ must be done in a case-insensitive manner. Initially it must be empty.
    <var title>password</var> = null]]])</code>
 
    <dd>
-    <p>Sets the <span>request method</span>, <span>request URL</span>,
-    <span>synchronous flag</span>, <span>request username</span>, and
-    <span>request password</span>.</p>
+    <p>Sets the <span>request method</span>, <span>request URL</span>, and
+    <span>synchronous flag</span>.</p>
 
     <p>Throws a "<code data-anolis-spec=dom>SyntaxError</code>" exception if
     one of the following is true:</p>
 
     <ul>
      <li><var title>method</var> is not a valid HTTP method.</li>
-     <li><var title>url</var> cannot be resolved.</li>
-     <li><var title>url</var> contains the <code>"user:password"</code>
-     format in the <code data-anolis-spec=uri>userinfo</code> production.
+     <li><var title>url</var> cannot be parsed.</li>
     </ul>
 
     <p>Throws a "<code data-anolis-spec=dom>SecurityError</code>" exception
@@ -623,42 +619,14 @@ must be done in a case-insensitive manner. Initially it must be empty.
     <span data-anolis-ref>HTTPVERBSEC</span>
    </li>
 
-   <li><p>Let <var title>url</var> be a
-   <span data-anolis-spec=html>URL</span> with character encoding UTF-8.
+   <li><p>Let <var title>parsed URL</var> be the result of
+   <span data-anolis-spec=url title=concept-url-parser>parsing</span>
+   <var title>url</var> with <var title>base</var>.
 
-   <li><p><span title="Resolve a URL" data-anolis-spec=html>Resolve</span>
-   <var title>url</var> relative to <var title>base</var>. If the algorithm
-   returns an error,
+   <li><p>If <var title>parsed URL</var> is failure,
    <span data-anolis-spec=dom title=concept-throw>throw</span> a
    "<code data-anolis-spec=dom>SyntaxError</code>" exception and terminate
    these steps.
-
-   <!-- Presto and Gecko override the encoding. WebKit does not. Trident
-   does not support non-ASCII URLs. This matters for the <query> component,
-   see HTML. -->
-
-   <li><p>Drop
-   <code data-anolis-spec=html title=url-fragment>&lt;fragment></code> from
-   <var title>url</var>.</p></li>
-
-   <li><p>If the <code>"user:password"</code> format in the
-   <code data-anolis-spec=uri>userinfo</code> production is not supported
-   for the relevant
-   <code data-anolis-spec=html title=url-scheme>&lt;scheme></code> and
-   <var title>url</var> contains this format,
-   <span data-anolis-spec=dom title=concept-throw>throw</span> a
-   "<code data-anolis-spec=dom>SyntaxError</code>" and terminate these
-   steps.
-
-   <!-- XXX need to throw here for "user:password" or just "user" for
-            cross-origin unless we solve this in another way -->
-
-   <li><p>If <var title>url</var> contains the <code>"user:password"</code>
-   format let <var>temp user</var> be the user part and
-   <var>temp password</var> be the password part.</p></li>
-
-   <li><p>If <var title>url</var> just contains the <code>"user"</code>
-   format let <var>temp user</var> be the user part.</p></li>
 
    <li><p>If <var>async</var> is false, the
    <span data-anolis-spec=html>JavaScript global environment</span> is a
@@ -674,11 +642,23 @@ must be done in a case-insensitive manner. Initially it must be empty.
    "<code data-anolis-spec=dom>InvalidAccessError</code>" exception and
    terminate these steps.
 
-   <li><p>If the <var title>user</var> argument is not null, set
-   <var>temp user</var> to <var>user</var>.
+   <li>
+    <p>If <var title>parsed URL</var>'s
+    <span data-anolis-spec=url>relative flag</span> is set, run these
+    substeps:
 
-   <li><p>If the <var title>password</var> argument is not null, set
-   <var>temp password</var> to <var>password</var>.
+    <ol>
+     <li><p>If the <var title>user</var> argument is not null, set
+     <var title>parsed URL</var>'s
+     <span data-anolis-spec=url title=concept-url-username>username</span>
+     to <var>user</var>.
+
+     <li><p>If the <var title>password</var> argument is not null, set
+     <var title>parsed URL</var>'s
+     <span data-anolis-spec=url title=concept-url-password>password</span>
+     to
+     <var>password</var>.
+    </ol>
 
    <li><p><span title="terminate abort()">Terminate the <code>abort()</code> algorithm</span>.</p></li>
 
@@ -701,14 +681,10 @@ must be done in a case-insensitive manner. Initially it must be empty.
 
      <li><p>Set <span>request method</span> to <var>method</var>.
 
-     <li><p>Set <span>request URL</span> to <var title>url</var>.
+     <li><p>Set <span>request URL</span> to <var title>parsed URL</var>.
 
      <li><p>If <var>async</var> is false, set the
      <span>synchronous flag</span>.
-
-     <li><p>Set <span>request username</span> to <var>temp user</var>.
-
-     <li><p>Set <span>request password</span> to <var>temp password</var>.
 
      <li><p>Set <span>author request headers</span> to the empty list.
 
@@ -1215,10 +1191,9 @@ X-Test: one, two</code></pre>
       <i title>override referrer source</i>, with the
       <i title>synchronous flag</i> set if the
       <span>synchronous flag</span> is set, using HTTP method
-      <span>request method</span>, user <span>request username</span> (if
-      non-null) and password <span>request password</span> (if non-null),
-      taking into account the <span>request entity body</span>, list of
-      <span>author request headers</span> and the rules listed at the end of
+      <span>request method</span>, taking into account the
+      <span>request entity body</span>, list of
+      <span>author request headers</span>, and the rules listed at the end of
       this section.</p>
 
       <dl class=switch>
@@ -1350,10 +1325,14 @@ X-Test: one, two</code></pre>
   <span>source origin</span> and the
   <span>request URL</span> are <span data-anolis-spec=html>same origin</span>,
   <code title="http-authorization">Authorization</code> is not in the list
-  of <span>author request headers</span>, <span>request username</span> is
-  null, and <span>request password</span> is null, user agents
-  should prompt the end user for their username and
+  of <span>author request headers</span>,
+  <span>request URL</span>'s
+  <span data-anolis-spec=url title=concept-url-username>username</span> is
+  the empty string and <span>request URL</span>'s
+  <span data-anolis-spec=url title=concept-url-password>password</span> is
+  null, user agents should prompt the end user for their username and
   password.</p>
+  <!-- XXX this should probably be defined in "fetch" -->
 
   <p>Otherwise, if authentication fails, user agents
   must not prompt the end user for their username and

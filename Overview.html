@@ -228,7 +228,7 @@ community.
 
 <p>This specification heavily borrows terminology, from
 Cross-Origin Resource Sharing, DOM, DOM Parsing and Serialization, Encoding,
-File API, HTML, HTTP, Streams API, Typed Array, Web IDL, and XML.
+File API, HTML, HTTP, Streams API, Typed Array, URL, Web IDL, and XML.
 
 <a href="#refsCORS">[CORS]</a>
 <a href="#refsDOM">[DOM]</a>
@@ -239,6 +239,7 @@ File API, HTML, HTTP, Streams API, Typed Array, Web IDL, and XML.
 <a href="#refsHTTP">[HTTP]</a>
 <a href="#refsSTREAMS">[STREAMS]</a>
 <a href="#refsTYPEDARRAY">[TYPEDARRAY]</a>
+<a href="#refsURL">[URL]</a>
 <a href="#refsWEBIDL">[WEBIDL]</a>
 <a href="#refsXML">[XML]</a> <a href="#refsXMLNS">[XMLNS]</a>
 
@@ -530,8 +531,6 @@ request-associated concepts:
 
 <dfn id="request-method">request method</dfn>,
 <dfn id="request-url">request URL</dfn>,
-<dfn id="request-username">request username</dfn>,
-<dfn id="request-password">request password</dfn>,
 <dfn id="author-request-headers">author request headers</dfn>,
 <dfn id="request-entity-body">request entity body</dfn>,
 <dfn id="source-origin">source origin</dfn>,
@@ -560,18 +559,15 @@ must be done in a case-insensitive manner. Initially it must be empty.
    <var title="">password</var> = null]]])</code>
 
    <dd>
-    <p>Sets the <a href="#request-method">request method</a>, <a href="#request-url">request URL</a>,
-    <a href="#synchronous-flag">synchronous flag</a>, <a href="#request-username">request username</a>, and
-    <a href="#request-password">request password</a>.</p>
+    <p>Sets the <a href="#request-method">request method</a>, <a href="#request-url">request URL</a>, and
+    <a href="#synchronous-flag">synchronous flag</a>.</p>
 
     <p>Throws a "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" exception if
     one of the following is true:</p>
 
     <ul>
      <li><var title="">method</var> is not a valid HTTP method.</li>
-     <li><var title="">url</var> cannot be resolved.</li>
-     <li><var title="">url</var> contains the <code>"user:password"</code>
-     format in the <code class="external"><a href="http://tools.ietf.org/html/rfc2616/#section-3.2.1">userinfo</a></code> production.
+     <li><var title="">url</var> cannot be parsed.</li>
     </ul>
 
     <p>Throws a "<code class="external"><a href="http://dom.spec.whatwg.org/#securityerror">SecurityError</a></code>" exception
@@ -671,42 +667,14 @@ must be done in a case-insensitive manner. Initially it must be empty.
     <a href="#refsHTTPVERBSEC">[HTTPVERBSEC]</a>
    </li>
 
-   <li><p>Let <var title="">url</var> be a
-   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/urls.html#url">URL</a> with character encoding UTF-8.
+   <li><p>Let <var title="">parsed URL</var> be the result of
+   <a class="external" href="http://url.spec.whatwg.org/#concept-url-parser" title="concept-url-parser">parsing</a>
+   <var title="">url</var> with <var title="">base</var>.
 
-   <li><p><a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/urls.html#resolve-a-url" title="Resolve a URL">Resolve</a>
-   <var title="">url</var> relative to <var title="">base</var>. If the algorithm
-   returns an error,
+   <li><p>If <var title="">parsed URL</var> is failure,
    <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
    "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" exception and terminate
    these steps.
-
-   <!-- Presto and Gecko override the encoding. WebKit does not. Trident
-   does not support non-ASCII URLs. This matters for the <query> component,
-   see HTML. -->
-
-   <li><p>Drop
-   <code class="external" title="url-fragment"><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/urls.html#url-fragment">&lt;fragment&gt;</a></code> from
-   <var title="">url</var>.</li>
-
-   <li><p>If the <code>"user:password"</code> format in the
-   <code class="external"><a href="http://tools.ietf.org/html/rfc2616/#section-3.2.1">userinfo</a></code> production is not supported
-   for the relevant
-   <code class="external" title="url-scheme"><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/urls.html#url-scheme">&lt;scheme&gt;</a></code> and
-   <var title="">url</var> contains this format,
-   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
-   "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" and terminate these
-   steps.
-
-   <!-- XXX need to throw here for "user:password" or just "user" for
-            cross-origin unless we solve this in another way -->
-
-   <li><p>If <var title="">url</var> contains the <code>"user:password"</code>
-   format let <var>temp user</var> be the user part and
-   <var>temp password</var> be the password part.</li>
-
-   <li><p>If <var title="">url</var> just contains the <code>"user"</code>
-   format let <var>temp user</var> be the user part.</li>
 
    <li><p>If <var>async</var> is false, the
    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
@@ -722,11 +690,23 @@ must be done in a case-insensitive manner. Initially it must be empty.
    "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception and
    terminate these steps.
 
-   <li><p>If the <var title="">user</var> argument is not null, set
-   <var>temp user</var> to <var>user</var>.
+   <li>
+    <p>If <var title="">parsed URL</var>'s
+    <a class="external" href="http://url.spec.whatwg.org/#relative-flag">relative flag</a> is set, run these
+    substeps:
 
-   <li><p>If the <var title="">password</var> argument is not null, set
-   <var>temp password</var> to <var>password</var>.
+    <ol>
+     <li><p>If the <var title="">user</var> argument is not null, set
+     <var title="">parsed URL</var>'s
+     <a class="external" href="http://url.spec.whatwg.org/#concept-url-username" title="concept-url-username">username</a>
+     to <var>user</var>.
+
+     <li><p>If the <var title="">password</var> argument is not null, set
+     <var title="">parsed URL</var>'s
+     <a class="external" href="http://url.spec.whatwg.org/#concept-url-password" title="concept-url-password">password</a>
+     to
+     <var>password</var>.
+    </ol>
 
    <li><p><a href="#terminate-abort()" title="terminate abort()">Terminate the <code>abort()</code> algorithm</a>.</li>
 
@@ -749,14 +729,10 @@ must be done in a case-insensitive manner. Initially it must be empty.
 
      <li><p>Set <a href="#request-method">request method</a> to <var>method</var>.
 
-     <li><p>Set <a href="#request-url">request URL</a> to <var title="">url</var>.
+     <li><p>Set <a href="#request-url">request URL</a> to <var title="">parsed URL</var>.
 
      <li><p>If <var>async</var> is false, set the
      <a href="#synchronous-flag">synchronous flag</a>.
-
-     <li><p>Set <a href="#request-username">request username</a> to <var>temp user</var>.
-
-     <li><p>Set <a href="#request-password">request password</a> to <var>temp password</var>.
 
      <li><p>Set <a href="#author-request-headers">author request headers</a> to the empty list.
 
@@ -1263,10 +1239,9 @@ X-Test: one, two</code></pre>
       <i title="">override referrer source</i>, with the
       <i title="">synchronous flag</i> set if the
       <a href="#synchronous-flag">synchronous flag</a> is set, using HTTP method
-      <a href="#request-method">request method</a>, user <a href="#request-username">request username</a> (if
-      non-null) and password <a href="#request-password">request password</a> (if non-null),
-      taking into account the <a href="#request-entity-body">request entity body</a>, list of
-      <a href="#author-request-headers">author request headers</a> and the rules listed at the end of
+      <a href="#request-method">request method</a>, taking into account the
+      <a href="#request-entity-body">request entity body</a>, list of
+      <a href="#author-request-headers">author request headers</a>, and the rules listed at the end of
       this section.</p>
 
       <dl class="switch">
@@ -1398,10 +1373,14 @@ X-Test: one, two</code></pre>
   <a href="#source-origin">source origin</a> and the
   <a href="#request-url">request URL</a> are <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#same-origin">same origin</a>,
   <code title="http-authorization">Authorization</code> is not in the list
-  of <a href="#author-request-headers">author request headers</a>, <a href="#request-username">request username</a> is
-  null, and <a href="#request-password">request password</a> is null, user agents
-  should prompt the end user for their username and
+  of <a href="#author-request-headers">author request headers</a>,
+  <a href="#request-url">request URL</a>'s
+  <a class="external" href="http://url.spec.whatwg.org/#concept-url-username" title="concept-url-username">username</a> is
+  the empty string and <a href="#request-url">request URL</a>'s
+  <a class="external" href="http://url.spec.whatwg.org/#concept-url-password" title="concept-url-password">password</a> is
+  null, user agents should prompt the end user for their username and
   password.</p>
+  <!-- XXX this should probably be defined in "fetch" -->
 
   <p>Otherwise, if authentication fails, user agents
   must not prompt the end user for their username and
@@ -2960,6 +2939,9 @@ that is <em>not</em> <code>GET</code>, determine the response as follows:
 
 <dt id="refsTYPEDARRAY">[TYPEDARRAY]
 <dd><cite><a href="http://www.khronos.org/registry/typedarray/specs/latest/">Typed Array</a></cite>, David Herman and Kenneth Russell. Khronos.
+
+<dt id="refsURL">[URL]
+<dd><cite><a href="http://url.spec.whatwg.org/">URL Standard</a></cite>, Anne van Kesteren. WHATWG.
 
 <dt id="refsWEBIDL">[WEBIDL]
 <dd><cite><a href="http://dev.w3.org/2006/webapi/WebIDL/">Web IDL</a></cite>, Cameron McCormack. W3C.
