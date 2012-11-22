@@ -248,7 +248,7 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
   readonly attribute unsigned short <span title="dom-XMLHttpRequest-readyState">readyState</span>;
 
   // <a href="#request">request</a>
-  void <span title="dom-XMLHttpRequest-open">open</span>(ByteString <var>method</var>, DOMString <var title>url</var>, optional boolean <var>async</var> = true, optional DOMString? <var>user</var> = null, optional DOMString? <var>password</var> = null);
+  void <span title="dom-XMLHttpRequest-open">open</span>(ByteString <var>method</var>, DOMString <var title>url</var>, optional boolean <var>async</var> = true, optional DOMString? <var>username</var> = null, optional DOMString? <var>password</var> = null);
   void <span title="dom-XMLHttpRequest-setRequestHeader">setRequestHeader</span>(ByteString <var>header</var>, ByteString <var>value</var>);
            attribute unsigned long <span title="dom-XMLHttpRequest-timeout">timeout</span>;
            attribute boolean <span title="dom-XMLHttpRequest-withCredentials">withCredentials</span>;
@@ -506,9 +506,7 @@ must be done in a case-insensitive manner. Initially it must be empty.
   <h4>The <code title>open()</code> method</h4>
 
   <dl class=domintro>
-   <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-open>open</span>(<var title>method</var>,
-   <var title>url</var> [, <var title>async</var> = true [, <var title>user</var> = null [,
-   <var title>password</var> = null]]])</code>
+   <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-open>open</span>(<var title>method</var>, <var title>url</var> [, <var title>async</var> = true [, <var title>username</var> = null [, <var title>password</var> = null]]])</code>
 
    <dd>
     <p>Sets the <span>request method</span>, <span>request URL</span>, and
@@ -540,7 +538,7 @@ must be done in a case-insensitive manner. Initially it must be empty.
   </dl>
 
   <p>The
-  <dfn id="dom-xmlhttprequest-open" title="dom-XMLHttpRequest-open"><code>open(<var title>method</var>, <var title>url</var>, <var title>async</var>, <var title>user</var>, <var title>password</var>)</code></dfn>
+  <dfn id="dom-xmlhttprequest-open" title="dom-XMLHttpRequest-open"><code>open(<var title>method</var>, <var title>url</var>, <var title>async</var>, <var title>username</var>, <var title>password</var>)</code></dfn>
   method must run these steps (unless otherwise indicated):</p>
 
   <ol>
@@ -648,10 +646,10 @@ must be done in a case-insensitive manner. Initially it must be empty.
     substeps:
 
     <ol>
-     <li><p>If the <var title>user</var> argument is not null, set
+     <li><p>If the <var title>username</var> argument is not null, set
      <var title>parsed URL</var>'s
      <span data-anolis-spec=url title=concept-url-username>username</span>
-     to <var>user</var>.
+     to <var>username</var>.
 
      <li><p>If the <var title>password</var> argument is not null, set
      <var title>parsed URL</var>'s
