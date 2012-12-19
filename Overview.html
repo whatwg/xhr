@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a></p>
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-22-november-2012">Living Standard — Last Updated 22 November 2012</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-19-december-2012">Living Standard — Last Updated 19 December 2012</h2>
 
 <dl>
  <dt>This Version:</dt>
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-22 November 2012, the editor has made this specification available
+19 December 2012, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -604,7 +604,7 @@ must be done in a case-insensitive manner. Initially it must be empty.
      <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/urls.html#document-base-url">document base URL</a> of
      <a href="#concept-xmlhttprequest-document" title="concept-XMLHttpRequest-document">document</a>.
 
-     <li><p>Set <a href="#source-origin">source origin</a> to a globally unique identifier,
+     <li><p>Set <a href="#source-origin">source origin</a> to a globally unique identifier
      if the <a href="#anonymous-flag">anonymous flag</a> is set, and the
      <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a> of
      <a href="#concept-xmlhttprequest-document" title="concept-XMLHttpRequest-document">document</a> otherwise.
@@ -2157,11 +2157,7 @@ Content-Type: text/plain; charset=utf-8</code></pre>
     executed, resources referenced will not be loaded and no associated XSLT
     will be applied.</p> <!-- XXX more formally?! -->
 
-    <!-- XXX what about document's encoding? -->
-
-   <li><p>Set <var title="">document</var>'s
-   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a> to the
-   <a href="#source-origin">source origin</a>.
+   <!-- XXX what about document's encoding? -->
 
    <li><p>Set <var title="">document</var>'s
    <a class="external" href="http://dom.spec.whatwg.org/#concept-document-content-type" title="concept-document-content-type">content type</a>
@@ -2170,6 +2166,10 @@ Content-Type: text/plain; charset=utf-8</code></pre>
    <li><p>Set <var title="">document</var>'s
    <a class="external" href="http://dom.spec.whatwg.org/#concept-document-url" title="concept-document-url">URL</a> to
    <a href="#request-url">request URL</a>.
+
+   <li><p>Set <var title="">document</var>'s
+   <a class="external" href="http://dom.spec.whatwg.org/#concept-document-origin" title="concept-document-origin">origin</a> to
+   <a href="#source-origin">source origin</a>.
 
    <li><p>Return <var title="">document</var>.
   </ol>

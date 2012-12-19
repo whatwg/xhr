@@ -316,7 +316,7 @@ constructor must run these steps:
  <span data-anolis-spec=html>JavaScript global environment</span> is a
  <span data-anolis-spec=html>document environment</span>, set
  <span title=concept-XMLHttpRequest-document>document</span> to the
- <span title=concept-document data-anolis-spec=dom>document</span>
+ <span data-anolis-spec=dom title=concept-document>document</span>
  associated with the global object of <var title>xhr</var>'s interface
  object.
 
@@ -556,7 +556,7 @@ must be done in a case-insensitive manner. Initially it must be empty.
      <span data-anolis-spec=html>document base URL</span> of
      <span title=concept-XMLHttpRequest-document>document</span>.
 
-     <li><p>Set <span>source origin</span> to a globally unique identifier,
+     <li><p>Set <span>source origin</span> to a globally unique identifier
      if the <span>anonymous flag</span> is set, and the
      <span data-anolis-spec=html>origin</span> of
      <span title=concept-XMLHttpRequest-document>document</span> otherwise.
@@ -2109,11 +2109,7 @@ Content-Type: text/plain; charset=utf-8</code></pre>
     executed, resources referenced will not be loaded and no associated XSLT
     will be applied.</p> <!-- XXX more formally?! -->
 
-    <!-- XXX what about document's encoding? -->
-
-   <li><p>Set <var title>document</var>'s
-   <span data-anolis-spec=html>origin</span> to the
-   <span>source origin</span>.
+   <!-- XXX what about document's encoding? -->
 
    <li><p>Set <var title>document</var>'s
    <span data-anolis-spec=dom title=concept-document-content-type>content type</span>
@@ -2122,6 +2118,10 @@ Content-Type: text/plain; charset=utf-8</code></pre>
    <li><p>Set <var title>document</var>'s
    <span data-anolis-spec=dom title=concept-document-url>URL</span> to
    <span>request URL</span>.
+
+   <li><p>Set <var title>document</var>'s
+   <span data-anolis-spec=dom title=concept-document-origin>origin</span> to
+   <span>source origin</span>.
 
    <li><p>Return <var title>document</var>.
   </ol>
