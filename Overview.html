@@ -5,15 +5,15 @@
 
 <div class="head">
 
-<p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a></p>
+<p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-19-december-2012">Living Standard — Last Updated 19 December 2012</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-18-february-2013">Living Standard — Last Updated 18 February 2013</h2>
 
 <dl>
- <dt>This Version:</dt>
- <dd><a href="http://xhr.spec.whatwg.org/">http://xhr.spec.whatwg.org/</a></dd>
+ <dt>This Version:
+ <dd><a href="http://xhr.spec.whatwg.org/">http://xhr.spec.whatwg.org/</a>
 
- <dt>Participate:</dt>
+ <dt>Participate:
  <dd>Send feedback to
   <a href="mailto:public-webapps@w3.org?subject==%5Bxhr%5D%20">public-webapps@w3.org</a>
   (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>) or
@@ -25,9 +25,10 @@
  <dt>Version History:
  <dd><a href="https://github.com/whatwg/xhr/commits">https://github.com/whatwg/xhr/commits</a>
 
- <dt>Editor:</dt>
+ <dt>Editor:
  <dd><a href="http://annevankesteren.nl/">Anne van Kesteren</a>
-  &lt;<a href="mailto:annevk@annevk.nl">annevk@annevk.nl</a>&gt;</dd>
+  (<a href="http://www.mozilla.org/">Mozilla</a>)
+  &lt;<a href="mailto:annevk@annevk.nl">annevk@annevk.nl</a>&gt;
 </dl>
 
 <script async="" src="//resources.whatwg.org/file-bug.js"></script>
@@ -35,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-19 December 2012, the editor has made this specification available
+18 February 2013, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -520,8 +521,7 @@ discarding any further data received from the network for them.
   <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a> state.
 
   <p>The <dfn id="error-flag">error flag</dfn> indicates some type of
-  network error or request abortion. It is initially unset and is used
-  during the <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a> state.
+  network error or fetch termination. It is initially unset.
 
 
 <h3 id="request"><span class="secno">4.6 </span>Request</h3>
@@ -702,9 +702,11 @@ must be done in a case-insensitive manner. Initially it must be empty.
    "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception and
    terminate these steps.
 
-   <li><p><a href="#terminate-abort()" title="terminate abort()">Terminate the <code>abort()</code> algorithm</a>.</li>
-
-   <li><p><a href="#terminate-send()" title="terminate send()">Terminate the <code>send()</code> algorithm</a>.</li>
+   <li>
+    <p>Set the <a href="#error-flag">error flag</a>.
+    
+    <p class="note">This is meaningless unless the 
+    <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code> algorithm is running.
 
    <li><p>The user agent should cancel any network
    activity for which the object is responsible.</li>
@@ -1043,18 +1045,8 @@ X-Test: one, two</code></pre>
    </dd>
   </dl>
 
-  <p>The
-  <dfn id="dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send"><code>send(<var>data</var>)</code></dfn>
-  method must run these steps (unless otherwise noted). This algorithm can
-  be <dfn id="terminate-send()" title="terminate send()">terminated</dfn> by invoking the
-  <code title="dom-XMLHttpRequest-open"><a href="#dom-xmlhttprequest-open">open()</a></code> or
-  <code title="dom-XMLHttpRequest-abort"><a href="#dom-xmlhttprequest-abort">abort()</a></code> method. When it is
-  <a href="#terminate-send()" title="terminate send()">terminated</a> the user agent
-  must terminate the algorithm after finishing the step it is on.</p>
-
-  <p class="note">The <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code>
-  algorithm can only be terminated if the <a href="#synchronous-flag">synchronous flag</a> is
-  unset and only after the method call has returned.</p>
+<p>The <dfn id="dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send"><code>send(<var>data</var>)</code></dfn> 
+method must run these steps (unless otherwise noted):
 
   <ol>
    <li><p>If the state is not
@@ -1448,6 +1440,9 @@ X-Test: one, two</code></pre>
   <p>The <dfn id="same-origin-request-event-rules">same-origin request event rules</dfn> are as follows:</p>
 
   <dl class="switch">
+   <dt>If the <a href="#error-flag">error flag</a> is set
+   <dd><p>Terminate these steps.
+   
    <dt>If the response has an HTTP status code of 301, 302, 303, 307, or 308
    <dd>
     <p>If the redirect violates infinite loop precautions this is a
@@ -1526,6 +1521,9 @@ X-Test: one, two</code></pre>
   <p>The <dfn id="cross-origin-request-event-rules">cross-origin request event rules</dfn> are as follows:</p>
 
   <dl class="switch">
+   <dt>If the <a href="#error-flag">error flag</a> is set
+   <dd><p>Terminate these steps.
+
    <dt>If the <a class="external" href="http://fetch.spec.whatwg.org/#cross-origin-request-status">cross-origin request status</a>
    is <i>preflight complete</i> and the <a href="#synchronous-flag">synchronous flag</a> is
    unset</dt>
@@ -1739,28 +1737,18 @@ X-Test: one, two</code></pre>
 
 
 
-  <h4 id="the-abort()-method"><span class="secno">4.6.8 </span>The <code title="">abort()</code> method</h4>
+<h4 id="the-abort()-method"><span class="secno">4.6.8 </span>The <code title="">abort()</code> method</h4>
 
   <dl class="domintro">
    <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-abort" title="dom-XMLHttpRequest-abort">abort</a>()</code>
    <dd>Cancels any network activity.
   </dl>
 
-  <p>The
-  <dfn id="dom-xmlhttprequest-abort" title="dom-XMLHttpRequest-abort"><code>abort()</code></dfn>
-  method must run these steps (unless otherwise noted). This algorithm can
-  be <dfn id="terminate-abort()" title="terminate abort()">terminated</dfn> by invoking the
-  <code title="dom-XMLHttpRequest-open"><a href="#dom-xmlhttprequest-open">open()</a></code> method. When it is
-  <a href="#terminate-abort()" title="terminate abort()">terminated</a> the user agent
-  must terminate the algorithm after finishing the step it is on.
-
-  <p class="note">The <code title="dom-XMLHttpRequest-abort"><a href="#dom-xmlhttprequest-abort">abort()</a></code>
-  algorithm can only be terminated by invoking
-  <code title="dom-XMLHttpRequest-open"><a href="#dom-xmlhttprequest-open">open()</a></code> from an event
-  handler.</p>
+<p>The <dfn id="dom-xmlhttprequest-abort" title="dom-XMLHttpRequest-abort"><code>abort()</code></dfn> method must run 
+these steps (unless otherwise noted):
 
   <ol>
-   <li><p><a href="#terminate-send()" title="terminate send()">Terminate the <code>send()</code> algorithm</a>.</li>
+   <li><p>Set the <a href="#error-flag">error flag</a>.
 
    <li><p>The user agent should cancel any network
    activity for which the object is responsible.</li>
@@ -1770,10 +1758,6 @@ X-Test: one, two</code></pre>
    object's <a href="#xmlhttprequest-task-source"><code>XMLHttpRequest</code> task source</a> in one of
    the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#task-queue" title="task queue">task queues</a>,
    then remove them.
-
-   <li><p>Set the <a href="#error-flag">error flag</a>.
-
-   <li><p>Unset the <a href="#synchronous-flag">synchronous flag</a>.
 
    <li>
     <p>If the state is <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a>,
@@ -1816,14 +1800,10 @@ X-Test: one, two</code></pre>
 
     </ol>
 
-
-   </li>
-
    <li>
     <p>Change the state to <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a>.</p>
 
     <p class="note">No <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code> event is dispatched.</p>
-   </li>
   </ol>
 
 
@@ -2167,8 +2147,7 @@ Content-Type: text/plain; charset=utf-8</code></pre>
    <a class="external" href="http://dom.spec.whatwg.org/#concept-document-url" title="concept-document-url">URL</a> to
    <a href="#request-url">request URL</a>.
 
-   <li><p>Set <var title="">document</var>'s
-   <a class="external" href="http://dom.spec.whatwg.org/#concept-document-origin" title="concept-document-origin">origin</a> to
+   <li><p>Set <var title="">document</var>'s <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a> to
    <a href="#source-origin">source origin</a>.
 
    <li><p>Return <var title="">document</var>.
@@ -2977,6 +2956,7 @@ that is <em>not</em> <code>GET</code>, determine the response as follows:
   David Levin,
   Dean Jackson,
   Denis Sureau,
+  Dominik Röttsches,
   Doug Schepers,
   Douglas Livingstone,
   Elliotte Harold,

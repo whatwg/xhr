@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-US">
+<html lang=en-US>
 <meta charset=utf-8>
 <title>XMLHttpRequest Standard</title>
 <link href=http://www.whatwg.org/style/specification rel=stylesheet>
@@ -7,15 +7,15 @@
 
 <div class="head">
 
-<p><a class=logo href=//www.whatwg.org/><img alt=WHATWG src=//resources.whatwg.org/logo-xhr.svg width=100 height=100></a></p>
+<p><a class=logo href=//www.whatwg.org/><img alt=WHATWG src=//resources.whatwg.org/logo-xhr.svg width=100 height=100></a>
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
 <h2 class="no-num no-toc">Living Standard &mdash; Last Updated [DATE: 3 August 2002]</h2>
 
 <dl>
- <dt>This Version:</dt>
- <dd><a href=http://xhr.spec.whatwg.org/>http://xhr.spec.whatwg.org/</a></dd>
+ <dt>This Version:
+ <dd><a href=http://xhr.spec.whatwg.org/>http://xhr.spec.whatwg.org/</a>
 
- <dt>Participate:</dt>
+ <dt>Participate:
  <dd>Send feedback to
   <a href="mailto:public-webapps@w3.org?subject==%5Bxhr%5D%20">public-webapps@w3.org</a>
   (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>) or
@@ -27,9 +27,10 @@
  <dt>Version History:
  <dd><a href=https://github.com/whatwg/xhr/commits>https://github.com/whatwg/xhr/commits</a>
 
- <dt>Editor:</dt>
+ <dt>Editor:
  <dd><a href="http://annevankesteren.nl/">Anne van Kesteren</a>
-  &lt;<a href="mailto:annevk@annevk.nl">annevk@annevk.nl</a>&gt;</dd>
+  (<a href=http://www.mozilla.org/>Mozilla</a>)
+  &lt;<a href="mailto:annevk@annevk.nl">annevk@annevk.nl</a>>
 </dl>
 
 <script src=//resources.whatwg.org/file-bug.js async></script>
@@ -472,8 +473,7 @@ discarding any further data received from the network for them.
   <span title="dom-XMLHttpRequest-OPENED">OPENED</span> state.
 
   <p>The <dfn id="error-flag">error flag</dfn> indicates some type of
-  network error or request abortion. It is initially unset and is used
-  during the <span title="dom-XMLHttpRequest-DONE">DONE</span> state.
+  network error or fetch termination. It is initially unset.
 
 
 <h3 id="request">Request</h3>
@@ -654,9 +654,11 @@ must be done in a case-insensitive manner. Initially it must be empty.
    "<code data-anolis-spec=dom>InvalidAccessError</code>" exception and
    terminate these steps.
 
-   <li><p><span title="terminate abort()">Terminate the <code>abort()</code> algorithm</span>.</p></li>
-
-   <li><p><span title="terminate send()">Terminate the <code>send()</code> algorithm</span>.</p></li>
+   <li>
+    <p>Set the <span>error flag</span>.
+    
+    <p class=note>This is meaningless unless the 
+    <code title=dom-XMLHttpRequest-send>send()</code> algorithm is running.
 
    <li><p>The user agent should cancel any network
    activity for which the object is responsible.</p></li>
@@ -995,18 +997,8 @@ X-Test: one, two</code></pre>
    </dd>
   </dl>
 
-  <p>The
-  <dfn title="dom-XMLHttpRequest-send"><code>send(<var>data</var>)</code></dfn>
-  method must run these steps (unless otherwise noted). This algorithm can
-  be <dfn title="terminate send()">terminated</dfn> by invoking the
-  <code title="dom-XMLHttpRequest-open">open()</code> or
-  <code title="dom-XMLHttpRequest-abort">abort()</code> method. When it is
-  <span title="terminate send()">terminated</span> the user agent
-  must terminate the algorithm after finishing the step it is on.</p>
-
-  <p class=note>The <code title="dom-XMLHttpRequest-send">send()</code>
-  algorithm can only be terminated if the <span>synchronous flag</span> is
-  unset and only after the method call has returned.</p>
+<p>The <dfn title="dom-XMLHttpRequest-send"><code>send(<var>data</var>)</code></dfn> 
+method must run these steps (unless otherwise noted):
 
   <ol>
    <li><p>If the state is not
@@ -1400,6 +1392,9 @@ X-Test: one, two</code></pre>
   <p>The <dfn>same-origin request event rules</dfn> are as follows:</p>
 
   <dl class=switch>
+   <dt>If the <span>error flag</span> is set
+   <dd><p>Terminate these steps.
+   
    <dt>If the response has an HTTP status code of 301, 302, 303, 307, or 308
    <dd>
     <p>If the redirect violates infinite loop precautions this is a
@@ -1478,6 +1473,9 @@ X-Test: one, two</code></pre>
   <p>The <dfn>cross-origin request event rules</dfn> are as follows:</p>
 
   <dl class=switch>
+   <dt>If the <span>error flag</span> is set
+   <dd><p>Terminate these steps.
+
    <dt>If the <span data-anolis-spec=cors>cross-origin request status</span>
    is <i>preflight complete</i> and the <span>synchronous flag</span> is
    unset</dt>
@@ -1691,28 +1689,18 @@ X-Test: one, two</code></pre>
 
 
 
-  <h4>The <code title>abort()</code> method</h4>
+<h4>The <code title>abort()</code> method</h4>
 
   <dl class=domintro>
    <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-abort>abort</span>()</code>
    <dd>Cancels any network activity.
   </dl>
 
-  <p>The
-  <dfn title="dom-XMLHttpRequest-abort"><code>abort()</code></dfn>
-  method must run these steps (unless otherwise noted). This algorithm can
-  be <dfn title="terminate abort()">terminated</dfn> by invoking the
-  <code title="dom-XMLHttpRequest-open">open()</code> method. When it is
-  <span title="terminate abort()">terminated</span> the user agent
-  must terminate the algorithm after finishing the step it is on.
-
-  <p class=note>The <code title="dom-XMLHttpRequest-abort">abort()</code>
-  algorithm can only be terminated by invoking
-  <code title="dom-XMLHttpRequest-open">open()</code> from an event
-  handler.</p>
+<p>The <dfn title="dom-XMLHttpRequest-abort"><code>abort()</code></dfn> method must run 
+these steps (unless otherwise noted):
 
   <ol>
-   <li><p><span title="terminate send()">Terminate the <code>send()</code> algorithm</span>.</p></li>
+   <li><p>Set the <span>error flag</span>.
 
    <li><p>The user agent should cancel any network
    activity for which the object is responsible.</p></li>
@@ -1722,10 +1710,6 @@ X-Test: one, two</code></pre>
    object's <span><code>XMLHttpRequest</code> task source</span> in one of
    the <span data-anolis-spec=html title="task queue">task queues</span>,
    then remove them.
-
-   <li><p>Set the <span>error flag</span>.
-
-   <li><p>Unset the <span>synchronous flag</span>.
 
    <li>
     <p>If the state is <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span>,
@@ -1768,14 +1752,10 @@ X-Test: one, two</code></pre>
 
     </ol>
 
-
-   </li>
-
    <li>
     <p>Change the state to <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span>.</p>
 
     <p class=note>No <code title="event-xhr-readystatechange">readystatechange</code> event is dispatched.</p>
-   </li>
   </ol>
 
 
@@ -2119,8 +2099,7 @@ Content-Type: text/plain; charset=utf-8</code></pre>
    <span data-anolis-spec=dom title=concept-document-url>URL</span> to
    <span>request URL</span>.
 
-   <li><p>Set <var title>document</var>'s
-   <span data-anolis-spec=dom title=concept-document-origin>origin</span> to
+   <li><p>Set <var title>document</var>'s <span data-anolis-spec=html>origin</span> to
    <span>source origin</span>.
 
    <li><p>Return <var title>document</var>.
@@ -2871,6 +2850,7 @@ that is <em>not</em> <code>GET</code>, determine the response as follows:
   David Levin,
   Dean Jackson,
   Denis Sureau,
+  Dominik Röttsches,
   Doug Schepers,
   Douglas Livingstone,
   Elliotte Harold,
