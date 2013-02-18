@@ -581,168 +581,140 @@ must be done in a case-insensitive manner. Initially it must be empty.
     attribute is not the empty string.
   </dl>
 
-  <p>The
-  <dfn id="dom-xmlhttprequest-open" title="dom-XMLHttpRequest-open"><code>open(<var title="">method</var>, <var title="">url</var>, <var title="">async</var>, <var title="">username</var>, <var title="">password</var>)</code></dfn>
-  method must run these steps (unless otherwise indicated):</p>
+<p>The 
+<dfn id="dom-xmlhttprequest-open" title="dom-XMLHttpRequest-open"><code>open(<var title="">method</var>, <var title="">url</var>, <var title="">async</var>, <var title="">username</var>, <var title="">password</var>)</code></dfn>
+method must run these steps (unless otherwise indicated):
+
+<ol>
+ <li><p>Let <var title="">base</var> be null.
+
+ <li>
+  <p>If the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
+  <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#document-environment">document environment</a>, run these steps:
 
   <ol>
-   <li><p>Let <var title="">base</var> be null.
+   <li><p>If <a href="#concept-xmlhttprequest-document" title="concept-XMLHttpRequest-document">document</a> is not 
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#fully-active">fully active</a>, 
+   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an 
+   "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception.
 
-   <li>
-    <p>If the
-    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
-    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#document-environment">document environment</a>, run these steps:
+   <li><p>Set <var title="">base</var> to the 
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/urls.html#document-base-url">document base URL</a> of
+   <a href="#concept-xmlhttprequest-document" title="concept-XMLHttpRequest-document">document</a>.
 
-    <ol>
-     <li><p>If <a href="#concept-xmlhttprequest-document" title="concept-XMLHttpRequest-document">document</a>
-     is not <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#fully-active">fully active</a>,
-     <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
-     "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception and
-     terminate the overall set of steps.
+   <li><p>Set <a href="#source-origin">source origin</a> to a globally unique identifier if the 
+   <a href="#anonymous-flag">anonymous flag</a> is set, and the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a> 
+   of <a href="#concept-xmlhttprequest-document" title="concept-XMLHttpRequest-document">document</a> otherwise.
 
-     <li><p>Set <var title="">base</var> to the
-     <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/urls.html#document-base-url">document base URL</a> of
-     <a href="#concept-xmlhttprequest-document" title="concept-XMLHttpRequest-document">document</a>.
-
-     <li><p>Set <a href="#source-origin">source origin</a> to a globally unique identifier
-     if the <a href="#anonymous-flag">anonymous flag</a> is set, and the
-     <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a> of
-     <a href="#concept-xmlhttprequest-document" title="concept-XMLHttpRequest-document">document</a> otherwise.
-
-     <li><p>Set <a href="#referrer-source">referrer source</a> to
-     <a href="#concept-xmlhttprequest-document" title="concept-XMLHttpRequest-document">document</a>.
-    </ol>
-
-   <li>
-    <p>If the
-    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
-    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#worker-environment">worker environment</a>, run these steps:
-
-    <ol>
-     <li><p>Set <var title="">base</var> to the
-     <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#script's-base-url">script's base URL</a>.
-
-     <li><p>Set <a href="#source-origin">source origin</a> to the
-     <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#concept-script" title="concept-script">script</a>'s
-     <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a>.
-
-     <li><p>Set <a href="#referrer-source">referrer source</a> to the
-     <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#script's-referrer-source">script's referrer source</a>.
-    </ol>
-
-   <li><p>If <var>method</var> does not match the
-   <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-5.1.1">Method</a> token production,
-   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
-   "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" exception and terminate
-   these steps.
-
-   <li>
-    <p>If <var>method</var> is a case-insensitive match for
-    <code>CONNECT</code>, <code>DELETE</code>, <code>GET</code>,
-    <code>HEAD</code>, <code>OPTIONS</code>, <code>POST</code>,
-    <code>PUT</code>, <code>TRACE</code>, or <code>TRACK</code>
-    subtract 0x20 from each byte in the range 0x61 (ASCII a) to
-    0x7A (ASCII z).</p>
-
-    <p class="note">If it does not match any of the above, it is passed
-    through <em>literally</em>, including in the final request.</p>
-   </li>
-   <!-- WebKit (and supposedly Gecko) also uppercase: COPY, INDEX, LOCK,
-   M-POST, MKCOL, MOVE, PROPFIND, PROPPATCH, and UNLOCK. -->
-
-   <li>
-    <p>If <var>method</var> is a case-sensitive match for
-    <code>CONNECT</code>, <code>TRACE</code>, or <code>TRACK</code>,
-    <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
-    "<code class="external"><a href="http://dom.spec.whatwg.org/#securityerror">SecurityError</a></code>" exception and
-    terminate these steps.
-
-    <p class="note">Allowing these methods would pose a security risk.
-    <a href="#refsHTTPVERBSEC">[HTTPVERBSEC]</a>
-   </li>
-
-   <li><p>Let <var title="">parsed URL</var> be the result of
-   <a class="external" href="http://url.spec.whatwg.org/#concept-url-parser" title="concept-url-parser">parsing</a>
-   <var title="">url</var> with <var title="">base</var>.
-
-   <li><p>If <var title="">parsed URL</var> is failure,
-   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
-   "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" exception and terminate
-   these steps.
-
-   <li>
-    <p>If <var title="">parsed URL</var>'s
-    <a class="external" href="http://url.spec.whatwg.org/#relative-flag">relative flag</a> is set, run these
-    substeps:
-
-    <ol>
-     <li><p>If the <var title="">username</var> argument is not null, set
-     <var title="">parsed URL</var>'s
-     <a class="external" href="http://url.spec.whatwg.org/#concept-url-username" title="concept-url-username">username</a>
-     to <var>username</var>.
-
-     <li><p>If the <var title="">password</var> argument is not null, set
-     <var title="">parsed URL</var>'s
-     <a class="external" href="http://url.spec.whatwg.org/#concept-url-password" title="concept-url-password">password</a>
-     to
-     <var>password</var>.
-    </ol>
-
-   <li><p>If <var>async</var> is false, the
-   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
-   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#document-environment">document environment</a>, and either the
-   <a href="#anonymous-flag">anonymous flag</a> is set, the
-   <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code> attribute value is
-   not zero, the
-   <code title="dom-XMLHttpRequest-withCredentials"><a href="#dom-xmlhttprequest-withcredentials">withCredentials</a></code>
-   attribute value is true, or the
-   <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code>
-   attribute value is not the empty string,
-   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
-   "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception and
-   terminate these steps.
-
-   <li>
-    <p>Set the <a href="#error-flag">error flag</a>.
-    
-    <p class="note">This is meaningless unless the 
-    <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code> algorithm is running.
-
-   <li><p>The user agent should cancel any network
-   activity for which the object is responsible.</li>
-   <!-- we can hardly require it... -->
-
-   <li><p>If there are any
-   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#concept-task" title="concept-task">tasks</a> from the
-   object's <a href="#xmlhttprequest-task-source"><code>XMLHttpRequest</code> task source</a> in one of
-   the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#task-queue" title="task queue">task queues</a>,
-   then remove them.
-
-   <li>
-    <p>Set variables associated with the object as follows:</p>
-
-    <ul>
-
-     <li><p>Set <a href="#request-method">request method</a> to <var>method</var>.
-
-     <li><p>Set <a href="#request-url">request URL</a> to <var title="">parsed URL</var>.
-
-     <li><p>If <var>async</var> is false, set the
-     <a href="#synchronous-flag">synchronous flag</a>.
-
-     <li><p>Set <a href="#author-request-headers">author request headers</a> to the empty list.
-
-     <li><p>Unset the <a href="#send-flag"><code>send()</code> flag</a>.
-
-     <li><p>Set <a href="#response-entity-body">response entity body</a> to null.
-    </ul>
-   </li>
-
-   <li><p>Change the state to
-   <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a>.</li>
-
-   <li><p><a class="external" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.</li>
+   <li><p>Set <a href="#referrer-source">referrer source</a> to 
+   <a href="#concept-xmlhttprequest-document" title="concept-XMLHttpRequest-document">document</a>.
   </ol>
+
+ <li>
+  <p>If the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
+  <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#worker-environment">worker environment</a>, run these steps:
+
+  <ol>
+   <li><p>Set <var title="">base</var> to the 
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#script's-base-url">script's base URL</a>.
+
+   <li><p>Set <a href="#source-origin">source origin</a> to the 
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#concept-script" title="concept-script">script</a>'s
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a>.
+
+   <li><p>Set <a href="#referrer-source">referrer source</a> to the 
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#script's-referrer-source">script's referrer source</a>.
+  </ol>
+
+ <li><p>If <var>method</var> does not match the <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-5.1.1">Method</a> 
+ token production, <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
+ "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" exception.
+
+ <li>
+  <p>If <var>method</var> is a case-insensitive match for <code>CONNECT</code>, 
+  <code>DELETE</code>, <code>GET</code>, <code>HEAD</code>, <code>OPTIONS</code>, 
+  <code>POST</code>, <code>PUT</code>, <code>TRACE</code>, or <code>TRACK</code>, subtract 
+  0x20 from each byte in the range 0x61 (ASCII a) to 0x7A (ASCII z).
+
+  <p class="note">If it does not match any of the above, it is passed 
+  through <em>literally</em>, including in the final request.
+  <!-- WebKit (and supposedly Gecko) also uppercase: COPY, INDEX, LOCK, 
+  M-POST, MKCOL, MOVE, PROPFIND, PROPPATCH, and UNLOCK. -->
+
+ <li>
+  <p>If <var>method</var> is a case-sensitive match for <code>CONNECT</code>, 
+  <code>TRACE</code>, or <code>TRACK</code>, 
+  <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a 
+  "<code class="external"><a href="http://dom.spec.whatwg.org/#securityerror">SecurityError</a></code>" exception.
+
+  <p class="note">Allowing these methods would pose a security risk. 
+  <a href="#refsHTTPVERBSEC">[HTTPVERBSEC]</a>
+
+ <li><p>Let <var title="">parsed URL</var> be the result of 
+ <a class="external" href="http://url.spec.whatwg.org/#concept-url-parser" title="concept-url-parser">parsing</a> <var title="">url</var> 
+ with <var title="">base</var>.
+
+ <li><p>If <var title="">parsed URL</var> is failure, 
+ <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a 
+ "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" exception.
+
+ <li>
+  <p>If <var title="">parsed URL</var>'s <a class="external" href="http://url.spec.whatwg.org/#relative-flag">relative flag</a> is 
+  set, run these substeps:
+
+  <ol>
+   <li><p>If the <var title="">username</var> argument is not null, set 
+   <var title="">parsed URL</var>'s 
+   <a class="external" href="http://url.spec.whatwg.org/#concept-url-username" title="concept-url-username">username</a> to 
+   <var>username</var>.
+
+   <li><p>If the <var title="">password</var> argument is not null, set 
+   <var title="">parsed URL</var>'s 
+   <a class="external" href="http://url.spec.whatwg.org/#concept-url-password" title="concept-url-password">password</a> to
+   <var>password</var>.
+  </ol>
+
+ <li><p>If <var>async</var> is false, the
+ <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
+ <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#document-environment">document environment</a>, and either the
+ <a href="#anonymous-flag">anonymous flag</a> is set, the
+ <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code> attribute value is not zero, the
+ <code title="dom-XMLHttpRequest-withCredentials"><a href="#dom-xmlhttprequest-withcredentials">withCredentials</a></code> attribute value is 
+ true, or the <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code> attribute 
+ value is not the empty string, 
+ <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
+ "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception.
+
+ <li>
+  <p>Set the <a href="#error-flag">error flag</a>.
+    
+  <p class="note">This is meaningless unless the 
+  <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code> algorithm is running.
+
+ <li><p>The user agent should cancel any network activity for which the object is 
+ responsible.
+ <!-- we can hardly require it... -->
+
+ <li><p>If there are any <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#concept-task" title="concept-task">tasks</a> from 
+ the object's <a href="#xmlhttprequest-task-source"><code>XMLHttpRequest</code> task source</a> in one of the 
+ <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#task-queue" title="task queue">task queues</a>, then remove them.
+
+ <li>
+  <p>Set variables associated with the object as follows:</p>
+
+  <ul>
+   <li><p>Set <a href="#request-method">request method</a> to <var>method</var>.
+   <li><p>Set <a href="#request-url">request URL</a> to <var title="">parsed URL</var>.
+   <li><p>If <var>async</var> is false, set the <a href="#synchronous-flag">synchronous flag</a>.
+   <li><p>Set <a href="#author-request-headers">author request headers</a> to the empty list.
+   <li><p>Unset the <a href="#send-flag"><code>send()</code> flag</a>.
+   <li><p>Set <a href="#response-entity-body">response entity body</a> to null.
+  </ul>
+ 
+ <li><p>Change the state to <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a>.
+
+ <li><p><a class="external" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.</li>
+</ol>
 
 
 

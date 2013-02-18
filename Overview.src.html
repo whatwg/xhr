@@ -533,168 +533,140 @@ must be done in a case-insensitive manner. Initially it must be empty.
     attribute is not the empty string.
   </dl>
 
-  <p>The
-  <dfn id="dom-xmlhttprequest-open" title="dom-XMLHttpRequest-open"><code>open(<var title>method</var>, <var title>url</var>, <var title>async</var>, <var title>username</var>, <var title>password</var>)</code></dfn>
-  method must run these steps (unless otherwise indicated):</p>
+<p>The 
+<dfn id="dom-xmlhttprequest-open" title="dom-XMLHttpRequest-open"><code>open(<var title>method</var>, <var title>url</var>, <var title>async</var>, <var title>username</var>, <var title>password</var>)</code></dfn>
+method must run these steps (unless otherwise indicated):
+
+<ol>
+ <li><p>Let <var title>base</var> be null.
+
+ <li>
+  <p>If the <span data-anolis-spec=html>JavaScript global environment</span> is a
+  <span data-anolis-spec=html>document environment</span>, run these steps:
 
   <ol>
-   <li><p>Let <var title>base</var> be null.
+   <li><p>If <span title=concept-XMLHttpRequest-document>document</span> is not 
+   <span data-anolis-spec=html>fully active</span>, 
+   <span data-anolis-spec=dom title=concept-throw>throw</span> an 
+   "<code data-anolis-spec=dom>InvalidStateError</code>" exception.
 
-   <li>
-    <p>If the
-    <span data-anolis-spec=html>JavaScript global environment</span> is a
-    <span data-anolis-spec=html>document environment</span>, run these steps:
+   <li><p>Set <var title>base</var> to the 
+   <span data-anolis-spec=html>document base URL</span> of
+   <span title=concept-XMLHttpRequest-document>document</span>.
 
-    <ol>
-     <li><p>If <span title=concept-XMLHttpRequest-document>document</span>
-     is not <span data-anolis-spec=html>fully active</span>,
-     <span data-anolis-spec=dom title=concept-throw>throw</span> an
-     "<code data-anolis-spec=dom>InvalidStateError</code>" exception and
-     terminate the overall set of steps.
+   <li><p>Set <span>source origin</span> to a globally unique identifier if the 
+   <span>anonymous flag</span> is set, and the <span data-anolis-spec=html>origin</span> 
+   of <span title=concept-XMLHttpRequest-document>document</span> otherwise.
 
-     <li><p>Set <var title>base</var> to the
-     <span data-anolis-spec=html>document base URL</span> of
-     <span title=concept-XMLHttpRequest-document>document</span>.
-
-     <li><p>Set <span>source origin</span> to a globally unique identifier
-     if the <span>anonymous flag</span> is set, and the
-     <span data-anolis-spec=html>origin</span> of
-     <span title=concept-XMLHttpRequest-document>document</span> otherwise.
-
-     <li><p>Set <span>referrer source</span> to
-     <span title=concept-XMLHttpRequest-document>document</span>.
-    </ol>
-
-   <li>
-    <p>If the
-    <span data-anolis-spec=html>JavaScript global environment</span> is a
-    <span data-anolis-spec=html>worker environment</span>, run these steps:
-
-    <ol>
-     <li><p>Set <var title>base</var> to the
-     <span data-anolis-spec=html>script's base URL</span>.
-
-     <li><p>Set <span>source origin</span> to the
-     <span data-anolis-spec=html title=concept-script>script</span>'s
-     <span data-anolis-spec=html>origin</span>.
-
-     <li><p>Set <span>referrer source</span> to the
-     <span data-anolis-spec=html>script's referrer source</span>.
-    </ol>
-
-   <li><p>If <var>method</var> does not match the
-   <span data-anolis-spec=http>Method</span> token production,
-   <span data-anolis-spec=dom title=concept-throw>throw</span> a
-   "<code data-anolis-spec=dom>SyntaxError</code>" exception and terminate
-   these steps.
-
-   <li>
-    <p>If <var>method</var> is a case-insensitive match for
-    <code>CONNECT</code>, <code>DELETE</code>, <code>GET</code>,
-    <code>HEAD</code>, <code>OPTIONS</code>, <code>POST</code>,
-    <code>PUT</code>, <code>TRACE</code>, or <code>TRACK</code>
-    subtract 0x20 from each byte in the range 0x61 (ASCII a) to
-    0x7A (ASCII z).</p>
-
-    <p class=note>If it does not match any of the above, it is passed
-    through <em>literally</em>, including in the final request.</p>
-   </li>
-   <!-- WebKit (and supposedly Gecko) also uppercase: COPY, INDEX, LOCK,
-   M-POST, MKCOL, MOVE, PROPFIND, PROPPATCH, and UNLOCK. -->
-
-   <li>
-    <p>If <var>method</var> is a case-sensitive match for
-    <code>CONNECT</code>, <code>TRACE</code>, or <code>TRACK</code>,
-    <span data-anolis-spec=dom title=concept-throw>throw</span> a
-    "<code data-anolis-spec=dom>SecurityError</code>" exception and
-    terminate these steps.
-
-    <p class=note>Allowing these methods would pose a security risk.
-    <span data-anolis-ref>HTTPVERBSEC</span>
-   </li>
-
-   <li><p>Let <var title>parsed URL</var> be the result of
-   <span data-anolis-spec=url title=concept-url-parser>parsing</span>
-   <var title>url</var> with <var title>base</var>.
-
-   <li><p>If <var title>parsed URL</var> is failure,
-   <span data-anolis-spec=dom title=concept-throw>throw</span> a
-   "<code data-anolis-spec=dom>SyntaxError</code>" exception and terminate
-   these steps.
-
-   <li>
-    <p>If <var title>parsed URL</var>'s
-    <span data-anolis-spec=url>relative flag</span> is set, run these
-    substeps:
-
-    <ol>
-     <li><p>If the <var title>username</var> argument is not null, set
-     <var title>parsed URL</var>'s
-     <span data-anolis-spec=url title=concept-url-username>username</span>
-     to <var>username</var>.
-
-     <li><p>If the <var title>password</var> argument is not null, set
-     <var title>parsed URL</var>'s
-     <span data-anolis-spec=url title=concept-url-password>password</span>
-     to
-     <var>password</var>.
-    </ol>
-
-   <li><p>If <var>async</var> is false, the
-   <span data-anolis-spec=html>JavaScript global environment</span> is a
-   <span data-anolis-spec=html>document environment</span>, and either the
-   <span>anonymous flag</span> is set, the
-   <code title=dom-XMLHttpRequest-timeout>timeout</code> attribute value is
-   not zero, the
-   <code title=dom-XMLHttpRequest-withCredentials>withCredentials</code>
-   attribute value is true, or the
-   <code title=dom-XMLHttpRequest-responseType>responseType</code>
-   attribute value is not the empty string,
-   <span data-anolis-spec=dom title=concept-throw>throw</span> an
-   "<code data-anolis-spec=dom>InvalidAccessError</code>" exception and
-   terminate these steps.
-
-   <li>
-    <p>Set the <span>error flag</span>.
-    
-    <p class=note>This is meaningless unless the 
-    <code title=dom-XMLHttpRequest-send>send()</code> algorithm is running.
-
-   <li><p>The user agent should cancel any network
-   activity for which the object is responsible.</p></li>
-   <!-- we can hardly require it... -->
-
-   <li><p>If there are any
-   <span data-anolis-spec=html title=concept-task>tasks</span> from the
-   object's <span><code>XMLHttpRequest</code> task source</span> in one of
-   the <span data-anolis-spec=html title="task queue">task queues</span>,
-   then remove them.
-
-   <li>
-    <p>Set variables associated with the object as follows:</p>
-
-    <ul>
-
-     <li><p>Set <span>request method</span> to <var>method</var>.
-
-     <li><p>Set <span>request URL</span> to <var title>parsed URL</var>.
-
-     <li><p>If <var>async</var> is false, set the
-     <span>synchronous flag</span>.
-
-     <li><p>Set <span>author request headers</span> to the empty list.
-
-     <li><p>Unset the <span><code>send()</code> flag</span>.
-
-     <li><p>Set <span>response entity body</span> to null.
-    </ul>
-   </li>
-
-   <li><p>Change the state to
-   <span title="dom-XMLHttpRequest-OPENED">OPENED</span>.</p></li>
-
-   <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.</p></li>
+   <li><p>Set <span>referrer source</span> to 
+   <span title=concept-XMLHttpRequest-document>document</span>.
   </ol>
+
+ <li>
+  <p>If the <span data-anolis-spec=html>JavaScript global environment</span> is a
+  <span data-anolis-spec=html>worker environment</span>, run these steps:
+
+  <ol>
+   <li><p>Set <var title>base</var> to the 
+   <span data-anolis-spec=html>script's base URL</span>.
+
+   <li><p>Set <span>source origin</span> to the 
+   <span data-anolis-spec=html title=concept-script>script</span>'s
+   <span data-anolis-spec=html>origin</span>.
+
+   <li><p>Set <span>referrer source</span> to the 
+   <span data-anolis-spec=html>script's referrer source</span>.
+  </ol>
+
+ <li><p>If <var>method</var> does not match the <span data-anolis-spec=http>Method</span> 
+ token production, <span data-anolis-spec=dom title=concept-throw>throw</span> a
+ "<code data-anolis-spec=dom>SyntaxError</code>" exception.
+
+ <li>
+  <p>If <var>method</var> is a case-insensitive match for <code>CONNECT</code>, 
+  <code>DELETE</code>, <code>GET</code>, <code>HEAD</code>, <code>OPTIONS</code>, 
+  <code>POST</code>, <code>PUT</code>, <code>TRACE</code>, or <code>TRACK</code>, subtract 
+  0x20 from each byte in the range 0x61 (ASCII a) to 0x7A (ASCII z).
+
+  <p class=note>If it does not match any of the above, it is passed 
+  through <em>literally</em>, including in the final request.
+  <!-- WebKit (and supposedly Gecko) also uppercase: COPY, INDEX, LOCK, 
+  M-POST, MKCOL, MOVE, PROPFIND, PROPPATCH, and UNLOCK. -->
+
+ <li>
+  <p>If <var>method</var> is a case-sensitive match for <code>CONNECT</code>, 
+  <code>TRACE</code>, or <code>TRACK</code>, 
+  <span data-anolis-spec=dom title=concept-throw>throw</span> a 
+  "<code data-anolis-spec=dom>SecurityError</code>" exception.
+
+  <p class=note>Allowing these methods would pose a security risk. 
+  <span data-anolis-ref>HTTPVERBSEC</span>
+
+ <li><p>Let <var title>parsed URL</var> be the result of 
+ <span data-anolis-spec=url title=concept-url-parser>parsing</span> <var title>url</var> 
+ with <var title>base</var>.
+
+ <li><p>If <var title>parsed URL</var> is failure, 
+ <span data-anolis-spec=dom title=concept-throw>throw</span> a 
+ "<code data-anolis-spec=dom>SyntaxError</code>" exception.
+
+ <li>
+  <p>If <var title>parsed URL</var>'s <span data-anolis-spec=url>relative flag</span> is 
+  set, run these substeps:
+
+  <ol>
+   <li><p>If the <var title>username</var> argument is not null, set 
+   <var title>parsed URL</var>'s 
+   <span data-anolis-spec=url title=concept-url-username>username</span> to 
+   <var>username</var>.
+
+   <li><p>If the <var title>password</var> argument is not null, set 
+   <var title>parsed URL</var>'s 
+   <span data-anolis-spec=url title=concept-url-password>password</span> to
+   <var>password</var>.
+  </ol>
+
+ <li><p>If <var>async</var> is false, the
+ <span data-anolis-spec=html>JavaScript global environment</span> is a
+ <span data-anolis-spec=html>document environment</span>, and either the
+ <span>anonymous flag</span> is set, the
+ <code title=dom-XMLHttpRequest-timeout>timeout</code> attribute value is not zero, the
+ <code title=dom-XMLHttpRequest-withCredentials>withCredentials</code> attribute value is 
+ true, or the <code title=dom-XMLHttpRequest-responseType>responseType</code> attribute 
+ value is not the empty string, 
+ <span data-anolis-spec=dom title=concept-throw>throw</span> an
+ "<code data-anolis-spec=dom>InvalidAccessError</code>" exception.
+
+ <li>
+  <p>Set the <span>error flag</span>.
+    
+  <p class=note>This is meaningless unless the 
+  <code title=dom-XMLHttpRequest-send>send()</code> algorithm is running.
+
+ <li><p>The user agent should cancel any network activity for which the object is 
+ responsible.
+ <!-- we can hardly require it... -->
+
+ <li><p>If there are any <span data-anolis-spec=html title=concept-task>tasks</span> from 
+ the object's <span><code>XMLHttpRequest</code> task source</span> in one of the 
+ <span data-anolis-spec=html title="task queue">task queues</span>, then remove them.
+
+ <li>
+  <p>Set variables associated with the object as follows:</p>
+
+  <ul>
+   <li><p>Set <span>request method</span> to <var>method</var>.
+   <li><p>Set <span>request URL</span> to <var title>parsed URL</var>.
+   <li><p>If <var>async</var> is false, set the <span>synchronous flag</span>.
+   <li><p>Set <span>author request headers</span> to the empty list.
+   <li><p>Unset the <span><code>send()</code> flag</span>.
+   <li><p>Set <span>response entity body</span> to null.
+  </ul>
+ 
+ <li><p>Change the state to <span title="dom-XMLHttpRequest-OPENED">OPENED</span>.
+
+ <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.</p></li>
+</ol>
 
 
 
