@@ -114,20 +114,12 @@ client functionality for transferring data between a client and a server.
 
 <p><em>This section is non-normative.</em></p>
 
-<p>The <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object is the ECMAScript HTTP API.
-<a class="informative" href="#refsECMASCRIPT">[ECMASCRIPT]</a>
-<!-- XXX elaborate on options -->
+<p>The <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object is an API for
+<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/fetching-resources.html#fetch" title="fetch">fetching</a> 
+<a class="external" href="http://url.spec.whatwg.org/#concept-url" title="concept-url">URLs</a>.
 
-<p>The name of the object is <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> for compatibility
-with the Web, though each component of this name is potentially
-misleading. First, the object supports any text based format, including
-XML. Second, it can be used to make requests over both HTTP and HTTPS
-(some implementations support protocols in addition to HTTP and HTTPS, but
-that functionality is not covered by this specification). Finally, it
-supports "requests" in a broad sense of the term as it pertains to HTTP;
-namely all activity involved with HTTP requests or responses for the
-defined HTTP methods.</p>
-<!-- XXX need to improve point 2 -->
+<p>The name <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> is historical and has no baring on its 
+functionality.
 
 <div class="example">
  <p>Some simple code to do something with data from an XML document
