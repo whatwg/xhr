@@ -1219,14 +1219,6 @@ method must run these steps (unless otherwise noted):
 
 <hr>
 
-<p>If the user agent allows the end user to configure a proxy it
-should modify the request appropriately; i.e., connect
-to the proxy host instead of the origin server, modify the
-<code>Request-Line</code> and send <code>Proxy-Authorization</code>
-headers as specified.
-
-<hr>
-
 <p>If the user agent supports HTTP Authentication and
 <code title="http-authorization">Authorization</code> is not in the list
 of <span>author request headers</span>, it should
@@ -1256,14 +1248,6 @@ password. <span data-anolis-ref>HTTPAUTH</span>
 content constraints. However, when possible this behavior is prohibited,
 as it is bad UI. E.g. that is why the
 <span data-anolis-spec=html>same origin</span> restriction is made above.
-
-<hr>
-
-<p>If the user agent supports HTTP State Management it
-should persist, discard and send cookies (as received
-in the <code>Set-Cookie</code> response header, and sent in the
-<code>Cookie</code> header) as applicable.
-<span data-anolis-ref>COOKIES</span>
 
 <hr>
 

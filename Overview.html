@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-20-february-2013">Living Standard — Last Updated 20 February 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-21-february-2013">Living Standard — Last Updated 21 February 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-20 February 2013, the editor has made this specification available
+21 February 2013, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -1267,14 +1267,6 @@ method must run these steps (unless otherwise noted):
 
 <hr>
 
-<p>If the user agent allows the end user to configure a proxy it
-should modify the request appropriately; i.e., connect
-to the proxy host instead of the origin server, modify the
-<code>Request-Line</code> and send <code>Proxy-Authorization</code>
-headers as specified.
-
-<hr>
-
 <p>If the user agent supports HTTP Authentication and
 <code title="http-authorization">Authorization</code> is not in the list
 of <a href="#author-request-headers">author request headers</a>, it should
@@ -1304,14 +1296,6 @@ password. <a href="#refsHTTPAUTH">[HTTPAUTH]</a>
 content constraints. However, when possible this behavior is prohibited,
 as it is bad UI. E.g. that is why the
 <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#same-origin">same origin</a> restriction is made above.
-
-<hr>
-
-<p>If the user agent supports HTTP State Management it
-should persist, discard and send cookies (as received
-in the <code>Set-Cookie</code> response header, and sent in the
-<code>Cookie</code> header) as applicable.
-<a href="#refsCOOKIES">[COOKIES]</a>
 
 <hr>
 
