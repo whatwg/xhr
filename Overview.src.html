@@ -2672,22 +2672,10 @@ this section.
  "<code title>;base64</code>" flag is present.
 </ul>
 
-<p>When a
-<span data-anolis-spec=html title=data-protocol><code>data:</code> URL</span> is
-<span data-anolis-spec=html title=fetch>fetched</span> using the HTTP method
-that is <em>not</em> <code>GET</code>, determine the response as follows:
+<p>Otherwise, including when the
+<span data-anolis-spec=html title=data-protocol><code>data:</code> URL</span> cannot be
+parsed, this is a network error.
 
-<ul>
- <li><p>Ignore any request headers.
-
- <li><p>Set the HTTP status code to 501.
-
- <li><p>Set the HTTP status text to "<code title>Not Implemented</code>".
-
- <li><p>Include no response headers.
-
- <li><p>Set the <span>response entity body</span> to null.
-</ul>
 
 
 <h2 class=no-num>References</h2>
