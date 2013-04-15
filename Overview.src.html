@@ -172,7 +172,7 @@ community.
 
 <p>This specification heavily borrows terminology, from
 Cross-Origin Resource Sharing, DOM, DOM Parsing and Serialization, Encoding,
-File API, HTML, HTTP, Streams API, Typed Array, URL, Web IDL, and XML.
+File API, HTML, HTTP, Typed Array, URL, Web IDL, and XML.
 
 <span data-anolis-ref>CORS</span>
 <span data-anolis-ref>DOM</span>
@@ -181,7 +181,6 @@ File API, HTML, HTTP, Streams API, Typed Array, URL, Web IDL, and XML.
 <span data-anolis-ref>FILEAPI</span>
 <span data-anolis-ref>HTML</span>
 <span data-anolis-ref>HTTP</span>
-<span data-anolis-ref>STREAMS</span>
 <span data-anolis-ref>TYPEDARRAY</span>
 <span data-anolis-ref>URL</span>
 <span data-anolis-ref>WEBIDL</span>
@@ -218,7 +217,6 @@ enum <dfn>XMLHttpRequestResponseType</dfn> {
   "blob",
   "document",
   "json",
-  "stream",
   "text"
 };
 
@@ -245,7 +243,7 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
            attribute unsigned long <span title="dom-XMLHttpRequest-timeout">timeout</span>;
            attribute boolean <span title="dom-XMLHttpRequest-withCredentials">withCredentials</span>;
   readonly attribute <span>XMLHttpRequestUpload</span> <span title="dom-XMLHttpRequest-upload">upload</span>;
-  void <span title="dom-XMLHttpRequest-send">send</span>(optional (<span data-anolis-spec=typedarray>ArrayBufferView</span> or <span data-anolis-spec=fileapi>Blob</span> or <span data-anolis-spec=dom>Document</span> or DOMString or <span>FormData</span> or <span data-anolis-spec=streams>Stream</span>)? <var>data</var> = null);
+  void <span title="dom-XMLHttpRequest-send">send</span>(optional (<span data-anolis-spec=typedarray>ArrayBufferView</span> or <span data-anolis-spec=fileapi>Blob</span> or <span data-anolis-spec=dom>Document</span> or DOMString or <span>FormData</span>)? <var>data</var> = null);
   void <span title="dom-XMLHttpRequest-abort">abort</span>();
 
   // <a href="#response">response</a>
@@ -1092,7 +1090,7 @@ method must run these steps (unless otherwise noted):
 	 <dt>If the <span>source origin</span> and the <span>request URL</span>
 	 are <span data-anolis-spec=html>same origin</span></dt>
 	 <dt>If the <span>request URL</span>'s
-	 <code data-anolis-spec=html title=url-scheme>&lt;scheme></code> is
+	 <code data-anolis-spec=url title=concept-url-scheme>scheme</code> is
 	 "<code title>data</code>"
 
 	 <dd>
@@ -2016,21 +2014,6 @@ algorithm:
 </ol>
 
 
-<p>The <dfn>stream response entity body</dfn> is
-<code data-anolis-spec=streams>Stream</code> object representing the
-<span>response entity body</span>. The
-<span>stream response entity body</span> is the return value of the
-following algorithm:
-
-<ol>
- <li><p>If the <span>response entity body</span> is null, return an empty
- <code data-anolis-spec=streams>Stream</code> object.
-
- <li><p>Return a <code data-anolis-spec=streams>Stream</code> object
- representing the <span>response entity body</span>.
-</ol>
-
-
 <p>The <dfn id="text-response-entity-body">text response entity body</dfn>
 is a string representing the <span>response entity body</span>. The
 <span>text response entity body</span> is the return value of the
@@ -2127,8 +2110,7 @@ method must run these steps:
 	"<code title>arraybuffer</code>",
 	"<code title>blob</code>",
 	"<code title>document</code>",
-	"<code title>json</code>",
-	"<code title>stream</code>", and
+	"<code title>json</code>", and
 	"<code title>text</code>".
 	<p>When set: setting to "<code title>document</code>" is ignored if the
 	<span data-anolis-spec=html>JavaScript global environment</span> is a

@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-13-march-2013">Living Standard — Last Updated 13 March 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-15-april-2013">Living Standard — Last Updated 15 April 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-13 March 2013, the editor has made this specification available
+15 April 2013, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -220,7 +220,7 @@ community.
 
 <p>This specification heavily borrows terminology, from
 Cross-Origin Resource Sharing, DOM, DOM Parsing and Serialization, Encoding,
-File API, HTML, HTTP, Streams API, Typed Array, URL, Web IDL, and XML.
+File API, HTML, HTTP, Typed Array, URL, Web IDL, and XML.
 
 <a href="#refsCORS">[CORS]</a>
 <a href="#refsDOM">[DOM]</a>
@@ -229,7 +229,6 @@ File API, HTML, HTTP, Streams API, Typed Array, URL, Web IDL, and XML.
 <a href="#refsFILEAPI">[FILEAPI]</a>
 <a href="#refsHTML">[HTML]</a>
 <a href="#refsHTTP">[HTTP]</a>
-<a href="#refsSTREAMS">[STREAMS]</a>
 <a href="#refsTYPEDARRAY">[TYPEDARRAY]</a>
 <a href="#refsURL">[URL]</a>
 <a href="#refsWEBIDL">[WEBIDL]</a>
@@ -266,7 +265,6 @@ enum <dfn id="xmlhttprequestresponsetype">XMLHttpRequestResponseType</dfn> {
   "blob",
   "document",
   "json",
-  "stream",
   "text"
 };
 
@@ -293,7 +291,7 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <a href="#xmlhttpreque
            attribute unsigned long <a href="#dom-xmlhttprequest-timeout" title="dom-XMLHttpRequest-timeout">timeout</a>;
            attribute boolean <a href="#dom-xmlhttprequest-withcredentials" title="dom-XMLHttpRequest-withCredentials">withCredentials</a>;
   readonly attribute <a href="#xmlhttprequestupload">XMLHttpRequestUpload</a> <a href="#dom-xmlhttprequest-upload" title="dom-XMLHttpRequest-upload">upload</a>;
-  void <a href="#dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send">send</a>(optional (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#6">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or <a class="external" href="http://dom.spec.whatwg.org/#document">Document</a> or DOMString or <a href="#formdata">FormData</a> or <a class="external" href="http://dvcs.w3.org/hg/streams-api/raw-file/tip/Overview.htm#idl-def-Stream">Stream</a>)? <var>data</var> = null);
+  void <a href="#dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send">send</a>(optional (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#6">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or <a class="external" href="http://dom.spec.whatwg.org/#document">Document</a> or DOMString or <a href="#formdata">FormData</a>)? <var>data</var> = null);
   void <a href="#dom-xmlhttprequest-abort" title="dom-XMLHttpRequest-abort">abort</a>();
 
   // <a href="#response">response</a>
@@ -1140,7 +1138,7 @@ method must run these steps (unless otherwise noted):
 	 <dt>If the <a href="#source-origin">source origin</a> and the <a href="#request-url">request URL</a>
 	 are <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#same-origin">same origin</a></dt>
 	 <dt>If the <a href="#request-url">request URL</a>'s
-	 <code class="external" title="url-scheme"><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/urls.html#url-scheme">&lt;scheme&gt;</a></code> is
+	 <code class="external" title="concept-url-scheme"><a href="http://url.spec.whatwg.org/#concept-url-scheme">scheme</a></code> is
 	 "<code title="">data</code>"
 
 	 <dd>
@@ -1199,7 +1197,7 @@ method must run these steps (unless otherwise noted):
 
 
 
-		<p>Make a <a class="external" href="http://fetch.spec.whatwg.org/#cross-origin-request">cross-origin request</a>,
+		<p>Make a <a class="external" href="http://www.w3.org/TR/2013/CR-cors-20130129/#cross-origin-request">cross-origin request</a>,
 		passing these as parameters:
 
 		<dl>
@@ -1436,16 +1434,16 @@ This ensures that authors have a predictable API.
  <dt>If the <a href="#error-flag">error flag</a> is set
  <dd><p>Terminate these steps.
 
- <dt>If the <a class="external" href="http://fetch.spec.whatwg.org/#cross-origin-request-status">cross-origin request status</a>
+ <dt>If the <a class="external" href="http://www.w3.org/TR/2013/CR-cors-20130129/#cross-origin-request-status">cross-origin request status</a>
  is <i>preflight complete</i> and the <a href="#synchronous-flag">synchronous flag</a> is
  unset</dt>
  <dd><p><a href="#make-upload-progress-notifications">Make upload progress notifications</a>.</dd>
 
- <dt>If the <a class="external" href="http://fetch.spec.whatwg.org/#cross-origin-request-status">cross-origin request status</a>
+ <dt>If the <a class="external" href="http://www.w3.org/TR/2013/CR-cors-20130129/#cross-origin-request-status">cross-origin request status</a>
  is <i title="">network error</i></dt>
  <dd><p>This is a <a href="#network-error">network error</a>.</dd>
 
- <dt>If the <a class="external" href="http://fetch.spec.whatwg.org/#cross-origin-request-status">cross-origin request status</a>
+ <dt>If the <a class="external" href="http://www.w3.org/TR/2013/CR-cors-20130129/#cross-origin-request-status">cross-origin request status</a>
  is <i title="">abort error</i></dt>
  <dd><p>This is an <a href="#abort-error">abort error</a>.</dd>
 
@@ -1455,7 +1453,7 @@ This ensures that authors have a predictable API.
  <dd><p>This is a <a href="#timeout-error">timeout error</a>.</dd>
 
  <dt>Once all HTTP headers have been received, the
- <a class="external" href="http://fetch.spec.whatwg.org/#cross-origin-request-status">cross-origin request status</a> is
+ <a class="external" href="http://www.w3.org/TR/2013/CR-cors-20130129/#cross-origin-request-status">cross-origin request status</a> is
  <i>success</i>, and the <a href="#synchronous-flag">synchronous flag</a> is unset</dt>
  <dd>
 	<p><a href="#switch-headers-received">Switch to the HEADERS_RECEIVED state</a>.
@@ -1465,22 +1463,22 @@ This ensures that authors have a predictable API.
 
  <dt>Once the first byte (or more) of the
  <a href="#response-entity-body">response entity body</a> has been received, the
- <a class="external" href="http://fetch.spec.whatwg.org/#cross-origin-request-status">cross-origin request status</a> is
+ <a class="external" href="http://www.w3.org/TR/2013/CR-cors-20130129/#cross-origin-request-status">cross-origin request status</a> is
  <i>success</i>, and the <a href="#synchronous-flag">synchronous flag</a> is unset</dt>
  <dt>If there is no <a href="#response-entity-body">response entity body</a>, the
- <a class="external" href="http://fetch.spec.whatwg.org/#cross-origin-request-status">cross-origin request status</a> is
+ <a class="external" href="http://www.w3.org/TR/2013/CR-cors-20130129/#cross-origin-request-status">cross-origin request status</a> is
  <i>success</i>, and the <a href="#synchronous-flag">synchronous flag</a> is unset</dt>
  <dd><p><a href="#switch-loading">Switch to the LOADING state</a>.</dd>
 
  <dt>Once the whole <a href="#response-entity-body">response entity body</a> has been received
- and the <a class="external" href="http://fetch.spec.whatwg.org/#cross-origin-request-status">cross-origin request status</a> is
+ and the <a class="external" href="http://www.w3.org/TR/2013/CR-cors-20130129/#cross-origin-request-status">cross-origin request status</a> is
  <i>success</i></dt>
  <dt>If there is no <a href="#response-entity-body">response entity body</a>, the
- <a class="external" href="http://fetch.spec.whatwg.org/#cross-origin-request-status">cross-origin request status</a> is
+ <a class="external" href="http://www.w3.org/TR/2013/CR-cors-20130129/#cross-origin-request-status">cross-origin request status</a> is
  <i>success</i>, and the state is
  <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a></dt>
  <dt>If there is no <a href="#response-entity-body">response entity body</a>, the
- <a class="external" href="http://fetch.spec.whatwg.org/#cross-origin-request-status">cross-origin request status</a> is
+ <a class="external" href="http://www.w3.org/TR/2013/CR-cors-20130129/#cross-origin-request-status">cross-origin request status</a> is
  <i>success</i>, and the <a href="#synchronous-flag">synchronous flag</a> is set</dt>
  <dd><p><a href="#switch-done">Switch to the DONE state</a>.</dd>
 </dl>
@@ -2064,21 +2062,6 @@ algorithm:
 </ol>
 
 
-<p>The <dfn id="stream-response-entity-body">stream response entity body</dfn> is
-<code class="external"><a href="http://dvcs.w3.org/hg/streams-api/raw-file/tip/Overview.htm#idl-def-Stream">Stream</a></code> object representing the
-<a href="#response-entity-body">response entity body</a>. The
-<a href="#stream-response-entity-body">stream response entity body</a> is the return value of the
-following algorithm:
-
-<ol>
- <li><p>If the <a href="#response-entity-body">response entity body</a> is null, return an empty
- <code class="external"><a href="http://dvcs.w3.org/hg/streams-api/raw-file/tip/Overview.htm#idl-def-Stream">Stream</a></code> object.
-
- <li><p>Return a <code class="external"><a href="http://dvcs.w3.org/hg/streams-api/raw-file/tip/Overview.htm#idl-def-Stream">Stream</a></code> object
- representing the <a href="#response-entity-body">response entity body</a>.
-</ol>
-
-
 <p>The <dfn id="text-response-entity-body">text response entity body</dfn>
 is a string representing the <a href="#response-entity-body">response entity body</a>. The
 <a href="#text-response-entity-body">text response entity body</a> is the return value of the
@@ -2175,8 +2158,7 @@ method must run these steps:
 	"<code title="">arraybuffer</code>",
 	"<code title="">blob</code>",
 	"<code title="">document</code>",
-	"<code title="">json</code>",
-	"<code title="">stream</code>", and
+	"<code title="">json</code>", and
 	"<code title="">text</code>".
 	<p>When set: setting to "<code title="">document</code>" is ignored if the
 	<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
@@ -2262,7 +2244,7 @@ steps:
 
 	 <li><p>If the <a href="#error-flag">error flag</a> is set, return null.
 
-	 <li><p>Return the <a href="#stream-response-entity-body">stream response entity body</a>.
+	 <li><p>Return the <span>stream response entity body</span>.
 	</ol>
 
  <dt>Otherwise</dt>
@@ -2766,9 +2748,6 @@ parsed, this is a network error.
 
 <dt id="refsRFC2119">[RFC2119]
 <dd><cite><a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner. IETF.
-
-<dt id="refsSTREAMS">[STREAMS]
-<dd><cite><a href="http://dvcs.w3.org/hg/streams-api/raw-file/tip/Overview.htm">Streams API</a></cite>, Feras Moussa. W3C.
 
 <dt id="refsTYPEDARRAY">[TYPEDARRAY]
 <dd><cite><a href="http://www.khronos.org/registry/typedarray/specs/latest/">Typed Array</a></cite>, David Herman and Kenneth Russell. Khronos.
