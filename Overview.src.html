@@ -955,15 +955,12 @@ method must run these steps (unless otherwise noted):
 	 represented by <var title>data</var>.</dd>
 
 	 <dt id="dom-XMLHttpRequest-send-Blob"><code data-anolis-spec=fileapi>Blob</code>
-	 <dt id="dom-XMLHttpRequest-send-Stream"><code data-anolis-spec=streams>Stream</code>
 	 <dd>
 		<p>If the object's <code title>type</code> attribute value is not
 		the empty string, let <var>mime type</var> be its value.
 
 		<p class=note>See also <code data-anolis-spec=fileapi>Blob</code>'s
-		<code data-anolis-spec=fileapi title=dom-Blob-type>type</code>
-		attribute and <code data-anolis-spec=streams>Stream</code>'s
-		<code data-anolis-spec=streams>type</code> attribute.
+		<code data-anolis-spec=fileapi title=dom-Blob-type>type</code> attribute.
 
 		<p>Let the <span>request entity body</span> be the raw data
 		represented by <var>data</var>.
@@ -2185,18 +2182,6 @@ steps:
 	 <li><p>If the <span>error flag</span> is set, return the empty string.
 
 	 <li><p>Return the <span>text response entity body</span>.
-	</ol>
-
- <dt>If <code title="dom-XMLHttpRequest-responseType">responseType</code>
- is "<code title>stream</code>"
- <dd>
-	<ol>
-	 <li><p>If the state is not <span title="dom-XMLHttpRequest-LOADING">LOADING</span> or
-	 <span title="dom-XMLHttpRequest-DONE">DONE</span>, return null.
-
-	 <li><p>If the <span>error flag</span> is set, return null.
-
-	 <li><p>Return the <span>stream response entity body</span>.
 	</ol>
 
  <dt>Otherwise</dt>

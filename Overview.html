@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-15-april-2013">Living Standard — Last Updated 15 April 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-23-april-2013">Living Standard — Last Updated 23 April 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-15 April 2013, the editor has made this specification available
+23 April 2013, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -1003,15 +1003,12 @@ method must run these steps (unless otherwise noted):
 	 represented by <var title="">data</var>.</dd>
 
 	 <dt id="dom-XMLHttpRequest-send-Blob"><code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code>
-	 <dt id="dom-XMLHttpRequest-send-Stream"><code class="external"><a href="http://dvcs.w3.org/hg/streams-api/raw-file/tip/Overview.htm#idl-def-Stream">Stream</a></code>
 	 <dd>
 		<p>If the object's <code title="">type</code> attribute value is not
 		the empty string, let <var>mime type</var> be its value.
 
 		<p class="note">See also <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code>'s
-		<code class="external" title="dom-Blob-type"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-type">type</a></code>
-		attribute and <code class="external"><a href="http://dvcs.w3.org/hg/streams-api/raw-file/tip/Overview.htm#idl-def-Stream">Stream</a></code>'s
-		<code class="external"><a href="http://dvcs.w3.org/hg/streams-api/raw-file/tip/Overview.htm#widl-Stream-type">type</a></code> attribute.
+		<code class="external" title="dom-Blob-type"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-type">type</a></code> attribute.
 
 		<p>Let the <a href="#request-entity-body">request entity body</a> be the raw data
 		represented by <var>data</var>.
@@ -2233,18 +2230,6 @@ steps:
 	 <li><p>If the <a href="#error-flag">error flag</a> is set, return the empty string.
 
 	 <li><p>Return the <a href="#text-response-entity-body">text response entity body</a>.
-	</ol>
-
- <dt>If <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code>
- is "<code title="">stream</code>"
- <dd>
-	<ol>
-	 <li><p>If the state is not <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a> or
-	 <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>, return null.
-
-	 <li><p>If the <a href="#error-flag">error flag</a> is set, return null.
-
-	 <li><p>Return the <span>stream response entity body</span>.
 	</ol>
 
  <dt>Otherwise</dt>
