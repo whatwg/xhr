@@ -1348,6 +1348,11 @@ This ensures that authors have a predictable API.
 	some type of error, such as HTTP status code 410.
  </dd>
 
+ <dt>If the <span title=concept-XMLHttpRequest-document>associated document</span> is no longer <span data-anolis-spec=html>fully active</span> while the request is in progress</dt>
+ <dd>
+	<p>This is a <span>network error</span>. 
+ </dd>
+
 
  <dt>If <code title="dom-XMLHttpRequest-timeout">timeout</code> is not 0
  and since the request started the amount of milliseconds specified by
