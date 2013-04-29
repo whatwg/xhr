@@ -258,11 +258,8 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
   readonly attribute <span data-anolis-spec=dom>Document</span>? <span title="dom-XMLHttpRequest-responseXML">responseXML</span>;
 };</pre>
 
-
-
 <p>Each <code>XMLHttpRequest</code> object has a unique, associated
 <code>XMLHttpRequestUpload</code> object.
-
 
 
 <h3>Task sources</h3>
@@ -284,6 +281,7 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
 is a <span data-anolis-spec=html>document environment</span>, the
 <code>XMLHttpRequest</code> object has an associated
 <dfn title=concept-XMLHttpRequest-document>document</dfn>.
+
 <dl class=domintro>
  <dt><code><var title>client</var> = new <span title=dom-XMLHttpRequest>XMLHttpRequest</span>()</code>
  <dd>Returns a new <code>XMLHttpRequest</code> object.
@@ -311,12 +309,12 @@ constructor must run these steps:
  <span data-anolis-spec=dom title=concept-document>document</span>
  associated with the global object of <var title>xhr</var>'s interface
  object.
+ 
  <li><p>Return <var title>xhr</var>.
 </ol>
 
 
 <h3>Garbage collection</h3>
-
 <!-- Based on EventSource and WebSocket. Not sure what I am doing. -->
 
 <p>An <code>XMLHttpRequest</code> object must not be garbage collected if
@@ -1348,6 +1346,11 @@ This ensures that authors have a predictable API.
 	some type of error, such as HTTP status code 410.
  </dd>
 
+ <dt>If the <span title=concept-XMLHttpRequest-document>associated document</span> ceases being <span data-anolis-spec=html>fully active</span> during the request</dt>
+ <dd>
+	<p>This is a <span>network error</span>. 
+ </dd>
+
 
  <dt>If <code title="dom-XMLHttpRequest-timeout">timeout</code> is not 0
  and since the request started the amount of milliseconds specified by
@@ -1393,6 +1396,11 @@ This ensures that authors have a predictable API.
  <dt>If the <span data-anolis-spec=cors>cross-origin request status</span>
  is <i title>network error</i></dt>
  <dd><p>This is a <span>network error</span>.</dd>
+ 
+ <dt>If the <span title=concept-XMLHttpRequest-document>associated document</span> ceases being <span data-anolis-spec=html>fully active</span> during the request</dt>
+ <dd>
+	<p>This is a <span>network error</span>. 
+ </dd>
 
  <dt>If the <span data-anolis-spec=cors>cross-origin request status</span>
  is <i title>abort error</i></dt>
@@ -1594,6 +1602,7 @@ these steps:
 	 on the <code>XMLHttpRequestUpload</code> object.
 	</ol>
 </ul>
+
 
 <h4>The <code title>abort()</code> method</h4>
 
@@ -2306,7 +2315,6 @@ as documents.
 
 <p>The following events are dispatched on <code>XMLHttpRequest</code>
 and/or <code>XMLHttpRequestUpload</code> objects:
-
 
 <table>
  <thead>
