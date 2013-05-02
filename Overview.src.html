@@ -221,7 +221,7 @@ enum <dfn>XMLHttpRequestResponseType</dfn> {
 };
 
 dictionary <dfn>XMLHttpRequestOptions</dfn> {
-  boolean anon = false;
+  boolean anonymous = false;
 };
 
 [<span title="dom-XMLHttpRequest">Constructor</span>(optional <span>XMLHttpRequestOptions</span> <var title>options</var>)]
@@ -286,7 +286,7 @@ is a <span data-anolis-spec=html>document environment</span>, the
  <dt><code><var title>client</var> = new <span title=dom-XMLHttpRequest>XMLHttpRequest</span>()</code>
  <dd>Returns a new <code>XMLHttpRequest</code> object.
 
- <dt><code><var title>client</var> = new <span title=dom-XMLHttpRequest>XMLHttpRequest</span>({anon:true})</code>
+ <dt><code><var title>client</var> = new <span title=dom-XMLHttpRequest>XMLHttpRequest</span>({anonymous:true})</code>
  <dd>Returns a new <code>XMLHttpRequest</code> object that has its
  <span>anonymous flag</span> set.
 </dl>
@@ -299,7 +299,7 @@ constructor must run these steps:
  <li><p>Let <var title>xhr</var> be a new <code>XMLHttpRequest</code>
  object.
 
- <li><p>If <var title>options</var>'s <code title>anon</code> member is
+ <li><p>If <var title>options</var>'s <code title>anonymous</code> member is
  true, set <var title>xhr</var>'s <span>anonymous flag</span>.
 
  <li><p>If the
@@ -2678,6 +2678,7 @@ Denis Sureau,
 Dominik Röttsches,
 Doug Schepers,
 Douglas Livingstone,
+Elliott Sprehn,
 Elliotte Harold,
 Eric Lawrence,
 Eric Uhrhane,

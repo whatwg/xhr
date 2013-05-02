@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-23-april-2013">Living Standard — Last Updated 23 April 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-2-may-2013">Living Standard — Last Updated 2 May 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-23 April 2013, the editor has made this specification available
+2 May 2013, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -269,7 +269,7 @@ enum <dfn id="xmlhttprequestresponsetype">XMLHttpRequestResponseType</dfn> {
 };
 
 dictionary <dfn id="xmlhttprequestoptions">XMLHttpRequestOptions</dfn> {
-  boolean anon = false;
+  boolean anonymous = false;
 };
 
 [<a href="#dom-xmlhttprequest" title="dom-XMLHttpRequest">Constructor</a>(optional <a href="#xmlhttprequestoptions">XMLHttpRequestOptions</a> <var title="">options</var>)]
@@ -334,7 +334,7 @@ is a <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work
  <dt><code><var title="">client</var> = new <a href="#dom-xmlhttprequest" title="dom-XMLHttpRequest">XMLHttpRequest</a>()</code>
  <dd>Returns a new <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object.
 
- <dt><code><var title="">client</var> = new <a href="#dom-xmlhttprequest" title="dom-XMLHttpRequest">XMLHttpRequest</a>({anon:true})</code>
+ <dt><code><var title="">client</var> = new <a href="#dom-xmlhttprequest" title="dom-XMLHttpRequest">XMLHttpRequest</a>({anonymous:true})</code>
  <dd>Returns a new <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object that has its
  <a href="#anonymous-flag">anonymous flag</a> set.
 </dl>
@@ -347,7 +347,7 @@ constructor must run these steps:
  <li><p>Let <var title="">xhr</var> be a new <code><a href="#xmlhttprequest">XMLHttpRequest</a></code>
  object.
 
- <li><p>If <var title="">options</var>'s <code title="">anon</code> member is
+ <li><p>If <var title="">options</var>'s <code title="">anonymous</code> member is
  true, set <var title="">xhr</var>'s <a href="#anonymous-flag">anonymous flag</a>.
 
  <li><p>If the
@@ -2781,6 +2781,7 @@ Denis Sureau,
 Dominik Röttsches,
 Doug Schepers,
 Douglas Livingstone,
+Elliott Sprehn,
 Elliotte Harold,
 Eric Lawrence,
 Eric Uhrhane,
