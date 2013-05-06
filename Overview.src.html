@@ -187,10 +187,12 @@ File API, HTML, HTTP, Typed Array, URL, Web IDL, and XML.
 <span data-anolis-ref>XML</span> <span data-anolis-ref>XMLNS</span>
 
 <p>The term <dfn>user credentials</dfn> for the purposes of this
-specification means cookies, HTTP authentication, and client-side SSL
+specification means cookies, cached HTTP authentication credentials, and client-side SSL
 certificates. Specifically it does not refer to proxy authentication or the
-<code title="http-origin">Origin</code> header.
-<span data-anolis-ref>COOKIES</span> <!-- XXX ref? -->
+<code title="http-origin">Origin</code> header, nor to any <span>author request headers</span>. 
+Hence, if the <span>author request headers</span> include an Authorization header, it will be 
+sent by default if the remote site declares that this header is allowed.
+<span data-anolis-ref>COOKIES</span> <span data-anolis-ref>CORS</span> <!-- XXX ref? -->
 
 
 
