@@ -276,9 +276,7 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
 
 <p>The <code>XMLHttpRequest</code> object has an associated
 <dfn>anonymous flag</dfn>. If the <span>anonymous flag</span> is set,
-<span>user credentials</span> and the
-<span>source origin</span> are not exposed when
-<span data-anolis-spec=html title=fetch>fetching</span> resources.
+all requests are handled as cross-origin requests, <span>user credentials</span> are omitted, and Request and Origin headers do not identify the <span>source origin</span>.
 
 <p>When the <span data-anolis-spec=html>JavaScript global environment</span>
 is a <span data-anolis-spec=html>document environment</span>, the
@@ -545,6 +543,7 @@ method must run these steps (unless otherwise indicated):
    <span>anonymous flag</span> is set, and the <span data-anolis-spec=html>origin</span>
    of <span title=concept-XMLHttpRequest-document>document</span> otherwise.
 
+   <p class="note">Setting <span>source origin</span> to a globally unique identifier causes same-origin requests with the anonymous flag set to be handled as cross-origin requests.
    <li><p>Set <span>referrer source</span> to
    <span title=concept-XMLHttpRequest-document>document</span>.
   </ol>
