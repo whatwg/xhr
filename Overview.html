@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-2-may-2013">Living Standard — Last Updated 2 May 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-13-may-2013">Living Standard — Last Updated 13 May 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-2 May 2013, the editor has made this specification available
+13 May 2013, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -696,9 +696,15 @@ method must run these steps (unless otherwise indicated):
    <li><p>Set <a href="#response-entity-body">response entity body</a> to null.
   </ul>
 
- <li><p>Change the state to <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a>.
+ <li>
+  <p>If the state is not <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a>, run these
+  substeps:
 
- <li><p><a class="external" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.
+  <ol>
+   <li><p>Change the state to <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a>.
+
+   <li><p><a class="external" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.
+  </ol>
 </ol>
 
 
@@ -2360,54 +2366,41 @@ and/or <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> obj
 	 <th>Event name</th>
 	 <th>Interface</th>
 	 <th>Dispatched when…</th>
-	</tr>
- </thead>
  <tbody>
 	<tr>
 	 <td><dfn id="event-xhr-readystatechange" title="event-xhr-readystatechange"><code>readystatechange</code></dfn></td>
 	 <td><code class="external"><a href="http://dom.spec.whatwg.org/#event">Event</a></code></td>
-	 <td>The <code title="dom-XMLHttpRequest-readyState"><a href="#dom-xmlhttprequest-readystate">readyState</a></code>
-	 attribute changes at some seemingly arbitrary times for historical
-	 reasons.</td>
-	</tr>
+	 <td>The <code title="dom-XMLHttpRequest-readyState"><a href="#dom-xmlhttprequest-readystate">readyState</a></code> attribute changes
+	 value, except when it changes to <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a>.
 	<tr>
 	 <td><dfn id="event-xhr-loadstart" title="event-xhr-loadstart"><code>loadstart</code></dfn></td>
 	 <td><code><a href="#progressevent">ProgressEvent</a></code></td>
-	 <td>When the request starts.</td>
-	</tr>
+	 <td>The fetch initiates.
 	<tr>
 	 <td><dfn id="event-xhr-progress" title="event-xhr-progress"><code>progress</code></dfn></td>
 	 <td><code><a href="#progressevent">ProgressEvent</a></code></td>
-	 <td>While sending and loading data.</td>
-	</tr>
+	 <td>Transmitting data.
 	<tr>
 	 <td><dfn id="event-xhr-abort" title="event-xhr-abort"><code>abort</code></dfn></td>
 	 <td><code><a href="#progressevent">ProgressEvent</a></code></td>
-	 <td>When the request has been aborted. For instance, by invoking the
+	 <td>When the fetch has been aborted. For instance, by invoking the
 	 <code title="dom-XMLHttpRequest-abort"><a href="#dom-xmlhttprequest-abort">abort()</a></code> method.</td>
-	</tr>
 	<tr>
 	 <td><dfn id="event-xhr-error" title="event-xhr-error"><code>error</code></dfn></td>
 	 <td><code><a href="#progressevent">ProgressEvent</a></code></td>
-	 <td>When the request has failed.</td>
-	</tr>
+	 <td>The fetch failed.
 	<tr>
 	 <td><dfn id="event-xhr-load" title="event-xhr-load"><code>load</code></dfn></td>
 	 <td><code><a href="#progressevent">ProgressEvent</a></code></td>
-	 <td>When the request has successfully completed.</td>
-	</tr>
+	 <td>The fetch succeeded.
 	<tr>
 	 <td><dfn id="event-xhr-timeout" title="event-xhr-timeout"><code>timeout</code></dfn></td>
 	 <td><code><a href="#progressevent">ProgressEvent</a></code></td>
-	 <td>When the author specified timeout has passed before the request
-	 could complete.</td>
-	</tr>
+	 <td>The author specified timeout has passed before the fetch completed.
 	<tr>
 	 <td><dfn id="event-xhr-loadend" title="event-xhr-loadend"><code>loadend</code></dfn></td>
 	 <td><code><a href="#progressevent">ProgressEvent</a></code></td>
-	 <td>When the request has completed (either in success or failure).</td>
-	</tr>
- </tbody>
+	 <td>The fetch completed (success or failure).
 </table>
 
 

@@ -648,9 +648,15 @@ method must run these steps (unless otherwise indicated):
    <li><p>Set <span>response entity body</span> to null.
   </ul>
 
- <li><p>Change the state to <span title="dom-XMLHttpRequest-OPENED">OPENED</span>.
+ <li>
+  <p>If the state is not <span title="dom-XMLHttpRequest-OPENED">OPENED</span>, run these
+  substeps:
 
- <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.
+  <ol>
+   <li><p>Change the state to <span title="dom-XMLHttpRequest-OPENED">OPENED</span>.
+
+   <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.
+  </ol>
 </ol>
 
 
@@ -2312,54 +2318,41 @@ and/or <code>XMLHttpRequestUpload</code> objects:
 	 <th>Event name</th>
 	 <th>Interface</th>
 	 <th>Dispatched when&hellip;</th>
-	</tr>
- </thead>
  <tbody>
 	<tr>
 	 <td><dfn title="event-xhr-readystatechange"><code>readystatechange</code></dfn></td>
 	 <td><code data-anolis-spec=dom>Event</code></td>
-	 <td>The <code title="dom-XMLHttpRequest-readyState">readyState</code>
-	 attribute changes at some seemingly arbitrary times for historical
-	 reasons.</td>
-	</tr>
+	 <td>The <code title="dom-XMLHttpRequest-readyState">readyState</code> attribute changes
+	 value, except when it changes to <span title=dom-XMLHttpRequest-UNSENT>UNSENT</span>.
 	<tr>
 	 <td><dfn title="event-xhr-loadstart"><code>loadstart</code></dfn></td>
 	 <td><code>ProgressEvent</code></td>
-	 <td>When the request starts.</td>
-	</tr>
+	 <td>The fetch initiates.
 	<tr>
 	 <td><dfn title="event-xhr-progress"><code>progress</code></dfn></td>
 	 <td><code>ProgressEvent</code></td>
-	 <td>While sending and loading data.</td>
-	</tr>
+	 <td>Transmitting data.
 	<tr>
 	 <td><dfn title="event-xhr-abort"><code>abort</code></dfn></td>
 	 <td><code>ProgressEvent</code></td>
-	 <td>When the request has been aborted. For instance, by invoking the
+	 <td>When the fetch has been aborted. For instance, by invoking the
 	 <code title="dom-XMLHttpRequest-abort">abort()</code> method.</td>
-	</tr>
 	<tr>
 	 <td><dfn title="event-xhr-error"><code>error</code></dfn></td>
 	 <td><code>ProgressEvent</code></td>
-	 <td>When the request has failed.</td>
-	</tr>
+	 <td>The fetch failed.
 	<tr>
 	 <td><dfn title="event-xhr-load"><code>load</code></dfn></td>
 	 <td><code>ProgressEvent</code></td>
-	 <td>When the request has successfully completed.</td>
-	</tr>
+	 <td>The fetch succeeded.
 	<tr>
 	 <td><dfn title="event-xhr-timeout"><code>timeout</code></dfn></td>
 	 <td><code>ProgressEvent</code></td>
-	 <td>When the author specified timeout has passed before the request
-	 could complete.</td>
-	</tr>
+	 <td>The author specified timeout has passed before the fetch completed.
 	<tr>
 	 <td><dfn title="event-xhr-loadend"><code>loadend</code></dfn></td>
 	 <td><code>ProgressEvent</code></td>
-	 <td>When the request has completed (either in success or failure).</td>
-	</tr>
- </tbody>
+	 <td>The fetch completed (success or failure).
 </table>
 
 
