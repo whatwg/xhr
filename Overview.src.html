@@ -1723,6 +1723,8 @@ attribute must return the result of running these steps:
  <code>Set-Cookie</code> or <code>Set-Cookie2</code>.
 </dl>
 
+<p>The <code title="dom-XMLHttpRequest-getResponseHeader">getResponseHeader()</code> method returns only headers that are sent before the <span>response entity body</span>. Trailing HTTP headers are not included.
+
 <p>The
 <dfn title="dom-XMLHttpRequest-getResponseHeader"><code>getResponseHeader(<var title>header</var>)</code></dfn>
 method must run these steps:
@@ -1783,6 +1785,8 @@ client.onreadystatechange = function() {
  whose field name is <code>Set-Cookie</code> or
  <code>Set-Cookie2</code>.
 </dl>
+
+<p>The <code title="dom-XMLHttpRequest-getAllResponseHeaders">getAllResponseHeaders()</code> method returns only headers that are sent before the <span>response entity body</span>. Trailing HTTP headers are not included.
 
 <p>The
 <dfn title="dom-XMLHttpRequest-getAllResponseHeaders"><code>getAllResponseHeaders()</code></dfn>
