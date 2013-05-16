@@ -187,11 +187,9 @@ File API, HTML, HTTP, Typed Array, URL, Web IDL, and XML.
 <span data-anolis-ref>XML</span> <span data-anolis-ref>XMLNS</span>
 
 <p>The term <dfn>user credentials</dfn> for the purposes of this
-specification means cookies, cached HTTP authentication credentials, and client-side SSL
+specification means cookies, HTTP authentication, and client-side SSL
 certificates. Specifically it does not refer to proxy authentication or the
-<code title="http-origin">Origin</code> header, nor to any <span>author request headers</span>. 
-Hence, if the <span>author request headers</span> include an Authorization header, it will be 
-sent by default if the remote site declares that this header is allowed.
+<code title="http-origin">Origin</code> header.
 
 <span data-anolis-ref>COOKIES</span> <span data-anolis-ref>CORS</span> <!-- XXX ref? -->
 
@@ -261,11 +259,8 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
   readonly attribute <span data-anolis-spec=dom>Document</span>? <span title="dom-XMLHttpRequest-responseXML">responseXML</span>;
 };</pre>
 
-
-
 <p>Each <code>XMLHttpRequest</code> object has a unique, associated
 <code>XMLHttpRequestUpload</code> object.
-
 
 
 <h3>Task sources</h3>
@@ -287,6 +282,7 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
 is a <span data-anolis-spec=html>document environment</span>, the
 <code>XMLHttpRequest</code> object has an associated
 <dfn title=concept-XMLHttpRequest-document>document</dfn>.
+
 <dl class=domintro>
  <dt><code><var title>client</var> = new <span title=dom-XMLHttpRequest>XMLHttpRequest</span>()</code>
  <dd>Returns a new <code>XMLHttpRequest</code> object.
@@ -314,12 +310,12 @@ constructor must run these steps:
  <span data-anolis-spec=dom title=concept-document>document</span>
  associated with the global object of <var title>xhr</var>'s interface
  object.
+
  <li><p>Return <var title>xhr</var>.
 </ol>
 
 
 <h3>Garbage collection</h3>
-
 <!-- Based on EventSource and WebSocket. Not sure what I am doing. -->
 
 <p>An <code>XMLHttpRequest</code> object must not be garbage collected if
@@ -1598,6 +1594,7 @@ these steps:
 	</ol>
 </ul>
 
+
 <h4>The <code title>abort()</code> method</h4>
 
   <dl class=domintro>
@@ -2313,7 +2310,6 @@ as documents.
 
 <p>The following events are dispatched on <code>XMLHttpRequest</code>
 and/or <code>XMLHttpRequestUpload</code> objects:
-
 
 <table>
  <thead>
