@@ -192,7 +192,10 @@ certificates. Specifically it does not refer to proxy authentication or the
 <code title="http-origin">Origin</code> header.
 <span data-anolis-ref>COOKIES</span> <!-- XXX ref? -->
 
-
+<p>The term <dfn>response headers</dfn> for the purposes of this specification
+means HTTP response headers that are sent before the <span>response entity 
+body</span>. Specifically, it does not refer to any trailing HTTP headers. 
+<span data-anolis-ref>HTTP</span>
 
 <h2>Interface <code title>XMLHttpRequest</code></h2>
 
@@ -1738,13 +1741,13 @@ method must run these steps:
  <li><p>If <var>header</var> is a case-insensitive match for
  <code>Set-Cookie</code> or <code>Set-Cookie2</code>, return null.
 
- <li><p>If <var>header</var> is a case-insensitive match for multiple HTTP
- response headers, return the values of these headers as a single
+ <li><p>If <var>header</var> is a case-insensitive match for multiple 
+ <span>response headers</span>, return the values of these headers as a single
  concatenated string separated from each other by a
  U+002C COMMA U+0020 SPACE character pair.
 
  <li><p>If <var>header</var> is a case-insensitive match for a single HTTP
- response header, return the value of that header.
+ <span title="response-headers">response header</span>, return the value of that header.
 
  <li><p>Return null.
 </ol>
