@@ -309,7 +309,7 @@ constructor must run these steps:
  <span data-anolis-spec=dom title=concept-document>document</span>
  associated with the global object of <var title>xhr</var>'s interface
  object.
-
+ 
  <li><p>Return <var title>xhr</var>.
 </ol>
 
@@ -705,6 +705,11 @@ method must run these steps:
  "<code data-anolis-spec=dom>InvalidStateError</code>" exception.
 
  <li><p>If the <span><code>send()</code> flag</span> is set,
+ <span data-anolis-spec=dom title=concept-throw>throw</span> an
+ "<code data-anolis-spec=dom>InvalidStateError</code>" exception.
+
+ <li><p>If <span title=concept-XMLHttpRequest-document>document</span> is not
+ <span data-anolis-spec=html>fully active</span>,
  <span data-anolis-spec=dom title=concept-throw>throw</span> an
  "<code data-anolis-spec=dom>InvalidStateError</code>" exception.
 
@@ -1352,6 +1357,11 @@ This ensures that authors have a predictable API.
 	some type of error, such as HTTP status code 410.
  </dd>
 
+ <dt>If the <span title=concept-XMLHttpRequest-document>associated document</span> ceases being <span data-anolis-spec=html>fully active</span> during the request</dt>
+ <dd>
+	<p>This is a <span>network error</span>. 
+ </dd>
+
 
  <dt>If <code title="dom-XMLHttpRequest-timeout">timeout</code> is not 0
  and since the request started the amount of milliseconds specified by
@@ -1397,6 +1407,11 @@ This ensures that authors have a predictable API.
  <dt>If the <span data-anolis-spec=cors>cross-origin request status</span>
  is <i title>network error</i></dt>
  <dd><p>This is a <span>network error</span>.</dd>
+ 
+ <dt>If the <span title=concept-XMLHttpRequest-document>associated document</span> ceases being <span data-anolis-spec=html>fully active</span> during the request</dt>
+ <dd>
+	<p>This is a <span>network error</span>. 
+ </dd>
 
  <dt>If the <span data-anolis-spec=cors>cross-origin request status</span>
  is <i title>abort error</i></dt>
