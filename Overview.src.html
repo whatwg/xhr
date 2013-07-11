@@ -261,6 +261,13 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
 <p>Each <code>XMLHttpRequest</code> object has a unique, associated
 <code>XMLHttpRequestUpload</code> object.
 
+<p>If the <span data-anolis-spec=html>JavaScript global environment</span> is a
+<span data-anolis-spec=html>worker environment</span>, implementations must act as if
+<code title>Document</code> and <code title>Document?</code> in the above IDL were not
+exposed. I.e. <code title=dom-XMLHttpRequest-send>send()</code> is not overloaded with it
+and <code title=dom-XMLHttpRequest-responseXML>responseXML</code> always returns null (as
+required by its definition, too).
+
 
 <h3>Task sources</h3>
 
@@ -304,7 +311,7 @@ constructor must run these steps:
 
  <li><p>If the
  <span data-anolis-spec=html>JavaScript global environment</span> is a
- <span data-anolis-spec=html>document environment</span>, set
+ <span data-anolis-spec=html>document environment</span>, set <var title>xhr</var>'s
  <span title=concept-XMLHttpRequest-document>document</span> to the
  <span data-anolis-spec=dom title=concept-document>document</span>
  associated with the global object of <var title>xhr</var>'s interface
@@ -2371,6 +2378,12 @@ interface <dfn>FormData</dfn> {
   void <span title="dom-FormData-append">append</span>(DOMString <var>name</var>, <span data-anolis-spec=fileapi>Blob</span> <var title>value</var>, optional DOMString <var title>filename</var>);
   void <span title="dom-FormData-append">append</span>(DOMString <var>name</var>, DOMString <var>value</var>);
 };</pre>
+
+<p>If the <span data-anolis-spec=html>JavaScript global environment</span> is a
+<span data-anolis-spec=html>worker environment</span>, <code>FormData</code> must be
+<span data-anolis-spec=html>exposed to JavaScript</span> as if the constructor part of the
+IDL reads <code title>[Constructor]</code> (i.e. has no arguments).
+<!-- maybe move this into IDL at some point -->
 
 <dl class=domintro>
  <dt><code><var title>fd</var> = new <span title="dom-FormData">FormData</span>([<var title>form</var>])</code>

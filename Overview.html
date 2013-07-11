@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-22-may-2013">Living Standard — Last Updated 22 May 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-11-july-2013">Living Standard — Last Updated 11 July 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-22 May 2013, the editor has made this specification available
+11 July 2013, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -309,6 +309,13 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <a href="#xmlhttpreque
 <p>Each <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object has a unique, associated
 <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
 
+<p>If the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
+<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#worker-environment">worker environment</a>, implementations must act as if
+<code title="">Document</code> and <code title="">Document?</code> in the above IDL were not
+exposed. I.e. <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code> is not overloaded with it
+and <code title="dom-XMLHttpRequest-responseXML"><a href="#dom-xmlhttprequest-responsexml">responseXML</a></code> always returns null (as
+required by its definition, too).
+
 
 <h3 id="task-sources"><span class="secno">4.1 </span>Task sources</h3>
 
@@ -352,7 +359,7 @@ constructor must run these steps:
 
  <li><p>If the
  <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
- <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#document-environment">document environment</a>, set
+ <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#document-environment">document environment</a>, set <var title="">xhr</var>'s
  <a href="#concept-xmlhttprequest-document" title="concept-XMLHttpRequest-document">document</a> to the
  <a class="external" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>
  associated with the global object of <var title="">xhr</var>'s interface
@@ -2420,6 +2427,12 @@ interface <dfn id="formdata">FormData</dfn> {
   void <a href="#dom-formdata-append" title="dom-FormData-append">append</a>(DOMString <var>name</var>, DOMString <var>value</var>);
 };</pre>
 
+<p>If the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
+<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#worker-environment">worker environment</a>, <code><a href="#formdata">FormData</a></code> must be
+<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#exposed-to-javascript">exposed to JavaScript</a> as if the constructor part of the
+IDL reads <code title="">[Constructor]</code> (i.e. has no arguments).
+<!-- maybe move this into IDL at some point -->
+
 <dl class="domintro">
  <dt><code><var title="">fd</var> = new <a href="#dom-formdata" title="dom-FormData">FormData</a>([<var title="">form</var>])</code>
  <dd><p>Returns a new <code><a href="#formdata">FormData</a></code> object, optionally initialized
@@ -2694,7 +2707,7 @@ parsed, this is a network error.
 <dd><cite><a href="http://tools.ietf.org/html/rfc6265">HTTP State Management Mechanism</a></cite>, Adam Barth. IETF.
 
 <dt id="refsCORS">[CORS]
-<dd><cite><a href="http://fetch.spec.whatwg.org/">Cross-Origin Resource Sharing</a></cite>, Anne van Kesteren. WHATWG.
+<dd><cite><a href="http://www.w3.org/TR/cors/">CORS (obsolete)</a></cite>, Anne van Kesteren. W3C.
 
 <dt id="refsDOM">[DOM]
 <dd><cite><a href="http://dom.spec.whatwg.org/">DOM</a></cite>, Anne van Kesteren, Aryeh Gregor and Ms2ger. WHATWG.
@@ -2706,7 +2719,7 @@ parsed, this is a network error.
 <dd><cite><a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">ECMAScript Language Specification</a></cite>. ECMA.
 
 <dt id="refsENCODING">[ENCODING]
-<dd><cite><a href="http://encoding.spec.whatwg.org/">Encoding Standard</a></cite>, Anne van Kesteren. WHATWG.
+<dd><cite><a href="http://encoding.spec.whatwg.org/">Encoding</a></cite>, Anne van Kesteren. WHATWG.
 
 <dt id="refsFILEAPI">[FILEAPI]
 <dd><cite><a href="http://dev.w3.org/2006/webapi/FileAPI/">File API</a></cite>, Arun Ranganathan and Jonas Sicking. W3C.
@@ -2734,7 +2747,7 @@ parsed, this is a network error.
 <dd><cite><a href="http://www.khronos.org/registry/typedarray/specs/latest/">Typed Array</a></cite>, David Herman and Kenneth Russell. Khronos.
 
 <dt id="refsURL">[URL]
-<dd><cite><a href="http://url.spec.whatwg.org/">URL Standard</a></cite>, Anne van Kesteren. WHATWG.
+<dd><cite><a href="http://url.spec.whatwg.org/">URL</a></cite>, Anne van Kesteren. WHATWG.
 
 <dt id="refsWEBIDL">[WEBIDL]
 <dd><cite><a href="http://dev.w3.org/2006/webapi/WebIDL/">Web IDL</a></cite>, Cameron McCormack. W3C.
