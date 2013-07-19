@@ -1966,17 +1966,17 @@ it be the return value of the following algorithm:
 	 <li><p>If <var>charset</var> is null, set <var>charset</var> to
 	 <span data-anolis-spec=encoding>utf-8</span>.
 
-	 <li><p><span data-anolis-spec=encoding>Decode</span> byte stream
-	 <span>response entity body</span> using fallback encoding
-	 <var>charset</var> and then let <var title>document</var> be a
+	 <li><p>Let <var title>document</var> be a
 	 <span data-anolis-spec=dom title=concept-document>document</span> that
-	 represents the result of that, parsed following the rules set
-	 forth in the HTML specification for an HTML parser with scripting
-	 disabled. <span data-anolis-ref>HTML</span>
+	 represents the result parsing <span>response entity body</span> following the rules set
+	 forth in the HTML specification for an HTML parser with scripting disabled and
+	 <span data-anolis-spec=html>a known definite encoding</span> <var>charset</var>.
+	 <span data-anolis-ref>HTML</span>
 
 	 <li><p>Set <var title>document</var>'s
 	 <span data-anolis-spec=dom title=concept-document-encoding>encoding</span>
 	 to <var>charset</var>.
+	 <!-- This might be redundant with HTML. -->
 	</ol>
 
  <li>
@@ -2732,7 +2732,7 @@ Pawel Glowacki,
 Peter Michaux,
 Philip Taylor,
 Robin Berjon,
-Rune Halvorsen,
+Rune <span title="Fabulous">F.</span> Halvorsen,
 Ruud Steltenpool,
 Sergiu Dumitriu,
 Sigbj&oslash;rn Finne,

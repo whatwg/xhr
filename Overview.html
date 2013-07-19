@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-11-july-2013">Living Standard — Last Updated 11 July 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-19-july-2013">Living Standard — Last Updated 19 July 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-11 July 2013, the editor has made this specification available
+19 July 2013, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -2014,17 +2014,17 @@ it be the return value of the following algorithm:
 	 <li><p>If <var>charset</var> is null, set <var>charset</var> to
 	 <a class="external" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
 
-	 <li><p><a class="external" href="http://encoding.spec.whatwg.org/#decode">Decode</a> byte stream
-	 <a href="#response-entity-body">response entity body</a> using fallback encoding
-	 <var>charset</var> and then let <var title="">document</var> be a
+	 <li><p>Let <var title="">document</var> be a
 	 <a class="external" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> that
-	 represents the result of that, parsed following the rules set
-	 forth in the HTML specification for an HTML parser with scripting
-	 disabled. <a href="#refsHTML">[HTML]</a>
+	 represents the result parsing <a href="#response-entity-body">response entity body</a> following the rules set
+	 forth in the HTML specification for an HTML parser with scripting disabled and
+	 <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/parsing.html#a-known-definite-encoding">a known definite encoding</a> <var>charset</var>.
+	 <a href="#refsHTML">[HTML]</a>
 
 	 <li><p>Set <var title="">document</var>'s
 	 <a class="external" href="http://dom.spec.whatwg.org/#concept-document-encoding" title="concept-document-encoding">encoding</a>
 	 to <var>charset</var>.
+	 <!-- This might be redundant with HTML. -->
 	</ol>
 
  <li>
@@ -2835,7 +2835,7 @@ Pawel Glowacki,
 Peter Michaux,
 Philip Taylor,
 Robin Berjon,
-Rune Halvorsen,
+Rune <span title="Fabulous">F.</span> Halvorsen,
 Ruud Steltenpool,
 Sergiu Dumitriu,
 Sigbjørn Finne,
