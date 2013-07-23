@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-19-july-2013">Living Standard — Last Updated 19 July 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-23-july-2013">Living Standard — Last Updated 23 July 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-19 July 2013, the editor has made this specification available
+23 July 2013, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -286,12 +286,12 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <a href="#xmlhttpreque
   readonly attribute unsigned short <a href="#dom-xmlhttprequest-readystate" title="dom-XMLHttpRequest-readyState">readyState</a>;
 
   // <a href="#request">request</a>
-  void <a href="#dom-xmlhttprequest-open" title="dom-XMLHttpRequest-open">open</a>(ByteString <var>method</var>, DOMString <var title="">url</var>, optional boolean <var>async</var> = true, optional DOMString? <var>username</var> = null, optional DOMString? <var>password</var> = null);
+  void <a href="#dom-xmlhttprequest-open" title="dom-XMLHttpRequest-open">open</a>(ByteString <var>method</var>, [EnsureUTF16] DOMString <var title="">url</var>, optional boolean <var>async</var> = true, optional [EnsureUTF16] DOMString? <var>username</var> = null, optional [EnsureUTF16] DOMString? <var>password</var> = null);
   void <a href="#dom-xmlhttprequest-setrequestheader" title="dom-XMLHttpRequest-setRequestHeader">setRequestHeader</a>(ByteString <var>header</var>, ByteString <var>value</var>);
            attribute unsigned long <a href="#dom-xmlhttprequest-timeout" title="dom-XMLHttpRequest-timeout">timeout</a>;
            attribute boolean <a href="#dom-xmlhttprequest-withcredentials" title="dom-XMLHttpRequest-withCredentials">withCredentials</a>;
   readonly attribute <a href="#xmlhttprequestupload">XMLHttpRequestUpload</a> <a href="#dom-xmlhttprequest-upload" title="dom-XMLHttpRequest-upload">upload</a>;
-  void <a href="#dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send">send</a>(optional (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#6">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or <a class="external" href="http://dom.spec.whatwg.org/#document">Document</a> or DOMString or <a href="#formdata">FormData</a>)? <var>data</var> = null);
+  void <a href="#dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send">send</a>(optional (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#6">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or <a class="external" href="http://dom.spec.whatwg.org/#document">Document</a> or [EnsureUTF16] DOMString or <a href="#formdata">FormData</a>)? <var>data</var> = null);
   void <a href="#dom-xmlhttprequest-abort" title="dom-XMLHttpRequest-abort">abort</a>();
 
   // <a href="#response">response</a>
@@ -1070,9 +1070,8 @@ method must run these steps (unless otherwise noted):
 
 		<p>Let <var>mime type</var> be "<code>text/plain;charset=UTF-8</code>".
 
-		<p>Let the <a href="#request-entity-body">request entity body</a> be <var title="">data</var>
-		<a class="external" href="http://dev.w3.org/2006/webapi/WebIDL/#dfn-obtain-unicode" title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</a>
-		and <a class="external" href="http://encoding.spec.whatwg.org/#encode" title="encode">encoded</a> as
+		<p>Let the <a href="#request-entity-body">request entity body</a> be <var title="">data</var> ,
+		<a class="external" href="http://encoding.spec.whatwg.org/#encode" title="encode">encoded</a> as
 		<a class="external" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
 	 </dd>
 
