@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-23-july-2013">Living Standard — Last Updated 23 July 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-3-september-2013">Living Standard — Last Updated 3 September 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-23 July 2013, the editor has made this specification available
+3 September 2013, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -541,6 +541,21 @@ must be done in a case-insensitive manner. Initially it must be empty.
 <a href="#upload-complete-flag">upload complete flag</a>, and
 <a href="#upload-events-flag">upload events flag</a> must be initially unset.
 
+<hr>
+
+<p>To <dfn id="cancel-the-request">cancel the request</dfn> run these steps:
+
+<ol>
+ <li><p>Set the <a href="#error-flag">error flag</a>.
+
+ <li><p>Cancel any instance of the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/fetching-resources.html#fetch">fetch</a> algorithm
+ opened by this object.
+
+ <li><p>If there are any <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#concept-task" title="concept-task">tasks</a> from
+ the object's <a href="#xmlhttprequest-task-source"><code>XMLHttpRequest</code> task source</a> in one of the
+ <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#task-queue" title="task queue">task queues</a>, then remove them.
+</ol>
+
 
 
 <h4 id="the-open()-method"><span class="secno">4.6.1 </span>The <code title="">open()</code> method</h4>
@@ -678,18 +693,9 @@ method must run these steps (unless otherwise indicated):
  "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception.
 
  <li>
-  <p>Set the <a href="#error-flag">error flag</a>.
+  <p><a href="#cancel-the-request">Cancel the request</a>.
 
-  <p class="note">This is meaningless unless the
-  <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code> algorithm is running.
-
- <li><p>The user agent should cancel any network activity for which the object is
- responsible.
- <!-- we can hardly require it... -->
-
- <li><p>If there are any <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#concept-task" title="concept-task">tasks</a> from
- the object's <a href="#xmlhttprequest-task-source"><code>XMLHttpRequest</code> task source</a> in one of the
- <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#task-queue" title="task queue">task queues</a>, then remove them.
+  <p class="note">After all, a request can be ongoing at this point.
 
  <li>
   <p>Set variables associated with the object as follows:
@@ -1517,16 +1523,7 @@ exception <var>exception</var> and event <var title="">event</var> run these
 steps:
 
 <ol>
- <li><p>The user agent should cancel any network
- activity for which the object is responsible.
-
- <li><p>If there are any
- <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#concept-task" title="concept-task">tasks</a> from the
- object's <a href="#xmlhttprequest-task-source"><code>XMLHttpRequest</code> task source</a> in one of
- the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#task-queue" title="task queue">task queues</a>,
- then remove them.
-
- <li><p>Set the the <a href="#error-flag">error flag</a>.
+ <li><p><a href="#cancel-the-request">Cancel the request</a>.
 
  <li><p>Change the state to <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>.
 
@@ -1665,16 +1662,7 @@ these steps:
 these steps (unless otherwise noted):
 
 <ol>
- <li><p>Set the <a href="#error-flag">error flag</a>.
-
- <li><p>The user agent should cancel any network
- activity for which the object is responsible.
-
- <li><p>If there are any
- <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#concept-task" title="concept-task">tasks</a> from the
- object's <a href="#xmlhttprequest-task-source"><code>XMLHttpRequest</code> task source</a> in one of
- the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#task-queue" title="task queue">task queues</a>,
- then remove them.
+ <li><p><a href="#cancel-the-request">Cancel the request</a>.
 
  <li>
 	<p>If the state is <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a>,

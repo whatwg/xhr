@@ -493,6 +493,21 @@ must be done in a case-insensitive manner. Initially it must be empty.
 <span>upload complete flag</span>, and
 <span>upload events flag</span> must be initially unset.
 
+<hr>
+
+<p>To <dfn>cancel the request</dfn> run these steps:
+
+<ol>
+ <li><p>Set the <span>error flag</span>.
+
+ <li><p>Cancel any instance of the <span data-anolis-spec=html>fetch</span> algorithm
+ opened by this object.
+
+ <li><p>If there are any <span data-anolis-spec=html title=concept-task>tasks</span> from
+ the object's <span><code>XMLHttpRequest</code> task source</span> in one of the
+ <span data-anolis-spec=html title="task queue">task queues</span>, then remove them.
+</ol>
+
 
 
 <h4>The <code title>open()</code> method</h4>
@@ -630,18 +645,9 @@ method must run these steps (unless otherwise indicated):
  "<code data-anolis-spec=dom>InvalidAccessError</code>" exception.
 
  <li>
-  <p>Set the <span>error flag</span>.
+  <p><span>Cancel the request</span>.
 
-  <p class=note>This is meaningless unless the
-  <code title=dom-XMLHttpRequest-send>send()</code> algorithm is running.
-
- <li><p>The user agent should cancel any network activity for which the object is
- responsible.
- <!-- we can hardly require it... -->
-
- <li><p>If there are any <span data-anolis-spec=html title=concept-task>tasks</span> from
- the object's <span><code>XMLHttpRequest</code> task source</span> in one of the
- <span data-anolis-spec=html title="task queue">task queues</span>, then remove them.
+  <p class=note>After all, a request can be ongoing at this point.
 
  <li>
   <p>Set variables associated with the object as follows:
@@ -1469,16 +1475,7 @@ exception <var>exception</var> and event <var title>event</var> run these
 steps:
 
 <ol>
- <li><p>The user agent should cancel any network
- activity for which the object is responsible.
-
- <li><p>If there are any
- <span data-anolis-spec=html title=concept-task>tasks</span> from the
- object's <span><code>XMLHttpRequest</code> task source</span> in one of
- the <span data-anolis-spec=html title="task queue">task queues</span>,
- then remove them.
-
- <li><p>Set the the <span>error flag</span>.
+ <li><p><span>Cancel the request</span>.
 
  <li><p>Change the state to <span title="dom-XMLHttpRequest-DONE">DONE</span>.
 
@@ -1617,16 +1614,7 @@ these steps:
 these steps (unless otherwise noted):
 
 <ol>
- <li><p>Set the <span>error flag</span>.
-
- <li><p>The user agent should cancel any network
- activity for which the object is responsible.
-
- <li><p>If there are any
- <span data-anolis-spec=html title=concept-task>tasks</span> from the
- object's <span><code>XMLHttpRequest</code> task source</span> in one of
- the <span data-anolis-spec=html title="task queue">task queues</span>,
- then remove them.
+ <li><p><span>Cancel the request</span>.
 
  <li>
 	<p>If the state is <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span>,
