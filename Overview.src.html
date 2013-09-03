@@ -368,31 +368,31 @@ from <code>XMLHttpRequestEventTarget</code> as attributes:
 
 <table>
  <thead>
-	<tr>
-	 <th><span data-anolis-spec=html title="event handlers">event handler</span>
-	 <th><span data-anolis-spec=html>event handler event type</span>
+  <tr>
+   <th><span data-anolis-spec=html title="event handlers">event handler</span>
+   <th><span data-anolis-spec=html>event handler event type</span>
  <tbody>
-	<tr>
-	 <td><dfn title="handler-xhr-onloadstart"><code>onloadstart</code></dfn>
-	 <td><code title="event-xhr-loadstart">loadstart</code>
-	<tr>
-	 <td><dfn title="handler-xhr-onprogress"><code>onprogress</code></dfn>
-	 <td><code title="event-xhr-progress">progress</code>
-	<tr>
-	 <td><dfn title="handler-xhr-onabort"><code>onabort</code></dfn>
-	 <td><code title="event-xhr-abort">abort</code>
-	<tr>
-	 <td><dfn title="handler-xhr-onerror"><code>onerror</code></dfn>
-	 <td><code title="event-xhr-error">error</code>
-	<tr>
-	 <td><dfn title="handler-xhr-onload"><code>onload</code></dfn>
-	 <td><code title="event-xhr-load">load</code>
-	<tr>
-	 <td><dfn title="handler-xhr-ontimeout"><code>ontimeout</code></dfn>
-	 <td><code title="event-xhr-timeout">timeout</code>
-	<tr>
-	 <td><dfn title="handler-xhr-onloadend"><code>onloadend</code></dfn>
-	 <td><code title="event-xhr-loadend">loadend</code>
+  <tr>
+   <td><dfn title="handler-xhr-onloadstart"><code>onloadstart</code></dfn>
+   <td><code title="event-xhr-loadstart">loadstart</code>
+  <tr>
+   <td><dfn title="handler-xhr-onprogress"><code>onprogress</code></dfn>
+   <td><code title="event-xhr-progress">progress</code>
+  <tr>
+   <td><dfn title="handler-xhr-onabort"><code>onabort</code></dfn>
+   <td><code title="event-xhr-abort">abort</code>
+  <tr>
+   <td><dfn title="handler-xhr-onerror"><code>onerror</code></dfn>
+   <td><code title="event-xhr-error">error</code>
+  <tr>
+   <td><dfn title="handler-xhr-onload"><code>onload</code></dfn>
+   <td><code title="event-xhr-load">load</code>
+  <tr>
+   <td><dfn title="handler-xhr-ontimeout"><code>ontimeout</code></dfn>
+   <td><code title="event-xhr-timeout">timeout</code>
+  <tr>
+   <td><dfn title="handler-xhr-onloadend"><code>onloadend</code></dfn>
+   <td><code title="event-xhr-loadend">loadend</code>
 </table>
 
 <p>The following is the
@@ -404,13 +404,13 @@ supported as attribute solely by the
 
 <table>
  <thead>
-	<tr>
-	 <th><span data-anolis-spec=html title="event handlers">event handler</span>
-	 <th><span data-anolis-spec=html>event handler event type</span>
+  <tr>
+   <th><span data-anolis-spec=html title="event handlers">event handler</span>
+   <th><span data-anolis-spec=html>event handler event type</span>
  <tbody>
-	<tr>
-	 <td><dfn title="handler-xhr-onreadystatechange"><code>onreadystatechange</code></dfn>
-	 <td><code title="event-xhr-readystatechange">readystatechange</code></td>
+  <tr>
+   <td><dfn title="handler-xhr-onreadystatechange"><code>onreadystatechange</code></dfn>
+   <td><code title="event-xhr-readystatechange">readystatechange</code></td>
 </table>
 
 
@@ -512,28 +512,28 @@ must be done in a case-insensitive manner. Initially it must be empty.
  <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-open>open</span>(<var title>method</var>, <var title>url</var> [, <var title>async</var> = true [, <var title>username</var> = null [, <var title>password</var> = null]]])</code>
 
  <dd>
-	<p>Sets the <span>request method</span>, <span>request URL</span>, and
-	<span>synchronous flag</span>.
+  <p>Sets the <span>request method</span>, <span>request URL</span>, and
+  <span>synchronous flag</span>.
 
-	<p>Throws a "<code data-anolis-spec=dom>SyntaxError</code>" exception if
-	either <var title>method</var> is not a valid HTTP method or
-	<var title>url</var> cannot be parsed.
+  <p>Throws a "<code data-anolis-spec=dom>SyntaxError</code>" exception if
+  either <var title>method</var> is not a valid HTTP method or
+  <var title>url</var> cannot be parsed.
 
-	<p>Throws a "<code data-anolis-spec=dom>SecurityError</code>" exception
-	if <var title>method</var> is a case-insensitive match for
-	<code>CONNECT</code>, <code>TRACE</code> or <code>TRACK</code>.
+  <p>Throws a "<code data-anolis-spec=dom>SecurityError</code>" exception
+  if <var title>method</var> is a case-insensitive match for
+  <code>CONNECT</code>, <code>TRACE</code> or <code>TRACK</code>.
 
-	<p>Throws an "<code data-anolis-spec=dom>InvalidAccessError</code>"
-	exception if <var title>async</var> is false, the
-	<span data-anolis-spec=html>JavaScript global environment</span> is a
-	<span data-anolis-spec=html>document environment</span>, and either the
-	<span>anonymous flag</span> is set, the
-	<code title=dom-XMLHttpRequest-timeout>timeout</code> attribute is not
-	zero, the
-	<code title=dom-XMLHttpRequest-withCredentials>withCredentials</code>
-	attribute is true, or the
-	<code title=dom-XMLHttpRequest-responseType>responseType</code>
-	attribute is not the empty string.
+  <p>Throws an "<code data-anolis-spec=dom>InvalidAccessError</code>"
+  exception if <var title>async</var> is false, the
+  <span data-anolis-spec=html>JavaScript global environment</span> is a
+  <span data-anolis-spec=html>document environment</span>, and either the
+  <span>anonymous flag</span> is set, the
+  <code title=dom-XMLHttpRequest-timeout>timeout</code> attribute is not
+  zero, the
+  <code title=dom-XMLHttpRequest-withCredentials>withCredentials</code>
+  attribute is true, or the
+  <code title=dom-XMLHttpRequest-responseType>responseType</code>
+  attribute is not the empty string.
 </dl>
 
 <p>The
@@ -681,19 +681,19 @@ method must run these steps (unless otherwise indicated):
  <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-setRequestHeader>setRequestHeader</span>(<var title>header</var>, <var title>value</var>)</code>
 
  <dd>
-	<p>Appends an header to the list of
-	<span>author request headers</span>, or if <var>header</var> is already
-	in the list of <span>author request headers</span>, combines its value
-	with <var>value</var>.
+  <p>Appends an header to the list of
+  <span>author request headers</span>, or if <var>header</var> is already
+  in the list of <span>author request headers</span>, combines its value
+  with <var>value</var>.
 
-	<p>Throws an "<code data-anolis-spec=dom>InvalidStateError</code>"
-	exception if the state is not
-	<span title="dom-XMLHttpRequest-OPENED">OPENED</span> or if the
-	<span><code>send()</code> flag</span> is set.
+  <p>Throws an "<code data-anolis-spec=dom>InvalidStateError</code>"
+  exception if the state is not
+  <span title="dom-XMLHttpRequest-OPENED">OPENED</span> or if the
+  <span><code>send()</code> flag</span> is set.
 
-	<p>Throws a "<code data-anolis-spec=dom>SyntaxError</code>" exception if
-	<var title>header</var> is not a valid HTTP header field name or if
-	<var title>value</var> is not a valid HTTP header field value.
+  <p>Throws a "<code data-anolis-spec=dom>SyntaxError</code>" exception if
+  <var title>header</var> is not a valid HTTP header field name or if
+  <var title>value</var> is not a valid HTTP header field value.
  </dd>
 </dl>
 
@@ -728,62 +728,62 @@ method must run these steps:
  "<code data-anolis-spec=dom>SyntaxError</code>" exception.
 
  <li>
-	<p>If <var>value</var> does not match the
-	<span data-anolis-spec=http>field-value</span> production,
-	<span data-anolis-spec=dom title=concept-throw>throw</span> a
-	"<code data-anolis-spec=dom>SyntaxError</code>" exception.
+  <p>If <var>value</var> does not match the
+  <span data-anolis-spec=http>field-value</span> production,
+  <span data-anolis-spec=dom title=concept-throw>throw</span> a
+  "<code data-anolis-spec=dom>SyntaxError</code>" exception.
 
-	<p class=note>An empty string represents an empty header field value.
+  <p class=note>An empty string represents an empty header field value.
 
  <li>
-	<p>Terminate these steps if <var>header</var> is a case-insensitive
-	match for one of the following headers:
+  <p>Terminate these steps if <var>header</var> is a case-insensitive
+  match for one of the following headers:
 
-	<ul class=brief>
-	 <li><code>Accept-Charset</code>
-	 <li><code>Accept-Encoding</code>
-	 <li><code>Access-Control-Request-Headers</code>
-	 <li><code>Access-Control-Request-Method</code>
-	 <li><code>Connection</code>
-	 <li><code>Content-Length</code>
-	 <li><code>Cookie</code>
-	 <li><code>Cookie2</code>
-	 <li><code>Date</code>
-	 <li><code>DNT</code>
-	 <li><code>Expect</code>
-	 <li><code>Host</code>
-	 <li><code>Keep-Alive</code>
-	 <li><code title>Origin</code>
-	 <li><code>Referer</code>
-	 <li><code>TE</code>
-	 <li><code>Trailer</code>
-	 <li><code>Transfer-Encoding</code>
-	 <li><code>Upgrade</code>
-	 <li><code>User-Agent</code>
-	 <li><code>Via</code>
-	</ul>
+  <ul class=brief>
+   <li><code>Accept-Charset</code>
+   <li><code>Accept-Encoding</code>
+   <li><code>Access-Control-Request-Headers</code>
+   <li><code>Access-Control-Request-Method</code>
+   <li><code>Connection</code>
+   <li><code>Content-Length</code>
+   <li><code>Cookie</code>
+   <li><code>Cookie2</code>
+   <li><code>Date</code>
+   <li><code>DNT</code>
+   <li><code>Expect</code>
+   <li><code>Host</code>
+   <li><code>Keep-Alive</code>
+   <li><code title>Origin</code>
+   <li><code>Referer</code>
+   <li><code>TE</code>
+   <li><code>Trailer</code>
+   <li><code>Transfer-Encoding</code>
+   <li><code>Upgrade</code>
+   <li><code>User-Agent</code>
+   <li><code>Via</code>
+  </ul>
 
-	<p>&hellip; or if the start of <var>header</var> is a case-insensitive
-	match for <code>Proxy-</code> or <code>Sec-</code> (including when
-	<var>header</var> is just <code>Proxy-</code> or <code>Sec-</code>).
+  <p>&hellip; or if the start of <var>header</var> is a case-insensitive
+  match for <code>Proxy-</code> or <code>Sec-</code> (including when
+  <var>header</var> is just <code>Proxy-</code> or <code>Sec-</code>).
 
-	<p class=note>The above headers are controlled by the user agent to
-	let it control those aspects of transport. This guarantees data
-	integrity to some extent. Header names starting with <code>Sec-</code>
-	are not allowed to be set to allow new headers to be minted that are
-	guaranteed not to come from <code>XMLHttpRequest</code>.
+  <p class=note>The above headers are controlled by the user agent to
+  let it control those aspects of transport. This guarantees data
+  integrity to some extent. Header names starting with <code>Sec-</code>
+  are not allowed to be set to allow new headers to be minted that are
+  guaranteed not to come from <code>XMLHttpRequest</code>.
 
  <li><p>If <var>header</var> is not in the
  <span>author request headers</span> list, append <var>header</var> with
  its associated <var>value</var> to the list and terminate these steps.
 
  <li>
-	<p>If <var title>header</var> is in the <span>author request headers</span> list, append
-	"<code>,</code>", followed by U+0020, followed by <var title>value</var>, to the
-	value of the header matching <var title>header</var>.
+  <p>If <var title>header</var> is in the <span>author request headers</span> list, append
+  "<code>,</code>", followed by U+0020, followed by <var title>value</var>, to the
+  value of the header matching <var title>header</var>.
 
-	<p class=note>The XMLHttpRequest standard intentionally constraints the
-	use of HTTP here in line with contemporary implementations.
+  <p class=note>The XMLHttpRequest standard intentionally constraints the
+  use of HTTP here in line with contemporary implementations.
 </ol>
 
 <div class="example">
@@ -807,20 +807,20 @@ X-Test: one, two</code></pre>
 <dl class=domintro>
  <dt><code><var title>client</var> . <span title="dom-XMLHttpRequest-timeout">timeout</span></code>
  <dd>
-	<p>Can be set to a time in milliseconds. When set to a non-zero value
-	will cause <span title=fetch data-anolis-spec=html>fetching</span> to
-	terminate after the given time has passed. When the time has passed, if
-	the <span>synchronous flag</span> is unset, a
-	<code title=event-xhr-timeout>timeout</code> event will then be
-	<span title=concept-event-dispatch data-anolis-spec=dom>dispatched</span>,
-	or a "<code data-anolis-spec=dom>TimeoutError</code>" exception will be
-	<span data-anolis-spec=dom title=concept-throw>thrown</span> otherwise
-	(for the <code title=dom-XMLHttpRequest>send()</code> method).
-	<p>When set: throws an
-	"<code data-anolis-spec=dom>InvalidAccessError</code>" exception if
-	the <span>synchronous flag</span> is set and the
-	<span data-anolis-spec=html>JavaScript global environment</span> is a
-	<span data-anolis-spec=html>document environment</span>.
+  <p>Can be set to a time in milliseconds. When set to a non-zero value
+  will cause <span title=fetch data-anolis-spec=html>fetching</span> to
+  terminate after the given time has passed. When the time has passed, if
+  the <span>synchronous flag</span> is unset, a
+  <code title=event-xhr-timeout>timeout</code> event will then be
+  <span title=concept-event-dispatch data-anolis-spec=dom>dispatched</span>,
+  or a "<code data-anolis-spec=dom>TimeoutError</code>" exception will be
+  <span data-anolis-spec=dom title=concept-throw>thrown</span> otherwise
+  (for the <code title=dom-XMLHttpRequest>send()</code> method).
+  <p>When set: throws an
+  "<code data-anolis-spec=dom>InvalidAccessError</code>" exception if
+  the <span>synchronous flag</span> is set and the
+  <span data-anolis-spec=html>JavaScript global environment</span> is a
+  <span data-anolis-spec=html>document environment</span>.
  </dd>
 </dl>
 
@@ -854,22 +854,22 @@ of <span data-anolis-spec=html title=fetch>fetching</span>.
 <dl class=domintro>
  <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-withCredentials>withCredentials</span></code>
  <dd>
-	<p>True when <span>user credentials</span> are to be included in a
-	cross-origin request. False when they are to be excluded in a
-	cross-origin request and when cookies are to be ignored in its response.
-	Initially false.
+  <p>True when <span>user credentials</span> are to be included in a
+  cross-origin request. False when they are to be excluded in a
+  cross-origin request and when cookies are to be ignored in its response.
+  Initially false.
 
-	<p>When set: throws an
-	"<code data-anolis-spec=dom>InvalidStateError</code>" exception if the
-	state is not <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span> or
-	<span title="dom-XMLHttpRequest-OPENED">OPENED</span>, or if
-	the <span><code>send()</code> flag</span> is set.
-	<p>When set: throws an
-	"<code data-anolis-spec=dom>InvalidAccessError</code>" exception if
-	either the <span>synchronous flag</span> is set and the
-	<span data-anolis-spec=html>JavaScript global environment</span> is a
-	<span data-anolis-spec=html>document environment</span> or if the
-	<span>anonymous flag</span> is set.
+  <p>When set: throws an
+  "<code data-anolis-spec=dom>InvalidStateError</code>" exception if the
+  state is not <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span> or
+  <span title="dom-XMLHttpRequest-OPENED">OPENED</span>, or if
+  the <span><code>send()</code> flag</span> is set.
+  <p>When set: throws an
+  "<code data-anolis-spec=dom>InvalidAccessError</code>" exception if
+  either the <span>synchronous flag</span> is set and the
+  <span data-anolis-spec=html>JavaScript global environment</span> is a
+  <span data-anolis-spec=html>document environment</span> or if the
+  <span>anonymous flag</span> is set.
  </dd>
 </dl>
 
@@ -934,15 +934,15 @@ object has an associated <code>XMLHttpRequestUpload</code> object.
 <dl class=domintro>
  <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-send>send</span>([<var title>data</var> = null])</code>
  <dd>
-	<p>Initiates the request. The optional argument provides the
-	<span>request entity body</span>. The argument is ignored if
-	<span>request method</span> is <code>GET</code> or
-	<code>HEAD</code>.
+  <p>Initiates the request. The optional argument provides the
+  <span>request entity body</span>. The argument is ignored if
+  <span>request method</span> is <code>GET</code> or
+  <code>HEAD</code>.
 
-	<p>Throws an "<code data-anolis-spec=dom>InvalidStateError</code>"
-	exception if the state is not
-	<span title="dom-XMLHttpRequest-OPENED">OPENED</span> or if the
-	<span><code>send()</code> flag</span> is set.
+  <p>Throws an "<code data-anolis-spec=dom>InvalidStateError</code>"
+  exception if the state is not
+  <span title="dom-XMLHttpRequest-OPENED">OPENED</span> or if the
+  <span><code>send()</code> flag</span> is set.
  </dd>
 </dl>
 
@@ -962,113 +962,113 @@ method must run these steps (unless otherwise noted):
  <code>HEAD</code>, set <var title>data</var> to null.
 
  <li>
-	<p>If <var title>data</var> is null, do not include a
-	<span>request entity body</span> and go to the next step.
+  <p>If <var title>data</var> is null, do not include a
+  <span>request entity body</span> and go to the next step.
 
-	<p>Otherwise, let <var>encoding</var> be null, <var>mime type</var> be
-	null, and then follow these rules, depending on <var title>data</var>:
+  <p>Otherwise, let <var>encoding</var> be null, <var>mime type</var> be
+  null, and then follow these rules, depending on <var title>data</var>:
 
-	<dl class=switch>
+  <dl class=switch>
 
-	 <dt id="dom-XMLHttpRequest-send-ArrayBufferView"><code data-anolis-spec=typedarray>ArrayBufferView</code>
-	 <dd><p>Let the <span>request entity body</span> be the raw data
-	 represented by <var title>data</var>.</dd>
+   <dt id="dom-XMLHttpRequest-send-ArrayBufferView"><code data-anolis-spec=typedarray>ArrayBufferView</code>
+   <dd><p>Let the <span>request entity body</span> be the raw data
+   represented by <var title>data</var>.</dd>
 
-	 <dt id="dom-XMLHttpRequest-send-Blob"><code data-anolis-spec=fileapi>Blob</code>
-	 <dd>
-		<p>If the object's <code title>type</code> attribute value is not
-		the empty string, let <var>mime type</var> be its value.
+   <dt id="dom-XMLHttpRequest-send-Blob"><code data-anolis-spec=fileapi>Blob</code>
+   <dd>
+    <p>If the object's <code title>type</code> attribute value is not
+    the empty string, let <var>mime type</var> be its value.
 
-		<p class=note>See also <code data-anolis-spec=fileapi>Blob</code>'s
-		<code data-anolis-spec=fileapi title=dom-Blob-type>type</code> attribute.
+    <p class=note>See also <code data-anolis-spec=fileapi>Blob</code>'s
+    <code data-anolis-spec=fileapi title=dom-Blob-type>type</code> attribute.
 
-		<p>Let the <span>request entity body</span> be the raw data
-		represented by <var>data</var>.
-	 </dd>
+    <p>Let the <span>request entity body</span> be the raw data
+    represented by <var>data</var>.
+   </dd>
 
 
-	 <dt id="dom-XMLHttpRequest-send-document"><span data-anolis-spec=dom title=concept-document>document</span>
-	 <dd>
-		<p>Let <var title>encoding</var> be the
-		<span data-anolis-spec=dom title=concept-document-encoding>encoding</span>
-		of <var title>data</var>. If <var title>encoding</var> is
-		<span data-anolis-spec=encoding>utf-16le</span> or
-		<span data-anolis-spec=encoding>utf-16be</span>, set
-		<var title>encoding</var> to
-		<span data-anolis-spec=encoding>utf-8</span>.
+   <dt id="dom-XMLHttpRequest-send-document"><span data-anolis-spec=dom title=concept-document>document</span>
+   <dd>
+    <p>Let <var title>encoding</var> be the
+    <span data-anolis-spec=dom title=concept-document-encoding>encoding</span>
+    of <var title>data</var>. If <var title>encoding</var> is
+    <span data-anolis-spec=encoding>utf-16le</span> or
+    <span data-anolis-spec=encoding>utf-16be</span>, set
+    <var title>encoding</var> to
+    <span data-anolis-spec=encoding>utf-8</span>.
 
-		<p>If <var title>data</var> is an
-		<span data-anolis-spec=dom>HTML document</span>, let
-		<var>mime type</var> be "<code>text/html</code>", or let
-		<var>mime type</var> be "<code>application/xml</code>" otherwise. Then
-		append "<code>;charset=<var>encoding</var></code>" to
-		<var>mime type</var>.
+    <p>If <var title>data</var> is an
+    <span data-anolis-spec=dom>HTML document</span>, let
+    <var>mime type</var> be "<code>text/html</code>", or let
+    <var>mime type</var> be "<code>application/xml</code>" otherwise. Then
+    append "<code>;charset=<var>encoding</var></code>" to
+    <var>mime type</var>.
 
-		<p><span data-anolis-spec=domps title=concept-serialize>Serialize</span>
-		<var title>data</var>, and let the <span>request entity body</span> be the result,
-		<span data-anolis-spec=webidl title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</span>
-		and <span data-anolis-spec=encoding title=encode>encoded</span> using
-		encoding <var>encoding</var>. Re-throw any exception this
-		throws.
+    <p><span data-anolis-spec=domps title=concept-serialize>Serialize</span>
+    <var title>data</var>, and let the <span>request entity body</span> be the result,
+    <span data-anolis-spec=webidl title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</span>
+    and <span data-anolis-spec=encoding title=encode>encoded</span> using
+    encoding <var>encoding</var>. Re-throw any exception this
+    throws.
 
-		<p class=XXX>Should we only encode as utf-8? What happens in the face
-		of an <span data-anolis-spec=encoding>encoder error</span>?
+    <p class=XXX>Should we only encode as utf-8? What happens in the face
+    of an <span data-anolis-spec=encoding>encoder error</span>?
 
-		<p class=note>In particular, if the document cannot be serialized an
-		"<code data-anolis-spec=dom>InvalidStateError</code>" exception is
-		thrown.
+    <p class=note>In particular, if the document cannot be serialized an
+    "<code data-anolis-spec=dom>InvalidStateError</code>" exception is
+    thrown.
 
-		<p class=note>Subsequent changes to the
-		<span data-anolis-spec=dom title=concept-document>document</span> have
-		no effect on what is transferred.
-	 </dd>
+    <p class=note>Subsequent changes to the
+    <span data-anolis-spec=dom title=concept-document>document</span> have
+    no effect on what is transferred.
+   </dd>
 
-	 <dt id="dom-XMLHttpRequest-send-a-string">a string
-	 <dd>
-		<p>Let <var>encoding</var> be "<code title>UTF-8</code>".
+   <dt id="dom-XMLHttpRequest-send-a-string">a string
+   <dd>
+    <p>Let <var>encoding</var> be "<code title>UTF-8</code>".
 
-		<p>Let <var>mime type</var> be "<code>text/plain;charset=UTF-8</code>".
+    <p>Let <var>mime type</var> be "<code>text/plain;charset=UTF-8</code>".
 
-		<p>Let the <span>request entity body</span> be <var title>data</var> ,
-		<span data-anolis-spec=encoding title=encode>encoded</span> as
-		<span data-anolis-spec=encoding>utf-8</span>.
-	 </dd>
+    <p>Let the <span>request entity body</span> be <var title>data</var> ,
+    <span data-anolis-spec=encoding title=encode>encoded</span> as
+    <span data-anolis-spec=encoding>utf-8</span>.
+   </dd>
 
-	 <dt id="dom-XMLHttpRequest-send-FormData"><code>FormData</code>
-	 <dd>
-		<p>Let the <span>request entity body</span> be the result of running
-		the
-		<span data-anolis-spec=html><code>multipart/form-data</code> encoding algorithm</span>
-		with <var>data</var> as <var>form data set</var> and with
-		<span data-anolis-spec=encoding>utf-8</span> as the
-		explicit character encoding.
-		<!-- need to provide explicit character encoding because otherwise the
-				 encoding of the document is used -->
+   <dt id="dom-XMLHttpRequest-send-FormData"><code>FormData</code>
+   <dd>
+    <p>Let the <span>request entity body</span> be the result of running
+    the
+    <span data-anolis-spec=html><code>multipart/form-data</code> encoding algorithm</span>
+    with <var>data</var> as <var>form data set</var> and with
+    <span data-anolis-spec=encoding>utf-8</span> as the
+    explicit character encoding.
+    <!-- need to provide explicit character encoding because otherwise the
+         encoding of the document is used -->
 
-		<p>Let <var>mime type</var> be the concatenation of
-		"<code title>multipart/form-data;</code>",
-		a U+0020 SPACE character,
-		"<code title>boundary=</code>", and the
-		<span data-anolis-spec=html><code>multipart/form-data</code> boundary string</span>
-		generated by the
-		<span data-anolis-spec=html><code>multipart/form-data</code> encoding algorithm</span>.
-	</dl>
+    <p>Let <var>mime type</var> be the concatenation of
+    "<code title>multipart/form-data;</code>",
+    a U+0020 SPACE character,
+    "<code title>boundary=</code>", and the
+    <span data-anolis-spec=html><code>multipart/form-data</code> boundary string</span>
+    generated by the
+    <span data-anolis-spec=html><code>multipart/form-data</code> encoding algorithm</span>.
+  </dl>
 
-	<p>If a <code>Content-Type</code> header is in
-	<span>author request headers</span> and its value is a
-	<span data-anolis-spec=html>valid MIME type</span> that has a
-	<code>charset</code> parameter whose value is not a case-insensitive
-	match for <var title>encoding</var>, and <var title>encoding</var>
-	is not null, set all the <code>charset</code> parameters of that
-	<code>Content-Type</code> header to <var title>encoding</var>.
+  <p>If a <code>Content-Type</code> header is in
+  <span>author request headers</span> and its value is a
+  <span data-anolis-spec=html>valid MIME type</span> that has a
+  <code>charset</code> parameter whose value is not a case-insensitive
+  match for <var title>encoding</var>, and <var title>encoding</var>
+  is not null, set all the <code>charset</code> parameters of that
+  <code>Content-Type</code> header to <var title>encoding</var>.
 
-	<p>If no <code>Content-Type</code> header is in
-	<span>author request headers</span> and <var title>mime type</var> is
-	not null, append a <code>Content-Type</code> header with value
-	<var title>mime type</var> to <span>author request headers</span>.
+  <p>If no <code>Content-Type</code> header is in
+  <span>author request headers</span> and <var title>mime type</var> is
+  not null, append a <code>Content-Type</code> header with value
+  <var title>mime type</var> to <span>author request headers</span>.
 
-	<!-- reminder: if we ever change this to always include charset it has
-	to be included as the first parameter for compatibility reasons -->
+  <!-- reminder: if we ever change this to always include charset it has
+  to be included as the first parameter for compatibility reasons -->
 
 
  <li><p>If the <span>synchronous flag</span> is set, release the
@@ -1085,149 +1085,149 @@ method must run these steps (unless otherwise noted):
  object, set the <span>upload events flag</span>.
 
  <li>
-	<p>If the <span>synchronous flag</span> is unset, run these substeps:
+  <p>If the <span>synchronous flag</span> is unset, run these substeps:
 
-	<ol>
-	 <li><p>Set the <span><code>send()</code> flag</span>.
+  <ol>
+   <li><p>Set the <span><code>send()</code> flag</span>.
 
-	 <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadstart">loadstart</code>.
+   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadstart">loadstart</code>.
 
-	 <li><p>If the <span>upload complete flag</span> is unset,
-	 <span title=concept-event-fire-progress>fire a progress event</span> named <code title="event-xhr-loadstart">loadstart</code>
-	 on the <code>XMLHttpRequestUpload</code> object.
+   <li><p>If the <span>upload complete flag</span> is unset,
+   <span title=concept-event-fire-progress>fire a progress event</span> named <code title="event-xhr-loadstart">loadstart</code>
+   on the <code>XMLHttpRequestUpload</code> object.
 
-	 <li><p>Return the <code title="dom-XMLHttpRequest-send">send()</code>
-	 method call, but continue running the steps in this algorithm.
-	</ol>
+   <li><p>Return the <code title="dom-XMLHttpRequest-send">send()</code>
+   method call, but continue running the steps in this algorithm.
+  </ol>
 
 
  <li>
-	<dl class=switch>
-	 <dt>If the <span>source origin</span> and the <span>request URL</span>
-	 are <span data-anolis-spec=html>same origin</span></dt>
-	 <dt>If the <span>request URL</span>'s
-	 <code data-anolis-spec=url title=concept-url-scheme>scheme</code> is
-	 "<code title>data</code>"
+  <dl class=switch>
+   <dt>If the <span>source origin</span> and the <span>request URL</span>
+   are <span data-anolis-spec=html>same origin</span></dt>
+   <dt>If the <span>request URL</span>'s
+   <code data-anolis-spec=url title=concept-url-scheme>scheme</code> is
+   "<code title>data</code>"
 
-	 <dd>
-		<p>These are the <dfn>same-origin request steps</dfn>.
+   <dd>
+    <p>These are the <dfn>same-origin request steps</dfn>.
 
-		<p><span data-anolis-spec=html>Fetch</span> the
-		<span>request URL</span> from <i title>origin</i>
-		<span>source origin</span>, using
-		<span>referrer source</span> as
-		<i title>override referrer source</i>, with the
-		<i title>synchronous flag</i> set if the
-		<span>synchronous flag</span> is set, using HTTP method
-		<span>request method</span>, taking into account the
-		<span>request entity body</span>, list of
-		<span>author request headers</span>, and the rules listed at the end of
-		this section.
+    <p><span data-anolis-spec=html>Fetch</span> the
+    <span>request URL</span> from <i title>origin</i>
+    <span>source origin</span>, using
+    <span>referrer source</span> as
+    <i title>override referrer source</i>, with the
+    <i title>synchronous flag</i> set if the
+    <span>synchronous flag</span> is set, using HTTP method
+    <span>request method</span>, taking into account the
+    <span>request entity body</span>, list of
+    <span>author request headers</span>, and the rules listed at the end of
+    this section.
 
-		<dl class=switch>
-		 <dt>If the <span>synchronous flag</span> is set</dt>
-		 <dd>
-			<p>While making the request also follow the
-			<span>same-origin request event rules</span>.
+    <dl class=switch>
+     <dt>If the <span>synchronous flag</span> is set</dt>
+     <dd>
+      <p>While making the request also follow the
+      <span>same-origin request event rules</span>.
 
-			<!--
-			 This cannot involve any task queue whatsoever because that would
-			 mean other tasks on the task queue might get processed as well
-			 which is counter to the whole idea of doing things synchronous.
-			-->
+      <!--
+       This cannot involve any task queue whatsoever because that would
+       mean other tasks on the task queue might get processed as well
+       which is counter to the whole idea of doing things synchronous.
+      -->
 
-			<p class=note>The
-			<code title="dom-XMLHttpRequest-send">send()</code> method call will
-			now be returned by virtue of this algorithm ending.
-		 </dd>
+      <p class=note>The
+      <code title="dom-XMLHttpRequest-send">send()</code> method call will
+      now be returned by virtue of this algorithm ending.
+     </dd>
 
-		 <dt>If the <span>synchronous flag</span> is unset</dt>
-		 <dd>
+     <dt>If the <span>synchronous flag</span> is unset</dt>
+     <dd>
 
-			<p><span>Make upload progress notifications</span>.
+      <p><span>Make upload progress notifications</span>.
 
-			<p><span>Make progress notifications</span>.
-
-
-			<p>While processing the request, as data becomes available and when
-			the user interferes with the request,
-			<span data-anolis-spec=html title="queue a task">queue tasks</span>
-			to update the <span>response entity body</span> and follow the
-			<span>same-origin request event rules</span>.
-		 </dd>
-		</dl>
-	 </dd>
-
-	 <dt>Otherwise</dt>
-	 <dd>
-		<p>These are the <dfn>cross-origin request steps</dfn>.
+      <p><span>Make progress notifications</span>.
 
 
+      <p>While processing the request, as data becomes available and when
+      the user interferes with the request,
+      <span data-anolis-spec=html title="queue a task">queue tasks</span>
+      to update the <span>response entity body</span> and follow the
+      <span>same-origin request event rules</span>.
+     </dd>
+    </dl>
+   </dd>
+
+   <dt>Otherwise</dt>
+   <dd>
+    <p>These are the <dfn>cross-origin request steps</dfn>.
 
 
-		<p>Make a <span data-anolis-spec=cors>cross-origin request</span>,
-		passing these as parameters:
 
-		<dl>
-		 <dt>request URL</dt>
-		 <dd>The <span>request URL</span>.</dd>
 
-		 <dt>request method</dt>
-		 <dd>The <span>request method</span>.</dd>
+    <p>Make a <span data-anolis-spec=cors>cross-origin request</span>,
+    passing these as parameters:
 
-		 <dt>author request headers</dt>
-		 <dd>The list of <span>author request headers</span>.</dd>
+    <dl>
+     <dt>request URL</dt>
+     <dd>The <span>request URL</span>.</dd>
 
-		 <dt>request entity body</dt>
-		 <dd>The <span>request entity body</span>.</dd>
+     <dt>request method</dt>
+     <dd>The <span>request method</span>.</dd>
 
-		 <dt>source origin</dt>
-		 <dd>The <span>source origin</span>.</dd>
+     <dt>author request headers</dt>
+     <dd>The list of <span>author request headers</span>.</dd>
 
-		 <dt>referrer source
-		 <dd>If the <span>anonymous flag</span> is set, the
-		 <span data-anolis-spec=url>URL</span>
-		 "<code title>about:blank</code>", and the
-		 <span>referrer source</span> otherwise.
+     <dt>request entity body</dt>
+     <dd>The <span>request entity body</span>.</dd>
 
-		 <dt>omit credentials flag</dt>
-		 <dd>Set if
-		 <code title="dom-XMLHttpRequest-withCredentials">withCredentials</code>
-		 attribute's value is false.
+     <dt>source origin</dt>
+     <dd>The <span>source origin</span>.</dd>
 
-		 <dt>force preflight flag</dt>
-		 <dd>Set if the <span>upload events flag</span> is set.
-		</dl>
+     <dt>referrer source
+     <dd>If the <span>anonymous flag</span> is set, the
+     <span data-anolis-spec=url>URL</span>
+     "<code title>about:blank</code>", and the
+     <span>referrer source</span> otherwise.
 
-		<dl class=switch>
-		 <dt>If the <span>synchronous flag</span> is set</dt>
-		 <dd>
-			<p>While making the request also follow the
-			<span>cross-origin request event rules</span>.
+     <dt>omit credentials flag</dt>
+     <dd>Set if
+     <code title="dom-XMLHttpRequest-withCredentials">withCredentials</code>
+     attribute's value is false.
 
-			<!--
-			 This cannot involve any task queue whatsoever because that would
-			 mean other tasks on the task queue might get processed as well
-			 which is counter to the whole idea of doing things synchronous.
-			-->
+     <dt>force preflight flag</dt>
+     <dd>Set if the <span>upload events flag</span> is set.
+    </dl>
 
-			<p class=note>The
-			<code title="dom-XMLHttpRequest-send">send()</code> method call will
-			now be returned by virtue of this algorithm ending.
-		 </dd>
+    <dl class=switch>
+     <dt>If the <span>synchronous flag</span> is set</dt>
+     <dd>
+      <p>While making the request also follow the
+      <span>cross-origin request event rules</span>.
 
-		 <dt>If the <span>synchronous flag</span> is unset</dt>
-		 <dd>
-			<p>While processing the request, as data becomes available and when
-			the end user interferes with the request,
-			<span data-anolis-spec=html title="queue a task">queue tasks</span>
-			to update the <span>response entity body</span> and follow the
-			<span>cross-origin request event rules</span>.
-		 </dd>
-		</dl>
+      <!--
+       This cannot involve any task queue whatsoever because that would
+       mean other tasks on the task queue might get processed as well
+       which is counter to the whole idea of doing things synchronous.
+      -->
 
-	 </dd>
-	</dl>
+      <p class=note>The
+      <code title="dom-XMLHttpRequest-send">send()</code> method call will
+      now be returned by virtue of this algorithm ending.
+     </dd>
+
+     <dt>If the <span>synchronous flag</span> is unset</dt>
+     <dd>
+      <p>While processing the request, as data becomes available and when
+      the end user interferes with the request,
+      <span data-anolis-spec=html title="queue a task">queue tasks</span>
+      to update the <span>response entity body</span> and follow the
+      <span>cross-origin request event rules</span>.
+     </dd>
+    </dl>
+
+   </dd>
+  </dl>
 
 </ol>
 
@@ -1323,33 +1323,33 @@ This ensures that authors have a predictable API.
 
  <dt>If the response has an HTTP status code of 301, 302, 303, 307, or 308
  <dd>
-	<p>If the redirect violates infinite loop precautions this is a
-	<span>network error</span>.
+  <p>If the redirect violates infinite loop precautions this is a
+  <span>network error</span>.
 
-	<p>Otherwise, run these steps:
+  <p>Otherwise, run these steps:
 
-	<ol>
-	 <li><p>Set the <span>request URL</span> to the
-	 <span data-anolis-spec=url>URL</span> conveyed by the
-	 <code>Location</code> header.
-	 <!-- XXX fetch: this requires parsing and such too. Either HTTP or
-				Fetch needs to handle this. -->
+  <ol>
+   <li><p>Set the <span>request URL</span> to the
+   <span data-anolis-spec=url>URL</span> conveyed by the
+   <code>Location</code> header.
+   <!-- XXX fetch: this requires parsing and such too. Either HTTP or
+        Fetch needs to handle this. -->
 
-	 <li><p>If the <span>source origin</span> and the
-	 <span data-anolis-spec=html>origin</span> of <span>request URL</span>
-	 are <span data-anolis-spec=html>same origin</span> transparently follow
-	 the redirect while observing the
-	 <span>same-origin request event rules</span>.
+   <li><p>If the <span>source origin</span> and the
+   <span data-anolis-spec=html>origin</span> of <span>request URL</span>
+   are <span data-anolis-spec=html>same origin</span> transparently follow
+   the redirect while observing the
+   <span>same-origin request event rules</span>.
 
-	 <li><p>Otherwise, follow the <span>cross-origin request steps</span>
-	 and terminate the steps for this algorithm.
-	</ol>
+   <li><p>Otherwise, follow the <span>cross-origin request steps</span>
+   and terminate the steps for this algorithm.
+  </ol>
 
-	<p class=note>HTTP places requirements on the user agent regarding the
-	preservation of the <span>request method</span> and
-	<span>request entity body</span> during redirects, and also requires end
-	users to be notified of certain kinds of automatic redirections.
-	<!-- XXX HTTP needs fixing here -->
+  <p class=note>HTTP places requirements on the user agent regarding the
+  preservation of the <span>request method</span> and
+  <span>request entity body</span> during redirects, and also requires end
+  users to be notified of certain kinds of automatic redirections.
+  <!-- XXX HTTP needs fixing here -->
  </dd>
 
  <dt>If the end user cancels the request</dt>
@@ -1357,12 +1357,12 @@ This ensures that authors have a predictable API.
 
  <dt>If there is a network error</dt>
  <dd>
-	<p>In case of DNS errors, TLS negotiation failure, or other type of
-	network errors, this is a <span>network error</span>. Do not request any
-	kind of end user interaction.
+  <p>In case of DNS errors, TLS negotiation failure, or other type of
+  network errors, this is a <span>network error</span>. Do not request any
+  kind of end user interaction.
 
-	<p class=note>This does not include HTTP responses that indicate
-	some type of error, such as HTTP status code 410.
+  <p class=note>This does not include HTTP responses that indicate
+  some type of error, such as HTTP status code 410.
  </dd>
 
 
@@ -1424,9 +1424,9 @@ This ensures that authors have a predictable API.
  <span data-anolis-spec=cors>cross-origin request status</span> is
  <i>success</i>, and the <span>synchronous flag</span> is unset</dt>
  <dd>
-	<p><span>Switch to the HEADERS_RECEIVED state</span>.
+  <p><span>Switch to the HEADERS_RECEIVED state</span>.
 
-	<p><span>Make progress notifications</span>.
+  <p><span>Make progress notifications</span>.
  </dd>
 
  <dt>Once the first byte (or more) of the
@@ -1485,29 +1485,29 @@ steps:
  <var>exception</var> exception.
 
  <li>
-	<p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.
+  <p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.
 
-	<p class=note>At this point it is clear that the
-	<span>synchronous flag</span> is unset.
+  <p class=note>At this point it is clear that the
+  <span>synchronous flag</span> is unset.
 
 
 
  <li>
-	<p>If the <span>upload complete flag</span> is unset, follow these
-	substeps:
+  <p>If the <span>upload complete flag</span> is unset, follow these
+  substeps:
 
-	<ol>
-	 <li><p>Set the <span>upload complete flag</span>.
+  <ol>
+   <li><p>Set the <span>upload complete flag</span>.
 
-	 <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named
-	 <code title=event-xhr-progress>progress</code> on the <code>XMLHttpRequestUpload</code> object.
+   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named
+   <code title=event-xhr-progress>progress</code> on the <code>XMLHttpRequestUpload</code> object.
 
-	 <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named
-	 <var title>event</var> on the <code>XMLHttpRequestUpload</code> object.
+   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named
+   <var title>event</var> on the <code>XMLHttpRequestUpload</code> object.
 
-	 <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named
-	 <code title="event-xhr-loadend">loadend</code> on the <code>XMLHttpRequestUpload</code> object.
-	</ol>
+   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named
+   <code title="event-xhr-loadend">loadend</code> on the <code>XMLHttpRequestUpload</code> object.
+  </ol>
 
 
  <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>.
@@ -1583,24 +1583,24 @@ these steps:
  every byte transmitted, whichever is <em>least</em> frequent.
 
  <li>
-	<p>If the <span>request entity body</span> has been fully transmitted
-	(irrespective of whether the server has started transmitting a response
-	or the status code of such a response) and the
-	<span>upload complete flag</span> is still unset,
-	<span data-anolis-spec=html>queue a task</span> to run these substeps:
+  <p>If the <span>request entity body</span> has been fully transmitted
+  (irrespective of whether the server has started transmitting a response
+  or the status code of such a response) and the
+  <span>upload complete flag</span> is still unset,
+  <span data-anolis-spec=html>queue a task</span> to run these substeps:
 
-	<ol>
-	 <li><p>Set the <span>upload complete flag</span>.
+  <ol>
+   <li><p>Set the <span>upload complete flag</span>.
 
-	 <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>
-	 on the <code>XMLHttpRequestUpload</code> object.
+   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>
+   on the <code>XMLHttpRequestUpload</code> object.
 
-	 <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-load">load</code>
-	 on the <code>XMLHttpRequestUpload</code> object.
+   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-load">load</code>
+   on the <code>XMLHttpRequestUpload</code> object.
 
-	 <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadend">loadend</code>
-	 on the <code>XMLHttpRequestUpload</code> object.
-	</ol>
+   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadend">loadend</code>
+   on the <code>XMLHttpRequestUpload</code> object.
+  </ol>
 </ul>
 
 
@@ -1618,48 +1618,48 @@ these steps (unless otherwise noted):
  <li><p><span>Terminate the request</span>.
 
  <li>
-	<p>If the state is <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span>,
-	<span title="dom-XMLHttpRequest-OPENED">OPENED</span> with the
-	<span><code>send()</code> flag</span> being unset, or
-	<span title="dom-XMLHttpRequest-DONE">DONE</span> go to the next step.
+  <p>If the state is <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span>,
+  <span title="dom-XMLHttpRequest-OPENED">OPENED</span> with the
+  <span><code>send()</code> flag</span> being unset, or
+  <span title="dom-XMLHttpRequest-DONE">DONE</span>, change the state to
+  <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span>.
 
-	<p>Otherwise run these substeps:
-
-	<ol>
-	 <li><p>Change the state to <span title="dom-XMLHttpRequest-DONE">DONE</span>.
-
-	 <li><p>Unset the <span><code>send()</code> flag</span>.
-
-	 <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.
-
-	 <li>
-		<p>If the <span>upload complete flag</span> is false run these
-		substeps:
-
-		<ol>
-		 <li><p>Set the <span>upload complete flag</span> to true.
-
-		 <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>
-		 on the <code>XMLHttpRequestUpload</code> object.
-
-		 <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-abort">abort</code>
-		 on the <code>XMLHttpRequestUpload</code> object.
-
-		 <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadend">loadend</code>
-		 on the <code>XMLHttpRequestUpload</code> object.
-		</ol>
-
-	 <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>.
-
-	 <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-abort">abort</code>.
-
-	 <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadend">loadend</code>.
-	</ol>
+  <p class=note>No <code title="event-xhr-readystatechange">readystatechange</code> event
+  is dispatched.
 
  <li>
-	<p>Change the state to <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span>.
+  <p>Otherwise run these substeps:
 
-	<p class=note>No <code title="event-xhr-readystatechange">readystatechange</code> event is dispatched.
+  <ol>
+   <li><p>Change the state to <span title="dom-XMLHttpRequest-DONE">DONE</span>.
+
+   <li><p>Unset the <span><code>send()</code> flag</span>.
+
+   <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.
+
+   <li>
+    <p>If the <span>upload complete flag</span> is false run these
+    substeps:
+
+    <ol>
+     <li><p>Set the <span>upload complete flag</span> to true.
+
+     <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>
+     on the <code>XMLHttpRequestUpload</code> object.
+
+     <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-abort">abort</code>
+     on the <code>XMLHttpRequestUpload</code> object.
+
+     <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadend">loadend</code>
+     on the <code>XMLHttpRequestUpload</code> object.
+    </ol>
+
+   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>.
+
+   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-abort">abort</code>.
+
+   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadend">loadend</code>.
+  </ol>
 </ol>
 
 
@@ -1927,56 +1927,56 @@ following algorithm:
  <code title>+xml</code>, return null.
 
  <li>
-	<p>If <code title=dom-XMLHttpRequest-responseType>responseType</code> is
-	the empty string and <span>final MIME type</span> is
-	<code>text/html</code>, return null.
+  <p>If <code title=dom-XMLHttpRequest-responseType>responseType</code> is
+  the empty string and <span>final MIME type</span> is
+  <code>text/html</code>, return null.
 
-	<p class=note>This is restricted to
-	<code title=dom-XMLHttpRequest-responseType>responseType</code> being
-	"<code title>document</code>" in order to prevent breaking legacy
-	content.
-
- <li>
-	<p>If <span>final MIME type</span> is <code>text/html</code>, run these
-	substeps:
-
-	<ol>
-	 <li><p>Let <var>charset</var> be the <span>final charset</span>.
-
-	 <li><p>If <var>charset</var> is null,
-	 <span data-anolis-spec=html title="prescan a byte stream to determine its encoding">prescan</span>
-	 the first 1024 bytes of the <span>response entity body</span> and if
-	 that does not terminate unsuccessfully then let <var>charset</var> be
-	 the return value.
-
-	 <li><p>If <var>charset</var> is null, set <var>charset</var> to
-	 <span data-anolis-spec=encoding>utf-8</span>.
-
-	 <li><p>Let <var title>document</var> be a
-	 <span data-anolis-spec=dom title=concept-document>document</span> that
-	 represents the result parsing <span>response entity body</span> following the rules set
-	 forth in the HTML specification for an HTML parser with scripting disabled and
-	 <span data-anolis-spec=html>a known definite encoding</span> <var>charset</var>.
-	 <span data-anolis-ref>HTML</span>
-
-	 <li><p>Set <var title>document</var>'s
-	 <span data-anolis-spec=dom title=concept-document-encoding>encoding</span>
-	 to <var>charset</var>.
-	 <!-- This might be redundant with HTML. -->
-	</ol>
+  <p class=note>This is restricted to
+  <code title=dom-XMLHttpRequest-responseType>responseType</code> being
+  "<code title>document</code>" in order to prevent breaking legacy
+  content.
 
  <li>
-	<p>Otherwise, let <var title>document</var> be a
-	<span data-anolis-spec=dom title=concept-document>document</span>
-	that represents the result of parsing the
-	<span>response entity body</span> following the rules set forth in the
-	XML specifications. If that fails (unsupported character encoding,
-	namespace well-formedness error, etc.), return null.
-	<span data-anolis-ref>XML</span> <span data-anolis-ref>XMLNS</span>
+  <p>If <span>final MIME type</span> is <code>text/html</code>, run these
+  substeps:
 
-	<p class=note>Scripts in the resulting document tree will not be
-	executed, resources referenced will not be loaded and no associated XSLT
-	will be applied. <!-- XXX more formally?! -->
+  <ol>
+   <li><p>Let <var>charset</var> be the <span>final charset</span>.
+
+   <li><p>If <var>charset</var> is null,
+   <span data-anolis-spec=html title="prescan a byte stream to determine its encoding">prescan</span>
+   the first 1024 bytes of the <span>response entity body</span> and if
+   that does not terminate unsuccessfully then let <var>charset</var> be
+   the return value.
+
+   <li><p>If <var>charset</var> is null, set <var>charset</var> to
+   <span data-anolis-spec=encoding>utf-8</span>.
+
+   <li><p>Let <var title>document</var> be a
+   <span data-anolis-spec=dom title=concept-document>document</span> that
+   represents the result parsing <span>response entity body</span> following the rules set
+   forth in the HTML specification for an HTML parser with scripting disabled and
+   <span data-anolis-spec=html>a known definite encoding</span> <var>charset</var>.
+   <span data-anolis-ref>HTML</span>
+
+   <li><p>Set <var title>document</var>'s
+   <span data-anolis-spec=dom title=concept-document-encoding>encoding</span>
+   to <var>charset</var>.
+   <!-- This might be redundant with HTML. -->
+  </ol>
+
+ <li>
+  <p>Otherwise, let <var title>document</var> be a
+  <span data-anolis-spec=dom title=concept-document>document</span>
+  that represents the result of parsing the
+  <span>response entity body</span> following the rules set forth in the
+  XML specifications. If that fails (unsupported character encoding,
+  namespace well-formedness error, etc.), return null.
+  <span data-anolis-ref>XML</span> <span data-anolis-ref>XMLNS</span>
+
+  <p class=note>Scripts in the resulting document tree will not be
+  executed, resources referenced will not be loaded and no associated XSLT
+  will be applied. <!-- XXX more formally?! -->
 
  <!-- XXX what about document's encoding? -->
 
@@ -2024,19 +2024,19 @@ following algorithm:
  <li><p>Let <var>charset</var> be the <span>final charset</span>.
 
  <li>
-	<p>If <code title=dom-XMLHttpRequest-responseType>responseType</code> is
-	the empty string, <var>charset</var> is null, and
-	<span>final MIME type</span> is either null, <code>text/xml</code>,
-	<code>application/xml</code> or ends in <code title>+xml</code>, use the
-	rules set forth in the XML specifications to determine the encoding. Let
-	<var>charset</var> be the determined encoding.
-	<span data-anolis-ref>XML</span> <span data-anolis-ref>XMLNS</span>
+  <p>If <code title=dom-XMLHttpRequest-responseType>responseType</code> is
+  the empty string, <var>charset</var> is null, and
+  <span>final MIME type</span> is either null, <code>text/xml</code>,
+  <code>application/xml</code> or ends in <code title>+xml</code>, use the
+  rules set forth in the XML specifications to determine the encoding. Let
+  <var>charset</var> be the determined encoding.
+  <span data-anolis-ref>XML</span> <span data-anolis-ref>XMLNS</span>
 
-	<p class=note>This is restricted to
-	<code title=dom-XMLHttpRequest-responseType>responseType</code> being
-	the empty string to keep the non-legacy
-	<code title=dom-XMLHttpRequest-responseType>responseType</code> value
-	"<code title>text</code>" simple.
+  <p class=note>This is restricted to
+  <code title=dom-XMLHttpRequest-responseType>responseType</code> being
+  the empty string to keep the non-legacy
+  <code title=dom-XMLHttpRequest-responseType>responseType</code> value
+  "<code title>text</code>" simple.
 
  <li><p>If <var>charset</var> is null, set <var>charset</var> to
  <span data-anolis-spec=encoding>utf-8</span>.
@@ -2057,16 +2057,16 @@ resources using <span data-anolis-spec=encoding>utf-8</span>.
 <dl class=domintro>
  <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-overrideMimeType>overrideMimeType</span>(<var title>mime</var>)</code>
  <dd>
-	<p>Sets the <code>Content-Type</code> header for the response to
-	<var title>mime</var>.
+  <p>Sets the <code>Content-Type</code> header for the response to
+  <var title>mime</var>.
 
-	<p>Throws an "<code data-anolis-spec=dom>InvalidStateError</code>"
-	exception if the state is
-	<span title="dom-XMLHttpRequest-LOADING">LOADING</span> or
-	<span title="dom-XMLHttpRequest-DONE">DONE</span>.
+  <p>Throws an "<code data-anolis-spec=dom>InvalidStateError</code>"
+  exception if the state is
+  <span title="dom-XMLHttpRequest-LOADING">LOADING</span> or
+  <span title="dom-XMLHttpRequest-DONE">DONE</span>.
 
-	<p>Throws a "<code data-anolis-spec=dom>SyntaxError</code>" exception if
-	<var title>mime</var> is not a valid media type.
+  <p>Throws a "<code data-anolis-spec=dom>SyntaxError</code>" exception if
+  <var title>mime</var> is not a valid media type.
  </dd>
 </dl>
 
@@ -2103,26 +2103,26 @@ method must run these steps:
 <dl class=domintro>
  <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-responseType>responseType</code> [ = <var title>value</var> ]</code>
  <dd>
-	<p>Returns the response type.
-	<p>Can be set to change the response type. Values are:
-	the empty string (default),
-	"<code title>arraybuffer</code>",
-	"<code title>blob</code>",
-	"<code title>document</code>",
-	"<code title>json</code>", and
-	"<code title>text</code>".
-	<p>When set: setting to "<code title>document</code>" is ignored if the
-	<span data-anolis-spec=html>JavaScript global environment</span> is a
-	<span data-anolis-spec=html>worker environment</span>
-	<p>When set: throws an
-	"<code data-anolis-spec=dom>InvalidStateError</code>" exception if the
-	state is <span title="dom-XMLHttpRequest-LOADING">LOADING</span> or
-	<span title="dom-XMLHttpRequest-DONE">DONE</span>.
-	<p>When set: throws an
-	"<code data-anolis-spec=dom>InvalidAccessError</code>" exception if the
-	<span>synchronous flag</span> is set and the
-	<span data-anolis-spec=html>JavaScript global environment</span> is a
-	<span data-anolis-spec=html>document environment</span>.
+  <p>Returns the response type.
+  <p>Can be set to change the response type. Values are:
+  the empty string (default),
+  "<code title>arraybuffer</code>",
+  "<code title>blob</code>",
+  "<code title>document</code>",
+  "<code title>json</code>", and
+  "<code title>text</code>".
+  <p>When set: setting to "<code title>document</code>" is ignored if the
+  <span data-anolis-spec=html>JavaScript global environment</span> is a
+  <span data-anolis-spec=html>worker environment</span>
+  <p>When set: throws an
+  "<code data-anolis-spec=dom>InvalidStateError</code>" exception if the
+  state is <span title="dom-XMLHttpRequest-LOADING">LOADING</span> or
+  <span title="dom-XMLHttpRequest-DONE">DONE</span>.
+  <p>When set: throws an
+  "<code data-anolis-spec=dom>InvalidAccessError</code>" exception if the
+  <span>synchronous flag</span> is set and the
+  <span data-anolis-spec=html>JavaScript global environment</span> is a
+  <span data-anolis-spec=html>document environment</span>.
 </dl>
 
 
@@ -2177,50 +2177,50 @@ steps:
  <dt>If <code title="dom-XMLHttpRequest-responseType">responseType</code>
  is the empty string or "<code title>text</code>"</dt>
  <dd>
-	<ol>
-	 <li><p>If the state is not <span title="dom-XMLHttpRequest-LOADING">LOADING</span> or
-	 <span title="dom-XMLHttpRequest-DONE">DONE</span>, return the empty string.
+  <ol>
+   <li><p>If the state is not <span title="dom-XMLHttpRequest-LOADING">LOADING</span> or
+   <span title="dom-XMLHttpRequest-DONE">DONE</span>, return the empty string.
 
-	 <li><p>If the <span>error flag</span> is set, return the empty string.
+   <li><p>If the <span>error flag</span> is set, return the empty string.
 
-	 <li><p>Return the <span>text response entity body</span>.
-	</ol>
+   <li><p>Return the <span>text response entity body</span>.
+  </ol>
 
  <dt>Otherwise</dt>
  <dd>
-	<ol>
-	 <li><p>If the state is not <span title="dom-XMLHttpRequest-DONE">DONE</span>, return
-	 null.
+  <ol>
+   <li><p>If the state is not <span title="dom-XMLHttpRequest-DONE">DONE</span>, return
+   null.
 
-	 <li><p>If the <span>error flag</span> is set, return null.
+   <li><p>If the <span>error flag</span> is set, return null.
 
-	 <li>
-		<dl class=switch>
-		 <dt>If
-		 <code title="dom-XMLHttpRequest-responseType">responseType</code> is
-		 "<code title>arraybuffer</code>"</dt>
-		 <dd><p>Return the
-		 <span>arraybuffer response entity body</span>.</dd>
+   <li>
+    <dl class=switch>
+     <dt>If
+     <code title="dom-XMLHttpRequest-responseType">responseType</code> is
+     "<code title>arraybuffer</code>"</dt>
+     <dd><p>Return the
+     <span>arraybuffer response entity body</span>.</dd>
 
-		 <dt>If
-		 <code title="dom-XMLHttpRequest-responseType">responseType</code> is
-		 "<code title>blob</code>"</dt>
-		 <dd><p>Return the
-		 <span>blob response entity body</span>.</dd>
+     <dt>If
+     <code title="dom-XMLHttpRequest-responseType">responseType</code> is
+     "<code title>blob</code>"</dt>
+     <dd><p>Return the
+     <span>blob response entity body</span>.</dd>
 
-		 <dt>If
-		 <code title="dom-XMLHttpRequest-responseType">responseType</code> is
-		 "<code title>document</code>"</dt>
-		 <dd><p>Return the
-		 <span>document response entity body</span>.</dd>
+     <dt>If
+     <code title="dom-XMLHttpRequest-responseType">responseType</code> is
+     "<code title>document</code>"</dt>
+     <dd><p>Return the
+     <span>document response entity body</span>.</dd>
 
-		 <dt>If
-		 <code title="dom-XMLHttpRequest-responseType">responseType</code> is
-		 "<code title>json</code>"</dt>
-		 <dd><p>Return the
-		 <span>JSON response entity body</span>.</dd>
-		</dl>
-	</ol>
+     <dt>If
+     <code title="dom-XMLHttpRequest-responseType">responseType</code> is
+     "<code title>json</code>"</dt>
+     <dd><p>Return the
+     <span>JSON response entity body</span>.</dd>
+    </dl>
+  </ol>
 </dl>
 
 
@@ -2230,12 +2230,12 @@ steps:
 <dl class=domintro>
  <dt><code><var title>client</var> . <span title="dom-XMLHttpRequest-responseText">responseText</span></code>
  <dd>
-	<p>Returns the <span>text response entity body</span>.
+  <p>Returns the <span>text response entity body</span>.
 
-	<p>Throws an "<code data-anolis-spec=dom>InvalidStateError</code>"
-	exception if
-	<code title="dom-XMLHttpRequest-responseType">responseType</code> is not
-	the empty string or "<code title>text</code>".
+  <p>Throws an "<code data-anolis-spec=dom>InvalidStateError</code>"
+  exception if
+  <code title="dom-XMLHttpRequest-responseType">responseType</code> is not
+  the empty string or "<code title>text</code>".
 </dl>
 
 <p>The
@@ -2265,12 +2265,12 @@ steps:
 <dl class=domintro>
  <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-responseXML>responseXML</span></code>
  <dd>
-	<p>Returns the <span>document response entity body</span>.
+  <p>Returns the <span>document response entity body</span>.
 
-	<p>Throws an "<code data-anolis-spec=dom>InvalidStateError</code>"
-	exception if
-	<code title="dom-XMLHttpRequest-responseType">responseType</code> is not
-	the empty string or "<code title>document</code>".
+  <p>Throws an "<code data-anolis-spec=dom>InvalidStateError</code>"
+  exception if
+  <code title="dom-XMLHttpRequest-responseType">responseType</code> is not
+  the empty string or "<code title>document</code>".
 </dl>
 
 <p>The
@@ -2310,45 +2310,45 @@ and/or <code>XMLHttpRequestUpload</code> objects:
 
 <table>
  <thead>
-	<tr>
-	 <th>Event name</th>
-	 <th>Interface</th>
-	 <th>Dispatched when&hellip;</th>
+  <tr>
+   <th>Event name</th>
+   <th>Interface</th>
+   <th>Dispatched when&hellip;</th>
  <tbody>
-	<tr>
-	 <td><dfn title="event-xhr-readystatechange"><code>readystatechange</code></dfn></td>
-	 <td><code data-anolis-spec=dom>Event</code></td>
-	 <td>The <code title="dom-XMLHttpRequest-readyState">readyState</code> attribute changes
-	 value, except when it changes to <span title=dom-XMLHttpRequest-UNSENT>UNSENT</span>.
-	<tr>
-	 <td><dfn title="event-xhr-loadstart"><code>loadstart</code></dfn></td>
-	 <td><code>ProgressEvent</code></td>
-	 <td>The fetch initiates.
-	<tr>
-	 <td><dfn title="event-xhr-progress"><code>progress</code></dfn></td>
-	 <td><code>ProgressEvent</code></td>
-	 <td>Transmitting data.
-	<tr>
-	 <td><dfn title="event-xhr-abort"><code>abort</code></dfn></td>
-	 <td><code>ProgressEvent</code></td>
-	 <td>When the fetch has been aborted. For instance, by invoking the
-	 <code title="dom-XMLHttpRequest-abort">abort()</code> method.</td>
-	<tr>
-	 <td><dfn title="event-xhr-error"><code>error</code></dfn></td>
-	 <td><code>ProgressEvent</code></td>
-	 <td>The fetch failed.
-	<tr>
-	 <td><dfn title="event-xhr-load"><code>load</code></dfn></td>
-	 <td><code>ProgressEvent</code></td>
-	 <td>The fetch succeeded.
-	<tr>
-	 <td><dfn title="event-xhr-timeout"><code>timeout</code></dfn></td>
-	 <td><code>ProgressEvent</code></td>
-	 <td>The author specified timeout has passed before the fetch completed.
-	<tr>
-	 <td><dfn title="event-xhr-loadend"><code>loadend</code></dfn></td>
-	 <td><code>ProgressEvent</code></td>
-	 <td>The fetch completed (success or failure).
+  <tr>
+   <td><dfn title="event-xhr-readystatechange"><code>readystatechange</code></dfn></td>
+   <td><code data-anolis-spec=dom>Event</code></td>
+   <td>The <code title="dom-XMLHttpRequest-readyState">readyState</code> attribute changes
+   value, except when it changes to <span title=dom-XMLHttpRequest-UNSENT>UNSENT</span>.
+  <tr>
+   <td><dfn title="event-xhr-loadstart"><code>loadstart</code></dfn></td>
+   <td><code>ProgressEvent</code></td>
+   <td>The fetch initiates.
+  <tr>
+   <td><dfn title="event-xhr-progress"><code>progress</code></dfn></td>
+   <td><code>ProgressEvent</code></td>
+   <td>Transmitting data.
+  <tr>
+   <td><dfn title="event-xhr-abort"><code>abort</code></dfn></td>
+   <td><code>ProgressEvent</code></td>
+   <td>When the fetch has been aborted. For instance, by invoking the
+   <code title="dom-XMLHttpRequest-abort">abort()</code> method.</td>
+  <tr>
+   <td><dfn title="event-xhr-error"><code>error</code></dfn></td>
+   <td><code>ProgressEvent</code></td>
+   <td>The fetch failed.
+  <tr>
+   <td><dfn title="event-xhr-load"><code>load</code></dfn></td>
+   <td><code>ProgressEvent</code></td>
+   <td>The fetch succeeded.
+  <tr>
+   <td><dfn title="event-xhr-timeout"><code>timeout</code></dfn></td>
+   <td><code>ProgressEvent</code></td>
+   <td>The author specified timeout has passed before the fetch completed.
+  <tr>
+   <td><dfn title="event-xhr-loadend"><code>loadend</code></dfn></td>
+   <td><code>ProgressEvent</code></td>
+   <td>The fetch completed (success or failure).
 </table>
 
 
