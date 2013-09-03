@@ -543,7 +543,7 @@ must be done in a case-insensitive manner. Initially it must be empty.
 
 <hr>
 
-<p>To <dfn id="cancel-the-request">cancel the request</dfn> run these steps:
+<p>To <dfn id="terminate-the-request">terminate the request</dfn> run these steps:
 
 <ol>
  <li><p>Set the <a href="#error-flag">error flag</a>.
@@ -693,7 +693,7 @@ method must run these steps (unless otherwise indicated):
  "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception.
 
  <li>
-  <p><a href="#cancel-the-request">Cancel the request</a>.
+  <p><a href="#terminate-the-request">Terminate the request</a>.
 
   <p class="note">After all, a request can be ongoing at this point.
 
@@ -1528,7 +1528,7 @@ exception <var>exception</var> and event <var title="">event</var> run these
 steps:
 
 <ol>
- <li><p><a href="#cancel-the-request">Cancel the request</a>.
+ <li><p><a href="#terminate-the-request">Terminate the request</a>.
 
  <li><p>Change the state to <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>.
 
@@ -1667,7 +1667,7 @@ these steps:
 these steps (unless otherwise noted):
 
 <ol>
- <li><p><a href="#cancel-the-request">Cancel the request</a>.
+ <li><p><a href="#terminate-the-request">Terminate the request</a>.
 
  <li>
 	<p>If the state is <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a>,

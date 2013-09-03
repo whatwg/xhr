@@ -495,7 +495,7 @@ must be done in a case-insensitive manner. Initially it must be empty.
 
 <hr>
 
-<p>To <dfn>cancel the request</dfn> run these steps:
+<p>To <dfn>terminate the request</dfn> run these steps:
 
 <ol>
  <li><p>Set the <span>error flag</span>.
@@ -645,7 +645,7 @@ method must run these steps (unless otherwise indicated):
  "<code data-anolis-spec=dom>InvalidAccessError</code>" exception.
 
  <li>
-  <p><span>Cancel the request</span>.
+  <p><span>Terminate the request</span>.
 
   <p class=note>After all, a request can be ongoing at this point.
 
@@ -1480,7 +1480,7 @@ exception <var>exception</var> and event <var title>event</var> run these
 steps:
 
 <ol>
- <li><p><span>Cancel the request</span>.
+ <li><p><span>Terminate the request</span>.
 
  <li><p>Change the state to <span title="dom-XMLHttpRequest-DONE">DONE</span>.
 
@@ -1619,7 +1619,7 @@ these steps:
 these steps (unless otherwise noted):
 
 <ol>
- <li><p><span>Cancel the request</span>.
+ <li><p><span>Terminate the request</span>.
 
  <li>
 	<p>If the state is <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span>,
