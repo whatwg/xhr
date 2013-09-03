@@ -355,11 +355,7 @@ one of the following is true:
 </ul>
 
 <p>If an <code>XMLHttpRequest</code> object is garbage collected while its
-connection is still open, the user agent must cancel any instance of the
-<span data-anolis-spec=html>fetch</span> algorithm opened by this object,
-discarding any <span data-anolis-spec=html title=concept-task>tasks</span>
-<span data-anolis-spec=html title="queue a task">queued</span> for them, and
-discarding any further data received from the network for them.
+connection is still open, the user agent must <span>terminate the request</span>.
 
 
 <h3 id="event-handlers">Event handlers</h3>

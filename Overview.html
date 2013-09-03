@@ -403,11 +403,7 @@ one of the following is true:
 </ul>
 
 <p>If an <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object is garbage collected while its
-connection is still open, the user agent must cancel any instance of the
-<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/fetching-resources.html#fetch">fetch</a> algorithm opened by this object,
-discarding any <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#concept-task" title="concept-task">tasks</a>
-<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task" title="queue a task">queued</a> for them, and
-discarding any further data received from the network for them.
+connection is still open, the user agent must <a href="#terminate-the-request">terminate the request</a>.
 
 
 <h3 id="event-handlers"><span class="secno">4.4 </span>Event handlers</h3>
