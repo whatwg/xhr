@@ -659,6 +659,11 @@ method must run these steps (unless otherwise indicated):
    <li><p>Set <span>author request headers</span> to the empty list.
    <li><p>Unset the <span><code>send()</code> flag</span>.
    <li><p>Set <span>response entity body</span> to null.
+   <li><p>Set <span>arraybuffer response entity body</span> to null.
+   <li><p>Set <span>blob response entity body</span> to null.
+   <li><p>Set <span>document response entity body</span> to null.
+   <li><p>Set <span>JSON response entity body</span> to null.
+   <li><p>Set <span>text response entity body</span> to null.
   </ul>
 
  <li>
@@ -1871,16 +1876,17 @@ does not have an <span data-anolis-spec=http>entity body</span>, the
 <span>response entity body</span> is null.
 
 <p class=note>The <span>response entity body</span> is updated as part
-of the <code title="dom-XMLHttpRequest-send">send()</code> algorithm.
+of the <code title=dom-XMLHttpRequest-send>send()</code> method and reset by the
+<code title=dom-XMLHttpRequest-open>open()</code> method.
 
 <hr>
 
 <p>The
 <dfn id="arraybuffer-response-entity-body">arraybuffer response entity body</dfn>
-is an <code data-anolis-spec=typedarray>ArrayBuffer</code> representing
-the <span>response entity body</span>. If the
-<span>arraybuffer response entity body</span> has no value assigned to it
-let it be the return value of the following algorithm:
+is either an <code data-anolis-spec=typedarray>ArrayBuffer</code> representing
+the <span>response entity body</span> or null. If the
+<span>arraybuffer response entity body</span> is null, let it be the return value of the
+following algorithm:
 
 <ol>
  <li><p>If the <span>response entity body</span> is null, return an empty
@@ -1892,10 +1898,10 @@ let it be the return value of the following algorithm:
 
 
 <p>The
-<dfn id="blob-response-entity-body">blob response entity body</dfn> is a
-<code data-anolis-spec=fileapi>Blob</code> representing the <span>response entity body</span>. If
-the <span>blob response entity body</span> has no value assigned to it let
-it be the return value of the following algorithm:
+<dfn id="blob-response-entity-body">blob response entity body</dfn> is either a
+<code data-anolis-spec=fileapi>Blob</code> representing the
+<span>response entity body</span> or null. If the <span>blob response entity body</span>
+is null, let it be the return value of the following algorithm:
 
 <ol>
  <li><p>If the <span>response entity body</span> is null, return an empty
@@ -1909,11 +1915,10 @@ it be the return value of the following algorithm:
 
 <p>The
 <dfn id="document-response-entity-body">document response entity body</dfn>
-is either a
-<span data-anolis-spec=dom title=concept-document>document</span>
+is either a <span data-anolis-spec=dom title=concept-document>document</span>
 representing the <span>response entity body</span> or null. If the
-<span>document response entity body</span> has no value assigned to it let
-it be the return value of the following algorithm:
+<span>document response entity body</span> is null, let it be the return value of the
+following algorithm:
 
 <ol>
  <li><p>If the <span>response entity body</span> is null, return null.
@@ -1995,9 +2000,9 @@ it be the return value of the following algorithm:
  <li><p>Return <var title>document</var>.
 </ol>
 
-<p>The <dfn>JSON response entity body</dfn> is an ECMAScript value
-representing the <span>response entity body</span>. The
-<span>JSON response entity body</span> is the return value of the following
+<p>The <dfn>JSON response entity body</dfn> is either a JavaScript value
+representing the <span>response entity body</span>. If the
+<span>JSON response entity body</span> is null, let it be return value of the following
 algorithm:
 
 <ol>
@@ -2014,9 +2019,9 @@ algorithm:
 </ol>
 
 
-<p>The <dfn id="text-response-entity-body">text response entity body</dfn>
-is a string representing the <span>response entity body</span>. The
-<span>text response entity body</span> is the return value of the
+<p>The <dfn id="text-response-entity-body">text response entity body</dfn> is either a
+string representing the <span>response entity body</span> or null. If the
+<span>text response entity body</span> is null, let it be the return value of the
 following algorithm:
 
 <ol>

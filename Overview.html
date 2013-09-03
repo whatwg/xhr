@@ -707,6 +707,11 @@ method must run these steps (unless otherwise indicated):
    <li><p>Set <a href="#author-request-headers">author request headers</a> to the empty list.
    <li><p>Unset the <a href="#send-flag"><code>send()</code> flag</a>.
    <li><p>Set <a href="#response-entity-body">response entity body</a> to null.
+   <li><p>Set <a href="#arraybuffer-response-entity-body">arraybuffer response entity body</a> to null.
+   <li><p>Set <a href="#blob-response-entity-body">blob response entity body</a> to null.
+   <li><p>Set <a href="#document-response-entity-body">document response entity body</a> to null.
+   <li><p>Set <a href="#json-response-entity-body">JSON response entity body</a> to null.
+   <li><p>Set <a href="#text-response-entity-body">text response entity body</a> to null.
   </ul>
 
  <li>
@@ -1919,16 +1924,17 @@ does not have an <a class="external" href="http://tools.ietf.org/html/rfc2616/#s
 <a href="#response-entity-body">response entity body</a> is null.
 
 <p class="note">The <a href="#response-entity-body">response entity body</a> is updated as part
-of the <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code> algorithm.
+of the <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code> method and reset by the
+<code title="dom-XMLHttpRequest-open"><a href="#dom-xmlhttprequest-open">open()</a></code> method.
 
 <hr>
 
 <p>The
 <dfn id="arraybuffer-response-entity-body">arraybuffer response entity body</dfn>
-is an <code class="external"><a href="http://www.khronos.org/registry/typedarray/specs/latest/#5">ArrayBuffer</a></code> representing
-the <a href="#response-entity-body">response entity body</a>. If the
-<a href="#arraybuffer-response-entity-body">arraybuffer response entity body</a> has no value assigned to it
-let it be the return value of the following algorithm:
+is either an <code class="external"><a href="http://www.khronos.org/registry/typedarray/specs/latest/#5">ArrayBuffer</a></code> representing
+the <a href="#response-entity-body">response entity body</a> or null. If the
+<a href="#arraybuffer-response-entity-body">arraybuffer response entity body</a> is null, let it be the return value of the
+following algorithm:
 
 <ol>
  <li><p>If the <a href="#response-entity-body">response entity body</a> is null, return an empty
@@ -1940,10 +1946,10 @@ let it be the return value of the following algorithm:
 
 
 <p>The
-<dfn id="blob-response-entity-body">blob response entity body</dfn> is a
-<code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code> representing the <a href="#response-entity-body">response entity body</a>. If
-the <a href="#blob-response-entity-body">blob response entity body</a> has no value assigned to it let
-it be the return value of the following algorithm:
+<dfn id="blob-response-entity-body">blob response entity body</dfn> is either a
+<code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code> representing the
+<a href="#response-entity-body">response entity body</a> or null. If the <a href="#blob-response-entity-body">blob response entity body</a>
+is null, let it be the return value of the following algorithm:
 
 <ol>
  <li><p>If the <a href="#response-entity-body">response entity body</a> is null, return an empty
@@ -1957,11 +1963,10 @@ it be the return value of the following algorithm:
 
 <p>The
 <dfn id="document-response-entity-body">document response entity body</dfn>
-is either a
-<a class="external" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>
+is either a <a class="external" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>
 representing the <a href="#response-entity-body">response entity body</a> or null. If the
-<a href="#document-response-entity-body">document response entity body</a> has no value assigned to it let
-it be the return value of the following algorithm:
+<a href="#document-response-entity-body">document response entity body</a> is null, let it be the return value of the
+following algorithm:
 
 <ol>
  <li><p>If the <a href="#response-entity-body">response entity body</a> is null, return null.
@@ -2043,9 +2048,9 @@ it be the return value of the following algorithm:
  <li><p>Return <var title="">document</var>.
 </ol>
 
-<p>The <dfn id="json-response-entity-body">JSON response entity body</dfn> is an ECMAScript value
-representing the <a href="#response-entity-body">response entity body</a>. The
-<a href="#json-response-entity-body">JSON response entity body</a> is the return value of the following
+<p>The <dfn id="json-response-entity-body">JSON response entity body</dfn> is either a JavaScript value
+representing the <a href="#response-entity-body">response entity body</a>. If the
+<a href="#json-response-entity-body">JSON response entity body</a> is null, let it be return value of the following
 algorithm:
 
 <ol>
@@ -2062,9 +2067,9 @@ algorithm:
 </ol>
 
 
-<p>The <dfn id="text-response-entity-body">text response entity body</dfn>
-is a string representing the <a href="#response-entity-body">response entity body</a>. The
-<a href="#text-response-entity-body">text response entity body</a> is the return value of the
+<p>The <dfn id="text-response-entity-body">text response entity body</dfn> is either a
+string representing the <a href="#response-entity-body">response entity body</a> or null. If the
+<a href="#text-response-entity-body">text response entity body</a> is null, let it be the return value of the
 following algorithm:
 
 <ol>
