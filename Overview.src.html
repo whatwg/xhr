@@ -2355,10 +2355,6 @@ and/or <code>XMLHttpRequestUpload</code> objects:
 
 <h2>Interface <code title>FormData</code></h2>
 
-<p>The <code>FormData</code> object represents an ordered collection of
-entries. Each entry has a name, a value, a type, and optionally a filename
-(if type is "file").
-
 <pre class="idl">[<span title="dom-FormData">Constructor</span>(optional <span data-anolis-spec=html>HTMLFormElement</span> <var>form</var>)]
 interface <dfn>FormData</dfn> {
   void <span title="dom-FormData-append">append</span>(DOMString <var>name</var>, <span data-anolis-spec=fileapi>Blob</span> <var title>value</var>, optional DOMString <var title>filename</var>);
@@ -2371,13 +2367,28 @@ interface <dfn>FormData</dfn> {
 IDL reads <code title>[Constructor]</code> (i.e. has no arguments).
 <!-- maybe move this into IDL at some point -->
 
+<p>The <code>FormData</code> object represents an ordered list of
+<dfn title=concept-FormData-entry>entries</dfn>. Each
+<span title=concept-FormData-entry>entry</span> consists of a
+<dfn title=concept-FormData-entry-name>name</dfn> and a
+<dfn title=concept-FormData-entry-value>value</dfn>.
+
+<p>For the purposes of interaction with other algorithms, an
+<span title=concept-FormData-entry>entry</span>'s type is "string" if
+<span title=concept-FormData-entry-value>value</span> is a string and "file" otherwise. If
+an <span title=concept-FormData-entry>entry</span>'s type is "file", its filename is the
+value of <span title=concept-FormData-entry>entry</span>'s
+<span title=concept-FormData-entry-value>value</span>'s
+<code data-anolis-spec=fileapi title=dom-File-name>name</code> attribute.
+
 <dl class=domintro>
  <dt><code><var title>fd</var> = new <span title="dom-FormData">FormData</span>([<var title>form</var>])</code>
- <dd><p>Returns a new <code>FormData</code> object, optionally initialized
- with the data from <var title>form</var> (if given).
+ <dd><p>Returns a new <code>FormData</code> object, optionally initialized with the
+ <span title=concept-FormData-entry>entries</span> from <var title>form</var> (if given).
 
  <dt><code><var title>fd</var> . <span title=dom-FormData-append>append</span>(<var title>name</var>, <var title>value</var> [, <var title>filename</var>])</code>
- <dd><p>Appends a new entry to the <code>FormData</code> object.
+ <dd><p>Appends a new <span title=concept-FormData-entry>entry</span> to the
+ <code>FormData</code> object.
 </dl>
 
 <p>The
@@ -2387,37 +2398,40 @@ constructor must run these steps:
 <ol>
  <li><p>Let <var title>fd</var> be a new <code>FormData</code> object.
 
- <li><p>If <var>form</var> is given, set <var title>fd</var>'s entries to
- the result of
- <span data-anolis-spec=html>constructing the form data set</span> for
- <var>form</var>.
+ <li><p>If <var>form</var> is given, set <var title>fd</var>'s
+ <span title=concept-FormData-entry>entries</span> to the result of
+ <span data-anolis-spec=html>constructing the form data set</span> for <var>form</var>.
 
  <li><p>Return <var title>fd</var>.
 </ol>
 
 <p>The
 <dfn title="dom-FormData-append" id="dom-formdata-append"><code>append(<var>name</var>, <var>value</var>, <var>filename</var>)</code></dfn>
-method must create a new entry with the following parameters set and append
-it to the end of the collection the <code>FormData</code> object represents:
+method must run these steps:
 
-<ul>
- <li><p>Set its name to <var>name</var>.
+<ol>
+ <li><p>Let <var title>entry</var> be a new
+ <span title=concept-FormData-entry>entry</span>.
 
- <li><p>Set its value to <var>value</var>.
+ <li><p>Set <var title>entry</var>'s <span title=concept-FormData-entry-name>name</span>
+ to <var>name</var>.
 
- <li><p>Set its type to "text" if <var>value</var> is a string and "file" if
- it is a <code data-anolis-spec=fileapi>Blob</code>.
+ <li><p>If <var>value</var> is a <code data-anolis-spec=fileapi>Blob</code>, set
+ <var>value</var> to a new <code data-anolis-spec=fileapi>File</code> object whose
+ <code data-anolis-spec=fileapi title=dom-File-name>name</code> attribute value is
+ "<code title>blob</code>".
 
- <li><p>If its type is "file" set its filename to "<code title>blob</code>".
+ <li><p>If <var>value</var> is a <code data-anolis-spec=fileapi>File</code> and
+ <var title>filename</var> is given, set <var>value</var>'s
+ <code data-anolis-spec=fileapi title=dom-File-name>name</code> attribute value to
+ <var title>filename</var>.
 
- <li><p>If its type is "file" and <var>value</var> is a
- <code data-anolis-spec=fileapi>File</code> whose
- <code data-anolis-spec=fileapi title=dom-File-name>name</code> attribute
- is not the empty string, set entry's filename to the attribute's value.
+ <li><p>Set <var title>entry</var>'s <span title=concept-FormData-entry-value>value</span>
+ to <var>value</var>.
 
- <li><p>If the <var title>filename</var> parameter is not omitted set
- entry's filename to <var title>filename</var>.
-</ul>
+ <li><p>Append <var title>entry</var> to <code>FormData</code> object's list of
+ <span title=concept-FormData-entry>entries</span>.
+</ol>
 
 
 

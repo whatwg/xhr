@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-6-september-2013">Living Standard — Last Updated 6 September 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-9-september-2013">Living Standard — Last Updated 9 September 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-6 September 2013, the editor has made this specification available
+9 September 2013, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -2403,10 +2403,6 @@ and/or <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> obj
 
 <h2 id="interface-formdata"><span class="secno">5 </span>Interface <code title="">FormData</code></h2>
 
-<p>The <code><a href="#formdata">FormData</a></code> object represents an ordered collection of
-entries. Each entry has a name, a value, a type, and optionally a filename
-(if type is "file").
-
 <pre class="idl">[<a href="#dom-formdata" title="dom-FormData">Constructor</a>(optional <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/forms.html#htmlformelement">HTMLFormElement</a> <var>form</var>)]
 interface <dfn id="formdata">FormData</dfn> {
   void <a href="#dom-formdata-append" title="dom-FormData-append">append</a>(DOMString <var>name</var>, <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> <var title="">value</var>, optional DOMString <var title="">filename</var>);
@@ -2419,13 +2415,28 @@ interface <dfn id="formdata">FormData</dfn> {
 IDL reads <code title="">[Constructor]</code> (i.e. has no arguments).
 <!-- maybe move this into IDL at some point -->
 
+<p>The <code><a href="#formdata">FormData</a></code> object represents an ordered list of
+<dfn id="concept-formdata-entry" title="concept-FormData-entry">entries</dfn>. Each
+<a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a> consists of a
+<dfn id="concept-formdata-entry-name" title="concept-FormData-entry-name">name</dfn> and a
+<dfn id="concept-formdata-entry-value" title="concept-FormData-entry-value">value</dfn>.
+
+<p>For the purposes of interaction with other algorithms, an
+<a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a>'s type is "string" if
+<a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">value</a> is a string and "file" otherwise. If
+an <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a>'s type is "file", its filename is the
+value of <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a>'s
+<a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">value</a>'s
+<code class="external" title="dom-File-name"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-name">name</a></code> attribute.
+
 <dl class="domintro">
  <dt><code><var title="">fd</var> = new <a href="#dom-formdata" title="dom-FormData">FormData</a>([<var title="">form</var>])</code>
- <dd><p>Returns a new <code><a href="#formdata">FormData</a></code> object, optionally initialized
- with the data from <var title="">form</var> (if given).
+ <dd><p>Returns a new <code><a href="#formdata">FormData</a></code> object, optionally initialized with the
+ <a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a> from <var title="">form</var> (if given).
 
  <dt><code><var title="">fd</var> . <a href="#dom-formdata-append" title="dom-FormData-append">append</a>(<var title="">name</var>, <var title="">value</var> [, <var title="">filename</var>])</code>
- <dd><p>Appends a new entry to the <code><a href="#formdata">FormData</a></code> object.
+ <dd><p>Appends a new <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a> to the
+ <code><a href="#formdata">FormData</a></code> object.
 </dl>
 
 <p>The
@@ -2435,37 +2446,40 @@ constructor must run these steps:
 <ol>
  <li><p>Let <var title="">fd</var> be a new <code><a href="#formdata">FormData</a></code> object.
 
- <li><p>If <var>form</var> is given, set <var title="">fd</var>'s entries to
- the result of
- <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#constructing-form-data-set">constructing the form data set</a> for
- <var>form</var>.
+ <li><p>If <var>form</var> is given, set <var title="">fd</var>'s
+ <a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a> to the result of
+ <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#constructing-form-data-set">constructing the form data set</a> for <var>form</var>.
 
  <li><p>Return <var title="">fd</var>.
 </ol>
 
 <p>The
 <dfn id="dom-formdata-append" title="dom-FormData-append"><code>append(<var>name</var>, <var>value</var>, <var>filename</var>)</code></dfn>
-method must create a new entry with the following parameters set and append
-it to the end of the collection the <code><a href="#formdata">FormData</a></code> object represents:
+method must run these steps:
 
-<ul>
- <li><p>Set its name to <var>name</var>.
+<ol>
+ <li><p>Let <var title="">entry</var> be a new
+ <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a>.
 
- <li><p>Set its value to <var>value</var>.
+ <li><p>Set <var title="">entry</var>'s <a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a>
+ to <var>name</var>.
 
- <li><p>Set its type to "text" if <var>value</var> is a string and "file" if
- it is a <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code>.
+ <li><p>If <var>value</var> is a <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code>, set
+ <var>value</var> to a new <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a></code> object whose
+ <code class="external" title="dom-File-name"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-name">name</a></code> attribute value is
+ "<code title="">blob</code>".
 
- <li><p>If its type is "file" set its filename to "<code title="">blob</code>".
+ <li><p>If <var>value</var> is a <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a></code> and
+ <var title="">filename</var> is given, set <var>value</var>'s
+ <code class="external" title="dom-File-name"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-name">name</a></code> attribute value to
+ <var title="">filename</var>.
 
- <li><p>If its type is "file" and <var>value</var> is a
- <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a></code> whose
- <code class="external" title="dom-File-name"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-name">name</a></code> attribute
- is not the empty string, set entry's filename to the attribute's value.
+ <li><p>Set <var title="">entry</var>'s <a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">value</a>
+ to <var>value</var>.
 
- <li><p>If the <var title="">filename</var> parameter is not omitted set
- entry's filename to <var title="">filename</var>.
-</ul>
+ <li><p>Append <var title="">entry</var> to <code><a href="#formdata">FormData</a></code> object's list of
+ <a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a>.
+</ol>
 
 
 
