@@ -2355,10 +2355,18 @@ and/or <code>XMLHttpRequestUpload</code> objects:
 
 <h2>Interface <code title>FormData</code></h2>
 
-<pre class="idl">[<span title="dom-FormData">Constructor</span>(optional <span data-anolis-spec=html>HTMLFormElement</span> <var>form</var>)]
+<pre class="idl">typedef (<span data-anolis-spec=fileapi>File</span> or DOMString) <dfn>FormDataEntryValue</dfn>;
+
+[<span title="dom-FormData">Constructor</span>(optional <span data-anolis-spec=html>HTMLFormElement</span> <var>form</var>)]
 interface <dfn>FormData</dfn> {
-  void <span title="dom-FormData-append">append</span>(DOMString <var>name</var>, <span data-anolis-spec=fileapi>Blob</span> <var title>value</var>, optional DOMString <var title>filename</var>);
-  void <span title="dom-FormData-append">append</span>(DOMString <var>name</var>, DOMString <var>value</var>);
+  void <span title="dom-FormData-append">append</span>([EnsureUTF16] DOMString <var>name</var>, <span data-anolis-spec=fileapi>Blob</span> <var>value</var>, optional [EnsureUTF16] DOMString <var>filename</var>);
+  void <span title="dom-FormData-append">append</span>(DOMString <var>name</var>, [EnsureUTF16] DOMString <var>value</var>);
+  void <span title=dom-FormData-delete>delete</span>([EnsureUTF16] DOMString <var>name</var>);
+  <span>FormDataEntryValue</span>? <span title=dom-FormData-get>get</span>([EnsureUTF16] DOMString <var>name</var>);
+  sequence&lt;<span>FormDataEntryValue</span>> <span title=dom-FormData-getAll>getAll</span>([EnsureUTF16] DOMString <var>name</var>);
+  boolean <span title=dom-FormData-has>has</span>([EnsureUTF16] DOMString <var>name</var>);
+  void <span title=dom-FormData-append>set</span>([EnsureUTF16] DOMString <var>name</var>, <span data-anolis-spec=fileapi>Blob</span> <var>value</var>, optional [EnsureUTF16] DOMString <var>filename</var>);
+  void <span title=dom-FormData-set>set</span>([EnsureUTF16] DOMString <var>name</var>, [EnsureUTF16] DOMString <var>value</var>);
 };</pre>
 
 <p>If the <span data-anolis-spec=html>JavaScript global environment</span> is a
@@ -2391,6 +2399,33 @@ value of <span title=concept-FormData-entry>entry</span>'s
  <code>FormData</code> object.
 </dl>
 
+<p>To <dfn>create an entry</dfn> for <var>name</var>, <var>value</var>, and optionally a
+<var>filename</var>, run these steps:
+
+<ol>
+ <li><p>Let <var>entry</var> be a new
+ <span title=concept-FormData-entry>entry</span>.
+
+ <li><p>Set <var>entry</var>'s <span title=concept-FormData-entry-name>name</span>
+ to <var>name</var>.
+
+ <li><p>If <var>value</var> is a <code data-anolis-spec=fileapi>Blob</code>, set
+ <var>value</var> to a new <code data-anolis-spec=fileapi>File</code> object whose
+ <code data-anolis-spec=fileapi title=dom-File-name>name</code> attribute value is
+ "<code title>blob</code>".
+
+ <li><p>If <var>value</var> is a <code data-anolis-spec=fileapi>File</code> and
+ <var title>filename</var> is given, set <var>value</var>'s
+ <code data-anolis-spec=fileapi title=dom-File-name>name</code> attribute value to
+ <var>filename</var>.
+
+ <li><p>Set <var>entry</var>'s <span title=concept-FormData-entry-value>value</span> to
+ <var>value</var>.
+
+ <li><p>Return <var>entry</var>.
+</ol>
+
+
 <p>The
 <dfn title="dom-FormData"><code>FormData(<var>form</var>)</code></dfn>
 constructor must run these steps:
@@ -2410,28 +2445,53 @@ constructor must run these steps:
 method must run these steps:
 
 <ol>
- <li><p>Let <var title>entry</var> be a new
- <span title=concept-FormData-entry>entry</span>.
-
- <li><p>Set <var title>entry</var>'s <span title=concept-FormData-entry-name>name</span>
- to <var>name</var>.
-
- <li><p>If <var>value</var> is a <code data-anolis-spec=fileapi>Blob</code>, set
- <var>value</var> to a new <code data-anolis-spec=fileapi>File</code> object whose
- <code data-anolis-spec=fileapi title=dom-File-name>name</code> attribute value is
- "<code title>blob</code>".
-
- <li><p>If <var>value</var> is a <code data-anolis-spec=fileapi>File</code> and
- <var title>filename</var> is given, set <var>value</var>'s
- <code data-anolis-spec=fileapi title=dom-File-name>name</code> attribute value to
- <var title>filename</var>.
-
- <li><p>Set <var title>entry</var>'s <span title=concept-FormData-entry-value>value</span>
- to <var>value</var>.
+ <li><p>Let <var title>entry</var> be the result of <span>create an entry</span> with
+ <var>name</var>, <var>value</var>, and <var>filename</var> if given.
 
  <li><p>Append <var title>entry</var> to <code>FormData</code> object's list of
  <span title=concept-FormData-entry>entries</span>.
 </ol>
+
+<p>The
+<dfn title=dom-FormData-delete><code>delete(<var title>name</var>)</code></dfn>
+method must remove all <span title=concept-FormData-entry>entries</span> whose
+<span title=concept-FormData-entry-name>name</span> is <var title>name</var>.
+
+<p>The
+<dfn title=dom-FormData-get><code>get(<var title>name</var>)</code></dfn>
+method must return the <span title=concept-FormData-entry-value>value</span> of the first
+<span title=concept-FormData-entry>entry</span> whose
+<span title=concept-FormData-entry-name>name</span> is <var title>name</var>, and null
+otherwise.
+
+<p>The
+<dfn title=dom-FormData-getAll><code>getAll(<var title>name</var>)</code></dfn>
+method must return the <span title=concept-FormData-entry-values>values</span> of all
+<span title=concept-FormData-entry>entries</span> whose
+<span title=concept-FormData-entry-name>name</span> is <var title>name</var>, in list
+order, and the empty sequence otherwise.
+
+<p>The
+<dfn title=dom-FormData-set><code>set(<var title>name</var>, <var title>value</var>)</code></dfn>
+method must run these steps:
+
+<ol>
+ <li><p>Let <var>entry</var> be the result of <span>create an entry</span> with
+ <var>name</var>, <var>value</var>, and <var>filename</var> if given.
+
+ <li><p>If there are any <span title=concept-FormData-entry>entries</span> whose
+ <span title=concept-FormData-entry-name>name</span> is <var title>name</var>, replace
+ the first such <span title=concept-FormData-entry>entry</span> with <var>entry</var> and
+ remove the others.
+
+ <li><p>Otherwise, append <var>entry</var> to <code>FormData</code> object's list of
+ <span title=concept-FormData-entry>entries</span>.
+</ol>
+
+<p>The <dfn title=dom-FormData-has><code>has(<var>name</var>)</code></dfn> method must
+return true if there is an <span title=concept-FormData-entry>entry</span> whose
+<span title=concept-FormData-entry-name>name</span> is <var>name</var>, and false
+otherwise.
 
 
 
