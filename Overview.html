@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-10-september-2013">Living Standard — Last Updated 10 September 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-13-september-2013">Living Standard — Last Updated 13 September 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-10 September 2013, the editor has made this specification available
+13 September 2013, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -1679,14 +1679,9 @@ these steps (unless otherwise noted):
   <p>If the state is <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a>,
   <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a> with the
   <a href="#send-flag"><code>send()</code> flag</a> being unset, or
-  <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>, change the state to
-  <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a>.
+  <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>, go to the next step.
 
-  <p class="note">No <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code> event
-  is dispatched.
-
- <li>
-  <p>Otherwise, run these substeps:
+  <p>Otherwise, run these substeps first:
 
   <ol>
    <li><p>Change the state to <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>.
@@ -1718,6 +1713,12 @@ these steps (unless otherwise noted):
 
    <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>.
   </ol>
+
+ <li>
+  <p>change the state to <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a>.
+
+  <p class="note">No <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code> event
+  is dispatched.
 </ol>
 
 

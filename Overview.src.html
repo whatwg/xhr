@@ -1631,14 +1631,9 @@ these steps (unless otherwise noted):
   <p>If the state is <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span>,
   <span title="dom-XMLHttpRequest-OPENED">OPENED</span> with the
   <span><code>send()</code> flag</span> being unset, or
-  <span title="dom-XMLHttpRequest-DONE">DONE</span>, change the state to
-  <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span>.
+  <span title="dom-XMLHttpRequest-DONE">DONE</span>, go to the next step.
 
-  <p class=note>No <code title="event-xhr-readystatechange">readystatechange</code> event
-  is dispatched.
-
- <li>
-  <p>Otherwise, run these substeps:
+  <p>Otherwise, run these substeps first:
 
   <ol>
    <li><p>Change the state to <span title="dom-XMLHttpRequest-DONE">DONE</span>.
@@ -1670,6 +1665,12 @@ these steps (unless otherwise noted):
 
    <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadend">loadend</code>.
   </ol>
+
+ <li>
+  <p>change the state to <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span>.
+
+  <p class=note>No <code title="event-xhr-readystatechange">readystatechange</code> event
+  is dispatched.
 </ol>
 
 
