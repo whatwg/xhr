@@ -969,7 +969,6 @@ method must run these steps (unless otherwise noted):
   null, and then follow these rules, depending on <var title>data</var>:
 
   <dl class=switch>
-
    <dt id="dom-XMLHttpRequest-send-ArrayBufferView"><code data-anolis-spec=typedarray>ArrayBufferView</code>
    <dd><p>Let the <span>request entity body</span> be the raw data
    represented by <var title>data</var>.</dd>
@@ -986,42 +985,25 @@ method must run these steps (unless otherwise noted):
     represented by <var>data</var>.
    </dd>
 
-
    <dt id="dom-XMLHttpRequest-send-document"><span data-anolis-spec=dom title=concept-document>document</span>
    <dd>
-    <p>Let <var title>encoding</var> be the
-    <span data-anolis-spec=dom title=concept-document-encoding>encoding</span>
-    of <var title>data</var>. If <var title>encoding</var> is
-    <span data-anolis-spec=encoding>utf-16le</span> or
-    <span data-anolis-spec=encoding>utf-16be</span>, set
-    <var title>encoding</var> to
-    <span data-anolis-spec=encoding>utf-8</span>.
+    <p>Let <var>encoding</var> be "<code title>UTF-8</code>".
 
-    <p>If <var title>data</var> is an
-    <span data-anolis-spec=dom>HTML document</span>, let
-    <var>mime type</var> be "<code>text/html</code>", or let
-    <var>mime type</var> be "<code>application/xml</code>" otherwise. Then
-    append "<code>;charset=<var>encoding</var></code>" to
+    <p>If <var title>data</var> is an <span data-anolis-spec=dom>HTML document</span>, let
+    <var>mime type</var> be "<code>text/html</code>", or let <var>mime type</var> be
+    "<code>application/xml</code>" otherwise. Then append "<code>;charset=UTF-8</code>" to
     <var>mime type</var>.
 
-    <p><span data-anolis-spec=domps title=concept-serialize>Serialize</span>
-    <var title>data</var>, and let the <span>request entity body</span> be the result,
+    <p>Let the <span>request entity body</span> be <var title>data</var>,
+    <span data-anolis-spec=domps title=concept-serialize>serialized</span>,
     <span data-anolis-spec=webidl title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</span>
-    and <span data-anolis-spec=encoding title=encode>encoded</span> using
-    encoding <var>encoding</var>. Re-throw any exception this
-    throws.
+    and <span data-anolis-spec=encoding title="utf-8 encode">utf-8 encoded</span>.
+    Re-throw any exception
+    <span data-anolis-spec=domps title=concept-serialize>serializing</span> throws.
 
-    <p class=XXX>Should we only encode as utf-8? What happens in the face
-    of an <span data-anolis-spec=encoding>error</span>?
-
-    <p class=note>In particular, if the document cannot be serialized an
-    "<code data-anolis-spec=dom>InvalidStateError</code>" exception is
-    thrown.
-
-    <p class=note>Subsequent changes to the
-    <span data-anolis-spec=dom title=concept-document>document</span> have
-    no effect on what is transferred.
-   </dd>
+    <p class=note>If the <var title>data</var> cannot be
+    <span data-anolis-spec=domps title=concept-serialize>serialized</span> an
+    "<code data-anolis-spec=dom>InvalidStateError</code>" exception is thrown.
 
    <dt id="dom-XMLHttpRequest-send-a-string">a string
    <dd>
@@ -1029,10 +1011,8 @@ method must run these steps (unless otherwise noted):
 
     <p>Let <var>mime type</var> be "<code>text/plain;charset=UTF-8</code>".
 
-    <p>Let the <span>request entity body</span> be <var title>data</var> ,
-    <span data-anolis-spec=encoding title=encode>encoded</span> as
-    <span data-anolis-spec=encoding>utf-8</span>.
-   </dd>
+    <p>Let the <span>request entity body</span> be <var title>data</var>,
+    <span data-anolis-spec=encoding title="utf-8 encode">utf-8 encoded</span>.
 
    <dt id="dom-XMLHttpRequest-send-FormData"><code>FormData</code>
    <dd>
@@ -1061,7 +1041,7 @@ method must run these steps (unless otherwise noted):
     <!-- utf-8 implied -->
 
     <p>Let <var>mime type</var> be
-    "<code title>application/x-www-form-urlencoded;charset=utf-8</code>.
+    "<code title>application/x-www-form-urlencoded;charset=UTF-8</code>.
   </dl>
 
   <p>If a <code>Content-Type</code> header is in
@@ -1667,7 +1647,7 @@ these steps (unless otherwise noted):
   </ol>
 
  <li>
-  <p>change the state to <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span>.
+  <p>Change the state to <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span>.
 
   <p class=note>No <code title="event-xhr-readystatechange">readystatechange</code> event
   is dispatched.

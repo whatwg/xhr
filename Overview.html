@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-13-september-2013">Living Standard — Last Updated 13 September 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-26-september-2013">Living Standard — Last Updated 26 September 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-13 September 2013, the editor has made this specification available
+26 September 2013, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -1017,7 +1017,6 @@ method must run these steps (unless otherwise noted):
   null, and then follow these rules, depending on <var title="">data</var>:
 
   <dl class="switch">
-
    <dt id="dom-XMLHttpRequest-send-ArrayBufferView"><code class="external"><a href="http://www.khronos.org/registry/typedarray/specs/latest/#6">ArrayBufferView</a></code>
    <dd><p>Let the <a href="#request-entity-body">request entity body</a> be the raw data
    represented by <var title="">data</var>.</dd>
@@ -1034,42 +1033,25 @@ method must run these steps (unless otherwise noted):
     represented by <var>data</var>.
    </dd>
 
-
    <dt id="dom-XMLHttpRequest-send-document"><a class="external" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>
    <dd>
-    <p>Let <var title="">encoding</var> be the
-    <a class="external" href="http://dom.spec.whatwg.org/#concept-document-encoding" title="concept-document-encoding">encoding</a>
-    of <var title="">data</var>. If <var title="">encoding</var> is
-    <a class="external" href="http://encoding.spec.whatwg.org/#utf-16le">utf-16le</a> or
-    <a class="external" href="http://encoding.spec.whatwg.org/#utf-16be">utf-16be</a>, set
-    <var title="">encoding</var> to
-    <a class="external" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
+    <p>Let <var>encoding</var> be "<code title="">UTF-8</code>".
 
-    <p>If <var title="">data</var> is an
-    <a class="external" href="http://dom.spec.whatwg.org/#html-document">HTML document</a>, let
-    <var>mime type</var> be "<code>text/html</code>", or let
-    <var>mime type</var> be "<code>application/xml</code>" otherwise. Then
-    append "<code>;charset=<var>encoding</var></code>" to
+    <p>If <var title="">data</var> is an <a class="external" href="http://dom.spec.whatwg.org/#html-document">HTML document</a>, let
+    <var>mime type</var> be "<code>text/html</code>", or let <var>mime type</var> be
+    "<code>application/xml</code>" otherwise. Then append "<code>;charset=UTF-8</code>" to
     <var>mime type</var>.
 
-    <p><a class="external" href="http://html5.org/specs/dom-parsing.html#concept-serialize" title="concept-serialize">Serialize</a>
-    <var title="">data</var>, and let the <a href="#request-entity-body">request entity body</a> be the result,
+    <p>Let the <a href="#request-entity-body">request entity body</a> be <var title="">data</var>,
+    <a class="external" href="http://domparsing.spec.whatwg.org/#concept-serialize" title="concept-serialize">serialized</a>,
     <a class="external" href="http://dev.w3.org/2006/webapi/WebIDL/#dfn-obtain-unicode" title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</a>
-    and <a class="external" href="http://encoding.spec.whatwg.org/#encode" title="encode">encoded</a> using
-    encoding <var>encoding</var>. Re-throw any exception this
-    throws.
+    and <a class="external" href="http://encoding.spec.whatwg.org/#utf-8-encode" title="utf-8 encode">utf-8 encoded</a>.
+    Re-throw any exception
+    <a class="external" href="http://domparsing.spec.whatwg.org/#concept-serialize" title="concept-serialize">serializing</a> throws.
 
-    <p class="XXX">Should we only encode as utf-8? What happens in the face
-    of an <a class="external" href="http://encoding.spec.whatwg.org/#error">error</a>?
-
-    <p class="note">In particular, if the document cannot be serialized an
-    "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception is
-    thrown.
-
-    <p class="note">Subsequent changes to the
-    <a class="external" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> have
-    no effect on what is transferred.
-   </dd>
+    <p class="note">If the <var title="">data</var> cannot be
+    <a class="external" href="http://domparsing.spec.whatwg.org/#concept-serialize" title="concept-serialize">serialized</a> an
+    "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception is thrown.
 
    <dt id="dom-XMLHttpRequest-send-a-string">a string
    <dd>
@@ -1077,10 +1059,8 @@ method must run these steps (unless otherwise noted):
 
     <p>Let <var>mime type</var> be "<code>text/plain;charset=UTF-8</code>".
 
-    <p>Let the <a href="#request-entity-body">request entity body</a> be <var title="">data</var> ,
-    <a class="external" href="http://encoding.spec.whatwg.org/#encode" title="encode">encoded</a> as
-    <a class="external" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
-   </dd>
+    <p>Let the <a href="#request-entity-body">request entity body</a> be <var title="">data</var>,
+    <a class="external" href="http://encoding.spec.whatwg.org/#utf-8-encode" title="utf-8 encode">utf-8 encoded</a>.
 
    <dt id="dom-XMLHttpRequest-send-FormData"><code><a href="#formdata">FormData</a></code>
    <dd>
@@ -1109,7 +1089,7 @@ method must run these steps (unless otherwise noted):
     <!-- utf-8 implied -->
 
     <p>Let <var>mime type</var> be
-    "<code title="">application/x-www-form-urlencoded;charset=utf-8</code>.
+    "<code title="">application/x-www-form-urlencoded;charset=UTF-8</code>.
   </dl>
 
   <p>If a <code>Content-Type</code> header is in
@@ -1715,7 +1695,7 @@ these steps (unless otherwise noted):
   </ol>
 
  <li>
-  <p>change the state to <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a>.
+  <p>Change the state to <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a>.
 
   <p class="note">No <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code> event
   is dispatched.
