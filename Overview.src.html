@@ -989,20 +989,20 @@ method must run these steps (unless otherwise noted):
    <dd>
     <p>Let <var>encoding</var> be "<code title>UTF-8</code>".
 
-    <p>If <var title>data</var> is an <span data-anolis-spec=dom>HTML document</span>, let
+    <p>If <var>data</var> is an <span data-anolis-spec=dom>HTML document</span>, let
     <var>mime type</var> be "<code>text/html</code>", or let <var>mime type</var> be
     "<code>application/xml</code>" otherwise. Then append "<code>;charset=UTF-8</code>" to
     <var>mime type</var>.
 
-    <p>Let the <span>request entity body</span> be <var title>data</var>,
+    <p>Let the <span>request entity body</span> be <var>data</var>,
     <span data-anolis-spec=domps title=concept-serialize>serialized</span>,
-    <span data-anolis-spec=webidl title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</span>
+    <span data-anolis-spec=webidl title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</span>,
     and <span data-anolis-spec=encoding title="utf-8 encode">utf-8 encoded</span>.
     Re-throw any exception
     <span data-anolis-spec=domps title=concept-serialize>serializing</span> throws.
 
-    <p class=note>If the <var title>data</var> cannot be
-    <span data-anolis-spec=domps title=concept-serialize>serialized</span> an
+    <p class=note>If <var>data</var> cannot be
+    <span data-anolis-spec=domps title=concept-serialize>serialized</span>, an
     "<code data-anolis-spec=dom>InvalidStateError</code>" exception is thrown.
 
    <dt id="dom-XMLHttpRequest-send-a-string">a string
@@ -2782,6 +2782,7 @@ Sigbj&oslash;rn Finne,
 Simon Pieters,
 Stewart Brodie,
 Sunava Dutta,
+Takeshi Yoshino,
 Thomas Roessler,
 Tom Magliery,
 Travis Leithead,

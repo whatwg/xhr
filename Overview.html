@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-26-september-2013">Living Standard — Last Updated 26 September 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-4-october-2013">Living Standard — Last Updated 4 October 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-26 September 2013, the editor has made this specification available
+4 October 2013, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -1037,20 +1037,20 @@ method must run these steps (unless otherwise noted):
    <dd>
     <p>Let <var>encoding</var> be "<code title="">UTF-8</code>".
 
-    <p>If <var title="">data</var> is an <a class="external" href="http://dom.spec.whatwg.org/#html-document">HTML document</a>, let
+    <p>If <var>data</var> is an <a class="external" href="http://dom.spec.whatwg.org/#html-document">HTML document</a>, let
     <var>mime type</var> be "<code>text/html</code>", or let <var>mime type</var> be
     "<code>application/xml</code>" otherwise. Then append "<code>;charset=UTF-8</code>" to
     <var>mime type</var>.
 
-    <p>Let the <a href="#request-entity-body">request entity body</a> be <var title="">data</var>,
+    <p>Let the <a href="#request-entity-body">request entity body</a> be <var>data</var>,
     <a class="external" href="http://domparsing.spec.whatwg.org/#concept-serialize" title="concept-serialize">serialized</a>,
-    <a class="external" href="http://dev.w3.org/2006/webapi/WebIDL/#dfn-obtain-unicode" title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</a>
+    <a class="external" href="http://dev.w3.org/2006/webapi/WebIDL/#dfn-obtain-unicode" title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</a>,
     and <a class="external" href="http://encoding.spec.whatwg.org/#utf-8-encode" title="utf-8 encode">utf-8 encoded</a>.
     Re-throw any exception
     <a class="external" href="http://domparsing.spec.whatwg.org/#concept-serialize" title="concept-serialize">serializing</a> throws.
 
-    <p class="note">If the <var title="">data</var> cannot be
-    <a class="external" href="http://domparsing.spec.whatwg.org/#concept-serialize" title="concept-serialize">serialized</a> an
+    <p class="note">If <var>data</var> cannot be
+    <a class="external" href="http://domparsing.spec.whatwg.org/#concept-serialize" title="concept-serialize">serialized</a>, an
     "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception is thrown.
 
    <dt id="dom-XMLHttpRequest-send-a-string">a string
@@ -2885,6 +2885,7 @@ Sigbjørn Finne,
 Simon Pieters,
 Stewart Brodie,
 Sunava Dutta,
+Takeshi Yoshino,
 Thomas Roessler,
 Tom Magliery,
 Travis Leithead,
