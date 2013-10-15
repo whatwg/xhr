@@ -809,8 +809,8 @@ X-Test: one, two</code></pre>
  <dd>
   <p>Can be set to a time in milliseconds. When set to a non-zero value
   will cause <span title=fetch data-anolis-spec=html>fetching</span> to
-  terminate after the given time has passed. When the time has passed, if
-  the <span>synchronous flag</span> is unset, a
+  terminate after the given time has passed. When the time has passed, the request has
+  not yet completed, and the <span>synchronous flag</span> is unset, a
   <code title=event-xhr-timeout>timeout</code> event will then be
   <span title=concept-event-dispatch data-anolis-spec=dom>dispatched</span>,
   or a "<code data-anolis-spec=dom>TimeoutError</code>" exception will be
