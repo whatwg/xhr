@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-15-october-2013">Living Standard — Last Updated 15 October 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-22-october-2013">Living Standard — Last Updated 22 October 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-15 October 2013, the editor has made this specification available
+22 October 2013, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -67,34 +67,32 @@ client functionality for transferring data between a client and a server.
  <li><a href="#terminology"><span class="secno">3 </span>Terminology</a></li>
  <li><a href="#interface-xmlhttprequest"><span class="secno">4 </span>Interface <code title="">XMLHttpRequest</code></a>
   <ol class="toc">
-   <li><a href="#task-sources"><span class="secno">4.1 </span>Task sources</a></li>
-   <li><a href="#constructors"><span class="secno">4.2 </span>Constructors</a></li>
-   <li><a href="#garbage-collection"><span class="secno">4.3 </span>Garbage collection</a></li>
-   <li><a href="#event-handlers"><span class="secno">4.4 </span>Event handlers</a></li>
-   <li><a href="#states"><span class="secno">4.5 </span>States</a></li>
-   <li><a href="#request"><span class="secno">4.6 </span>Request</a>
+   <li><a href="#constructors"><span class="secno">4.1 </span>Constructors</a></li>
+   <li><a href="#garbage-collection"><span class="secno">4.2 </span>Garbage collection</a></li>
+   <li><a href="#event-handlers"><span class="secno">4.3 </span>Event handlers</a></li>
+   <li><a href="#states"><span class="secno">4.4 </span>States</a></li>
+   <li><a href="#request"><span class="secno">4.5 </span>Request</a>
     <ol class="toc">
-     <li><a href="#the-open()-method"><span class="secno">4.6.1 </span>The <code title="">open()</code> method</a></li>
-     <li><a href="#the-setrequestheader()-method"><span class="secno">4.6.2 </span>The <code title="">setRequestHeader()</code> method</a></li>
-     <li><a href="#the-timeout-attribute"><span class="secno">4.6.3 </span>The <code title="">timeout</code> attribute</a></li>
-     <li><a href="#the-withcredentials-attribute"><span class="secno">4.6.4 </span>The <code title="">withCredentials</code> attribute</a></li>
-     <li><a href="#the-upload-attribute"><span class="secno">4.6.5 </span>The <code title="">upload</code> attribute</a></li>
-     <li><a href="#the-send()-method"><span class="secno">4.6.6 </span>The <code title="">send()</code> method</a></li>
-     <li><a href="#infrastructure-for-the-send()-method"><span class="secno">4.6.7 </span>Infrastructure for the <code title="">send()</code> method</a></li>
-     <li><a href="#the-abort()-method"><span class="secno">4.6.8 </span>The <code title="">abort()</code> method</a></ol></li>
-   <li><a href="#response"><span class="secno">4.7 </span>Response</a>
+     <li><a href="#the-open()-method"><span class="secno">4.5.1 </span>The <code title="">open()</code> method</a></li>
+     <li><a href="#the-setrequestheader()-method"><span class="secno">4.5.2 </span>The <code title="">setRequestHeader()</code> method</a></li>
+     <li><a href="#the-timeout-attribute"><span class="secno">4.5.3 </span>The <code title="">timeout</code> attribute</a></li>
+     <li><a href="#the-withcredentials-attribute"><span class="secno">4.5.4 </span>The <code title="">withCredentials</code> attribute</a></li>
+     <li><a href="#the-upload-attribute"><span class="secno">4.5.5 </span>The <code title="">upload</code> attribute</a></li>
+     <li><a href="#the-send()-method"><span class="secno">4.5.6 </span>The <code title="">send()</code> method</a></li>
+     <li><a href="#the-abort()-method"><span class="secno">4.5.7 </span>The <code title="">abort()</code> method</a></ol></li>
+   <li><a href="#response"><span class="secno">4.6 </span>Response</a>
     <ol class="toc">
-     <li><a href="#the-status-attribute"><span class="secno">4.7.1 </span>The <code title="">status</code> attribute</a></li>
-     <li><a href="#the-statustext-attribute"><span class="secno">4.7.2 </span>The <code title="">statusText</code> attribute</a></li>
-     <li><a href="#the-getresponseheader()-method"><span class="secno">4.7.3 </span>The <code title="">getResponseHeader()</code> method</a></li>
-     <li><a href="#the-getallresponseheaders()-method"><span class="secno">4.7.4 </span>The <code title="">getAllResponseHeaders()</code> method</a></li>
-     <li><a href="#response-entity-body-0"><span class="secno">4.7.5 </span>Response entity body</a></li>
-     <li><a href="#the-overridemimetype()-method"><span class="secno">4.7.6 </span>The <code title="">overrideMimeType()</code> method</a></li>
-     <li><a href="#the-responsetype-attribute"><span class="secno">4.7.7 </span>The <code title="">responseType</code> attribute</a></li>
-     <li><a href="#the-response-attribute"><span class="secno">4.7.8 </span>The <code title="">response</code> attribute</a></li>
-     <li><a href="#the-responsetext-attribute"><span class="secno">4.7.9 </span>The <code title="">responseText</code> attribute</a></li>
-     <li><a href="#the-responsexml-attribute"><span class="secno">4.7.10 </span>The <code title="">responseXML</code> attribute</a></ol></li>
-   <li><a href="#events"><span class="secno">4.8 </span>Events summary</a></ol></li>
+     <li><a href="#the-status-attribute"><span class="secno">4.6.1 </span>The <code title="">status</code> attribute</a></li>
+     <li><a href="#the-statustext-attribute"><span class="secno">4.6.2 </span>The <code title="">statusText</code> attribute</a></li>
+     <li><a href="#the-getresponseheader()-method"><span class="secno">4.6.3 </span>The <code title="">getResponseHeader()</code> method</a></li>
+     <li><a href="#the-getallresponseheaders()-method"><span class="secno">4.6.4 </span>The <code title="">getAllResponseHeaders()</code> method</a></li>
+     <li><a href="#response-entity-body-0"><span class="secno">4.6.5 </span>Response entity body</a></li>
+     <li><a href="#the-overridemimetype()-method"><span class="secno">4.6.6 </span>The <code title="">overrideMimeType()</code> method</a></li>
+     <li><a href="#the-responsetype-attribute"><span class="secno">4.6.7 </span>The <code title="">responseType</code> attribute</a></li>
+     <li><a href="#the-response-attribute"><span class="secno">4.6.8 </span>The <code title="">response</code> attribute</a></li>
+     <li><a href="#the-responsetext-attribute"><span class="secno">4.6.9 </span>The <code title="">responseText</code> attribute</a></li>
+     <li><a href="#the-responsexml-attribute"><span class="secno">4.6.10 </span>The <code title="">responseXML</code> attribute</a></ol></li>
+   <li><a href="#events"><span class="secno">4.7 </span>Events summary</a></ol></li>
  <li><a href="#interface-formdata"><span class="secno">5 </span>Interface <code title="">FormData</code></a></li>
  <li><a href="#interface-progressevent"><span class="secno">6 </span>Interface <code title="">ProgressEvent</code></a>
   <ol class="toc">
@@ -317,14 +315,7 @@ and <code title="dom-XMLHttpRequest-responseXML"><a href="#dom-xmlhttprequest-re
 required by its definition, too).
 
 
-<h3 id="task-sources"><span class="secno">4.1 </span>Task sources</h3>
-
-<p>Each <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object has its own
-<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#task-source">task source</a>. Namely, the
-<dfn id="xmlhttprequest-task-source"><code>XMLHttpRequest</code> task source</dfn>.
-
-
-<h3 id="constructors"><span class="secno">4.2 </span>Constructors</h3>
+<h3 id="constructors"><span class="secno">4.1 </span>Constructors</h3>
 
 <p>The <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object has an associated
 <dfn id="anonymous-flag">anonymous flag</dfn>. If the <a href="#anonymous-flag">anonymous flag</a> is set,
@@ -369,7 +360,7 @@ constructor must run these steps:
 </ol>
 
 
-<h3 id="garbage-collection"><span class="secno">4.3 </span>Garbage collection</h3>
+<h3 id="garbage-collection"><span class="secno">4.2 </span>Garbage collection</h3>
 <!-- Based on EventSource and WebSocket. Not sure what I am doing. -->
 
 <p>An <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object must not be garbage collected if
@@ -406,7 +397,7 @@ one of the following is true:
 connection is still open, the user agent must <a href="#terminate-the-request">terminate the request</a>.
 
 
-<h3 id="event-handlers"><span class="secno">4.4 </span>Event handlers</h3>
+<h3 id="event-handlers"><span class="secno">4.3 </span>Event handlers</h3>
 
 <p>The following are the
 <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#event-handlers">event handlers</a> (and their corresponding
@@ -462,7 +453,7 @@ supported as attribute solely by the
 </table>
 
 
-<h3 id="states"><span class="secno">4.5 </span>States</h3>
+<h3 id="states"><span class="secno">4.4 </span>States</h3>
 
 <dl class="domintro">
  <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-readystate" title="dom-XMLHttpRequest-readyState">readyState</a></code>
@@ -512,7 +503,7 @@ been invoked. It is initially unset and is used during the
 network error or fetch termination. It is initially unset.
 
 
-<h3 id="request"><span class="secno">4.6 </span>Request</h3>
+<h3 id="request"><span class="secno">4.5 </span>Request</h3>
 
 <p>Each <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object has the following
 request-associated concepts:
@@ -539,22 +530,14 @@ must be done in a case-insensitive manner. Initially it must be empty.
 
 <hr>
 
-<p>To <dfn id="terminate-the-request">terminate the request</dfn> run these steps:
-
-<ol>
- <li><p>Set the <a href="#error-flag">error flag</a>.
-
- <li><p>Cancel any instance of the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/fetching-resources.html#fetch">fetch</a> algorithm
- opened by this object.
-
- <li><p>If there are any <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#concept-task" title="concept-task">tasks</a> from
- the object's <a href="#xmlhttprequest-task-source"><code>XMLHttpRequest</code> task source</a> in one of the
- <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#task-queue" title="task queue">task queues</a>, then remove them.
-</ol>
+<p>To <dfn id="terminate-the-request">terminate the request</dfn>,
+<a class="external" href="http://fetch.spec.whatwg.org/#concept-fetch-terminate" title="concept-fetch-terminate">terminate</a> the
+<a class="external" href="http://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">fetch</a> algorithm operated by the
+<code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object with reason <i title="">fatal</i>.
 
 
 
-<h4 id="the-open()-method"><span class="secno">4.6.1 </span>The <code title="">open()</code> method</h4>
+<h4 id="the-open()-method"><span class="secno">4.5.1 </span>The <code title="">open()</code> method</h4>
 
 <dl class="domintro">
  <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-open" title="dom-XMLHttpRequest-open">open</a>(<var title="">method</var>, <var title="">url</var> [, <var title="">async</var> = true [, <var title="">username</var> = null [, <var title="">password</var> = null]]])</code>
@@ -699,7 +682,8 @@ method must run these steps (unless otherwise indicated):
   <ul>
    <li><p>Set <a href="#request-method">request method</a> to <var>method</var>.
    <li><p>Set <a href="#request-url">request URL</a> to <var title="">parsed URL</var>.
-   <li><p>If <var>async</var> is false, set the <a href="#synchronous-flag">synchronous flag</a>.
+   <li><p>Set the <a href="#synchronous-flag">synchronous flag</a>, if <var>async</var> is false, and unset
+   the <a href="#synchronous-flag">synchronous flag</a> otherwise.
    <li><p>Set <a href="#author-request-headers">author request headers</a> to the empty list.
    <li><p>Unset the <a href="#send-flag"><code>send()</code> flag</a>.
    <li><p>Set <a href="#response-entity-body">response entity body</a> to null.
@@ -723,7 +707,7 @@ method must run these steps (unless otherwise indicated):
 
 
 
-<h4 id="the-setrequestheader()-method"><span class="secno">4.6.2 </span>The <code title="">setRequestHeader()</code> method</h4>
+<h4 id="the-setrequestheader()-method"><span class="secno">4.5.2 </span>The <code title="">setRequestHeader()</code> method</h4>
 
 <dl class="domintro">
  <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-setrequestheader" title="dom-XMLHttpRequest-setRequestHeader">setRequestHeader</a>(<var title="">header</var>, <var title="">value</var>)</code>
@@ -850,7 +834,7 @@ X-Test: one, two</code></pre>
 </div>
 
 
-<h4 id="the-timeout-attribute"><span class="secno">4.6.3 </span>The <code title="">timeout</code> attribute</h4>
+<h4 id="the-timeout-attribute"><span class="secno">4.5.3 </span>The <code title="">timeout</code> attribute</h4>
 
 <dl class="domintro">
  <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-timeout" title="dom-XMLHttpRequest-timeout">timeout</a></code>
@@ -897,7 +881,7 @@ progress. If that occurs it will still be measured relative to the start
 of <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/fetching-resources.html#fetch" title="fetch">fetching</a>.
 
 
-<h4 id="the-withcredentials-attribute"><span class="secno">4.6.4 </span>The <code title="">withCredentials</code> attribute</h4>
+<h4 id="the-withcredentials-attribute"><span class="secno">4.5.4 </span>The <code title="">withCredentials</code> attribute</h4>
 
 <dl class="domintro">
  <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-withcredentials" title="dom-XMLHttpRequest-withCredentials">withCredentials</a></code>
@@ -959,7 +943,7 @@ attribute has no effect when <a class="external" href="http://www.whatwg.org/spe
 <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#same-origin" title="same origin">same-origin</a> resources.
 
 
-<h4 id="the-upload-attribute"><span class="secno">4.6.5 </span>The <code title="">upload</code> attribute</h4>
+<h4 id="the-upload-attribute"><span class="secno">4.5.5 </span>The <code title="">upload</code> attribute</h4>
 
 <dl class="domintro">
  <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-upload" title="dom-XMLHttpRequest-upload">upload</a></code>
@@ -977,7 +961,7 @@ attribute must return the associated
 object has an associated <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
 
 
-<h4 id="the-send()-method"><span class="secno">4.6.6 </span>The <code title="">send()</code> method</h4>
+<h4 id="the-send()-method"><span class="secno">4.5.6 </span>The <code title="">send()</code> method</h4>
 
 <dl class="domintro">
  <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send">send</a>([<var title="">data</var> = null])</code>
@@ -1140,399 +1124,216 @@ method must run these steps (unless otherwise noted):
 
 
  <li>
-  <dl class="switch">
-   <dt>If the <a href="#source-origin">source origin</a> and the <a href="#request-url">request URL</a>
-   are <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#same-origin">same origin</a></dt>
-   <dt>If the <a href="#request-url">request URL</a>'s
-   <code class="external" title="concept-url-scheme"><a href="http://url.spec.whatwg.org/#concept-url-scheme">scheme</a></code> is
-   "<code title="">data</code>"
+  <p>Let <var title="">req</var> be a new
+  <a class="external" href="http://fetch.spec.whatwg.org/#concept-request" title="concept-request">request</a>, initialized as
+  follows:
 
-   <dd>
-    <p>These are the <dfn id="same-origin-request-steps">same-origin request steps</dfn>.
-
-    <p><a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/fetching-resources.html#fetch">Fetch</a> the
-    <a href="#request-url">request URL</a> from <i title="">origin</i>
-    <a href="#source-origin">source origin</a>, using
-    <a href="#referrer-source">referrer source</a> as
-    <i title="">override referrer source</i>, with the
-    <i title="">synchronous flag</i> set if the
-    <a href="#synchronous-flag">synchronous flag</a> is set, using HTTP method
-    <a href="#request-method">request method</a>, taking into account the
-    <a href="#request-entity-body">request entity body</a>, list of
-    <a href="#author-request-headers">author request headers</a>, and the rules listed at the end of
-    this section.
-
-    <dl class="switch">
-     <dt>If the <a href="#synchronous-flag">synchronous flag</a> is set</dt>
-     <dd>
-      <p>While making the request also follow the
-      <a href="#same-origin-request-event-rules">same-origin request event rules</a>.
-
-      <!--
-       This cannot involve any task queue whatsoever because that would
-       mean other tasks on the task queue might get processed as well
-       which is counter to the whole idea of doing things synchronous.
-      -->
-
-      <p class="note">The
-      <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code> method call will
-      now be returned by virtue of this algorithm ending.
-     </dd>
-
-     <dt>If the <a href="#synchronous-flag">synchronous flag</a> is unset</dt>
-     <dd>
-
-      <p><a href="#make-upload-progress-notifications">Make upload progress notifications</a>.
-
-      <p><a href="#make-progress-notifications">Make progress notifications</a>.
-
-
-      <p>While processing the request, as data becomes available and when
-      the user interferes with the request,
-      <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task" title="queue a task">queue tasks</a>
-      to update the <a href="#response-entity-body">response entity body</a> and follow the
-      <a href="#same-origin-request-event-rules">same-origin request event rules</a>.
-     </dd>
-    </dl>
-   </dd>
-
-   <dt>Otherwise</dt>
-   <dd>
-    <p>These are the <dfn id="cross-origin-request-steps">cross-origin request steps</dfn>.
-
-
-
-
-    <p>Make a <a class="external" href="http://www.w3.org/TR/2013/CR-cors-20130129/#cross-origin-request">cross-origin request</a>,
-    passing these as parameters:
-
-    <dl>
-     <dt>request URL</dt>
-     <dd>The <a href="#request-url">request URL</a>.</dd>
-
-     <dt>request method</dt>
-     <dd>The <a href="#request-method">request method</a>.</dd>
-
-     <dt>author request headers</dt>
-     <dd>The list of <a href="#author-request-headers">author request headers</a>.</dd>
-
-     <dt>request entity body</dt>
-     <dd>The <a href="#request-entity-body">request entity body</a>.</dd>
-
-     <dt>source origin</dt>
-     <dd>The <a href="#source-origin">source origin</a>.</dd>
-
-     <dt>referrer source
-     <dd>If the <a href="#anonymous-flag">anonymous flag</a> is set, the
-     <a class="external" href="http://url.spec.whatwg.org/#url">URL</a>
-     "<code title="">about:blank</code>", and the
-     <a href="#referrer-source">referrer source</a> otherwise.
-
-     <dt>omit credentials flag</dt>
-     <dd>Set if
-     <code title="dom-XMLHttpRequest-withCredentials"><a href="#dom-xmlhttprequest-withcredentials">withCredentials</a></code>
-     attribute's value is false.
-
-     <dt>force preflight flag</dt>
-     <dd>Set if the <a href="#upload-events-flag">upload events flag</a> is set.
-    </dl>
-
-    <dl class="switch">
-     <dt>If the <a href="#synchronous-flag">synchronous flag</a> is set</dt>
-     <dd>
-      <p>While making the request also follow the
-      <a href="#cross-origin-request-event-rules">cross-origin request event rules</a>.
-
-      <!--
-       This cannot involve any task queue whatsoever because that would
-       mean other tasks on the task queue might get processed as well
-       which is counter to the whole idea of doing things synchronous.
-      -->
-
-      <p class="note">The
-      <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code> method call will
-      now be returned by virtue of this algorithm ending.
-     </dd>
-
-     <dt>If the <a href="#synchronous-flag">synchronous flag</a> is unset</dt>
-     <dd>
-      <p>While processing the request, as data becomes available and when
-      the end user interferes with the request,
-      <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task" title="queue a task">queue tasks</a>
-      to update the <a href="#response-entity-body">response entity body</a> and follow the
-      <a href="#cross-origin-request-event-rules">cross-origin request event rules</a>.
-     </dd>
-    </dl>
-
-   </dd>
+  <dl>
+   <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-method" title="concept-request-method">method</a>
+   <dd><a href="#request-method">request method</a>
+   <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-url" title="concept-request-url">url</a>
+   <dd><a href="#request-url">request URL</a>
+   <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-author-headers" title="concept-request-author-headers">author headers</a>
+   <dd><a href="#author-request-headers">author request headers</a>
+   <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-origin" title="concept-request-origin">origin</a>
+   <dd><a href="#source-origin">source origin</a>
+   <dt><a class="external" href="http://fetch.spec.whatwg.org/#force-origin-header-flag">force <code title="">Origin</code> header flag</a>
+   <dd>Set.
+   <dd><a href="#source-origin">source origin</a>
+   <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-referrer" title="concept-request-referrer">referrer</a>
+   <dd class="XXX"><a href="#referrer-source">referrer source</a>
+   <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>
+   <dd><a href="#request-entity-body">request entity body</a>
+   <dt><a data-anolis-spec="fetch" href="#synchronous-flag">synchronous flag</a>
+   <dd>Set if the <a href="#synchronous-flag">synchronous flag</a> is set.
+   <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-mode" title="concept-request-mode">mode</a>
+   <dd><i title="">CORS</i>
+   <dd><a class="external" href="http://fetch.spec.whatwg.org/#force-preflight-flag">force preflight flag</a>
+   <dd>Set if the <a href="#upload-events-flag">upload events flag</a> is set.
+   <dd><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-omit-credentials-mode" title="concept-request-omit-credentials-mode">omit credentials mode</a>
+   <dd>If the <a href="#anonymous-flag">anonymous flag</a> is set, <i title="">always</i>, and
+   <i title="">CORS</i> otherwise.
+   <dd><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-use-url-credentials-flag" title="concept-request-use-url-credentials-flag">use URL credentials flag</a>
+   <dd>Set if either <a href="#request-url">request URL</a>'s
+   <a class="external" href="http://url.spec.whatwg.org/#concept-url-username" title="concept-url-username">username</a>
+   is not the empty string or <a href="#request-url">request URL</a>'s
+   <a class="external" href="http://url.spec.whatwg.org/#concept-url-password" title="concept-url-password">password</a> is non-null.
   </dl>
 
-</ol>
+ <li><p>If a <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a>
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">named</a>
+ `<code>Accept-Language</code>` is not in <var title="">req</var>'s
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-request-author-headers" title="concept-request-author-headers">author headers</a>,
+ append one with an appropriate
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a>.
 
-<hr>
+ <li><p>If a <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a>
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">named</a>
+ `<code>Accept</code>` is not in <var title="">req</var>'s
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-request-author-headers" title="concept-request-author-headers">author headers</a>,
+ append one with `<code title="">*/*</code>` as
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a>.
 
-<p>If the user agent supports HTTP Authentication and
-<code title="http-authorization">Authorization</code> is not in the list
-of <a href="#author-request-headers">author request headers</a>, it should
-consider requests originating from the <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object
-to be part of the protection space that includes the accessed URIs and
-send <code title="http-authorization">Authorization</code> headers and
-handle <code>401 Unauthorized</code> requests appropriately.
+ <li>
+  <p><a class="external" href="http://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">Fetch</a> <var title="">req</var>.
 
-<p>If authentication fails,
-<a href="#source-origin">source origin</a> and the
-<a href="#request-url">request URL</a> are <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#same-origin">same origin</a>,
-<code title="http-authorization">Authorization</code> is not in the list
-of <a href="#author-request-headers">author request headers</a>,
-<a href="#request-url">request URL</a>'s
-<a class="external" href="http://url.spec.whatwg.org/#concept-url-username" title="concept-url-username">username</a> is
-the empty string and <a href="#request-url">request URL</a>'s
-<a class="external" href="http://url.spec.whatwg.org/#concept-url-password" title="concept-url-password">password</a> is
-null, user agents should prompt the end user for their username and
-password.
-<!-- XXX this should probably be defined in "fetch" -->
+  <p>If <var title="">req</var>'s <a data-anolis-spec="fetch" href="#synchronous-flag">synchronous flag</a> is
+  set, pass the return value, synchronously, to
+  <a class="external" href="http://fetch.spec.whatwg.org/#process-response-end-of-file">process response end-of-file</a> below. Otherwise,
+  handle the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#concept-task" title="concept-task">tasks</a>
+  <span data-anolis-html="" title="queue-a-task">queued</span> on the
+  <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#networking-task-source">networking task source</a> per below.
 
-<p>Otherwise, if authentication fails, user agents
-must not prompt the end user for their username and
-password. <a href="#refsHTTPAUTH">[HTTPAUTH]</a>
+  <p>If the <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code> attribute value is not
+  0, <a class="external" href="http://fetch.spec.whatwg.org/#concept-fetch-terminate" title="concept-fetch-terminate">terminate</a>
+  <span title="concept-fetch" title-anolis-spec="fetch">fetching</span> after the amount of
+  milliseconds specified by the <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code>
+  attribute value have passed with reason <i title="">timeout</i>.
 
-<p class="note">Unfortunately end users are prompted because of legacy
-content constraints. However, when possible this behavior is prohibited,
-as it is bad UI. E.g. that is why the
-<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#same-origin">same origin</a> restriction is made above.
+  <p>To <a class="external" href="http://fetch.spec.whatwg.org/#process-request-body">process request body</a> for
+  <var title="">request</var>,
+  <a href="#concept-event-fire-progress" title="concept-event-fire-progress">fire a progress event</a> named
+  <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code> on the
+  <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
+  <!-- upload complete flag can never be set here I hope -->
 
-<hr>
-
-<p>If the user agent implements a HTTP cache it should
-respect <code>Cache-Control</code> headers in
-<a href="#author-request-headers">author request headers</a>
-(e.g. <code>Cache-Control: no-cache</code> bypasses the cache). It
-must not send <code>Cache-Control</code> or
-<code>Pragma</code> request headers automatically unless the end user
-explicitly requests such behavior (e.g. by reloading the page).
-
-<p>For <code>304 Not Modified</code> responses that are a result of a
-user agent generated conditional request the user agent
-must act as if the server gave a <code>200 OK</code>
-response with the appropriate content. The user agent
-must allow <a href="#author-request-headers">author request headers</a> to override automatic cache
-validation (e.g. <code>If-None-Match</code> or
-<code>If-Modified-Since</code>), in which case
-<code>304 Not Modified</code> responses must be passed through.
-<a href="#refsHTTP">[HTTP]</a>
-
-<hr>
-
-<p>If the user agent implements server-driven content-negotiation
-it must follow these constraints for the
-<code>Accept</code> and <code>Accept-Language</code> request headers:
-
-<ul>
- <li><p>Both headers must not be modified if they are in
- <a href="#author-request-headers">author request headers</a>.
-
- <li><p>If not in <a href="#author-request-headers">author request headers</a>,
- <code>Accept-Language</code> with an appropriate value should be appended
- to it.
-
- <li><p>If not in <a href="#author-request-headers">author request headers</a>, <code>Accept</code>
- with value <code>*/*</code> must be appended to it.
-</ul>
-
-<p>Responses must have the content-encodings
-automatically decoded. <a href="#refsHTTP">[HTTP]</a>
-
-<hr>
-
-<p>Besides the <a href="#author-request-headers">author request headers</a>, user agents
-should not include additional request headers other than those mentioned
-above or other than those authors are not allowed to set using
-<code title="dom-XMLHttpRequest-setRequestHeader"><a href="#dom-xmlhttprequest-setrequestheader">setRequestHeader()</a></code>.
-This ensures that authors have a predictable API.
-
-
-<h4 id="infrastructure-for-the-send()-method"><span class="secno">4.6.7 </span>Infrastructure for the <code title="">send()</code> method</h4>
-
-<p>The <dfn id="same-origin-request-event-rules">same-origin request event rules</dfn> are as follows:
-
-<dl class="switch">
- <dt>If the <a href="#error-flag">error flag</a> is set
- <dd><p>Terminate these steps.
-
- <dt>If the response has an HTTP status code of 301, 302, 303, 307, or 308
- <dd>
-  <p>If the redirect violates infinite loop precautions this is a
-  <a href="#network-error">network error</a>.
-
-  <p>Otherwise, run these steps:
+  <p>To <a class="external" href="http://fetch.spec.whatwg.org/#process-request-end-of-file">process request end-of-file</a> for
+  <var title="">request</var>, run these substeps:
 
   <ol>
-   <li><p>Set the <a href="#request-url">request URL</a> to the
-   <a class="external" href="http://url.spec.whatwg.org/#url">URL</a> conveyed by the
-   <code>Location</code> header.
-   <!-- XXX fetch: this requires parsing and such too. Either HTTP or
-        Fetch needs to handle this. -->
+   <li><p>Set the <a href="#upload-complete-flag">upload complete flag</a>.
 
-   <li><p>If the <a href="#source-origin">source origin</a> and the
-   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a> of <a href="#request-url">request URL</a>
-   are <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#same-origin">same origin</a> transparently follow
-   the redirect while observing the
-   <a href="#same-origin-request-event-rules">same-origin request event rules</a>.
+   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>
+   on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
 
-   <li><p>Otherwise, follow the <a href="#cross-origin-request-steps">cross-origin request steps</a>
-   and terminate the steps for this algorithm.
+   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-load"><a href="#event-xhr-load">load</a></code>
+   on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
+
+   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>
+   on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
+  </ol>
+  <!-- upload complete flag can never be set here I hope -->
+
+  <p>To <a class="external" href="http://fetch.spec.whatwg.org/#process-response">process response</a> for <var title="">response</var>,
+  run these substeps:
+
+  <ol>
+   <li><p><a href="#handle-errors">Handle errors</a> for <var title="">response</var>.
+
+   <li>
+    <p>If state is <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a>, run these
+    subsubsteps:
+
+    <ol>
+     <li><p>Change the state to <a href="#dom-xmlhttprequest-headers_received" title="dom-XMLHttpRequest-HEADERS_RECEIVED">HEADERS_RECEIVED</a>.
+
+     <li><p><a class="external" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.
+    </ol>
   </ol>
 
-  <p class="note">HTTP places requirements on the user agent regarding the
-  preservation of the <a href="#request-method">request method</a> and
-  <a href="#request-entity-body">request entity body</a> during redirects, and also requires end
-  users to be notified of certain kinds of automatic redirections.
-  <!-- XXX HTTP needs fixing here -->
- </dd>
+  <p>To <a class="external" href="http://fetch.spec.whatwg.org/#process-response-body">process response body</a> for
+  <var title="">response</var>, run these substeps:
 
- <dt>If the end user cancels the request</dt>
- <dd><p>This is an <a href="#abort-error">abort error</a>.</dd>
+  <ol>
+   <li><p><a href="#handle-errors">Handle errors</a> for <var title="">response</var>.
 
- <dt>If there is a network error</dt>
- <dd>
-  <p>In case of DNS errors, TLS negotiation failure, or other type of
-  network errors, this is a <a href="#network-error">network error</a>. Do not request any
-  kind of end user interaction.
+   <li>
+    <p>If state is
+    <a href="#dom-xmlhttprequest-headers_received" title="dom-XMLHttpRequest-HEADERS_RECEIVED">HEADERS_RECEIVED</a>, run these
+    subsubsteps:
 
-  <p class="note">This does not include HTTP responses that indicate
-  some type of error, such as HTTP status code 410.
- </dd>
+    <ol>
+     <li><p>Change the state to <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a>.
 
+     <li><p><a class="external" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.
+    </ol>
 
- <dt>If <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code> is not 0
- and since the request started the amount of milliseconds specified by
- <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code> has passed</dt>
- <dd><p>This is a <a href="#timeout-error">timeout error</a>.</dd>
+   <li><p>Update <a href="#response-entity-body">response entity body</a> with <var title="">response</var>'s
+   <a class="external" href="http://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a>.
 
+   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>.
+  </ol>
 
- <dt>Once all HTTP headers have been received, the
- <a href="#synchronous-flag">synchronous flag</a> is unset, and the HTTP status code of the
- response is not one of 301, 302, 303, 307, and 308
- <dd><p><a href="#switch-headers-received">Switch to the HEADERS_RECEIVED state</a>.</dd>
+  <p>To <a class="external" href="http://fetch.spec.whatwg.org/#process-response-end-of-file">process response end-of-file</a> for
+  <var title="">response</var>, run these substeps:
 
- <dt>Once the first byte (or more) of the
- <a href="#response-entity-body">response entity body</a> has been received and the
- <a href="#synchronous-flag">synchronous flag</a> is unset</dt>
- <dt>If there is no <a href="#response-entity-body">response entity body</a> and the
- <a href="#synchronous-flag">synchronous flag</a> is unset</dt>
- <dd><p><a href="#switch-loading">Switch to the LOADING state</a>.</dd>
+  <ol>
+   <li><p><a href="#handle-errors">Handle errors</a> for <var title="">response</var>.
 
- <dt>Once the whole <a href="#response-entity-body">response entity body</a> has been
- received</dt>
- <dt>If there is no <a href="#response-entity-body">response entity body</a> and the state is
- <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a></dt>
- <dt>If there is no <a href="#response-entity-body">response entity body</a> and the
- <a href="#synchronous-flag">synchronous flag</a> is set</dt>
- <dd><p><a href="#switch-done">Switch to the DONE state</a>.</dd>
-</dl>
+   <li>
+    <p>If state is <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a>, run these
+    subsubsteps:
 
+    <ol>
+     <li><p>Update <a href="#response-entity-body">response entity body</a> with <var title="">response</var>'s
+     <a class="external" href="http://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a>.
 
-<hr>
+     <li><p>Change the state to <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>.
 
-<p>The <dfn id="cross-origin-request-event-rules">cross-origin request event rules</dfn> are as follows:
+     <li><p>Unset the <a href="#send-flag"><code>send()</code> flag</a>.
 
-<dl class="switch">
- <dt>If the <a href="#error-flag">error flag</a> is set
- <dd><p>Terminate these steps.
+     <li><p><a class="external" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.
 
- <dt>If the <a class="external" href="http://www.w3.org/TR/2013/CR-cors-20130129/#cross-origin-request-status">cross-origin request status</a>
- is <i>preflight complete</i> and the <a href="#synchronous-flag">synchronous flag</a> is
- unset</dt>
- <dd><p><a href="#make-upload-progress-notifications">Make upload progress notifications</a>.</dd>
+     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>.
 
- <dt>If the <a class="external" href="http://www.w3.org/TR/2013/CR-cors-20130129/#cross-origin-request-status">cross-origin request status</a>
- is <i title="">network error</i></dt>
- <dd><p>This is a <a href="#network-error">network error</a>.</dd>
+     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-load"><a href="#event-xhr-load">load</a></code>.
 
- <dt>If the <a class="external" href="http://www.w3.org/TR/2013/CR-cors-20130129/#cross-origin-request-status">cross-origin request status</a>
- is <i title="">abort error</i></dt>
- <dd><p>This is an <a href="#abort-error">abort error</a>.</dd>
+     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>.
+    </ol>
+  </ol>
+</ol>
 
- <dt>If <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code> is not 0
- and since the request started the amount of milliseconds specified by
- <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code> has passed</dt>
- <dd><p>This is a <a href="#timeout-error">timeout error</a>.</dd>
-
- <dt>Once all HTTP headers have been received, the
- <a class="external" href="http://www.w3.org/TR/2013/CR-cors-20130129/#cross-origin-request-status">cross-origin request status</a> is
- <i>success</i>, and the <a href="#synchronous-flag">synchronous flag</a> is unset</dt>
- <dd>
-  <p><a href="#switch-headers-received">Switch to the HEADERS_RECEIVED state</a>.
-
-  <p><a href="#make-progress-notifications">Make progress notifications</a>.
- </dd>
-
- <dt>Once the first byte (or more) of the
- <a href="#response-entity-body">response entity body</a> has been received, the
- <a class="external" href="http://www.w3.org/TR/2013/CR-cors-20130129/#cross-origin-request-status">cross-origin request status</a> is
- <i>success</i>, and the <a href="#synchronous-flag">synchronous flag</a> is unset</dt>
- <dt>If there is no <a href="#response-entity-body">response entity body</a>, the
- <a class="external" href="http://www.w3.org/TR/2013/CR-cors-20130129/#cross-origin-request-status">cross-origin request status</a> is
- <i>success</i>, and the <a href="#synchronous-flag">synchronous flag</a> is unset</dt>
- <dd><p><a href="#switch-loading">Switch to the LOADING state</a>.</dd>
-
- <dt>Once the whole <a href="#response-entity-body">response entity body</a> has been received
- and the <a class="external" href="http://www.w3.org/TR/2013/CR-cors-20130129/#cross-origin-request-status">cross-origin request status</a> is
- <i>success</i></dt>
- <dt>If there is no <a href="#response-entity-body">response entity body</a>, the
- <a class="external" href="http://www.w3.org/TR/2013/CR-cors-20130129/#cross-origin-request-status">cross-origin request status</a> is
- <i>success</i>, and the state is
- <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a></dt>
- <dt>If there is no <a href="#response-entity-body">response entity body</a>, the
- <a class="external" href="http://www.w3.org/TR/2013/CR-cors-20130129/#cross-origin-request-status">cross-origin request status</a> is
- <i>success</i>, and the <a href="#synchronous-flag">synchronous flag</a> is set</dt>
- <dd><p><a href="#switch-done">Switch to the DONE state</a>.</dd>
-</dl>
-
-
-<hr>
-
-<p>When something is said to be a <dfn id="network-error">network error</dfn> run the
-<a href="#request-error">request error</a> steps for exception
-"<code class="external"><a href="http://dom.spec.whatwg.org/#networkerror">NetworkError</a></code>" and
-event <code title="event-xhr-error"><a href="#event-xhr-error">error</a></code>.
-
-<p>When something is said to be an <dfn id="abort-error">abort error</dfn> run the
-<a href="#request-error">request error</a> steps for exception
-"<code class="external"><a href="http://dom.spec.whatwg.org/#aborterror">AbortError</a></code>" and event
-<code title="event-xhr-abort"><a href="#event-xhr-abort">abort</a></code>.
-
-
-<p>When something is said to be an <dfn id="timeout-error">timeout error</dfn> run the
-<a href="#request-error">request error</a> steps for exception
-"<code class="external"><a href="http://dom.spec.whatwg.org/#timeouterror">TimeoutError</a></code>" and event
-<code title="event-xhr-timeout"><a href="#event-xhr-timeout">timeout</a></code>.
-
-
-<p>When something is said to be a <dfn id="request-error">request error</dfn> for
-exception <var>exception</var> and event <var title="">event</var> run these
-steps:
+<p>To <dfn id="handle-errors">handle errors</dfn> for <var title="">response</var> run these substeps:
 
 <ol>
- <li><p><a href="#terminate-the-request">Terminate the request</a>.
+ <li><p>If <var title="">response</var> is a
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-network-error" title="concept-network-error">network error</a>, run the
+ <a href="#request-error-steps">request error steps</a> for event <code title="event-xhr-error"><a href="#event-xhr-error">error</a></code> and
+ exception "<code class="external"><a href="http://dom.spec.whatwg.org/#networkerror">NetworkError</a></code>".
 
+ <li>
+  <p>Otherwise, if <var title="">response</var> has a
+  <a class="external" href="http://fetch.spec.whatwg.org/#concept-response-termination-reason" title="concept-response-termination-reason">termination reason</a>:
+
+  <dl class="switch">
+   <dt><i title="">end-user abort</i>
+   <dd><p>Run the <a href="#request-error-steps">request error steps</a> for event
+   <code title="event-xhr-abort"><a href="#event-xhr-abort">abort</a></code> and exception
+   "<code class="external"><a href="http://dom.spec.whatwg.org/#aborterror">AbortError</a></code>".
+
+   <dt><i title="">fatal</i>
+   <dd>
+    <p>Terminate the entire <code title="dom-XMLHTtpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code> algorithm.
+    <p>Game over.
+
+   <dt><i title="">timeout</i>
+   <dd><p>Run the <a href="#request-error-steps">request error steps</a> for event
+   <code title="event-xhr-timeout"><a href="#event-xhr-timeout">timeout</a></code> and exception
+   "<code class="external"><a href="http://dom.spec.whatwg.org/#timeouterror">TimeoutError</a></code>".
+  </dl>
+</ol>
+
+<p>The <dfn id="request-error-steps">request error steps</dfn> for event <var title="">event</var> and optionally an
+exception <var>exception</var> are:
+
+<ol>
  <li><p>Change the state to <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>.
 
+ <li><p>Unset the <a href="#send-flag"><code>send()</code> flag</a>.
+
+ <li><p>Set the <a href="#error-flag">error flag</a>.
+
  <li><p>If the <a href="#synchronous-flag">synchronous flag</a> is set,
- <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
- <var>exception</var> exception.
+ <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an <var>exception</var>
+ exception.
 
  <li>
   <p><a class="external" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.
 
-  <p class="note">At this point it is clear that the
-  <a href="#synchronous-flag">synchronous flag</a> is unset.
-
-
+  <p class="note">At this point it is clear that the <a href="#synchronous-flag">synchronous flag</a> is unset.
 
  <li>
-  <p>If the <a href="#upload-complete-flag">upload complete flag</a> is unset, follow these
-  substeps:
+  <p>If the <a href="#upload-complete-flag">upload complete flag</a> is unset, follow these substeps:
 
   <ol>
    <li><p>Set the <a href="#upload-complete-flag">upload complete flag</a>.
@@ -1547,7 +1348,6 @@ steps:
    <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code> on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
   </ol>
 
-
  <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>.
 
  <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <var title="">event</var>.
@@ -1555,94 +1355,8 @@ steps:
  <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>.
 </ol>
 
-<hr>
 
-<p>When it is said to
-<dfn id="switch-headers-received">switch to the HEADERS_RECEIVED state</dfn>
-run these steps:
-
-<ol>
- <li><p>Change the state to <a href="#dom-xmlhttprequest-headers_received" title="dom-XMLHttpRequest-HEADERS_RECEIVED">HEADERS_RECEIVED</a>.
-
- <li><p><a class="external" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.
-</ol>
-
-<p>When it is said to
-<dfn id="switch-loading">switch to the LOADING state</dfn> run these
-steps:
-
-<ol>
- <li><p>Change the state to <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a>.
-
- <li><p><a class="external" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.
-</ol>
-
-<p>When it is said to
-<dfn id="switch-done">switch to the DONE state</dfn> run these steps:
-
-<ol>
- <li><p>If the <a href="#synchronous-flag">synchronous flag</a> is set, update the
- <a href="#response-entity-body">response entity body</a>.
-
- <li><p>Unset the <a href="#synchronous-flag">synchronous flag</a>.
-
- <li><p>Change the state to <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>.
-
- <li><p><a class="external" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.
-
- <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>.
-
- <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-load"><a href="#event-xhr-load">load</a></code>.
-
- <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>.
-
-</ol>
-
-
-<hr>
-
-<p>When it is said to <dfn id="make-progress-notifications">make progress notifications</dfn>, while the
-download is progressing, <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to
-<a href="#concept-event-fire-progress" title="concept-event-fire-progress">fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>
-about every 50ms or for every byte received, whichever is <em>least</em>
-frequent.
-
-<hr>
-
-<p>When it is said to <dfn id="make-upload-progress-notifications">make upload progress notifications</dfn> run
-these steps:
-
-<ul>
- <li><p>While the request entity body is being transmitted and the
- <a href="#upload-complete-flag">upload complete flag</a> is unset,
- <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to
- <a href="#concept-event-fire-progress" title="concept-event-fire-progress">fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code> on
- the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object about every 50ms or for
- every byte transmitted, whichever is <em>least</em> frequent.
-
- <li>
-  <p>If the <a href="#request-entity-body">request entity body</a> has been fully transmitted
-  (irrespective of whether the server has started transmitting a response
-  or the status code of such a response) and the
-  <a href="#upload-complete-flag">upload complete flag</a> is still unset,
-  <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to run these substeps:
-
-  <ol>
-   <li><p>Set the <a href="#upload-complete-flag">upload complete flag</a>.
-
-   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>
-   on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
-
-   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-load"><a href="#event-xhr-load">load</a></code>
-   on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
-
-   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>
-   on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
-  </ol>
-</ul>
-
-
-<h4 id="the-abort()-method"><span class="secno">4.6.8 </span>The <code title="">abort()</code> method</h4>
+<h4 id="the-abort()-method"><span class="secno">4.5.7 </span>The <code title="">abort()</code> method</h4>
 
   <dl class="domintro">
    <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-abort" title="dom-XMLHttpRequest-abort">abort</a>()</code>
@@ -1655,44 +1369,11 @@ these steps (unless otherwise noted):
 <ol>
  <li><p><a href="#terminate-the-request">Terminate the request</a>.
 
- <li>
-  <p>If the state is <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a>,
-  <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a> with the
-  <a href="#send-flag"><code>send()</code> flag</a> being unset, or
-  <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>, go to the next step.
-
-  <p>Otherwise, run these substeps first:
-
-  <ol>
-   <li><p>Change the state to <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>.
-
-   <li><p>Unset the <a href="#send-flag"><code>send()</code> flag</a>.
-
-   <li><p><a class="external" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.
-
-   <li>
-    <p>If the <a href="#upload-complete-flag">upload complete flag</a> is false run these
-    substeps:
-
-    <ol>
-     <li><p>Set the <a href="#upload-complete-flag">upload complete flag</a> to true.
-
-     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>
-     on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
-
-     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-abort"><a href="#event-xhr-abort">abort</a></code>
-     on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
-
-     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>
-     on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
-    </ol>
-
-   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>.
-
-   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-abort"><a href="#event-xhr-abort">abort</a></code>.
-
-   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>.
-  </ol>
+ <li><p>If the state is <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a> with the
+ <a href="#send-flag"><code>send()</code> flag</a> set,
+ <a href="#dom-xmlhttprequest-headers_received" title="dom-XMLHttpRequest-HEADERS_RECEIVED">HEADERS_RECEIVED</a>, or
+ <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a>, run the
+ <a href="#request-error-steps">request error steps</a> for event <code title="event-xhr-abort"><a href="#event-xhr-abort">abort</a></code>.
 
  <li>
   <p>Change the state to <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a>.
@@ -1703,7 +1384,7 @@ these steps (unless otherwise noted):
 
 
 
-<h3 id="response"><span class="secno">4.7 </span>Response</h3>
+<h3 id="response"><span class="secno">4.6 </span>Response</h3>
 
 <p>A <dfn id="concept-response-header" title="concept-response-header">response header</dfn> is a HTTP response header
 transmitted before the <a href="#response-entity-body">response entity body</a>.
@@ -1712,7 +1393,7 @@ transmitted before the <a href="#response-entity-body">response entity body</a>.
 <p class="note">This excludes trailer fields ("trailers").
 
 
-<h4 id="the-status-attribute"><span class="secno">4.7.1 </span>The <code title="">status</code> attribute</h4>
+<h4 id="the-status-attribute"><span class="secno">4.6.1 </span>The <code title="">status</code> attribute</h4>
 
 <dl class="domintro">
  <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-status" title="dom-XMLHttpRequest-status">status</a></code>
@@ -1734,7 +1415,7 @@ steps:
 </ol>
 
 
-<h4 id="the-statustext-attribute"><span class="secno">4.7.2 </span>The <code title="">statusText</code> attribute</h4>
+<h4 id="the-statustext-attribute"><span class="secno">4.6.2 </span>The <code title="">statusText</code> attribute</h4>
 
 <dl class="domintro">
  <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-statustext" title="dom-XMLHttpRequest-statusText">statusText</a></code>
@@ -1755,7 +1436,7 @@ attribute must return the result of running these steps:
 </ol>
 
 
-<h4 id="the-getresponseheader()-method"><span class="secno">4.7.3 </span>The <code title="">getResponseHeader()</code> method</h4>
+<h4 id="the-getresponseheader()-method"><span class="secno">4.6.3 </span>The <code title="">getResponseHeader()</code> method</h4>
 
 <dl class="domintro">
  <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-getresponseheader" title="dom-XMLHttpRequest-getResponseHeader">getResponseHeader</a>(<var title="">header</var>)</code>
@@ -1814,7 +1495,7 @@ client.onreadystatechange = function() {
 </div>
 
 
-<h4 id="the-getallresponseheaders()-method"><span class="secno">4.7.4 </span>The <code title="">getAllResponseHeaders()</code> method</h4>
+<h4 id="the-getallresponseheaders()-method"><span class="secno">4.6.4 </span>The <code title="">getAllResponseHeaders()</code> method</h4>
 
 <dl class="domintro">
  <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-getallresponseheaders" title="dom-XMLHttpRequest-getAllResponseHeaders">getAllResponseHeaders</a>()</code>
@@ -1871,7 +1552,7 @@ Content-Type: text/plain; charset=utf-8</code></pre>
 </div>
 
 
-<h4 id="response-entity-body-0"><span class="secno">4.7.5 </span>Response entity body</h4>
+<h4 id="response-entity-body-0"><span class="secno">4.6.5 </span>Response entity body</h4>
 
 <p>The <dfn id="response-mime-type">response MIME type</dfn> is the
 MIME type the <code>Content-Type</code> header contains excluding any
@@ -2091,7 +1772,7 @@ resources using <a class="external" href="http://encoding.spec.whatwg.org/#utf-8
 
 
 
-<h4 id="the-overridemimetype()-method"><span class="secno">4.7.6 </span>The <code title="">overrideMimeType()</code> method</h4>
+<h4 id="the-overridemimetype()-method"><span class="secno">4.6.6 </span>The <code title="">overrideMimeType()</code> method</h4>
 
 <dl class="domintro">
  <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-overridemimetype" title="dom-XMLHttpRequest-overrideMimeType">overrideMimeType</a>(<var title="">mime</var>)</code>
@@ -2136,7 +1817,7 @@ method must run these steps:
 
 
 
-<h4 id="the-responsetype-attribute"><span class="secno">4.7.7 </span>The <code title="">responseType</code> attribute</h4>
+<h4 id="the-responsetype-attribute"><span class="secno">4.6.7 </span>The <code title="">responseType</code> attribute</h4>
 
 
 <dl class="domintro">
@@ -2200,7 +1881,7 @@ attribute must run these steps:
 
 
 
-<h4 id="the-response-attribute"><span class="secno">4.7.8 </span>The <code title="">response</code> attribute</h4>
+<h4 id="the-response-attribute"><span class="secno">4.6.8 </span>The <code title="">response</code> attribute</h4>
 
 <dl class="domintro">
  <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-response" title="dom-XMLHttpRequest-response">response</a></code>
@@ -2264,7 +1945,7 @@ steps:
 
 
 
-<h4 id="the-responsetext-attribute"><span class="secno">4.7.9 </span>The <code title="">responseText</code> attribute</h4>
+<h4 id="the-responsetext-attribute"><span class="secno">4.6.9 </span>The <code title="">responseText</code> attribute</h4>
 
 <dl class="domintro">
  <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-responsetext" title="dom-XMLHttpRequest-responseText">responseText</a></code>
@@ -2299,7 +1980,7 @@ steps:
 </ol>
 
 
-<h4 id="the-responsexml-attribute"><span class="secno">4.7.10 </span>The <code title="">responseXML</code> attribute</h4>
+<h4 id="the-responsexml-attribute"><span class="secno">4.6.10 </span>The <code title="">responseXML</code> attribute</h4>
 
 <dl class="domintro">
  <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-responsexml" title="dom-XMLHttpRequest-responseXML">responseXML</a></code>
@@ -2340,7 +2021,7 @@ has XML in its name for historical reasons. It also returns HTML resources
 as documents.
 
 
-<h3 id="events"><span class="secno">4.8 </span>Events summary</h3>
+<h3 id="events"><span class="secno">4.7 </span>Events summary</h3>
 
 <p><em>This section is non-normative.</em>
 
@@ -2770,9 +2451,6 @@ parsed, this is a network error.
 
 <dt id="refsHTTP">[HTTP]
 <dd><cite><a href="http://tools.ietf.org/html/rfc2616">Hypertext Transfer Protocol -- HTTP/1.1</a></cite>, Roy Fielding, James Gettys, Jeffrey Mogul et al.. IETF.
-
-<dt id="refsHTTPAUTH">[HTTPAUTH]
-<dd><cite><a href="http://tools.ietf.org/html/rfc2617">HTTP Authentication: Basic and Digest Access Authentication</a></cite>, J. Franks, Phillip Hallam-Baker, J. Hostetler et al.. IETF.
 
 <dt id="refsHTTPVERBSEC">[HTTPVERBSEC]
 <dd><cite><a href="http://www.kb.cert.org/vuls/id/867593">Multiple vendors' web servers enable HTTP TRACE method by default</a></cite>. US-CERT.

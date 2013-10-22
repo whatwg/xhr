@@ -269,13 +269,6 @@ and <code title=dom-XMLHttpRequest-responseXML>responseXML</code> always returns
 required by its definition, too).
 
 
-<h3>Task sources</h3>
-
-<p>Each <code>XMLHttpRequest</code> object has its own
-<span data-anolis-spec=html>task source</span>. Namely, the
-<dfn><code>XMLHttpRequest</code> task source</dfn>.
-
-
 <h3 id="constructors">Constructors</h3>
 
 <p>The <code>XMLHttpRequest</code> object has an associated
@@ -491,18 +484,10 @@ must be done in a case-insensitive manner. Initially it must be empty.
 
 <hr>
 
-<p>To <dfn>terminate the request</dfn> run these steps:
-
-<ol>
- <li><p>Set the <span>error flag</span>.
-
- <li><p>Cancel any instance of the <span data-anolis-spec=html>fetch</span> algorithm
- opened by this object.
-
- <li><p>If there are any <span data-anolis-spec=html title=concept-task>tasks</span> from
- the object's <span><code>XMLHttpRequest</code> task source</span> in one of the
- <span data-anolis-spec=html title="task queue">task queues</span>, then remove them.
-</ol>
+<p>To <dfn>terminate the request</dfn>,
+<span data-anolis-spec=fetch title=concept-fetch-terminate>terminate</span> the
+<span data-anolis-spec=fetch title=concept-fetch>fetch</span> algorithm operated by the
+<code>XMLHttpRequest</code> object with reason <i title>fatal</i>.
 
 
 
@@ -651,7 +636,8 @@ method must run these steps (unless otherwise indicated):
   <ul>
    <li><p>Set <span>request method</span> to <var>method</var>.
    <li><p>Set <span>request URL</span> to <var title>parsed URL</var>.
-   <li><p>If <var>async</var> is false, set the <span>synchronous flag</span>.
+   <li><p>Set the <span>synchronous flag</span>, if <var>async</var> is false, and unset
+   the <span>synchronous flag</span> otherwise.
    <li><p>Set <span>author request headers</span> to the empty list.
    <li><p>Unset the <span><code>send()</code> flag</span>.
    <li><p>Set <span>response entity body</span> to null.
@@ -1092,399 +1078,216 @@ method must run these steps (unless otherwise noted):
 
 
  <li>
-  <dl class=switch>
-   <dt>If the <span>source origin</span> and the <span>request URL</span>
-   are <span data-anolis-spec=html>same origin</span></dt>
-   <dt>If the <span>request URL</span>'s
-   <code data-anolis-spec=url title=concept-url-scheme>scheme</code> is
-   "<code title>data</code>"
+  <p>Let <var title>req</var> be a new
+  <span data-anolis-spec=fetch title=concept-request>request</span>, initialized as
+  follows:
 
-   <dd>
-    <p>These are the <dfn>same-origin request steps</dfn>.
-
-    <p><span data-anolis-spec=html>Fetch</span> the
-    <span>request URL</span> from <i title>origin</i>
-    <span>source origin</span>, using
-    <span>referrer source</span> as
-    <i title>override referrer source</i>, with the
-    <i title>synchronous flag</i> set if the
-    <span>synchronous flag</span> is set, using HTTP method
-    <span>request method</span>, taking into account the
-    <span>request entity body</span>, list of
-    <span>author request headers</span>, and the rules listed at the end of
-    this section.
-
-    <dl class=switch>
-     <dt>If the <span>synchronous flag</span> is set</dt>
-     <dd>
-      <p>While making the request also follow the
-      <span>same-origin request event rules</span>.
-
-      <!--
-       This cannot involve any task queue whatsoever because that would
-       mean other tasks on the task queue might get processed as well
-       which is counter to the whole idea of doing things synchronous.
-      -->
-
-      <p class=note>The
-      <code title="dom-XMLHttpRequest-send">send()</code> method call will
-      now be returned by virtue of this algorithm ending.
-     </dd>
-
-     <dt>If the <span>synchronous flag</span> is unset</dt>
-     <dd>
-
-      <p><span>Make upload progress notifications</span>.
-
-      <p><span>Make progress notifications</span>.
-
-
-      <p>While processing the request, as data becomes available and when
-      the user interferes with the request,
-      <span data-anolis-spec=html title="queue a task">queue tasks</span>
-      to update the <span>response entity body</span> and follow the
-      <span>same-origin request event rules</span>.
-     </dd>
-    </dl>
-   </dd>
-
-   <dt>Otherwise</dt>
-   <dd>
-    <p>These are the <dfn>cross-origin request steps</dfn>.
-
-
-
-
-    <p>Make a <span data-anolis-spec=cors>cross-origin request</span>,
-    passing these as parameters:
-
-    <dl>
-     <dt>request URL</dt>
-     <dd>The <span>request URL</span>.</dd>
-
-     <dt>request method</dt>
-     <dd>The <span>request method</span>.</dd>
-
-     <dt>author request headers</dt>
-     <dd>The list of <span>author request headers</span>.</dd>
-
-     <dt>request entity body</dt>
-     <dd>The <span>request entity body</span>.</dd>
-
-     <dt>source origin</dt>
-     <dd>The <span>source origin</span>.</dd>
-
-     <dt>referrer source
-     <dd>If the <span>anonymous flag</span> is set, the
-     <span data-anolis-spec=url>URL</span>
-     "<code title>about:blank</code>", and the
-     <span>referrer source</span> otherwise.
-
-     <dt>omit credentials flag</dt>
-     <dd>Set if
-     <code title="dom-XMLHttpRequest-withCredentials">withCredentials</code>
-     attribute's value is false.
-
-     <dt>force preflight flag</dt>
-     <dd>Set if the <span>upload events flag</span> is set.
-    </dl>
-
-    <dl class=switch>
-     <dt>If the <span>synchronous flag</span> is set</dt>
-     <dd>
-      <p>While making the request also follow the
-      <span>cross-origin request event rules</span>.
-
-      <!--
-       This cannot involve any task queue whatsoever because that would
-       mean other tasks on the task queue might get processed as well
-       which is counter to the whole idea of doing things synchronous.
-      -->
-
-      <p class=note>The
-      <code title="dom-XMLHttpRequest-send">send()</code> method call will
-      now be returned by virtue of this algorithm ending.
-     </dd>
-
-     <dt>If the <span>synchronous flag</span> is unset</dt>
-     <dd>
-      <p>While processing the request, as data becomes available and when
-      the end user interferes with the request,
-      <span data-anolis-spec=html title="queue a task">queue tasks</span>
-      to update the <span>response entity body</span> and follow the
-      <span>cross-origin request event rules</span>.
-     </dd>
-    </dl>
-
-   </dd>
+  <dl>
+   <dt><span data-anolis-spec=fetch title=concept-request-method>method</span>
+   <dd><span>request method</span>
+   <dt><span data-anolis-spec=fetch title=concept-request-url>url</span>
+   <dd><span>request URL</span>
+   <dt><span data-anolis-spec=fetch title=concept-request-author-headers>author headers</span>
+   <dd><span>author request headers</span>
+   <dt><span data-anolis-spec=fetch title=concept-request-origin>origin</span>
+   <dd><span>source origin</span>
+   <dt><span data-anolis-spec=fetch>force <code title>Origin</code> header flag</span>
+   <dd>Set.
+   <dd><span>source origin</span>
+   <dt><span data-anolis-spec=fetch title=concept-request-referrer>referrer</span>
+   <dd class=XXX><span>referrer source</span>
+   <dt><span data-anolis-spec=fetch title=concept-request-body>body</span>
+   <dd><span>request entity body</span>
+   <dt><span data-anolis-spec=fetch>synchronous flag</span>
+   <dd>Set if the <span>synchronous flag</span> is set.
+   <dt><span data-anolis-spec=fetch title=concept-request-mode>mode</span>
+   <dd><i title>CORS</i>
+   <dd><span data-anolis-spec=fetch>force preflight flag</span>
+   <dd>Set if the <span>upload events flag</span> is set.
+   <dd><span data-anolis-spec=fetch title=concept-request-omit-credentials-mode>omit credentials mode</span>
+   <dd>If the <span>anonymous flag</span> is set, <i title>always</i>, and
+   <i title>CORS</i> otherwise.
+   <dd><span data-anolis-spec=fetch title=concept-request-use-url-credentials-flag>use URL credentials flag</span>
+   <dd>Set if either <span>request URL</span>'s
+   <span data-anolis-spec=url title=concept-url-username>username</span>
+   is not the empty string or <span>request URL</span>'s
+   <span data-anolis-spec=url title=concept-url-password>password</span> is non-null.
   </dl>
 
-</ol>
+ <li><p>If a <span data-anolis-spec=fetch title=concept-header>header</span>
+ <span data-anolis-spec=fetch title=concept-header-name>named</span>
+ `<code>Accept-Language</code>` is not in <var title>req</var>'s
+ <span data-anolis-spec=fetch title=concept-request-author-headers>author headers</span>,
+ append one with an appropriate
+ <span data-anolis-spec=fetch title=concept-header-value>value</span>.
 
-<hr>
+ <li><p>If a <span data-anolis-spec=fetch title=concept-header>header</span>
+ <span data-anolis-spec=fetch title=concept-header-name>named</span>
+ `<code>Accept</code>` is not in <var title>req</var>'s
+ <span data-anolis-spec=fetch title=concept-request-author-headers>author headers</span>,
+ append one with `<code title>*/*</code>` as
+ <span data-anolis-spec=fetch title=concept-header-value>value</span>.
 
-<p>If the user agent supports HTTP Authentication and
-<code title="http-authorization">Authorization</code> is not in the list
-of <span>author request headers</span>, it should
-consider requests originating from the <code>XMLHttpRequest</code> object
-to be part of the protection space that includes the accessed URIs and
-send <code title="http-authorization">Authorization</code> headers and
-handle <code>401 Unauthorized</code> requests appropriately.
+ <li>
+  <p><span data-anolis-spec=fetch title=concept-fetch>Fetch</span> <var title>req</var>.
 
-<p>If authentication fails,
-<span>source origin</span> and the
-<span>request URL</span> are <span data-anolis-spec=html>same origin</span>,
-<code title="http-authorization">Authorization</code> is not in the list
-of <span>author request headers</span>,
-<span>request URL</span>'s
-<span data-anolis-spec=url title=concept-url-username>username</span> is
-the empty string and <span>request URL</span>'s
-<span data-anolis-spec=url title=concept-url-password>password</span> is
-null, user agents should prompt the end user for their username and
-password.
-<!-- XXX this should probably be defined in "fetch" -->
+  <p>If <var title>req</var>'s <span data-anolis-spec=fetch>synchronous flag</span> is
+  set, pass the return value, synchronously, to
+  <span data-anolis-spec=fetch>process response end-of-file</span> below. Otherwise,
+  handle the <span data-anolis-spec=html title=concept-task>tasks</span>
+  <span data-anolis-html title=queue-a-task>queued</span> on the
+  <span data-anolis-spec=html>networking task source</span> per below.
 
-<p>Otherwise, if authentication fails, user agents
-must not prompt the end user for their username and
-password. <span data-anolis-ref>HTTPAUTH</span>
+  <p>If the <code title="dom-XMLHttpRequest-timeout">timeout</code> attribute value is not
+  0, <span data-anolis-spec=fetch title=concept-fetch-terminate>terminate</span>
+  <span title-anolis-spec=fetch title=concept-fetch>fetching</span> after the amount of
+  milliseconds specified by the <code title="dom-XMLHttpRequest-timeout">timeout</code>
+  attribute value have passed with reason <i title>timeout</i>.
 
-<p class=note>Unfortunately end users are prompted because of legacy
-content constraints. However, when possible this behavior is prohibited,
-as it is bad UI. E.g. that is why the
-<span data-anolis-spec=html>same origin</span> restriction is made above.
+  <p>To <span data-anolis-spec=fetch>process request body</span> for
+  <var title>request</var>,
+  <span title=concept-event-fire-progress>fire a progress event</span> named
+  <code title="event-xhr-progress">progress</code> on the
+  <code>XMLHttpRequestUpload</code> object.
+  <!-- upload complete flag can never be set here I hope -->
 
-<hr>
-
-<p>If the user agent implements a HTTP cache it should
-respect <code>Cache-Control</code> headers in
-<span>author request headers</span>
-(e.g. <code>Cache-Control: no-cache</code> bypasses the cache). It
-must not send <code>Cache-Control</code> or
-<code>Pragma</code> request headers automatically unless the end user
-explicitly requests such behavior (e.g. by reloading the page).
-
-<p>For <code>304 Not Modified</code> responses that are a result of a
-user agent generated conditional request the user agent
-must act as if the server gave a <code>200 OK</code>
-response with the appropriate content. The user agent
-must allow <span>author request headers</span> to override automatic cache
-validation (e.g. <code>If-None-Match</code> or
-<code>If-Modified-Since</code>), in which case
-<code>304 Not Modified</code> responses must be passed through.
-<span data-anolis-ref>HTTP</span>
-
-<hr>
-
-<p>If the user agent implements server-driven content-negotiation
-it must follow these constraints for the
-<code>Accept</code> and <code>Accept-Language</code> request headers:
-
-<ul>
- <li><p>Both headers must not be modified if they are in
- <span>author request headers</span>.
-
- <li><p>If not in <span>author request headers</span>,
- <code>Accept-Language</code> with an appropriate value should be appended
- to it.
-
- <li><p>If not in <span>author request headers</span>, <code>Accept</code>
- with value <code>*/*</code> must be appended to it.
-</ul>
-
-<p>Responses must have the content-encodings
-automatically decoded. <span data-anolis-ref>HTTP</span>
-
-<hr>
-
-<p>Besides the <span>author request headers</span>, user agents
-should not include additional request headers other than those mentioned
-above or other than those authors are not allowed to set using
-<code title="dom-XMLHttpRequest-setRequestHeader">setRequestHeader()</code>.
-This ensures that authors have a predictable API.
-
-
-<h4>Infrastructure for the <code title>send()</code> method</h4>
-
-<p>The <dfn>same-origin request event rules</dfn> are as follows:
-
-<dl class=switch>
- <dt>If the <span>error flag</span> is set
- <dd><p>Terminate these steps.
-
- <dt>If the response has an HTTP status code of 301, 302, 303, 307, or 308
- <dd>
-  <p>If the redirect violates infinite loop precautions this is a
-  <span>network error</span>.
-
-  <p>Otherwise, run these steps:
+  <p>To <span data-anolis-spec=fetch>process request end-of-file</span> for
+  <var title>request</var>, run these substeps:
 
   <ol>
-   <li><p>Set the <span>request URL</span> to the
-   <span data-anolis-spec=url>URL</span> conveyed by the
-   <code>Location</code> header.
-   <!-- XXX fetch: this requires parsing and such too. Either HTTP or
-        Fetch needs to handle this. -->
+   <li><p>Set the <span>upload complete flag</span>.
 
-   <li><p>If the <span>source origin</span> and the
-   <span data-anolis-spec=html>origin</span> of <span>request URL</span>
-   are <span data-anolis-spec=html>same origin</span> transparently follow
-   the redirect while observing the
-   <span>same-origin request event rules</span>.
+   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>
+   on the <code>XMLHttpRequestUpload</code> object.
 
-   <li><p>Otherwise, follow the <span>cross-origin request steps</span>
-   and terminate the steps for this algorithm.
+   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-load">load</code>
+   on the <code>XMLHttpRequestUpload</code> object.
+
+   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadend">loadend</code>
+   on the <code>XMLHttpRequestUpload</code> object.
+  </ol>
+  <!-- upload complete flag can never be set here I hope -->
+
+  <p>To <span data-anolis-spec=fetch>process response</span> for <var title>response</var>,
+  run these substeps:
+
+  <ol>
+   <li><p><span>Handle errors</span> for <var title>response</var>.
+
+   <li>
+    <p>If state is <span title=dom-XMLHttpRequest-OPENED>OPENED</span>, run these
+    subsubsteps:
+
+    <ol>
+     <li><p>Change the state to <span title="dom-XMLHttpRequest-HEADERS_RECEIVED">HEADERS_RECEIVED</span>.
+
+     <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.
+    </ol>
   </ol>
 
-  <p class=note>HTTP places requirements on the user agent regarding the
-  preservation of the <span>request method</span> and
-  <span>request entity body</span> during redirects, and also requires end
-  users to be notified of certain kinds of automatic redirections.
-  <!-- XXX HTTP needs fixing here -->
- </dd>
+  <p>To <span data-anolis-spec=fetch>process response body</span> for
+  <var title>response</var>, run these substeps:
 
- <dt>If the end user cancels the request</dt>
- <dd><p>This is an <span>abort error</span>.</dd>
+  <ol>
+   <li><p><span>Handle errors</span> for <var title>response</var>.
 
- <dt>If there is a network error</dt>
- <dd>
-  <p>In case of DNS errors, TLS negotiation failure, or other type of
-  network errors, this is a <span>network error</span>. Do not request any
-  kind of end user interaction.
+   <li>
+    <p>If state is
+    <span title=dom-XMLHttpRequest-HEADERS_RECEIVED>HEADERS_RECEIVED</span>, run these
+    subsubsteps:
 
-  <p class=note>This does not include HTTP responses that indicate
-  some type of error, such as HTTP status code 410.
- </dd>
+    <ol>
+     <li><p>Change the state to <span title="dom-XMLHttpRequest-LOADING">LOADING</span>.
 
+     <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.
+    </ol>
 
- <dt>If <code title="dom-XMLHttpRequest-timeout">timeout</code> is not 0
- and since the request started the amount of milliseconds specified by
- <code title="dom-XMLHttpRequest-timeout">timeout</code> has passed</dt>
- <dd><p>This is a <span>timeout error</span>.</dd>
+   <li><p>Update <span>response entity body</span> with <var title>response</var>'s
+   <span data-anolis-spec=fetch title=concept-response-body>body</span>.
 
+   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-progress">progress</code>.
+  </ol>
 
- <dt>Once all HTTP headers have been received, the
- <span>synchronous flag</span> is unset, and the HTTP status code of the
- response is not one of 301, 302, 303, 307, and 308
- <dd><p><span>Switch to the HEADERS_RECEIVED state</span>.</dd>
+  <p>To <span data-anolis-spec=fetch>process response end-of-file</span> for
+  <var title>response</var>, run these substeps:
 
- <dt>Once the first byte (or more) of the
- <span>response entity body</span> has been received and the
- <span>synchronous flag</span> is unset</dt>
- <dt>If there is no <span>response entity body</span> and the
- <span>synchronous flag</span> is unset</dt>
- <dd><p><span>Switch to the LOADING state</span>.</dd>
+  <ol>
+   <li><p><span>Handle errors</span> for <var title>response</var>.
 
- <dt>Once the whole <span>response entity body</span> has been
- received</dt>
- <dt>If there is no <span>response entity body</span> and the state is
- <span title="dom-XMLHttpRequest-LOADING">LOADING</span></dt>
- <dt>If there is no <span>response entity body</span> and the
- <span>synchronous flag</span> is set</dt>
- <dd><p><span>Switch to the DONE state</span>.</dd>
-</dl>
+   <li>
+    <p>If state is <span title=dom-XMLHttpRequest-LOADING>LOADING</span>, run these
+    subsubsteps:
 
+    <ol>
+     <li><p>Update <span>response entity body</span> with <var title>response</var>'s
+     <span data-anolis-spec=fetch title=concept-response-body>body</span>.
 
-<hr>
+     <li><p>Change the state to <span title="dom-XMLHttpRequest-DONE">DONE</span>.
 
-<p>The <dfn>cross-origin request event rules</dfn> are as follows:
+     <li><p>Unset the <span><code>send()</code> flag</span>.
 
-<dl class=switch>
- <dt>If the <span>error flag</span> is set
- <dd><p>Terminate these steps.
+     <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.
 
- <dt>If the <span data-anolis-spec=cors>cross-origin request status</span>
- is <i>preflight complete</i> and the <span>synchronous flag</span> is
- unset</dt>
- <dd><p><span>Make upload progress notifications</span>.</dd>
+     <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>.
 
- <dt>If the <span data-anolis-spec=cors>cross-origin request status</span>
- is <i title>network error</i></dt>
- <dd><p>This is a <span>network error</span>.</dd>
+     <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-load">load</code>.
 
- <dt>If the <span data-anolis-spec=cors>cross-origin request status</span>
- is <i title>abort error</i></dt>
- <dd><p>This is an <span>abort error</span>.</dd>
+     <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadend">loadend</code>.
+    </ol>
+  </ol>
+</ol>
 
- <dt>If <code title="dom-XMLHttpRequest-timeout">timeout</code> is not 0
- and since the request started the amount of milliseconds specified by
- <code title="dom-XMLHttpRequest-timeout">timeout</code> has passed</dt>
- <dd><p>This is a <span>timeout error</span>.</dd>
-
- <dt>Once all HTTP headers have been received, the
- <span data-anolis-spec=cors>cross-origin request status</span> is
- <i>success</i>, and the <span>synchronous flag</span> is unset</dt>
- <dd>
-  <p><span>Switch to the HEADERS_RECEIVED state</span>.
-
-  <p><span>Make progress notifications</span>.
- </dd>
-
- <dt>Once the first byte (or more) of the
- <span>response entity body</span> has been received, the
- <span data-anolis-spec=cors>cross-origin request status</span> is
- <i>success</i>, and the <span>synchronous flag</span> is unset</dt>
- <dt>If there is no <span>response entity body</span>, the
- <span data-anolis-spec=cors>cross-origin request status</span> is
- <i>success</i>, and the <span>synchronous flag</span> is unset</dt>
- <dd><p><span>Switch to the LOADING state</span>.</dd>
-
- <dt>Once the whole <span>response entity body</span> has been received
- and the <span data-anolis-spec=cors>cross-origin request status</span> is
- <i>success</i></dt>
- <dt>If there is no <span>response entity body</span>, the
- <span data-anolis-spec=cors>cross-origin request status</span> is
- <i>success</i>, and the state is
- <span title="dom-XMLHttpRequest-LOADING">LOADING</span></dt>
- <dt>If there is no <span>response entity body</span>, the
- <span data-anolis-spec=cors>cross-origin request status</span> is
- <i>success</i>, and the <span>synchronous flag</span> is set</dt>
- <dd><p><span>Switch to the DONE state</span>.</dd>
-</dl>
-
-
-<hr>
-
-<p>When something is said to be a <dfn>network error</dfn> run the
-<span>request error</span> steps for exception
-"<code data-anolis-spec=dom>NetworkError</code>" and
-event <code title="event-xhr-error">error</code>.
-
-<p>When something is said to be an <dfn>abort error</dfn> run the
-<span>request error</span> steps for exception
-"<code data-anolis-spec=dom>AbortError</code>" and event
-<code title="event-xhr-abort">abort</code>.
-
-
-<p>When something is said to be an <dfn>timeout error</dfn> run the
-<span>request error</span> steps for exception
-"<code data-anolis-spec=dom>TimeoutError</code>" and event
-<code title="event-xhr-timeout">timeout</code>.
-
-
-<p>When something is said to be a <dfn>request error</dfn> for
-exception <var>exception</var> and event <var title>event</var> run these
-steps:
+<p>To <dfn>handle errors</dfn> for <var title>response</var> run these substeps:
 
 <ol>
- <li><p><span>Terminate the request</span>.
+ <li><p>If <var title>response</var> is a
+ <span data-anolis-spec=fetch title=concept-network-error>network error</span>, run the
+ <span>request error steps</span> for event <code title="event-xhr-error">error</code> and
+ exception "<code data-anolis-spec=dom>NetworkError</code>".
 
+ <li>
+  <p>Otherwise, if <var title>response</var> has a
+  <span data-anolis-spec=fetch title=concept-response-termination-reason>termination reason</span>:
+
+  <dl class=switch>
+   <dt><i title>end-user abort</i>
+   <dd><p>Run the <span>request error steps</span> for event
+   <code title="event-xhr-abort">abort</code> and exception
+   "<code data-anolis-spec=dom>AbortError</code>".
+
+   <dt><i title>fatal</i>
+   <dd>
+    <p>Terminate the entire <code title=dom-XMLHTtpRequest-send>send()</code> algorithm.
+    <p>Game over.
+
+   <dt><i title>timeout</i>
+   <dd><p>Run the <span>request error steps</span> for event
+   <code title="event-xhr-timeout">timeout</code> and exception
+   "<code data-anolis-spec=dom>TimeoutError</code>".
+  </dl>
+</ol>
+
+<p>The <dfn>request error steps</dfn> for event <var title>event</var> and optionally an
+exception <var>exception</var> are:
+
+<ol>
  <li><p>Change the state to <span title="dom-XMLHttpRequest-DONE">DONE</span>.
 
+ <li><p>Unset the <span><code>send()</code> flag</span>.
+
+ <li><p>Set the <span>error flag</span>.
+
  <li><p>If the <span>synchronous flag</span> is set,
- <span data-anolis-spec=dom title=concept-throw>throw</span> an
- <var>exception</var> exception.
+ <span data-anolis-spec=dom title=concept-throw>throw</span> an <var>exception</var>
+ exception.
 
  <li>
   <p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.
 
-  <p class=note>At this point it is clear that the
-  <span>synchronous flag</span> is unset.
-
-
+  <p class=note>At this point it is clear that the <span>synchronous flag</span> is unset.
 
  <li>
-  <p>If the <span>upload complete flag</span> is unset, follow these
-  substeps:
+  <p>If the <span>upload complete flag</span> is unset, follow these substeps:
 
   <ol>
    <li><p>Set the <span>upload complete flag</span>.
@@ -1499,99 +1302,12 @@ steps:
    <code title="event-xhr-loadend">loadend</code> on the <code>XMLHttpRequestUpload</code> object.
   </ol>
 
-
  <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>.
 
  <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <var title>event</var>.
 
  <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadend">loadend</code>.
 </ol>
-
-<hr>
-
-<p>When it is said to
-<dfn id="switch-headers-received">switch to the HEADERS_RECEIVED state</dfn>
-run these steps:
-
-<ol>
- <li><p>Change the state to <span title="dom-XMLHttpRequest-HEADERS_RECEIVED">HEADERS_RECEIVED</span>.
-
- <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.
-</ol>
-
-<p>When it is said to
-<dfn id="switch-loading">switch to the LOADING state</dfn> run these
-steps:
-
-<ol>
- <li><p>Change the state to <span title="dom-XMLHttpRequest-LOADING">LOADING</span>.
-
- <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.
-</ol>
-
-<p>When it is said to
-<dfn id="switch-done">switch to the DONE state</dfn> run these steps:
-
-<ol>
- <li><p>If the <span>synchronous flag</span> is set, update the
- <span>response entity body</span>.
-
- <li><p>Unset the <span>synchronous flag</span>.
-
- <li><p>Change the state to <span title="dom-XMLHttpRequest-DONE">DONE</span>.
-
- <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.
-
- <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>.
-
- <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-load">load</code>.
-
- <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadend">loadend</code>.
-
-</ol>
-
-
-<hr>
-
-<p>When it is said to <dfn>make progress notifications</dfn>, while the
-download is progressing, <span data-anolis-spec=html>queue a task</span> to
-<span title=concept-event-fire-progress>fire a progress event</span> named <code title="event-xhr-progress">progress</code>
-about every 50ms or for every byte received, whichever is <em>least</em>
-frequent.
-
-<hr>
-
-<p>When it is said to <dfn>make upload progress notifications</dfn> run
-these steps:
-
-<ul>
- <li><p>While the request entity body is being transmitted and the
- <span>upload complete flag</span> is unset,
- <span data-anolis-spec=html>queue a task</span> to
- <span title=concept-event-fire-progress>fire a progress event</span> named <code title="event-xhr-progress">progress</code> on
- the <code>XMLHttpRequestUpload</code> object about every 50ms or for
- every byte transmitted, whichever is <em>least</em> frequent.
-
- <li>
-  <p>If the <span>request entity body</span> has been fully transmitted
-  (irrespective of whether the server has started transmitting a response
-  or the status code of such a response) and the
-  <span>upload complete flag</span> is still unset,
-  <span data-anolis-spec=html>queue a task</span> to run these substeps:
-
-  <ol>
-   <li><p>Set the <span>upload complete flag</span>.
-
-   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>
-   on the <code>XMLHttpRequestUpload</code> object.
-
-   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-load">load</code>
-   on the <code>XMLHttpRequestUpload</code> object.
-
-   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadend">loadend</code>
-   on the <code>XMLHttpRequestUpload</code> object.
-  </ol>
-</ul>
 
 
 <h4>The <code title>abort()</code> method</h4>
@@ -1607,44 +1323,11 @@ these steps (unless otherwise noted):
 <ol>
  <li><p><span>Terminate the request</span>.
 
- <li>
-  <p>If the state is <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span>,
-  <span title="dom-XMLHttpRequest-OPENED">OPENED</span> with the
-  <span><code>send()</code> flag</span> being unset, or
-  <span title="dom-XMLHttpRequest-DONE">DONE</span>, go to the next step.
-
-  <p>Otherwise, run these substeps first:
-
-  <ol>
-   <li><p>Change the state to <span title="dom-XMLHttpRequest-DONE">DONE</span>.
-
-   <li><p>Unset the <span><code>send()</code> flag</span>.
-
-   <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.
-
-   <li>
-    <p>If the <span>upload complete flag</span> is false run these
-    substeps:
-
-    <ol>
-     <li><p>Set the <span>upload complete flag</span> to true.
-
-     <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>
-     on the <code>XMLHttpRequestUpload</code> object.
-
-     <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-abort">abort</code>
-     on the <code>XMLHttpRequestUpload</code> object.
-
-     <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadend">loadend</code>
-     on the <code>XMLHttpRequestUpload</code> object.
-    </ol>
-
-   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>.
-
-   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-abort">abort</code>.
-
-   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadend">loadend</code>.
-  </ol>
+ <li><p>If the state is <span title="dom-XMLHttpRequest-OPENED">OPENED</span> with the
+ <span><code>send()</code> flag</span> set,
+ <span title="dom-XMLHttpRequest-HEADERS_RECEIVED">HEADERS_RECEIVED</span>, or
+ <span title="dom-XMLHttpRequest-LOADING">LOADING</span>, run the
+ <span>request error steps</span> for event <code title=event-xhr-abort>abort</code>.
 
  <li>
   <p>Change the state to <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span>.
