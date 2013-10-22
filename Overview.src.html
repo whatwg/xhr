@@ -1093,21 +1093,20 @@ method must run these steps:
    <dd><span>source origin</span>
    <dt><span data-anolis-spec=fetch>force <code title>Origin</code> header flag</span>
    <dd>Set.
-   <dd><span>source origin</span>
    <dt><span data-anolis-spec=fetch title=concept-request-referrer>referrer</span>
-   <dd class=XXX><span>referrer source</span>
+   <dd><span class=XXX>referrer source</span>
    <dt><span data-anolis-spec=fetch title=concept-request-body>body</span>
    <dd><span>request entity body</span>
    <dt><span data-anolis-spec=fetch>synchronous flag</span>
    <dd>Set if the <span>synchronous flag</span> is set.
    <dt><span data-anolis-spec=fetch title=concept-request-mode>mode</span>
    <dd><i title>CORS</i>
-   <dd><span data-anolis-spec=fetch>force preflight flag</span>
+   <dt><span data-anolis-spec=fetch>force preflight flag</span>
    <dd>Set if the <span>upload events flag</span> is set.
-   <dd><span data-anolis-spec=fetch title=concept-request-omit-credentials-mode>omit credentials mode</span>
+   <dt><span data-anolis-spec=fetch title=concept-request-omit-credentials-mode>omit credentials mode</span>
    <dd>If the <span>anonymous flag</span> is set, <i title>always</i>, and
    <i title>CORS</i> otherwise.
-   <dd><span data-anolis-spec=fetch title=concept-request-use-url-credentials-flag>use URL credentials flag</span>
+   <dt><span data-anolis-spec=fetch title=concept-request-use-url-credentials-flag>use URL credentials flag</span>
    <dd>Set if either <span>request URL</span>'s
    <span data-anolis-spec=url title=concept-url-username>username</span>
    is not the empty string or <span>request URL</span>'s
@@ -1135,12 +1134,12 @@ method must run these steps:
   set, pass the return value, synchronously, to
   <span data-anolis-spec=fetch>process response end-of-file</span> below. Otherwise,
   handle the <span data-anolis-spec=html title=concept-task>tasks</span>
-  <span data-anolis-html title=queue-a-task>queued</span> on the
+  <span data-anolis-spec=html title="queue a task">queued</span> on the
   <span data-anolis-spec=html>networking task source</span> per below.
 
   <p>If the <code title="dom-XMLHttpRequest-timeout">timeout</code> attribute value is not
   0, <span data-anolis-spec=fetch title=concept-fetch-terminate>terminate</span>
-  <span title-anolis-spec=fetch title=concept-fetch>fetching</span> after the amount of
+  <span data-anolis-spec=fetch title=concept-fetch>fetching</span> after the amount of
   milliseconds specified by the <code title="dom-XMLHttpRequest-timeout">timeout</code>
   attribute value have passed with reason <i title>timeout</i>.
 

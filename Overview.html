@@ -1139,21 +1139,20 @@ method must run these steps:
    <dd><a href="#source-origin">source origin</a>
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#force-origin-header-flag">force <code title="">Origin</code> header flag</a>
    <dd>Set.
-   <dd><a href="#source-origin">source origin</a>
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-referrer" title="concept-request-referrer">referrer</a>
-   <dd class="XXX"><a href="#referrer-source">referrer source</a>
+   <dd><a class="XXX" href="#referrer-source">referrer source</a>
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>
    <dd><a href="#request-entity-body">request entity body</a>
    <dt><a data-anolis-spec="fetch" href="#synchronous-flag">synchronous flag</a>
    <dd>Set if the <a href="#synchronous-flag">synchronous flag</a> is set.
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-mode" title="concept-request-mode">mode</a>
    <dd><i title="">CORS</i>
-   <dd><a class="external" href="http://fetch.spec.whatwg.org/#force-preflight-flag">force preflight flag</a>
+   <dt><a class="external" href="http://fetch.spec.whatwg.org/#force-preflight-flag">force preflight flag</a>
    <dd>Set if the <a href="#upload-events-flag">upload events flag</a> is set.
-   <dd><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-omit-credentials-mode" title="concept-request-omit-credentials-mode">omit credentials mode</a>
+   <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-omit-credentials-mode" title="concept-request-omit-credentials-mode">omit credentials mode</a>
    <dd>If the <a href="#anonymous-flag">anonymous flag</a> is set, <i title="">always</i>, and
    <i title="">CORS</i> otherwise.
-   <dd><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-use-url-credentials-flag" title="concept-request-use-url-credentials-flag">use URL credentials flag</a>
+   <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-use-url-credentials-flag" title="concept-request-use-url-credentials-flag">use URL credentials flag</a>
    <dd>Set if either <a href="#request-url">request URL</a>'s
    <a class="external" href="http://url.spec.whatwg.org/#concept-url-username" title="concept-url-username">username</a>
    is not the empty string or <a href="#request-url">request URL</a>'s
@@ -1181,12 +1180,12 @@ method must run these steps:
   set, pass the return value, synchronously, to
   <a class="external" href="http://fetch.spec.whatwg.org/#process-response-end-of-file">process response end-of-file</a> below. Otherwise,
   handle the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#concept-task" title="concept-task">tasks</a>
-  <span data-anolis-html="" title="queue-a-task">queued</span> on the
+  <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task" title="queue a task">queued</a> on the
   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#networking-task-source">networking task source</a> per below.
 
   <p>If the <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code> attribute value is not
   0, <a class="external" href="http://fetch.spec.whatwg.org/#concept-fetch-terminate" title="concept-fetch-terminate">terminate</a>
-  <span title="concept-fetch" title-anolis-spec="fetch">fetching</span> after the amount of
+  <a class="external" href="http://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">fetching</a> after the amount of
   milliseconds specified by the <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code>
   attribute value have passed with reason <i title="">timeout</i>.
 
