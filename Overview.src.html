@@ -170,14 +170,14 @@ community.
 
 <h2 id="terminology">Terminology</h2>
 
-<p>This specification heavily borrows terminology, from
-Cross-Origin Resource Sharing, DOM, DOM Parsing and Serialization, Encoding,
-File API, HTML, HTTP, Typed Array, URL, Web IDL, and XML.
+<p>This specification heavily borrows terminology, from DOM,
+DOM Parsing and Serialization, Encoding, Fetch, File API, HTML, HTTP, Typed Array, URL,
+Web IDL, and XML.
 
-<span data-anolis-ref>CORS</span>
 <span data-anolis-ref>DOM</span>
 <span data-anolis-ref>DOMPS</span>
 <span data-anolis-ref>ENCODING</span>
+<span data-anolis-ref>FETCH</span>
 <span data-anolis-ref>FILEAPI</span>
 <span data-anolis-ref>HTML</span>
 <span data-anolis-ref>HTTP</span>
@@ -1422,11 +1422,11 @@ method must run these steps:
  <li><p>Return null.
 </ol>
 
-<p class=note>The Cross-Origin Resource Sharing specification filters
+<p class=note>The Fetch specification filters
 <span title=concept-response-header>response headers</span> exposed by
-<code title="dom-XMLHttpRequest-getAllResponseHeaders">getAllResponseHeaders()</code>
-for <span data-anolis-spec=cors title="cross-origin request">cross-origin requests</span>.
-<span data-anolis-ref>CORS</span>
+<code title="dom-XMLHttpRequest-getResponseHeader">getResponseHeader()</code>
+for cross-origin requests.
+<span data-anolis-ref>FETCH</span>
 
 <div class="example">
 
@@ -1475,11 +1475,11 @@ method must run these steps:
  U+003A COLON U+0020 SPACE pair.
 </ol>
 
-<p class=note>The Cross-Origin Resource Sharing specification filters
+<p class=note>The Fetch specification filters
 <span title=concept-response-header>response headers</span> exposed by
 <code title="dom-XMLHttpRequest-getAllResponseHeaders">getAllResponseHeaders()</code>
-for <span data-anolis-spec=cors title="cross-origin request">cross-origin requests</span>.
-<span data-anolis-ref>CORS</span>
+for cross-origin requests.
+<span data-anolis-ref>FETCH</span>
 
 <div class="example">
  <p>For the following script:
@@ -2028,12 +2028,12 @@ and/or <code>XMLHttpRequestUpload</code> objects:
 
 <h2>Interface <code title>FormData</code></h2>
 
-<pre class="idl">typedef (<span data-anolis-spec=fileapi>File</span> or DOMString) <dfn>FormDataEntryValue</dfn>;
+<pre class="idl">typedef (<span data-anolis-spec=fileapi>File</span> or [EnsureUTF16] DOMString) <dfn>FormDataEntryValue</dfn>;
 
 [<span title="dom-FormData">Constructor</span>(optional <span data-anolis-spec=html>HTMLFormElement</span> <var>form</var>)]
 interface <dfn>FormData</dfn> {
   void <span title="dom-FormData-append">append</span>([EnsureUTF16] DOMString <var>name</var>, <span data-anolis-spec=fileapi>Blob</span> <var>value</var>, optional [EnsureUTF16] DOMString <var>filename</var>);
-  void <span title="dom-FormData-append">append</span>(DOMString <var>name</var>, [EnsureUTF16] DOMString <var>value</var>);
+  void <span title="dom-FormData-append">append</span>([EnsureUTF16] DOMString <var>name</var>, [EnsureUTF16] DOMString <var>value</var>);
   void <span title=dom-FormData-delete>delete</span>([EnsureUTF16] DOMString <var>name</var>);
   <span>FormDataEntryValue</span>? <span title=dom-FormData-get>get</span>([EnsureUTF16] DOMString <var>name</var>);
   sequence&lt;<span>FormDataEntryValue</span>> <span title=dom-FormData-getAll>getAll</span>([EnsureUTF16] DOMString <var>name</var>);
@@ -2296,13 +2296,12 @@ attributes initialized to false, so it is suggested that for consistency all
 
 <h3>Security Considerations</h3>
 
-<p>For cross-origin requests some kind of opt-in, e.g.
-Cross-Origin Resource Sharing, has to be used before
+<p>For cross-origin requests some kind of opt-in, e.g. Fetch, has to be used before
 <span data-anolis-spec=dom title=concept-event>events</span> using the
 <code>ProgressEvent</code> interface are
 <span data-anolis-spec=dom title=concept-event-dispatch>dispatched</span>
 as information (e.g. size) would be revealed that cannot be obtained
-otherwise. <span data-anolis-ref class=informative>CORS</span>
+otherwise. <span data-anolis-ref class=informative>FETCH</span>
 
 
 <h3>Example</h3>
@@ -2436,7 +2435,7 @@ Jim Ley,
 Joe Farro,
 Jonas Sicking,
 Julian Reschke,
-Jungkee Song,
+송정기 (Jungkee Song),
 呂康豪 (Kang-Hao Lu),
 Karl Dubost,
 Lachlan Hunt,

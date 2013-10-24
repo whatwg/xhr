@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-22-october-2013">Living Standard — Last Updated 22 October 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-24-october-2013">Living Standard — Last Updated 24 October 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-22 October 2013, the editor has made this specification available
+24 October 2013, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -216,14 +216,14 @@ community.
 
 <h2 id="terminology"><span class="secno">3 </span>Terminology</h2>
 
-<p>This specification heavily borrows terminology, from
-Cross-Origin Resource Sharing, DOM, DOM Parsing and Serialization, Encoding,
-File API, HTML, HTTP, Typed Array, URL, Web IDL, and XML.
+<p>This specification heavily borrows terminology, from DOM,
+DOM Parsing and Serialization, Encoding, Fetch, File API, HTML, HTTP, Typed Array, URL,
+Web IDL, and XML.
 
-<a href="#refsCORS">[CORS]</a>
 <a href="#refsDOM">[DOM]</a>
 <a href="#refsDOMPS">[DOMPS]</a>
 <a href="#refsENCODING">[ENCODING]</a>
+<a href="#refsFETCH">[FETCH]</a>
 <a href="#refsFILEAPI">[FILEAPI]</a>
 <a href="#refsHTML">[HTML]</a>
 <a href="#refsHTTP">[HTTP]</a>
@@ -1468,11 +1468,11 @@ method must run these steps:
  <li><p>Return null.
 </ol>
 
-<p class="note">The Cross-Origin Resource Sharing specification filters
+<p class="note">The Fetch specification filters
 <a href="#concept-response-header" title="concept-response-header">response headers</a> exposed by
-<code title="dom-XMLHttpRequest-getAllResponseHeaders"><a href="#dom-xmlhttprequest-getallresponseheaders">getAllResponseHeaders()</a></code>
-for <a class="external" href="http://www.w3.org/TR/2013/CR-cors-20130129/#cross-origin-request" title="cross-origin request">cross-origin requests</a>.
-<a href="#refsCORS">[CORS]</a>
+<code title="dom-XMLHttpRequest-getResponseHeader"><a href="#dom-xmlhttprequest-getresponseheader">getResponseHeader()</a></code>
+for cross-origin requests.
+<a href="#refsFETCH">[FETCH]</a>
 
 <div class="example">
 
@@ -1521,11 +1521,11 @@ method must run these steps:
  U+003A COLON U+0020 SPACE pair.
 </ol>
 
-<p class="note">The Cross-Origin Resource Sharing specification filters
+<p class="note">The Fetch specification filters
 <a href="#concept-response-header" title="concept-response-header">response headers</a> exposed by
 <code title="dom-XMLHttpRequest-getAllResponseHeaders"><a href="#dom-xmlhttprequest-getallresponseheaders">getAllResponseHeaders()</a></code>
-for <a class="external" href="http://www.w3.org/TR/2013/CR-cors-20130129/#cross-origin-request" title="cross-origin request">cross-origin requests</a>.
-<a href="#refsCORS">[CORS]</a>
+for cross-origin requests.
+<a href="#refsFETCH">[FETCH]</a>
 
 <div class="example">
  <p>For the following script:
@@ -2074,12 +2074,12 @@ and/or <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> obj
 
 <h2 id="interface-formdata"><span class="secno">5 </span>Interface <code title="">FormData</code></h2>
 
-<pre class="idl">typedef (<a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a> or DOMString) <dfn id="formdataentryvalue">FormDataEntryValue</dfn>;
+<pre class="idl">typedef (<a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a> or [EnsureUTF16] DOMString) <dfn id="formdataentryvalue">FormDataEntryValue</dfn>;
 
 [<a href="#dom-formdata" title="dom-FormData">Constructor</a>(optional <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/forms.html#htmlformelement">HTMLFormElement</a> <var>form</var>)]
 interface <dfn id="formdata">FormData</dfn> {
   void <a href="#dom-formdata-append" title="dom-FormData-append">append</a>([EnsureUTF16] DOMString <var>name</var>, <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> <var>value</var>, optional [EnsureUTF16] DOMString <var>filename</var>);
-  void <a href="#dom-formdata-append" title="dom-FormData-append">append</a>(DOMString <var>name</var>, [EnsureUTF16] DOMString <var>value</var>);
+  void <a href="#dom-formdata-append" title="dom-FormData-append">append</a>([EnsureUTF16] DOMString <var>name</var>, [EnsureUTF16] DOMString <var>value</var>);
   void <a href="#dom-formdata-delete" title="dom-FormData-delete">delete</a>([EnsureUTF16] DOMString <var>name</var>);
   <a href="#formdataentryvalue">FormDataEntryValue</a>? <a href="#dom-formdata-get" title="dom-FormData-get">get</a>([EnsureUTF16] DOMString <var>name</var>);
   sequence&lt;<a href="#formdataentryvalue">FormDataEntryValue</a>&gt; <a href="#dom-formdata-getall" title="dom-FormData-getAll">getAll</a>([EnsureUTF16] DOMString <var>name</var>);
@@ -2342,13 +2342,12 @@ attributes initialized to false, so it is suggested that for consistency all
 
 <h3 id="security-considerations"><span class="secno">6.4 </span>Security Considerations</h3>
 
-<p>For cross-origin requests some kind of opt-in, e.g.
-Cross-Origin Resource Sharing, has to be used before
+<p>For cross-origin requests some kind of opt-in, e.g. Fetch, has to be used before
 <a class="external" href="http://dom.spec.whatwg.org/#concept-event" title="concept-event">events</a> using the
 <code><a href="#progressevent">ProgressEvent</a></code> interface are
 <a class="external" href="http://dom.spec.whatwg.org/#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>
 as information (e.g. size) would be revealed that cannot be obtained
-otherwise. <a class="informative" href="#refsCORS">[CORS]</a>
+otherwise. <a class="informative" href="#refsFETCH">[FETCH]</a>
 
 
 <h3 id="example"><span class="secno">6.5 </span>Example</h3>
@@ -2427,9 +2426,6 @@ parsed, this is a network error.
 <div id="anolis-references"><dl><dt id="refsCOOKIES">[COOKIES]
 <dd><cite><a href="http://tools.ietf.org/html/rfc6265">HTTP State Management Mechanism</a></cite>, Adam Barth. IETF.
 
-<dt id="refsCORS">[CORS]
-<dd><cite><a href="http://www.w3.org/TR/cors/">CORS (obsolete)</a></cite>, Anne van Kesteren. W3C.
-
 <dt id="refsDOM">[DOM]
 <dd><cite><a href="http://dom.spec.whatwg.org/">DOM</a></cite>, Anne van Kesteren, Aryeh Gregor and Ms2ger. WHATWG.
 
@@ -2441,6 +2437,9 @@ parsed, this is a network error.
 
 <dt id="refsENCODING">[ENCODING]
 <dd><cite><a href="http://encoding.spec.whatwg.org/">Encoding</a></cite>, Anne van Kesteren. WHATWG.
+
+<dt id="refsFETCH">[FETCH]
+<dd><cite><a href="http://fetch.spec.whatwg.org/">Fetch</a></cite>, Anne van Kesteren. WHATWG.
 
 <dt id="refsFILEAPI">[FILEAPI]
 <dd><cite><a href="http://dev.w3.org/2006/webapi/FileAPI/">File API</a></cite>, Arun Ranganathan and Jonas Sicking. W3C.
@@ -2534,7 +2533,7 @@ Jim Ley,
 Joe Farro,
 Jonas Sicking,
 Julian Reschke,
-Jungkee Song,
+송정기 (Jungkee Song),
 呂康豪 (Kang-Hao Lu),
 Karl Dubost,
 Lachlan Hunt,
