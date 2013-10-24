@@ -500,7 +500,7 @@ must be done in a case-insensitive manner. Initially it must be empty.
   <p>Sets the <span>request method</span>, <span>request URL</span>, and
   <span>synchronous flag</span>.
 
-  <p>Throws a "<code data-anolis-spec=dom>SyntaxError</code>" exception if
+  <p>Throws a JavaScript <code data-anolis-spec=webidl>TypeError</code> if
   either <var title>method</var> is not a valid HTTP method or
   <var title>url</var> cannot be parsed.
 
@@ -567,8 +567,7 @@ method must run these steps:
   </ol>
 
  <li><p>If <var>method</var> does not match the <span data-anolis-spec=http>Method</span>
- token production, <span data-anolis-spec=dom title=concept-throw>throw</span> a
- "<code data-anolis-spec=dom>SyntaxError</code>" exception.
+ token production, <span data-anolis-spec=dom title=concept-throw>throw</span> a JavaScript <code data-anolis-spec=webidl>TypeError</code>.
 
  <li>
   <p>If <var>method</var> is a case-insensitive match for <code>CONNECT</code>,
@@ -595,8 +594,8 @@ method must run these steps:
  with <var title>base</var>.
 
  <li><p>If <var title>parsed URL</var> is failure,
- <span data-anolis-spec=dom title=concept-throw>throw</span> a
- "<code data-anolis-spec=dom>SyntaxError</code>" exception.
+ <span data-anolis-spec=dom title=concept-throw>throw</span> a 
+ JavaScript <code data-anolis-spec=webidl>TypeError</code>.
 
  <li>
   <p>If <var title>parsed URL</var>'s <span data-anolis-spec=url>relative flag</span> is
@@ -677,7 +676,7 @@ method must run these steps:
   <span title="dom-XMLHttpRequest-OPENED">OPENED</span> or if the
   <span><code>send()</code> flag</span> is set.
 
-  <p>Throws a "<code data-anolis-spec=dom>SyntaxError</code>" exception if
+  <p>Throws a JavaScript <code data-anolis-spec=webidl>TypeError</code> if
   <var title>header</var> is not a valid HTTP header field name or if
   <var title>value</var> is not a valid HTTP header field value.
  </dd>
@@ -710,14 +709,14 @@ method must run these steps:
 
  <li><p>If <var>header</var> does not match the
  <span data-anolis-spec=http>field-name</span> production,
- <span data-anolis-spec=dom title=concept-throw>throw</span> a
- "<code data-anolis-spec=dom>SyntaxError</code>" exception.
+ <span data-anolis-spec=dom title=concept-throw>throw</span> a 
+ JavaScript <code data-anolis-spec=webidl>TypeError</code>.
 
  <li>
   <p>If <var>value</var> does not match the
   <span data-anolis-spec=http>field-value</span> production,
-  <span data-anolis-spec=dom title=concept-throw>throw</span> a
-  "<code data-anolis-spec=dom>SyntaxError</code>" exception.
+  <span data-anolis-spec=dom title=concept-throw>throw</span> a 
+  JavaScript <code data-anolis-spec=webidl>TypeError</code>.
 
   <p class=note>An empty string represents an empty header field value.
 
@@ -1738,7 +1737,7 @@ resources using <span data-anolis-spec=encoding>utf-8</span>.
   <span title="dom-XMLHttpRequest-LOADING">LOADING</span> or
   <span title="dom-XMLHttpRequest-DONE">DONE</span>.
 
-  <p>Throws a "<code data-anolis-spec=dom>SyntaxError</code>" exception if
+  <p>Throws a JavaScript <code data-anolis-spec=webidl>TypeError</code> if
   <var title>mime</var> is not a valid media type.
  </dd>
 </dl>
@@ -1756,8 +1755,8 @@ method must run these steps:
 
  <li><p>If parsing <var title>mime</var> analogously to the value of
  the <code>Content-Type</code> header fails,
- <span data-anolis-spec=dom title=concept-throw>throw</span> a
- "<code data-anolis-spec=dom>SyntaxError</code>" exception.
+ <span data-anolis-spec=dom title=concept-throw>throw</span> a 
+ JavaScript <code data-anolis-spec=webidl>TypeError</code>.
 
  <li><p>If <var title>mime</var> is successfully parsed, set
  <span>override MIME type</span> to its MIME type,
