@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-24-october-2013">Living Standard — Last Updated 24 October 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-25-october-2013">Living Standard — Last Updated 25 October 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-24 October 2013, the editor has made this specification available
+25 October 2013, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -285,7 +285,7 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <a href="#xmlhttpreque
 
   // <a href="#request">request</a>
   void <a href="#dom-xmlhttprequest-open" title="dom-XMLHttpRequest-open">open</a>(ByteString <var>method</var>, [EnsureUTF16] DOMString <var title="">url</var>, optional boolean <var>async</var> = true, optional [EnsureUTF16] DOMString? <var>username</var> = null, optional [EnsureUTF16] DOMString? <var>password</var> = null);
-  void <a href="#dom-xmlhttprequest-setrequestheader" title="dom-XMLHttpRequest-setRequestHeader">setRequestHeader</a>(ByteString <var>header</var>, ByteString <var>value</var>);
+  void <a href="#dom-xmlhttprequest-setrequestheader" title="dom-XMLHttpRequest-setRequestHeader">setRequestHeader</a>(ByteString <var>name</var>, ByteString <var>value</var>);
            attribute unsigned long <a href="#dom-xmlhttprequest-timeout" title="dom-XMLHttpRequest-timeout">timeout</a>;
            attribute boolean <a href="#dom-xmlhttprequest-withcredentials" title="dom-XMLHttpRequest-withCredentials">withCredentials</a>;
   readonly attribute <a href="#xmlhttprequestupload">XMLHttpRequestUpload</a> <a href="#dom-xmlhttprequest-upload" title="dom-XMLHttpRequest-upload">upload</a>;
@@ -295,7 +295,7 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <a href="#xmlhttpreque
   // <a href="#response">response</a>
   readonly attribute unsigned short <a href="#dom-xmlhttprequest-status" title="dom-XMLHttpRequest-status">status</a>;
   readonly attribute ByteString <a href="#dom-xmlhttprequest-statustext" title="dom-XMLHttpRequest-statusText">statusText</a>;
-  ByteString? <a href="#dom-xmlhttprequest-getresponseheader" title="dom-XMLHttpRequest-getResponseHeader">getResponseHeader</a>(ByteString <var>header</var>);
+  ByteString? <a href="#dom-xmlhttprequest-getresponseheader" title="dom-XMLHttpRequest-getResponseHeader">getResponseHeader</a>(ByteString <var>name</var>);
   ByteString <a href="#dom-xmlhttprequest-getallresponseheaders" title="dom-XMLHttpRequest-getAllResponseHeaders">getAllResponseHeaders</a>();
   void <a href="#dom-xmlhttprequest-overridemimetype" title="dom-XMLHttpRequest-overrideMimeType">overrideMimeType</a>(DOMString <var>mime</var>);
            attribute <a href="#xmlhttprequestresponsetype">XMLHttpRequestResponseType</a> <a href="#dom-xmlhttprequest-responsetype" title="dom-XMLHttpRequest-responseType">responseType</a>;
@@ -499,8 +499,6 @@ that the <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send
 been invoked. It is initially unset and is used during the
 <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a> state.
 
-<p>The <dfn id="error-flag">error flag</dfn> indicates some type of
-network error or fetch termination. It is initially unset.
 
 
 <h3 id="request"><span class="secno">4.5 </span>Request</h3>
@@ -518,15 +516,14 @@ request-associated concepts:
 <dfn id="upload-complete-flag">upload complete flag</dfn>, and
 <dfn id="upload-events-flag">upload events flag</dfn>.
 
-<p>The <a href="#author-request-headers">author request headers</a> is a list of HTTP header names
-and corresponding header values. Comparisons against the HTTP header names
-must be done in a case-insensitive manner. Initially it must be empty.
+<p>The <a href="#author-request-headers">author request headers</a> is an initially empty list of
+<a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">headers</a>.
 
-<p>The <a href="#request-entity-body">request entity body</a> must initially be null.
+<p>The <a href="#request-entity-body">request entity body</a> is initially null.
 
 <p>The <a href="#synchronous-flag">synchronous flag</a>,
 <a href="#upload-complete-flag">upload complete flag</a>, and
-<a href="#upload-events-flag">upload events flag</a> must be initially unset.
+<a href="#upload-events-flag">upload events flag</a> are initially unset.
 
 <hr>
 
@@ -552,7 +549,7 @@ must be done in a case-insensitive manner. Initially it must be empty.
 
   <p>Throws a "<code class="external"><a href="http://dom.spec.whatwg.org/#securityerror">SecurityError</a></code>" exception
   if <var title="">method</var> is a case-insensitive match for
-  <code>CONNECT</code>, <code>TRACE</code> or <code>TRACK</code>.
+  `<code title="">CONNECT</code>`, `<code title="">TRACE</code>` or `<code title="">TRACK</code>`.
 
   <p>Throws an "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>"
   exception if <var title="">async</var> is false, the
@@ -617,9 +614,10 @@ method must run these steps:
  "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" exception.
 
  <li>
-  <p>If <var>method</var> is a case-insensitive match for <code>CONNECT</code>,
-  <code>DELETE</code>, <code>GET</code>, <code>HEAD</code>, <code>OPTIONS</code>,
-  <code>POST</code>, <code>PUT</code>, <code>TRACE</code>, or <code>TRACK</code>, subtract
+  <p>If <var>method</var> is a case-insensitive match for `<code title="">CONNECT</code>`,
+  `<code title="">DELETE</code>`, `<code title="">GET</code>`, `<code title="">HEAD</code>`,
+  `<code title="">OPTIONS</code>`, `<code title="">POST</code>`, `<code title="">PUT</code>`,
+  `<code title="">TRACE</code>`, or `<code title="">TRACK</code>`, subtract
   0x20 from each byte in the range 0x61 (ASCII a) to 0x7A (ASCII z).
 
   <p class="note">If it does not match any of the above, it is passed
@@ -628,8 +626,8 @@ method must run these steps:
   M-POST, MKCOL, MOVE, PROPFIND, PROPPATCH, and UNLOCK. -->
 
  <li>
-  <p>If <var>method</var> is a case-sensitive match for <code>CONNECT</code>,
-  <code>TRACE</code>, or <code>TRACK</code>,
+  <p>If <var>method</var> is a case-sensitive match for `<code title="">CONNECT</code>`,
+  `<code title="">TRACE</code>`, or `<code title="">TRACK</code>`,
   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
   "<code class="external"><a href="http://dom.spec.whatwg.org/#securityerror">SecurityError</a></code>" exception.
 
@@ -686,7 +684,8 @@ method must run these steps:
    the <a href="#synchronous-flag">synchronous flag</a> otherwise.
    <li><p>Set <a href="#author-request-headers">author request headers</a> to the empty list.
    <li><p>Unset the <a href="#send-flag"><code>send()</code> flag</a>.
-   <li><p>Set <a href="#response-entity-body">response entity body</a> to null.
+   <li><p>Set <a href="#response-0">response</a> to a
+   <a class="external" href="http://fetch.spec.whatwg.org/#concept-network-error" title="concept-network-error">network error</a>.
    <li><p>Set <a href="#arraybuffer-response-entity-body">arraybuffer response entity body</a> to null.
    <li><p>Set <a href="#blob-response-entity-body">blob response entity body</a> to null.
    <li><p>Set <a href="#document-response-entity-body">document response entity body</a> to null.
@@ -710,13 +709,16 @@ method must run these steps:
 <h4 id="the-setrequestheader()-method"><span class="secno">4.5.2 </span>The <code title="">setRequestHeader()</code> method</h4>
 
 <dl class="domintro">
- <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-setrequestheader" title="dom-XMLHttpRequest-setRequestHeader">setRequestHeader</a>(<var title="">header</var>, <var title="">value</var>)</code>
+ <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-setrequestheader" title="dom-XMLHttpRequest-setRequestHeader">setRequestHeader</a>(<var>name</var>, <var>value</var>)</code>
 
  <dd>
-  <p>Appends an header to the list of
-  <a href="#author-request-headers">author request headers</a>, or if <var>header</var> is already
-  in the list of <a href="#author-request-headers">author request headers</a>, combines its value
-  with <var>value</var>.
+  <p>Appends an <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a> to
+  <a href="#author-request-headers">author request headers</a>, or if <var>name</var> is already a
+  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a>'s
+  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">name</a> in
+  <a href="#author-request-headers">author request headers</a>, appends <var>value</var> to that
+  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a>'s
+  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a>.
 
   <p>Throws an "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>"
   exception if the state is not
@@ -724,8 +726,8 @@ method must run these steps:
   <a href="#send-flag"><code>send()</code> flag</a> is set.
 
   <p>Throws a "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" exception if
-  <var title="">header</var> is not a valid HTTP header field name or if
-  <var title="">value</var> is not a valid HTTP header field value.
+  <var>name</var> is not a valid HTTP header field name or if
+  <var>value</var> is not a valid HTTP header field value.
  </dd>
 </dl>
 
@@ -735,14 +737,8 @@ other headers the user agent will take control of if they are not set by
 the author as indicated at the end of the
 <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code> method section.
 
-
-<p class="note">For non <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#same-origin">same origin</a> requests using the HTTP
-<code>GET</code> method a preflight request is made when headers other
-than <code>Accept</code> and <code>Accept-Language</code> are set.
-
-
 <p>The
-<dfn id="dom-xmlhttprequest-setrequestheader" title="dom-XMLHttpRequest-setRequestHeader"><code>setRequestHeader(<var title="">header</var>, <var title="">value</var>)</code></dfn>
+<dfn id="dom-xmlhttprequest-setrequestheader" title="dom-XMLHttpRequest-setRequestHeader"><code>setRequestHeader(<var>name</var>, <var>value</var>)</code></dfn>
 method must run these steps:
 
 <ol>
@@ -754,7 +750,7 @@ method must run these steps:
  <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
  "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception.
 
- <li><p>If <var>header</var> does not match the
+ <li><p>If <var>name</var> does not match the
  <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-4.2">field-name</a> production,
  <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
  "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" exception.
@@ -768,51 +764,61 @@ method must run these steps:
   <p class="note">An empty string represents an empty header field value.
 
  <li>
-  <p>Terminate these steps if <var>header</var> is a case-insensitive
+  <p>Terminate these steps if <var>name</var> is a case-insensitive
   match for one of the following headers:
 
   <ul class="brief">
-   <li><code>Accept-Charset</code>
-   <li><code>Accept-Encoding</code>
-   <li><code>Access-Control-Request-Headers</code>
-   <li><code>Access-Control-Request-Method</code>
-   <li><code>Connection</code>
-   <li><code>Content-Length</code>
-   <li><code>Cookie</code>
-   <li><code>Cookie2</code>
-   <li><code>Date</code>
-   <li><code>DNT</code>
-   <li><code>Expect</code>
-   <li><code>Host</code>
-   <li><code>Keep-Alive</code>
-   <li><code title="">Origin</code>
-   <li><code>Referer</code>
-   <li><code>TE</code>
-   <li><code>Trailer</code>
-   <li><code>Transfer-Encoding</code>
-   <li><code>Upgrade</code>
-   <li><code>User-Agent</code>
-   <li><code>Via</code>
+   <li>`<code title="">Accept-Charset</code>`
+   <li>`<code title="">Accept-Encoding</code>`
+   <li>`<code title="">Access-Control-Request-Headers</code>`
+   <li>`<code title="">Access-Control-Request-Method</code>`
+   <li>`<code title="">Connection</code>`
+   <li>`<code title="">Content-Length</code>`
+   <li>`<code title="">Cookie</code>`
+   <li>`<code title="">Cookie2</code>`
+   <li>`<code title="">Date</code>`
+   <li>`<code title="">DNT</code>`
+   <li>`<code title="">Expect</code>`
+   <li>`<code title="">Host</code>`
+   <li>`<code title="">Keep-Alive</code>`
+   <li><code title="">Origin</code>`
+   <li>`<code title="">Referer</code>`
+   <li>`<code title="">TE</code>`
+   <li>`<code title="">Trailer</code>`
+   <li>`<code title="">Transfer-Encoding</code>`
+   <li>`<code title="">Upgrade</code>`
+   <li>`<code title="">User-Agent</code>`
+   <li>`<code title="">Via</code>`
   </ul>
 
-  <p>… or if the start of <var>header</var> is a case-insensitive
-  match for <code>Proxy-</code> or <code>Sec-</code> (including when
-  <var>header</var> is just <code>Proxy-</code> or <code>Sec-</code>).
+  <p>… or if the start of <var>name</var> is a case-insensitive
+  match for `<code title="">Proxy-</code>` or `<code title="">Sec-</code>` (including when
+  <var>name</var> is just `<code title="">Proxy-</code>` or `<code title="">Sec-</code>`).
 
   <p class="note">The above headers are controlled by the user agent to
   let it control those aspects of transport. This guarantees data
-  integrity to some extent. Header names starting with <code>Sec-</code>
+  integrity to some extent. Header names starting with `<code title="">Sec-</code>`
   are not allowed to be set to allow new headers to be minted that are
   guaranteed not to come from <code><a href="#xmlhttprequest">XMLHttpRequest</a></code>.
 
- <li><p>If <var>header</var> is not in the
- <a href="#author-request-headers">author request headers</a> list, append <var>header</var> with
- its associated <var>value</var> to the list and terminate these steps.
+ <li><p>If <var>name</var> is not a
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">name</a> of a
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a> in
+ <a href="#author-request-headers">author request headers</a>, append a
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a> whose
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">name</a> is
+ <var>name</var> and
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a> is
+ <var>value</var> to <a href="#author-request-headers">author request headers</a>.
 
  <li>
-  <p>If <var title="">header</var> is in the <a href="#author-request-headers">author request headers</a> list, append
-  "<code>,</code>", followed by U+0020, followed by <var title="">value</var>, to the
-  value of the header matching <var title="">header</var>.
+  <p>Otherwise, append `<code>,</code>`, followed by 0x20, followed by
+  <var>value</var>, to the
+  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a> of the
+  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a> in
+  <a href="#author-request-headers">author request headers</a> whose
+  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">name</a> is
+  <var>name</var>.
 
   <p class="note">The XMLHttpRequest standard intentionally constraints the
   use of HTTP here in line with contemporary implementations.
@@ -1096,8 +1102,7 @@ method must run these steps:
  <li><p>If the <a href="#synchronous-flag">synchronous flag</a> is set, release the
  <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#storage-mutex">storage mutex</a>.
 
- <li><p>Unset the <a href="#error-flag">error flag</a>,
- <a href="#upload-complete-flag">upload complete flag</a> and <a href="#upload-events-flag">upload events flag</a>.
+ <li><p>Unset the <a href="#upload-complete-flag">upload complete flag</a> and <a href="#upload-events-flag">upload events flag</a>.
 
  <li><p>If there is no <a href="#request-entity-body">request entity body</a> or if it is empty,
  set the <a href="#upload-complete-flag">upload complete flag</a>.
@@ -1219,6 +1224,8 @@ method must run these steps:
   <ol>
    <li><p><a href="#handle-errors">Handle errors</a> for <var title="">response</var>.
 
+   <li><p>Set <a href="#response-0">response</a> to <var title="">response</var>.
+
    <li>
     <p>If state is <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a>, run these
     subsubsteps:
@@ -1258,6 +1265,9 @@ method must run these steps:
 
   <ol>
    <li><p><a href="#handle-errors">Handle errors</a> for <var title="">response</var>.
+
+   <li><p>If the <a href="#synchronous-flag">synchronous flag</a> is set, set <a href="#response-0">response</a> to
+   <var title="">response</var>.
 
    <li>
     <p>If state is <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a>, run these
@@ -1320,7 +1330,8 @@ exception <var>exception</var> are:
 
  <li><p>Unset the <a href="#send-flag"><code>send()</code> flag</a>.
 
- <li><p>Set the <a href="#error-flag">error flag</a>.
+ <li><p>Set <a href="#response-0">response</a> to a
+ <span title="concept-network-error">network error</span>.
 
  <li><p>If the <a href="#synchronous-flag">synchronous flag</a> is set,
  <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an <var>exception</var>
@@ -1385,93 +1396,53 @@ these steps:
 
 <h3 id="response"><span class="secno">4.6 </span>Response</h3>
 
-<p>A <dfn id="concept-response-header" title="concept-response-header">response header</dfn> is a HTTP response header
-transmitted before the <a href="#response-entity-body">response entity body</a>.
-<a href="#refsHTTP">[HTTP]</a>
-
-<p class="note">This excludes trailer fields ("trailers").
+<p>An <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> has an associated <dfn id="response-0">response</dfn>. Unless stated
+otherwise it is a
+<a class="external" href="http://fetch.spec.whatwg.org/#concept-network-error" title="concept-network-error">network error</a>.
 
 
 <h4 id="the-status-attribute"><span class="secno">4.6.1 </span>The <code title="">status</code> attribute</h4>
 
-<dl class="domintro">
- <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-status" title="dom-XMLHttpRequest-status">status</a></code>
- <dd><p>Returns the HTTP status code.
-</dl>
-
 <p>The
 <dfn id="dom-xmlhttprequest-status" title="dom-XMLHttpRequest-status"><code>status</code></dfn>
-attribute must return the result of running these
-steps:
-
-<ol>
- <li><p>If the state is <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a> or
- <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a>, return 0.
-
- <li><p>If the <a href="#error-flag">error flag</a> is set, return 0.
-
- <li><p>Return the HTTP status code.
-</ol>
+attribute must return the <a href="#response-0">response</a>'s
+<a class="external" href="http://fetch.spec.whatwg.org/#concept-response-status" title="concept-response-status">status</a>.
 
 
 <h4 id="the-statustext-attribute"><span class="secno">4.6.2 </span>The <code title="">statusText</code> attribute</h4>
 
-<dl class="domintro">
- <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-statustext" title="dom-XMLHttpRequest-statusText">statusText</a></code>
- <dd><p>Returns the HTTP status text.
-</dl>
-
 <p>The
 <dfn id="dom-xmlhttprequest-statustext" title="dom-XMLHttpRequest-statusText"><code>statusText</code></dfn>
-attribute must return the result of running these steps:
-
-<ol>
- <li><p>If the state is <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a> or
- <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a>, return the empty string.
-
- <li><p>If the <a href="#error-flag">error flag</a> is set, return the empty string.
-
- <li><p>Return the HTTP status text.
-</ol>
+attribute must return the <a href="#response-0">response</a>'s
+<a class="external" href="http://fetch.spec.whatwg.org/#concept-response-status-message" title="concept-response-status-message">status message</a>.
 
 
 <h4 id="the-getresponseheader()-method"><span class="secno">4.6.3 </span>The <code title="">getResponseHeader()</code> method</h4>
 
-<dl class="domintro">
- <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-getresponseheader" title="dom-XMLHttpRequest-getResponseHeader">getResponseHeader</a>(<var title="">header</var>)</code>
- <dd><p>Returns the header field value from the response of which the
- field name matches <var title="">header</var>, unless the field name is
- <code>Set-Cookie</code> or <code>Set-Cookie2</code>.
-</dl>
-
 <p>The
-<dfn id="dom-xmlhttprequest-getresponseheader" title="dom-XMLHttpRequest-getResponseHeader"><code>getResponseHeader(<var title="">header</var>)</code></dfn>
+<dfn id="dom-xmlhttprequest-getresponseheader" title="dom-XMLHttpRequest-getResponseHeader"><code>getResponseHeader(<var>name</var>)</code></dfn>
 method must run these steps:
 
 <ol>
- <li><p>If the state is <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a> or
- <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a>, return null.
+ <li><p>If <a href="#response-0">response</a>'s
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-response-headers" title="concept-response-headers">headers</a> has multiple
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">headers</a> whose
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">name</a> is <var>name</var>,
+ return their <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">values</a> in
+ list order as a single byte sequence separated from each other by a 0x2C 0x20 byte pair.
 
- <li><p>If the <a href="#error-flag">error flag</a> is set, return null.
-
- <li><p>If <var>header</var> is a case-insensitive match for
- <code>Set-Cookie</code> or <code>Set-Cookie2</code>, return null.
-
- <li><p>If <var>header</var> is a case-insensitive match for multiple
- <a href="#concept-response-header" title="concept-response-header">response headers</a>, return the values of these
- headers as a single concatenated string separated from each other by a
- U+002C COMMA U+0020 SPACE character pair.
-
- <li><p>If <var>header</var> is a case-insensitive match for a single
- <a href="#concept-response-header" title="concept-response-header">response header</a>, return the value of that header.
+ <li><p>If <a href="#response-0">response</a>'s
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-response-headers" title="concept-response-headers">headers</a> has one
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a> whose
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">name</a> is <var>name</var>,
+ return its <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a>.
 
  <li><p>Return null.
 </ol>
 
 <p class="note">The Fetch specification filters
-<a href="#concept-response-header" title="concept-response-header">response headers</a> exposed by
-<code title="dom-XMLHttpRequest-getResponseHeader"><a href="#dom-xmlhttprequest-getresponseheader">getResponseHeader()</a></code>
-for cross-origin requests.
+<a class="external" href="http://fetch.spec.whatwg.org/#concept-response-headers" title="concept-response-headers">headers</a> exposed by
+<code title="dom-XMLHttpRequest-getResponseHeader"><a href="#dom-xmlhttprequest-getresponseheader">getResponseHeader()</a></code>.
 <a href="#refsFETCH">[FETCH]</a>
 
 <div class="example">
@@ -1496,35 +1467,20 @@ client.onreadystatechange = function() {
 
 <h4 id="the-getallresponseheaders()-method"><span class="secno">4.6.4 </span>The <code title="">getAllResponseHeaders()</code> method</h4>
 
-<dl class="domintro">
- <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-getallresponseheaders" title="dom-XMLHttpRequest-getAllResponseHeaders">getAllResponseHeaders</a>()</code>
- <dd><p>Returns all headers from the response, with the exception of those
- whose field name is <code>Set-Cookie</code> or
- <code>Set-Cookie2</code>.
-</dl>
-
 <p>The
 <dfn id="dom-xmlhttprequest-getallresponseheaders" title="dom-XMLHttpRequest-getAllResponseHeaders"><code>getAllResponseHeaders()</code></dfn>
-method must run these steps:
-
-<ol>
- <li><p>If the state is <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a> or
- <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a>, return the empty string.
-
- <li><p>If the <a href="#error-flag">error flag</a> is set, return the empty string.
-
- <li><p>Return all <a href="#concept-response-header" title="concept-response-header">response headers</a>, excluding headers that are a
- case-insensitive match for <code>Set-Cookie</code> or
- <code>Set-Cookie2</code>, as a single string, with each header line
- separated by a U+000D CR U+000A LF pair, excluding the status line, and
- with each header name and header value separated by a
- U+003A COLON U+0020 SPACE pair.
-</ol>
+method must return all <a href="#response-0">response</a>'s
+<a class="external" href="http://fetch.spec.whatwg.org/#concept-response-headers" title="concept-response-headers">headers</a>, in list order,
+as a single byte sequence with each
+<a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a> separated by a 0x0D 0x0A
+byte pair, and each <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">name</a> and
+<a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a> of a
+<a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a> separated by a 0x3A 0x20
+byte pair.
 
 <p class="note">The Fetch specification filters
-<a href="#concept-response-header" title="concept-response-header">response headers</a> exposed by
-<code title="dom-XMLHttpRequest-getAllResponseHeaders"><a href="#dom-xmlhttprequest-getallresponseheaders">getAllResponseHeaders()</a></code>
-for cross-origin requests.
+<a class="external" href="http://fetch.spec.whatwg.org/#concept-response-headers" title="concept-response-headers">headers</a> exposed by
+<code title="dom-XMLHttpRequest-getAllResponseHeaders"><a href="#dom-xmlhttprequest-getallresponseheaders">getAllResponseHeaders()</a></code>.
 <a href="#refsFETCH">[FETCH]</a>
 
 <div class="example">
@@ -1554,7 +1510,7 @@ Content-Type: text/plain; charset=utf-8</code></pre>
 <h4 id="response-entity-body-0"><span class="secno">4.6.5 </span>Response entity body</h4>
 
 <p>The <dfn id="response-mime-type">response MIME type</dfn> is the
-MIME type the <code>Content-Type</code> header contains excluding any
+MIME type the `<code title="">Content-Type</code>` header contains excluding any
 parameters and
 <a class="external" href="http://dom.spec.whatwg.org/#converted-to-ascii-lowercase">converted to ASCII lowercase</a>, or null if
 the response header can not be parsed or was omitted. The
@@ -1566,8 +1522,8 @@ is invoked. <dfn id="final-mime-type">Final MIME type</dfn> is the
 the <a href="#response-mime-type">response MIME type</a>.
 
 <p>The <dfn id="response-charset">response charset</dfn> is the value of
-the <code>charset</code> parameter of the <code>Content-Type</code> header
-or null if there was no <code>charset</code> parameter or the header could
+the <code>charset</code> parameter of the `<code title="">Content-Type</code>` header
+or null if there was no `<code title="">charset</code>` parameter or the header could
 not be parsed or was omitted. The
 <dfn id="override-charset">override charset</dfn> is initially null and
 can get a value if <code title="dom-XMLHttpRequest-overrideMimeType"><a href="#dom-xmlhttprequest-overridemimetype">overrideMimeType()</a></code> is invoked.
@@ -1580,17 +1536,14 @@ that is null in which case it is the <a href="#response-charset">response charse
 <hr>
 
 <p>The <dfn id="response-entity-body">response entity body</dfn> is the
-fragment of the <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-7.2">entity body</a> of the
-response received so far
+fragment of <a href="#response-0">response</a>'s
+<a class="external" href="http://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> received so far
 (<a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a>) or the complete
-<a class="external" href="http://tools.ietf.org/html/rfc2616/#section-7.2">entity body</a> of the response
-(<a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>). If the response
-does not have an <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-7.2">entity body</a>, the
+<a class="external" href="http://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> of the
+<a href="#response-0">response</a> (<a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>). If
+<a href="#response-0">response</a>'s
+<a class="external" href="http://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> is null,
 <a href="#response-entity-body">response entity body</a> is null.
-
-<p class="note">The <a href="#response-entity-body">response entity body</a> is updated as part
-of the <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code> method and reset by the
-<code title="dom-XMLHttpRequest-open"><a href="#dom-xmlhttprequest-open">open()</a></code> method.
 
 <hr>
 
@@ -1776,7 +1729,7 @@ resources using <a class="external" href="http://encoding.spec.whatwg.org/#utf-8
 <dl class="domintro">
  <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-overridemimetype" title="dom-XMLHttpRequest-overrideMimeType">overrideMimeType</a>(<var title="">mime</var>)</code>
  <dd>
-  <p>Sets the <code>Content-Type</code> header for the response to
+  <p>Sets the `<code title="">Content-Type</code>` header for <a href="#response-0">response</a> to
   <var title="">mime</var>.
 
   <p>Throws an "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>"
@@ -1785,7 +1738,7 @@ resources using <a class="external" href="http://encoding.spec.whatwg.org/#utf-8
   <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>.
 
   <p>Throws a "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" exception if
-  <var title="">mime</var> is not a valid media type.
+  <var title="">mime</var> is not a valid MIME type.
  </dd>
 </dl>
 
@@ -1801,7 +1754,7 @@ method must run these steps:
  "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception.
 
  <li><p>If parsing <var title="">mime</var> analogously to the value of
- the <code>Content-Type</code> header fails,
+ the `<code title="">Content-Type</code>` header fails,
  <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
  "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" exception.
 
@@ -1810,7 +1763,7 @@ method must run these steps:
  excluding any parameters, and
  <a class="external" href="http://dom.spec.whatwg.org/#converted-to-ascii-lowercase">converted to ASCII lowercase</a>.
 
- <li><p>If a <code>charset</code> parameter is successfully parsed, set
+ <li><p>If a `<code title="">charset</code>` parameter is successfully parsed, set
  <a href="#override-charset">override charset</a> to its value.
 </ol>
 
@@ -1820,7 +1773,7 @@ method must run these steps:
 
 
 <dl class="domintro">
- <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-responsetype" title="dom-XMLHttpRequest-responseType">responseType</a></code> [ = <var title="">value</var> ]
+ <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-responsetype" title="dom-XMLHttpRequest-responseType">responseType</a></code> [ = <var>value</var> ]
  <dd>
   <p>Returns the response type.
   <p>Can be set to change the response type. Values are:
@@ -1900,8 +1853,6 @@ steps:
    <li><p>If the state is not <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a> or
    <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>, return the empty string.
 
-   <li><p>If the <a href="#error-flag">error flag</a> is set, return the empty string.
-
    <li><p>Return the <a href="#text-response-entity-body">text response entity body</a>.
   </ol>
 
@@ -1910,8 +1861,6 @@ steps:
   <ol>
    <li><p>If the state is not <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>, return
    null.
-
-   <li><p>If the <a href="#error-flag">error flag</a> is set, return null.
 
    <li>
     <dl class="switch">
@@ -1973,8 +1922,6 @@ steps:
  <li><p>If the state is not <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a> or
  <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>, return the empty string.
 
- <li><p>If the <a href="#error-flag">error flag</a> is set, return the empty string.
-
  <li><p>Return the <a href="#text-response-entity-body">text response entity body</a>.
 </ol>
 
@@ -1997,7 +1944,6 @@ steps:
 attribute must return the result of running these steps:
 
 <ol>
-
  <li><p>If
  <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code> is not
  the empty string or "<code title="">document</code>",
@@ -2008,16 +1954,13 @@ attribute must return the result of running these steps:
  <li><p>If the state is not <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>, return
  null.
 
- <li><p>If the <a href="#error-flag">error flag</a> is set, return null.
-
  <li><p>Return the <a href="#document-response-entity-body">document response entity body</a>.
 </ol>
-
 
 <p class="note">The
 <code title="dom-XMLHttpRequest-responseXML"><a href="#dom-xmlhttprequest-responsexml">responseXML</a></code> attribute
 has XML in its name for historical reasons. It also returns HTML resources
-as documents.
+as <a class="external" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">documents</a>.
 
 
 <h3 id="events"><span class="secno">4.7 </span>Events summary</h3>
@@ -2162,26 +2105,26 @@ method must run these steps:
 </ol>
 
 <p>The
-<dfn id="dom-formdata-delete" title="dom-FormData-delete"><code>delete(<var title="">name</var>)</code></dfn>
+<dfn id="dom-formdata-delete" title="dom-FormData-delete"><code>delete(<var>name</var>)</code></dfn>
 method must remove all <a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a> whose
-<a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> is <var title="">name</var>.
+<a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> is <var>name</var>.
 
 <p>The
-<dfn id="dom-formdata-get" title="dom-FormData-get"><code>get(<var title="">name</var>)</code></dfn>
+<dfn id="dom-formdata-get" title="dom-FormData-get"><code>get(<var>name</var>)</code></dfn>
 method must return the <a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">value</a> of the first
 <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a> whose
-<a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> is <var title="">name</var>, and null
+<a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> is <var>name</var>, and null
 otherwise.
 
 <p>The
-<dfn id="dom-formdata-getall" title="dom-FormData-getAll"><code>getAll(<var title="">name</var>)</code></dfn>
+<dfn id="dom-formdata-getall" title="dom-FormData-getAll"><code>getAll(<var>name</var>)</code></dfn>
 method must return the <a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">values</a> of all
 <a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a> whose
-<a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> is <var title="">name</var>, in list
+<a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> is <var>name</var>, in list
 order, and the empty sequence otherwise.
 
 <p>The
-<dfn id="dom-formdata-set" title="dom-FormData-set"><code>set(<var title="">name</var>, <var title="">value</var>)</code></dfn>
+<dfn id="dom-formdata-set" title="dom-FormData-set"><code>set(<var>name</var>, <var>value</var>)</code></dfn>
 method must run these steps:
 
 <ol>
@@ -2189,7 +2132,7 @@ method must run these steps:
  <var>name</var>, <var>value</var>, and <var>filename</var> if given.
 
  <li><p>If there are any <a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a> whose
- <a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> is <var title="">name</var>, replace
+ <a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> is <var>name</var>, replace
  the first such <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a> with <var>entry</var> and
  remove the others.
 
