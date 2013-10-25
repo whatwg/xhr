@@ -101,7 +101,6 @@ client functionality for transferring data between a client and a server.
    <li><a href="#suggested-names-for-events-using-the-progressevent-interface"><span class="secno">6.3 </span>Suggested names for events using the <code title="">ProgressEvent</code> interface</a></li>
    <li><a href="#security-considerations"><span class="secno">6.4 </span>Security Considerations</a></li>
    <li><a href="#example"><span class="secno">6.5 </span>Example</a></ol></li>
- <li><a href="#data:-urls-and-http"><span class="secno">7 </span><code>data:</code> URLs and HTTP</a></li>
  <li><a class="no-num" href="#references">References</a></li>
  <li><a class="no-num" href="#acknowledgments">Acknowledgments</a></ol>
 <!--end-toc-->
@@ -1331,7 +1330,7 @@ exception <var>exception</var> are:
  <li><p>Unset the <a href="#send-flag"><code>send()</code> flag</a>.
 
  <li><p>Set <a href="#response-0">response</a> to a
- <span title="concept-network-error">network error</span>.
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-network-error" title="concept-network-error">network error</a>.
 
  <li><p>If the <a href="#synchronous-flag">synchronous flag</a> is set,
  <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an <var>exception</var>
@@ -2324,44 +2323,6 @@ otherwise. <a class="informative" href="#refsFETCH">[FETCH]</a>
  <p>Fully working code would of course be more elaborate and deal with more
  scenarios, such as network errors or the end user terminating the request.
 </div>
-
-
-
-<h2 id="data:-urls-and-http"><span class="secno">7 </span><code>data:</code> URLs and HTTP</h2>
-
-<p class="note">To ensure
-<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#data-protocol" title="data-protocol"><code>data:</code> URLs</a>
-can function in APIs designed around HTTP, such as
-<code><a href="#xmlhttprequest">XMLHttpRequest</a></code>, this section details how they work.
-Specifications defining similar URL schemes ought to take inspiration from
-this section.
-
-<p>When a
-<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#data-protocol" title="data-protocol"><code>data:</code> URL</a> is
-<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/fetching-resources.html#fetch" title="fetch">fetched</a> using the HTTP method
-<code>GET</code>, determine the response as follows:
-
-<ul>
- <li><p>Ignore any request headers.
-
- <li><p>Set the HTTP status code to 200.
-
- <li><p>Set the HTTP status text to "<code title="">OK</code>".
-
- <li><p>Include a single response header whose header field name is
- "<code title="">content-type</code>" and whose value is the
- MIME type (including any parameters) given in the
- <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#data-protocol" title="data-protocol"><code>data:</code> URL</a>,
- or the default otherwise.
-
- <li><p>Set the <a href="#response-entity-body">response entity body</a> to the data the
- <a class="external" href="http://url.spec.whatwg.org/#url">URL</a> encodes, base64 decoded if the
- "<code title="">;base64</code>" flag is present.
-</ul>
-
-<p>Otherwise, including when the
-<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#data-protocol" title="data-protocol"><code>data:</code> URL</a> cannot be
-parsed, this is a network error.
 
 
 

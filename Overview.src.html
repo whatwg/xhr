@@ -1285,7 +1285,7 @@ exception <var>exception</var> are:
  <li><p>Unset the <span><code>send()</code> flag</span>.
 
  <li><p>Set <span>response</span> to a
- <span title=concept-network-error>network error</span>.
+ <span data-anolis-spec=fetch title=concept-network-error>network error</span>.
 
  <li><p>If the <span>synchronous flag</span> is set,
  <span data-anolis-spec=dom title=concept-throw>throw</span> an <var>exception</var>
@@ -2278,44 +2278,6 @@ otherwise. <span data-anolis-ref class=informative>FETCH</span>
  <p>Fully working code would of course be more elaborate and deal with more
  scenarios, such as network errors or the end user terminating the request.
 </div>
-
-
-
-<h2><code>data:</code> URLs and HTTP</h2>
-
-<p class=note>To ensure
-<span data-anolis-spec=html title=data-protocol><code>data:</code> URLs</span>
-can function in APIs designed around HTTP, such as
-<code>XMLHttpRequest</code>, this section details how they work.
-Specifications defining similar URL schemes ought to take inspiration from
-this section.
-
-<p>When a
-<span data-anolis-spec=html title=data-protocol><code>data:</code> URL</span> is
-<span data-anolis-spec=html title=fetch>fetched</span> using the HTTP method
-<code>GET</code>, determine the response as follows:
-
-<ul>
- <li><p>Ignore any request headers.
-
- <li><p>Set the HTTP status code to 200.
-
- <li><p>Set the HTTP status text to "<code title>OK</code>".
-
- <li><p>Include a single response header whose header field name is
- "<code title>content-type</code>" and whose value is the
- MIME type (including any parameters) given in the
- <span data-anolis-spec=html title=data-protocol><code>data:</code> URL</span>,
- or the default otherwise.
-
- <li><p>Set the <span>response entity body</span> to the data the
- <span data-anolis-spec=url>URL</span> encodes, base64 decoded if the
- "<code title>;base64</code>" flag is present.
-</ul>
-
-<p>Otherwise, including when the
-<span data-anolis-spec=html title=data-protocol><code>data:</code> URL</span> cannot be
-parsed, this is a network error.
 
 
 
