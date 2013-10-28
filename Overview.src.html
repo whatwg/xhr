@@ -67,7 +67,7 @@ client functionality for transferring data between a client and a server.
 <p><em>This section is non-normative.</em>
 
 <p>The <code>XMLHttpRequest</code> object is an API for
-<span data-anolis-spec=html title=fetch>fetching</span> resources.
+<span data-anolis-spec=fetch title=concept-fetch>fetching</span> resources.
 
 <p>The name <code>XMLHttpRequest</code> is historical and has no baring on its
 functionality.
@@ -275,7 +275,7 @@ required by its definition, too).
 <dfn>anonymous flag</dfn>. If the <span>anonymous flag</span> is set,
 <span>user credentials</span> and the
 <span>source origin</span> are not exposed when
-<span data-anolis-spec=html title=fetch>fetching</span> resources.
+<span data-anolis-spec=fetch title=concept-fetch>fetching</span> resources.
 
 <p>When the <span data-anolis-spec=html>JavaScript global environment</span>
 is a <span data-anolis-spec=html>document environment</span>, the
@@ -800,7 +800,7 @@ X-Test: one, two</code></pre>
  <dt><code><var title>client</var> . <span title="dom-XMLHttpRequest-timeout">timeout</span></code>
  <dd>
   <p>Can be set to a time in milliseconds. When set to a non-zero value
-  will cause <span title=fetch data-anolis-spec=html>fetching</span> to
+  will cause <span data-anolis-spec=fetch title=concept-fetch>fetching</span> to
   terminate after the given time has passed. When the time has passed, the request has
   not yet completed, and the <span>synchronous flag</span> is unset, a
   <code title=event-xhr-timeout>timeout</code> event will then be
@@ -836,9 +836,9 @@ attribute must run these steps:
 
 <p class=note>This implies that the
 <code title="dom-XMLHttpRequest-timeout">timeout</code> attribute can be
-set while <span data-anolis-spec=html title=fetch>fetching</span> is in
+set while <span data-anolis-spec=fetch title=concept-fetch>fetching</span> is in
 progress. If that occurs it will still be measured relative to the start
-of <span data-anolis-spec=html title=fetch>fetching</span>.
+of <span data-anolis-spec=fetch title=concept-fetch>fetching</span>.
 
 
 <h4>The <code title>withCredentials</code> attribute</h4>
@@ -899,7 +899,8 @@ attribute must run these steps:
 </ol>
 
 <p class=note>The <code title="dom-XMLHttpRequest-withCredentials">withCredentials</code>
-attribute has no effect when <span data-anolis-spec=html title=fetch>fetching</span>
+attribute has no effect when
+<span data-anolis-spec=fetch title=concept-fetch>fetching</span>
 <span data-anolis-spec=html title="same origin">same-origin</span> resources.
 
 
@@ -2254,7 +2255,7 @@ otherwise. <span data-anolis-ref class=informative>FETCH</span>
  defined in the sections before, and the HTML
  <code data-anolis-spec=html>progress</code> element are used together to
  display the process of
- <span data-anolis-spec=html title=fetch>fetching</span> a resource.
+ <span data-anolis-spec=fetch title=concept-fetch>fetching</span> a resource.
 
  <pre>&lt;!DOCTYPE html>
 &lt;title>Waiting for Magical Unicorns&lt;/title>
