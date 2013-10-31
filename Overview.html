@@ -265,11 +265,7 @@ enum <dfn id="xmlhttprequestresponsetype">XMLHttpRequestResponseType</dfn> {
   "text"
 };
 
-dictionary <dfn id="xmlhttprequestoptions">XMLHttpRequestOptions</dfn> {
-  boolean anonymous = false;
-};
-
-[<a href="#dom-xmlhttprequest" title="dom-XMLHttpRequest">Constructor</a>(optional <a href="#xmlhttprequestoptions">XMLHttpRequestOptions</a> <var title="">options</var>)]
+[<a href="#dom-xmlhttprequest" title="dom-XMLHttpRequest">Constructor</a>]
 interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <a href="#xmlhttprequesteventtarget">XMLHttpRequestEventTarget</a> {
   // <a href="#event-handlers">event handler</a>
   attribute <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#eventhandler">EventHandler</a> <a href="#handler-xhr-onreadystatechange" title="handler-xhr-onreadystatechange">onreadystatechange</a>;
@@ -316,12 +312,6 @@ required by its definition, too).
 
 <h3 id="constructors"><span class="secno">4.1 </span>Constructors</h3>
 
-<p>The <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object has an associated
-<dfn id="anonymous-flag">anonymous flag</dfn>. If the <a href="#anonymous-flag">anonymous flag</a> is set,
-<a href="#user-credentials">user credentials</a> and the
-<a href="#source-origin">source origin</a> are not exposed when
-<a class="external" href="http://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">fetching</a> resources.
-
 <p>When the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a>
 is a <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#document-environment">document environment</a>, the
 <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object has an associated
@@ -330,22 +320,15 @@ is a <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work
 <dl class="domintro">
  <dt><code><var title="">client</var> = new <a href="#dom-xmlhttprequest" title="dom-XMLHttpRequest">XMLHttpRequest</a>()</code>
  <dd>Returns a new <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object.
-
- <dt><code><var title="">client</var> = new <a href="#dom-xmlhttprequest" title="dom-XMLHttpRequest">XMLHttpRequest</a>({anonymous:true})</code>
- <dd>Returns a new <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object that has its
- <a href="#anonymous-flag">anonymous flag</a> set.
 </dl>
 
 <p>The
-<dfn id="dom-xmlhttprequest" title="dom-XMLHttpRequest"><code>XMLHttpRequest(<var title="">options</var>)</code></dfn>
+<dfn id="dom-xmlhttprequest" title="dom-XMLHttpRequest"><code>XMLHttpRequest()</code></dfn>
 constructor must run these steps:
 
 <ol>
  <li><p>Let <var title="">xhr</var> be a new <code><a href="#xmlhttprequest">XMLHttpRequest</a></code>
  object.
-
- <li><p>If <var title="">options</var>'s <code title="">anonymous</code> member is
- true, set <var title="">xhr</var>'s <a href="#anonymous-flag">anonymous flag</a>.
 
  <li><p>If the
  <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
@@ -554,7 +537,6 @@ request-associated concepts:
   exception if <var title="">async</var> is false, the
   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#document-environment">document environment</a>, and either the
-  <a href="#anonymous-flag">anonymous flag</a> is set, the
   <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code> attribute is not
   zero, the
   <code title="dom-XMLHttpRequest-withCredentials"><a href="#dom-xmlhttprequest-withcredentials">withCredentials</a></code>
@@ -584,8 +566,7 @@ method must run these steps:
    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/urls.html#document-base-url">document base URL</a> of
    <a href="#concept-xmlhttprequest-document" title="concept-XMLHttpRequest-document">document</a>.
 
-   <li><p>Set <a href="#source-origin">source origin</a> to a globally unique identifier if the
-   <a href="#anonymous-flag">anonymous flag</a> is set, and the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a>
+   <li><p>Set <a href="#source-origin">source origin</a> to the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a>
    of <a href="#concept-xmlhttprequest-document" title="concept-XMLHttpRequest-document">document</a> otherwise.
 
    <li><p>Set <a href="#referrer-source">referrer source</a> to
@@ -660,7 +641,6 @@ method must run these steps:
  <li><p>If <var>async</var> is false, the
  <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
  <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#document-environment">document environment</a>, and either the
- <a href="#anonymous-flag">anonymous flag</a> is set, the
  <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code> attribute value is not zero, the
  <code title="dom-XMLHttpRequest-withCredentials"><a href="#dom-xmlhttprequest-withcredentials">withCredentials</a></code> attribute value is
  true, or the <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code> attribute
@@ -905,8 +885,7 @@ of <a class="external" href="http://fetch.spec.whatwg.org/#concept-fetch" title=
   "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception if
   either the <a href="#synchronous-flag">synchronous flag</a> is set and the
   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
-  <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#document-environment">document environment</a> or if the
-  <a href="#anonymous-flag">anonymous flag</a> is set.
+  <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#document-environment">document environment</a>.
  </dd>
 </dl>
 
@@ -927,10 +906,6 @@ attribute must run these steps:
  <li><p>If the <a href="#send-flag"><code>send()</code> flag</a> is set,
  <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
  "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception.
-
- <li><p>If the <a href="#anonymous-flag">anonymous flag</a> is set,
- <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
- "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception.
 
  <li><p>If the
  <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
@@ -1155,10 +1130,8 @@ method must run these steps:
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#force-preflight-flag">force preflight flag</a>
    <dd>Set if the <a href="#upload-events-flag">upload events flag</a> is set.
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-omit-credentials-mode" title="concept-request-omit-credentials-mode">omit credentials mode</a>
-   <dd>If the <a href="#anonymous-flag">anonymous flag</a> is set, <i title="">always</i>, if the
-   <a href="#anonymous-flag">anonymous flag</a> is unset and the
-   <code title="dom-XMLHttpRequest-withCredentials"><a href="#dom-xmlhttprequest-withcredentials">withCredentials</a></code> attribute value
-   is true, <i title="">never</i>, and <i title="">CORS</i> otherwise.
+   <dd>If the <code title="dom-XMLHttpRequest-withCredentials"><a href="#dom-xmlhttprequest-withcredentials">withCredentials</a></code>
+   attribute value is true, <i title="">never</i>, and <i title="">CORS</i> otherwise.
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-use-url-credentials-flag" title="concept-request-use-url-credentials-flag">use URL credentials flag</a>
    <dd>Set if either <a href="#request-url">request URL</a>'s
    <a class="external" href="http://url.spec.whatwg.org/#concept-url-username" title="concept-url-username">username</a>

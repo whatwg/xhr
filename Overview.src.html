@@ -220,11 +220,7 @@ enum <dfn>XMLHttpRequestResponseType</dfn> {
   "text"
 };
 
-dictionary <dfn>XMLHttpRequestOptions</dfn> {
-  boolean anonymous = false;
-};
-
-[<span title="dom-XMLHttpRequest">Constructor</span>(optional <span>XMLHttpRequestOptions</span> <var title>options</var>)]
+[<span title="dom-XMLHttpRequest">Constructor</span>]
 interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEventTarget</span> {
   // <a href="#event-handlers">event handler</a>
   attribute <span data-anolis-spec=html>EventHandler</span> <span title="handler-xhr-onreadystatechange">onreadystatechange</span>;
@@ -271,12 +267,6 @@ required by its definition, too).
 
 <h3 id="constructors">Constructors</h3>
 
-<p>The <code>XMLHttpRequest</code> object has an associated
-<dfn>anonymous flag</dfn>. If the <span>anonymous flag</span> is set,
-<span>user credentials</span> and the
-<span>source origin</span> are not exposed when
-<span data-anolis-spec=fetch title=concept-fetch>fetching</span> resources.
-
 <p>When the <span data-anolis-spec=html>JavaScript global environment</span>
 is a <span data-anolis-spec=html>document environment</span>, the
 <code>XMLHttpRequest</code> object has an associated
@@ -285,22 +275,15 @@ is a <span data-anolis-spec=html>document environment</span>, the
 <dl class=domintro>
  <dt><code><var title>client</var> = new <span title=dom-XMLHttpRequest>XMLHttpRequest</span>()</code>
  <dd>Returns a new <code>XMLHttpRequest</code> object.
-
- <dt><code><var title>client</var> = new <span title=dom-XMLHttpRequest>XMLHttpRequest</span>({anonymous:true})</code>
- <dd>Returns a new <code>XMLHttpRequest</code> object that has its
- <span>anonymous flag</span> set.
 </dl>
 
 <p>The
-<dfn title="dom-XMLHttpRequest"><code>XMLHttpRequest(<var title>options</var>)</code></dfn>
+<dfn title="dom-XMLHttpRequest"><code>XMLHttpRequest()</code></dfn>
 constructor must run these steps:
 
 <ol>
  <li><p>Let <var title>xhr</var> be a new <code>XMLHttpRequest</code>
  object.
-
- <li><p>If <var title>options</var>'s <code title>anonymous</code> member is
- true, set <var title>xhr</var>'s <span>anonymous flag</span>.
 
  <li><p>If the
  <span data-anolis-spec=html>JavaScript global environment</span> is a
@@ -509,7 +492,6 @@ request-associated concepts:
   exception if <var title>async</var> is false, the
   <span data-anolis-spec=html>JavaScript global environment</span> is a
   <span data-anolis-spec=html>document environment</span>, and either the
-  <span>anonymous flag</span> is set, the
   <code title=dom-XMLHttpRequest-timeout>timeout</code> attribute is not
   zero, the
   <code title=dom-XMLHttpRequest-withCredentials>withCredentials</code>
@@ -539,8 +521,7 @@ method must run these steps:
    <span data-anolis-spec=html>document base URL</span> of
    <span title=concept-XMLHttpRequest-document>document</span>.
 
-   <li><p>Set <span>source origin</span> to a globally unique identifier if the
-   <span>anonymous flag</span> is set, and the <span data-anolis-spec=html>origin</span>
+   <li><p>Set <span>source origin</span> to the <span data-anolis-spec=html>origin</span>
    of <span title=concept-XMLHttpRequest-document>document</span> otherwise.
 
    <li><p>Set <span>referrer source</span> to
@@ -615,7 +596,6 @@ method must run these steps:
  <li><p>If <var>async</var> is false, the
  <span data-anolis-spec=html>JavaScript global environment</span> is a
  <span data-anolis-spec=html>document environment</span>, and either the
- <span>anonymous flag</span> is set, the
  <code title=dom-XMLHttpRequest-timeout>timeout</code> attribute value is not zero, the
  <code title=dom-XMLHttpRequest-withCredentials>withCredentials</code> attribute value is
  true, or the <code title=dom-XMLHttpRequest-responseType>responseType</code> attribute
@@ -860,8 +840,7 @@ of <span data-anolis-spec=fetch title=concept-fetch>fetching</span>.
   "<code data-anolis-spec=dom>InvalidAccessError</code>" exception if
   either the <span>synchronous flag</span> is set and the
   <span data-anolis-spec=html>JavaScript global environment</span> is a
-  <span data-anolis-spec=html>document environment</span> or if the
-  <span>anonymous flag</span> is set.
+  <span data-anolis-spec=html>document environment</span>.
  </dd>
 </dl>
 
@@ -882,10 +861,6 @@ attribute must run these steps:
  <li><p>If the <span><code>send()</code> flag</span> is set,
  <span data-anolis-spec=dom title=concept-throw>throw</span> an
  "<code data-anolis-spec=dom>InvalidStateError</code>" exception.
-
- <li><p>If the <span>anonymous flag</span> is set,
- <span data-anolis-spec=dom title=concept-throw>throw</span> an
- "<code data-anolis-spec=dom>InvalidAccessError</code>" exception.
 
  <li><p>If the
  <span data-anolis-spec=html>JavaScript global environment</span> is a
@@ -1110,10 +1085,8 @@ method must run these steps:
    <dt><span data-anolis-spec=fetch>force preflight flag</span>
    <dd>Set if the <span>upload events flag</span> is set.
    <dt><span data-anolis-spec=fetch title=concept-request-omit-credentials-mode>omit credentials mode</span>
-   <dd>If the <span>anonymous flag</span> is set, <i title>always</i>, if the
-   <span>anonymous flag</span> is unset and the
-   <code title=dom-XMLHttpRequest-withCredentials>withCredentials</code> attribute value
-   is true, <i title>never</i>, and <i title>CORS</i> otherwise.
+   <dd>If the <code title=dom-XMLHttpRequest-withCredentials>withCredentials</code>
+   attribute value is true, <i title>never</i>, and <i title>CORS</i> otherwise.
    <dt><span data-anolis-spec=fetch title=concept-request-use-url-credentials-flag>use URL credentials flag</span>
    <dd>Set if either <span>request URL</span>'s
    <span data-anolis-spec=url title=concept-url-username>username</span>
