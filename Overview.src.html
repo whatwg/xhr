@@ -1110,8 +1110,10 @@ method must run these steps:
    <dt><span data-anolis-spec=fetch>force preflight flag</span>
    <dd>Set if the <span>upload events flag</span> is set.
    <dt><span data-anolis-spec=fetch title=concept-request-omit-credentials-mode>omit credentials mode</span>
-   <dd>If the <span>anonymous flag</span> is set, <i title>always</i>, and
-   <i title>CORS</i> otherwise.
+   <dd>If the <span>anonymous flag</span> is set, <i title>always</i>, if the
+   <span>anonymous flag</span> is unset and the
+   <code title=dom-XMLHttpRequest-withCredentials>withCredentials</code> attribute value
+   is true, <i title>never</i>, and <i title>CORS</i> otherwise.
    <dt><span data-anolis-spec=fetch title=concept-request-use-url-credentials-flag>use URL credentials flag</span>
    <dd>Set if either <span>request URL</span>'s
    <span data-anolis-spec=url title=concept-url-username>username</span>

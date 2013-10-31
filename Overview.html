@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-28-october-2013">Living Standard — Last Updated 28 October 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-31-october-2013">Living Standard — Last Updated 31 October 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-28 October 2013, the editor has made this specification available
+31 October 2013, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -1155,8 +1155,10 @@ method must run these steps:
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#force-preflight-flag">force preflight flag</a>
    <dd>Set if the <a href="#upload-events-flag">upload events flag</a> is set.
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-omit-credentials-mode" title="concept-request-omit-credentials-mode">omit credentials mode</a>
-   <dd>If the <a href="#anonymous-flag">anonymous flag</a> is set, <i title="">always</i>, and
-   <i title="">CORS</i> otherwise.
+   <dd>If the <a href="#anonymous-flag">anonymous flag</a> is set, <i title="">always</i>, if the
+   <a href="#anonymous-flag">anonymous flag</a> is unset and the
+   <code title="dom-XMLHttpRequest-withCredentials"><a href="#dom-xmlhttprequest-withcredentials">withCredentials</a></code> attribute value
+   is true, <i title="">never</i>, and <i title="">CORS</i> otherwise.
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-use-url-credentials-flag" title="concept-request-use-url-credentials-flag">use URL credentials flag</a>
    <dd>Set if either <a href="#request-url">request URL</a>'s
    <a class="external" href="http://url.spec.whatwg.org/#concept-url-username" title="concept-url-username">username</a>
