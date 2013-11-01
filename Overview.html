@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-31-october-2013">Living Standard — Last Updated 31 October 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-1-november-2013">Living Standard — Last Updated 1 November 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-31 October 2013, the editor has made this specification available
+1 November 2013, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -279,7 +279,8 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <a href="#xmlhttpreque
   readonly attribute unsigned short <a href="#dom-xmlhttprequest-readystate" title="dom-XMLHttpRequest-readyState">readyState</a>;
 
   // <a href="#request">request</a>
-  void <a href="#dom-xmlhttprequest-open" title="dom-XMLHttpRequest-open">open</a>(ByteString <var>method</var>, [EnsureUTF16] DOMString <var title="">url</var>, optional boolean <var>async</var> = true, optional [EnsureUTF16] DOMString? <var>username</var> = null, optional [EnsureUTF16] DOMString? <var>password</var> = null);
+  void <a href="#dom-xmlhttprequest-open" title="dom-XMLHttpRequest-open">open</a>(ByteString <var>method</var>, [EnsureUTF16] DOMString <var title="">url</var>);
+  void <a href="#dom-xmlhttprequest-open" title="dom-XMLHttpRequest-open">open</a>(ByteString <var>method</var>, [EnsureUTF16] DOMString <var title="">url</var>, boolean <var>async</var>, optional [EnsureUTF16] DOMString? <var>username</var> = null, optional [EnsureUTF16] DOMString? <var>password</var> = null);
   void <a href="#dom-xmlhttprequest-setrequestheader" title="dom-XMLHttpRequest-setRequestHeader">setRequestHeader</a>(ByteString <var>name</var>, ByteString <var>value</var>);
            attribute unsigned long <a href="#dom-xmlhttprequest-timeout" title="dom-XMLHttpRequest-timeout">timeout</a>;
            attribute boolean <a href="#dom-xmlhttprequest-withcredentials" title="dom-XMLHttpRequest-withCredentials">withCredentials</a>;
@@ -621,6 +622,14 @@ method must run these steps:
  <li><p>If <var title="">parsed URL</var> is failure,
  <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
  "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" exception.
+
+ <li>
+  <p>If the <var>async</var> argument is omitted, set <var>async</var> to true, and set
+  <var title="">username</var> and <var title="">password</var> to null.
+
+  <p class="note">Due to unfortunate legacy constraints, passing
+  <code title="">undefined</code> for the <var>async</var> argument is treated differently
+  from <var>async</var> being omitted.
 
  <li>
   <p>If <var title="">parsed URL</var>'s <a class="external" href="http://url.spec.whatwg.org/#relative-flag">relative flag</a> is

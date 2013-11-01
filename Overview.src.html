@@ -234,7 +234,8 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
   readonly attribute unsigned short <span title="dom-XMLHttpRequest-readyState">readyState</span>;
 
   // <a href="#request">request</a>
-  void <span title="dom-XMLHttpRequest-open">open</span>(ByteString <var>method</var>, [EnsureUTF16] DOMString <var title>url</var>, optional boolean <var>async</var> = true, optional [EnsureUTF16] DOMString? <var>username</var> = null, optional [EnsureUTF16] DOMString? <var>password</var> = null);
+  void <span title="dom-XMLHttpRequest-open">open</span>(ByteString <var>method</var>, [EnsureUTF16] DOMString <var title>url</var>);
+  void <span title="dom-XMLHttpRequest-open">open</span>(ByteString <var>method</var>, [EnsureUTF16] DOMString <var title>url</var>, boolean <var>async</var>, optional [EnsureUTF16] DOMString? <var>username</var> = null, optional [EnsureUTF16] DOMString? <var>password</var> = null);
   void <span title="dom-XMLHttpRequest-setRequestHeader">setRequestHeader</span>(ByteString <var>name</var>, ByteString <var>value</var>);
            attribute unsigned long <span title="dom-XMLHttpRequest-timeout">timeout</span>;
            attribute boolean <span title="dom-XMLHttpRequest-withCredentials">withCredentials</span>;
@@ -576,6 +577,14 @@ method must run these steps:
  <li><p>If <var title>parsed URL</var> is failure,
  <span data-anolis-spec=dom title=concept-throw>throw</span> a
  "<code data-anolis-spec=dom>SyntaxError</code>" exception.
+
+ <li>
+  <p>If the <var>async</var> argument is omitted, set <var>async</var> to true, and set
+  <var title>username</var> and <var title>password</var> to null.
+
+  <p class=note>Due to unfortunate legacy constraints, passing
+  <code title>undefined</code> for the <var>async</var> argument is treated differently
+  from <var>async</var> being omitted.
 
  <li>
   <p>If <var title>parsed URL</var>'s <span data-anolis-spec=url>relative flag</span> is
