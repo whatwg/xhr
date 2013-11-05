@@ -549,26 +549,21 @@ method must run these steps:
  token production, <span data-anolis-spec=dom title=concept-throw>throw</span> a
  "<code data-anolis-spec=dom>SyntaxError</code>" exception.
 
+ <li><p>If <var>method</var> is a
+ <span data-anolis-spec=fetch title=concept-forbidden-methods>forbidden method</span>,
+ <span data-anolis-spec=dom title=concept-throw>throw</span> a
+ "<code data-anolis-spec=dom>SecurityError</code>" exception.
+
  <li>
-  <p>If <var>method</var> is a case-insensitive match for `<code title>CONNECT</code>`,
-  `<code title>DELETE</code>`, `<code title>GET</code>`, `<code title>HEAD</code>`,
-  `<code title>OPTIONS</code>`, `<code title>POST</code>`, `<code title>PUT</code>`,
-  `<code title>TRACE</code>`, or `<code title>TRACK</code>`, subtract
+  <p>If <var>method</var> is a case-insensitive match for `<code title>DELETE</code>`,
+  `<code title>GET</code>`, `<code title>HEAD</code>`, `<code title>OPTIONS</code>`,
+  `<code title>POST</code>`, or `<code title>PUT</code>`, subtract
   0x20 from each byte in the range 0x61 (ASCII a) to 0x7A (ASCII z).
 
   <p class=note>If it does not match any of the above, it is passed
   through <em>literally</em>, including in the final request.
   <!-- WebKit (and supposedly Gecko) also uppercase: COPY, INDEX, LOCK,
   M-POST, MKCOL, MOVE, PROPFIND, PROPPATCH, and UNLOCK. -->
-
- <li>
-  <p>If <var>method</var> is a case-sensitive match for `<code title>CONNECT</code>`,
-  `<code title>TRACE</code>`, or `<code title>TRACK</code>`,
-  <span data-anolis-spec=dom title=concept-throw>throw</span> a
-  "<code data-anolis-spec=dom>SecurityError</code>" exception.
-
-  <p class=note>Allowing these methods would pose a security risk.
-  <span data-anolis-ref>HTTPVERBSEC</span>
 
  <li><p>Let <var title>parsed URL</var> be the result of
  <span data-anolis-spec=url title=concept-url-parser>parsing</span> <var title>url</var>
@@ -706,43 +701,8 @@ method must run these steps:
 
   <p class=note>An empty string represents an empty header field value.
 
- <li>
-  <p>Terminate these steps if <var>name</var> is a case-insensitive
-  match for one of the following headers:
-
-  <ul class=brief>
-   <li>`<code title>Accept-Charset</code>`
-   <li>`<code title>Accept-Encoding</code>`
-   <li>`<code title>Access-Control-Request-Headers</code>`
-   <li>`<code title>Access-Control-Request-Method</code>`
-   <li>`<code title>Connection</code>`
-   <li>`<code title>Content-Length</code>`
-   <li>`<code title>Cookie</code>`
-   <li>`<code title>Cookie2</code>`
-   <li>`<code title>Date</code>`
-   <li>`<code title>DNT</code>`
-   <li>`<code title>Expect</code>`
-   <li>`<code title>Host</code>`
-   <li>`<code title>Keep-Alive</code>`
-   <li><code title>Origin</code>`
-   <li>`<code title>Referer</code>`
-   <li>`<code title>TE</code>`
-   <li>`<code title>Trailer</code>`
-   <li>`<code title>Transfer-Encoding</code>`
-   <li>`<code title>Upgrade</code>`
-   <li>`<code title>User-Agent</code>`
-   <li>`<code title>Via</code>`
-  </ul>
-
-  <p>&hellip; or if the start of <var>name</var> is a case-insensitive
-  match for `<code title>Proxy-</code>` or `<code title>Sec-</code>` (including when
-  <var>name</var> is just `<code title>Proxy-</code>` or `<code title>Sec-</code>`).
-
-  <p class=note>The above headers are controlled by the user agent to
-  let it control those aspects of transport. This guarantees data
-  integrity to some extent. Header names starting with `<code title>Sec-</code>`
-  are not allowed to be set to allow new headers to be minted that are
-  guaranteed not to come from <code>XMLHttpRequest</code>.
+ <li><p>Terminate these steps if <var>name</var> is a
+ <span data-anolis-spec=fetch title=concept-forbidden-author-header-names>forbidden author header name</span>.
 
  <li><p>If <var>name</var> is not a
  <span data-anolis-spec=fetch title=concept-header-name>name</span> of a

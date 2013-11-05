@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-1-november-2013">Living Standard — Last Updated 1 November 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-5-november-2013">Living Standard — Last Updated 5 November 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-1 November 2013, the editor has made this specification available
+5 November 2013, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -594,26 +594,21 @@ method must run these steps:
  token production, <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
  "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" exception.
 
+ <li><p>If <var>method</var> is a
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-forbidden-methods" title="concept-forbidden-methods">forbidden method</a>,
+ <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
+ "<code class="external"><a href="http://dom.spec.whatwg.org/#securityerror">SecurityError</a></code>" exception.
+
  <li>
-  <p>If <var>method</var> is a case-insensitive match for `<code title="">CONNECT</code>`,
-  `<code title="">DELETE</code>`, `<code title="">GET</code>`, `<code title="">HEAD</code>`,
-  `<code title="">OPTIONS</code>`, `<code title="">POST</code>`, `<code title="">PUT</code>`,
-  `<code title="">TRACE</code>`, or `<code title="">TRACK</code>`, subtract
+  <p>If <var>method</var> is a case-insensitive match for `<code title="">DELETE</code>`,
+  `<code title="">GET</code>`, `<code title="">HEAD</code>`, `<code title="">OPTIONS</code>`,
+  `<code title="">POST</code>`, or `<code title="">PUT</code>`, subtract
   0x20 from each byte in the range 0x61 (ASCII a) to 0x7A (ASCII z).
 
   <p class="note">If it does not match any of the above, it is passed
   through <em>literally</em>, including in the final request.
   <!-- WebKit (and supposedly Gecko) also uppercase: COPY, INDEX, LOCK,
   M-POST, MKCOL, MOVE, PROPFIND, PROPPATCH, and UNLOCK. -->
-
- <li>
-  <p>If <var>method</var> is a case-sensitive match for `<code title="">CONNECT</code>`,
-  `<code title="">TRACE</code>`, or `<code title="">TRACK</code>`,
-  <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
-  "<code class="external"><a href="http://dom.spec.whatwg.org/#securityerror">SecurityError</a></code>" exception.
-
-  <p class="note">Allowing these methods would pose a security risk.
-  <a href="#refsHTTPVERBSEC">[HTTPVERBSEC]</a>
 
  <li><p>Let <var title="">parsed URL</var> be the result of
  <a class="external" href="http://url.spec.whatwg.org/#concept-url-parser" title="concept-url-parser">parsing</a> <var title="">url</var>
@@ -751,43 +746,8 @@ method must run these steps:
 
   <p class="note">An empty string represents an empty header field value.
 
- <li>
-  <p>Terminate these steps if <var>name</var> is a case-insensitive
-  match for one of the following headers:
-
-  <ul class="brief">
-   <li>`<code title="">Accept-Charset</code>`
-   <li>`<code title="">Accept-Encoding</code>`
-   <li>`<code title="">Access-Control-Request-Headers</code>`
-   <li>`<code title="">Access-Control-Request-Method</code>`
-   <li>`<code title="">Connection</code>`
-   <li>`<code title="">Content-Length</code>`
-   <li>`<code title="">Cookie</code>`
-   <li>`<code title="">Cookie2</code>`
-   <li>`<code title="">Date</code>`
-   <li>`<code title="">DNT</code>`
-   <li>`<code title="">Expect</code>`
-   <li>`<code title="">Host</code>`
-   <li>`<code title="">Keep-Alive</code>`
-   <li><code title="">Origin</code>`
-   <li>`<code title="">Referer</code>`
-   <li>`<code title="">TE</code>`
-   <li>`<code title="">Trailer</code>`
-   <li>`<code title="">Transfer-Encoding</code>`
-   <li>`<code title="">Upgrade</code>`
-   <li>`<code title="">User-Agent</code>`
-   <li>`<code title="">Via</code>`
-  </ul>
-
-  <p>… or if the start of <var>name</var> is a case-insensitive
-  match for `<code title="">Proxy-</code>` or `<code title="">Sec-</code>` (including when
-  <var>name</var> is just `<code title="">Proxy-</code>` or `<code title="">Sec-</code>`).
-
-  <p class="note">The above headers are controlled by the user agent to
-  let it control those aspects of transport. This guarantees data
-  integrity to some extent. Header names starting with `<code title="">Sec-</code>`
-  are not allowed to be set to allow new headers to be minted that are
-  guaranteed not to come from <code><a href="#xmlhttprequest">XMLHttpRequest</a></code>.
+ <li><p>Terminate these steps if <var>name</var> is a
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-forbidden-author-header-names" title="concept-forbidden-author-header-names">forbidden author header name</a>.
 
  <li><p>If <var>name</var> is not a
  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">name</a> of a
@@ -2338,13 +2298,6 @@ otherwise. <a class="informative" href="#refsFETCH">[FETCH]</a>
 
 <dt id="refsHTTP">[HTTP]
 <dd><cite><a href="http://tools.ietf.org/html/rfc2616">Hypertext Transfer Protocol -- HTTP/1.1</a></cite>, Roy Fielding, James Gettys, Jeffrey Mogul et al.. IETF.
-
-<dt id="refsHTTPVERBSEC">[HTTPVERBSEC]
-<dd><cite><a href="http://www.kb.cert.org/vuls/id/867593">Multiple vendors' web servers enable HTTP TRACE method by default</a></cite>. US-CERT.
-
-<dd><cite><a href="http://www.kb.cert.org/vuls/id/288308">Microsoft Internet Information Server (IIS) vulnerable to cross-site scripting via HTTP TRACK method</a></cite>. US-CERT.
-
-<dd><cite><a href="http://www.kb.cert.org/vuls/id/150227">HTTP proxy default configurations allow arbitrary TCP connections</a></cite>. US-CERT.
 
 <dt id="refsRFC2119">[RFC2119]
 <dd><cite><a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner. IETF.
