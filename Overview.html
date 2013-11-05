@@ -1575,10 +1575,8 @@ following algorithm:
    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/parsing.html#a-known-definite-encoding">a known definite encoding</a> <var>charset</var>.
    <a href="#refsHTML">[HTML]</a>
 
-   <li><p>Set <var title="">document</var>'s
-   <a class="external" href="http://dom.spec.whatwg.org/#concept-document-encoding" title="concept-document-encoding">encoding</a>
-   to <var>charset</var>.
-   <!-- This might be redundant with HTML. -->
+   <li><p>Flag <var title="">document</var> as an
+   <a class="external" href="http://dom.spec.whatwg.org/#html-document">HTML document</a>.
   </ol>
 
  <li>
@@ -1594,7 +1592,13 @@ following algorithm:
   executed, resources referenced will not be loaded and no associated XSLT
   will be applied. <!-- XXX more formally?! -->
 
- <!-- XXX what about document's encoding? -->
+ <li><p>If <var>charset</var> is null, set <var>charset</var> to
+ <a class="external" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
+ <!-- can only happen in the XML case -->
+
+ <li><p>Set <var title="">document</var>'s
+ <a class="external" href="http://dom.spec.whatwg.org/#concept-document-encoding" title="concept-document-encoding">encoding</a> to
+ <var>charset</var>.
 
  <li><p>Set <var title="">document</var>'s
  <a class="external" href="http://dom.spec.whatwg.org/#concept-document-content-type" title="concept-document-content-type">content type</a>

@@ -1530,10 +1530,8 @@ following algorithm:
    <span data-anolis-spec=html>a known definite encoding</span> <var>charset</var>.
    <span data-anolis-ref>HTML</span>
 
-   <li><p>Set <var title>document</var>'s
-   <span data-anolis-spec=dom title=concept-document-encoding>encoding</span>
-   to <var>charset</var>.
-   <!-- This might be redundant with HTML. -->
+   <li><p>Flag <var title>document</var> as an
+   <span data-anolis-spec=dom>HTML document</span>.
   </ol>
 
  <li>
@@ -1549,7 +1547,13 @@ following algorithm:
   executed, resources referenced will not be loaded and no associated XSLT
   will be applied. <!-- XXX more formally?! -->
 
- <!-- XXX what about document's encoding? -->
+ <li><p>If <var>charset</var> is null, set <var>charset</var> to
+ <span data-anolis-spec=encoding>utf-8</span>.
+ <!-- can only happen in the XML case -->
+
+ <li><p>Set <var title>document</var>'s
+ <span data-anolis-spec=dom title=concept-document-encoding>encoding</span> to
+ <var>charset</var>.
 
  <li><p>Set <var title>document</var>'s
  <span data-anolis-spec=dom title=concept-document-content-type>content type</span>
