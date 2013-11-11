@@ -1021,7 +1021,7 @@ method must run these steps:
    <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadstart">loadstart</code>.
 
    <li><p>If the <span>upload complete flag</span> is unset,
-   <span title=concept-event-fire-progress>fire a progress event</span> named <code title="event-xhr-loadstart">loadstart</code>
+   <span title=concept-event-fire-upload-progress>fire an upload progress event</span> named <code title="event-xhr-loadstart">loadstart</code>
    on the <code>XMLHttpRequestUpload</code> object.
 
    <li><p>Return the <code title="dom-XMLHttpRequest-send">send()</code>
@@ -1097,7 +1097,7 @@ method must run these steps:
 
   <p>To <span data-anolis-spec=fetch>process request body</span> for
   <var title>request</var>,
-  <span title=concept-event-fire-progress>fire a progress event</span> named
+  <span title=concept-event-fire-upload-progress>fire an upload progress event</span> named
   <code title="event-xhr-progress">progress</code> on the
   <code>XMLHttpRequestUpload</code> object.
   <!-- upload complete flag can never be set here I hope -->
@@ -1108,13 +1108,13 @@ method must run these steps:
   <ol>
    <li><p>Set the <span>upload complete flag</span>.
 
-   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>
+   <li><p><span title=concept-event-fire-upload-progress>Fire an upload progress event</span> named <code title=event-xhr-progress>progress</code>
    on the <code>XMLHttpRequestUpload</code> object.
 
-   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-load">load</code>
+   <li><p><span title=concept-event-fire-upload-progress>Fire an upload progress event</span> named <code title="event-xhr-load">load</code>
    on the <code>XMLHttpRequestUpload</code> object.
 
-   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadend">loadend</code>
+   <li><p><span title=concept-event-fire-upload-progress>Fire an upload progress event</span> named <code title="event-xhr-loadend">loadend</code>
    on the <code>XMLHttpRequestUpload</code> object.
   </ol>
   <!-- upload complete flag can never be set here I hope -->
@@ -1249,13 +1249,13 @@ exception <var>exception</var> are:
   <ol>
    <li><p>Set the <span>upload complete flag</span>.
 
-   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named
+   <li><p><span title=concept-event-fire-upload-progress>Fire an upload progress event</span> named
    <code title=event-xhr-progress>progress</code> on the <code>XMLHttpRequestUpload</code> object.
 
-   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named
+   <li><p><span title=concept-event-fire-upload-progress>Fire an upload progress event</span> named
    <var title>event</var> on the <code>XMLHttpRequestUpload</code> object.
 
-   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named
+   <li><p><span title=concept-event-fire-upload-progress>Fire an upload progress event</span> named
    <code title="event-xhr-loadend">loadend</code> on the <code>XMLHttpRequestUpload</code> object.
   </ol>
 
@@ -2085,10 +2085,10 @@ attributes must return the value they were initialized to. When an
 the attributes must be initialized to 0.
 
 
-<h3>Firing events using the <code title="">ProgressEvent</code> interface for HTTP</h3>
+<h3>Firing events using the <code title="">ProgressEvent</code> interface for Fetch</h3>
 
 <p>To
-<dfn id=concept-event-fire-progress title=concept-event-fire-progress>fire a progress event named <var>e</var></dfn>
+<dfn title=concept-event-fire-upload-progress>fire an upload progress event named <var>e</var></dfn>
 means to
 <span data-anolis-spec=dom title=concept-event-fire>fire an event named <var>e</var></span>
 with an <span data-anolis-spec=dom title=concept-event>event</span>
@@ -2097,15 +2097,38 @@ conditions:
 
 <ul>
  <li>Initialize the <code title=dom-ProgressEvent-loaded>loaded</code>
- attribute to the number of HTTP
- <span data-anolis-spec=http>entity body</span> bytes transferred.
- <li>If the length of the HTTP
- <span data-anolis-spec=http>entity body</span> is known through the
- <code data-anolis-spec=http title=http-content-length>Content-Length</code>
- header, initialize the
- <code title=dom-ProgressEvent-lengthComputable>lengthComputable</code>
- attribute to true and initialize the
- <code title=dom-ProgressEvent-total>total</code> attribute to the length.
+ attribute to the length of
+ <span data-anolis-spec=fetch title=concept-request>request</span>'s
+ <span data-anolis-spec=fetch title=concept-request-body>body</span>.
+ <li>If the length of
+ <span data-anolis-spec=fetch title=concept-request>response</span>'s
+ <span data-anolis-spec=fetch title=concept-request-body>body</span> is known through the
+ <code data-anolis-spec=http title=http-content-length>Content-Length</code> header,
+ set the <code title=dom-ProgressEvent-lengthComputable>lengthComputable</code> attribute
+ value to true and the <code title=dom-ProgressEvent-total>total</code> attribute value to
+ the length.
+</ul>
+
+<p>To
+<dfn title=concept-event-fire-progress>fire a progress event named <var>e</var></dfn>
+means to
+<span data-anolis-spec=dom title=concept-event-fire>fire an event named <var>e</var></span>
+with an <span data-anolis-spec=dom title=concept-event>event</span>
+using the <code>ProgressEvent</code> interface that also meets these
+conditions:
+
+<ul>
+ <li>Initialize the <code title=dom-ProgressEvent-loaded>loaded</code>
+ attribute to the length of
+ <span data-anolis-spec=fetch title=concept-response>response</span>'s
+ <span data-anolis-spec=fetch title=concept-response-body>body</span>.
+ <li>If the length of
+ <span data-anolis-spec=fetch title=concept-response>response</span>'s
+ <span data-anolis-spec=fetch title=concept-response-body>body</span> is known through the
+ <code data-anolis-spec=http title=http-content-length>Content-Length</code> header,
+ set the <code title=dom-ProgressEvent-lengthComputable>lengthComputable</code> attribute
+ value to true and the <code title=dom-ProgressEvent-total>total</code> attribute value to
+ the length.
 </ul>
 
 
@@ -2190,8 +2213,9 @@ attributes initialized to false, so it is suggested that for consistency all
 
 <h3>Security Considerations</h3>
 
-<p>For cross-origin requests some kind of opt-in, e.g. Fetch, has to be used before
-<span data-anolis-spec=dom title=concept-event>events</span> using the
+<p>For cross-origin requests some kind of opt-in, e.g. the
+<span data-anolis-spec=fetch>CORS protocol</span> defined in the Fetch Standard, has to be
+used before <span data-anolis-spec=dom title=concept-event>events</span> using the
 <code>ProgressEvent</code> interface are
 <span data-anolis-spec=dom title=concept-event-dispatch>dispatched</span>
 as information (e.g. size) would be revealed that cannot be obtained

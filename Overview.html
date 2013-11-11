@@ -96,7 +96,7 @@ transferring data between a client and a server.
  <li><a href="#interface-formdata"><span class="secno">5 </span>Interface <code title="">FormData</code></a></li>
  <li><a href="#interface-progressevent"><span class="secno">6 </span>Interface <code title="">ProgressEvent</code></a>
   <ol class="toc">
-   <li><a href="#firing-events-using-the-progressevent-interface-for-http"><span class="secno">6.1 </span>Firing events using the <code title="">ProgressEvent</code> interface for HTTP</a></li>
+   <li><a href="#firing-events-using-the-progressevent-interface-for-fetch"><span class="secno">6.1 </span>Firing events using the <code title="">ProgressEvent</code> interface for Fetch</a></li>
    <li><a href="#firing-events-using-the-progressevent-interface-for-other-contexts"><span class="secno">6.2 </span>Firing events using the <code title="">ProgressEvent</code> interface for other contexts</a></li>
    <li><a href="#suggested-names-for-events-using-the-progressevent-interface"><span class="secno">6.3 </span>Suggested names for events using the <code title="">ProgressEvent</code> interface</a></li>
    <li><a href="#security-considerations"><span class="secno">6.4 </span>Security Considerations</a></li>
@@ -1066,7 +1066,7 @@ method must run these steps:
    <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadstart"><a href="#event-xhr-loadstart">loadstart</a></code>.
 
    <li><p>If the <a href="#upload-complete-flag">upload complete flag</a> is unset,
-   <a href="#concept-event-fire-progress" title="concept-event-fire-progress">fire a progress event</a> named <code title="event-xhr-loadstart"><a href="#event-xhr-loadstart">loadstart</a></code>
+   <a href="#concept-event-fire-upload-progress" title="concept-event-fire-upload-progress">fire an upload progress event</a> named <code title="event-xhr-loadstart"><a href="#event-xhr-loadstart">loadstart</a></code>
    on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
 
    <li><p>Return the <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code>
@@ -1142,7 +1142,7 @@ method must run these steps:
 
   <p>To <a class="external" href="http://fetch.spec.whatwg.org/#process-request-body">process request body</a> for
   <var title="">request</var>,
-  <a href="#concept-event-fire-progress" title="concept-event-fire-progress">fire a progress event</a> named
+  <a href="#concept-event-fire-upload-progress" title="concept-event-fire-upload-progress">fire an upload progress event</a> named
   <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code> on the
   <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
   <!-- upload complete flag can never be set here I hope -->
@@ -1153,13 +1153,13 @@ method must run these steps:
   <ol>
    <li><p>Set the <a href="#upload-complete-flag">upload complete flag</a>.
 
-   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>
+   <li><p><a href="#concept-event-fire-upload-progress" title="concept-event-fire-upload-progress">Fire an upload progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>
    on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
 
-   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-load"><a href="#event-xhr-load">load</a></code>
+   <li><p><a href="#concept-event-fire-upload-progress" title="concept-event-fire-upload-progress">Fire an upload progress event</a> named <code title="event-xhr-load"><a href="#event-xhr-load">load</a></code>
    on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
 
-   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>
+   <li><p><a href="#concept-event-fire-upload-progress" title="concept-event-fire-upload-progress">Fire an upload progress event</a> named <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>
    on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
   </ol>
   <!-- upload complete flag can never be set here I hope -->
@@ -1294,13 +1294,13 @@ exception <var>exception</var> are:
   <ol>
    <li><p>Set the <a href="#upload-complete-flag">upload complete flag</a>.
 
-   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
+   <li><p><a href="#concept-event-fire-upload-progress" title="concept-event-fire-upload-progress">Fire an upload progress event</a> named
    <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code> on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
 
-   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
+   <li><p><a href="#concept-event-fire-upload-progress" title="concept-event-fire-upload-progress">Fire an upload progress event</a> named
    <var title="">event</var> on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
 
-   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
+   <li><p><a href="#concept-event-fire-upload-progress" title="concept-event-fire-upload-progress">Fire an upload progress event</a> named
    <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code> on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
   </ol>
 
@@ -2130,7 +2130,29 @@ attributes must return the value they were initialized to. When an
 the attributes must be initialized to 0.
 
 
-<h3 id="firing-events-using-the-progressevent-interface-for-http"><span class="secno">6.1 </span>Firing events using the <code title="">ProgressEvent</code> interface for HTTP</h3>
+<h3 id="firing-events-using-the-progressevent-interface-for-fetch"><span class="secno">6.1 </span>Firing events using the <code title="">ProgressEvent</code> interface for Fetch</h3>
+
+<p>To
+<dfn id="concept-event-fire-upload-progress" title="concept-event-fire-upload-progress">fire an upload progress event named <var>e</var></dfn>
+means to
+<a class="external" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event named <var>e</var></a>
+with an <a class="external" href="http://dom.spec.whatwg.org/#concept-event" title="concept-event">event</a>
+using the <code><a href="#progressevent">ProgressEvent</a></code> interface that also meets these
+conditions:
+
+<ul>
+ <li>Initialize the <code title="dom-ProgressEvent-loaded"><a href="#dom-progressevent-loaded">loaded</a></code>
+ attribute to the length of
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-request" title="concept-request">request</a>'s
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>.
+ <li>If the length of
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-request" title="concept-request">response</a>'s
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a> is known through the
+ <code class="external" title="http-content-length"><a href="http://tools.ietf.org/html/rfc2616/#section-14.13">Content-Length</a></code> header,
+ set the <code title="dom-ProgressEvent-lengthComputable"><a href="#dom-progressevent-lengthcomputable">lengthComputable</a></code> attribute
+ value to true and the <code title="dom-ProgressEvent-total"><a href="#dom-progressevent-total">total</a></code> attribute value to
+ the length.
+</ul>
 
 <p>To
 <dfn id="concept-event-fire-progress" title="concept-event-fire-progress">fire a progress event named <var>e</var></dfn>
@@ -2142,15 +2164,16 @@ conditions:
 
 <ul>
  <li>Initialize the <code title="dom-ProgressEvent-loaded"><a href="#dom-progressevent-loaded">loaded</a></code>
- attribute to the number of HTTP
- <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-7.2">entity body</a> bytes transferred.
- <li>If the length of the HTTP
- <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-7.2">entity body</a> is known through the
- <code class="external" title="http-content-length"><a href="http://tools.ietf.org/html/rfc2616/#section-14.13">Content-Length</a></code>
- header, initialize the
- <code title="dom-ProgressEvent-lengthComputable"><a href="#dom-progressevent-lengthcomputable">lengthComputable</a></code>
- attribute to true and initialize the
- <code title="dom-ProgressEvent-total"><a href="#dom-progressevent-total">total</a></code> attribute to the length.
+ attribute to the length of
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-response" title="concept-response">response</a>'s
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a>.
+ <li>If the length of
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-response" title="concept-response">response</a>'s
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> is known through the
+ <code class="external" title="http-content-length"><a href="http://tools.ietf.org/html/rfc2616/#section-14.13">Content-Length</a></code> header,
+ set the <code title="dom-ProgressEvent-lengthComputable"><a href="#dom-progressevent-lengthcomputable">lengthComputable</a></code> attribute
+ value to true and the <code title="dom-ProgressEvent-total"><a href="#dom-progressevent-total">total</a></code> attribute value to
+ the length.
 </ul>
 
 
@@ -2235,8 +2258,9 @@ attributes initialized to false, so it is suggested that for consistency all
 
 <h3 id="security-considerations"><span class="secno">6.4 </span>Security Considerations</h3>
 
-<p>For cross-origin requests some kind of opt-in, e.g. Fetch, has to be used before
-<a class="external" href="http://dom.spec.whatwg.org/#concept-event" title="concept-event">events</a> using the
+<p>For cross-origin requests some kind of opt-in, e.g. the
+<a class="external" href="http://fetch.spec.whatwg.org/#cors-protocol">CORS protocol</a> defined in the Fetch Standard, has to be
+used before <a class="external" href="http://dom.spec.whatwg.org/#concept-event" title="concept-event">events</a> using the
 <code><a href="#progressevent">ProgressEvent</a></code> interface are
 <a class="external" href="http://dom.spec.whatwg.org/#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>
 as information (e.g. size) would be revealed that cannot be obtained
