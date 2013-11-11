@@ -544,7 +544,7 @@ method must run these steps:
    <span data-anolis-spec=html>origin</span>.
 
    <li><p>Set <span>referrer source</span> to the
-   <span data-anolis-spec=html>script's referrer source</span>.
+   <span data-anolis-spec=html>worker environment</span>'s <span data-anolis-spec=html>API referrer source</span>.
   </ol>
 
  <li><p>If <var>method</var> does not match the <span data-anolis-spec=http>Method</span>
@@ -1046,7 +1046,7 @@ method must run these steps:
    <dt><span data-anolis-spec=fetch>force <code title>Origin</code> header flag</span>
    <dd>Set.
    <dt><span data-anolis-spec=fetch title=concept-request-referrer>referrer</span>
-   <dd><span class=XXX>referrer source</span>
+   <dd>the URL of the <span>referrer source</span> if it refers to a document, the <span>referrer source</span> itself otherwise.
    <dt><span data-anolis-spec=fetch title=concept-request-body>body</span>
    <dd><span>request entity body</span>
    <dt><span data-anolis-spec=fetch>synchronous flag</span>
