@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-5-november-2013">Living Standard — Last Updated 5 November 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-11-november-2013">Living Standard — Last Updated 11 November 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-5 November 2013, the editor has made this specification available
+11 November 2013, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -48,8 +48,8 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
 <h2 class="no-num no-toc" id="specabstract">Abstract</h2>
 
-<p>The XMLHttpRequest specification defines an API that provides scripted
-client functionality for transferring data between a client and a server.
+<p>XMLHttpRequest defines an API that provides scripted client functionality for
+transferring data between a client and a server.
 
 
 
@@ -215,7 +215,7 @@ community.
 
 <h2 id="terminology"><span class="secno">3 </span>Terminology</h2>
 
-<p>This specification heavily borrows terminology, from DOM,
+<p>This specification uses terminology, cross-linked throughout, from DOM,
 DOM Parsing and Serialization, Encoding, Fetch, File API, HTML, HTTP, Typed Array, URL,
 Web IDL, and XML.
 
@@ -230,6 +230,8 @@ Web IDL, and XML.
 <a href="#refsURL">[URL]</a>
 <a href="#refsWEBIDL">[WEBIDL]</a>
 <a href="#refsXML">[XML]</a> <a href="#refsXMLNS">[XMLNS]</a>
+
+<p>It uses the typographic conventions from HTML. <a href="#refsHTTP">[HTTP]</a>
 
 <p>The term <dfn id="user-credentials">user credentials</dfn> for the purposes of this
 specification means cookies, HTTP authentication, and client-side SSL
@@ -1384,7 +1386,7 @@ method must run these steps:
  <li><p>Return null.
 </ol>
 
-<p class="note">The Fetch specification filters
+<p class="note">The Fetch Standard filters
 <a class="external" href="http://fetch.spec.whatwg.org/#concept-response-headers" title="concept-response-headers">headers</a> exposed by
 <code title="dom-XMLHttpRequest-getResponseHeader"><a href="#dom-xmlhttprequest-getresponseheader">getResponseHeader()</a></code>.
 <a href="#refsFETCH">[FETCH]</a>
@@ -1422,7 +1424,7 @@ byte pair, and each <a class="external" href="http://fetch.spec.whatwg.org/#conc
 <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a> separated by a 0x3A 0x20
 byte pair.
 
-<p class="note">The Fetch specification filters
+<p class="note">The Fetch Standard filters
 <a class="external" href="http://fetch.spec.whatwg.org/#concept-response-headers" title="concept-response-headers">headers</a> exposed by
 <code title="dom-XMLHttpRequest-getAllResponseHeaders"><a href="#dom-xmlhttprequest-getallresponseheaders">getAllResponseHeaders()</a></code>.
 <a href="#refsFETCH">[FETCH]</a>
@@ -1571,7 +1573,7 @@ following algorithm:
    <li><p>Let <var title="">document</var> be a
    <a class="external" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> that
    represents the result parsing <a href="#response-entity-body">response entity body</a> following the rules set
-   forth in the HTML specification for an HTML parser with scripting disabled and
+   forth in the HTML Standard for an HTML parser with scripting disabled and
    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/parsing.html#a-known-definite-encoding">a known definite encoding</a> <var>charset</var>.
    <a href="#refsHTML">[HTML]</a>
 

@@ -51,8 +51,8 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
 <h2 class="no-num no-toc" id="specabstract">Abstract</h2>
 
-<p>The XMLHttpRequest specification defines an API that provides scripted
-client functionality for transferring data between a client and a server.
+<p>XMLHttpRequest defines an API that provides scripted client functionality for
+transferring data between a client and a server.
 
 
 
@@ -170,7 +170,7 @@ community.
 
 <h2 id="terminology">Terminology</h2>
 
-<p>This specification heavily borrows terminology, from DOM,
+<p>This specification uses terminology, cross-linked throughout, from DOM,
 DOM Parsing and Serialization, Encoding, Fetch, File API, HTML, HTTP, Typed Array, URL,
 Web IDL, and XML.
 
@@ -185,6 +185,8 @@ Web IDL, and XML.
 <span data-anolis-ref>URL</span>
 <span data-anolis-ref>WEBIDL</span>
 <span data-anolis-ref>XML</span> <span data-anolis-ref>XMLNS</span>
+
+<p>It uses the typographic conventions from HTML. <span data-anolis-ref>HTTP</span>
 
 <p>The term <dfn>user credentials</dfn> for the purposes of this
 specification means cookies, HTTP authentication, and client-side SSL
@@ -1339,7 +1341,7 @@ method must run these steps:
  <li><p>Return null.
 </ol>
 
-<p class=note>The Fetch specification filters
+<p class=note>The Fetch Standard filters
 <span data-anolis-spec=fetch title=concept-response-headers>headers</span> exposed by
 <code title="dom-XMLHttpRequest-getResponseHeader">getResponseHeader()</code>.
 <span data-anolis-ref>FETCH</span>
@@ -1377,7 +1379,7 @@ byte pair, and each <span data-anolis-spec=fetch title=concept-header-name>name<
 <span data-anolis-spec=fetch title=concept-header>header</span> separated by a 0x3A 0x20
 byte pair.
 
-<p class=note>The Fetch specification filters
+<p class=note>The Fetch Standard filters
 <span data-anolis-spec=fetch title=concept-response-headers>headers</span> exposed by
 <code title="dom-XMLHttpRequest-getAllResponseHeaders">getAllResponseHeaders()</code>.
 <span data-anolis-ref>FETCH</span>
@@ -1526,7 +1528,7 @@ following algorithm:
    <li><p>Let <var title>document</var> be a
    <span data-anolis-spec=dom title=concept-document>document</span> that
    represents the result parsing <span>response entity body</span> following the rules set
-   forth in the HTML specification for an HTML parser with scripting disabled and
+   forth in the HTML Standard for an HTML parser with scripting disabled and
    <span data-anolis-spec=html>a known definite encoding</span> <var>charset</var>.
    <span data-anolis-ref>HTML</span>
 
