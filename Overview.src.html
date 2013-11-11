@@ -452,7 +452,7 @@ request-associated concepts:
 <dfn>referrer source</dfn>,
 <dfn>synchronous flag</dfn>,
 <dfn id="upload-complete-flag">upload complete flag</dfn>, and
-<dfn id="upload-events-flag">upload events flag</dfn>.
+<dfn id="upload-events-flag">force preflight flag</dfn>.
 
 <p>The <span>author request headers</span> is an initially empty list of
 <span data-anolis-spec=fetch title=concept-header>headers</span>.
@@ -461,7 +461,7 @@ request-associated concepts:
 
 <p>The <span>synchronous flag</span>,
 <span>upload complete flag</span>, and
-<span>upload events flag</span> are initially unset.
+<span>force preflight flag</span> are initially unset.
 
 <hr>
 
@@ -1001,14 +1001,15 @@ method must run these steps:
  <li><p>If the <span>synchronous flag</span> is set, release the
  <span data-anolis-spec=html>storage mutex</span>.
 
- <li><p>Unset the <span>upload complete flag</span> and <span>upload events flag</span>.
+ <li><p>Unset the <span>upload complete flag</span> and <span>force preflight flag</span>.
 
  <li><p>If there is no <span>request entity body</span> or if it is empty,
  set the <span>upload complete flag</span>.
 
  <li><p>If the <span>synchronous flag</span> is unset and one or more
  event listeners are registered on the <code>XMLHttpRequestUpload</code>
- object, set the <span>upload events flag</span>.
+ object, set the <span>force preflight flag</span>.
+ <p class="note">Firing upload events requires a preflight for cross-origin requests to avoid leaking information about the existence of sites and services from other origins.</p>
 
  <li>
   <p>If the <span>synchronous flag</span> is unset, run these substeps:
@@ -1052,7 +1053,7 @@ method must run these steps:
    <dt><span data-anolis-spec=fetch title=concept-request-mode>mode</span>
    <dd><i title>CORS</i>
    <dt><span data-anolis-spec=fetch>force preflight flag</span>
-   <dd>Set if the <span>upload events flag</span> is set.
+   <dd><span>force preflight flag</span>
    <dt><span data-anolis-spec=fetch title=concept-request-omit-credentials-mode>omit credentials mode</span>
    <dd>If the <code title=dom-XMLHttpRequest-withCredentials>withCredentials</code>
    attribute value is true, <i title>never</i>, and <i title>CORS</i> otherwise.
