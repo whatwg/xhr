@@ -270,10 +270,8 @@ required by its definition, too).
 
 <h3 id="constructors">Constructors</h3>
 
-<p>When the <span data-anolis-spec=html>JavaScript global environment</span>
-is a <span data-anolis-spec=html>document environment</span>, the
-<code>XMLHttpRequest</code> object has an associated
-<dfn title=concept-XMLHttpRequest-document>document</dfn>.
+<p>The <code>XMLHttpRequest</code> object has an associated
+<dfn title=concept-XMLHttpRequest-settings-object>settings object</dfn>.
 
 <dl class=domintro>
  <dt><code><var title>client</var> = new <span title=dom-XMLHttpRequest>XMLHttpRequest</span>()</code>
@@ -288,13 +286,10 @@ constructor must run these steps:
  <li><p>Let <var title>xhr</var> be a new <code>XMLHttpRequest</code>
  object.
 
- <li><p>If the
- <span data-anolis-spec=html>JavaScript global environment</span> is a
- <span data-anolis-spec=html>document environment</span>, set <var title>xhr</var>'s
- <span title=concept-XMLHttpRequest-document>document</span> to the
- <span data-anolis-spec=dom title=concept-document>document</span>
- associated with the global object of <var title>xhr</var>'s interface
- object.
+ <li><p>Set <var title>xhr</var>'s
+ <span title=concept-XMLHttpRequest-settings-object>settings object</span> to the
+ <span data-anolis-spec=html>script settings object</span> associated with the global
+ object of <var title>xhr</var>'s interface object.
 
  <li><p>Return <var title>xhr</var>.
 </ol>
@@ -508,44 +503,22 @@ request-associated concepts:
 method must run these steps:
 
 <ol>
- <li><p>Let <var title>base</var> be null.
+ <li><p>If <span title=concept-XMLHttpRequest-settings-object>settings object</span>'s
+ <span data-anolis-spec=html>responsible document</span> is not
+ <span data-anolis-spec=html>fully active</span>,
+ <span data-anolis-spec=dom title=concept-throw>throw</span> an
+ "<code data-anolis-spec=dom>InvalidStateError</code>" exception.
 
- <li>
-  <p>If the <span data-anolis-spec=html>JavaScript global environment</span> is a
-  <span data-anolis-spec=html>document environment</span>, run these steps:
+ <li><p>Set <var title>base</var> to
+ <span title=concept-XMLHttpRequest-settings-object>settings object</span>'s
+ <span data-anolis-spec=html>API base URL</span>.
 
-  <ol>
-   <li><p>If <span title=concept-XMLHttpRequest-document>document</span> is not
-   <span data-anolis-spec=html>fully active</span>,
-   <span data-anolis-spec=dom title=concept-throw>throw</span> an
-   "<code data-anolis-spec=dom>InvalidStateError</code>" exception.
+ <li><p>Set <span>source origin</span> to
+ <span title=concept-XMLHttpRequest-settings-object>settings object</span>'s
+ <span data-anolis-spec=html>origin</span>.
 
-   <li><p>Set <var title>base</var> to the
-   <span data-anolis-spec=html>document base URL</span> of
-   <span title=concept-XMLHttpRequest-document>document</span>.
-
-   <li><p>Set <span>source origin</span> to the <span data-anolis-spec=html>origin</span>
-   of <span title=concept-XMLHttpRequest-document>document</span> otherwise.
-
-   <li><p>Set <span>referrer source</span> to
-   <span title=concept-XMLHttpRequest-document>document</span>.
-  </ol>
-
- <li>
-  <p>If the <span data-anolis-spec=html>JavaScript global environment</span> is a
-  <span data-anolis-spec=html>worker environment</span>, run these steps:
-
-  <ol>
-   <li><p>Set <var title>base</var> to the
-   <span data-anolis-spec=html>script's base URL</span>.
-
-   <li><p>Set <span>source origin</span> to the
-   <span data-anolis-spec=html title=concept-script>script</span>'s
-   <span data-anolis-spec=html>origin</span>.
-
-   <li><p>Set <span>referrer source</span> to the
-   <span data-anolis-spec=html>script's referrer source</span>.
-  </ol>
+ <li><p>Set <span>referrer source</span> to the
+ <span data-anolis-spec=html>API referrer source</span>.
 
  <li><p>If <var>method</var> does not match the <span data-anolis-spec=http>Method</span>
  token production, <span data-anolis-spec=dom title=concept-throw>throw</span> a

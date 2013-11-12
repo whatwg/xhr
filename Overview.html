@@ -315,10 +315,8 @@ required by its definition, too).
 
 <h3 id="constructors"><span class="secno">4.1 </span>Constructors</h3>
 
-<p>When the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a>
-is a <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#document-environment">document environment</a>, the
-<code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object has an associated
-<dfn id="concept-xmlhttprequest-document" title="concept-XMLHttpRequest-document">document</dfn>.
+<p>The <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object has an associated
+<dfn id="concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</dfn>.
 
 <dl class="domintro">
  <dt><code><var title="">client</var> = new <a href="#dom-xmlhttprequest" title="dom-XMLHttpRequest">XMLHttpRequest</a>()</code>
@@ -333,13 +331,10 @@ constructor must run these steps:
  <li><p>Let <var title="">xhr</var> be a new <code><a href="#xmlhttprequest">XMLHttpRequest</a></code>
  object.
 
- <li><p>If the
- <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
- <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#document-environment">document environment</a>, set <var title="">xhr</var>'s
- <a href="#concept-xmlhttprequest-document" title="concept-XMLHttpRequest-document">document</a> to the
- <a class="external" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>
- associated with the global object of <var title="">xhr</var>'s interface
- object.
+ <li><p>Set <var title="">xhr</var>'s
+ <a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a> to the
+ <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#script-settings-object">script settings object</a> associated with the global
+ object of <var title="">xhr</var>'s interface object.
 
  <li><p>Return <var title="">xhr</var>.
 </ol>
@@ -553,44 +548,22 @@ request-associated concepts:
 method must run these steps:
 
 <ol>
- <li><p>Let <var title="">base</var> be null.
+ <li><p>If <a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
+ <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#responsible-document">responsible document</a> is not
+ <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#fully-active">fully active</a>,
+ <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
+ "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception.
 
- <li>
-  <p>If the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
-  <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#document-environment">document environment</a>, run these steps:
+ <li><p>Set <var title="">base</var> to
+ <a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
+ <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#api-base-url">API base URL</a>.
 
-  <ol>
-   <li><p>If <a href="#concept-xmlhttprequest-document" title="concept-XMLHttpRequest-document">document</a> is not
-   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#fully-active">fully active</a>,
-   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
-   "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception.
+ <li><p>Set <a href="#source-origin">source origin</a> to
+ <a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
+ <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a>.
 
-   <li><p>Set <var title="">base</var> to the
-   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/urls.html#document-base-url">document base URL</a> of
-   <a href="#concept-xmlhttprequest-document" title="concept-XMLHttpRequest-document">document</a>.
-
-   <li><p>Set <a href="#source-origin">source origin</a> to the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a>
-   of <a href="#concept-xmlhttprequest-document" title="concept-XMLHttpRequest-document">document</a> otherwise.
-
-   <li><p>Set <a href="#referrer-source">referrer source</a> to
-   <a href="#concept-xmlhttprequest-document" title="concept-XMLHttpRequest-document">document</a>.
-  </ol>
-
- <li>
-  <p>If the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
-  <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#worker-environment">worker environment</a>, run these steps:
-
-  <ol>
-   <li><p>Set <var title="">base</var> to the
-   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#script's-base-url">script's base URL</a>.
-
-   <li><p>Set <a href="#source-origin">source origin</a> to the
-   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#concept-script" title="concept-script">script</a>'s
-   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a>.
-
-   <li><p>Set <a href="#referrer-source">referrer source</a> to the
-   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#script's-referrer-source">script's referrer source</a>.
-  </ol>
+ <li><p>Set <a href="#referrer-source">referrer source</a> to the
+ <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#api-referrer-source">API referrer source</a>.
 
  <li><p>If <var>method</var> does not match the <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-5.1.1">Method</a>
  token production, <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
