@@ -445,8 +445,6 @@ request-associated concepts:
 <dfn>request URL</dfn>,
 <dfn id="author-request-headers">author request headers</dfn>,
 <dfn>request entity body</dfn>,
-<dfn>source origin</dfn>,
-<dfn>referrer source</dfn>,
 <dfn>synchronous flag</dfn>,
 <dfn id="upload-complete-flag">upload complete flag</dfn>, and
 <dfn id="upload-events-flag">upload events flag</dfn>.
@@ -512,13 +510,6 @@ method must run these steps:
  <li><p>Set <var title>base</var> to
  <span title=concept-XMLHttpRequest-settings-object>settings object</span>'s
  <span data-anolis-spec=html>API base URL</span>.
-
- <li><p>Set <span>source origin</span> to
- <span title=concept-XMLHttpRequest-settings-object>settings object</span>'s
- <span data-anolis-spec=html>origin</span>.
-
- <li><p>Set <span>referrer source</span> to the
- <span data-anolis-spec=html>API referrer source</span>.
 
  <li><p>If <var>method</var> does not match the <span data-anolis-spec=http>Method</span>
  token production, <span data-anolis-spec=dom title=concept-throw>throw</span> a
@@ -1015,11 +1006,19 @@ method must run these steps:
    <dt><span data-anolis-spec=fetch title=concept-request-author-headers>author headers</span>
    <dd><span>author request headers</span>
    <dt><span data-anolis-spec=fetch title=concept-request-origin>origin</span>
-   <dd><span>source origin</span>
+   <dd><span title=concept-XMLHttpRequest-settings-object>settings object</span>'s
+   <span data-anolis-spec=html>origin</span>
    <dt><span data-anolis-spec=fetch>force <code title>Origin</code> header flag</span>
    <dd>Set.
    <dt><span data-anolis-spec=fetch title=concept-request-referrer>referrer</span>
-   <dd><span class=XXX>referrer source</span>
+   <dd><span title=concept-XMLHttpRequest-settings-object>settings object</span>'s
+   <span data-anolis-spec=html>API referrer source</span>'s
+   <span data-anolis-spec=dom title=concept-document-url>URL</span> if
+   <span title=concept-XMLHttpRequest-settings-object>settings object</span>'s
+   <span data-anolis-spec=html>API referrer source</span> is a
+   <span data-anolis-spec=dom title=concept-document>document</span>, and
+   <span title=concept-XMLHttpRequest-settings-object>settings object</span>'s
+   <span data-anolis-spec=html>API referrer source</span> otherwise
    <dt><span data-anolis-spec=fetch title=concept-request-body>body</span>
    <dd><span>request entity body</span>
    <dt><span data-anolis-spec=fetch>synchronous flag</span>
@@ -1441,7 +1440,7 @@ following algorithm:
 <dfn id="blob-response-entity-body">blob response entity body</dfn> is either a
 <code data-anolis-spec=fileapi>Blob</code> representing the
 <span>response entity body</span> or null. If the <span>blob response entity body</span>
-is null, let it be the return value of the following algorithm:
+is null, set it to the return value of the following algorithm:
 
 <ol>
  <li><p>If the <span>response entity body</span> is null, return an empty
@@ -1457,7 +1456,7 @@ is null, let it be the return value of the following algorithm:
 <dfn id="document-response-entity-body">document response entity body</dfn>
 is either a <span data-anolis-spec=dom title=concept-document>document</span>
 representing the <span>response entity body</span> or null. If the
-<span>document response entity body</span> is null, let it be the return value of the
+<span>document response entity body</span> is null, set it to the return value of the
 following algorithm:
 
 <ol>
@@ -1539,15 +1538,16 @@ following algorithm:
  <span>request URL</span>.
 
  <li><p>Set <var title>document</var>'s <span data-anolis-spec=html>origin</span> to
- <span>source origin</span>.
+ <span title=concept-XMLHttpRequest-settings-object>settings object</span>'s
+ <span data-anolis-spec=html>origin</span>.
 
  <li><p>Return <var title>document</var>.
 </ol>
 
 <p>The <dfn>JSON response entity body</dfn> is either a JavaScript value
 representing the <span>response entity body</span>. If the
-<span>JSON response entity body</span> is null, let it be return value of the following
-algorithm:
+<span>JSON response entity body</span> is null, set it to the return value of the
+following algorithm:
 
 <ol>
  <li><p>If the <span>response entity body</span> is null, return null.
@@ -1565,7 +1565,7 @@ algorithm:
 
 <p>The <dfn id="text-response-entity-body">text response entity body</dfn> is either a
 string representing the <span>response entity body</span> or null. If the
-<span>text response entity body</span> is null, let it be the return value of the
+<span>text response entity body</span> is null, set it to the return value of the
 following algorithm:
 
 <ol>

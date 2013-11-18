@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-15-november-2013">Living Standard — Last Updated 15 November 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-18-november-2013">Living Standard — Last Updated 18 November 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-15 November 2013, the editor has made this specification available
+18 November 2013, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -490,8 +490,6 @@ request-associated concepts:
 <dfn id="request-url">request URL</dfn>,
 <dfn id="author-request-headers">author request headers</dfn>,
 <dfn id="request-entity-body">request entity body</dfn>,
-<dfn id="source-origin">source origin</dfn>,
-<dfn id="referrer-source">referrer source</dfn>,
 <dfn id="synchronous-flag">synchronous flag</dfn>,
 <dfn id="upload-complete-flag">upload complete flag</dfn>, and
 <dfn id="upload-events-flag">upload events flag</dfn>.
@@ -557,13 +555,6 @@ method must run these steps:
  <li><p>Set <var title="">base</var> to
  <a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
  <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#api-base-url">API base URL</a>.
-
- <li><p>Set <a href="#source-origin">source origin</a> to
- <a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
- <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a>.
-
- <li><p>Set <a href="#referrer-source">referrer source</a> to the
- <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#api-referrer-source">API referrer source</a>.
 
  <li><p>If <var>method</var> does not match the <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-5.1.1">Method</a>
  token production, <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
@@ -1060,11 +1051,19 @@ method must run these steps:
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-author-headers" title="concept-request-author-headers">author headers</a>
    <dd><a href="#author-request-headers">author request headers</a>
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-origin" title="concept-request-origin">origin</a>
-   <dd><a href="#source-origin">source origin</a>
+   <dd><a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a>
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#force-origin-header-flag">force <code title="">Origin</code> header flag</a>
    <dd>Set.
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-referrer" title="concept-request-referrer">referrer</a>
-   <dd><a class="XXX" href="#referrer-source">referrer source</a>
+   <dd><a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#api-referrer-source">API referrer source</a>'s
+   <a class="external" href="http://dom.spec.whatwg.org/#concept-document-url" title="concept-document-url">URL</a> if
+   <a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#api-referrer-source">API referrer source</a> is a
+   <a class="external" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>, and
+   <a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#api-referrer-source">API referrer source</a> otherwise
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>
    <dd><a href="#request-entity-body">request entity body</a>
    <dt><a data-anolis-spec="fetch" href="#synchronous-flag">synchronous flag</a>
@@ -1486,7 +1485,7 @@ following algorithm:
 <dfn id="blob-response-entity-body">blob response entity body</dfn> is either a
 <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code> representing the
 <a href="#response-entity-body">response entity body</a> or null. If the <a href="#blob-response-entity-body">blob response entity body</a>
-is null, let it be the return value of the following algorithm:
+is null, set it to the return value of the following algorithm:
 
 <ol>
  <li><p>If the <a href="#response-entity-body">response entity body</a> is null, return an empty
@@ -1502,7 +1501,7 @@ is null, let it be the return value of the following algorithm:
 <dfn id="document-response-entity-body">document response entity body</dfn>
 is either a <a class="external" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>
 representing the <a href="#response-entity-body">response entity body</a> or null. If the
-<a href="#document-response-entity-body">document response entity body</a> is null, let it be the return value of the
+<a href="#document-response-entity-body">document response entity body</a> is null, set it to the return value of the
 following algorithm:
 
 <ol>
@@ -1584,15 +1583,16 @@ following algorithm:
  <a href="#request-url">request URL</a>.
 
  <li><p>Set <var title="">document</var>'s <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a> to
- <a href="#source-origin">source origin</a>.
+ <a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
+ <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a>.
 
  <li><p>Return <var title="">document</var>.
 </ol>
 
 <p>The <dfn id="json-response-entity-body">JSON response entity body</dfn> is either a JavaScript value
 representing the <a href="#response-entity-body">response entity body</a>. If the
-<a href="#json-response-entity-body">JSON response entity body</a> is null, let it be return value of the following
-algorithm:
+<a href="#json-response-entity-body">JSON response entity body</a> is null, set it to the return value of the
+following algorithm:
 
 <ol>
  <li><p>If the <a href="#response-entity-body">response entity body</a> is null, return null.
@@ -1610,7 +1610,7 @@ algorithm:
 
 <p>The <dfn id="text-response-entity-body">text response entity body</dfn> is either a
 string representing the <a href="#response-entity-body">response entity body</a> or null. If the
-<a href="#text-response-entity-body">text response entity body</a> is null, let it be the return value of the
+<a href="#text-response-entity-body">text response entity body</a> is null, set it to the return value of the
 following algorithm:
 
 <ol>
