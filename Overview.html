@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-25-november-2013">Living Standard — Last Updated 25 November 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-12-december-2013">Living Standard — Last Updated 12 December 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-25 November 2013, the editor has made this specification available
+12 December 2013, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -944,7 +944,7 @@ method must run these steps:
 
     <p>Let the <a href="#request-entity-body">request entity body</a> be <var>data</var>,
     <a class="external" href="http://domparsing.spec.whatwg.org/#concept-serialize" title="concept-serialize">serialized</a>,
-    <a class="external" href="http://dev.w3.org/2006/webapi/WebIDL/#dfn-obtain-unicode" title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</a>,
+    <a class="external" href="http://heycam.github.io/webidl/#dfn-obtain-unicode" title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</a>,
     and <a class="external" href="http://encoding.spec.whatwg.org/#utf-8-encode" title="utf-8 encode">utf-8 encoded</a>.
     Re-throw any exception
     <a class="external" href="http://domparsing.spec.whatwg.org/#concept-serialize" title="concept-serialize">serializing</a> throws.
@@ -989,7 +989,7 @@ method must run these steps:
     <!-- utf-8 implied -->
 
     <p>Let <var>mime type</var> be
-    "<code title="">application/x-www-form-urlencoded;charset=UTF-8</code>.
+    "<code title="">application/x-www-form-urlencoded;charset=UTF-8</code>".
   </dl>
 
   <p>If a <code>Content-Type</code> header is in
@@ -1985,14 +1985,15 @@ value of <a href="#concept-formdata-entry" title="concept-FormData-entry">entry<
  to <var>name</var>.
 
  <li><p>If <var>value</var> is a <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code>, set
- <var>value</var> to a new <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a></code> object whose
- <code class="external" title="dom-File-name"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-name">name</a></code> attribute value is
- "<code title="">blob</code>".
+ <var>value</var> to a new <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a></code> object, representing
+ the same bytes, whose <code class="external" title="dom-File-name"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-name">name</a></code>
+ attribute value is "<code title="">blob</code>".
 
  <li><p>If <var>value</var> is a <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a></code> and
- <var title="">filename</var> is given, set <var>value</var>'s
- <code class="external" title="dom-File-name"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-name">name</a></code> attribute value to
- <var>filename</var>.
+ <var title="">filename</var> is given, set <var>value</var> to a new
+ <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a></code> object, representing
+ the same bytes, whose <code class="external" title="dom-File-name"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-name">name</a></code>
+ attribute value is <var>filename</var>.
 
  <li><p>Set <var>entry</var>'s <a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">value</a> to
  <var>value</var>.
@@ -2312,7 +2313,7 @@ otherwise. <a class="informative" href="#refsFETCH">[FETCH]</a>
 <dd><cite><a href="http://url.spec.whatwg.org/">URL</a></cite>, Anne van Kesteren. WHATWG.
 
 <dt id="refsWEBIDL">[WEBIDL]
-<dd><cite><a href="http://dev.w3.org/2006/webapi/WebIDL/">Web IDL</a></cite>, Cameron McCormack. W3C.
+<dd><cite><a href="http://heycam.github.io/webidl/">Web IDL</a></cite>, Cameron McCormack. W3C.
 
 <dt id="refsXML">[XML]
 <dd><cite><a href="http://www.w3.org/TR/xml/">Extensible Markup Language</a></cite>, Tim Bray, Jean Paoli, C. M. Sperberg-McQueen et al.. W3C.
