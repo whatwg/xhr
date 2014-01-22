@@ -2210,18 +2210,18 @@ otherwise. <span data-anolis-ref class=informative>FETCH</span>
 &lt;progress id=p>&lt;/progress>
 &lt;script>
   var progressBar = document.getElementById("p"),
-      client = new XMLHttpRequest()
-  client.open("GET", "magical-unicorns")
+      client = new XMLHttpRequest();
+  client.open("GET", "magical-unicorns");
   client.onprogress = function(pe) {
     if(pe.lengthComputable) {
-      progressBar.max = pe.total
-      progressBar.value = pe.loaded
+      progressBar.max = pe.total;
+      progressBar.value = pe.loaded;
     }
-  }
+  };
   client.onloadend = function(pe) {
-    progressBar.value = pe.loaded
-  }
-  client.send()
+    progressBar.value = pe.loaded;
+  };
+  client.send();
 &lt;/script></pre>
 
  <p>Fully working code would of course be more elaborate and deal with more
