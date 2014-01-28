@@ -210,6 +210,7 @@ interface <dfn id="xmlhttprequesteventtarget">XMLHttpRequestEventTarget</dfn> : 
   attribute <span data-anolis-spec=html>EventHandler</span> <span title="handler-xhr-onloadend">onloadend</span>;
 };
 
+[Exposed=Window,Worker]
 interface <dfn id="xmlhttprequestupload">XMLHttpRequestUpload</dfn> : <span>XMLHttpRequestEventTarget</span> {
 };
 
@@ -222,7 +223,8 @@ enum <dfn>XMLHttpRequestResponseType</dfn> {
   "text"
 };
 
-[<span title="dom-XMLHttpRequest">Constructor</span>]
+[<span title="dom-XMLHttpRequest">Constructor</span>,
+ Exposed=Window,Worker]
 interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEventTarget</span> {
   // <a href="#event-handlers">event handler</a>
   attribute <span data-anolis-spec=html>EventHandler</span> <span title="handler-xhr-onreadystatechange">onreadystatechange</span>;
@@ -254,18 +256,11 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
            attribute <span>XMLHttpRequestResponseType</span> <span title="dom-XMLHttpRequest-responseType">responseType</span>;
   readonly attribute any <span title="dom-XMLHttpRequest-response">response</span>;
   readonly attribute DOMString <span title="dom-XMLHttpRequest-responseText">responseText</span>;
-  readonly attribute <span data-anolis-spec=dom>Document</span>? <span title="dom-XMLHttpRequest-responseXML">responseXML</span>;
+  [Exposed=Window] readonly attribute <span data-anolis-spec=dom>Document</span>? <span title="dom-XMLHttpRequest-responseXML">responseXML</span>;
 };</pre>
 
 <p>Each <code>XMLHttpRequest</code> object has a unique, associated
 <code>XMLHttpRequestUpload</code> object.
-
-<p>If the <span data-anolis-spec=html>JavaScript global environment</span> is a
-<span data-anolis-spec=html>worker environment</span>, implementations must act as if
-<code title>Document</code> and <code title>Document?</code> in the above IDL were not
-exposed. I.e. <code title=dom-XMLHttpRequest-send>send()</code> is not overloaded with it
-and <code title=dom-XMLHttpRequest-responseXML>responseXML</code> always returns null (as
-required by its definition, too).
 
 
 <h3 id="constructors">Constructors</h3>
@@ -1462,10 +1457,6 @@ following algorithm:
 <ol>
  <li><p>If the <span>response entity body</span> is null, return null.
 
- <li><p>If the
- <span data-anolis-spec=html>JavaScript global environment</span> is a
- <span data-anolis-spec=html>worker environment</span>, return null.
-
  <li><p>If <span>final MIME type</span> is not null,
  <code>text/html</code>, <code>text/xml</code>,
  <code>application/xml</code>, or does not end in
@@ -1686,6 +1677,11 @@ string.
 attribute must run these steps:
 
 <ol>
+ <li><p>If the
+ <span data-anolis-spec=html>JavaScript global environment</span> is a
+ <span data-anolis-spec=html>worker environment</span> and the given
+ value is "<code title>document</code>", terminate these steps.
+
  <li><p>If the state is <span title="dom-XMLHttpRequest-LOADING">LOADING</span> or
  <span title="dom-XMLHttpRequest-DONE">DONE</span>,
  <span data-anolis-spec=dom title=concept-throw>throw</span> an
@@ -1697,11 +1693,6 @@ attribute must run these steps:
  <span>synchronous flag</span> is set,
  <span data-anolis-spec=dom title=concept-throw>throw</span> an
  "<code data-anolis-spec=dom>InvalidAccessError</code>" exception.
-
- <li><p>If the
- <span data-anolis-spec=html>JavaScript global environment</span> is a
- <span data-anolis-spec=html>worker environment</span> and the given
- value is "<code title>document</code>", terminate these steps.
 
  <li><p>Set the
  <code title="dom-XMLHttpRequest-responseType">responseType</code>
@@ -1828,7 +1819,6 @@ attribute must return the result of running these steps:
  <span data-anolis-spec=dom title=concept-throw>throw</span> an
  "<code data-anolis-spec=dom>InvalidStateError</code>" exception.
 
-
  <li><p>If the state is not <span title="dom-XMLHttpRequest-DONE">DONE</span>, return
  null.
 
@@ -1897,7 +1887,8 @@ and/or <code>XMLHttpRequestUpload</code> objects:
 
 <pre class="idl">typedef (<span data-anolis-spec=fileapi>File</span> or [EnsureUTF16] DOMString) <dfn>FormDataEntryValue</dfn>;
 
-[<span title="dom-FormData">Constructor</span>(optional <span data-anolis-spec=html>HTMLFormElement</span> <var>form</var>)]
+[<span title="dom-FormData">Constructor</span>(optional <span data-anolis-spec=html>HTMLFormElement</span> <var>form</var>),
+ Exposed=Window,Worker]
 interface <dfn>FormData</dfn> {
   void <span title="dom-FormData-append">append</span>([EnsureUTF16] DOMString <var>name</var>, <span data-anolis-spec=fileapi>Blob</span> <var>value</var>, optional [EnsureUTF16] DOMString <var>filename</var>);
   void <span title="dom-FormData-append">append</span>([EnsureUTF16] DOMString <var>name</var>, [EnsureUTF16] DOMString <var>value</var>);
@@ -1908,12 +1899,6 @@ interface <dfn>FormData</dfn> {
   void <span title=dom-FormData-append>set</span>([EnsureUTF16] DOMString <var>name</var>, <span data-anolis-spec=fileapi>Blob</span> <var>value</var>, optional [EnsureUTF16] DOMString <var>filename</var>);
   void <span title=dom-FormData-set>set</span>([EnsureUTF16] DOMString <var>name</var>, [EnsureUTF16] DOMString <var>value</var>);
 };</pre>
-
-<p>If the <span data-anolis-spec=html>JavaScript global environment</span> is a
-<span data-anolis-spec=html>worker environment</span>, <code>FormData</code> must be
-<span data-anolis-spec=html>exposed to JavaScript</span> as if the constructor part of the
-IDL reads <code title>[Constructor]</code> (i.e. has no arguments).
-<!-- maybe move this into IDL at some point -->
 
 <p>The <code>FormData</code> object represents an ordered list of
 <dfn title=concept-FormData-entry>entries</dfn>. Each
@@ -2028,7 +2013,8 @@ otherwise.
 
 <h2>Interface <code title="">ProgressEvent</code></h2>
 
-<pre class="idl">[Constructor(DOMString <var title>type</var>, optional <span>ProgressEventInit</span> <var title>eventInitDict</var>)]
+<pre class="idl">[Constructor(DOMString <var title>type</var>, optional <span>ProgressEventInit</span> <var title>eventInitDict</var>),
+ Exposed=Window,Worker]
 interface <dfn>ProgressEvent</dfn> : <span data-anolis-spec=dom>Event</span> {
   readonly attribute boolean <span title="dom-ProgressEvent-lengthComputable">lengthComputable</span>;
   readonly attribute unsigned long long <span title="dom-ProgressEvent-loaded">loaded</span>;

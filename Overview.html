@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-12-december-2013">Living Standard — Last Updated 12 December 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-28-january-2014">Living Standard — Last Updated 28 January 2014</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-12 December 2013, the editor has made this specification available
+28 January 2014, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -255,6 +255,7 @@ interface <dfn id="xmlhttprequesteventtarget">XMLHttpRequestEventTarget</dfn> : 
   attribute <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#eventhandler">EventHandler</a> <a href="#handler-xhr-onloadend" title="handler-xhr-onloadend">onloadend</a>;
 };
 
+[Exposed=Window,Worker]
 interface <dfn id="xmlhttprequestupload">XMLHttpRequestUpload</dfn> : <a href="#xmlhttprequesteventtarget">XMLHttpRequestEventTarget</a> {
 };
 
@@ -267,7 +268,8 @@ enum <dfn id="xmlhttprequestresponsetype">XMLHttpRequestResponseType</dfn> {
   "text"
 };
 
-[<a href="#dom-xmlhttprequest" title="dom-XMLHttpRequest">Constructor</a>]
+[<a href="#dom-xmlhttprequest" title="dom-XMLHttpRequest">Constructor</a>,
+ Exposed=Window,Worker]
 interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <a href="#xmlhttprequesteventtarget">XMLHttpRequestEventTarget</a> {
   // <a href="#event-handlers">event handler</a>
   attribute <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#eventhandler">EventHandler</a> <a href="#handler-xhr-onreadystatechange" title="handler-xhr-onreadystatechange">onreadystatechange</a>;
@@ -299,18 +301,11 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <a href="#xmlhttpreque
            attribute <a href="#xmlhttprequestresponsetype">XMLHttpRequestResponseType</a> <a href="#dom-xmlhttprequest-responsetype" title="dom-XMLHttpRequest-responseType">responseType</a>;
   readonly attribute any <a href="#dom-xmlhttprequest-response" title="dom-XMLHttpRequest-response">response</a>;
   readonly attribute DOMString <a href="#dom-xmlhttprequest-responsetext" title="dom-XMLHttpRequest-responseText">responseText</a>;
-  readonly attribute <a class="external" href="http://dom.spec.whatwg.org/#document">Document</a>? <a href="#dom-xmlhttprequest-responsexml" title="dom-XMLHttpRequest-responseXML">responseXML</a>;
+  [Exposed=Window] readonly attribute <a class="external" href="http://dom.spec.whatwg.org/#document">Document</a>? <a href="#dom-xmlhttprequest-responsexml" title="dom-XMLHttpRequest-responseXML">responseXML</a>;
 };</pre>
 
 <p>Each <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object has a unique, associated
 <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
-
-<p>If the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
-<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#worker-environment">worker environment</a>, implementations must act as if
-<code title="">Document</code> and <code title="">Document?</code> in the above IDL were not
-exposed. I.e. <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code> is not overloaded with it
-and <code title="dom-XMLHttpRequest-responseXML"><a href="#dom-xmlhttprequest-responsexml">responseXML</a></code> always returns null (as
-required by its definition, too).
 
 
 <h3 id="constructors"><span class="secno">4.1 </span>Constructors</h3>
@@ -1507,10 +1502,6 @@ following algorithm:
 <ol>
  <li><p>If the <a href="#response-entity-body">response entity body</a> is null, return null.
 
- <li><p>If the
- <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
- <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#worker-environment">worker environment</a>, return null.
-
  <li><p>If <a href="#final-mime-type">final MIME type</a> is not null,
  <code>text/html</code>, <code>text/xml</code>,
  <code>application/xml</code>, or does not end in
@@ -1731,6 +1722,11 @@ string.
 attribute must run these steps:
 
 <ol>
+ <li><p>If the
+ <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
+ <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#worker-environment">worker environment</a> and the given
+ value is "<code title="">document</code>", terminate these steps.
+
  <li><p>If the state is <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a> or
  <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>,
  <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
@@ -1742,11 +1738,6 @@ attribute must run these steps:
  <a href="#synchronous-flag">synchronous flag</a> is set,
  <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
  "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception.
-
- <li><p>If the
- <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
- <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#worker-environment">worker environment</a> and the given
- value is "<code title="">document</code>", terminate these steps.
 
  <li><p>Set the
  <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code>
@@ -1873,7 +1864,6 @@ attribute must return the result of running these steps:
  <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
  "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception.
 
-
  <li><p>If the state is not <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>, return
  null.
 
@@ -1942,7 +1932,8 @@ and/or <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> obj
 
 <pre class="idl">typedef (<a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a> or [EnsureUTF16] DOMString) <dfn id="formdataentryvalue">FormDataEntryValue</dfn>;
 
-[<a href="#dom-formdata" title="dom-FormData">Constructor</a>(optional <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/forms.html#htmlformelement">HTMLFormElement</a> <var>form</var>)]
+[<a href="#dom-formdata" title="dom-FormData">Constructor</a>(optional <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/forms.html#htmlformelement">HTMLFormElement</a> <var>form</var>),
+ Exposed=Window,Worker]
 interface <dfn id="formdata">FormData</dfn> {
   void <a href="#dom-formdata-append" title="dom-FormData-append">append</a>([EnsureUTF16] DOMString <var>name</var>, <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> <var>value</var>, optional [EnsureUTF16] DOMString <var>filename</var>);
   void <a href="#dom-formdata-append" title="dom-FormData-append">append</a>([EnsureUTF16] DOMString <var>name</var>, [EnsureUTF16] DOMString <var>value</var>);
@@ -1953,12 +1944,6 @@ interface <dfn id="formdata">FormData</dfn> {
   void <a href="#dom-formdata-append" title="dom-FormData-append">set</a>([EnsureUTF16] DOMString <var>name</var>, <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> <var>value</var>, optional [EnsureUTF16] DOMString <var>filename</var>);
   void <a href="#dom-formdata-set" title="dom-FormData-set">set</a>([EnsureUTF16] DOMString <var>name</var>, [EnsureUTF16] DOMString <var>value</var>);
 };</pre>
-
-<p>If the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
-<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#worker-environment">worker environment</a>, <code><a href="#formdata">FormData</a></code> must be
-<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#exposed-to-javascript">exposed to JavaScript</a> as if the constructor part of the
-IDL reads <code title="">[Constructor]</code> (i.e. has no arguments).
-<!-- maybe move this into IDL at some point -->
 
 <p>The <code><a href="#formdata">FormData</a></code> object represents an ordered list of
 <dfn id="concept-formdata-entry" title="concept-FormData-entry">entries</dfn>. Each
@@ -2073,7 +2058,8 @@ otherwise.
 
 <h2 id="interface-progressevent"><span class="secno">6 </span>Interface <code title="">ProgressEvent</code></h2>
 
-<pre class="idl">[Constructor(DOMString <var title="">type</var>, optional <a href="#progresseventinit">ProgressEventInit</a> <var title="">eventInitDict</var>)]
+<pre class="idl">[Constructor(DOMString <var title="">type</var>, optional <a href="#progresseventinit">ProgressEventInit</a> <var title="">eventInitDict</var>),
+ Exposed=Window,Worker]
 interface <dfn id="progressevent">ProgressEvent</dfn> : <a class="external" href="http://dom.spec.whatwg.org/#event">Event</a> {
   readonly attribute boolean <a href="#dom-progressevent-lengthcomputable" title="dom-ProgressEvent-lengthComputable">lengthComputable</a>;
   readonly attribute unsigned long long <a href="#dom-progressevent-loaded" title="dom-ProgressEvent-loaded">loaded</a>;
