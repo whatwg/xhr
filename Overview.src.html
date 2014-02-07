@@ -492,6 +492,16 @@ request-associated concepts:
   attribute is not the empty string.
 </dl>
 
+<p class=warning id=sync-warning>Developers must not pass false for the
+<var title>async</var> argument when the
+<span data-anolis-spec=html>JavaScript global environment</span> is a
+<span data-anolis-spec=html>document environment</span> as it has detrimental effects to
+the end user's experience. User agents are strongly encouraged to warn about such usage in
+developer tools and may experiment with
+<span data-anolis-spec=dom title=concept-throw>throwing</span> a
+"<code data-anolis-spec=dom>InvalidAccessError</code>" exception when it occurs so the
+feature can eventually be removed from the platform.
+
 <p>The
 <dfn id="dom-xmlhttprequest-open" title="dom-XMLHttpRequest-open"><code>open(<var title>method</var>, <var title>url</var>, <var title>async</var>, <var title>username</var>, <var title>password</var>)</code></dfn>
 method must run these steps:

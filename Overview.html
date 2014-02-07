@@ -538,6 +538,16 @@ request-associated concepts:
   attribute is not the empty string.
 </dl>
 
+<p class="warning" id="sync-warning">Developers must not pass false for the
+<var title="">async</var> argument when the
+<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
+<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#document-environment">document environment</a> as it has detrimental effects to
+the end user's experience. User agents are strongly encouraged to warn about such usage in
+developer tools and may experiment with
+<a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throwing</a> a
+"<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception when it occurs so the
+feature can eventually be removed from the platform.
+
 <p>The
 <dfn id="dom-xmlhttprequest-open" title="dom-XMLHttpRequest-open"><code>open(<var title="">method</var>, <var title="">url</var>, <var title="">async</var>, <var title="">username</var>, <var title="">password</var>)</code></dfn>
 method must run these steps:
