@@ -248,6 +248,7 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
   void <span title="dom-XMLHttpRequest-abort">abort</span>();
 
   // <a href="#response">response</a>
+  readonly attribute DOMString <span title=dom-XMLHttpRequest-responseURL>responseURL</span>;
   readonly attribute unsigned short <span title="dom-XMLHttpRequest-status">status</span>;
   readonly attribute ByteString <span title="dom-XMLHttpRequest-statusText">statusText</span>;
   ByteString? <span title="dom-XMLHttpRequest-getResponseHeader">getResponseHeader</span>(ByteString <var>name</var>);
@@ -526,11 +527,11 @@ method must run these steps:
   <!-- WebKit (and supposedly Gecko) also uppercase: COPY, INDEX, LOCK,
   M-POST, MKCOL, MOVE, PROPFIND, PROPPATCH, and UNLOCK. -->
 
- <li><p>Let <var title>parsed URL</var> be the result of
+ <li><p>Let <var title>parsedURL</var> be the result of
  <span data-anolis-spec=url title=concept-url-parser>parsing</span> <var title>url</var>
  with <var title>base</var>.
 
- <li><p>If <var title>parsed URL</var> is failure,
+ <li><p>If <var title>parsedURL</var> is failure,
  <span data-anolis-spec=dom title=concept-throw>throw</span> a
  "<code data-anolis-spec=dom>SyntaxError</code>" exception.
 
@@ -543,17 +544,17 @@ method must run these steps:
   from <var>async</var> being omitted.
 
  <li>
-  <p>If <var title>parsed URL</var>'s <span data-anolis-spec=url>relative flag</span> is
+  <p>If <var title>parsedURL</var>'s <span data-anolis-spec=url>relative flag</span> is
   set, run these substeps:
 
   <ol>
    <li><p>If the <var title>username</var> argument is not null, set
-   <var title>parsed URL</var>'s
+   <var title>parsedURL</var>'s
    <span data-anolis-spec=url title=concept-url-username>username</span> to
    <var>username</var>.
 
    <li><p>If the <var title>password</var> argument is not null, set
-   <var title>parsed URL</var>'s
+   <var title>parsedURL</var>'s
    <span data-anolis-spec=url title=concept-url-password>password</span> to
    <var>password</var>.
   </ol>
@@ -578,7 +579,7 @@ method must run these steps:
 
   <ul>
    <li><p>Set <span>request method</span> to <var>method</var>.
-   <li><p>Set <span>request URL</span> to <var title>parsed URL</var>.
+   <li><p>Set <span>request URL</span> to <var title>parsedURL</var>.
    <li><p>Set the <span>synchronous flag</span>, if <var>async</var> is false, and unset
    the <span>synchronous flag</span> otherwise.
    <li><p>Set <span>author request headers</span> to the empty list.
@@ -1269,6 +1270,14 @@ otherwise it is a
 <span data-anolis-spec=fetch title=concept-network-error>network error</span>.
 
 
+<h4>The <code title>responseURL</code> attribute</h4>
+
+<p>The <dfn title=dom-XMLHttpRequest-responseURL><code>responseURL</code></dfn> attribute
+must return the empty string if <span>response</span>'s
+<span data-anolis-spec=fetch title=concept-response-url>url</span> is null and its
+<span data-anolis-spec=url title=concept-url-serializer>serialization</span> otherwise.
+
+
 <h4>The <code title>status</code> attribute</h4>
 
 <p>The
@@ -1526,7 +1535,8 @@ following algorithm:
 
  <li><p>Set <var title>document</var>'s
  <span data-anolis-spec=dom title=concept-document-url>URL</span> to
- <span>request URL</span>.
+ <span>response</span>'s
+ <span data-anolis-spec=fetch title=concept-response-url>url</span>.
 
  <li><p>Set <var title>document</var>'s <span data-anolis-spec=html>origin</span> to
  <span title=concept-XMLHttpRequest-settings-object>settings object</span>'s

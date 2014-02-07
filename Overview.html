@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 class="head" id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-28-january-2014">Living Standard — Last Updated 28 January 2014</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-7-february-2014">Living Standard — Last Updated 7 February 2014</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-28 January 2014, the editor has made this specification available
+7 February 2014, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -82,16 +82,17 @@ transferring data between a client and a server.
      <li><a href="#the-abort()-method"><span class="secno">4.5.7 </span>The <code title="">abort()</code> method</a></ol></li>
    <li><a href="#response"><span class="secno">4.6 </span>Response</a>
     <ol class="toc">
-     <li><a href="#the-status-attribute"><span class="secno">4.6.1 </span>The <code title="">status</code> attribute</a></li>
-     <li><a href="#the-statustext-attribute"><span class="secno">4.6.2 </span>The <code title="">statusText</code> attribute</a></li>
-     <li><a href="#the-getresponseheader()-method"><span class="secno">4.6.3 </span>The <code title="">getResponseHeader()</code> method</a></li>
-     <li><a href="#the-getallresponseheaders()-method"><span class="secno">4.6.4 </span>The <code title="">getAllResponseHeaders()</code> method</a></li>
-     <li><a href="#response-entity-body-0"><span class="secno">4.6.5 </span>Response entity body</a></li>
-     <li><a href="#the-overridemimetype()-method"><span class="secno">4.6.6 </span>The <code title="">overrideMimeType()</code> method</a></li>
-     <li><a href="#the-responsetype-attribute"><span class="secno">4.6.7 </span>The <code title="">responseType</code> attribute</a></li>
-     <li><a href="#the-response-attribute"><span class="secno">4.6.8 </span>The <code title="">response</code> attribute</a></li>
-     <li><a href="#the-responsetext-attribute"><span class="secno">4.6.9 </span>The <code title="">responseText</code> attribute</a></li>
-     <li><a href="#the-responsexml-attribute"><span class="secno">4.6.10 </span>The <code title="">responseXML</code> attribute</a></ol></li>
+     <li><a href="#the-responseurl-attribute"><span class="secno">4.6.1 </span>The <code title="">responseURL</code> attribute</a></li>
+     <li><a href="#the-status-attribute"><span class="secno">4.6.2 </span>The <code title="">status</code> attribute</a></li>
+     <li><a href="#the-statustext-attribute"><span class="secno">4.6.3 </span>The <code title="">statusText</code> attribute</a></li>
+     <li><a href="#the-getresponseheader()-method"><span class="secno">4.6.4 </span>The <code title="">getResponseHeader()</code> method</a></li>
+     <li><a href="#the-getallresponseheaders()-method"><span class="secno">4.6.5 </span>The <code title="">getAllResponseHeaders()</code> method</a></li>
+     <li><a href="#response-entity-body-0"><span class="secno">4.6.6 </span>Response entity body</a></li>
+     <li><a href="#the-overridemimetype()-method"><span class="secno">4.6.7 </span>The <code title="">overrideMimeType()</code> method</a></li>
+     <li><a href="#the-responsetype-attribute"><span class="secno">4.6.8 </span>The <code title="">responseType</code> attribute</a></li>
+     <li><a href="#the-response-attribute"><span class="secno">4.6.9 </span>The <code title="">response</code> attribute</a></li>
+     <li><a href="#the-responsetext-attribute"><span class="secno">4.6.10 </span>The <code title="">responseText</code> attribute</a></li>
+     <li><a href="#the-responsexml-attribute"><span class="secno">4.6.11 </span>The <code title="">responseXML</code> attribute</a></ol></li>
    <li><a href="#events"><span class="secno">4.7 </span>Events summary</a></ol></li>
  <li><a href="#interface-formdata"><span class="secno">5 </span>Interface <code title="">FormData</code></a></li>
  <li><a href="#interface-progressevent"><span class="secno">6 </span>Interface <code title="">ProgressEvent</code></a>
@@ -293,6 +294,7 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <a href="#xmlhttpreque
   void <a href="#dom-xmlhttprequest-abort" title="dom-XMLHttpRequest-abort">abort</a>();
 
   // <a href="#response">response</a>
+  readonly attribute DOMString <a href="#dom-xmlhttprequest-responseurl" title="dom-XMLHttpRequest-responseURL">responseURL</a>;
   readonly attribute unsigned short <a href="#dom-xmlhttprequest-status" title="dom-XMLHttpRequest-status">status</a>;
   readonly attribute ByteString <a href="#dom-xmlhttprequest-statustext" title="dom-XMLHttpRequest-statusText">statusText</a>;
   ByteString? <a href="#dom-xmlhttprequest-getresponseheader" title="dom-XMLHttpRequest-getResponseHeader">getResponseHeader</a>(ByteString <var>name</var>);
@@ -571,11 +573,11 @@ method must run these steps:
   <!-- WebKit (and supposedly Gecko) also uppercase: COPY, INDEX, LOCK,
   M-POST, MKCOL, MOVE, PROPFIND, PROPPATCH, and UNLOCK. -->
 
- <li><p>Let <var title="">parsed URL</var> be the result of
+ <li><p>Let <var title="">parsedURL</var> be the result of
  <a class="external" href="http://url.spec.whatwg.org/#concept-url-parser" title="concept-url-parser">parsing</a> <var title="">url</var>
  with <var title="">base</var>.
 
- <li><p>If <var title="">parsed URL</var> is failure,
+ <li><p>If <var title="">parsedURL</var> is failure,
  <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
  "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" exception.
 
@@ -588,17 +590,17 @@ method must run these steps:
   from <var>async</var> being omitted.
 
  <li>
-  <p>If <var title="">parsed URL</var>'s <a class="external" href="http://url.spec.whatwg.org/#relative-flag">relative flag</a> is
+  <p>If <var title="">parsedURL</var>'s <a class="external" href="http://url.spec.whatwg.org/#relative-flag">relative flag</a> is
   set, run these substeps:
 
   <ol>
    <li><p>If the <var title="">username</var> argument is not null, set
-   <var title="">parsed URL</var>'s
+   <var title="">parsedURL</var>'s
    <a class="external" href="http://url.spec.whatwg.org/#concept-url-username" title="concept-url-username">username</a> to
    <var>username</var>.
 
    <li><p>If the <var title="">password</var> argument is not null, set
-   <var title="">parsed URL</var>'s
+   <var title="">parsedURL</var>'s
    <a class="external" href="http://url.spec.whatwg.org/#concept-url-password" title="concept-url-password">password</a> to
    <var>password</var>.
   </ol>
@@ -623,7 +625,7 @@ method must run these steps:
 
   <ul>
    <li><p>Set <a href="#request-method">request method</a> to <var>method</var>.
-   <li><p>Set <a href="#request-url">request URL</a> to <var title="">parsed URL</var>.
+   <li><p>Set <a href="#request-url">request URL</a> to <var title="">parsedURL</var>.
    <li><p>Set the <a href="#synchronous-flag">synchronous flag</a>, if <var>async</var> is false, and unset
    the <a href="#synchronous-flag">synchronous flag</a> otherwise.
    <li><p>Set <a href="#author-request-headers">author request headers</a> to the empty list.
@@ -1314,7 +1316,15 @@ otherwise it is a
 <a class="external" href="http://fetch.spec.whatwg.org/#concept-network-error" title="concept-network-error">network error</a>.
 
 
-<h4 id="the-status-attribute"><span class="secno">4.6.1 </span>The <code title="">status</code> attribute</h4>
+<h4 id="the-responseurl-attribute"><span class="secno">4.6.1 </span>The <code title="">responseURL</code> attribute</h4>
+
+<p>The <dfn id="dom-xmlhttprequest-responseurl" title="dom-XMLHttpRequest-responseURL"><code>responseURL</code></dfn> attribute
+must return the empty string if <a href="#response-0">response</a>'s
+<a class="external" href="http://fetch.spec.whatwg.org/#concept-response-url" title="concept-response-url">url</a> is null and its
+<a class="external" href="http://url.spec.whatwg.org/#concept-url-serializer" title="concept-url-serializer">serialization</a> otherwise.
+
+
+<h4 id="the-status-attribute"><span class="secno">4.6.2 </span>The <code title="">status</code> attribute</h4>
 
 <p>The
 <dfn id="dom-xmlhttprequest-status" title="dom-XMLHttpRequest-status"><code>status</code></dfn>
@@ -1322,7 +1332,7 @@ attribute must return the <a href="#response-0">response</a>'s
 <a class="external" href="http://fetch.spec.whatwg.org/#concept-response-status" title="concept-response-status">status</a>.
 
 
-<h4 id="the-statustext-attribute"><span class="secno">4.6.2 </span>The <code title="">statusText</code> attribute</h4>
+<h4 id="the-statustext-attribute"><span class="secno">4.6.3 </span>The <code title="">statusText</code> attribute</h4>
 
 <p>The
 <dfn id="dom-xmlhttprequest-statustext" title="dom-XMLHttpRequest-statusText"><code>statusText</code></dfn>
@@ -1330,7 +1340,7 @@ attribute must return the <a href="#response-0">response</a>'s
 <a class="external" href="http://fetch.spec.whatwg.org/#concept-response-status-message" title="concept-response-status-message">status message</a>.
 
 
-<h4 id="the-getresponseheader()-method"><span class="secno">4.6.3 </span>The <code title="">getResponseHeader()</code> method</h4>
+<h4 id="the-getresponseheader()-method"><span class="secno">4.6.4 </span>The <code title="">getResponseHeader()</code> method</h4>
 
 <p>The
 <dfn id="dom-xmlhttprequest-getresponseheader" title="dom-XMLHttpRequest-getResponseHeader"><code>getResponseHeader(<var>name</var>)</code></dfn>
@@ -1378,7 +1388,7 @@ client.onreadystatechange = function() {
 </div>
 
 
-<h4 id="the-getallresponseheaders()-method"><span class="secno">4.6.4 </span>The <code title="">getAllResponseHeaders()</code> method</h4>
+<h4 id="the-getallresponseheaders()-method"><span class="secno">4.6.5 </span>The <code title="">getAllResponseHeaders()</code> method</h4>
 
 <p>The
 <dfn id="dom-xmlhttprequest-getallresponseheaders" title="dom-XMLHttpRequest-getAllResponseHeaders"><code>getAllResponseHeaders()</code></dfn>
@@ -1420,7 +1430,7 @@ Content-Type: text/plain; charset=utf-8</code></pre>
 </div>
 
 
-<h4 id="response-entity-body-0"><span class="secno">4.6.5 </span>Response entity body</h4>
+<h4 id="response-entity-body-0"><span class="secno">4.6.6 </span>Response entity body</h4>
 
 <p>The <dfn id="response-mime-type">response MIME type</dfn> is the
 MIME type the `<code title="">Content-Type</code>` header contains excluding any
@@ -1571,7 +1581,8 @@ following algorithm:
 
  <li><p>Set <var title="">document</var>'s
  <a class="external" href="http://dom.spec.whatwg.org/#concept-document-url" title="concept-document-url">URL</a> to
- <a href="#request-url">request URL</a>.
+ <a href="#response-0">response</a>'s
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-response-url" title="concept-response-url">url</a>.
 
  <li><p>Set <var title="">document</var>'s <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a> to
  <a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
@@ -1638,7 +1649,7 @@ resources using <a class="external" href="http://encoding.spec.whatwg.org/#utf-8
 
 
 
-<h4 id="the-overridemimetype()-method"><span class="secno">4.6.6 </span>The <code title="">overrideMimeType()</code> method</h4>
+<h4 id="the-overridemimetype()-method"><span class="secno">4.6.7 </span>The <code title="">overrideMimeType()</code> method</h4>
 
 <dl class="domintro">
  <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-overridemimetype" title="dom-XMLHttpRequest-overrideMimeType">overrideMimeType</a>(<var title="">mime</var>)</code>
@@ -1683,7 +1694,7 @@ method must run these steps:
 
 
 
-<h4 id="the-responsetype-attribute"><span class="secno">4.6.7 </span>The <code title="">responseType</code> attribute</h4>
+<h4 id="the-responsetype-attribute"><span class="secno">4.6.8 </span>The <code title="">responseType</code> attribute</h4>
 
 
 <dl class="domintro">
@@ -1747,7 +1758,7 @@ attribute must run these steps:
 
 
 
-<h4 id="the-response-attribute"><span class="secno">4.6.8 </span>The <code title="">response</code> attribute</h4>
+<h4 id="the-response-attribute"><span class="secno">4.6.9 </span>The <code title="">response</code> attribute</h4>
 
 <dl class="domintro">
  <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-response" title="dom-XMLHttpRequest-response">response</a></code>
@@ -1807,7 +1818,7 @@ steps:
 
 
 
-<h4 id="the-responsetext-attribute"><span class="secno">4.6.9 </span>The <code title="">responseText</code> attribute</h4>
+<h4 id="the-responsetext-attribute"><span class="secno">4.6.10 </span>The <code title="">responseText</code> attribute</h4>
 
 <dl class="domintro">
  <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-responsetext" title="dom-XMLHttpRequest-responseText">responseText</a></code>
@@ -1840,7 +1851,7 @@ steps:
 </ol>
 
 
-<h4 id="the-responsexml-attribute"><span class="secno">4.6.10 </span>The <code title="">responseXML</code> attribute</h4>
+<h4 id="the-responsexml-attribute"><span class="secno">4.6.11 </span>The <code title="">responseXML</code> attribute</h4>
 
 <dl class="domintro">
  <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-responsexml" title="dom-XMLHttpRequest-responseXML">responseXML</a></code>
