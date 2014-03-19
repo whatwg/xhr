@@ -2150,10 +2150,10 @@ WHATWG community to ensure input from people familiar with the subject.
    <td>After <code title="">loadstart</code> has been
     <span data-anolis-spec=dom title=concept-event-dispatch>dispatched</span>.
   <tr>
-   <th><code title="">error</code>
+   <th><code title>error</code>
    <td>Progression failed.
-   <td>Zero or once.
-   <td rowspan="3">After the last <code title="">progress</code> has
+   <td rowspan=4>Zero or once (mutually exclusive).
+   <td rowspan=4>After the last <code title="">progress</code> has
     been
     <span data-anolis-spec=dom title=concept-event-dispatch>dispatched</span>,
     or after <code title="">loadstart</code> has been
@@ -2163,11 +2163,12 @@ WHATWG community to ensure input from people familiar with the subject.
   <tr>
    <th><code>abort</code>
    <td>Progression is terminated.
-   <td>Zero or once.
+  <tr>
+   <th><code title>timeout</code>
+   <td>Progression is terminated due to preset time expiring.
   <tr>
    <th><code>load</code>
    <td>Progression is successful.
-   <td>Zero or once.
   <tr>
    <th><code title="">loadend</code>
    <td>Progress has stopped.
@@ -2177,11 +2178,11 @@ WHATWG community to ensure input from people familiar with the subject.
     <span data-anolis-spec=dom title=concept-event-dispatch>dispatched</span>.
 </table>
 
-<p>The <code title="">error</code>, <code title="">abort</code>, and
-<code title="">load</code> event types are mutually exclusive.
+<p>The <code title>error</code>, <code title>abort</code>, <code title>timeout</code>, and
+<code title>load</code> event types are mutually exclusive.
 
-<p>Throughout the web platform the <code title="">error</code>,
-<code title="">abort</code>, and <code title="">load</code> event types have
+<p>Throughout the web platform the <code title>error</code>, <code title>abort</code>,
+<code title>timeout</code> and <code title>load</code> event types have
 their <code data-anolis-spec=dom title=dom-Event-bubbles>bubbles</code> and
 <code data-anolis-spec=dom title=dom-Event-cancelable>cancelable</code>
 attributes initialized to false, so it is suggested that for consistency all
@@ -2285,6 +2286,7 @@ Huub Schaeks,
 Ian Davis,
 Ian Hickson,
 Ivan Herman,
+Jared Jacobs,
 Jarred Nicholls,
 Jeff Walden,
 Jens Lindstr&ouml;m,

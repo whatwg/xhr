@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-14-february-2014">Living Standard — Last Updated 14 February 2014</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-19-march-2014">Living Standard — Last Updated 19 March 2014</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-14 February 2014, the editor has made this specification available
+19 March 2014, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -2200,8 +2200,8 @@ WHATWG community to ensure input from people familiar with the subject.
   <tr>
    <th><code title="">error</code>
    <td>Progression failed.
-   <td>Zero or once.
-   <td rowspan="3">After the last <code title="">progress</code> has
+   <td rowspan="4">Zero or once (mutually exclusive).
+   <td rowspan="4">After the last <code title="">progress</code> has
     been
     <a class="external" href="http://dom.spec.whatwg.org/#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>,
     or after <code title="">loadstart</code> has been
@@ -2211,11 +2211,12 @@ WHATWG community to ensure input from people familiar with the subject.
   <tr>
    <th><code>abort</code>
    <td>Progression is terminated.
-   <td>Zero or once.
+  <tr>
+   <th><code title="">timeout</code>
+   <td>Progression is terminated due to preset time expiring.
   <tr>
    <th><code>load</code>
    <td>Progression is successful.
-   <td>Zero or once.
   <tr>
    <th><code title="">loadend</code>
    <td>Progress has stopped.
@@ -2225,11 +2226,11 @@ WHATWG community to ensure input from people familiar with the subject.
     <a class="external" href="http://dom.spec.whatwg.org/#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>.
 </table>
 
-<p>The <code title="">error</code>, <code title="">abort</code>, and
+<p>The <code title="">error</code>, <code title="">abort</code>, <code title="">timeout</code>, and
 <code title="">load</code> event types are mutually exclusive.
 
-<p>Throughout the web platform the <code title="">error</code>,
-<code title="">abort</code>, and <code title="">load</code> event types have
+<p>Throughout the web platform the <code title="">error</code>, <code title="">abort</code>,
+<code title="">timeout</code> and <code title="">load</code> event types have
 their <code class="external" title="dom-Event-bubbles"><a href="http://dom.spec.whatwg.org/#dom-event-bubbles">bubbles</a></code> and
 <code class="external" title="dom-Event-cancelable"><a href="http://dom.spec.whatwg.org/#dom-event-cancelable">cancelable</a></code>
 attributes initialized to false, so it is suggested that for consistency all
@@ -2378,6 +2379,7 @@ Huub Schaeks,
 Ian Davis,
 Ian Hickson,
 Ivan Herman,
+Jared Jacobs,
 Jarred Nicholls,
 Jeff Walden,
 Jens Lindström,
