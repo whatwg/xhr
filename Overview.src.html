@@ -2029,7 +2029,7 @@ otherwise.
 
 
 
-<h2>Interface <code title="">ProgressEvent</code></h2>
+<h2>Interface <code title>ProgressEvent</code></h2>
 
 <pre class="idl">[Constructor(DOMString <var title>type</var>, optional <span>ProgressEventInit</span> <var title>eventInitDict</var>),
  Exposed=Window,Worker]
@@ -2063,7 +2063,7 @@ attributes must return the value they were initialized to. When an
 the attributes must be initialized to 0.
 
 
-<h3>Firing events using the <code title="">ProgressEvent</code> interface for Fetch</h3>
+<h3>Firing events using the <code title>ProgressEvent</code> interface for Fetch</h3>
 
 <p>To
 <dfn title=concept-event-fire-upload-progress>fire an upload progress event named <var>e</var></dfn>
@@ -2110,7 +2110,7 @@ conditions:
 </ul>
 
 
-<h3>Firing events using the <code title="">ProgressEvent</code> interface for other contexts</h3>
+<h3>Firing events using the <code title>ProgressEvent</code> interface for other contexts</h3>
 
 <p>This is left as an exercise for the editor of the specification that
 introduces such a context. The editor is encouraged to define it in a way
@@ -2119,7 +2119,7 @@ consistent with this and other specifications that utilize
 <code>ProgressEvent</code> interface.
 
 
-<h3>Suggested names for events using the <code title="">ProgressEvent</code> interface</h3>
+<h3>Suggested names for events using the <code title>ProgressEvent</code> interface</h3>
 
 <p><em>This section is non-normative.</em>
 
@@ -2139,21 +2139,21 @@ WHATWG community to ensure input from people familiar with the subject.
    <th>Times
    <th>When
   <tr>
-   <th><code title="">loadstart</code>
+   <th><code title>loadstart</code>
    <td>Progress has begun.
    <td>Once.
    <td>First.
   <tr>
-   <th><code title="">progress</code>
+   <th><code title>progress</code>
    <td>In progress.
    <td>Once or more.
-   <td>After <code title="">loadstart</code> has been
+   <td>After <code title>loadstart</code> has been
     <span data-anolis-spec=dom title=concept-event-dispatch>dispatched</span>.
   <tr>
    <th><code title>error</code>
    <td>Progression failed.
    <td rowspan=4>Zero or once (mutually exclusive).
-   <td rowspan=4>After the last <code title="">progress</code> has
+   <td rowspan=4>After the last <code title>progress</code> has
     been
     <span data-anolis-spec=dom title=concept-event-dispatch>dispatched</span>.
   <tr>
@@ -2166,7 +2166,7 @@ WHATWG community to ensure input from people familiar with the subject.
    <th><code>load</code>
    <td>Progression is successful.
   <tr>
-   <th><code title="">loadend</code>
+   <th><code title>loadend</code>
    <td>Progress has stopped.
    <td>Once.</td>
    <td>After one of <code title>error</code>, <code title>abort</code>,
@@ -2312,7 +2312,7 @@ Pawel Glowacki,
 Peter Michaux,
 Philip Taylor,
 Robin Berjon,
-Rune <span title="Fabulous">F.</span> Halvorsen,
+Rune <span title=Fabulous>F.</span> Halvorsen,
 Ruud Steltenpool,
 Sergiu Dumitriu,
 Sigbj&oslash;rn Finne,
@@ -2337,7 +2337,7 @@ this specification in their Web Applications 1.0 document (now renamed to
 HTML). <span data-anolis-ref>HTML</span>
 
 <p>Special thanks to the SVG WG for drafting the original
-<code title="">ProgressEvent</code> interface as part of the
+<code title>ProgressEvent</code> interface as part of the
 <a href="http://www.w3.org/TR/2008/REC-SVGTiny12-20081222/svgudom.html">SVG Micro DOM</a>.
 
 <p>Thanks also to all those who have helped to improve this specification by
