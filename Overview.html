@@ -2194,7 +2194,7 @@ WHATWG community to ensure input from people familiar with the subject.
   <tr>
    <th><code title="">progress</code>
    <td>In progress.
-   <td>Zero or more.
+   <td>Once or more.
    <td>After <code title="">loadstart</code> has been
     <a class="external" href="http://dom.spec.whatwg.org/#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>.
   <tr>
@@ -2203,10 +2203,6 @@ WHATWG community to ensure input from people familiar with the subject.
    <td rowspan="4">Zero or once (mutually exclusive).
    <td rowspan="4">After the last <code title="">progress</code> has
     been
-    <a class="external" href="http://dom.spec.whatwg.org/#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>,
-    or after <code title="">loadstart</code> has been
-    <a class="external" href="http://dom.spec.whatwg.org/#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>
-    if <code title="">progress</code> has not been
     <a class="external" href="http://dom.spec.whatwg.org/#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>.
   <tr>
    <th><code>abort</code>
@@ -2221,8 +2217,8 @@ WHATWG community to ensure input from people familiar with the subject.
    <th><code title="">loadend</code>
    <td>Progress has stopped.
    <td>Once.</td>
-   <td>After one of <code title="">error</code>,
-    <code title="">abort</code>, or <code title="">load</code> has been
+   <td>After one of <code title="">error</code>, <code title="">abort</code>,
+    <code title="">timeout</code> or <code title="">load</code> has been
     <a class="external" href="http://dom.spec.whatwg.org/#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>.
 </table>
 

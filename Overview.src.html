@@ -2146,7 +2146,7 @@ WHATWG community to ensure input from people familiar with the subject.
   <tr>
    <th><code title="">progress</code>
    <td>In progress.
-   <td>Zero or more.
+   <td>Once or more.
    <td>After <code title="">loadstart</code> has been
     <span data-anolis-spec=dom title=concept-event-dispatch>dispatched</span>.
   <tr>
@@ -2155,10 +2155,6 @@ WHATWG community to ensure input from people familiar with the subject.
    <td rowspan=4>Zero or once (mutually exclusive).
    <td rowspan=4>After the last <code title="">progress</code> has
     been
-    <span data-anolis-spec=dom title=concept-event-dispatch>dispatched</span>,
-    or after <code title="">loadstart</code> has been
-    <span data-anolis-spec=dom title=concept-event-dispatch>dispatched</span>
-    if <code title="">progress</code> has not been
     <span data-anolis-spec=dom title=concept-event-dispatch>dispatched</span>.
   <tr>
    <th><code>abort</code>
@@ -2173,8 +2169,8 @@ WHATWG community to ensure input from people familiar with the subject.
    <th><code title="">loadend</code>
    <td>Progress has stopped.
    <td>Once.</td>
-   <td>After one of <code title="">error</code>,
-    <code title="">abort</code>, or <code title="">load</code> has been
+   <td>After one of <code title>error</code>, <code title>abort</code>,
+    <code title>timeout</code> or <code title>load</code> has been
     <span data-anolis-spec=dom title=concept-event-dispatch>dispatched</span>.
 </table>
 
