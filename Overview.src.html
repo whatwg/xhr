@@ -1028,9 +1028,8 @@ method must run these steps:
    <dt><span data-anolis-spec=fetch>synchronous flag</span>
    <dd>Set if the <span>synchronous flag</span> is set.
    <dt><span data-anolis-spec=fetch title=concept-request-mode>mode</span>
-   <dd><i title>CORS</i>
-   <dt><span data-anolis-spec=fetch>force preflight flag</span>
-   <dd>Set if the <span>upload events flag</span> is set.
+   <dd><i title>CORS</i> if the <span>upload events flag</span> is unset, and
+   <i title>CORS-with-forced-preflight</i> otherwise.
    <dt><span data-anolis-spec=fetch title=concept-request-omit-credentials-mode>omit credentials mode</span>
    <dd>If the <code title=dom-XMLHttpRequest-withCredentials>withCredentials</code>
    attribute value is true, <i title>never</i>, and <i title>CORS</i> otherwise.

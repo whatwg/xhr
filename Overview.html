@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-19-march-2014">Living Standard — Last Updated 19 March 2014</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-23-april-2014">Living Standard — Last Updated 23 April 2014</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-19 March 2014, the editor has made this specification available
+23 April 2014, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -1076,9 +1076,8 @@ method must run these steps:
    <dt><a data-anolis-spec="fetch" href="#synchronous-flag">synchronous flag</a>
    <dd>Set if the <a href="#synchronous-flag">synchronous flag</a> is set.
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-mode" title="concept-request-mode">mode</a>
-   <dd><i title="">CORS</i>
-   <dt><a class="external" href="http://fetch.spec.whatwg.org/#force-preflight-flag">force preflight flag</a>
-   <dd>Set if the <a href="#upload-events-flag">upload events flag</a> is set.
+   <dd><i title="">CORS</i> if the <a href="#upload-events-flag">upload events flag</a> is unset, and
+   <i title="">CORS-with-forced-preflight</i> otherwise.
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-omit-credentials-mode" title="concept-request-omit-credentials-mode">omit credentials mode</a>
    <dd>If the <code title="dom-XMLHttpRequest-withCredentials"><a href="#dom-xmlhttprequest-withcredentials">withCredentials</a></code>
    attribute value is true, <i title="">never</i>, and <i title="">CORS</i> otherwise.
