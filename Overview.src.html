@@ -296,31 +296,17 @@ constructor must run these steps:
 its state is <span title=dom-XMLHttpRequest-OPENED>OPENED</span> and the
 <span><code>send()</code> flag</span> is set, its state is
 <span title=dom-XMLHttpRequest-HEADERS_RECEIVED>HEADERS_RECEIVED</span>, or
-its state is <span title=dom-XMLHttpRequest-LOADING>LOADING</span>, and
-one of the following is true:
-
-<ul>
- <li><p>It has one or more
- <span data-anolis-spec=dom title=concept-event-listener>event listeners</span>
- registered whose <b>type</b> is
- <code title=event-xhr-readystatechange>readystatechange</code>,
- <code title=event-xhr-progress>progress</code>,
- <code title=event-xhr-abort>abort</code>,
- <code title=event-xhr-error>error</code>,
- <code title=event-xhr-load>load</code>,
- <code title=event-xhr-timeout>timeout</code>, or
- <code title=event-xhr-loadend>loadend</code>.
- <li><p>The <span>upload complete flag</span> is unset and the associated
- <code>XMLHttpRequestUpload</code> object has one or more
- <span data-anolis-spec=dom title=concept-event-listener>event listeners</span>
- registered whose <b>type</b> is
- <code title=event-xhr-progress>progress</code>,
- <code title=event-xhr-abort>abort</code>,
- <code title=event-xhr-error>error</code>,
- <code title=event-xhr-load>load</code>,
- <code title=event-xhr-timeout>timeout</code>, or
- <code title=event-xhr-loadend>loadend</code>.
-</ul>
+its state is <span title=dom-XMLHttpRequest-LOADING>LOADING</span> and it has one or more
+<span data-anolis-spec=dom title=concept-event-listener>event listeners</span>
+registered whose <b>type</b> is one of
+<code title=event-xhr-readystatechange>readystatechange</code>,
+<code title=event-xhr-progress>progress</code>,
+<code title=event-xhr-abort>abort</code>,
+<code title=event-xhr-error>error</code>,
+<code title=event-xhr-load>load</code>,
+<code title=event-xhr-timeout>timeout</code>, and
+<code title=event-xhr-loadend>loadend</code>.
+<!-- No need to mention upload event listeners as they happen during OPENED. -->
 
 <p>If an <code>XMLHttpRequest</code> object is garbage collected while its
 connection is still open, the user agent must <span>terminate the request</span>.

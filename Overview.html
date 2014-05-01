@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-23-april-2014">Living Standard — Last Updated 23 April 2014</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-1-may-2014">Living Standard — Last Updated 1 May 2014</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-23 April 2014, the editor has made this specification available
+1 May 2014, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -344,31 +344,17 @@ constructor must run these steps:
 its state is <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a> and the
 <a href="#send-flag"><code>send()</code> flag</a> is set, its state is
 <a href="#dom-xmlhttprequest-headers_received" title="dom-XMLHttpRequest-HEADERS_RECEIVED">HEADERS_RECEIVED</a>, or
-its state is <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a>, and
-one of the following is true:
-
-<ul>
- <li><p>It has one or more
- <a class="external" href="http://dom.spec.whatwg.org/#concept-event-listener" title="concept-event-listener">event listeners</a>
- registered whose <b>type</b> is
- <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>,
- <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>,
- <code title="event-xhr-abort"><a href="#event-xhr-abort">abort</a></code>,
- <code title="event-xhr-error"><a href="#event-xhr-error">error</a></code>,
- <code title="event-xhr-load"><a href="#event-xhr-load">load</a></code>,
- <code title="event-xhr-timeout"><a href="#event-xhr-timeout">timeout</a></code>, or
- <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>.
- <li><p>The <a href="#upload-complete-flag">upload complete flag</a> is unset and the associated
- <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object has one or more
- <a class="external" href="http://dom.spec.whatwg.org/#concept-event-listener" title="concept-event-listener">event listeners</a>
- registered whose <b>type</b> is
- <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>,
- <code title="event-xhr-abort"><a href="#event-xhr-abort">abort</a></code>,
- <code title="event-xhr-error"><a href="#event-xhr-error">error</a></code>,
- <code title="event-xhr-load"><a href="#event-xhr-load">load</a></code>,
- <code title="event-xhr-timeout"><a href="#event-xhr-timeout">timeout</a></code>, or
- <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>.
-</ul>
+its state is <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a> and it has one or more
+<a class="external" href="http://dom.spec.whatwg.org/#concept-event-listener" title="concept-event-listener">event listeners</a>
+registered whose <b>type</b> is one of
+<code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>,
+<code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>,
+<code title="event-xhr-abort"><a href="#event-xhr-abort">abort</a></code>,
+<code title="event-xhr-error"><a href="#event-xhr-error">error</a></code>,
+<code title="event-xhr-load"><a href="#event-xhr-load">load</a></code>,
+<code title="event-xhr-timeout"><a href="#event-xhr-timeout">timeout</a></code>, and
+<code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>.
+<!-- No need to mention upload event listeners as they happen during OPENED. -->
 
 <p>If an <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object is garbage collected while its
 connection is still open, the user agent must <a href="#terminate-the-request">terminate the request</a>.
