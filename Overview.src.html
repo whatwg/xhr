@@ -236,13 +236,13 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
   readonly attribute unsigned short <span title="dom-XMLHttpRequest-readyState">readyState</span>;
 
   // <a href="#request">request</a>
-  void <span title="dom-XMLHttpRequest-open">open</span>(ByteString <var>method</var>, [EnsureUTF16] DOMString <var title>url</var>);
-  void <span title="dom-XMLHttpRequest-open">open</span>(ByteString <var>method</var>, [EnsureUTF16] DOMString <var title>url</var>, boolean <var>async</var>, optional [EnsureUTF16] DOMString? <var>username</var> = null, optional [EnsureUTF16] DOMString? <var>password</var> = null);
+  void <span title="dom-XMLHttpRequest-open">open</span>(ByteString <var>method</var>, <span data-anolis-spec=encoding>ScalarValueString</span> <var title>url</var>);
+  void <span title="dom-XMLHttpRequest-open">open</span>(ByteString <var>method</var>, <span data-anolis-spec=encoding>ScalarValueString</span> <var title>url</var>, boolean <var>async</var>, optional <span data-anolis-spec=encoding>ScalarValueString</span>? <var>username</var> = null, optional <span data-anolis-spec=encoding>ScalarValueString</span>? <var>password</var> = null);
   void <span title="dom-XMLHttpRequest-setRequestHeader">setRequestHeader</span>(ByteString <var>name</var>, ByteString <var>value</var>);
            attribute unsigned long <span title="dom-XMLHttpRequest-timeout">timeout</span>;
            attribute boolean <span title="dom-XMLHttpRequest-withCredentials">withCredentials</span>;
   readonly attribute <span>XMLHttpRequestUpload</span> <span title="dom-XMLHttpRequest-upload">upload</span>;
-  void <span title="dom-XMLHttpRequest-send">send</span>(optional (<span data-anolis-spec=typedarray>ArrayBufferView</span> or <span data-anolis-spec=fileapi>Blob</span> or <span data-anolis-spec=dom>Document</span> or [EnsureUTF16] DOMString or <span>FormData</span> or <span data-anolis-spec=url>URLSearchParams</span>)? <var>data</var> = null);
+  void <span title="dom-XMLHttpRequest-send">send</span>(optional (<span data-anolis-spec=typedarray>ArrayBufferView</span> or <span data-anolis-spec=fileapi>Blob</span> or <span data-anolis-spec=dom>Document</span> or <span data-anolis-spec=encoding>ScalarValueString</span> or <span>FormData</span> or <span data-anolis-spec=url>URLSearchParams</span>)? <var>data</var> = null);
   void <span title="dom-XMLHttpRequest-abort">abort</span>();
 
   // <a href="#response">response</a>
@@ -1890,19 +1890,19 @@ and/or <code>XMLHttpRequestUpload</code> objects:
 
 <h2>Interface <code title>FormData</code></h2>
 
-<pre class="idl">typedef (<span data-anolis-spec=fileapi>File</span> or [EnsureUTF16] DOMString) <dfn>FormDataEntryValue</dfn>;
+<pre class="idl">typedef (<span data-anolis-spec=fileapi>File</span> or <span data-anolis-spec=encoding>ScalarValueString</span>) <dfn>FormDataEntryValue</dfn>;
 
 [<span title="dom-FormData">Constructor</span>(optional <span data-anolis-spec=html>HTMLFormElement</span> <var>form</var>),
  Exposed=Window,Worker]
 interface <dfn>FormData</dfn> {
-  void <span title="dom-FormData-append">append</span>([EnsureUTF16] DOMString <var>name</var>, <span data-anolis-spec=fileapi>Blob</span> <var>value</var>, optional [EnsureUTF16] DOMString <var>filename</var>);
-  void <span title="dom-FormData-append">append</span>([EnsureUTF16] DOMString <var>name</var>, [EnsureUTF16] DOMString <var>value</var>);
-  void <span title=dom-FormData-delete>delete</span>([EnsureUTF16] DOMString <var>name</var>);
-  <span>FormDataEntryValue</span>? <span title=dom-FormData-get>get</span>([EnsureUTF16] DOMString <var>name</var>);
-  sequence&lt;<span>FormDataEntryValue</span>> <span title=dom-FormData-getAll>getAll</span>([EnsureUTF16] DOMString <var>name</var>);
-  boolean <span title=dom-FormData-has>has</span>([EnsureUTF16] DOMString <var>name</var>);
-  void <span title=dom-FormData-append>set</span>([EnsureUTF16] DOMString <var>name</var>, <span data-anolis-spec=fileapi>Blob</span> <var>value</var>, optional [EnsureUTF16] DOMString <var>filename</var>);
-  void <span title=dom-FormData-set>set</span>([EnsureUTF16] DOMString <var>name</var>, [EnsureUTF16] DOMString <var>value</var>);
+  void <span title="dom-FormData-append">append</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var>name</var>, <span data-anolis-spec=fileapi>Blob</span> <var>value</var>, optional <span data-anolis-spec=encoding>ScalarValueString</span> <var>filename</var>);
+  void <span title="dom-FormData-append">append</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var>name</var>, <span data-anolis-spec=encoding>ScalarValueString</span> <var>value</var>);
+  void <span title=dom-FormData-delete>delete</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var>name</var>);
+  <span>FormDataEntryValue</span>? <span title=dom-FormData-get>get</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var>name</var>);
+  sequence&lt;<span>FormDataEntryValue</span>> <span title=dom-FormData-getAll>getAll</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var>name</var>);
+  boolean <span title=dom-FormData-has>has</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var>name</var>);
+  void <span title=dom-FormData-append>set</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var>name</var>, <span data-anolis-spec=fileapi>Blob</span> <var>value</var>, optional <span data-anolis-spec=encoding>ScalarValueString</span> <var>filename</var>);
+  void <span title=dom-FormData-set>set</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var>name</var>, <span data-anolis-spec=encoding>ScalarValueString</span> <var>value</var>);
 };</pre>
 
 <p>The <code>FormData</code> object represents an ordered list of
