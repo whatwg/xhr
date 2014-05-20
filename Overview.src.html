@@ -1442,11 +1442,16 @@ following algorithm:
 is null, set it to the return value of the following algorithm:
 
 <ol>
- <li><p>If the <span>response entity body</span> is null, return an empty
- <code data-anolis-spec=fileapi>Blob</code> object.
+ <li><p>Let <var title>type</var> be the empty string, if <span>final MIME type</span> is
+ null, and <span>final MIME type</span> otherwise.
 
- <li><p>Return a <code data-anolis-spec=fileapi>Blob</code> object
- representing the <span>response entity body</span>.
+ <li><p>Let <var title>bytes</var> be the empty byte sequence if the
+ <span>response entity body</span> is null, and the <span>response entity body</span>
+ otherwise.
+
+ <li><p>Return a <code data-anolis-spec=fileapi>Blob</code> object representing
+ <var title>bytes</var> with
+ <code data-anolis-spec=fileapi title=dom-Blob-type>type</code> <var title>type</var>.
 </ol>
 
 

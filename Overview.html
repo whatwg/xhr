@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-19-may-2014">Living Standard — Last Updated 19 May 2014</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-20-may-2014">Living Standard — Last Updated 20 May 2014</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-19 May 2014, the editor has made this specification available
+20 May 2014, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -1490,11 +1490,16 @@ following algorithm:
 is null, set it to the return value of the following algorithm:
 
 <ol>
- <li><p>If the <a href="#response-entity-body">response entity body</a> is null, return an empty
- <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code> object.
+ <li><p>Let <var title="">type</var> be the empty string, if <a href="#final-mime-type">final MIME type</a> is
+ null, and <a href="#final-mime-type">final MIME type</a> otherwise.
 
- <li><p>Return a <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code> object
- representing the <a href="#response-entity-body">response entity body</a>.
+ <li><p>Let <var title="">bytes</var> be the empty byte sequence if the
+ <a href="#response-entity-body">response entity body</a> is null, and the <a href="#response-entity-body">response entity body</a>
+ otherwise.
+
+ <li><p>Return a <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code> object representing
+ <var title="">bytes</var> with
+ <code class="external" title="dom-Blob-type"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-type">type</a></code> <var title="">type</var>.
 </ol>
 
 
