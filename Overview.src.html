@@ -395,13 +395,13 @@ following values:
 
  <dt><dfn title="dom-XMLHttpRequest-HEADERS_RECEIVED"><code>HEADERS_RECEIVED</code></dfn>
  (numeric value 2)</dt>
- <dd><p>All redirects (if any) have been followed and all HTTP headers of
- the final response have been received. Several response members of the
- object are now available.</dd>
+ <dd><p>All redirects (if any) have been followed and all HTTP headers of the
+ <span>response</span> have been received.
 
  <dt><dfn title="dom-XMLHttpRequest-LOADING"><code>LOADING</code></dfn>
  (numeric value 3)</dt>
- <dd><p>The <span>response entity body</span> is being received.</dd>
+ <dd><p>The <span>response</span>'s
+ <span data-anolis-spec=fetch title=concept-response-body>body</span> is being received.
 
  <dt><dfn title="dom-XMLHttpRequest-DONE"><code>DONE</code></dfn>
  (numeric value 4)</dt>
@@ -580,11 +580,10 @@ method must run these steps:
    <li><p>Unset the <span><code>send()</code> flag</span>.
    <li><p>Set <span>response</span> to a
    <span data-anolis-spec=fetch title=concept-network-error>network error</span>.
-   <li><p>Set <span>arraybuffer response entity body</span> to null.
-   <li><p>Set <span>blob response entity body</span> to null.
-   <li><p>Set <span>document response entity body</span> to null.
-   <li><p>Set <span>JSON response entity body</span> to null.
-   <li><p>Set <span>text response entity body</span> to null.
+   <li><p>Set <span>response <code>ArrayBuffer</code> object</span> to null.
+   <li><p>Set <span>response <code>Blob</code> object</span> to null.
+   <li><p>Set <span>response <code>Document</code> object</span> to null.
+   <li><p>Set <span>response JSON object</span> to null.
   </ul>
 
  <li>
@@ -1118,8 +1117,9 @@ method must run these steps:
      <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.
     </ol>
 
-   <li><p>Update <span>response entity body</span> with <var title>response</var>'s
-   <span data-anolis-spec=fetch title=concept-response-body>body</span>.
+   <li><p>Update <span>response</span>'s
+   <span data-anolis-spec=fetch title=concept-response-body>body</span> using
+   <var title>response</var>.
 
    <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-progress">progress</code>.
   </ol>
@@ -1138,8 +1138,9 @@ method must run these steps:
     subsubsteps:
 
     <ol>
-     <li><p>Update <span>response entity body</span> with <var title>response</var>'s
-     <span data-anolis-spec=fetch title=concept-response-body>body</span>.
+     <li><p>Update <span>response</span>'s
+     <span data-anolis-spec=fetch title=concept-response-body>body</span> using
+     <var title>response</var>.
 
      <li><p>Change the state to <span title="dom-XMLHttpRequest-DONE">DONE</span>.
 
@@ -1258,7 +1259,7 @@ these steps:
 
 
 
-<h3 id="response">Response</h3>
+<h3 id=xmlhttprequest-response>Response</h3>
 
 <p>An <code>XMLHttpRequest</code> has an associated <dfn>response</dfn>. Unless stated
 otherwise it is a
@@ -1379,7 +1380,7 @@ Content-Type: text/plain; charset=utf-8</code></pre>
 </div>
 
 
-<h4>Response entity body</h4>
+<h4>Response body</h4>
 
 <p>The <dfn id="response-mime-type">response MIME type</dfn> is the
 MIME type the `<code title>Content-Type</code>` header contains excluding any
@@ -1403,68 +1404,59 @@ can get a value if <code title="dom-XMLHttpRequest-overrideMimeType">overrideMim
 <span>override charset</span> unless
 that is null in which case it is the <span>response charset</span>.
 
-
-
 <hr>
 
-<p>The <dfn id="response-entity-body">response entity body</dfn> is the
-fragment of <span>response</span>'s
-<span data-anolis-spec=fetch title=concept-response-body>body</span> received so far
-(<span title="dom-XMLHttpRequest-LOADING">LOADING</span>) or the complete
-<span data-anolis-spec=fetch title=concept-response-body>body</span> of the
-<span>response</span> (<span title="dom-XMLHttpRequest-DONE">DONE</span>). If
-<span>response</span>'s
-<span data-anolis-spec=fetch title=concept-response-body>body</span> is null,
-<span>response entity body</span> is null.
+<p>An <code>XMLHttpRequest</code> object has an associated
+<dfn>response <code>ArrayBuffer</code> object</dfn>,
+<dfn>response <code>Blob</code> object</dfn>,
+<dfn>response <code>Document</code> object</dfn>, and a
+<dfn>response JSON object</dfn>. Their shared initial value is null.
 
-<hr>
 
-<p>The
-<dfn id="arraybuffer-response-entity-body">arraybuffer response entity body</dfn>
-is either an <code data-anolis-spec=typedarray>ArrayBuffer</code> representing
-the <span>response entity body</span> or null. If the
-<span>arraybuffer response entity body</span> is null, let it be the return value of the
-following algorithm:
+<p>An <dfn>arraybuffer response</dfn> is the return value of these steps:
 
 <ol>
- <li><p>If the <span>response entity body</span> is null, return an empty
- <code data-anolis-spec=typedarray>ArrayBuffer</code> object.
+ <li><p>If <span>response <code>ArrayBuffer</code> object</span> is non-null, return it.
 
- <li><p>Return an <code data-anolis-spec=typedarray>ArrayBuffer</code>
- object representing the <span>response entity body</span>.
+ <li><p>Let <var>bytes</var> be the empty byte sequence, if <span>response</span>'s
+ <span data-anolis-spec=fetch title=concept-response-body>body</span> is null, and
+ <span>response</span>'s
+ <span data-anolis-spec=fetch title=concept-response-body>body</span> otherwise.
+
+ <li><p>Set <span>response <code>ArrayBuffer</code> object</span> to a new
+ <code>ArrayBuffer</code> object representing <var>bytes</var> and return it.
 </ol>
 
 
-<p>The
-<dfn id="blob-response-entity-body">blob response entity body</dfn> is either a
-<code data-anolis-spec=fileapi>Blob</code> representing the
-<span>response entity body</span> or null. If the <span>blob response entity body</span>
-is null, set it to the return value of the following algorithm:
+<p>A <dfn>blob response</dfn> is the return value of these steps:
 
 <ol>
+ <li><p>If <span>response <code>Blob</code> object</span> is non-null, return it.
+
  <li><p>Let <var title>type</var> be the empty string, if <span>final MIME type</span> is
  null, and <span>final MIME type</span> otherwise.
 
- <li><p>Let <var title>bytes</var> be the empty byte sequence if the
- <span>response entity body</span> is null, and the <span>response entity body</span>
- otherwise.
+ <li><p>Let <var>bytes</var> be the empty byte sequence, if <span>response</span>'s
+ <span data-anolis-spec=fetch title=concept-response-body>body</span> is null, and
+ <span>response</span>'s
+ <span data-anolis-spec=fetch title=concept-response-body>body</span> otherwise.
 
- <li><p>Return a <code data-anolis-spec=fileapi>Blob</code> object representing
- <var title>bytes</var> with
- <code data-anolis-spec=fileapi title=dom-Blob-type>type</code> <var title>type</var>.
+ <li><p>Set <span>response <code>Blob</code> object</span> to a new
+ <code data-anolis-spec=fileapi>Blob</code> object representing <var>bytes</var> with
+ <code data-anolis-spec=fileapi title=dom-Blob-type>type</code> <var title>type</var> and
+ return it.
 </ol>
 
 
-
-<p>The
-<dfn id="document-response-entity-body">document response entity body</dfn>
-is either a <span data-anolis-spec=dom title=concept-document>document</span>
-representing the <span>response entity body</span> or null. If the
-<span>document response entity body</span> is null, set it to the return value of the
-following algorithm:
+<p>A <dfn>document response</dfn> is the return value of these steps:
 
 <ol>
- <li><p>If the <span>response entity body</span> is null, return null.
+ <li><p>If <span>response <code>Document</code> object</span> is non-null, return it.
+
+ <li><p>Let <var>bytes</var> be <span>response</span>'s
+ <span data-anolis-spec=fetch title=concept-response-body>body</span>.
+
+ <li><p>If <var>bytes</var> is null, return null.
 
  <li><p>If <span>final MIME type</span> is not null,
  <code>text/html</code>, <code>text/xml</code>,
@@ -1490,7 +1482,7 @@ following algorithm:
 
    <li><p>If <var>charset</var> is null,
    <span data-anolis-spec=html title="prescan a byte stream to determine its encoding">prescan</span>
-   the first 1024 bytes of the <span>response entity body</span> and if
+   the first 1024 bytes of <var>bytes</var> and if
    that does not terminate unsuccessfully then let <var>charset</var> be
    the return value.
 
@@ -1499,7 +1491,7 @@ following algorithm:
 
    <li><p>Let <var title>document</var> be a
    <span data-anolis-spec=dom title=concept-document>document</span> that
-   represents the result parsing <span>response entity body</span> following the rules set
+   represents the result parsing <var>bytes</var> following the rules set
    forth in the HTML Standard for an HTML parser with scripting disabled and
    <span data-anolis-spec=html>a known definite encoding</span> <var>charset</var>.
    <span data-anolis-ref>HTML</span>
@@ -1512,7 +1504,7 @@ following algorithm:
   <p>Otherwise, let <var title>document</var> be a
   <span data-anolis-spec=dom title=concept-document>document</span>
   that represents the result of parsing the
-  <span>response entity body</span> following the rules set forth in the
+  <var>bytes</var> following the rules set forth in the
   XML specifications. If that fails (unsupported character encoding,
   namespace well-formedness error, etc.), return null.
   <span data-anolis-ref>XML</span> <span data-anolis-ref>XMLNS</span>
@@ -1542,35 +1534,40 @@ following algorithm:
  <span title=concept-XMLHttpRequest-settings-object>settings object</span>'s
  <span data-anolis-spec=html>origin</span>.
 
- <li><p>Return <var title>document</var>.
-</ol>
-
-<p>The <dfn>JSON response entity body</dfn> is either a JavaScript value
-representing the <span>response entity body</span>. If the
-<span>JSON response entity body</span> is null, set it to the return value of the
-following algorithm:
-
-<ol>
- <li><p>If the <span>response entity body</span> is null, return null.
-
- <li><p>Let <var title>JSON text</var> be the result of running
- <span data-anolis-spec=encoding>utf-8 decode</span> on byte stream
- <span>response entity body</span>.
-
- <li><p>Return the result of invoking the initial value of the <code title>parse</code>
- property of the <code title>JSON</code> object defined in JavaScript, with
- <var title>JSON text</var> as its only argument, or null if that function
- throws an exception. <span data-anolis-ref>ECMASCRIPT</span>
+ <li><p>Set <span>response <code>Document</code> object</span> to
+ <var title>document</var> and return it.
 </ol>
 
 
-<p>The <dfn id="text-response-entity-body">text response entity body</dfn> is either a
-string representing the <span>response entity body</span> or null. If the
-<span>text response entity body</span> is null, set it to the return value of the
-following algorithm:
+<p>A <dfn>JSON response</dfn> is the return value of these steps:
 
 <ol>
- <li><p>If the <span>response entity body</span> is null, return the empty string.
+ <li><p>If <span>response JSON object</span> is non-null, return it.
+
+ <li><p>Let <var>bytes</var> be <span>response</span>'s
+ <span data-anolis-spec=fetch title=concept-response-body>body</span>.
+
+ <li><p>If <var>bytes</var> is null, return null.
+
+ <li><p>Let <var>JSON text</var> be the result of running
+ <span data-anolis-spec=encoding>utf-8 decode</span> on byte stream <var>bytes</var>.
+
+ <li><p>Let <var>JSON object</var> be the result of invoking the initial value of the
+ <code title>parse</code> property of the <code title>JSON</code> object, with
+ <var>JSON text</var> as its only argument. If that threw an exception, return null.
+ <span data-anolis-ref>ECMASCRIPT</span>
+
+ <li><p>Set <span>response JSON object</span> to <var>JSON object</var> and return it.
+</ol>
+
+
+<p>A <dfn>text response</dfn> is the return value of these steps:
+
+<ol>
+ <li><p>Let <var>bytes</var> be <span>response</span>'s
+ <span data-anolis-spec=fetch title=concept-response-body>body</span>.
+
+ <li><p>If <var>bytes</var> is null, return the empty string.
 
  <li><p>Let <var>charset</var> be the <span>final charset</span>.
 
@@ -1594,7 +1591,7 @@ following algorithm:
 
  <li><p>Return the result of running
  <span data-anolis-spec=encoding>decode</span> on byte stream
- <span>response entity body</span> using fallback encoding
+ <var>bytes</var> using fallback encoding
  <var>charset</var>.
 </ol>
 
@@ -1716,7 +1713,8 @@ attribute must run these steps:
 
 <dl class=domintro>
  <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-response>response</span></code>
- <dd><p>Returns the <span>response entity body</span>.
+ <dd><p>Returns the <span>response</span>'s
+ <span data-anolis-spec=fetch title=concept-response-body>body</span>.
 </dl>
 
 <p>The
@@ -1732,7 +1730,7 @@ steps:
    <li><p>If the state is not <span title="dom-XMLHttpRequest-LOADING">LOADING</span> or
    <span title="dom-XMLHttpRequest-DONE">DONE</span>, return the empty string.
 
-   <li><p>Return the <span>text response entity body</span>.
+   <li><p>Return the <span>text response</span>.
   </ol>
 
  <dt>Otherwise</dt>
@@ -1746,26 +1744,22 @@ steps:
      <dt>If
      <code title="dom-XMLHttpRequest-responseType">responseType</code> is
      "<code title>arraybuffer</code>"</dt>
-     <dd><p>Return the
-     <span>arraybuffer response entity body</span>.</dd>
+     <dd><p>Return the <span>arraybuffer response</span>.
 
      <dt>If
      <code title="dom-XMLHttpRequest-responseType">responseType</code> is
      "<code title>blob</code>"</dt>
-     <dd><p>Return the
-     <span>blob response entity body</span>.</dd>
+     <dd><p>Return the <span>blob response</span>.
 
      <dt>If
      <code title="dom-XMLHttpRequest-responseType">responseType</code> is
      "<code title>document</code>"</dt>
-     <dd><p>Return the
-     <span>document response entity body</span>.</dd>
+     <dd><p>Return the <span>document response</span>.
 
      <dt>If
      <code title="dom-XMLHttpRequest-responseType">responseType</code> is
      "<code title>json</code>"</dt>
-     <dd><p>Return the
-     <span>JSON response entity body</span>.</dd>
+     <dd><p>Return the <span>JSON response</span>.
     </dl>
   </ol>
 </dl>
@@ -1777,7 +1771,7 @@ steps:
 <dl class=domintro>
  <dt><code><var title>client</var> . <span title="dom-XMLHttpRequest-responseText">responseText</span></code>
  <dd>
-  <p>Returns the <span>text response entity body</span>.
+  <p>Returns the <span>text response</span>.
 
   <p>Throws an "<code data-anolis-spec=dom>InvalidStateError</code>"
   exception if
@@ -1801,7 +1795,7 @@ steps:
  <li><p>If the state is not <span title="dom-XMLHttpRequest-LOADING">LOADING</span> or
  <span title="dom-XMLHttpRequest-DONE">DONE</span>, return the empty string.
 
- <li><p>Return the <span>text response entity body</span>.
+ <li><p>Return the <span>text response</span>.
 </ol>
 
 
@@ -1810,7 +1804,7 @@ steps:
 <dl class=domintro>
  <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-responseXML>responseXML</span></code>
  <dd>
-  <p>Returns the <span>document response entity body</span>.
+  <p>Returns the <span>document response</span>.
 
   <p>Throws an "<code data-anolis-spec=dom>InvalidStateError</code>"
   exception if
@@ -1832,7 +1826,7 @@ attribute must return the result of running these steps:
  <li><p>If the state is not <span title="dom-XMLHttpRequest-DONE">DONE</span>, return
  null.
 
- <li><p>Return the <span>document response entity body</span>.
+ <li><p>Return the <span>document response</span>.
 </ol>
 
 <p class=note>The
