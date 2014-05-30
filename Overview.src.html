@@ -501,12 +501,12 @@ method must run these steps:
  <span title=concept-XMLHttpRequest-settings-object>settings object</span>'s
  <span data-anolis-spec=html>API base URL</span>.
 
- <li><p>If <var>method</var> does not match the <span data-anolis-spec=http>Method</span>
- token production, <span data-anolis-spec=dom title=concept-throw>throw</span> a
+ <li><p>If <var>method</var> is not a
+ <span data-anolis-spec=fetch title=concept-method>method</span>,
+ <span data-anolis-spec=dom title=concept-throw>throw</span> a
  "<code data-anolis-spec=dom>SyntaxError</code>" exception.
 
- <li><p>If <var>method</var> is a
- <span data-anolis-spec=fetch title=concept-forbidden-methods>forbidden method</span>,
+ <li><p>If <var>method</var> is a <span data-anolis-spec=fetch>forbidden method</span>,
  <span data-anolis-spec=dom title=concept-throw>throw</span> a
  "<code data-anolis-spec=dom>SecurityError</code>" exception.
 
@@ -657,7 +657,7 @@ method must run these steps:
   <p class=note>An empty string represents an empty header field value.
 
  <li><p>Terminate these steps if <var>name</var> is a
- <span data-anolis-spec=fetch title=concept-forbidden-author-header-names>forbidden author header name</span>.
+ <span data-anolis-spec=fetch>forbidden author header name</span>.
 
  <li><p>If <var>name</var> is not a
  <span data-anolis-spec=fetch title=concept-header-name>name</span> of a

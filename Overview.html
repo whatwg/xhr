@@ -549,12 +549,12 @@ method must run these steps:
  <a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
  <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#api-base-url">API base URL</a>.
 
- <li><p>If <var>method</var> does not match the <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-5.1.1">Method</a>
- token production, <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
+ <li><p>If <var>method</var> is not a
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-method" title="concept-method">method</a>,
+ <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
  "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" exception.
 
- <li><p>If <var>method</var> is a
- <a class="external" href="http://fetch.spec.whatwg.org/#concept-forbidden-methods" title="concept-forbidden-methods">forbidden method</a>,
+ <li><p>If <var>method</var> is a <a class="external" href="http://fetch.spec.whatwg.org/#forbidden-method">forbidden method</a>,
  <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
  "<code class="external"><a href="http://dom.spec.whatwg.org/#securityerror">SecurityError</a></code>" exception.
 
@@ -705,7 +705,7 @@ method must run these steps:
   <p class="note">An empty string represents an empty header field value.
 
  <li><p>Terminate these steps if <var>name</var> is a
- <a class="external" href="http://fetch.spec.whatwg.org/#concept-forbidden-author-header-names" title="concept-forbidden-author-header-names">forbidden author header name</a>.
+ <a class="external" href="http://fetch.spec.whatwg.org/#forbidden-author-header-name">forbidden author header name</a>.
 
  <li><p>If <var>name</var> is not a
  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">name</a> of a
