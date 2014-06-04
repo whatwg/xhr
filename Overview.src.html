@@ -1017,9 +1017,9 @@ method must run these steps:
    <dt><span data-anolis-spec=fetch title=concept-request-mode>mode</span>
    <dd><i title>CORS</i> if the <span>upload events flag</span> is unset, and
    <i title>CORS-with-forced-preflight</i> otherwise.
-   <dt><span data-anolis-spec=fetch title=concept-request-omit-credentials-mode>omit credentials mode</span>
+   <dt><span data-anolis-spec=fetch title=concept-request-credentials-mode>credentials mode</span>
    <dd>If the <code title=dom-XMLHttpRequest-withCredentials>withCredentials</code>
-   attribute value is true, <i title>never</i>, and <i title>CORS</i> otherwise.
+   attribute value is true, <i title>include</i>, and <i title>same-origin</i> otherwise.
    <dt><span data-anolis-spec=fetch title=concept-request-use-url-credentials-flag>use URL credentials flag</span>
    <dd>Set if either <span>request URL</span>'s
    <span data-anolis-spec=url title=concept-url-username>username</span>
