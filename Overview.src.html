@@ -660,7 +660,7 @@ method must run these steps:
   <p class=note>An empty string represents an empty header field value.
 
  <li><p>Terminate these steps if <var>name</var> is a
- <span data-anolis-spec=fetch>forbidden author header name</span>.
+ <span data-anolis-spec=fetch>forbidden header name</span>.
 
  <li><p>If <var>name</var> is not a
  <span data-anolis-spec=fetch title=concept-header-name>name</span> of a
@@ -714,7 +714,7 @@ X-Test: one, two</code></pre>
   <span title=concept-event-dispatch data-anolis-spec=dom>dispatched</span>,
   or a "<code data-anolis-spec=dom>TimeoutError</code>" exception will be
   <span data-anolis-spec=dom title=concept-throw>thrown</span> otherwise
-  (for the <code title=dom-XMLHttpRequest>send()</code> method).
+  (for the <code title=dom-XMLHttpRequest-send>send()</code> method).
   <p>When set: throws an
   "<code data-anolis-spec=dom>InvalidAccessError</code>" exception if
   the <span>synchronous flag</span> is set and the
@@ -995,8 +995,10 @@ method must run these steps:
    <dd><span>request method</span>
    <dt><span data-anolis-spec=fetch title=concept-request-url>url</span>
    <dd><span>request URL</span>
-   <dt><span data-anolis-spec=fetch title=concept-request-author-headers>author headers</span>
+   <dt><span data-anolis-spec=fetch title=concept-request-header-list>header list</span>
    <dd><span>author request headers</span>
+   <dt><span data-anolis-spec=fetch>unsafe request flag</span>
+   <dd>Set.
    <dt><span data-anolis-spec=fetch title=concept-request-origin>origin</span>
    <dd><span title=concept-XMLHttpRequest-settings-object>settings object</span>'s
    <span data-anolis-spec=html>origin</span>
@@ -1033,16 +1035,18 @@ method must run these steps:
  <li><p>If a <span data-anolis-spec=fetch title=concept-header>header</span>
  <span data-anolis-spec=fetch title=concept-header-name>named</span>
  `<code>Accept-Language</code>` is not in <var title>req</var>'s
- <span data-anolis-spec=fetch title=concept-request-author-headers>author headers</span>,
+ <span data-anolis-spec=fetch title=concept-request-header-list>header list</span>,
  append one with an appropriate
  <span data-anolis-spec=fetch title=concept-header-value>value</span>.
+ <!-- XXX header list set -->
 
  <li><p>If a <span data-anolis-spec=fetch title=concept-header>header</span>
  <span data-anolis-spec=fetch title=concept-header-name>named</span>
  `<code>Accept</code>` is not in <var title>req</var>'s
- <span data-anolis-spec=fetch title=concept-request-author-headers>author headers</span>,
+ <span data-anolis-spec=fetch title=concept-request-header-list>header list</span>,
  append one with `<code title>*/*</code>` as
  <span data-anolis-spec=fetch title=concept-header-value>value</span>.
+ <!-- XX header list set -->
 
  <li>
   <p><span data-anolis-spec=fetch title=concept-fetch>Fetch</span> <var title>req</var>.
@@ -1301,24 +1305,23 @@ method must run these steps:
 
 <ol>
  <li><p>If <span>response</span>'s
- <span data-anolis-spec=fetch title=concept-response-headers>headers</span> has multiple
- <span data-anolis-spec=fetch title=concept-header>headers</span> whose
+ <span data-anolis-spec=fetch title=concept-response-header-list>header list</span> has
+ multiple <span data-anolis-spec=fetch title=concept-header>headers</span> whose
  <span data-anolis-spec=fetch title=concept-header-name>name</span> is <var>name</var>,
  return their <span data-anolis-spec=fetch title=concept-header-value>values</span> in
  list order as a single byte sequence separated from each other by a 0x2C 0x20 byte pair.
 
  <li><p>If <span>response</span>'s
- <span data-anolis-spec=fetch title=concept-response-headers>headers</span> has one
- <span data-anolis-spec=fetch title=concept-header>header</span> whose
+ <span data-anolis-spec=fetch title=concept-response-header-list>header list</span> has
+ one <span data-anolis-spec=fetch title=concept-header>header</span> whose
  <span data-anolis-spec=fetch title=concept-header-name>name</span> is <var>name</var>,
  return its <span data-anolis-spec=fetch title=concept-header-value>value</span>.
 
  <li><p>Return null.
 </ol>
 
-<p class=note>The Fetch Standard filters
-<span data-anolis-spec=fetch title=concept-response-headers>headers</span> exposed by
-<code title="dom-XMLHttpRequest-getResponseHeader">getResponseHeader()</code>.
+<p class="note no-backref">The Fetch Standard filters <span>response</span>'s
+<span data-anolis-spec=fetch title=concept-response-header-list>header list</span>.
 <span data-anolis-ref>FETCH</span>
 
 <div class="example">
@@ -1345,18 +1348,17 @@ client.onreadystatechange = function() {
 
 <p>The
 <dfn title="dom-XMLHttpRequest-getAllResponseHeaders"><code>getAllResponseHeaders()</code></dfn>
-method must return all <span>response</span>'s
-<span data-anolis-spec=fetch title=concept-response-headers>headers</span>, in list order,
-as a single byte sequence with each
+method must return <span>response</span>'s
+<span data-anolis-spec=fetch title=concept-response-header-list>header list</span>, in
+list order, as a single byte sequence with each
 <span data-anolis-spec=fetch title=concept-header>header</span> separated by a 0x0D 0x0A
 byte pair, and each <span data-anolis-spec=fetch title=concept-header-name>name</span> and
 <span data-anolis-spec=fetch title=concept-header-value>value</span> of a
 <span data-anolis-spec=fetch title=concept-header>header</span> separated by a 0x3A 0x20
 byte pair.
 
-<p class=note>The Fetch Standard filters
-<span data-anolis-spec=fetch title=concept-response-headers>headers</span> exposed by
-<code title="dom-XMLHttpRequest-getAllResponseHeaders">getAllResponseHeaders()</code>.
+<p class="note no-backref">The Fetch Standard filters <span>response</span>'s
+<span data-anolis-spec=fetch title=concept-response-header-list>header list</span>.
 <span data-anolis-ref>FETCH</span>
 
 <div class="example">

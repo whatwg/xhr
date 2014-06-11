@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-6-june-2014">Living Standard — Last Updated 6 June 2014</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-11-june-2014">Living Standard — Last Updated 11 June 2014</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-6 June 2014, the editor has made this specification available
+11 June 2014, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -708,7 +708,7 @@ method must run these steps:
   <p class="note">An empty string represents an empty header field value.
 
  <li><p>Terminate these steps if <var>name</var> is a
- <a class="external" href="http://fetch.spec.whatwg.org/#forbidden-author-header-name">forbidden author header name</a>.
+ <a class="external" href="http://fetch.spec.whatwg.org/#forbidden-header-name">forbidden header name</a>.
 
  <li><p>If <var>name</var> is not a
  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">name</a> of a
@@ -762,7 +762,7 @@ X-Test: one, two</code></pre>
   <a class="external" href="http://dom.spec.whatwg.org/#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>,
   or a "<code class="external"><a href="http://dom.spec.whatwg.org/#timeouterror">TimeoutError</a></code>" exception will be
   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">thrown</a> otherwise
-  (for the <code title="dom-XMLHttpRequest"><a href="#dom-xmlhttprequest">send()</a></code> method).
+  (for the <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code> method).
   <p>When set: throws an
   "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidaccesserror">InvalidAccessError</a></code>" exception if
   the <a href="#synchronous-flag">synchronous flag</a> is set and the
@@ -1043,8 +1043,10 @@ method must run these steps:
    <dd><a href="#request-method">request method</a>
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-url" title="concept-request-url">url</a>
    <dd><a href="#request-url">request URL</a>
-   <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-author-headers" title="concept-request-author-headers">author headers</a>
+   <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-header-list" title="concept-request-header-list">header list</a>
    <dd><a href="#author-request-headers">author request headers</a>
+   <dt><a class="external" href="http://fetch.spec.whatwg.org/#unsafe-request-flag">unsafe request flag</a>
+   <dd>Set.
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-origin" title="concept-request-origin">origin</a>
    <dd><a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a>
@@ -1081,16 +1083,18 @@ method must run these steps:
  <li><p>If a <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a>
  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">named</a>
  `<code>Accept-Language</code>` is not in <var title="">req</var>'s
- <a class="external" href="http://fetch.spec.whatwg.org/#concept-request-author-headers" title="concept-request-author-headers">author headers</a>,
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-request-header-list" title="concept-request-header-list">header list</a>,
  append one with an appropriate
  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a>.
+ <!-- XXX header list set -->
 
  <li><p>If a <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a>
  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">named</a>
  `<code>Accept</code>` is not in <var title="">req</var>'s
- <a class="external" href="http://fetch.spec.whatwg.org/#concept-request-author-headers" title="concept-request-author-headers">author headers</a>,
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-request-header-list" title="concept-request-header-list">header list</a>,
  append one with `<code title="">*/*</code>` as
  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a>.
+ <!-- XX header list set -->
 
  <li>
   <p><a class="external" href="http://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">Fetch</a> <var title="">req</var>.
@@ -1349,24 +1353,23 @@ method must run these steps:
 
 <ol>
  <li><p>If <a href="#response">response</a>'s
- <a class="external" href="http://fetch.spec.whatwg.org/#concept-response-headers" title="concept-response-headers">headers</a> has multiple
- <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">headers</a> whose
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-response-header-list" title="concept-response-header-list">header list</a> has
+ multiple <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">headers</a> whose
  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">name</a> is <var>name</var>,
  return their <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">values</a> in
  list order as a single byte sequence separated from each other by a 0x2C 0x20 byte pair.
 
  <li><p>If <a href="#response">response</a>'s
- <a class="external" href="http://fetch.spec.whatwg.org/#concept-response-headers" title="concept-response-headers">headers</a> has one
- <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a> whose
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-response-header-list" title="concept-response-header-list">header list</a> has
+ one <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a> whose
  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">name</a> is <var>name</var>,
  return its <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a>.
 
  <li><p>Return null.
 </ol>
 
-<p class="note">The Fetch Standard filters
-<a class="external" href="http://fetch.spec.whatwg.org/#concept-response-headers" title="concept-response-headers">headers</a> exposed by
-<code title="dom-XMLHttpRequest-getResponseHeader"><a href="#dom-xmlhttprequest-getresponseheader">getResponseHeader()</a></code>.
+<p class="note no-backref">The Fetch Standard filters <a href="#response">response</a>'s
+<a class="external" href="http://fetch.spec.whatwg.org/#concept-response-header-list" title="concept-response-header-list">header list</a>.
 <a href="#refsFETCH">[FETCH]</a>
 
 <div class="example">
@@ -1393,18 +1396,17 @@ client.onreadystatechange = function() {
 
 <p>The
 <dfn id="dom-xmlhttprequest-getallresponseheaders" title="dom-XMLHttpRequest-getAllResponseHeaders"><code>getAllResponseHeaders()</code></dfn>
-method must return all <a href="#response">response</a>'s
-<a class="external" href="http://fetch.spec.whatwg.org/#concept-response-headers" title="concept-response-headers">headers</a>, in list order,
-as a single byte sequence with each
+method must return <a href="#response">response</a>'s
+<a class="external" href="http://fetch.spec.whatwg.org/#concept-response-header-list" title="concept-response-header-list">header list</a>, in
+list order, as a single byte sequence with each
 <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a> separated by a 0x0D 0x0A
 byte pair, and each <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">name</a> and
 <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a> of a
 <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a> separated by a 0x3A 0x20
 byte pair.
 
-<p class="note">The Fetch Standard filters
-<a class="external" href="http://fetch.spec.whatwg.org/#concept-response-headers" title="concept-response-headers">headers</a> exposed by
-<code title="dom-XMLHttpRequest-getAllResponseHeaders"><a href="#dom-xmlhttprequest-getallresponseheaders">getAllResponseHeaders()</a></code>.
+<p class="note no-backref">The Fetch Standard filters <a href="#response">response</a>'s
+<a class="external" href="http://fetch.spec.whatwg.org/#concept-response-header-list" title="concept-response-header-list">header list</a>.
 <a href="#refsFETCH">[FETCH]</a>
 
 <div class="example">
