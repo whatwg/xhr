@@ -646,18 +646,16 @@ method must run these steps:
  <span data-anolis-spec=dom title=concept-throw>throw</span> an
  "<code data-anolis-spec=dom>InvalidStateError</code>" exception.
 
- <li><p>If <var>name</var> does not match the
- <span data-anolis-spec=http>field-name</span> production,
- <span data-anolis-spec=dom title=concept-throw>throw</span> a
- "<code data-anolis-spec=dom>SyntaxError</code>" exception.
-
  <li>
-  <p>If <var>value</var> does not match the
-  <span data-anolis-spec=http>field-value</span> production,
+  <p>If <var>name</var> is not a
+  <span data-anolis-spec=fetch title=concept-header-name>name</span> or <var>value</var>
+  is not a <span data-anolis-spec=fetch title=concept-header-value>value</span>,
   <span data-anolis-spec=dom title=concept-throw>throw</span> a
   "<code data-anolis-spec=dom>SyntaxError</code>" exception.
 
-  <p class=note>An empty string represents an empty header field value.
+  <p class="note no-backref">An empty byte sequence represents an empty
+  <span data-anolis-spec=fetch title=concept-header>header</span>
+  <span data-anolis-spec=fetch title=concept-header-value>value</span>.
 
  <li><p>Terminate these steps if <var>name</var> is a
  <span data-anolis-spec=fetch>forbidden header name</span>.
@@ -1006,17 +1004,16 @@ method must run these steps:
  <span data-anolis-spec=fetch title=concept-header-name>named</span>
  `<code>Accept-Language</code>` is not in <var title>req</var>'s
  <span data-anolis-spec=fetch title=concept-request-header-list>header list</span>,
- append one with an appropriate
- <span data-anolis-spec=fetch title=concept-header-value>value</span>.
- <!-- XXX header list set -->
+ <span data-anolis-spec=fetch title=concept-header-list-append>append</span>
+ `<code>Accept-Language</code>`/an appropriate
+ <span data-anolis-spec=fetch title=concept-header-value>value</span> to it.
 
  <li><p>If a <span data-anolis-spec=fetch title=concept-header>header</span>
  <span data-anolis-spec=fetch title=concept-header-name>named</span>
  `<code>Accept</code>` is not in <var title>req</var>'s
  <span data-anolis-spec=fetch title=concept-request-header-list>header list</span>,
- append one with `<code title>*/*</code>` as
- <span data-anolis-spec=fetch title=concept-header-value>value</span>.
- <!-- XX header list set -->
+ <span data-anolis-spec=fetch title=concept-header-list-append>append</span>
+ `<code>Accept</code>`/`<code title>*/*</code>` to it.
 
  <li><p>Unset the <span>upload complete flag</span> and <span>upload events flag</span>.
 

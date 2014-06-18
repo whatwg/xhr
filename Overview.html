@@ -694,18 +694,16 @@ method must run these steps:
  <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
  "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception.
 
- <li><p>If <var>name</var> does not match the
- <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-4.2">field-name</a> production,
- <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
- "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" exception.
-
  <li>
-  <p>If <var>value</var> does not match the
-  <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-4.2">field-value</a> production,
+  <p>If <var>name</var> is not a
+  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">name</a> or <var>value</var>
+  is not a <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a>,
   <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
   "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" exception.
 
-  <p class="note">An empty string represents an empty header field value.
+  <p class="note no-backref">An empty byte sequence represents an empty
+  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a>
+  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a>.
 
  <li><p>Terminate these steps if <var>name</var> is a
  <a class="external" href="http://fetch.spec.whatwg.org/#forbidden-header-name">forbidden header name</a>.
@@ -1054,17 +1052,16 @@ method must run these steps:
  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">named</a>
  `<code>Accept-Language</code>` is not in <var title="">req</var>'s
  <a class="external" href="http://fetch.spec.whatwg.org/#concept-request-header-list" title="concept-request-header-list">header list</a>,
- append one with an appropriate
- <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a>.
- <!-- XXX header list set -->
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-list-append" title="concept-header-list-append">append</a>
+ `<code>Accept-Language</code>`/an appropriate
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a> to it.
 
  <li><p>If a <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a>
  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">named</a>
  `<code>Accept</code>` is not in <var title="">req</var>'s
  <a class="external" href="http://fetch.spec.whatwg.org/#concept-request-header-list" title="concept-request-header-list">header list</a>,
- append one with `<code title="">*/*</code>` as
- <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a>.
- <!-- XX header list set -->
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-list-append" title="concept-header-list-append">append</a>
+ `<code>Accept</code>`/`<code title="">*/*</code>` to it.
 
  <li><p>Unset the <a href="#upload-complete-flag">upload complete flag</a> and <a href="#upload-events-flag">upload events flag</a>.
 
