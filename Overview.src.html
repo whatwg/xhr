@@ -955,36 +955,6 @@ method must run these steps:
   <!-- reminder: if we ever change this to always include charset it has
   to be included as the first parameter for compatibility reasons -->
 
-
- <li><p>If the <span>synchronous flag</span> is set, release the
- <span data-anolis-spec=html>storage mutex</span>.
-
- <li><p>Unset the <span>upload complete flag</span> and <span>upload events flag</span>.
-
- <li><p>If there is no <span>request entity body</span> or if it is empty,
- set the <span>upload complete flag</span>.
-
- <li><p>If the <span>synchronous flag</span> is unset and one or more
- event listeners are registered on the <code>XMLHttpRequestUpload</code>
- object, set the <span>upload events flag</span>.
-
- <li>
-  <p>If the <span>synchronous flag</span> is unset, run these substeps:
-
-  <ol>
-   <li><p>Set the <span><code>send()</code> flag</span>.
-
-   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadstart">loadstart</code>.
-
-   <li><p>If the <span>upload complete flag</span> is unset,
-   <span title=concept-event-fire-upload-progress>fire an upload progress event</span> named <code title="event-xhr-loadstart">loadstart</code>
-   on the <code>XMLHttpRequestUpload</code> object.
-
-   <li><p>Return the <code title="dom-XMLHttpRequest-send">send()</code>
-   method call, but continue running the steps in this algorithm.
-  </ol>
-
-
  <li>
   <p>Let <var title>req</var> be a new
   <span data-anolis-spec=fetch title=concept-request>request</span>, initialized as
@@ -1048,123 +1018,149 @@ method must run these steps:
  <span data-anolis-spec=fetch title=concept-header-value>value</span>.
  <!-- XX header list set -->
 
+ <li><p>Unset the <span>upload complete flag</span> and <span>upload events flag</span>.
+
+ <li><p>If there is no <span>request entity body</span> or if it is empty,
+ set the <span>upload complete flag</span>.
+
  <li>
-  <p><span data-anolis-spec=fetch title=concept-fetch>Fetch</span> <var title>req</var>.
-
-  <p>If <var title>req</var>'s <span data-anolis-spec=fetch>synchronous flag</span> is
-  set, pass the return value, synchronously, to
-  <span data-anolis-spec=fetch>process response end-of-file</span> below. Otherwise,
-  handle the <span data-anolis-spec=html title=concept-task>tasks</span>
-  <span data-anolis-spec=html title="queue a task">queued</span> on the
-  <span data-anolis-spec=html>networking task source</span> per below.
-
-  <p>If the <code title="dom-XMLHttpRequest-timeout">timeout</code> attribute value is not
-  0, <span data-anolis-spec=fetch title=concept-fetch-terminate>terminate</span>
-  <span data-anolis-spec=fetch title=concept-fetch>fetching</span> after the amount of
-  milliseconds specified by the <code title="dom-XMLHttpRequest-timeout">timeout</code>
-  attribute value have passed with reason <i title>timeout</i>.
-
-  <p>To <span data-anolis-spec=fetch>process request body</span> for
-  <var title>request</var>,
-  <span title=concept-event-fire-upload-progress>fire an upload progress event</span> named
-  <code title="event-xhr-progress">progress</code> on the
-  <code>XMLHttpRequestUpload</code> object.
-  <!-- upload complete flag can never be set here I hope -->
-
-  <p>To <span data-anolis-spec=fetch>process request end-of-file</span> for
-  <var title>request</var>, run these substeps:
+  <p>If the <span>synchronous flag</span> is unset, run these substeps:
 
   <ol>
-   <li><p>Set the <span>upload complete flag</span>.
+   <li><p>If one or more event listeners are registered on the
+   <code>XMLHttpRequestUpload</code> object, set the <span>upload events flag</span>.
 
-   <li><p><span title=concept-event-fire-upload-progress>Fire an upload progress event</span> named <code title=event-xhr-progress>progress</code>
+   <li><p>Set the <span><code>send()</code> flag</span>.
+
+   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadstart">loadstart</code>.
+
+   <li><p>If the <span>upload complete flag</span> is unset,
+   <span title=concept-event-fire-upload-progress>fire an upload progress event</span> named <code title="event-xhr-loadstart">loadstart</code>
    on the <code>XMLHttpRequestUpload</code> object.
-
-   <li><p><span title=concept-event-fire-upload-progress>Fire an upload progress event</span> named <code title="event-xhr-load">load</code>
-   on the <code>XMLHttpRequestUpload</code> object.
-
-   <li><p><span title=concept-event-fire-upload-progress>Fire an upload progress event</span> named <code title="event-xhr-loadend">loadend</code>
-   on the <code>XMLHttpRequestUpload</code> object.
-  </ol>
-  <!-- upload complete flag can never be set here I hope -->
-
-  <p>To <span data-anolis-spec=fetch>process response</span> for <var title>response</var>,
-  run these substeps:
-
-  <ol>
-   <li><p><span>Handle errors</span> for <var title>response</var>.
-
-   <li><p>Set <span>response</span> to <var title>response</var>.
 
    <li>
-    <p>If state is <span title=dom-XMLHttpRequest-OPENED>OPENED</span>, run these
-    subsubsteps:
+    <p><span data-anolis-spec=fetch title=concept-fetch>Fetch</span> <var title>req</var>.
+    Handle the <span data-anolis-spec=html title=concept-task>tasks</span>
+    <span data-anolis-spec=html title="queue a task">queued</span> on the
+    <span data-anolis-spec=html>networking task source</span> per below.
+
+    <p>If the <code title="dom-XMLHttpRequest-timeout">timeout</code> attribute value is
+    not 0, <span data-anolis-spec=fetch title=concept-fetch-terminate>terminate</span>
+    <span data-anolis-spec=fetch title=concept-fetch>fetching</span> after the amount of
+    milliseconds specified by the <code title="dom-XMLHttpRequest-timeout">timeout</code>
+    attribute value have passed with reason <i title>timeout</i>.
+    <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=22228 -->
+
+    <p>To <span data-anolis-spec=fetch>process request body</span> for
+    <var title>request</var>,
+    <span title=concept-event-fire-upload-progress>fire an upload progress event</span>
+    named <code title="event-xhr-progress">progress</code> on the
+    <code>XMLHttpRequestUpload</code> object.
+    <!-- upload complete flag can never be set here I hope -->
+
+    <p>To <span data-anolis-spec=fetch>process request end-of-file</span> for
+    <var title>request</var>, run these subsubsteps:
 
     <ol>
+     <li><p>Set the <span>upload complete flag</span>.
+
+     <li><p><span title=concept-event-fire-upload-progress>Fire an upload progress event</span> named <code title=event-xhr-progress>progress</code>
+     on the <code>XMLHttpRequestUpload</code> object.
+
+     <li><p><span title=concept-event-fire-upload-progress>Fire an upload progress event</span> named <code title="event-xhr-load">load</code>
+     on the <code>XMLHttpRequestUpload</code> object.
+
+     <li><p><span title=concept-event-fire-upload-progress>Fire an upload progress event</span> named <code title="event-xhr-loadend">loadend</code>
+     on the <code>XMLHttpRequestUpload</code> object.
+    </ol>
+    <!-- upload complete flag can never be set here I hope -->
+
+    <p>To <span data-anolis-spec=fetch>process response</span> for <var title>response</var>,
+    run these subsubsteps:
+
+    <ol>
+     <li><p>Set <span>response</span> to <var title>response</var>.
+
+     <li><p><span>Handle errors</span> for <var title>response</var>.
+
+     <li><p>If <span>response</span> is a
+     <span data-anolis-spec=fetch title=concept-network-error>network error</span>,
+     return.
+
      <li><p>Change the state to <span title="dom-XMLHttpRequest-HEADERS_RECEIVED">HEADERS_RECEIVED</span>.
 
      <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.
     </ol>
-  </ol>
 
-  <p>To <span data-anolis-spec=fetch>process response body</span> for
-  <var title>response</var>, run these substeps:
-
-  <ol>
-   <li><p><span>Handle errors</span> for <var title>response</var>.
-
-   <li>
-    <p>If state is
-    <span title=dom-XMLHttpRequest-HEADERS_RECEIVED>HEADERS_RECEIVED</span>, run these
-    subsubsteps:
+    <p>To <span data-anolis-spec=fetch>process response body</span> for
+    <var title>response</var>, run these subsubsteps:
 
     <ol>
-     <li><p>Change the state to <span title="dom-XMLHttpRequest-LOADING">LOADING</span>.
+     <li><p><span>Handle errors</span> for <var title>response</var>.
 
-     <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.
-    </ol>
+     <li><p>If <span>response</span> is a
+     <span data-anolis-spec=fetch title=concept-network-error>network error</span>,
+     return.
 
-   <li><p>Update <span>response</span>'s
-   <span data-anolis-spec=fetch title=concept-response-body>body</span> using
-   <var title>response</var>.
-
-   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-progress">progress</code>.
-  </ol>
-
-  <p>To <span data-anolis-spec=fetch>process response end-of-file</span> for
-  <var title>response</var>, run these substeps:
-
-  <ol>
-   <li><p><span>Handle errors</span> for <var title>response</var>.
-
-   <li><p>If the <span>synchronous flag</span> is set, set <span>response</span> to
-   <var title>response</var>.
-
-   <li>
-    <p>If state is <span title=dom-XMLHttpRequest-LOADING>LOADING</span>, run these
-    subsubsteps:
-
-    <ol>
      <li><p>Update <span>response</span>'s
      <span data-anolis-spec=fetch title=concept-response-body>body</span> using
      <var title>response</var>.
 
-     <li><p>Change the state to <span title="dom-XMLHttpRequest-DONE">DONE</span>.
+     <li><p>If state is
+     <span title=dom-XMLHttpRequest-HEADERS_RECEIVED>HEADERS_RECEIVED</span>, change the
+     state to <span title="dom-XMLHttpRequest-LOADING">LOADING</span> and
+     <span data-anolis-spec=dom title=concept-event-fire>fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.
 
-     <li><p>Unset the <span><code>send()</code> flag</span>.
-
-     <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.
-
-     <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>.
-
-     <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-load">load</code>.
-
-     <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadend">loadend</code>.
+     <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-progress">progress</code>.
     </ol>
+
+    <p>To <span data-anolis-spec=fetch>process response end-of-file</span> for
+    <var title>response</var>, run <span>handle response end-of-file</span> for
+    <var title>response</var>.
+  </ol>
+
+ <li>
+  <p>Otherwise, if the <span>synchronous flag</span> is set, run these substeps:
+
+  <ol>
+   <li><p>Release the <span data-anolis-spec=html>storage mutex</span>.
+
+   <li><p>Let <var title>response</var> be the result of
+   <span data-anolis-spec=fetch title=concept-fetch>fetching</span> <var title>req</var>
+
+   <li><p>Run <span>handle response end-of-file</span> for <var title>response</var>.
   </ol>
 </ol>
 
-<p>To <dfn>handle errors</dfn> for <var title>response</var> run these substeps:
+<p>To <dfn>handle response end-of-file</dfn>, run these steps:
+
+<ol>
+ <li><p>If the <span>synchronous flag</span> is set, set <span>response</span> to
+ <var title>response</var>.
+
+ <li><p><span>Handle errors</span> for <var title>response</var>.
+
+ <li><p>If <span>response</span> is a
+ <span data-anolis-spec=fetch title=concept-network-error>network error</span>, return.
+
+ <li><p>If the <span>synchronous flag</span> is unset, update <span>response</span>'s
+ <span data-anolis-spec=fetch title=concept-response-body>body</span> using
+ <var title>response</var>.
+
+ <li><p>Change the state to <span title="dom-XMLHttpRequest-DONE">DONE</span>.
+
+ <li><p>Unset the <span><code>send()</code> flag</span>.
+
+ <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.
+
+ <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>.
+
+ <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-load">load</code>.
+
+ <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadend">loadend</code>.
+</ol>
+
+<p>To <dfn>handle errors</dfn> for <var title>response</var> run these steps:
 
 <ol>
  <li><p>If <var title>response</var> is a
@@ -1184,8 +1180,14 @@ method must run these steps:
 
    <dt><i title>fatal</i>
    <dd>
-    <p>Terminate the entire <code title=dom-XMLHTtpRequest-send>send()</code> algorithm.
-    <p>Game over.
+    <ol>
+     <li><p>Change the state to <span title="dom-XMLHttpRequest-DONE">DONE</span>.
+
+     <li><p>Unset the <span><code>send()</code> flag</span>.
+
+     <li><p>Set <span>response</span> to a
+     <span data-anolis-spec=fetch title=concept-network-error>network error</span>.
+    </ol>
 
    <dt><i title>timeout</i>
    <dd><p>Run the <span>request error steps</span> for event
@@ -2288,6 +2290,7 @@ Karl Dubost,
 Lachlan Hunt,
 Maciej Stachowiak,
 Magnus Kristiansen,
+Manish Goregaokar,
 Marc Hadley,
 Marcos Caceres,
 Mark Baker,

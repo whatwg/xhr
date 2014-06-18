@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-11-june-2014">Living Standard — Last Updated 11 June 2014</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-18-june-2014">Living Standard — Last Updated 18 June 2014</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-11 June 2014, the editor has made this specification available
+18 June 2014, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -1003,36 +1003,6 @@ method must run these steps:
   <!-- reminder: if we ever change this to always include charset it has
   to be included as the first parameter for compatibility reasons -->
 
-
- <li><p>If the <a href="#synchronous-flag">synchronous flag</a> is set, release the
- <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#storage-mutex">storage mutex</a>.
-
- <li><p>Unset the <a href="#upload-complete-flag">upload complete flag</a> and <a href="#upload-events-flag">upload events flag</a>.
-
- <li><p>If there is no <a href="#request-entity-body">request entity body</a> or if it is empty,
- set the <a href="#upload-complete-flag">upload complete flag</a>.
-
- <li><p>If the <a href="#synchronous-flag">synchronous flag</a> is unset and one or more
- event listeners are registered on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code>
- object, set the <a href="#upload-events-flag">upload events flag</a>.
-
- <li>
-  <p>If the <a href="#synchronous-flag">synchronous flag</a> is unset, run these substeps:
-
-  <ol>
-   <li><p>Set the <a href="#send-flag"><code>send()</code> flag</a>.
-
-   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadstart"><a href="#event-xhr-loadstart">loadstart</a></code>.
-
-   <li><p>If the <a href="#upload-complete-flag">upload complete flag</a> is unset,
-   <a href="#concept-event-fire-upload-progress" title="concept-event-fire-upload-progress">fire an upload progress event</a> named <code title="event-xhr-loadstart"><a href="#event-xhr-loadstart">loadstart</a></code>
-   on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
-
-   <li><p>Return the <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code>
-   method call, but continue running the steps in this algorithm.
-  </ol>
-
-
  <li>
   <p>Let <var title="">req</var> be a new
   <a class="external" href="http://fetch.spec.whatwg.org/#concept-request" title="concept-request">request</a>, initialized as
@@ -1096,123 +1066,149 @@ method must run these steps:
  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a>.
  <!-- XX header list set -->
 
+ <li><p>Unset the <a href="#upload-complete-flag">upload complete flag</a> and <a href="#upload-events-flag">upload events flag</a>.
+
+ <li><p>If there is no <a href="#request-entity-body">request entity body</a> or if it is empty,
+ set the <a href="#upload-complete-flag">upload complete flag</a>.
+
  <li>
-  <p><a class="external" href="http://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">Fetch</a> <var title="">req</var>.
-
-  <p>If <var title="">req</var>'s <a data-anolis-spec="fetch" href="#synchronous-flag">synchronous flag</a> is
-  set, pass the return value, synchronously, to
-  <a class="external" href="http://fetch.spec.whatwg.org/#process-response-end-of-file">process response end-of-file</a> below. Otherwise,
-  handle the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#concept-task" title="concept-task">tasks</a>
-  <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task" title="queue a task">queued</a> on the
-  <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#networking-task-source">networking task source</a> per below.
-
-  <p>If the <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code> attribute value is not
-  0, <a class="external" href="http://fetch.spec.whatwg.org/#concept-fetch-terminate" title="concept-fetch-terminate">terminate</a>
-  <a class="external" href="http://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">fetching</a> after the amount of
-  milliseconds specified by the <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code>
-  attribute value have passed with reason <i title="">timeout</i>.
-
-  <p>To <a class="external" href="http://fetch.spec.whatwg.org/#process-request-body">process request body</a> for
-  <var title="">request</var>,
-  <a href="#concept-event-fire-upload-progress" title="concept-event-fire-upload-progress">fire an upload progress event</a> named
-  <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code> on the
-  <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
-  <!-- upload complete flag can never be set here I hope -->
-
-  <p>To <a class="external" href="http://fetch.spec.whatwg.org/#process-request-end-of-file">process request end-of-file</a> for
-  <var title="">request</var>, run these substeps:
+  <p>If the <a href="#synchronous-flag">synchronous flag</a> is unset, run these substeps:
 
   <ol>
-   <li><p>Set the <a href="#upload-complete-flag">upload complete flag</a>.
+   <li><p>If one or more event listeners are registered on the
+   <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object, set the <a href="#upload-events-flag">upload events flag</a>.
 
-   <li><p><a href="#concept-event-fire-upload-progress" title="concept-event-fire-upload-progress">Fire an upload progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>
+   <li><p>Set the <a href="#send-flag"><code>send()</code> flag</a>.
+
+   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadstart"><a href="#event-xhr-loadstart">loadstart</a></code>.
+
+   <li><p>If the <a href="#upload-complete-flag">upload complete flag</a> is unset,
+   <a href="#concept-event-fire-upload-progress" title="concept-event-fire-upload-progress">fire an upload progress event</a> named <code title="event-xhr-loadstart"><a href="#event-xhr-loadstart">loadstart</a></code>
    on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
-
-   <li><p><a href="#concept-event-fire-upload-progress" title="concept-event-fire-upload-progress">Fire an upload progress event</a> named <code title="event-xhr-load"><a href="#event-xhr-load">load</a></code>
-   on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
-
-   <li><p><a href="#concept-event-fire-upload-progress" title="concept-event-fire-upload-progress">Fire an upload progress event</a> named <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>
-   on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
-  </ol>
-  <!-- upload complete flag can never be set here I hope -->
-
-  <p>To <a class="external" href="http://fetch.spec.whatwg.org/#process-response">process response</a> for <var title="">response</var>,
-  run these substeps:
-
-  <ol>
-   <li><p><a href="#handle-errors">Handle errors</a> for <var title="">response</var>.
-
-   <li><p>Set <a href="#response">response</a> to <var title="">response</var>.
 
    <li>
-    <p>If state is <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a>, run these
-    subsubsteps:
+    <p><a class="external" href="http://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">Fetch</a> <var title="">req</var>.
+    Handle the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#concept-task" title="concept-task">tasks</a>
+    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task" title="queue a task">queued</a> on the
+    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#networking-task-source">networking task source</a> per below.
+
+    <p>If the <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code> attribute value is
+    not 0, <a class="external" href="http://fetch.spec.whatwg.org/#concept-fetch-terminate" title="concept-fetch-terminate">terminate</a>
+    <a class="external" href="http://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">fetching</a> after the amount of
+    milliseconds specified by the <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code>
+    attribute value have passed with reason <i title="">timeout</i>.
+    <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=22228 -->
+
+    <p>To <a class="external" href="http://fetch.spec.whatwg.org/#process-request-body">process request body</a> for
+    <var title="">request</var>,
+    <a href="#concept-event-fire-upload-progress" title="concept-event-fire-upload-progress">fire an upload progress event</a>
+    named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code> on the
+    <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
+    <!-- upload complete flag can never be set here I hope -->
+
+    <p>To <a class="external" href="http://fetch.spec.whatwg.org/#process-request-end-of-file">process request end-of-file</a> for
+    <var title="">request</var>, run these subsubsteps:
 
     <ol>
+     <li><p>Set the <a href="#upload-complete-flag">upload complete flag</a>.
+
+     <li><p><a href="#concept-event-fire-upload-progress" title="concept-event-fire-upload-progress">Fire an upload progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>
+     on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
+
+     <li><p><a href="#concept-event-fire-upload-progress" title="concept-event-fire-upload-progress">Fire an upload progress event</a> named <code title="event-xhr-load"><a href="#event-xhr-load">load</a></code>
+     on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
+
+     <li><p><a href="#concept-event-fire-upload-progress" title="concept-event-fire-upload-progress">Fire an upload progress event</a> named <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>
+     on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
+    </ol>
+    <!-- upload complete flag can never be set here I hope -->
+
+    <p>To <a class="external" href="http://fetch.spec.whatwg.org/#process-response">process response</a> for <var title="">response</var>,
+    run these subsubsteps:
+
+    <ol>
+     <li><p>Set <a href="#response">response</a> to <var title="">response</var>.
+
+     <li><p><a href="#handle-errors">Handle errors</a> for <var title="">response</var>.
+
+     <li><p>If <a href="#response">response</a> is a
+     <a class="external" href="http://fetch.spec.whatwg.org/#concept-network-error" title="concept-network-error">network error</a>,
+     return.
+
      <li><p>Change the state to <a href="#dom-xmlhttprequest-headers_received" title="dom-XMLHttpRequest-HEADERS_RECEIVED">HEADERS_RECEIVED</a>.
 
      <li><p><a class="external" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.
     </ol>
-  </ol>
 
-  <p>To <a class="external" href="http://fetch.spec.whatwg.org/#process-response-body">process response body</a> for
-  <var title="">response</var>, run these substeps:
-
-  <ol>
-   <li><p><a href="#handle-errors">Handle errors</a> for <var title="">response</var>.
-
-   <li>
-    <p>If state is
-    <a href="#dom-xmlhttprequest-headers_received" title="dom-XMLHttpRequest-HEADERS_RECEIVED">HEADERS_RECEIVED</a>, run these
-    subsubsteps:
+    <p>To <a class="external" href="http://fetch.spec.whatwg.org/#process-response-body">process response body</a> for
+    <var title="">response</var>, run these subsubsteps:
 
     <ol>
-     <li><p>Change the state to <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a>.
+     <li><p><a href="#handle-errors">Handle errors</a> for <var title="">response</var>.
 
-     <li><p><a class="external" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.
-    </ol>
+     <li><p>If <a href="#response">response</a> is a
+     <a class="external" href="http://fetch.spec.whatwg.org/#concept-network-error" title="concept-network-error">network error</a>,
+     return.
 
-   <li><p>Update <a href="#response">response</a>'s
-   <a class="external" href="http://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> using
-   <var title="">response</var>.
-
-   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>.
-  </ol>
-
-  <p>To <a class="external" href="http://fetch.spec.whatwg.org/#process-response-end-of-file">process response end-of-file</a> for
-  <var title="">response</var>, run these substeps:
-
-  <ol>
-   <li><p><a href="#handle-errors">Handle errors</a> for <var title="">response</var>.
-
-   <li><p>If the <a href="#synchronous-flag">synchronous flag</a> is set, set <a href="#response">response</a> to
-   <var title="">response</var>.
-
-   <li>
-    <p>If state is <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a>, run these
-    subsubsteps:
-
-    <ol>
      <li><p>Update <a href="#response">response</a>'s
      <a class="external" href="http://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> using
      <var title="">response</var>.
 
-     <li><p>Change the state to <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>.
-
-     <li><p>Unset the <a href="#send-flag"><code>send()</code> flag</a>.
-
-     <li><p><a class="external" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.
+     <li><p>If state is
+     <a href="#dom-xmlhttprequest-headers_received" title="dom-XMLHttpRequest-HEADERS_RECEIVED">HEADERS_RECEIVED</a>, change the
+     state to <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a> and
+     <a class="external" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.
 
      <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>.
-
-     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-load"><a href="#event-xhr-load">load</a></code>.
-
-     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>.
     </ol>
+
+    <p>To <a class="external" href="http://fetch.spec.whatwg.org/#process-response-end-of-file">process response end-of-file</a> for
+    <var title="">response</var>, run <a href="#handle-response-end-of-file">handle response end-of-file</a> for
+    <var title="">response</var>.
+  </ol>
+
+ <li>
+  <p>Otherwise, if the <a href="#synchronous-flag">synchronous flag</a> is set, run these substeps:
+
+  <ol>
+   <li><p>Release the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#storage-mutex">storage mutex</a>.
+
+   <li><p>Let <var title="">response</var> be the result of
+   <a class="external" href="http://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">fetching</a> <var title="">req</var>
+
+   <li><p>Run <a href="#handle-response-end-of-file">handle response end-of-file</a> for <var title="">response</var>.
   </ol>
 </ol>
 
-<p>To <dfn id="handle-errors">handle errors</dfn> for <var title="">response</var> run these substeps:
+<p>To <dfn id="handle-response-end-of-file">handle response end-of-file</dfn>, run these steps:
+
+<ol>
+ <li><p>If the <a href="#synchronous-flag">synchronous flag</a> is set, set <a href="#response">response</a> to
+ <var title="">response</var>.
+
+ <li><p><a href="#handle-errors">Handle errors</a> for <var title="">response</var>.
+
+ <li><p>If <a href="#response">response</a> is a
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-network-error" title="concept-network-error">network error</a>, return.
+
+ <li><p>If the <a href="#synchronous-flag">synchronous flag</a> is unset, update <a href="#response">response</a>'s
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> using
+ <var title="">response</var>.
+
+ <li><p>Change the state to <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>.
+
+ <li><p>Unset the <a href="#send-flag"><code>send()</code> flag</a>.
+
+ <li><p><a class="external" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.
+
+ <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>.
+
+ <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-load"><a href="#event-xhr-load">load</a></code>.
+
+ <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>.
+</ol>
+
+<p>To <dfn id="handle-errors">handle errors</dfn> for <var title="">response</var> run these steps:
 
 <ol>
  <li><p>If <var title="">response</var> is a
@@ -1232,8 +1228,14 @@ method must run these steps:
 
    <dt><i title="">fatal</i>
    <dd>
-    <p>Terminate the entire <code title="dom-XMLHTtpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code> algorithm.
-    <p>Game over.
+    <ol>
+     <li><p>Change the state to <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>.
+
+     <li><p>Unset the <a href="#send-flag"><code>send()</code> flag</a>.
+
+     <li><p>Set <a href="#response">response</a> to a
+     <a class="external" href="http://fetch.spec.whatwg.org/#concept-network-error" title="concept-network-error">network error</a>.
+    </ol>
 
    <dt><i title="">timeout</i>
    <dd><p>Run the <a href="#request-error-steps">request error steps</a> for event
@@ -2381,6 +2383,7 @@ Karl Dubost,
 Lachlan Hunt,
 Maciej Stachowiak,
 Magnus Kristiansen,
+Manish Goregaokar,
 Marc Hadley,
 Marcos Caceres,
 Mark Baker,
