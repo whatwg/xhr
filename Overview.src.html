@@ -432,8 +432,8 @@ request-associated concepts:
 <dfn id="upload-complete-flag">upload complete flag</dfn>, and
 <dfn id="upload-events-flag">upload events flag</dfn>.
 
-<p>The <span>author request headers</span> is an initially empty list of
-<span data-anolis-spec=fetch title=concept-header>headers</span>.
+<p>The <span>author request headers</span> is an initially empty
+<span data-anolis-spec=fetch title=concept-header-list>header list</span>.
 
 <p>The <span>request entity body</span> is initially null.
 
@@ -536,9 +536,8 @@ method must run these steps:
   <p>If the <var>async</var> argument is omitted, set <var>async</var> to true, and set
   <var title>username</var> and <var title>password</var> to null.
 
-  <p class=note>Due to unfortunate legacy constraints, passing
-  <code title>undefined</code> for the <var>async</var> argument is treated differently
-  from <var>async</var> being omitted.
+  <p class=note>Unfortunately legacy content prevents treating the <var>async</var>
+  argument being <code title>undefined</code> identical from it being omitted.
 
  <li>
   <p>If <var title>parsedURL</var>'s <span data-anolis-spec=url>relative flag</span> is
@@ -579,7 +578,7 @@ method must run these steps:
    <li><p>Set <span>request URL</span> to <var title>parsedURL</var>.
    <li><p>Set the <span>synchronous flag</span>, if <var>async</var> is false, and unset
    the <span>synchronous flag</span> otherwise.
-   <li><p>Set <span>author request headers</span> to the empty list.
+   <li><p>Empty <span>author request headers</span>.
    <li><p>Unset the <span><code>send()</code> flag</span>.
    <li><p>Set <span>response</span> to a
    <span data-anolis-spec=fetch title=concept-network-error>network error</span>.
@@ -608,13 +607,8 @@ method must run these steps:
  <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-setRequestHeader>setRequestHeader</span>(<var>name</var>, <var>value</var>)</code>
 
  <dd>
-  <p>Appends an <span data-anolis-spec=fetch title=concept-header>header</span> to
-  <span>author request headers</span>, or if <var>name</var> is already a
-  <span data-anolis-spec=fetch title=concept-header>header</span>'s
-  <span data-anolis-spec=fetch title=concept-header-name>name</span> in
-  <span>author request headers</span>, appends <var>value</var> to that
-  <span data-anolis-spec=fetch title=concept-header>header</span>'s
-  <span data-anolis-spec=fetch title=concept-header-value>value</span>.
+  <p>Combines a <span data-anolis-spec=fetch title=concept-header>header</span> in
+  <span>author request headers</span>.
 
   <p>Throws an "<code data-anolis-spec=dom>InvalidStateError</code>"
   exception if the state is not
@@ -622,8 +616,7 @@ method must run these steps:
   <span><code>send()</code> flag</span> is set.
 
   <p>Throws a "<code data-anolis-spec=dom>SyntaxError</code>" exception if
-  <var>name</var> is not a valid HTTP header field name or if
-  <var>value</var> is not a valid HTTP header field value.
+  <var>name</var> is not a header name or if <var>value</var> is not a header value.
  </dd>
 </dl>
 
@@ -660,27 +653,8 @@ method must run these steps:
  <li><p>Terminate these steps if <var>name</var> is a
  <span data-anolis-spec=fetch>forbidden header name</span>.
 
- <li><p>If <var>name</var> is not a
- <span data-anolis-spec=fetch title=concept-header-name>name</span> of a
- <span data-anolis-spec=fetch title=concept-header>header</span> in
- <span>author request headers</span>, append a
- <span data-anolis-spec=fetch title=concept-header>header</span> whose
- <span data-anolis-spec=fetch title=concept-header-name>name</span> is
- <var>name</var> and
- <span data-anolis-spec=fetch title=concept-header-value>value</span> is
- <var>value</var> to <span>author request headers</span>.
-
- <li>
-  <p>Otherwise, append `<code>,</code>`, followed by 0x20, followed by
-  <var>value</var>, to the
-  <span data-anolis-spec=fetch title=concept-header-value>value</span> of the
-  <span data-anolis-spec=fetch title=concept-header>header</span> in
-  <span>author request headers</span> whose
-  <span data-anolis-spec=fetch title=concept-header-name>name</span> is
-  <var>name</var>.
-
-  <p class=note>The XMLHttpRequest standard intentionally constraints the
-  use of HTTP here in line with contemporary implementations.
+ <li><p><span data-anolis-spec=fetch title=concept-header-list-combine>Combine</span>
+ <var>name</var>/<var>value</var> in <span>author request headers</span>.
 </ol>
 
 <div class="example">
@@ -937,18 +911,27 @@ method must run these steps:
     "<code title>application/x-www-form-urlencoded;charset=UTF-8</code>".
   </dl>
 
-  <p>If a <code>Content-Type</code> header is in
-  <span>author request headers</span> and its value is a
-  <span data-anolis-spec=html>valid MIME type</span> that has a
-  <code>charset</code> parameter whose value is not a case-insensitive
-  match for <var title>encoding</var>, and <var title>encoding</var>
-  is not null, set all the <code>charset</code> parameters of that
-  <code>Content-Type</code> header to <var title>encoding</var>.
+  <p>If <span>author request headers</span> contains no
+  <span data-anolis-spec=fetch title=concept-header>header</span>
+  <span data-anolis-spec=fetch title=concept-header-name>named</span>
+  `<code>Content-Type</code>`,
+  <span data-anolis-spec=fetch title=concept-header-list-append>append</span>
+  `<code>Content-Type</code>`/<var title>mime type</var> to
+  <span>author request headers</span>.
 
-  <p>If no <code>Content-Type</code> header is in
-  <span>author request headers</span> and <var title>mime type</var> is
-  not null, append a <code>Content-Type</code> header with value
-  <var title>mime type</var> to <span>author request headers</span>.
+  <p>Otherwise, if the <span data-anolis-spec=fetch title=concept-header>header</span>
+  <span data-anolis-spec=fetch title=concept-header-name>named</span>
+  `<code>Content-Type</code>` in <span>author request headers</span> has
+  <span data-anolis-spec=fetch title=concept-header-value>value</span> that is a
+  <span data-anolis-spec=html>valid MIME type</span>, which has a
+  `<code>charset</code>` parameter whose value is not a case-insensitive
+  match for <var title>encoding</var>, and <var title>encoding</var>
+  is not null, set all the `<code>charset</code>` parameters of that
+  `<code>Content-Type</code>`
+  <span data-anolis-spec=fetch title=concept-header>header</span>'s
+  <span data-anolis-spec=fetch title=concept-header-value>value</span> to
+  <var title>encoding</var>.
+  <!-- XXX could still be better with case-insensitive and parameter cross-ref -->
 
   <!-- reminder: if we ever change this to always include charset it has
   to be included as the first parameter for compatibility reasons -->

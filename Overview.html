@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-18-june-2014">Living Standard — Last Updated 18 June 2014</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-20-june-2014">Living Standard — Last Updated 20 June 2014</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-18 June 2014, the editor has made this specification available
+20 June 2014, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -480,8 +480,8 @@ request-associated concepts:
 <dfn id="upload-complete-flag">upload complete flag</dfn>, and
 <dfn id="upload-events-flag">upload events flag</dfn>.
 
-<p>The <a href="#author-request-headers">author request headers</a> is an initially empty list of
-<a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">headers</a>.
+<p>The <a href="#author-request-headers">author request headers</a> is an initially empty
+<a class="external" href="http://fetch.spec.whatwg.org/#concept-header-list" title="concept-header-list">header list</a>.
 
 <p>The <a href="#request-entity-body">request entity body</a> is initially null.
 
@@ -584,9 +584,8 @@ method must run these steps:
   <p>If the <var>async</var> argument is omitted, set <var>async</var> to true, and set
   <var title="">username</var> and <var title="">password</var> to null.
 
-  <p class="note">Due to unfortunate legacy constraints, passing
-  <code title="">undefined</code> for the <var>async</var> argument is treated differently
-  from <var>async</var> being omitted.
+  <p class="note">Unfortunately legacy content prevents treating the <var>async</var>
+  argument being <code title="">undefined</code> identical from it being omitted.
 
  <li>
   <p>If <var title="">parsedURL</var>'s <a class="external" href="http://url.spec.whatwg.org/#relative-flag">relative flag</a> is
@@ -627,7 +626,7 @@ method must run these steps:
    <li><p>Set <a href="#request-url">request URL</a> to <var title="">parsedURL</var>.
    <li><p>Set the <a href="#synchronous-flag">synchronous flag</a>, if <var>async</var> is false, and unset
    the <a href="#synchronous-flag">synchronous flag</a> otherwise.
-   <li><p>Set <a href="#author-request-headers">author request headers</a> to the empty list.
+   <li><p>Empty <a href="#author-request-headers">author request headers</a>.
    <li><p>Unset the <a href="#send-flag"><code>send()</code> flag</a>.
    <li><p>Set <a href="#response">response</a> to a
    <a class="external" href="http://fetch.spec.whatwg.org/#concept-network-error" title="concept-network-error">network error</a>.
@@ -656,13 +655,8 @@ method must run these steps:
  <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-setrequestheader" title="dom-XMLHttpRequest-setRequestHeader">setRequestHeader</a>(<var>name</var>, <var>value</var>)</code>
 
  <dd>
-  <p>Appends an <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a> to
-  <a href="#author-request-headers">author request headers</a>, or if <var>name</var> is already a
-  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a>'s
-  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">name</a> in
-  <a href="#author-request-headers">author request headers</a>, appends <var>value</var> to that
-  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a>'s
-  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a>.
+  <p>Combines a <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a> in
+  <a href="#author-request-headers">author request headers</a>.
 
   <p>Throws an "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>"
   exception if the state is not
@@ -670,8 +664,7 @@ method must run these steps:
   <a href="#send-flag"><code>send()</code> flag</a> is set.
 
   <p>Throws a "<code class="external"><a href="http://dom.spec.whatwg.org/#syntaxerror">SyntaxError</a></code>" exception if
-  <var>name</var> is not a valid HTTP header field name or if
-  <var>value</var> is not a valid HTTP header field value.
+  <var>name</var> is not a header name or if <var>value</var> is not a header value.
  </dd>
 </dl>
 
@@ -708,27 +701,8 @@ method must run these steps:
  <li><p>Terminate these steps if <var>name</var> is a
  <a class="external" href="http://fetch.spec.whatwg.org/#forbidden-header-name">forbidden header name</a>.
 
- <li><p>If <var>name</var> is not a
- <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">name</a> of a
- <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a> in
- <a href="#author-request-headers">author request headers</a>, append a
- <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a> whose
- <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">name</a> is
- <var>name</var> and
- <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a> is
- <var>value</var> to <a href="#author-request-headers">author request headers</a>.
-
- <li>
-  <p>Otherwise, append `<code>,</code>`, followed by 0x20, followed by
-  <var>value</var>, to the
-  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a> of the
-  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a> in
-  <a href="#author-request-headers">author request headers</a> whose
-  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">name</a> is
-  <var>name</var>.
-
-  <p class="note">The XMLHttpRequest standard intentionally constraints the
-  use of HTTP here in line with contemporary implementations.
+ <li><p><a class="external" href="http://fetch.spec.whatwg.org/#concept-header-list-combine" title="concept-header-list-combine">Combine</a>
+ <var>name</var>/<var>value</var> in <a href="#author-request-headers">author request headers</a>.
 </ol>
 
 <div class="example">
@@ -985,18 +959,27 @@ method must run these steps:
     "<code title="">application/x-www-form-urlencoded;charset=UTF-8</code>".
   </dl>
 
-  <p>If a <code>Content-Type</code> header is in
-  <a href="#author-request-headers">author request headers</a> and its value is a
-  <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#valid-mime-type">valid MIME type</a> that has a
-  <code>charset</code> parameter whose value is not a case-insensitive
-  match for <var title="">encoding</var>, and <var title="">encoding</var>
-  is not null, set all the <code>charset</code> parameters of that
-  <code>Content-Type</code> header to <var title="">encoding</var>.
+  <p>If <a href="#author-request-headers">author request headers</a> contains no
+  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a>
+  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">named</a>
+  `<code>Content-Type</code>`,
+  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-list-append" title="concept-header-list-append">append</a>
+  `<code>Content-Type</code>`/<var title="">mime type</var> to
+  <a href="#author-request-headers">author request headers</a>.
 
-  <p>If no <code>Content-Type</code> header is in
-  <a href="#author-request-headers">author request headers</a> and <var title="">mime type</var> is
-  not null, append a <code>Content-Type</code> header with value
-  <var title="">mime type</var> to <a href="#author-request-headers">author request headers</a>.
+  <p>Otherwise, if the <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a>
+  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">named</a>
+  `<code>Content-Type</code>` in <a href="#author-request-headers">author request headers</a> has
+  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a> that is a
+  <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#valid-mime-type">valid MIME type</a>, which has a
+  `<code>charset</code>` parameter whose value is not a case-insensitive
+  match for <var title="">encoding</var>, and <var title="">encoding</var>
+  is not null, set all the `<code>charset</code>` parameters of that
+  `<code>Content-Type</code>`
+  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a>'s
+  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a> to
+  <var title="">encoding</var>.
+  <!-- XXX could still be better with case-insensitive and parameter cross-ref -->
 
   <!-- reminder: if we ever change this to always include charset it has
   to be included as the first parameter for compatibility reasons -->
