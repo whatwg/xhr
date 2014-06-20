@@ -2013,9 +2013,9 @@ interface <dfn>ProgressEvent</dfn> : <span data-anolis-spec=dom>Event</span> {
 };
 
 dictionary <dfn>ProgressEventInit</dfn> : <span data-anolis-spec=dom>EventInit</span> {
-  boolean <span title="dom-ProgressEventInit-lengthComputable">lengthComputable</span>;
-  unsigned long long <span title="dom-ProgressEventInit-loaded">loaded</span>;
-  unsigned long long <span title="dom-ProgressEventInit-total">total</span>;
+  boolean <span title="dom-ProgressEventInit-lengthComputable">lengthComputable</span> = false;
+  unsigned long long <span title="dom-ProgressEventInit-loaded">loaded</span> = 0;
+  unsigned long long <span title="dom-ProgressEventInit-total">total</span> = 0;
 }</pre>
 
 <p><span data-anolis-spec=dom title=concept-event>Events</span> using
@@ -2024,16 +2024,12 @@ progression.
 
 <p>The
 <dfn id="dom-progressevent-lengthcomputable" title="dom-ProgressEvent-lengthComputable"><code>lengthComputable</code></dfn>
-attribute must return the value it was initialized to. When an
-<span data-anolis-spec=dom title=concept-event>event</span> is created
-the attribute must be initialized to false.
+attribute must return the value it was initialized to.
 
 <p>The
 <dfn id="dom-progressevent-loaded" title="dom-ProgressEvent-loaded"><code>loaded</code></dfn> and
 <dfn id="dom-progressevent-total" title="dom-ProgressEvent-total"><code>total</code></dfn>
-attributes must return the value they were initialized to. When an
-<span data-anolis-spec=dom title=concept-event>event</span> is created
-the attributes must be initialized to 0.
+attributes must return the value they were initialized to.
 
 
 <h3>Firing events using the <code title>ProgressEvent</code> interface for Fetch</h3>
