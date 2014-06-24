@@ -1967,12 +1967,13 @@ value of <a href="#concept-formdata-entry" title="concept-FormData-entry">entry<
  <li><p>Set <var>entry</var>'s <a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a>
  to <var>name</var>.
 
- <li><p>If <var>value</var> is a <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code>, set
- <var>value</var> to a new <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a></code> object, representing
- the same bytes, whose <code class="external" title="dom-File-name"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-name">name</a></code>
- attribute value is "<code title="">blob</code>".
+ <li><p>If <var>value</var> is a <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code> object and not
+ a <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a></code> object, set <var>value</var> to a new
+ <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a></code> object, representing the same bytes, whose
+ <code class="external" title="dom-File-name"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-name">name</a></code> attribute value is
+ "<code title="">blob</code>".
 
- <li><p>If <var>value</var> is a <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a></code> and
+ <li><p>If <var>value</var> is a <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a></code> object and
  <var title="">filename</var> is given, set <var>value</var> to a new
  <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a></code> object, representing
  the same bytes, whose <code class="external" title="dom-File-name"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-name">name</a></code>
