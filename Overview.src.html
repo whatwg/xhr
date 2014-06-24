@@ -568,7 +568,9 @@ method must run these steps:
  <li>
   <p><span>Terminate the request</span>.
 
-  <p class=note>After all, a request can be ongoing at this point.
+  <p class=note>A <span data-anolis-spec=fetch title=concept-fetch>fetch</span> can be
+  ongoing at this point.
+  <!-- also unsets the send() flag -->
 
  <li>
   <p>Set variables associated with the object as follows:
@@ -579,7 +581,6 @@ method must run these steps:
    <li><p>Set the <span>synchronous flag</span>, if <var>async</var> is false, and unset
    the <span>synchronous flag</span> otherwise.
    <li><p>Empty <span>author request headers</span>.
-   <li><p>Unset the <span><code>send()</code> flag</span>.
    <li><p>Set <span>response</span> to a
    <span data-anolis-spec=fetch title=concept-network-error>network error</span>.
    <li><p>Set <span>response <code>ArrayBuffer</code> object</span> to null.
@@ -1003,14 +1004,14 @@ method must run these steps:
  <li><p>If there is no <span>request entity body</span> or if it is empty,
  set the <span>upload complete flag</span>.
 
+ <li><p>Set the <span><code>send()</code> flag</span>.
+
  <li>
   <p>If the <span>synchronous flag</span> is unset, run these substeps:
 
   <ol>
    <li><p>If one or more event listeners are registered on the
    <code>XMLHttpRequestUpload</code> object, set the <span>upload events flag</span>.
-
-   <li><p>Set the <span><code>send()</code> flag</span>.
 
    <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadstart">loadstart</code>.
 
@@ -1106,13 +1107,14 @@ method must run these steps:
    <li><p>Release the <span data-anolis-spec=html>storage mutex</span>.
 
    <li><p>Let <var title>response</var> be the result of
-   <span data-anolis-spec=fetch title=concept-fetch>fetching</span> <var title>req</var>
+   <span data-anolis-spec=fetch title=concept-fetch>fetching</span> <var title>req</var>.
 
    <li><p>Run <span>handle response end-of-file</span> for <var title>response</var>.
   </ol>
 </ol>
 
-<p>To <dfn>handle response end-of-file</dfn>, run these steps:
+<p>To <dfn>handle response end-of-file</dfn> for <var title>response</var>, run these
+steps:
 
 <ol>
  <li><p>If the <span>synchronous flag</span> is set, set <span>response</span> to
@@ -1143,6 +1145,8 @@ method must run these steps:
 <p>To <dfn>handle errors</dfn> for <var title>response</var> run these steps:
 
 <ol>
+ <li><p>If the <span><code>send()</code> flag</span> is unset, return.
+
  <li><p>If <var title>response</var> is a
  <span data-anolis-spec=fetch title=concept-network-error>network error</span>, run the
  <span>request error steps</span> for event <code title="event-xhr-error">error</code> and

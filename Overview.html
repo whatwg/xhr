@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-23-june-2014">Living Standard — Last Updated 23 June 2014</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-24-june-2014">Living Standard — Last Updated 24 June 2014</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-23 June 2014, the editor has made this specification available
+24 June 2014, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -616,7 +616,9 @@ method must run these steps:
  <li>
   <p><a href="#terminate-the-request">Terminate the request</a>.
 
-  <p class="note">After all, a request can be ongoing at this point.
+  <p class="note">A <a class="external" href="http://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">fetch</a> can be
+  ongoing at this point.
+  <!-- also unsets the send() flag -->
 
  <li>
   <p>Set variables associated with the object as follows:
@@ -627,7 +629,6 @@ method must run these steps:
    <li><p>Set the <a href="#synchronous-flag">synchronous flag</a>, if <var>async</var> is false, and unset
    the <a href="#synchronous-flag">synchronous flag</a> otherwise.
    <li><p>Empty <a href="#author-request-headers">author request headers</a>.
-   <li><p>Unset the <a href="#send-flag"><code>send()</code> flag</a>.
    <li><p>Set <a href="#response">response</a> to a
    <a class="external" href="http://fetch.spec.whatwg.org/#concept-network-error" title="concept-network-error">network error</a>.
    <li><p>Set <a href="#response-arraybuffer-object">response <code>ArrayBuffer</code> object</a> to null.
@@ -1051,14 +1052,14 @@ method must run these steps:
  <li><p>If there is no <a href="#request-entity-body">request entity body</a> or if it is empty,
  set the <a href="#upload-complete-flag">upload complete flag</a>.
 
+ <li><p>Set the <a href="#send-flag"><code>send()</code> flag</a>.
+
  <li>
   <p>If the <a href="#synchronous-flag">synchronous flag</a> is unset, run these substeps:
 
   <ol>
    <li><p>If one or more event listeners are registered on the
    <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object, set the <a href="#upload-events-flag">upload events flag</a>.
-
-   <li><p>Set the <a href="#send-flag"><code>send()</code> flag</a>.
 
    <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadstart"><a href="#event-xhr-loadstart">loadstart</a></code>.
 
@@ -1154,13 +1155,14 @@ method must run these steps:
    <li><p>Release the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#storage-mutex">storage mutex</a>.
 
    <li><p>Let <var title="">response</var> be the result of
-   <a class="external" href="http://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">fetching</a> <var title="">req</var>
+   <a class="external" href="http://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">fetching</a> <var title="">req</var>.
 
    <li><p>Run <a href="#handle-response-end-of-file">handle response end-of-file</a> for <var title="">response</var>.
   </ol>
 </ol>
 
-<p>To <dfn id="handle-response-end-of-file">handle response end-of-file</dfn>, run these steps:
+<p>To <dfn id="handle-response-end-of-file">handle response end-of-file</dfn> for <var title="">response</var>, run these
+steps:
 
 <ol>
  <li><p>If the <a href="#synchronous-flag">synchronous flag</a> is set, set <a href="#response">response</a> to
@@ -1191,6 +1193,8 @@ method must run these steps:
 <p>To <dfn id="handle-errors">handle errors</dfn> for <var title="">response</var> run these steps:
 
 <ol>
+ <li><p>If the <a href="#send-flag"><code>send()</code> flag</a> is unset, return.
+
  <li><p>If <var title="">response</var> is a
  <a class="external" href="http://fetch.spec.whatwg.org/#concept-network-error" title="concept-network-error">network error</a>, run the
  <a href="#request-error-steps">request error steps</a> for event <code title="event-xhr-error"><a href="#event-xhr-error">error</a></code> and
