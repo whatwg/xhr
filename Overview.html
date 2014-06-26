@@ -1063,9 +1063,9 @@ method must run these steps:
    <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadstart"><a href="#event-xhr-loadstart">loadstart</a></code> with 0 and 0.
 
    <li><p>If the <a href="#upload-complete-flag">upload complete flag</a> is unset,
-   <a href="#concept-event-fire-progress" title="concept-event-fire-progress">fire an upload progress event</a> named <code title="event-xhr-loadstart"><a href="#event-xhr-loadstart">loadstart</a></code>
-   on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object with 0 and
-   <var title="">req</var>'s
+   <a href="#concept-event-fire-progress" title="concept-event-fire-progress">fire a progress event</a> named
+   <code title="event-xhr-loadstart"><a href="#event-xhr-loadstart">loadstart</a></code> on the
+   <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object with 0 and <var title="">req</var>'s
    <a class="external" href="http://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>'s
    <a class="external" href="http://fetch.spec.whatwg.org/#concept-body-length" title="concept-body-length">length</a>.
 
@@ -1084,7 +1084,7 @@ method must run these steps:
 
     <p>To <a class="external" href="http://fetch.spec.whatwg.org/#process-request-body">process request body</a> for
     <var title="">request</var>,
-    <a href="#concept-event-fire-progress" title="concept-event-fire-progress">fire an upload progress event</a> named
+    <a href="#concept-event-fire-progress" title="concept-event-fire-progress">fire a progress event</a> named
     <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code> on the
     <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object with <var title="">request</var>'s
     <a class="external" href="http://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>'s
@@ -1108,18 +1108,18 @@ method must run these steps:
      <a class="external" href="http://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>'s
      <a class="external" href="http://fetch.spec.whatwg.org/#concept-body-length" title="concept-body-length">length</a>.
 
-     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire an upload progress event</a>
-     named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code> on the
+     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
+     <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code> on the
      <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object with <var title="">transmitted</var> and
      <var title="">length</var>.
 
-     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire an upload progress event</a>
-     named <code title="event-xhr-load"><a href="#event-xhr-load">load</a></code> on the
+     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
+     <code title="event-xhr-load"><a href="#event-xhr-load">load</a></code> on the
      <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object with <var title="">transmitted</var> and
      <var title="">length</var>.
 
-     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire an upload progress event</a>
-     named <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code> on the
+     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
+     <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code> on the
      <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object with <var title="">transmitted</var> and
      <var title="">length</var>.
     </ol>
@@ -1287,26 +1287,26 @@ exception <var>exception</var> are:
   <ol>
    <li><p>Set the <a href="#upload-complete-flag">upload complete flag</a>.
 
-   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire an upload progress event</a> named
+   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
    <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code> on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code>
    object with 0 and 0.
 
-   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire an upload progress event</a> named
+   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
    <var title="">event</var> on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object with 0 and 0.
 
-   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire an upload progress event</a> named
+   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
    <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code> on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code>
    object with 0 and 0.
   </ol>
 
- <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>
- with 0 and 0.
+ <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
+ <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code> with 0 and 0.
 
- <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <var title="">event</var>
- with 0 and 0.
+ <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
+ <var title="">event</var> with 0 and 0.
 
- <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>
- with 0 and 0.
+ <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
+ <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code> with 0 and 0.
 </ol>
 
 
