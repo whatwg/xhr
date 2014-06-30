@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-26-june-2014">Living Standard — Last Updated 26 June 2014</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-30-june-2014">Living Standard — Last Updated 30 June 2014</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-26 June 2014, the editor has made this specification available
+30 June 2014, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -884,31 +884,29 @@ method must run these steps:
 
   <dl class="switch">
    <dt id="dom-XMLHttpRequest-send-ArrayBufferView"><code class="external"><a href="http://www.khronos.org/registry/typedarray/specs/latest/#6">ArrayBufferView</a></code>
-   <dd><p>Let the <a href="#request-body">request body</a> be a copy of the bytes represented by
-   <var title="">data</var>.</dd>
+   <dd><p>Set <a href="#request-body">request body</a> to a copy of the bytes represented by
+   <var title="">data</var>.
 
    <dt id="dom-XMLHttpRequest-send-Blob"><code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code>
    <dd>
-    <p>If the object's <code title="">type</code> attribute value is not
-    the empty string, let <var>mime type</var> be its value.
+    <p>If the <var title="">data</var>'s
+    <code class="external" title="dom-Blob-type"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-type">type</a></code> attribute value is not
+    the empty string, set <var>mime type</var> to its value.
 
-    <p class="note">See also <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code>'s
-    <code class="external" title="dom-Blob-type"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-type">type</a></code> attribute.
-
-    <p>Let the <a href="#request-body">request body</a> be a copy of the bytes represented by
+    <p>Set <a href="#request-body">request body</a> to a copy of the bytes represented by
     <var>data</var>.
    </dd>
 
    <dt id="dom-XMLHttpRequest-send-document"><a class="external" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>
    <dd>
-    <p>Let <var>encoding</var> be "<code title="">UTF-8</code>".
+    <p>Set <var>encoding</var> to `<code title="">UTF-8</code>`.
 
-    <p>If <var>data</var> is an <a class="external" href="http://dom.spec.whatwg.org/#html-document">HTML document</a>, let
-    <var>mime type</var> be "<code>text/html</code>", or let <var>mime type</var> be
-    "<code>application/xml</code>" otherwise. Then append "<code>;charset=UTF-8</code>" to
+    <p>If <var>data</var> is an <a class="external" href="http://dom.spec.whatwg.org/#html-document">HTML document</a>, set
+    <var>mime type</var> to `<code>text/html</code>`, and set <var>mime type</var> to
+    `<code>application/xml</code>` otherwise. Then append `<code>;charset=UTF-8</code>` to
     <var>mime type</var>.
 
-    <p>Let the <a href="#request-body">request body</a> be <var>data</var>,
+    <p>Set <a href="#request-body">request body</a> to <var>data</var>,
     <a class="external" href="http://domparsing.spec.whatwg.org/#concept-serialize" title="concept-serialize">serialized</a>,
     <a class="external" href="http://heycam.github.io/webidl/#dfn-obtain-unicode" title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</a>,
     and <a class="external" href="http://encoding.spec.whatwg.org/#utf-8-encode" title="utf-8 encode">utf-8 encoded</a>.
@@ -921,41 +919,39 @@ method must run these steps:
 
    <dt id="dom-XMLHttpRequest-send-a-string">a string
    <dd>
-    <p>Let <var>encoding</var> be "<code title="">UTF-8</code>".
+    <p>Set <var>encoding</var> to `<code title="">UTF-8</code>`.
 
-    <p>Let <var>mime type</var> be "<code>text/plain;charset=UTF-8</code>".
+    <p>Set <var>mime type</var> to `<code>text/plain;charset=UTF-8</code>`.
 
-    <p>Let the <a href="#request-body">request body</a> be <var title="">data</var>,
+    <p>Set <a href="#request-body">request body</a> to <var title="">data</var>,
     <a class="external" href="http://encoding.spec.whatwg.org/#utf-8-encode" title="utf-8 encode">utf-8 encoded</a>.
 
    <dt id="dom-XMLHttpRequest-send-FormData"><code><a href="#formdata">FormData</a></code>
    <dd>
-    <p>Let the <a href="#request-body">request body</a> be the result of running
-    the
-    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#multipart/form-data-encoding-algorithm"><code>multipart/form-data</code> encoding algorithm</a>
-    with <var>data</var> as <var>form data set</var> and with
-    <a class="external" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a> as the
-    explicit character encoding.
-    <!-- need to provide explicit character encoding because otherwise the
-         encoding of the document is used -->
-
-    <p>Let <var>mime type</var> be the concatenation of
-    "<code title="">multipart/form-data;</code>",
-    a U+0020 SPACE character,
-    "<code title="">boundary=</code>", and the
+    <p>Set <var>mime type</var> to `<code title="">multipart/form-data;boundary=</code>`,
+    followed by the
     <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#multipart/form-data-boundary-string"><code>multipart/form-data</code> boundary string</a>
     generated by the
     <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#multipart/form-data-encoding-algorithm"><code>multipart/form-data</code> encoding algorithm</a>.
 
+    <p>Set <a href="#request-body">request body</a> be the result of running the
+    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#multipart/form-data-encoding-algorithm"><code>multipart/form-data</code> encoding algorithm</a>
+    with <var>data</var> as <var>form data set</var> and with
+    <a class="external" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a> as the explicit character encoding.
+    <!-- need to provide explicit character encoding because otherwise the
+         encoding of the document is used -->
+
    <dt id="dom-XMLHttpRequest-send-URLSearchParams"><code class="external"><a href="http://url.spec.whatwg.org/#urlsearchparams">URLSearchParams</a></code>
    <dd>
-    <p>Let the <a href="#request-body">request body</a> be the result of running the
+    <p>Set <var>encoding</var> to `<code title="">UTF-8</code>`.
+
+    <p>Set <var>mime type</var> to
+    `<code title="">application/x-www-form-urlencoded;charset=UTF-8</code>`.
+
+    <p>Set <a href="#request-body">request body</a> to the result of running the
     <a class="external" href="http://url.spec.whatwg.org/#concept-urlencoded-serializer" title="concept-urlencoded-serializer"><code>application/x-www-form-urlencoded</code> serializer</a>
     with <var>data</var>'s associated list of name-value pairs as <var>pairs</var>.
     <!-- utf-8 implied -->
-
-    <p>Let <var>mime type</var> be
-    "<code title="">application/x-www-form-urlencoded;charset=UTF-8</code>".
   </dl>
 
   <p>If <a href="#author-request-headers">author request headers</a> contains no
