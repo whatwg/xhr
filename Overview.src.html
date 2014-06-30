@@ -242,11 +242,11 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
            attribute unsigned long <span title="dom-XMLHttpRequest-timeout">timeout</span>;
            attribute boolean <span title="dom-XMLHttpRequest-withCredentials">withCredentials</span>;
   readonly attribute <span>XMLHttpRequestUpload</span> <span title="dom-XMLHttpRequest-upload">upload</span>;
-  void <span title="dom-XMLHttpRequest-send">send</span>(optional (<span data-anolis-spec=typedarray>ArrayBufferView</span> or <span data-anolis-spec=fileapi>Blob</span> or <span data-anolis-spec=dom>Document</span> or <span data-anolis-spec=encoding>ScalarValueString</span> or <span>FormData</span> or <span data-anolis-spec=url>URLSearchParams</span>)? <var>data</var> = null);
+  void <span title="dom-XMLHttpRequest-send">send</span>(optional (<span data-anolis-spec=dom>Document</span> or <span data-anolis-spec=fetch>FetchBodyInit</span>)? <var>body</var> = null);
   void <span title="dom-XMLHttpRequest-abort">abort</span>();
 
   // <a href="#response">response</a>
-  readonly attribute DOMString <span title=dom-XMLHttpRequest-responseURL>responseURL</span>;
+  readonly attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-XMLHttpRequest-responseURL>responseURL</span>;
   readonly attribute unsigned short <span title="dom-XMLHttpRequest-status">status</span>;
   readonly attribute ByteString <span title="dom-XMLHttpRequest-statusText">statusText</span>;
   ByteString? <span title="dom-XMLHttpRequest-getResponseHeader">getResponseHeader</span>(ByteString <var>name</var>);
@@ -254,7 +254,7 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
   void <span title="dom-XMLHttpRequest-overrideMimeType">overrideMimeType</span>(DOMString <var>mime</var>);
            attribute <span>XMLHttpRequestResponseType</span> <span title="dom-XMLHttpRequest-responseType">responseType</span>;
   readonly attribute any <span title="dom-XMLHttpRequest-response">response</span>;
-  readonly attribute DOMString <span title="dom-XMLHttpRequest-responseText">responseText</span>;
+  readonly attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title="dom-XMLHttpRequest-responseText">responseText</span>;
   [Exposed=Window] readonly attribute <span data-anolis-spec=dom>Document</span>? <span title="dom-XMLHttpRequest-responseXML">responseXML</span>;
 };</pre>
 
@@ -800,7 +800,7 @@ object has an associated <code>XMLHttpRequestUpload</code> object.
 <h4>The <code title>send()</code> method</h4>
 
 <dl class=domintro>
- <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-send>send</span>([<var title>data</var> = null])</code>
+ <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-send>send</span>([<var title>body</var> = null])</code>
  <dd>
   <p>Initiates the request. The optional argument provides the
   <span>request body</span>. The argument is ignored if
@@ -814,7 +814,7 @@ object has an associated <code>XMLHttpRequestUpload</code> object.
  </dd>
 </dl>
 
-<p>The <dfn title="dom-XMLHttpRequest-send"><code>send(<var>data</var>)</code></dfn>
+<p>The <dfn title="dom-XMLHttpRequest-send"><code>send(<var>body</var>)</code></dfn>
 method must run these steps:
 
 <ol>
@@ -827,84 +827,43 @@ method must run these steps:
  "<code data-anolis-spec=dom>InvalidStateError</code>" exception.
 
  <li><p>If the <span>request method</span> is <code>GET</code> or
- <code>HEAD</code>, set <var title>data</var> to null.
+ <code>HEAD</code>, set <var title>body</var> to null.
 
  <li>
-  <p>If <var title>data</var> is null, go to the next step.
+  <p>If <var title>body</var> is null, go to the next step.
 
-  <p>Otherwise, let <var>encoding</var> be null, <var>mime type</var> be
-  null, and then follow these rules, depending on <var title>data</var>:
+  <p>Otherwise, let <var>encoding</var> be null, <var>Content-Type</var> be null, and then
+  follow these rules, depending on <var title>body</var>:
 
   <dl class=switch>
-   <dt id="dom-XMLHttpRequest-send-ArrayBufferView"><code data-anolis-spec=typedarray>ArrayBufferView</code>
-   <dd><p>Set <span>request body</span> to a copy of the bytes represented by
-   <var title>data</var>.
-
-   <dt id="dom-XMLHttpRequest-send-Blob"><code data-anolis-spec=fileapi>Blob</code>
-   <dd>
-    <p>If the <var title>data</var>'s
-    <code data-anolis-spec=fileapi title=dom-Blob-type>type</code> attribute value is not
-    the empty string, set <var>mime type</var> to its value.
-
-    <p>Set <span>request body</span> to a copy of the bytes represented by
-    <var>data</var>.
-   </dd>
-
-   <dt id="dom-XMLHttpRequest-send-document"><span data-anolis-spec=dom title=concept-document>document</span>
+   <dt id=dom-xmlhttprequest-send-document><code data-anolis-spec=dom>Document</code>
    <dd>
     <p>Set <var>encoding</var> to `<code title>UTF-8</code>`.
 
-    <p>If <var>data</var> is an <span data-anolis-spec=dom>HTML document</span>, set
-    <var>mime type</var> to `<code>text/html</code>`, and set <var>mime type</var> to
-    `<code>application/xml</code>` otherwise. Then append `<code>;charset=UTF-8</code>` to
-    <var>mime type</var>.
+    <p>If <var>body</var> is an <span data-anolis-spec=dom>HTML document</span>, set
+    <var>Content-Type</var> to `<code>text/html</code>`, and set <var>Content-Type</var>
+    to `<code>application/xml</code>` otherwise. Then append `<code>;charset=UTF-8</code>`
+    to <var>Content-Type</var>.
 
-    <p>Set <span>request body</span> to <var>data</var>,
+    <p>Set <span>request body</span> to <var>body</var>,
     <span data-anolis-spec=domps title=concept-serialize>serialized</span>,
     <span data-anolis-spec=webidl title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</span>,
     and <span data-anolis-spec=encoding title="utf-8 encode">utf-8 encoded</span>.
     Re-throw any exception
     <span data-anolis-spec=domps title=concept-serialize>serializing</span> throws.
 
-    <p class=note>If <var>data</var> cannot be
+    <p class=note>If <var>body</var> cannot be
     <span data-anolis-spec=domps title=concept-serialize>serialized</span>, an
     "<code data-anolis-spec=dom>InvalidStateError</code>" exception is thrown.
 
-   <dt id="dom-XMLHttpRequest-send-a-string">a string
+   <dt id=dom-xmlhttprequest-send-fetchbodyinit><code data-anolis-spec=fetch>FetchBodyInit</code>
    <dd>
-    <p>Set <var>encoding</var> to `<code title>UTF-8</code>`.
+    <p>If <var>body</var> is a string, set <var>encoding</var> to
+    `<code title>UTF-8</code>`.
 
-    <p>Set <var>mime type</var> to `<code>text/plain;charset=UTF-8</code>`.
-
-    <p>Set <span>request body</span> to <var title>data</var>,
-    <span data-anolis-spec=encoding title="utf-8 encode">utf-8 encoded</span>.
-
-   <dt id="dom-XMLHttpRequest-send-FormData"><code>FormData</code>
-   <dd>
-    <p>Set <var>mime type</var> to `<code title>multipart/form-data;boundary=</code>`,
-    followed by the
-    <span data-anolis-spec=html><code>multipart/form-data</code> boundary string</span>
-    generated by the
-    <span data-anolis-spec=html><code>multipart/form-data</code> encoding algorithm</span>.
-
-    <p>Set <span>request body</span> be the result of running the
-    <span data-anolis-spec=html><code>multipart/form-data</code> encoding algorithm</span>
-    with <var>data</var> as <var>form data set</var> and with
-    <span data-anolis-spec=encoding>utf-8</span> as the explicit character encoding.
-    <!-- need to provide explicit character encoding because otherwise the
-         encoding of the document is used -->
-
-   <dt id=dom-XMLHttpRequest-send-URLSearchParams><code data-anolis-spec=url>URLSearchParams</code>
-   <dd>
-    <p>Set <var>encoding</var> to `<code title>UTF-8</code>`.
-
-    <p>Set <var>mime type</var> to
-    `<code title>application/x-www-form-urlencoded;charset=UTF-8</code>`.
-
-    <p>Set <span>request body</span> to the result of running the
-    <span data-anolis-spec=url title=concept-urlencoded-serializer><code>application/x-www-form-urlencoded</code> serializer</span>
-    with <var>data</var>'s associated list of name-value pairs as <var>pairs</var>.
-    <!-- utf-8 implied -->
+    <p>Set <span>request body</span> and <var>Content-Type</var> to the result of
+    <span data-anolis-spec=fetch title=concept-FetchBodyInit-extract>extracting</span>
+    <var>body</var>.
   </dl>
 
   <p>If <span>author request headers</span> contains no
@@ -912,7 +871,7 @@ method must run these steps:
   <span data-anolis-spec=fetch title=concept-header-name>named</span>
   `<code>Content-Type</code>`,
   <span data-anolis-spec=fetch title=concept-header-list-append>append</span>
-  `<code>Content-Type</code>`/<var title>mime type</var> to
+  `<code>Content-Type</code>`/<var title>Content-Type</var> to
   <span>author request headers</span>.
 
   <p>Otherwise, if the <span data-anolis-spec=fetch title=concept-header>header</span>

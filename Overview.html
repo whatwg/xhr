@@ -289,11 +289,11 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <a href="#xmlhttpreque
            attribute unsigned long <a href="#dom-xmlhttprequest-timeout" title="dom-XMLHttpRequest-timeout">timeout</a>;
            attribute boolean <a href="#dom-xmlhttprequest-withcredentials" title="dom-XMLHttpRequest-withCredentials">withCredentials</a>;
   readonly attribute <a href="#xmlhttprequestupload">XMLHttpRequestUpload</a> <a href="#dom-xmlhttprequest-upload" title="dom-XMLHttpRequest-upload">upload</a>;
-  void <a href="#dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send">send</a>(optional (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#6">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or <a class="external" href="http://dom.spec.whatwg.org/#document">Document</a> or <a class="external" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> or <a href="#formdata">FormData</a> or <a class="external" href="http://url.spec.whatwg.org/#urlsearchparams">URLSearchParams</a>)? <var>data</var> = null);
+  void <a href="#dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send">send</a>(optional (<a class="external" href="http://dom.spec.whatwg.org/#document">Document</a> or <a class="external" href="http://fetch.spec.whatwg.org/#fetchbodyinit">FetchBodyInit</a>)? <var>body</var> = null);
   void <a href="#dom-xmlhttprequest-abort" title="dom-XMLHttpRequest-abort">abort</a>();
 
   // <a href="#response">response</a>
-  readonly attribute DOMString <a href="#dom-xmlhttprequest-responseurl" title="dom-XMLHttpRequest-responseURL">responseURL</a>;
+  readonly attribute <a class="external" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-xmlhttprequest-responseurl" title="dom-XMLHttpRequest-responseURL">responseURL</a>;
   readonly attribute unsigned short <a href="#dom-xmlhttprequest-status" title="dom-XMLHttpRequest-status">status</a>;
   readonly attribute ByteString <a href="#dom-xmlhttprequest-statustext" title="dom-XMLHttpRequest-statusText">statusText</a>;
   ByteString? <a href="#dom-xmlhttprequest-getresponseheader" title="dom-XMLHttpRequest-getResponseHeader">getResponseHeader</a>(ByteString <var>name</var>);
@@ -301,7 +301,7 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <a href="#xmlhttpreque
   void <a href="#dom-xmlhttprequest-overridemimetype" title="dom-XMLHttpRequest-overrideMimeType">overrideMimeType</a>(DOMString <var>mime</var>);
            attribute <a href="#xmlhttprequestresponsetype">XMLHttpRequestResponseType</a> <a href="#dom-xmlhttprequest-responsetype" title="dom-XMLHttpRequest-responseType">responseType</a>;
   readonly attribute any <a href="#dom-xmlhttprequest-response" title="dom-XMLHttpRequest-response">response</a>;
-  readonly attribute DOMString <a href="#dom-xmlhttprequest-responsetext" title="dom-XMLHttpRequest-responseText">responseText</a>;
+  readonly attribute <a class="external" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-xmlhttprequest-responsetext" title="dom-XMLHttpRequest-responseText">responseText</a>;
   [Exposed=Window] readonly attribute <a class="external" href="http://dom.spec.whatwg.org/#document">Document</a>? <a href="#dom-xmlhttprequest-responsexml" title="dom-XMLHttpRequest-responseXML">responseXML</a>;
 };</pre>
 
@@ -847,7 +847,7 @@ object has an associated <code><a href="#xmlhttprequestupload">XMLHttpRequestUpl
 <h4 id="the-send()-method"><span class="secno">4.5.6 </span>The <code title="">send()</code> method</h4>
 
 <dl class="domintro">
- <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send">send</a>([<var title="">data</var> = null])</code>
+ <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send">send</a>([<var title="">body</var> = null])</code>
  <dd>
   <p>Initiates the request. The optional argument provides the
   <a href="#request-body">request body</a>. The argument is ignored if
@@ -861,7 +861,7 @@ object has an associated <code><a href="#xmlhttprequestupload">XMLHttpRequestUpl
  </dd>
 </dl>
 
-<p>The <dfn id="dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send"><code>send(<var>data</var>)</code></dfn>
+<p>The <dfn id="dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send"><code>send(<var>body</var>)</code></dfn>
 method must run these steps:
 
 <ol>
@@ -874,84 +874,43 @@ method must run these steps:
  "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception.
 
  <li><p>If the <a href="#request-method">request method</a> is <code>GET</code> or
- <code>HEAD</code>, set <var title="">data</var> to null.
+ <code>HEAD</code>, set <var title="">body</var> to null.
 
  <li>
-  <p>If <var title="">data</var> is null, go to the next step.
+  <p>If <var title="">body</var> is null, go to the next step.
 
-  <p>Otherwise, let <var>encoding</var> be null, <var>mime type</var> be
-  null, and then follow these rules, depending on <var title="">data</var>:
+  <p>Otherwise, let <var>encoding</var> be null, <var>Content-Type</var> be null, and then
+  follow these rules, depending on <var title="">body</var>:
 
   <dl class="switch">
-   <dt id="dom-XMLHttpRequest-send-ArrayBufferView"><code class="external"><a href="http://www.khronos.org/registry/typedarray/specs/latest/#6">ArrayBufferView</a></code>
-   <dd><p>Set <a href="#request-body">request body</a> to a copy of the bytes represented by
-   <var title="">data</var>.
-
-   <dt id="dom-XMLHttpRequest-send-Blob"><code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code>
-   <dd>
-    <p>If the <var title="">data</var>'s
-    <code class="external" title="dom-Blob-type"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-type">type</a></code> attribute value is not
-    the empty string, set <var>mime type</var> to its value.
-
-    <p>Set <a href="#request-body">request body</a> to a copy of the bytes represented by
-    <var>data</var>.
-   </dd>
-
-   <dt id="dom-XMLHttpRequest-send-document"><a class="external" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>
+   <dt id="dom-xmlhttprequest-send-document"><code class="external"><a href="http://dom.spec.whatwg.org/#document">Document</a></code>
    <dd>
     <p>Set <var>encoding</var> to `<code title="">UTF-8</code>`.
 
-    <p>If <var>data</var> is an <a class="external" href="http://dom.spec.whatwg.org/#html-document">HTML document</a>, set
-    <var>mime type</var> to `<code>text/html</code>`, and set <var>mime type</var> to
-    `<code>application/xml</code>` otherwise. Then append `<code>;charset=UTF-8</code>` to
-    <var>mime type</var>.
+    <p>If <var>body</var> is an <a class="external" href="http://dom.spec.whatwg.org/#html-document">HTML document</a>, set
+    <var>Content-Type</var> to `<code>text/html</code>`, and set <var>Content-Type</var>
+    to `<code>application/xml</code>` otherwise. Then append `<code>;charset=UTF-8</code>`
+    to <var>Content-Type</var>.
 
-    <p>Set <a href="#request-body">request body</a> to <var>data</var>,
+    <p>Set <a href="#request-body">request body</a> to <var>body</var>,
     <a class="external" href="http://domparsing.spec.whatwg.org/#concept-serialize" title="concept-serialize">serialized</a>,
     <a class="external" href="http://heycam.github.io/webidl/#dfn-obtain-unicode" title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</a>,
     and <a class="external" href="http://encoding.spec.whatwg.org/#utf-8-encode" title="utf-8 encode">utf-8 encoded</a>.
     Re-throw any exception
     <a class="external" href="http://domparsing.spec.whatwg.org/#concept-serialize" title="concept-serialize">serializing</a> throws.
 
-    <p class="note">If <var>data</var> cannot be
+    <p class="note">If <var>body</var> cannot be
     <a class="external" href="http://domparsing.spec.whatwg.org/#concept-serialize" title="concept-serialize">serialized</a>, an
     "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception is thrown.
 
-   <dt id="dom-XMLHttpRequest-send-a-string">a string
+   <dt id="dom-xmlhttprequest-send-fetchbodyinit"><code class="external"><a href="http://fetch.spec.whatwg.org/#fetchbodyinit">FetchBodyInit</a></code>
    <dd>
-    <p>Set <var>encoding</var> to `<code title="">UTF-8</code>`.
+    <p>If <var>body</var> is a string, set <var>encoding</var> to
+    `<code title="">UTF-8</code>`.
 
-    <p>Set <var>mime type</var> to `<code>text/plain;charset=UTF-8</code>`.
-
-    <p>Set <a href="#request-body">request body</a> to <var title="">data</var>,
-    <a class="external" href="http://encoding.spec.whatwg.org/#utf-8-encode" title="utf-8 encode">utf-8 encoded</a>.
-
-   <dt id="dom-XMLHttpRequest-send-FormData"><code><a href="#formdata">FormData</a></code>
-   <dd>
-    <p>Set <var>mime type</var> to `<code title="">multipart/form-data;boundary=</code>`,
-    followed by the
-    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#multipart/form-data-boundary-string"><code>multipart/form-data</code> boundary string</a>
-    generated by the
-    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#multipart/form-data-encoding-algorithm"><code>multipart/form-data</code> encoding algorithm</a>.
-
-    <p>Set <a href="#request-body">request body</a> be the result of running the
-    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#multipart/form-data-encoding-algorithm"><code>multipart/form-data</code> encoding algorithm</a>
-    with <var>data</var> as <var>form data set</var> and with
-    <a class="external" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a> as the explicit character encoding.
-    <!-- need to provide explicit character encoding because otherwise the
-         encoding of the document is used -->
-
-   <dt id="dom-XMLHttpRequest-send-URLSearchParams"><code class="external"><a href="http://url.spec.whatwg.org/#urlsearchparams">URLSearchParams</a></code>
-   <dd>
-    <p>Set <var>encoding</var> to `<code title="">UTF-8</code>`.
-
-    <p>Set <var>mime type</var> to
-    `<code title="">application/x-www-form-urlencoded;charset=UTF-8</code>`.
-
-    <p>Set <a href="#request-body">request body</a> to the result of running the
-    <a class="external" href="http://url.spec.whatwg.org/#concept-urlencoded-serializer" title="concept-urlencoded-serializer"><code>application/x-www-form-urlencoded</code> serializer</a>
-    with <var>data</var>'s associated list of name-value pairs as <var>pairs</var>.
-    <!-- utf-8 implied -->
+    <p>Set <a href="#request-body">request body</a> and <var>Content-Type</var> to the result of
+    <a class="external" href="http://fetch.spec.whatwg.org/#concept-fetchbodyinit-extract" title="concept-FetchBodyInit-extract">extracting</a>
+    <var>body</var>.
   </dl>
 
   <p>If <a href="#author-request-headers">author request headers</a> contains no
@@ -959,7 +918,7 @@ method must run these steps:
   <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">named</a>
   `<code>Content-Type</code>`,
   <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-list-append" title="concept-header-list-append">append</a>
-  `<code>Content-Type</code>`/<var title="">mime type</var> to
+  `<code>Content-Type</code>`/<var title="">Content-Type</var> to
   <a href="#author-request-headers">author request headers</a>.
 
   <p>Otherwise, if the <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a>
