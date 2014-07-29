@@ -207,7 +207,7 @@ interface <dfn id="xmlhttprequesteventtarget">XMLHttpRequestEventTarget</dfn> : 
   attribute <span data-anolis-spec=html>EventHandler</span> <span title="handler-xhr-onloadend">onloadend</span>;
 };
 
-[Exposed=Window,Worker]
+[Exposed=(Window,Worker)]
 interface <dfn id="xmlhttprequestupload">XMLHttpRequestUpload</dfn> : <span>XMLHttpRequestEventTarget</span> {
 };
 
@@ -221,7 +221,7 @@ enum <dfn>XMLHttpRequestResponseType</dfn> {
 };
 
 [<span title="dom-XMLHttpRequest">Constructor</span>,
- Exposed=Window,Worker]
+ Exposed=(Window,Worker)]
 interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEventTarget</span> {
   // <a href="#event-handlers">event handler</a>
   attribute <span data-anolis-spec=html>EventHandler</span> <span title="handler-xhr-onreadystatechange">onreadystatechange</span>;
@@ -1881,7 +1881,7 @@ and/or <code>XMLHttpRequestUpload</code> objects:
 <pre class="idl">typedef (<span data-anolis-spec=fileapi>File</span> or <span data-anolis-spec=encoding>ScalarValueString</span>) <dfn>FormDataEntryValue</dfn>;
 
 [<span title="dom-FormData">Constructor</span>(optional <span data-anolis-spec=html>HTMLFormElement</span> <var>form</var>),
- Exposed=Window,Worker]
+ Exposed=(Window,Worker)]
 interface <dfn>FormData</dfn> {
   void <span title="dom-FormData-append">append</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var>name</var>, <span data-anolis-spec=fileapi>Blob</span> <var>value</var>, optional <span data-anolis-spec=encoding>ScalarValueString</span> <var>filename</var>);
   void <span title="dom-FormData-append">append</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var>name</var>, <span data-anolis-spec=encoding>ScalarValueString</span> <var>value</var>);
@@ -2008,7 +2008,7 @@ otherwise.
 <h2>Interface <code title>ProgressEvent</code></h2>
 
 <pre class="idl">[<span data-anolis-spec=dom title=concept-event-constructor>Constructor</span>(DOMString <var title>type</var>, optional <span>ProgressEventInit</span> <var title>eventInitDict</var>),
- Exposed=Window,Worker]
+ Exposed=(Window,Worker)]
 interface <dfn>ProgressEvent</dfn> : <span data-anolis-spec=dom>Event</span> {
   readonly attribute boolean <span title="dom-ProgressEvent-lengthComputable">lengthComputable</span>;
   readonly attribute unsigned long long <span title="dom-ProgressEvent-loaded">loaded</span>;
