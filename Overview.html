@@ -242,7 +242,8 @@ certificates. Specifically it does not refer to proxy authentication or the
 
 <h2 id="interface-xmlhttprequest"><span class="secno">4 </span>Interface <code title="">XMLHttpRequest</code></h2>
 
-<pre class="idl">[NoInterfaceObject]
+<pre class="idl">[NoInterfaceObject,
+ Exposed=(Window,Worker)]
 interface <dfn id="xmlhttprequesteventtarget">XMLHttpRequestEventTarget</dfn> : <a class="external" href="http://dom.spec.whatwg.org/#eventtarget">EventTarget</a> {
   // <a href="#event-handlers">event handlers</a>
   attribute <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#eventhandler">EventHandler</a> <a href="#handler-xhr-onloadstart" title="handler-xhr-onloadstart">onloadstart</a>;
