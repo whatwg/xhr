@@ -866,8 +866,8 @@ method must run these steps:
     <var>body</var>.
   </dl>
 
-  <p>If <span>author request headers</span> contains no
-  <span data-anolis-spec=fetch title=concept-header>header</span>
+  <p>If <var>Content-Type</var> is non-null and <span>author request headers</span>
+  contains no <span data-anolis-spec=fetch title=concept-header>header</span>
   <span data-anolis-spec=fetch title=concept-header-name>named</span>
   `<code>Content-Type</code>`,
   <span data-anolis-spec=fetch title=concept-header-list-append>append</span>
@@ -876,7 +876,7 @@ method must run these steps:
 
   <p>Otherwise, if the <span data-anolis-spec=fetch title=concept-header>header</span>
   <span data-anolis-spec=fetch title=concept-header-name>named</span>
-  `<code>Content-Type</code>` in <span>author request headers</span> has
+  `<code>Content-Type</code>` in <span>author request headers</span> has a
   <span data-anolis-spec=fetch title=concept-header-value>value</span> that is a
   <span data-anolis-spec=html>valid MIME type</span>, which has a
   `<code>charset</code>` parameter whose value is not a case-insensitive

@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-29-july-2014">Living Standard — Last Updated 29 July 2014</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-6-august-2014">Living Standard — Last Updated 6 August 2014</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-29 July 2014, the editor has made this specification available
+6 August 2014, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -823,7 +823,7 @@ attribute must run these steps:
 <p class="note">The <code title="dom-XMLHttpRequest-withCredentials"><a href="#dom-xmlhttprequest-withcredentials">withCredentials</a></code>
 attribute has no effect when
 <a class="external" href="http://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">fetching</a>
-<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#same-origin" title="same origin">same-origin</a> resources.
+<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#same-origin" title="same origin">same-origin</a> resources.
 
 
 <h4 id="the-upload-attribute"><span class="secno">4.5.5 </span>The <code title="">upload</code> attribute</h4>
@@ -913,8 +913,8 @@ method must run these steps:
     <var>body</var>.
   </dl>
 
-  <p>If <a href="#author-request-headers">author request headers</a> contains no
-  <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a>
+  <p>If <var>Content-Type</var> is non-null and <a href="#author-request-headers">author request headers</a>
+  contains no <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a>
   <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">named</a>
   `<code>Content-Type</code>`,
   <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-list-append" title="concept-header-list-append">append</a>
@@ -923,7 +923,7 @@ method must run these steps:
 
   <p>Otherwise, if the <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a>
   <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">named</a>
-  `<code>Content-Type</code>` in <a href="#author-request-headers">author request headers</a> has
+  `<code>Content-Type</code>` in <a href="#author-request-headers">author request headers</a> has a
   <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a> that is a
   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#valid-mime-type">valid MIME type</a>, which has a
   `<code>charset</code>` parameter whose value is not a case-insensitive
@@ -954,7 +954,7 @@ method must run these steps:
    <dd>Set.
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-origin" title="concept-request-origin">origin</a>
    <dd><a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
-   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a>
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#origin">origin</a>
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#force-origin-header-flag">force <code title="">Origin</code> header flag</a>
    <dd>Set.
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-referrer" title="concept-request-referrer">referrer</a>
@@ -1518,7 +1518,7 @@ that is null in which case it is the <a href="#response-charset">response charse
    <li><p>Let <var>charset</var> be the <a href="#final-charset">final charset</a>.
 
    <li><p>If <var>charset</var> is null,
-   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/parsing.html#prescan-a-byte-stream-to-determine-its-encoding" title="prescan a byte stream to determine its encoding">prescan</a>
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#prescan-a-byte-stream-to-determine-its-encoding" title="prescan a byte stream to determine its encoding">prescan</a>
    the first 1024 bytes of <var>bytes</var> and if
    that does not terminate unsuccessfully then let <var>charset</var> be
    the return value.
@@ -1530,7 +1530,7 @@ that is null in which case it is the <a href="#response-charset">response charse
    <a class="external" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> that
    represents the result parsing <var>bytes</var> following the rules set
    forth in the HTML Standard for an HTML parser with scripting disabled and
-   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/parsing.html#a-known-definite-encoding">a known definite encoding</a> <var>charset</var>.
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#a-known-definite-encoding">a known definite encoding</a> <var>charset</var>.
    <a href="#refsHTML">[HTML]</a>
 
    <li><p>Flag <var title="">document</var> as an
@@ -1567,9 +1567,9 @@ that is null in which case it is the <a href="#response-charset">response charse
  <a href="#response">response</a>'s
  <a class="external" href="http://fetch.spec.whatwg.org/#concept-response-url" title="concept-response-url">url</a>.
 
- <li><p>Set <var title="">document</var>'s <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a> to
+ <li><p>Set <var title="">document</var>'s <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#origin">origin</a> to
  <a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
- <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a>.
+ <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#origin">origin</a>.
 
  <li><p>Set <a href="#response-document-object">response <code>Document</code> object</a> to
  <var title="">document</var> and return it.
@@ -1993,7 +1993,7 @@ constructor must run these steps:
 
  <li><p>If <var>form</var> is given, set <var title="">fd</var>'s
  <a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a> to the result of
- <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#constructing-form-data-set">constructing the form data set</a> for <var>form</var>.
+ <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/forms.html#constructing-form-data-set">constructing the form data set</a> for <var>form</var>.
 
  <li><p>Return <var title="">fd</var>.
 </ol>
@@ -2184,7 +2184,7 @@ otherwise. <a class="informative" href="#refsFETCH">[FETCH]</a>
 <div class="example">
  <p>In this example <code><a href="#xmlhttprequest">XMLHttpRequest</a></code>, combined with concepts
  defined in the sections before, and the HTML
- <code class="external"><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/the-button-element.html#the-progress-element">progress</a></code> element are used together to
+ <code class="external"><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/forms.html#the-progress-element">progress</a></code> element are used together to
  display the process of
  <a class="external" href="http://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">fetching</a> a resource.
 
