@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-6-august-2014">Living Standard — Last Updated 6 August 2014</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-12-august-2014">Living Standard — Last Updated 12 August 2014</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-6 August 2014, the editor has made this specification available
+12 August 2014, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -560,16 +560,8 @@ method must run these steps:
  <a class="external" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> a
  "<code class="external"><a href="http://dom.spec.whatwg.org/#securityerror">SecurityError</a></code>" exception.
 
- <li>
-  <p>If <var>method</var> is a case-insensitive match for `<code title="">DELETE</code>`,
-  `<code title="">GET</code>`, `<code title="">HEAD</code>`, `<code title="">OPTIONS</code>`,
-  `<code title="">POST</code>`, or `<code title="">PUT</code>`, subtract
-  0x20 from each byte in the range 0x61 (ASCII a) to 0x7A (ASCII z).
-
-  <p class="note">If it does not match any of the above, it is passed
-  through <em>literally</em>, including in the final request.
-  <!-- WebKit (and supposedly Gecko) also uppercase: COPY, INDEX, LOCK,
-  M-POST, MKCOL, MOVE, PROPFIND, PROPPATCH, and UNLOCK. -->
+ <li><p><a class="external" href="http://fetch.spec.whatwg.org/#concept-method-normalize" title="concept-method-normalize">Normalize</a>
+ <var>method</var>.
 
  <li><p>Let <var title="">parsedURL</var> be the result of
  <a class="external" href="http://url.spec.whatwg.org/#concept-url-parser" title="concept-url-parser">parsing</a> <var title="">url</var>

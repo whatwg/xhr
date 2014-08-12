@@ -513,16 +513,8 @@ method must run these steps:
  <span data-anolis-spec=dom title=concept-throw>throw</span> a
  "<code data-anolis-spec=dom>SecurityError</code>" exception.
 
- <li>
-  <p>If <var>method</var> is a case-insensitive match for `<code title>DELETE</code>`,
-  `<code title>GET</code>`, `<code title>HEAD</code>`, `<code title>OPTIONS</code>`,
-  `<code title>POST</code>`, or `<code title>PUT</code>`, subtract
-  0x20 from each byte in the range 0x61 (ASCII a) to 0x7A (ASCII z).
-
-  <p class=note>If it does not match any of the above, it is passed
-  through <em>literally</em>, including in the final request.
-  <!-- WebKit (and supposedly Gecko) also uppercase: COPY, INDEX, LOCK,
-  M-POST, MKCOL, MOVE, PROPFIND, PROPPATCH, and UNLOCK. -->
+ <li><p><span data-anolis-spec=fetch title=concept-method-normalize>Normalize</span>
+ <var>method</var>.
 
  <li><p>Let <var title>parsedURL</var> be the result of
  <span data-anolis-spec=url title=concept-url-parser>parsing</span> <var title>url</var>
