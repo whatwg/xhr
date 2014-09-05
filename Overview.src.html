@@ -1485,15 +1485,14 @@ that is null in which case it is the <span>response charset</span>.
  <li>
   <p>Otherwise, let <var title>document</var> be a
   <span data-anolis-spec=dom title=concept-document>document</span>
-  that represents the result of parsing the
-  <var>bytes</var> following the rules set forth in the
-  XML specifications. If that fails (unsupported character encoding,
+  that represents the result of running the <span data-anolis-spec=html>XML parser</span>
+  with <span data-anolis-spec=html>XML scripting support disabled</span> on
+  <var>bytes</var>. If that fails (unsupported character encoding,
   namespace well-formedness error, etc.), return null.
-  <span data-anolis-ref>XML</span> <span data-anolis-ref>XMLNS</span>
+  <span data-anolis-ref>HTML</span>
 
-  <p class=note>Scripts in the resulting document tree will not be
-  executed, resources referenced will not be loaded and no associated XSLT
-  will be applied. <!-- XXX more formally?! -->
+  <p class=note>Resources referenced will not be loaded and no associated XSLT will be
+  applied. <!-- XXX more formally?! -->
 
  <li><p>If <var>charset</var> is null, set <var>charset</var> to
  <span data-anolis-spec=encoding>utf-8</span>.

@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-12-august-2014">Living Standard — Last Updated 12 August 2014</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-5-september-2014">Living Standard — Last Updated 5 September 2014</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-12 August 2014, the editor has made this specification available
+5 September 2014, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -1532,15 +1532,14 @@ that is null in which case it is the <a href="#response-charset">response charse
  <li>
   <p>Otherwise, let <var title="">document</var> be a
   <a class="external" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>
-  that represents the result of parsing the
-  <var>bytes</var> following the rules set forth in the
-  XML specifications. If that fails (unsupported character encoding,
+  that represents the result of running the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/xhtml.html#xml-parser">XML parser</a>
+  with <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/xhtml.html#xml-scripting-support-disabled">XML scripting support disabled</a> on
+  <var>bytes</var>. If that fails (unsupported character encoding,
   namespace well-formedness error, etc.), return null.
-  <a href="#refsXML">[XML]</a> <a href="#refsXMLNS">[XMLNS]</a>
+  <a href="#refsHTML">[HTML]</a>
 
-  <p class="note">Scripts in the resulting document tree will not be
-  executed, resources referenced will not be loaded and no associated XSLT
-  will be applied. <!-- XXX more formally?! -->
+  <p class="note">Resources referenced will not be loaded and no associated XSLT will be
+  applied. <!-- XXX more formally?! -->
 
  <li><p>If <var>charset</var> is null, set <var>charset</var> to
  <a class="external" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
