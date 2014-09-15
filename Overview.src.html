@@ -1,7 +1,7 @@
 <!doctype html><html lang=en-US><meta charset=utf-8>
 <title>XMLHttpRequest Standard</title>
-<link href=http://www.whatwg.org/style/specification rel=stylesheet>
-<link href=http://resources.whatwg.org/logo-xhr.svg rel=icon>
+<link href=//www.whatwg.org/style/specification rel=stylesheet>
+<link href=//resources.whatwg.org/logo-xhr.svg rel=icon>
 
 <div class="head">
 
@@ -11,7 +11,7 @@
 
 <dl>
  <dt>This Version:
- <dd><a href=http://xhr.spec.whatwg.org/>http://xhr.spec.whatwg.org/</a>
+ <dd><a href=https://xhr.spec.whatwg.org/>https://xhr.spec.whatwg.org/</a>
 
  <dt>Participate:
  <dd>Send feedback to
@@ -20,20 +20,20 @@
   <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=XHR">file a bug</a>
   (<a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=XHR&amp;resolution=---">open bugs</a>)
 
- <dd><a href="http://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
+ <dd><a href="https://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
 
  <dt>Version History:
  <dd><a href=https://github.com/whatwg/xhr/commits>https://github.com/whatwg/xhr/commits</a>
 
  <dt>Editor:
- <dd><a href="http://annevankesteren.nl/">Anne van Kesteren</a>
-  (<a href=http://www.mozilla.org/>Mozilla</a>)
+ <dd><a href="//annevankesteren.nl/">Anne van Kesteren</a>
+  (<a href=//www.mozilla.org/>Mozilla</a>)
   &lt;<a href="mailto:annevk@annevk.nl">annevk@annevk.nl</a>>
 </dl>
 
 <script src=//resources.whatwg.org/file-bug.js async></script>
 
-<p class=copyright><a rel=license href="http://creativecommons.org/publicdomain/zero/1.0/"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt=CC0></a>
+<p class=copyright><a rel=license href="//creativecommons.org/publicdomain/zero/1.0/"><img src="//i.creativecommons.org/p/zero/1.0/80x15.png" alt=CC0></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
 [DATE: 01 Jan 1901], the editor has made this specification available
@@ -242,7 +242,7 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
            attribute unsigned long <span title="dom-XMLHttpRequest-timeout">timeout</span>;
            attribute boolean <span title="dom-XMLHttpRequest-withCredentials">withCredentials</span>;
   readonly attribute <span>XMLHttpRequestUpload</span> <span title="dom-XMLHttpRequest-upload">upload</span>;
-  void <span title="dom-XMLHttpRequest-send">send</span>(optional (<span data-anolis-spec=dom>Document</span> or <span data-anolis-spec=fetch>FetchBodyInit</span>)? <var>body</var> = null);
+  void <span title="dom-XMLHttpRequest-send">send</span>(optional (<span data-anolis-spec=dom>Document</span> or <span data-anolis-spec=fetch>BodyInit</span>)? <var>body</var> = null);
   void <span title="dom-XMLHttpRequest-abort">abort</span>();
 
   // <a href="#response">response</a>
@@ -848,13 +848,13 @@ method must run these steps:
     <span data-anolis-spec=domps title=concept-serialize>serialized</span>, an
     "<code data-anolis-spec=dom>InvalidStateError</code>" exception is thrown.
 
-   <dt id=dom-xmlhttprequest-send-fetchbodyinit><code data-anolis-spec=fetch>FetchBodyInit</code>
+   <dt id=dom-xmlhttprequest-send-bodyinit><code data-anolis-spec=fetch>BodyInit</code>
    <dd>
     <p>If <var>body</var> is a string, set <var>encoding</var> to
     `<code title>UTF-8</code>`.
 
     <p>Set <span>request body</span> and <var>Content-Type</var> to the result of
-    <span data-anolis-spec=fetch title=concept-FetchBodyInit-extract>extracting</span>
+    <span data-anolis-spec=fetch title=concept-BodyInit-extract>extracting</span>
     <var>body</var>.
   </dl>
 
@@ -2272,4 +2272,4 @@ HTML). <span data-anolis-ref>HTML</span>
 sending suggestions and corrections. (Please, keep bugging us with your
 issues!)
 
-<script id=head src=http://www.whatwg.org/specs/web-apps/current-work/dfn.js></script>
+<script id=head src=//www.whatwg.org/specs/web-apps/current-work/dfn.js></script>

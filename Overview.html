@@ -1,17 +1,17 @@
 <!DOCTYPE html><html lang="en-US"><meta charset="utf-8">
 <title>XMLHttpRequest Standard</title>
-<link href="http://www.whatwg.org/style/specification" rel="stylesheet">
-<link href="http://resources.whatwg.org/logo-xhr.svg" rel="icon">
+<link href="//www.whatwg.org/style/specification" rel="stylesheet">
+<link href="//resources.whatwg.org/logo-xhr.svg" rel="icon">
 
 <div class="head">
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-5-september-2014">Living Standard — Last Updated 5 September 2014</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-15-september-2014">Living Standard — Last Updated 15 September 2014</h2>
 
 <dl>
  <dt>This Version:
- <dd><a href="http://xhr.spec.whatwg.org/">http://xhr.spec.whatwg.org/</a>
+ <dd><a href="https://xhr.spec.whatwg.org/">https://xhr.spec.whatwg.org/</a>
 
  <dt>Participate:
  <dd>Send feedback to
@@ -20,23 +20,23 @@
   <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=XHR">file a bug</a>
   (<a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=XHR&amp;resolution=---">open bugs</a>)
 
- <dd><a href="http://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
+ <dd><a href="https://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
 
  <dt>Version History:
  <dd><a href="https://github.com/whatwg/xhr/commits">https://github.com/whatwg/xhr/commits</a>
 
  <dt>Editor:
- <dd><a href="http://annevankesteren.nl/">Anne van Kesteren</a>
-  (<a href="http://www.mozilla.org/">Mozilla</a>)
+ <dd><a href="//annevankesteren.nl/">Anne van Kesteren</a>
+  (<a href="//www.mozilla.org/">Mozilla</a>)
   &lt;<a href="mailto:annevk@annevk.nl">annevk@annevk.nl</a>&gt;
 </dl>
 
 <script async="" src="//resources.whatwg.org/file-bug.js"></script>
 
-<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
+<p class="copyright"><a href="//creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="//i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-5 September 2014, the editor has made this specification available
+15 September 2014, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -289,7 +289,7 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <a href="#xmlhttpreque
            attribute unsigned long <a href="#dom-xmlhttprequest-timeout" title="dom-XMLHttpRequest-timeout">timeout</a>;
            attribute boolean <a href="#dom-xmlhttprequest-withcredentials" title="dom-XMLHttpRequest-withCredentials">withCredentials</a>;
   readonly attribute <a href="#xmlhttprequestupload">XMLHttpRequestUpload</a> <a href="#dom-xmlhttprequest-upload" title="dom-XMLHttpRequest-upload">upload</a>;
-  void <a href="#dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send">send</a>(optional (<a class="external" href="http://dom.spec.whatwg.org/#document">Document</a> or <a class="external" href="http://fetch.spec.whatwg.org/#fetchbodyinit">FetchBodyInit</a>)? <var>body</var> = null);
+  void <a href="#dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send">send</a>(optional (<a class="external" href="http://dom.spec.whatwg.org/#document">Document</a> or <a class="external" href="http://fetch.spec.whatwg.org/#bodyinit">BodyInit</a>)? <var>body</var> = null);
   void <a href="#dom-xmlhttprequest-abort" title="dom-XMLHttpRequest-abort">abort</a>();
 
   // <a href="#response">response</a>
@@ -895,13 +895,13 @@ method must run these steps:
     <a class="external" href="http://domparsing.spec.whatwg.org/#concept-serialize" title="concept-serialize">serialized</a>, an
     "<code class="external"><a href="http://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception is thrown.
 
-   <dt id="dom-xmlhttprequest-send-fetchbodyinit"><code class="external"><a href="http://fetch.spec.whatwg.org/#fetchbodyinit">FetchBodyInit</a></code>
+   <dt id="dom-xmlhttprequest-send-bodyinit"><code class="external"><a href="http://fetch.spec.whatwg.org/#bodyinit">BodyInit</a></code>
    <dd>
     <p>If <var>body</var> is a string, set <var>encoding</var> to
     `<code title="">UTF-8</code>`.
 
     <p>Set <a href="#request-body">request body</a> and <var>Content-Type</var> to the result of
-    <a class="external" href="http://fetch.spec.whatwg.org/#concept-fetchbodyinit-extract" title="concept-FetchBodyInit-extract">extracting</a>
+    <a class="external" href="http://fetch.spec.whatwg.org/#concept-bodyinit-extract" title="concept-BodyInit-extract">extracting</a>
     <var>body</var>.
   </dl>
 
@@ -2361,4 +2361,4 @@ HTML). <a href="#refsHTML">[HTML]</a>
 sending suggestions and corrections. (Please, keep bugging us with your
 issues!)
 
-<script id="head" src="http://www.whatwg.org/specs/web-apps/current-work/dfn.js"></script>
+<script id="head" src="//www.whatwg.org/specs/web-apps/current-work/dfn.js"></script>
