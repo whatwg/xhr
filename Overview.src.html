@@ -988,16 +988,22 @@ method must run these steps:
     <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=22228 -->
 
     <p>To <span data-anolis-spec=fetch>process request body</span> for
-    <var title>request</var>,
-    <span title=concept-event-fire-progress>fire a progress event</span> named
-    <code title="event-xhr-progress">progress</code> on the
-    <code>XMLHttpRequestUpload</code> object with <var title>request</var>'s
-    <span data-anolis-spec=fetch title=concept-request-body>body</span>'s
-    <span data-anolis-spec=fetch title=concept-body-transmitted>transmitted</span> and
-    <var title>request</var>'s
-    <span data-anolis-spec=fetch title=concept-request-body>body</span>'s
-    <span data-anolis-spec=fetch title=concept-body-length>length</span>.
-    <!-- upload complete flag can never be set here I hope -->
+    <var title>request</var>, run these subsubsteps:
+
+    <ol>
+     <li><p>If not roughly 50ms have passed since these subsubsteps were last invoked,
+     terminate these subsubsteps.
+
+     <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named
+     <code title="event-xhr-progress">progress</code> on the
+     <code>XMLHttpRequestUpload</code> object with <var title>request</var>'s
+     <span data-anolis-spec=fetch title=concept-request-body>body</span>'s
+     <span data-anolis-spec=fetch title=concept-body-transmitted>transmitted</span> and
+     <var title>request</var>'s
+     <span data-anolis-spec=fetch title=concept-request-body>body</span>'s
+     <span data-anolis-spec=fetch title=concept-body-length>length</span>.
+     <!-- upload complete flag can never be set here I hope -->
+    </ol>
 
     <p>To <span data-anolis-spec=fetch>process request end-of-file</span> for
     <var title>request</var>, run these subsubsteps:
@@ -1051,6 +1057,9 @@ method must run these steps:
     <var title>response</var>, run these subsubsteps:
 
     <ol>
+     <li><p>If not roughly 50ms have passed since these subsubsteps were last invoked,
+     terminate these subsubsteps.
+
      <li><p><span>Handle errors</span> for <var title>response</var>.
 
      <li><p>If <span>response</span> is a

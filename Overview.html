@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-24-september-2014">Living Standard — Last Updated 24 September 2014</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-26-september-2014">Living Standard — Last Updated 26 September 2014</h2>
 
 <dl>
  <dt>This Version:
@@ -36,7 +36,7 @@
 <p class="copyright"><a href="//creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="//i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-24 September 2014, the editor has made this specification available
+26 September 2014, the editor has made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -1035,16 +1035,22 @@ method must run these steps:
     <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=22228 -->
 
     <p>To <a class="external" href="https://fetch.spec.whatwg.org/#process-request-body">process request body</a> for
-    <var title="">request</var>,
-    <a href="#concept-event-fire-progress" title="concept-event-fire-progress">fire a progress event</a> named
-    <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code> on the
-    <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object with <var title="">request</var>'s
-    <a class="external" href="https://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>'s
-    <a class="external" href="https://fetch.spec.whatwg.org/#concept-body-transmitted" title="concept-body-transmitted">transmitted</a> and
-    <var title="">request</var>'s
-    <a class="external" href="https://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>'s
-    <a class="external" href="https://fetch.spec.whatwg.org/#concept-body-length" title="concept-body-length">length</a>.
-    <!-- upload complete flag can never be set here I hope -->
+    <var title="">request</var>, run these subsubsteps:
+
+    <ol>
+     <li><p>If not roughly 50ms have passed since these subsubsteps were last invoked,
+     terminate these subsubsteps.
+
+     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
+     <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code> on the
+     <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object with <var title="">request</var>'s
+     <a class="external" href="https://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>'s
+     <a class="external" href="https://fetch.spec.whatwg.org/#concept-body-transmitted" title="concept-body-transmitted">transmitted</a> and
+     <var title="">request</var>'s
+     <a class="external" href="https://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>'s
+     <a class="external" href="https://fetch.spec.whatwg.org/#concept-body-length" title="concept-body-length">length</a>.
+     <!-- upload complete flag can never be set here I hope -->
+    </ol>
 
     <p>To <a class="external" href="https://fetch.spec.whatwg.org/#process-request-end-of-file">process request end-of-file</a> for
     <var title="">request</var>, run these subsubsteps:
@@ -1098,6 +1104,9 @@ method must run these steps:
     <var title="">response</var>, run these subsubsteps:
 
     <ol>
+     <li><p>If not roughly 50ms have passed since these subsubsteps were last invoked,
+     terminate these subsubsteps.
+
      <li><p><a href="#handle-errors">Handle errors</a> for <var title="">response</var>.
 
      <li><p>If <a href="#response">response</a> is a
