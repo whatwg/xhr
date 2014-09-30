@@ -7,12 +7,9 @@
 
 <p><a class="logo" href="//whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-26-september-2014">Living Standard — Last Updated 26 September 2014</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-30-september-2014">Living Standard — Last Updated 30 September 2014</h2>
 
 <dl>
- <dt>This Version:
- <dd><a href="https://xhr.spec.whatwg.org/">https://xhr.spec.whatwg.org/</a>
-
  <dt>Participate:
  <dd>Send feedback to
   <a href="mailto:public-webapps@w3.org?subject==%5Bxhr%5D%20">public-webapps@w3.org</a>
@@ -24,23 +21,9 @@
 
  <dt>Version History:
  <dd><a href="https://github.com/whatwg/xhr/commits">https://github.com/whatwg/xhr/commits</a>
-
- <dt>Editor:
- <dd><a href="//annevankesteren.nl/">Anne van Kesteren</a>
-  (<a href="//www.mozilla.org/">Mozilla</a>)
-  &lt;<a href="mailto:annevk@annevk.nl">annevk@annevk.nl</a>&gt;
 </dl>
 
 <script async="" src="//resources.whatwg.org/file-bug.js"></script>
-
-<p class="copyright"><a href="//creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="//i.creativecommons.org/p/zero/1.0/80x15.png"></a>
-To the extent possible under law, the editor has waived all copyright and
-related or neighboring rights to this work. In addition, as of
-26 September 2014, the editor has made this specification available
-under the
-<a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
-which is available at
-http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
 </div>
 
@@ -885,14 +868,14 @@ method must run these steps:
     to <var>Content-Type</var>.
 
     <p>Set <a href="#request-body">request body</a> to <var>body</var>,
-    <a class="external" href="https://domparsing.spec.whatwg.org/#concept-serialize" title="concept-serialize">serialized</a>,
+    <a class="external" href="https://dvcs.w3.org/hg/innerhtml/raw-file/tip/index.html#concept-serialize" title="concept-serialize">serialized</a>,
     <a class="external" href="http://heycam.github.io/webidl/#dfn-obtain-unicode" title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</a>,
     and <a class="external" href="https://encoding.spec.whatwg.org/#utf-8-encode" title="utf-8 encode">utf-8 encoded</a>.
     Re-throw any exception
-    <a class="external" href="https://domparsing.spec.whatwg.org/#concept-serialize" title="concept-serialize">serializing</a> throws.
+    <a class="external" href="https://dvcs.w3.org/hg/innerhtml/raw-file/tip/index.html#concept-serialize" title="concept-serialize">serializing</a> throws.
 
     <p class="note">If <var>body</var> cannot be
-    <a class="external" href="https://domparsing.spec.whatwg.org/#concept-serialize" title="concept-serialize">serialized</a>, an
+    <a class="external" href="https://dvcs.w3.org/hg/innerhtml/raw-file/tip/index.html#concept-serialize" title="concept-serialize">serialized</a>, an
     "<code class="external"><a href="https://dom.spec.whatwg.org/#invalidstateerror">InvalidStateError</a></code>" exception is thrown.
 
    <dt id="dom-xmlhttprequest-send-bodyinit"><code class="external"><a href="https://fetch.spec.whatwg.org/#bodyinit">BodyInit</a></code>
@@ -2222,7 +2205,7 @@ otherwise. <a class="informative" href="#refsFETCH">[FETCH]</a>
 <dd><cite><a href="https://dom.spec.whatwg.org/">DOM</a></cite>, Anne van Kesteren, Aryeh Gregor and Ms2ger. WHATWG.
 
 <dt id="refsDOMPS">[DOMPS]
-<dd><cite><a href="https://domparsing.spec.whatwg.org/">DOM Parsing and Serialization</a></cite>, Ms2ger. WHATWG.
+<dd><cite><a href="https://dvcs.w3.org/hg/innerhtml/raw-file/tip/index.html">DOM Parsing and Serialization</a></cite>, Travis Leithead. W3C.
 
 <dt id="refsECMASCRIPT">[ECMASCRIPT]
 <dd><cite><a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">ECMAScript Language Specification</a></cite>. ECMA.
@@ -2263,8 +2246,7 @@ otherwise. <a class="informative" href="#refsFETCH">[FETCH]</a>
 
 <h2 class="no-num" id="acknowledgments">Acknowledgments</h2>
 
-<p>The editor would like to thank
-
+<p>Thanks to
 Addison Phillips,
 Adrian Bateman,
 Ahmed Kamel,
@@ -2353,23 +2335,26 @@ Tom Magliery,
 Travis Leithead,
 Yehuda Katz, and
 Zhenbin Xu
-
-for their contributions to this specification.
+for their contributions to this standard.
 
 <p>Special thanks to the Microsoft employees who first implemented the
-<code title="">XMLHttpRequest</code> interface, which was first widely
-deployed by the Windows Internet Explorer browser.
+<code title="">XMLHttpRequest</code> interface, which was first widely deployed by the
+Windows Internet Explorer browser.
 
-<p>Special thanks also to the WHATWG for drafting an initial version of
-this specification in their Web Applications 1.0 document (now renamed to
-HTML). <a href="#refsHTML">[HTML]</a>
+<p>Special thanks to Ian Hickson for drafting an initial version of this specification in
+the HTML Standard (then Web Applications 1.0). <a href="#refsHTML">[HTML]</a>
 
-<p>Special thanks to the SVG WG for drafting the original
-<code title="">ProgressEvent</code> interface as part of the
+<p>Special thanks to the W3C SVG WG for drafting the original
+<code><a href="#progressevent">ProgressEvent</a></code> class as part of the
 <a href="http://www.w3.org/TR/2008/REC-SVGTiny12-20081222/svgudom.html">SVG Micro DOM</a>.
 
-<p>Thanks also to all those who have helped to improve this specification by
-sending suggestions and corrections. (Please, keep bugging us with your
-issues!)
+<p>This standard is written by
+<a href="//annevankesteren.nl/" lang="nl">Anne van Kesteren</a>
+(<a href="//www.mozilla.org/">Mozilla</a>,
+<a href="mailto:annevk@annevk.nl">annevk@annevk.nl</a>).
+
+<p>Per <a href="//creativecommons.org/publicdomain/zero/1.0/" rel="license">CC0</a>, to
+the extent possible under law, the editor has waived all copyright and related or
+neighboring rights to this work.
 
 <script id="head" src="//resources.whatwg.org/dfn.js"></script>
