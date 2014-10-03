@@ -218,8 +218,8 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
   readonly attribute unsigned short <span title="dom-XMLHttpRequest-readyState">readyState</span>;
 
   // <a href="#request">request</a>
-  void <span title="dom-XMLHttpRequest-open">open</span>(ByteString <var>method</var>, <span data-anolis-spec=encoding>ScalarValueString</span> <var title>url</var>);
-  void <span title="dom-XMLHttpRequest-open">open</span>(ByteString <var>method</var>, <span data-anolis-spec=encoding>ScalarValueString</span> <var title>url</var>, boolean <var>async</var>, optional <span data-anolis-spec=encoding>ScalarValueString</span>? <var>username</var> = null, optional <span data-anolis-spec=encoding>ScalarValueString</span>? <var>password</var> = null);
+  void <span title="dom-XMLHttpRequest-open">open</span>(ByteString <var>method</var>, USVString <var title>url</var>);
+  void <span title="dom-XMLHttpRequest-open">open</span>(ByteString <var>method</var>, USVString <var title>url</var>, boolean <var>async</var>, optional USVString? <var>username</var> = null, optional USVString? <var>password</var> = null);
   void <span title="dom-XMLHttpRequest-setRequestHeader">setRequestHeader</span>(ByteString <var>name</var>, ByteString <var>value</var>);
            attribute unsigned long <span title="dom-XMLHttpRequest-timeout">timeout</span>;
            attribute boolean <span title="dom-XMLHttpRequest-withCredentials">withCredentials</span>;
@@ -228,7 +228,7 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
   void <span title="dom-XMLHttpRequest-abort">abort</span>();
 
   // <a href="#response">response</a>
-  readonly attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-XMLHttpRequest-responseURL>responseURL</span>;
+  readonly attribute USVString <span title=dom-XMLHttpRequest-responseURL>responseURL</span>;
   readonly attribute unsigned short <span title="dom-XMLHttpRequest-status">status</span>;
   readonly attribute ByteString <span title="dom-XMLHttpRequest-statusText">statusText</span>;
   ByteString? <span title="dom-XMLHttpRequest-getResponseHeader">getResponseHeader</span>(ByteString <var>name</var>);
@@ -236,7 +236,7 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
   void <span title="dom-XMLHttpRequest-overrideMimeType">overrideMimeType</span>(DOMString <var>mime</var>);
            attribute <span>XMLHttpRequestResponseType</span> <span title="dom-XMLHttpRequest-responseType">responseType</span>;
   readonly attribute any <span title="dom-XMLHttpRequest-response">response</span>;
-  readonly attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title="dom-XMLHttpRequest-responseText">responseText</span>;
+  readonly attribute USVString <span title="dom-XMLHttpRequest-responseText">responseText</span>;
   [Exposed=Window] readonly attribute <span data-anolis-spec=dom>Document</span>? <span title="dom-XMLHttpRequest-responseXML">responseXML</span>;
 };</pre>
 
@@ -441,15 +441,15 @@ request-associated concepts:
   <p>Sets the <span>request method</span>, <span>request URL</span>, and
   <span>synchronous flag</span>.
 
-  <p>Throws a "<code data-anolis-spec=dom>SyntaxError</code>" exception if
+  <p>Throws a <code>SyntaxError</code> exception if
   either <var title>method</var> is not a valid HTTP method or
   <var title>url</var> cannot be parsed.
 
-  <p>Throws a "<code data-anolis-spec=dom>SecurityError</code>" exception
+  <p>Throws a <code>SecurityError</code> exception
   if <var title>method</var> is a case-insensitive match for
   `<code title>CONNECT</code>`, `<code title>TRACE</code>` or `<code title>TRACK</code>`.
 
-  <p>Throws an "<code data-anolis-spec=dom>InvalidAccessError</code>"
+  <p>Throws an <code>InvalidAccessError</code>
   exception if <var title>async</var> is false, the
   <span data-anolis-spec=html>JavaScript global environment</span> is a
   <span data-anolis-spec=html>document environment</span>, and either the
@@ -467,8 +467,8 @@ request-associated concepts:
 <span data-anolis-spec=html>document environment</span> as it has detrimental effects to
 the end user's experience. User agents are strongly encouraged to warn about such usage in
 developer tools and may experiment with
-<span data-anolis-spec=dom title=concept-throw>throwing</span> an
-"<code data-anolis-spec=dom>InvalidAccessError</code>" exception when it occurs so the
+<span data-anolis-spec=webidl title=throw>throwing</span> an
+<code>InvalidAccessError</code> exception when it occurs so the
 feature can eventually be removed from the platform.
 
 <p>The
@@ -479,8 +479,8 @@ method must run these steps:
  <li><p>If <span title=concept-XMLHttpRequest-settings-object>settings object</span>'s
  <span data-anolis-spec=html>responsible document</span> is not
  <span data-anolis-spec=html>fully active</span>,
- <span data-anolis-spec=dom title=concept-throw>throw</span> an
- "<code data-anolis-spec=dom>InvalidStateError</code>" exception.
+ <span data-anolis-spec=webidl title=throw>throw</span> an
+ <code>InvalidStateError</code> exception.
 
  <li><p>Set <var title>base</var> to
  <span title=concept-XMLHttpRequest-settings-object>settings object</span>'s
@@ -488,12 +488,12 @@ method must run these steps:
 
  <li><p>If <var>method</var> is not a
  <span data-anolis-spec=fetch title=concept-method>method</span>,
- <span data-anolis-spec=dom title=concept-throw>throw</span> a
- "<code data-anolis-spec=dom>SyntaxError</code>" exception.
+ <span data-anolis-spec=webidl title=throw>throw</span> a
+ <code>SyntaxError</code> exception.
 
  <li><p>If <var>method</var> is a <span data-anolis-spec=fetch>forbidden method</span>,
- <span data-anolis-spec=dom title=concept-throw>throw</span> a
- "<code data-anolis-spec=dom>SecurityError</code>" exception.
+ <span data-anolis-spec=webidl title=throw>throw</span> a
+ <code>SecurityError</code> exception.
 
  <li><p><span data-anolis-spec=fetch title=concept-method-normalize>Normalize</span>
  <var>method</var>.
@@ -503,8 +503,8 @@ method must run these steps:
  with <var title>base</var>.
 
  <li><p>If <var title>parsedURL</var> is failure,
- <span data-anolis-spec=dom title=concept-throw>throw</span> a
- "<code data-anolis-spec=dom>SyntaxError</code>" exception.
+ <span data-anolis-spec=webidl title=throw>throw</span> a
+ <code>SyntaxError</code> exception.
 
  <li>
   <p>If the <var>async</var> argument is omitted, set <var>async</var> to true, and set
@@ -536,8 +536,8 @@ method must run these steps:
  <code title=dom-XMLHttpRequest-withCredentials>withCredentials</code> attribute value is
  true, or the <code title=dom-XMLHttpRequest-responseType>responseType</code> attribute
  value is not the empty string,
- <span data-anolis-spec=dom title=concept-throw>throw</span> an
- "<code data-anolis-spec=dom>InvalidAccessError</code>" exception.
+ <span data-anolis-spec=webidl title=throw>throw</span> an
+ <code>InvalidAccessError</code> exception.
 
  <li>
   <p><span>Terminate the request</span>.
@@ -585,12 +585,12 @@ method must run these steps:
   <p>Combines a <span data-anolis-spec=fetch title=concept-header>header</span> in
   <span>author request headers</span>.
 
-  <p>Throws an "<code data-anolis-spec=dom>InvalidStateError</code>"
+  <p>Throws an <code>InvalidStateError</code>
   exception if the state is not
   <span title="dom-XMLHttpRequest-OPENED">OPENED</span> or if the
   <span><code>send()</code> flag</span> is set.
 
-  <p>Throws a "<code data-anolis-spec=dom>SyntaxError</code>" exception if
+  <p>Throws a <code>SyntaxError</code> exception if
   <var>name</var> is not a header name or if <var>value</var> is not a header value.
  </dd>
 </dl>
@@ -607,19 +607,19 @@ method must run these steps:
 
 <ol>
  <li><p>If the state is not <span title="dom-XMLHttpRequest-OPENED">OPENED</span>,
- <span data-anolis-spec=dom title=concept-throw>throw</span> an
- "<code data-anolis-spec=dom>InvalidStateError</code>" exception.
+ <span data-anolis-spec=webidl title=throw>throw</span> an
+ <code>InvalidStateError</code> exception.
 
  <li><p>If the <span><code>send()</code> flag</span> is set,
- <span data-anolis-spec=dom title=concept-throw>throw</span> an
- "<code data-anolis-spec=dom>InvalidStateError</code>" exception.
+ <span data-anolis-spec=webidl title=throw>throw</span> an
+ <code>InvalidStateError</code> exception.
 
  <li>
   <p>If <var>name</var> is not a
   <span data-anolis-spec=fetch title=concept-header-name>name</span> or <var>value</var>
   is not a <span data-anolis-spec=fetch title=concept-header-value>value</span>,
-  <span data-anolis-spec=dom title=concept-throw>throw</span> a
-  "<code data-anolis-spec=dom>SyntaxError</code>" exception.
+  <span data-anolis-spec=webidl title=throw>throw</span> a
+  <code>SyntaxError</code> exception.
 
   <p class="note no-backref">An empty byte sequence represents an empty
   <span data-anolis-spec=fetch title=concept-header>header</span>
@@ -659,11 +659,11 @@ X-Test: one, two</code></pre>
   not yet completed, and the <span>synchronous flag</span> is unset, a
   <code title=event-xhr-timeout>timeout</code> event will then be
   <span title=concept-event-dispatch data-anolis-spec=dom>dispatched</span>,
-  or a "<code data-anolis-spec=dom>TimeoutError</code>" exception will be
-  <span data-anolis-spec=dom title=concept-throw>thrown</span> otherwise
+  or a <code>TimeoutError</code> exception will be
+  <span data-anolis-spec=webidl title=throw>thrown</span> otherwise
   (for the <code title=dom-XMLHttpRequest-send>send()</code> method).
   <p>When set: throws an
-  "<code data-anolis-spec=dom>InvalidAccessError</code>" exception if
+  <code>InvalidAccessError</code> exception if
   the <span>synchronous flag</span> is set and the
   <span data-anolis-spec=html>JavaScript global environment</span> is a
   <span data-anolis-spec=html>document environment</span>.
@@ -682,8 +682,8 @@ attribute must run these steps:
  <span data-anolis-spec=html>JavaScript global environment</span> is a
  <span data-anolis-spec=html>document environment</span> and the
  <span>synchronous flag</span> is set,
- <span data-anolis-spec=dom title=concept-throw>throw</span> an
- "<code data-anolis-spec=dom>InvalidAccessError</code>" exception.
+ <span data-anolis-spec=webidl title=throw>throw</span> an
+ <code>InvalidAccessError</code> exception.
 
  <li><p>Set its value to the new value.
 </ol>
@@ -706,12 +706,12 @@ of <span data-anolis-spec=fetch title=concept-fetch>fetching</span>.
   Initially false.
 
   <p>When set: throws an
-  "<code data-anolis-spec=dom>InvalidStateError</code>" exception if the
+  <code>InvalidStateError</code> exception if the
   state is not <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span> or
   <span title="dom-XMLHttpRequest-OPENED">OPENED</span>, or if
   the <span><code>send()</code> flag</span> is set.
   <p>When set: throws an
-  "<code data-anolis-spec=dom>InvalidAccessError</code>" exception if
+  <code>InvalidAccessError</code> exception if
   either the <span>synchronous flag</span> is set and the
   <span data-anolis-spec=html>JavaScript global environment</span> is a
   <span data-anolis-spec=html>document environment</span>.
@@ -729,19 +729,19 @@ attribute must run these steps:
 <ol>
  <li><p>If the state is not <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span> or
  <span title="dom-XMLHttpRequest-OPENED">OPENED</span>,
- <span data-anolis-spec=dom title=concept-throw>throw</span> an
- "<code data-anolis-spec=dom>InvalidStateError</code>" exception.
+ <span data-anolis-spec=webidl title=throw>throw</span> an
+ <code>InvalidStateError</code> exception.
 
  <li><p>If the <span><code>send()</code> flag</span> is set,
- <span data-anolis-spec=dom title=concept-throw>throw</span> an
- "<code data-anolis-spec=dom>InvalidStateError</code>" exception.
+ <span data-anolis-spec=webidl title=throw>throw</span> an
+ <code>InvalidStateError</code> exception.
 
  <li><p>If the
  <span data-anolis-spec=html>JavaScript global environment</span> is a
  <span data-anolis-spec=html>document environment</span> and the
  <span>synchronous flag</span> is set,
- <span data-anolis-spec=dom title=concept-throw>throw</span> an
- "<code data-anolis-spec=dom>InvalidAccessError</code>" exception.
+ <span data-anolis-spec=webidl title=throw>throw</span> an
+ <code>InvalidAccessError</code> exception.
 
  <li><p>Set the <code title="dom-XMLHttpRequest-withCredentials">withCredentials</code>
  attribute's value to the given value.
@@ -781,7 +781,7 @@ object has an associated <code>XMLHttpRequestUpload</code> object.
   <span>request method</span> is <code>GET</code> or
   <code>HEAD</code>.
 
-  <p>Throws an "<code data-anolis-spec=dom>InvalidStateError</code>"
+  <p>Throws an <code>InvalidStateError</code>
   exception if the state is not
   <span title="dom-XMLHttpRequest-OPENED">OPENED</span> or if the
   <span><code>send()</code> flag</span> is set.
@@ -793,12 +793,12 @@ method must run these steps:
 
 <ol>
  <li><p>If the state is not <span title="dom-XMLHttpRequest-OPENED">OPENED</span>,
- <span data-anolis-spec=dom title=concept-throw>throw</span> an
- "<code data-anolis-spec=dom>InvalidStateError</code>" exception.
+ <span data-anolis-spec=webidl title=throw>throw</span> an
+ <code>InvalidStateError</code> exception.
 
  <li><p>If the <span><code>send()</code> flag</span> is set,
- <span data-anolis-spec=dom title=concept-throw>throw</span> an
- "<code data-anolis-spec=dom>InvalidStateError</code>" exception.
+ <span data-anolis-spec=webidl title=throw>throw</span> an
+ <code>InvalidStateError</code> exception.
 
  <li><p>If the <span>request method</span> is <code>GET</code> or
  <code>HEAD</code>, set <var title>body</var> to null.
@@ -828,7 +828,7 @@ method must run these steps:
 
     <p class=note>If <var>body</var> cannot be
     <span data-anolis-spec=domps title=concept-serialize>serialized</span>, an
-    "<code data-anolis-spec=dom>InvalidStateError</code>" exception is thrown.
+    <code>InvalidStateError</code> exception is thrown.
 
    <dt id=dom-xmlhttprequest-send-bodyinit><code data-anolis-spec=fetch>BodyInit</code>
    <dd>
@@ -1127,7 +1127,7 @@ steps:
  <li><p>If <var title>response</var> is a
  <span data-anolis-spec=fetch title=concept-network-error>network error</span>, run the
  <span>request error steps</span> for event <code title="event-xhr-error">error</code> and
- exception "<code data-anolis-spec=dom>NetworkError</code>".
+ exception <code>NetworkError</code>.
 
  <li>
   <p>Otherwise, if <var title>response</var> has a
@@ -1137,7 +1137,7 @@ steps:
    <dt><i title>end-user abort</i>
    <dd><p>Run the <span>request error steps</span> for event
    <code title="event-xhr-abort">abort</code> and exception
-   "<code data-anolis-spec=dom>AbortError</code>".
+   <code>AbortError</code>.
 
    <dt><i title>fatal</i>
    <dd>
@@ -1153,7 +1153,7 @@ steps:
    <dt><i title>timeout</i>
    <dd><p>Run the <span>request error steps</span> for event
    <code title="event-xhr-timeout">timeout</code> and exception
-   "<code data-anolis-spec=dom>TimeoutError</code>".
+   <code>TimeoutError</code>.
   </dl>
 </ol>
 
@@ -1169,7 +1169,7 @@ exception <var>exception</var> are:
  <span data-anolis-spec=fetch title=concept-network-error>network error</span>.
 
  <li><p>If the <span>synchronous flag</span> is set,
- <span data-anolis-spec=dom title=concept-throw>throw</span> an <var>exception</var>
+ <span data-anolis-spec=webidl title=throw>throw</span> an <var>exception</var>
  exception.
 
  <li>
@@ -1581,12 +1581,12 @@ resources using <span data-anolis-spec=encoding>utf-8</span>.
   <p>Sets the `<code title>Content-Type</code>` header for <span>response</span> to
   <var title>mime</var>.
 
-  <p>Throws an "<code data-anolis-spec=dom>InvalidStateError</code>"
+  <p>Throws an <code>InvalidStateError</code>
   exception if the state is
   <span title="dom-XMLHttpRequest-LOADING">LOADING</span> or
   <span title="dom-XMLHttpRequest-DONE">DONE</span>.
 
-  <p>Throws a "<code data-anolis-spec=dom>SyntaxError</code>" exception if
+  <p>Throws a <code>SyntaxError</code> exception if
   <var title>mime</var> is not a valid MIME type.
  </dd>
 </dl>
@@ -1599,13 +1599,13 @@ method must run these steps:
  <li><p>If the state is
  <span title="dom-XMLHttpRequest-LOADING">LOADING</span> or
  <span title="dom-XMLHttpRequest-DONE">DONE</span>,
- <span data-anolis-spec=dom title=concept-throw>throw</span> an
- "<code data-anolis-spec=dom>InvalidStateError</code>" exception.
+ <span data-anolis-spec=webidl title=throw>throw</span> an
+ <code>InvalidStateError</code> exception.
 
  <li><p>If parsing <var title>mime</var> analogously to the value of
  the `<code title>Content-Type</code>` header fails,
- <span data-anolis-spec=dom title=concept-throw>throw</span> a
- "<code data-anolis-spec=dom>SyntaxError</code>" exception.
+ <span data-anolis-spec=webidl title=throw>throw</span> a
+ <code>SyntaxError</code> exception.
 
  <li><p>If <var title>mime</var> is successfully parsed, set
  <span>override MIME type</span> to its MIME type,
@@ -1636,11 +1636,11 @@ method must run these steps:
   <span data-anolis-spec=html>JavaScript global environment</span> is a
   <span data-anolis-spec=html>worker environment</span>
   <p>When set: throws an
-  "<code data-anolis-spec=dom>InvalidStateError</code>" exception if the
+  <code>InvalidStateError</code> exception if the
   state is <span title="dom-XMLHttpRequest-LOADING">LOADING</span> or
   <span title="dom-XMLHttpRequest-DONE">DONE</span>.
   <p>When set: throws an
-  "<code data-anolis-spec=dom>InvalidAccessError</code>" exception if the
+  <code>InvalidAccessError</code> exception if the
   <span>synchronous flag</span> is set and the
   <span data-anolis-spec=html>JavaScript global environment</span> is a
   <span data-anolis-spec=html>document environment</span>.
@@ -1664,15 +1664,15 @@ attribute must run these steps:
 
  <li><p>If the state is <span title="dom-XMLHttpRequest-LOADING">LOADING</span> or
  <span title="dom-XMLHttpRequest-DONE">DONE</span>,
- <span data-anolis-spec=dom title=concept-throw>throw</span> an
- "<code data-anolis-spec=dom>InvalidStateError</code>" exception.
+ <span data-anolis-spec=webidl title=throw>throw</span> an
+ <code>InvalidStateError</code> exception.
 
  <li><p>If the
  <span data-anolis-spec=html>JavaScript global environment</span> is a
  <span data-anolis-spec=html>document environment</span> and the
  <span>synchronous flag</span> is set,
- <span data-anolis-spec=dom title=concept-throw>throw</span> an
- "<code data-anolis-spec=dom>InvalidAccessError</code>" exception.
+ <span data-anolis-spec=webidl title=throw>throw</span> an
+ <code>InvalidAccessError</code> exception.
 
  <li><p>Set the
  <code title="dom-XMLHttpRequest-responseType">responseType</code>
@@ -1746,7 +1746,7 @@ steps:
  <dd>
   <p>Returns the <span>text response</span>.
 
-  <p>Throws an "<code data-anolis-spec=dom>InvalidStateError</code>"
+  <p>Throws an <code>InvalidStateError</code>
   exception if
   <code title="dom-XMLHttpRequest-responseType">responseType</code> is not
   the empty string or "<code title>text</code>".
@@ -1761,8 +1761,8 @@ steps:
 
  <li><p>If <code title="dom-XMLHttpRequest-responseType">responseType</code> is not the
  empty string or "<code title>text</code>",
- <span data-anolis-spec=dom title=concept-throw>throw</span> an
- "<code data-anolis-spec=dom>InvalidStateError</code>" exception.
+ <span data-anolis-spec=webidl title=throw>throw</span> an
+ <code>InvalidStateError</code> exception.
 
 
  <li><p>If the state is not <span title="dom-XMLHttpRequest-LOADING">LOADING</span> or
@@ -1779,7 +1779,7 @@ steps:
  <dd>
   <p>Returns the <span>document response</span>.
 
-  <p>Throws an "<code data-anolis-spec=dom>InvalidStateError</code>"
+  <p>Throws an <code>InvalidStateError</code>
   exception if
   <code title="dom-XMLHttpRequest-responseType">responseType</code> is not
   the empty string or "<code title>document</code>".
@@ -1793,8 +1793,8 @@ attribute must return the result of running these steps:
  <li><p>If
  <code title="dom-XMLHttpRequest-responseType">responseType</code> is not
  the empty string or "<code title>document</code>",
- <span data-anolis-spec=dom title=concept-throw>throw</span> an
- "<code data-anolis-spec=dom>InvalidStateError</code>" exception.
+ <span data-anolis-spec=webidl title=throw>throw</span> an
+ <code>InvalidStateError</code> exception.
 
  <li><p>If the state is not <span title="dom-XMLHttpRequest-DONE">DONE</span>, return
  null.
@@ -1862,19 +1862,19 @@ and/or <code>XMLHttpRequestUpload</code> objects:
 
 <h2>Interface <code title>FormData</code></h2>
 
-<pre class="idl">typedef (<span data-anolis-spec=fileapi>File</span> or <span data-anolis-spec=encoding>ScalarValueString</span>) <dfn>FormDataEntryValue</dfn>;
+<pre class="idl">typedef (<span data-anolis-spec=fileapi>File</span> or USVString) <dfn>FormDataEntryValue</dfn>;
 
 [<span title="dom-FormData">Constructor</span>(optional <span data-anolis-spec=html>HTMLFormElement</span> <var>form</var>),
  Exposed=(Window,Worker)]
 interface <dfn>FormData</dfn> {
-  void <span title="dom-FormData-append">append</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var>name</var>, <span data-anolis-spec=fileapi>Blob</span> <var>value</var>, optional <span data-anolis-spec=encoding>ScalarValueString</span> <var>filename</var>);
-  void <span title="dom-FormData-append">append</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var>name</var>, <span data-anolis-spec=encoding>ScalarValueString</span> <var>value</var>);
-  void <span title=dom-FormData-delete>delete</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var>name</var>);
-  <span>FormDataEntryValue</span>? <span title=dom-FormData-get>get</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var>name</var>);
-  sequence&lt;<span>FormDataEntryValue</span>> <span title=dom-FormData-getAll>getAll</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var>name</var>);
-  boolean <span title=dom-FormData-has>has</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var>name</var>);
-  void <span title=dom-FormData-append>set</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var>name</var>, <span data-anolis-spec=fileapi>Blob</span> <var>value</var>, optional <span data-anolis-spec=encoding>ScalarValueString</span> <var>filename</var>);
-  void <span title=dom-FormData-set>set</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var>name</var>, <span data-anolis-spec=encoding>ScalarValueString</span> <var>value</var>);
+  void <span title="dom-FormData-append">append</span>(USVString <var>name</var>, <span data-anolis-spec=fileapi>Blob</span> <var>value</var>, optional USVString <var>filename</var>);
+  void <span title="dom-FormData-append">append</span>(USVString <var>name</var>, USVString <var>value</var>);
+  void <span title=dom-FormData-delete>delete</span>(USVString <var>name</var>);
+  <span>FormDataEntryValue</span>? <span title=dom-FormData-get>get</span>(USVString <var>name</var>);
+  sequence&lt;<span>FormDataEntryValue</span>> <span title=dom-FormData-getAll>getAll</span>(USVString <var>name</var>);
+  boolean <span title=dom-FormData-has>has</span>(USVString <var>name</var>);
+  void <span title=dom-FormData-append>set</span>(USVString <var>name</var>, <span data-anolis-spec=fileapi>Blob</span> <var>value</var>, optional USVString <var>filename</var>);
+  void <span title=dom-FormData-set>set</span>(USVString <var>name</var>, USVString <var>value</var>);
 };</pre>
 
 <p>The <code>FormData</code> object represents an ordered list of
