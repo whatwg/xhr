@@ -1923,6 +1923,7 @@ interface <dfn id="formdata">FormData</dfn> {
   boolean <a href="#dom-formdata-has" title="dom-FormData-has">has</a>(USVString <var>name</var>);
   void <a href="#dom-formdata-append" title="dom-FormData-append">set</a>(USVString <var>name</var>, <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> <var>value</var>, optional USVString <var>filename</var>);
   void <a href="#dom-formdata-set" title="dom-FormData-set">set</a>(USVString <var>name</var>, USVString <var>value</var>);
+  iterable&lt;USVString, <a href="#formdataentryvalue">FormDataEntryValue</a>&gt;;
 };</pre>
 
 <p>The <code><a href="#formdata">FormData</a></code> object represents an ordered list of
@@ -2034,6 +2035,11 @@ method must run these steps:
 return true if there is an <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a> whose
 <a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> is <var>name</var>, and false
 otherwise.
+
+<p>The <a class="external" href="http://heycam.github.io/webidl/#dfn-value-pairs-to-iterate-over">value pairs to iterate over</a> are the
+<a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a> with the key being the
+<a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> and the value the
+<a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">value</a>.
 
 
 

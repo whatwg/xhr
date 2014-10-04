@@ -1875,6 +1875,7 @@ interface <dfn>FormData</dfn> {
   boolean <span title=dom-FormData-has>has</span>(USVString <var>name</var>);
   void <span title=dom-FormData-append>set</span>(USVString <var>name</var>, <span data-anolis-spec=fileapi>Blob</span> <var>value</var>, optional USVString <var>filename</var>);
   void <span title=dom-FormData-set>set</span>(USVString <var>name</var>, USVString <var>value</var>);
+  iterable&lt;USVString, <span>FormDataEntryValue</span>>;
 };</pre>
 
 <p>The <code>FormData</code> object represents an ordered list of
@@ -1986,6 +1987,11 @@ method must run these steps:
 return true if there is an <span title=concept-FormData-entry>entry</span> whose
 <span title=concept-FormData-entry-name>name</span> is <var>name</var>, and false
 otherwise.
+
+<p>The <span data-anolis-spec=webidl>value pairs to iterate over</span> are the
+<span title=concept-FormData-entry>entries</span> with the key being the
+<span title=concept-FormData-entry-name>name</span> and the value the
+<span title=concept-FormData-entry-value>value</span>.
 
 
 
