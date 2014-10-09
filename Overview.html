@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-4-october-2014">Living Standard — Last Updated 4 October 2014</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-9-october-2014">Living Standard — Last Updated 9 October 2014</h2>
 
 <dl>
  <dt>Participate:
@@ -109,21 +109,19 @@ functionality.
 }
 
 function handler() {
-  if(this.readyState == this.DONE) {
-    if(this.status == 200 &amp;&amp;
-       this.responseXML != null &amp;&amp;
-       this.responseXML.getElementById('test').textContent) {
-      // success!
-      processData(this.responseXML.getElementById('test').textContent);
-      return;
-    }
+  if(this.status == 200 &amp;&amp;
+    this.responseXML != null &amp;&amp;
+    this.responseXML.getElementById('test').textContent) {
+    // success!
+    processData(this.responseXML.getElementById('test').textContent);
+  } else {
     // something went wrong
-    processData(null);
+    …
   }
 }
 
 var client = new XMLHttpRequest();
-client.onreadystatechange = handler;
+client.onload = handler;
 client.open("GET", "unicorn.xml");
 client.send();</code></pre>
 
@@ -140,10 +138,9 @@ client.send();</code></pre>
 
  <pre><code>function fetchStatus(address) {
   var client = new XMLHttpRequest();
-  client.onreadystatechange = function() {
+  client.onload = function() {
     // in case of network errors this might not give reliable results
-    if(this.readyState == this.DONE)
-      returnStatus(this.status);
+    returnStatus(this.status);
   }
   client.open("HEAD", address);
   client.send();
@@ -1349,7 +1346,7 @@ method must run these steps:
 client.open("GET", "unicorns-are-teh-awesome.txt", true);
 client.send();
 client.onreadystatechange = function() {
-  if(this.readyState == 2) {
+  if(this.readyState == this.HEADERS_RECEIVED) {
     print(client.getResponseHeader("Content-Type"));
   }
 }</code></pre>
@@ -1385,7 +1382,7 @@ byte pair.
 client.open("GET", "narwhals-too.txt", true);
 client.send();
 client.onreadystatechange = function() {
-  if(this.readyState == 2) {
+  if(this.readyState == this.HEADERS_RECEIVED) {
     print(this.getAllResponseHeaders());
   }
 }</code></pre>
