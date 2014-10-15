@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-9-october-2014">Living Standard — Last Updated 9 October 2014</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-15-october-2014">Living Standard — Last Updated 15 October 2014</h2>
 
 <dl>
  <dt>Participate:
@@ -285,8 +285,19 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <a href="#xmlhttpreque
   [Exposed=Window] readonly attribute <a class="external" href="https://dom.spec.whatwg.org/#document">Document</a>? <a href="#dom-xmlhttprequest-responsexml" title="dom-XMLHttpRequest-responseXML">responseXML</a>;
 };</pre>
 
-<p>Each <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object has a unique, associated
+<p>An <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object has an associated
 <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
+
+<p>An <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object has an associated
+<dfn id="concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</dfn>, which is one of
+<i title="">unsent</i>,
+<i title="">opened</i>,
+<i title="">headers received</i>,
+<i title="">loading</i>, and
+<i title="">done</i>. Unless stated otherwise it is <i title="">unsent</i>.
+
+<p>An <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object has an associated
+<dfn id="send-flag"><code>send()</code> flag</dfn>. Unless stated otherwise it is unset.
 
 
 <h3 id="constructors"><span class="secno">4.1 </span>Constructors</h3>
@@ -319,11 +330,10 @@ constructor must run these steps:
 <h3 id="garbage-collection"><span class="secno">4.2 </span>Garbage collection</h3>
 <!-- Based on EventSource and WebSocket. Not sure what I am doing. -->
 
-<p>An <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object must not be garbage collected if
-its state is <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a> and the
-<a href="#send-flag"><code>send()</code> flag</a> is set, its state is
-<a href="#dom-xmlhttprequest-headers_received" title="dom-XMLHttpRequest-HEADERS_RECEIVED">HEADERS_RECEIVED</a>, or
-its state is <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a> and it has one or more
+<p>An <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object must not be garbage collected if its
+<a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is either
+<i title="">opened</i> with the <a href="#send-flag"><code>send()</code> flag</a> set,
+<i title="">headers received</i>, or <i title="">loading</i>, and it has one or more
 <a class="external" href="https://dom.spec.whatwg.org/#concept-event-listener" title="concept-event-listener">event listeners</a>
 registered whose <b>type</b> is one of
 <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>,
@@ -333,7 +343,7 @@ registered whose <b>type</b> is one of
 <code title="event-xhr-load"><a href="#event-xhr-load">load</a></code>,
 <code title="event-xhr-timeout"><a href="#event-xhr-timeout">timeout</a></code>, and
 <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>.
-<!-- No need to mention upload event listeners as they happen during OPENED. -->
+<!-- No need to mention upload event listeners as they happen during /opened/. -->
 
 <p>If an <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object is garbage collected while its
 connection is still open, the user agent must <a href="#terminate-the-request">terminate the request</a>.
@@ -399,51 +409,46 @@ supported as attribute solely by the
 
 <dl class="domintro">
  <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-readystate" title="dom-XMLHttpRequest-readyState">readyState</a></code>
- <dd><p>Returns the current state.
+ <dd><p>Returns <var title="">client</var>'s
+ <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a>.
 </dl>
 
-<p>The <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object can be in several states. The
-<dfn id="dom-xmlhttprequest-readystate" title="dom-XMLHttpRequest-readyState"><code>readyState</code></dfn>
-attribute must return the current state, which must be one of the
-following values:
+<p>The <dfn id="dom-xmlhttprequest-readystate" title="dom-XMLHttpRequest-readyState"><code>readyState</code></dfn>
+attribute's getter must return the value from the table below in the cell of the second
+column, from the row where the value in the cell in the first column is
+<a class="external" href="https://dom.spec.whatwg.org/#context-object">context object</a>'s
+<a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a>:
 
-<dl>
- <dt><dfn id="dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT"><code>UNSENT</code></dfn>
- (numeric value 0)</dt>
- <dd><p>The object has been constructed.</dd>
-
- <dt><dfn id="dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED"><code>OPENED</code></dfn>
- (numeric value 1)</dt>
- <dd><p>The <code title="dom-XMLHttpRequest-open"><a href="#dom-xmlhttprequest-open">open()</a></code> method has been successfully invoked.
- During this state request headers can be set using
- <code title="dom-XMLHttpRequest-setRequestHeader"><a href="#dom-xmlhttprequest-setrequestheader">setRequestHeader()</a></code>
- and the request can be made using the
- <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code> method.</dd>
-
- <dt><dfn id="dom-xmlhttprequest-headers_received" title="dom-XMLHttpRequest-HEADERS_RECEIVED"><code>HEADERS_RECEIVED</code></dfn>
- (numeric value 2)</dt>
- <dd><p>All redirects (if any) have been followed and all HTTP headers of the
- <a href="#response">response</a> have been received.
-
- <dt><dfn id="dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING"><code>LOADING</code></dfn>
- (numeric value 3)</dt>
- <dd><p>The <a href="#response">response</a>'s
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> is being received.
-
- <dt><dfn id="dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE"><code>DONE</code></dfn>
- (numeric value 4)</dt>
- <dd><p>The data transfer has been completed or something went wrong
- during the transfer (e.g. infinite redirects).</dd>
-</dl>
-
-<p>Initially the <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object must be in the
-<a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a> state.
-
-<p>The <dfn id="send-flag"><code>send()</code> flag</dfn> indicates
-that the <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code> method has
-been invoked. It is initially unset and is used during the
-<a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a> state.
-
+<table>
+ <tr>
+  <td><i title="">unsent</i>
+  <td><dfn id="dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT"><code>UNSENT</code></dfn> (numeric value 0)
+  <td>The object has been constructed.
+ <tr>
+  <td><i title="">opened</i>
+  <td><dfn id="dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED"><code>OPENED</code></dfn> (numeric value 1)
+  <td>The <code title="dom-XMLHttpRequest-open"><a href="#dom-xmlhttprequest-open">open()</a></code> method has been successfully
+   invoked. During this state request headers can be set using
+   <code title="dom-XMLHttpRequest-setRequestHeader"><a href="#dom-xmlhttprequest-setrequestheader">setRequestHeader()</a></code> and the
+   fetch can be initiated using the <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code>
+   method.
+ <tr>
+  <td><i title="">headers received</i>
+  <td><dfn id="dom-xmlhttprequest-headers_received" title="dom-XMLHttpRequest-HEADERS_RECEIVED"><code>HEADERS_RECEIVED</code></dfn>
+   (numeric value 2)
+  <td>All redirects (if any) have been followed and all HTTP headers of the
+   <a href="#response">response</a> have been received.
+ <tr>
+  <td><i title="">loading</i>
+  <td><dfn id="dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING"><code>LOADING</code></dfn> (numeric value 3)
+  <td>The <a href="#response">response</a>'s
+  <a class="external" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> is being received.
+ <tr>
+  <td><i title="">done</i>
+  <td><dfn id="dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE"><code>DONE</code></dfn> (numeric value 4)
+  <td>The data transfer has been completed or something went wrong during the transfer
+   (e.g. infinite redirects).
+</table>
 
 
 <h3 id="request"><span class="secno">4.5 </span>Request</h3>
@@ -609,11 +614,12 @@ method must run these steps:
   </ul>
 
  <li>
-  <p>If the state is not <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a>, run these
-  substeps:
+  <p>If the <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is not
+  <i title="">opened</i>, run these substeps:
 
   <ol>
-   <li><p>Change the state to <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a>.
+   <li><p>Set <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> to
+   <i title="">opened</i>.
 
    <li><p><a class="external" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.
   </ol>
@@ -631,9 +637,8 @@ method must run these steps:
   <a href="#author-request-headers">author request headers</a>.
 
   <p>Throws an <code>InvalidStateError</code>
-  exception if the state is not
-  <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a> or if the
-  <a href="#send-flag"><code>send()</code> flag</a> is set.
+  exception if either <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is not
+  <i title="">opened</i> or the <a href="#send-flag"><code>send()</code> flag</a> is set.
 
   <p>Throws a <code>SyntaxError</code> exception if
   <var>name</var> is not a header name or if <var>value</var> is not a header value.
@@ -651,8 +656,8 @@ the author as indicated at the end of the
 method must run these steps:
 
 <ol>
- <li><p>If the state is not <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a>,
- <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an
+ <li><p>If <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is not
+ <i title="">opened</i>, <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an
  <code>InvalidStateError</code> exception.
 
  <li><p>If the <a href="#send-flag"><code>send()</code> flag</a> is set,
@@ -751,10 +756,9 @@ of <a class="external" href="https://fetch.spec.whatwg.org/#concept-fetch" title
   Initially false.
 
   <p>When set: throws an
-  <code>InvalidStateError</code> exception if the
-  state is not <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a> or
-  <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a>, or if
-  the <a href="#send-flag"><code>send()</code> flag</a> is set.
+  <code>InvalidStateError</code> exception if
+  <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is not <i title="">unset</i> or
+  <i title="">opened</i>, or if the <a href="#send-flag"><code>send()</code> flag</a> is set.
   <p>When set: throws an
   <code>InvalidAccessError</code> exception if
   either the <a href="#synchronous-flag">synchronous flag</a> is set and the
@@ -772,8 +776,8 @@ attribute must return its value. Initially its value must be false.
 attribute must run these steps:
 
 <ol>
- <li><p>If the state is not <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a> or
- <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a>,
+ <li><p>If <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is not
+ <i title="">unsent</i> or <i title="">opened</i>,
  <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an
  <code>InvalidStateError</code> exception.
 
@@ -826,19 +830,17 @@ object has an associated <code><a href="#xmlhttprequestupload">XMLHttpRequestUpl
   <a href="#request-method">request method</a> is <code>GET</code> or
   <code>HEAD</code>.
 
-  <p>Throws an <code>InvalidStateError</code>
-  exception if the state is not
-  <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a> or if the
+  <p>Throws an <code>InvalidStateError</code> exception if either
+  <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is not <i title="">opened</i> or the
   <a href="#send-flag"><code>send()</code> flag</a> is set.
- </dd>
 </dl>
 
 <p>The <dfn id="dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send"><code>send(<var>body</var>)</code></dfn>
 method must run these steps:
 
 <ol>
- <li><p>If the state is not <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a>,
- <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an
+ <li><p>If <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is not
+ <i title="">opened</i>, <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an
  <code>InvalidStateError</code> exception.
 
  <li><p>If the <a href="#send-flag"><code>send()</code> flag</a> is set,
@@ -1075,7 +1077,8 @@ method must run these steps:
      <a class="external" href="https://fetch.spec.whatwg.org/#concept-network-error" title="concept-network-error">network error</a>,
      return.
 
-     <li><p>Change the state to <a href="#dom-xmlhttprequest-headers_received" title="dom-XMLHttpRequest-HEADERS_RECEIVED">HEADERS_RECEIVED</a>.
+     <li><p>Set <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> to
+     <i title="">headers received</i>.
 
      <li><p><a class="external" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.
     </ol>
@@ -1093,9 +1096,9 @@ method must run these steps:
      <a class="external" href="https://fetch.spec.whatwg.org/#concept-network-error" title="concept-network-error">network error</a>,
      return.
 
-     <li><p>If state is
-     <a href="#dom-xmlhttprequest-headers_received" title="dom-XMLHttpRequest-HEADERS_RECEIVED">HEADERS_RECEIVED</a>, change the
-     state to <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a> and
+     <li><p>If <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is
+     <i title="">headers received</i>, set
+     <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> to <i title="">loading</i> and
      <a class="external" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.
 
      <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code> with <var title="">response</var>'s
@@ -1140,7 +1143,7 @@ steps:
  <a class="external" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> using
  <var title="">response</var>.
 
- <li><p>Change the state to <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>.
+ <li><p>Set <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> to <i title="">done</i>.
 
  <li><p>Unset the <a href="#send-flag"><code>send()</code> flag</a>.
 
@@ -1187,7 +1190,8 @@ steps:
    <dt><i title="">fatal</i>
    <dd>
     <ol>
-     <li><p>Change the state to <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>.
+     <li><p>Set <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> to
+     <i title="">done</i>.
 
      <li><p>Unset the <a href="#send-flag"><code>send()</code> flag</a>.
 
@@ -1206,7 +1210,7 @@ steps:
 exception <var>exception</var> are:
 
 <ol>
- <li><p>Change the state to <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>.
+ <li><p>Set <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> to <i title="">done</i>.
 
  <li><p>Unset the <a href="#send-flag"><code>send()</code> flag</a>.
 
@@ -1264,14 +1268,13 @@ these steps:
 <ol>
  <li><p><a href="#terminate-the-request">Terminate the request</a>.
 
- <li><p>If the state is <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a> with the
- <a href="#send-flag"><code>send()</code> flag</a> set,
- <a href="#dom-xmlhttprequest-headers_received" title="dom-XMLHttpRequest-HEADERS_RECEIVED">HEADERS_RECEIVED</a>, or
- <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a>, run the
+ <li><p>If <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is either
+ <i title="">opened</i> with the <a href="#send-flag"><code>send()</code> flag</a> set,
+ <i title="">headers received</i>, or <i title="">loading</i>, run the
  <a href="#request-error-steps">request error steps</a> for event <code title="event-xhr-abort"><a href="#event-xhr-abort">abort</a></code>.
 
  <li>
-  <p>Change the state to <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a>.
+  <p>Set <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> to <i title="">unset</i>.
 
   <p class="note">No <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code> event
   is dispatched.
@@ -1626,10 +1629,9 @@ resources using <a class="external" href="https://encoding.spec.whatwg.org/#utf-
   <p>Sets the `<code title="">Content-Type</code>` header for <a href="#response">response</a> to
   <var title="">mime</var>.
 
-  <p>Throws an <code>InvalidStateError</code>
-  exception if the state is
-  <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a> or
-  <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>.
+  <p>Throws an <code>InvalidStateError</code> exception if
+  <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is
+  <i title="">loading</i> or <i title="">done</i>.
 
   <p>Throws a <code>SyntaxError</code> exception if
   <var title="">mime</var> is not a valid MIME type.
@@ -1641,9 +1643,8 @@ resources using <a class="external" href="https://encoding.spec.whatwg.org/#utf-
 method must run these steps:
 
 <ol>
- <li><p>If the state is
- <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a> or
- <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>,
+ <li><p>If <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is
+ <i title="">loading</i> or <i title="">done</i>,
  <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an
  <code>InvalidStateError</code> exception.
 
@@ -1681,9 +1682,9 @@ method must run these steps:
   <a class="external" href="https://html.spec.whatwg.org/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
   <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#worker-environment">worker environment</a>
   <p>When set: throws an
-  <code>InvalidStateError</code> exception if the
-  state is <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a> or
-  <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>.
+  <code>InvalidStateError</code> exception if
+  <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is <i title="">loading</i> or
+  <i title="">done</i>.
   <p>When set: throws an
   <code>InvalidAccessError</code> exception if the
   <a href="#synchronous-flag">synchronous flag</a> is set and the
@@ -1707,8 +1708,8 @@ attribute must run these steps:
  <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#worker-environment">worker environment</a> and the given
  value is "<code title="">document</code>", terminate these steps.
 
- <li><p>If the state is <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a> or
- <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>,
+ <li><p>If <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is
+ <i title="">loading</i> or <i title="">done</i>,
  <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an
  <code>InvalidStateError</code> exception.
 
@@ -1745,8 +1746,8 @@ steps:
  is the empty string or "<code title="">text</code>"</dt>
  <dd>
   <ol>
-   <li><p>If the state is not <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a> or
-   <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>, return the empty string.
+   <li><p>If <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is not
+   <i title="">loading</i> or <i title="">done</i>, return the empty string.
 
    <li><p>Return the <a href="#text-response">text response</a>.
   </ol>
@@ -1754,8 +1755,8 @@ steps:
  <dt>Otherwise</dt>
  <dd>
   <ol>
-   <li><p>If the state is not <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>, return
-   null.
+   <li><p>If <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is not
+   <i title="">done</i>, return null.
 
    <li>
     <dl class="switch">
@@ -1810,8 +1811,8 @@ steps:
  <code>InvalidStateError</code> exception.
 
 
- <li><p>If the state is not <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a> or
- <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>, return the empty string.
+ <li><p>If <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is not
+ <i title="">loading</i> or <i title="">done</i>, return the empty string.
 
  <li><p>Return the <a href="#text-response">text response</a>.
 </ol>
@@ -1841,8 +1842,8 @@ attribute must return the result of running these steps:
  <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an
  <code>InvalidStateError</code> exception.
 
- <li><p>If the state is not <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a>, return
- null.
+ <li><p>If <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is not <i title="">done</i>,
+ return null.
 
  <li><p>Return the <a href="#document-response">document response</a>.
 </ol>

@@ -237,8 +237,19 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
   [Exposed=Window] readonly attribute <span data-anolis-spec=dom>Document</span>? <span title="dom-XMLHttpRequest-responseXML">responseXML</span>;
 };</pre>
 
-<p>Each <code>XMLHttpRequest</code> object has a unique, associated
+<p>An <code>XMLHttpRequest</code> object has an associated
 <code>XMLHttpRequestUpload</code> object.
+
+<p>An <code>XMLHttpRequest</code> object has an associated
+<dfn title=concept-XMLHttpRequest-state>state</dfn>, which is one of
+<i title>unsent</i>,
+<i title>opened</i>,
+<i title>headers received</i>,
+<i title>loading</i>, and
+<i title>done</i>. Unless stated otherwise it is <i title>unsent</i>.
+
+<p>An <code>XMLHttpRequest</code> object has an associated
+<dfn id=send-flag><code>send()</code> flag</dfn>. Unless stated otherwise it is unset.
 
 
 <h3 id="constructors">Constructors</h3>
@@ -271,11 +282,10 @@ constructor must run these steps:
 <h3>Garbage collection</h3>
 <!-- Based on EventSource and WebSocket. Not sure what I am doing. -->
 
-<p>An <code>XMLHttpRequest</code> object must not be garbage collected if
-its state is <span title=dom-XMLHttpRequest-OPENED>OPENED</span> and the
-<span><code>send()</code> flag</span> is set, its state is
-<span title=dom-XMLHttpRequest-HEADERS_RECEIVED>HEADERS_RECEIVED</span>, or
-its state is <span title=dom-XMLHttpRequest-LOADING>LOADING</span> and it has one or more
+<p>An <code>XMLHttpRequest</code> object must not be garbage collected if its
+<span title=concept-XMLHttpRequest-state>state</span> is either
+<i title>opened</i> with the <span><code>send()</code> flag</span> set,
+<i title>headers received</i>, or <i title>loading</i>, and it has one or more
 <span data-anolis-spec=dom title=concept-event-listener>event listeners</span>
 registered whose <b>type</b> is one of
 <code title=event-xhr-readystatechange>readystatechange</code>,
@@ -285,7 +295,7 @@ registered whose <b>type</b> is one of
 <code title=event-xhr-load>load</code>,
 <code title=event-xhr-timeout>timeout</code>, and
 <code title=event-xhr-loadend>loadend</code>.
-<!-- No need to mention upload event listeners as they happen during OPENED. -->
+<!-- No need to mention upload event listeners as they happen during /opened/. -->
 
 <p>If an <code>XMLHttpRequest</code> object is garbage collected while its
 connection is still open, the user agent must <span>terminate the request</span>.
@@ -351,51 +361,46 @@ supported as attribute solely by the
 
 <dl class=domintro>
  <dt><code><var title>client</var> . <span title="dom-XMLHttpRequest-readyState">readyState</span></code>
- <dd><p>Returns the current state.
+ <dd><p>Returns <var title>client</var>'s
+ <span title=concept-XMLHttpRequest-state>state</span>.
 </dl>
 
-<p>The <code>XMLHttpRequest</code> object can be in several states. The
-<dfn title="dom-XMLHttpRequest-readyState"><code>readyState</code></dfn>
-attribute must return the current state, which must be one of the
-following values:
+<p>The <dfn title="dom-XMLHttpRequest-readyState"><code>readyState</code></dfn>
+attribute's getter must return the value from the table below in the cell of the second
+column, from the row where the value in the cell in the first column is
+<span data-anolis-spec=dom>context object</span>'s
+<span title=concept-XMLHttpRequest-state>state</span>:
 
-<dl>
- <dt><dfn title="dom-XMLHttpRequest-UNSENT"><code>UNSENT</code></dfn>
- (numeric value 0)</dt>
- <dd><p>The object has been constructed.</dd>
-
- <dt><dfn title="dom-XMLHttpRequest-OPENED"><code>OPENED</code></dfn>
- (numeric value 1)</dt>
- <dd><p>The <code title="dom-XMLHttpRequest-open">open()</code> method has been successfully invoked.
- During this state request headers can be set using
- <code title="dom-XMLHttpRequest-setRequestHeader">setRequestHeader()</code>
- and the request can be made using the
- <code title="dom-XMLHttpRequest-send">send()</code> method.</dd>
-
- <dt><dfn title="dom-XMLHttpRequest-HEADERS_RECEIVED"><code>HEADERS_RECEIVED</code></dfn>
- (numeric value 2)</dt>
- <dd><p>All redirects (if any) have been followed and all HTTP headers of the
- <span>response</span> have been received.
-
- <dt><dfn title="dom-XMLHttpRequest-LOADING"><code>LOADING</code></dfn>
- (numeric value 3)</dt>
- <dd><p>The <span>response</span>'s
- <span data-anolis-spec=fetch title=concept-response-body>body</span> is being received.
-
- <dt><dfn title="dom-XMLHttpRequest-DONE"><code>DONE</code></dfn>
- (numeric value 4)</dt>
- <dd><p>The data transfer has been completed or something went wrong
- during the transfer (e.g. infinite redirects).</dd>
-</dl>
-
-<p>Initially the <code>XMLHttpRequest</code> object must be in the
-<span title=dom-XMLHttpRequest-UNSENT>UNSENT</span> state.
-
-<p>The <dfn id="send-flag"><code>send()</code> flag</dfn> indicates
-that the <code title="dom-XMLHttpRequest-send">send()</code> method has
-been invoked. It is initially unset and is used during the
-<span title="dom-XMLHttpRequest-OPENED">OPENED</span> state.
-
+<table>
+ <tr>
+  <td><i title>unsent</i>
+  <td><dfn title="dom-XMLHttpRequest-UNSENT"><code>UNSENT</code></dfn> (numeric value 0)
+  <td>The object has been constructed.
+ <tr>
+  <td><i title>opened</i>
+  <td><dfn title="dom-XMLHttpRequest-OPENED"><code>OPENED</code></dfn> (numeric value 1)
+  <td>The <code title="dom-XMLHttpRequest-open">open()</code> method has been successfully
+   invoked. During this state request headers can be set using
+   <code title="dom-XMLHttpRequest-setRequestHeader">setRequestHeader()</code> and the
+   fetch can be initiated using the <code title="dom-XMLHttpRequest-send">send()</code>
+   method.
+ <tr>
+  <td><i title>headers received</i>
+  <td><dfn title="dom-XMLHttpRequest-HEADERS_RECEIVED"><code>HEADERS_RECEIVED</code></dfn>
+   (numeric value 2)
+  <td>All redirects (if any) have been followed and all HTTP headers of the
+   <span>response</span> have been received.
+ <tr>
+  <td><i title>loading</i>
+  <td><dfn title="dom-XMLHttpRequest-LOADING"><code>LOADING</code></dfn> (numeric value 3)
+  <td>The <span>response</span>'s
+  <span data-anolis-spec=fetch title=concept-response-body>body</span> is being received.
+ <tr>
+  <td><i title>done</i>
+  <td><dfn title="dom-XMLHttpRequest-DONE"><code>DONE</code></dfn> (numeric value 4)
+  <td>The data transfer has been completed or something went wrong during the transfer
+   (e.g. infinite redirects).
+</table>
 
 
 <h3 id="request">Request</h3>
@@ -561,11 +566,12 @@ method must run these steps:
   </ul>
 
  <li>
-  <p>If the state is not <span title="dom-XMLHttpRequest-OPENED">OPENED</span>, run these
-  substeps:
+  <p>If the <span title=concept-XMLHttpRequest-state>state</span> is not
+  <i title>opened</i>, run these substeps:
 
   <ol>
-   <li><p>Change the state to <span title="dom-XMLHttpRequest-OPENED">OPENED</span>.
+   <li><p>Set <span title=concept-XMLHttpRequest-state>state</span> to
+   <i title>opened</i>.
 
    <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.
   </ol>
@@ -583,9 +589,8 @@ method must run these steps:
   <span>author request headers</span>.
 
   <p>Throws an <code>InvalidStateError</code>
-  exception if the state is not
-  <span title="dom-XMLHttpRequest-OPENED">OPENED</span> or if the
-  <span><code>send()</code> flag</span> is set.
+  exception if either <span title=concept-XMLHttpRequest-state>state</span> is not
+  <i title>opened</i> or the <span><code>send()</code> flag</span> is set.
 
   <p>Throws a <code>SyntaxError</code> exception if
   <var>name</var> is not a header name or if <var>value</var> is not a header value.
@@ -603,8 +608,8 @@ the author as indicated at the end of the
 method must run these steps:
 
 <ol>
- <li><p>If the state is not <span title="dom-XMLHttpRequest-OPENED">OPENED</span>,
- <span data-anolis-spec=webidl title=throw>throw</span> an
+ <li><p>If <span title=concept-XMLHttpRequest-state>state</span> is not
+ <i title>opened</i>, <span data-anolis-spec=webidl title=throw>throw</span> an
  <code>InvalidStateError</code> exception.
 
  <li><p>If the <span><code>send()</code> flag</span> is set,
@@ -703,10 +708,9 @@ of <span data-anolis-spec=fetch title=concept-fetch>fetching</span>.
   Initially false.
 
   <p>When set: throws an
-  <code>InvalidStateError</code> exception if the
-  state is not <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span> or
-  <span title="dom-XMLHttpRequest-OPENED">OPENED</span>, or if
-  the <span><code>send()</code> flag</span> is set.
+  <code>InvalidStateError</code> exception if
+  <span title=concept-XMLHttpRequest-state>state</span> is not <i title>unset</i> or
+  <i title>opened</i>, or if the <span><code>send()</code> flag</span> is set.
   <p>When set: throws an
   <code>InvalidAccessError</code> exception if
   either the <span>synchronous flag</span> is set and the
@@ -724,8 +728,8 @@ attribute must return its value. Initially its value must be false.
 attribute must run these steps:
 
 <ol>
- <li><p>If the state is not <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span> or
- <span title="dom-XMLHttpRequest-OPENED">OPENED</span>,
+ <li><p>If <span title=concept-XMLHttpRequest-state>state</span> is not
+ <i title>unsent</i> or <i title>opened</i>,
  <span data-anolis-spec=webidl title=throw>throw</span> an
  <code>InvalidStateError</code> exception.
 
@@ -778,19 +782,17 @@ object has an associated <code>XMLHttpRequestUpload</code> object.
   <span>request method</span> is <code>GET</code> or
   <code>HEAD</code>.
 
-  <p>Throws an <code>InvalidStateError</code>
-  exception if the state is not
-  <span title="dom-XMLHttpRequest-OPENED">OPENED</span> or if the
+  <p>Throws an <code>InvalidStateError</code> exception if either
+  <span title=concept-XMLHttpRequest-state>state</span> is not <i title>opened</i> or the
   <span><code>send()</code> flag</span> is set.
- </dd>
 </dl>
 
 <p>The <dfn title="dom-XMLHttpRequest-send"><code>send(<var>body</var>)</code></dfn>
 method must run these steps:
 
 <ol>
- <li><p>If the state is not <span title="dom-XMLHttpRequest-OPENED">OPENED</span>,
- <span data-anolis-spec=webidl title=throw>throw</span> an
+ <li><p>If <span title=concept-XMLHttpRequest-state>state</span> is not
+ <i title>opened</i>, <span data-anolis-spec=webidl title=throw>throw</span> an
  <code>InvalidStateError</code> exception.
 
  <li><p>If the <span><code>send()</code> flag</span> is set,
@@ -1027,7 +1029,8 @@ method must run these steps:
      <span data-anolis-spec=fetch title=concept-network-error>network error</span>,
      return.
 
-     <li><p>Change the state to <span title="dom-XMLHttpRequest-HEADERS_RECEIVED">HEADERS_RECEIVED</span>.
+     <li><p>Set <span title=concept-XMLHttpRequest-state>state</span> to
+     <i title>headers received</i>.
 
      <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.
     </ol>
@@ -1045,9 +1048,9 @@ method must run these steps:
      <span data-anolis-spec=fetch title=concept-network-error>network error</span>,
      return.
 
-     <li><p>If state is
-     <span title=dom-XMLHttpRequest-HEADERS_RECEIVED>HEADERS_RECEIVED</span>, change the
-     state to <span title="dom-XMLHttpRequest-LOADING">LOADING</span> and
+     <li><p>If <span title=concept-XMLHttpRequest-state>state</span> is
+     <i title>headers received</i>, set
+     <span title=concept-XMLHttpRequest-state>state</span> to <i title>loading</i> and
      <span data-anolis-spec=dom title=concept-event-fire>fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.
 
      <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-progress">progress</code> with <var title>response</var>'s
@@ -1092,7 +1095,7 @@ steps:
  <span data-anolis-spec=fetch title=concept-response-body>body</span> using
  <var title>response</var>.
 
- <li><p>Change the state to <span title="dom-XMLHttpRequest-DONE">DONE</span>.
+ <li><p>Set <span title=concept-XMLHttpRequest-state>state</span> to <i title>done</i>.
 
  <li><p>Unset the <span><code>send()</code> flag</span>.
 
@@ -1139,7 +1142,8 @@ steps:
    <dt><i title>fatal</i>
    <dd>
     <ol>
-     <li><p>Change the state to <span title="dom-XMLHttpRequest-DONE">DONE</span>.
+     <li><p>Set <span title=concept-XMLHttpRequest-state>state</span> to
+     <i title>done</i>.
 
      <li><p>Unset the <span><code>send()</code> flag</span>.
 
@@ -1158,7 +1162,7 @@ steps:
 exception <var>exception</var> are:
 
 <ol>
- <li><p>Change the state to <span title="dom-XMLHttpRequest-DONE">DONE</span>.
+ <li><p>Set <span title=concept-XMLHttpRequest-state>state</span> to <i title>done</i>.
 
  <li><p>Unset the <span><code>send()</code> flag</span>.
 
@@ -1216,14 +1220,13 @@ these steps:
 <ol>
  <li><p><span>Terminate the request</span>.
 
- <li><p>If the state is <span title="dom-XMLHttpRequest-OPENED">OPENED</span> with the
- <span><code>send()</code> flag</span> set,
- <span title="dom-XMLHttpRequest-HEADERS_RECEIVED">HEADERS_RECEIVED</span>, or
- <span title="dom-XMLHttpRequest-LOADING">LOADING</span>, run the
+ <li><p>If <span title=concept-XMLHttpRequest-state>state</span> is either
+ <i title>opened</i> with the <span><code>send()</code> flag</span> set,
+ <i title>headers received</i>, or <i title>loading</i>, run the
  <span>request error steps</span> for event <code title=event-xhr-abort>abort</code>.
 
  <li>
-  <p>Change the state to <span title="dom-XMLHttpRequest-UNSENT">UNSENT</span>.
+  <p>Set <span title=concept-XMLHttpRequest-state>state</span> to <i title>unset</i>.
 
   <p class=note>No <code title="event-xhr-readystatechange">readystatechange</code> event
   is dispatched.
@@ -1578,10 +1581,9 @@ resources using <span data-anolis-spec=encoding>utf-8</span>.
   <p>Sets the `<code title>Content-Type</code>` header for <span>response</span> to
   <var title>mime</var>.
 
-  <p>Throws an <code>InvalidStateError</code>
-  exception if the state is
-  <span title="dom-XMLHttpRequest-LOADING">LOADING</span> or
-  <span title="dom-XMLHttpRequest-DONE">DONE</span>.
+  <p>Throws an <code>InvalidStateError</code> exception if
+  <span title=concept-XMLHttpRequest-state>state</span> is
+  <i title>loading</i> or <i title>done</i>.
 
   <p>Throws a <code>SyntaxError</code> exception if
   <var title>mime</var> is not a valid MIME type.
@@ -1593,9 +1595,8 @@ resources using <span data-anolis-spec=encoding>utf-8</span>.
 method must run these steps:
 
 <ol>
- <li><p>If the state is
- <span title="dom-XMLHttpRequest-LOADING">LOADING</span> or
- <span title="dom-XMLHttpRequest-DONE">DONE</span>,
+ <li><p>If <span title=concept-XMLHttpRequest-state>state</span> is
+ <i title>loading</i> or <i title>done</i>,
  <span data-anolis-spec=webidl title=throw>throw</span> an
  <code>InvalidStateError</code> exception.
 
@@ -1633,9 +1634,9 @@ method must run these steps:
   <span data-anolis-spec=html>JavaScript global environment</span> is a
   <span data-anolis-spec=html>worker environment</span>
   <p>When set: throws an
-  <code>InvalidStateError</code> exception if the
-  state is <span title="dom-XMLHttpRequest-LOADING">LOADING</span> or
-  <span title="dom-XMLHttpRequest-DONE">DONE</span>.
+  <code>InvalidStateError</code> exception if
+  <span title=concept-XMLHttpRequest-state>state</span> is <i title>loading</i> or
+  <i title>done</i>.
   <p>When set: throws an
   <code>InvalidAccessError</code> exception if the
   <span>synchronous flag</span> is set and the
@@ -1659,8 +1660,8 @@ attribute must run these steps:
  <span data-anolis-spec=html>worker environment</span> and the given
  value is "<code title>document</code>", terminate these steps.
 
- <li><p>If the state is <span title="dom-XMLHttpRequest-LOADING">LOADING</span> or
- <span title="dom-XMLHttpRequest-DONE">DONE</span>,
+ <li><p>If <span title=concept-XMLHttpRequest-state>state</span> is
+ <i title>loading</i> or <i title>done</i>,
  <span data-anolis-spec=webidl title=throw>throw</span> an
  <code>InvalidStateError</code> exception.
 
@@ -1697,8 +1698,8 @@ steps:
  is the empty string or "<code title>text</code>"</dt>
  <dd>
   <ol>
-   <li><p>If the state is not <span title="dom-XMLHttpRequest-LOADING">LOADING</span> or
-   <span title="dom-XMLHttpRequest-DONE">DONE</span>, return the empty string.
+   <li><p>If <span title=concept-XMLHttpRequest-state>state</span> is not
+   <i title>loading</i> or <i title>done</i>, return the empty string.
 
    <li><p>Return the <span>text response</span>.
   </ol>
@@ -1706,8 +1707,8 @@ steps:
  <dt>Otherwise</dt>
  <dd>
   <ol>
-   <li><p>If the state is not <span title="dom-XMLHttpRequest-DONE">DONE</span>, return
-   null.
+   <li><p>If <span title=concept-XMLHttpRequest-state>state</span> is not
+   <i title>done</i>, return null.
 
    <li>
     <dl class=switch>
@@ -1762,8 +1763,8 @@ steps:
  <code>InvalidStateError</code> exception.
 
 
- <li><p>If the state is not <span title="dom-XMLHttpRequest-LOADING">LOADING</span> or
- <span title="dom-XMLHttpRequest-DONE">DONE</span>, return the empty string.
+ <li><p>If <span title=concept-XMLHttpRequest-state>state</span> is not
+ <i title>loading</i> or <i title>done</i>, return the empty string.
 
  <li><p>Return the <span>text response</span>.
 </ol>
@@ -1793,8 +1794,8 @@ attribute must return the result of running these steps:
  <span data-anolis-spec=webidl title=throw>throw</span> an
  <code>InvalidStateError</code> exception.
 
- <li><p>If the state is not <span title="dom-XMLHttpRequest-DONE">DONE</span>, return
- null.
+ <li><p>If <span title=concept-XMLHttpRequest-state>state</span> is not <i title>done</i>,
+ return null.
 
  <li><p>Return the <span>document response</span>.
 </ol>
