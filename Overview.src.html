@@ -251,6 +251,9 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
 <p>An <code>XMLHttpRequest</code> object has an associated
 <dfn id=send-flag><code>send()</code> flag</dfn>. Unless stated otherwise it is unset.
 
+<p>An <code>XMLHttpRequest</code> object has an associated <dfn>stop timeout flag</dfn>.
+Unless stated otherwise it is unset.
+
 
 <h3 id="constructors">Constructors</h3>
 
@@ -552,6 +555,7 @@ method must run these steps:
   <p>Set variables associated with the object as follows:
 
   <ul>
+   <li><p>Unset the <span>stop timeout flag</span>.
    <li><p>Set <span>request method</span> to <var>method</var>.
    <li><p>Set <span>request URL</span> to <var title>parsedURL</var>.
    <li><p>Set the <span>synchronous flag</span>, if <var>async</var> is false, and unset
@@ -709,7 +713,7 @@ of <span data-anolis-spec=fetch title=concept-fetch>fetching</span>.
 
   <p>When set: throws an
   <code>InvalidStateError</code> exception if
-  <span title=concept-XMLHttpRequest-state>state</span> is not <i title>unset</i> or
+  <span title=concept-XMLHttpRequest-state>state</span> is not <i title>unsent</i> or
   <i title>opened</i>, or if the <span><code>send()</code> flag</span> is set.
   <p>When set: throws an
   <code>InvalidAccessError</code> exception if
@@ -961,12 +965,26 @@ method must run these steps:
     <span data-anolis-spec=html title="queue a task">queued</span> on the
     <span data-anolis-spec=html>networking task source</span> per below.
 
-    <p>If the <code title="dom-XMLHttpRequest-timeout">timeout</code> attribute value is
-    not 0, <span data-anolis-spec=fetch title=concept-fetch-terminate>terminate</span>
-    <span data-anolis-spec=fetch title=concept-fetch>fetching</span> after the amount of
-    milliseconds specified by the <code title="dom-XMLHttpRequest-timeout">timeout</code>
-    attribute value have passed with reason <i title>timeout</i>.
-    <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=22228 -->
+    <p>Run these subsubsteps <span data-anolis-spec=html>in parallel</span>:
+
+    <ol>
+     <li><p>Let <var title>seconds</var> be zero.
+
+     <li>
+      <p>Every millisecond, as long as the <span>stop timeout flag</span> is unset,
+      <span data-anolis-spec=html>queue a microtask</span> to run these subsubsubsteps:
+
+      <ol>
+       <li><p>Increase <var title>seconds</var> by one.
+
+       <li><p>If <var title>seconds</var> is equal or greater than
+       the <code title="dom-XMLHttpRequest-timeout">timeout</code> attribute value and
+       the <code title="dom-XMLHttpRequest-timeout">timeout</code> attribute value is not
+       zero, <span data-anolis-spec=fetch title=concept-fetch-terminate>terminate</span>
+       <span data-anolis-spec=fetch title=concept-fetch>fetching</span> with reason
+       <i title>timeout</i>.
+      </ol>
+    </ol>
 
     <p>To <span data-anolis-spec=fetch>process request body</span> for
     <var title>request</var>, run these subsubsteps:
@@ -1021,6 +1039,9 @@ method must run these steps:
     run these subsubsteps:
 
     <ol>
+     <li><p>If the <span>stop timeout flag</span> is unset, set the
+     <span>stop timeout flag</span>.
+
      <li><p>Set <span>response</span> to <var title>response</var>.
 
      <li><p><span>Handle errors</span> for <var title>response</var>.
@@ -1072,8 +1093,16 @@ method must run these steps:
   <ol>
    <li><p>Release the <span data-anolis-spec=html>storage mutex</span>.
 
-   <li><p>Let <var title>response</var> be the result of
-   <span data-anolis-spec=fetch title=concept-fetch>fetching</span> <var title>req</var>.
+   <li>
+    <p>Let <var title>response</var> be the result of
+    <span data-anolis-spec=fetch title=concept-fetch>fetching</span> <var title>req</var>.
+
+    <p>If the <code title=dom-XMLHttpRequest-timeout>timeout</code> attribute value is not
+    zero, <span data-anolis-spec=fetch title=concept-fetch-terminate>terminate</span> this
+    <span data-anolis-spec=fetch title=concept-fetch>fetch</span> if it has not returned
+    within the amount of milliseconds from the
+    <code title=dom-XMLHttpRequest-timeout>timeout</code> attribute value with reason
+    <i title>timeout</i>.
 
    <li><p>Run <span>handle response end-of-file</span> for <var title>response</var>.
   </ol>
@@ -1226,7 +1255,7 @@ these steps:
  <span>request error steps</span> for event <code title=event-xhr-abort>abort</code>.
 
  <li>
-  <p>Set <span title=concept-XMLHttpRequest-state>state</span> to <i title>unset</i>.
+  <p>Set <span title=concept-XMLHttpRequest-state>state</span> to <i title>unsent</i>.
 
   <p class=note>No <code title="event-xhr-readystatechange">readystatechange</code> event
   is dispatched.
