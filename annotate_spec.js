@@ -68,11 +68,12 @@
         testLinksAdded = true;
     }
 
-    var dd = document.currentScript.parentElement.parentElement.appendChild(document.createElement('dd'));
-    var cb = dd.appendChild(document.createElement('label')).appendChild(document.createElement('input'));
+    var ref = document.querySelector("#xmlhttprequest-tests"),
+        dd = ref.parentElement.insertBefore(document.createElement('dd'), ref.nextElementSibling.nextElementSibling),
+        cb = dd.appendChild(document.createElement('label')).appendChild(document.createElement('input'));
     cb.type = "checkbox";
     cb.onchange = toggleTestsuiteLinks;
-    cb.parentElement.appendChild(document.createTextNode(' Link spec assertations to relevant tests'));
+    cb.parentElement.appendChild(document.createTextNode(' Add links to tests from requirements'));
 
 
     function toggleTestsuiteLinks(event) {
