@@ -73,7 +73,7 @@
         cb = dd.appendChild(document.createElement('label')).appendChild(document.createElement('input'));
     cb.type = "checkbox";
     cb.onchange = toggleTestsuiteLinks;
-    cb.parentElement.appendChild(document.createTextNode(' Add links to tests from requirements'));
+    cb.parentElement.appendChild(document.createTextNode(' Add links to tests from requirements (beta)'));
 
 
     function toggleTestsuiteLinks(event) {
