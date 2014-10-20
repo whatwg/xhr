@@ -420,18 +420,16 @@ request-associated concepts:
 <dfn>request URL</dfn>,
 <dfn id="author-request-headers">author request headers</dfn>,
 <dfn>request body</dfn>,
-<dfn>synchronous flag</dfn>,
-<dfn id="upload-complete-flag">upload complete flag</dfn>, and
-<dfn id="upload-events-flag">upload events flag</dfn>.
+<dfn>synchronous flag</dfn>, and
+<dfn id="upload-complete-flag">upload complete flag</dfn>.
 
 <p>The <span>author request headers</span> is an initially empty
 <span data-anolis-spec=fetch title=concept-header-list>header list</span>.
 
 <p>The <span>request body</span> is initially null.
 
-<p>The <span>synchronous flag</span>,
-<span>upload complete flag</span>, and
-<span>upload events flag</span> are initially unset.
+<p>The <span>synchronous flag</span> and <span>upload complete flag</span> are initially
+unset.
 
 <hr>
 
@@ -911,8 +909,9 @@ method must run these steps:
    <dt><span data-anolis-spec=fetch>synchronous flag</span>
    <dd>Set if the <span>synchronous flag</span> is set.
    <dt><span data-anolis-spec=fetch title=concept-request-mode>mode</span>
-   <dd><i title>CORS</i> if the <span>upload events flag</span> is unset, and
-   <i title>CORS-with-forced-preflight</i> otherwise.
+   <dd><i title>CORS-with-forced-preflight</i> if one or more event listeners are
+   registered on the associated <code>XMLHttpRequestUpload</code> object and
+   <i title>CORS</i> otherwise.
    <dt><span data-anolis-spec=fetch title=concept-request-credentials-mode>credentials mode</span>
    <dd>If the <code title=dom-XMLHttpRequest-withCredentials>withCredentials</code>
    attribute value is true, <i title>include</i>, and <i title>same-origin</i> otherwise.
@@ -938,7 +937,7 @@ method must run these steps:
  <span data-anolis-spec=fetch title=concept-header-list-append>append</span>
  `<code>Accept</code>`/`<code title>*/*</code>` to it.
 
- <li><p>Unset the <span>upload complete flag</span> and <span>upload events flag</span>.
+ <li><p>Unset the <span>upload complete flag</span>.
 
  <li><p>If <var title>req</var>'s
  <span data-anolis-spec=fetch title=concept-request-body>body</span> is null,
@@ -950,9 +949,6 @@ method must run these steps:
   <p>If the <span>synchronous flag</span> is unset, run these substeps:
 
   <ol>
-   <li><p>If one or more event listeners are registered on the
-   <code>XMLHttpRequestUpload</code> object, set the <span>upload events flag</span>.
-
    <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadstart">loadstart</code> with 0 and 0.
 
    <li><p>If the <span>upload complete flag</span> is unset,

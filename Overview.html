@@ -468,18 +468,16 @@ request-associated concepts:
 <dfn id="request-url">request URL</dfn>,
 <dfn id="author-request-headers">author request headers</dfn>,
 <dfn id="request-body">request body</dfn>,
-<dfn id="synchronous-flag">synchronous flag</dfn>,
-<dfn id="upload-complete-flag">upload complete flag</dfn>, and
-<dfn id="upload-events-flag">upload events flag</dfn>.
+<dfn id="synchronous-flag">synchronous flag</dfn>, and
+<dfn id="upload-complete-flag">upload complete flag</dfn>.
 
 <p>The <a href="#author-request-headers">author request headers</a> is an initially empty
 <a class="external" href="https://fetch.spec.whatwg.org/#concept-header-list" title="concept-header-list">header list</a>.
 
 <p>The <a href="#request-body">request body</a> is initially null.
 
-<p>The <a href="#synchronous-flag">synchronous flag</a>,
-<a href="#upload-complete-flag">upload complete flag</a>, and
-<a href="#upload-events-flag">upload events flag</a> are initially unset.
+<p>The <a href="#synchronous-flag">synchronous flag</a> and <a href="#upload-complete-flag">upload complete flag</a> are initially
+unset.
 
 <hr>
 
@@ -959,8 +957,9 @@ method must run these steps:
    <dt><a data-anolis-spec="fetch" href="#synchronous-flag">synchronous flag</a>
    <dd>Set if the <a href="#synchronous-flag">synchronous flag</a> is set.
    <dt><a class="external" href="https://fetch.spec.whatwg.org/#concept-request-mode" title="concept-request-mode">mode</a>
-   <dd><i title="">CORS</i> if the <a href="#upload-events-flag">upload events flag</a> is unset, and
-   <i title="">CORS-with-forced-preflight</i> otherwise.
+   <dd><i title="">CORS-with-forced-preflight</i> if one or more event listeners are
+   registered on the associated <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object and
+   <i title="">CORS</i> otherwise.
    <dt><a class="external" href="https://fetch.spec.whatwg.org/#concept-request-credentials-mode" title="concept-request-credentials-mode">credentials mode</a>
    <dd>If the <code title="dom-XMLHttpRequest-withCredentials"><a href="#dom-xmlhttprequest-withcredentials">withCredentials</a></code>
    attribute value is true, <i title="">include</i>, and <i title="">same-origin</i> otherwise.
@@ -986,7 +985,7 @@ method must run these steps:
  <a class="external" href="https://fetch.spec.whatwg.org/#concept-header-list-append" title="concept-header-list-append">append</a>
  `<code>Accept</code>`/`<code title="">*/*</code>` to it.
 
- <li><p>Unset the <a href="#upload-complete-flag">upload complete flag</a> and <a href="#upload-events-flag">upload events flag</a>.
+ <li><p>Unset the <a href="#upload-complete-flag">upload complete flag</a>.
 
  <li><p>If <var title="">req</var>'s
  <a class="external" href="https://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a> is null,
@@ -998,9 +997,6 @@ method must run these steps:
   <p>If the <a href="#synchronous-flag">synchronous flag</a> is unset, run these substeps:
 
   <ol>
-   <li><p>If one or more event listeners are registered on the
-   <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object, set the <a href="#upload-events-flag">upload events flag</a>.
-
    <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadstart"><a href="#event-xhr-loadstart">loadstart</a></code> with 0 and 0.
 
    <li><p>If the <a href="#upload-complete-flag">upload complete flag</a> is unset,
