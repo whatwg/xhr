@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-9-november-2014">Living Standard — Last Updated 9 November 2014</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-11-november-2014">Living Standard — Last Updated 11 November 2014</h2>
 
 <dl>
  <dt>Participate:
@@ -518,15 +518,16 @@ unset.
   attribute is not the empty string.
 </dl>
 
-<p class="critical" id="sync-warning">Developers must not pass false for the
+<p class="critical no-backref" id="sync-warning">Synchronous <code><a href="#xmlhttprequest">XMLHttpRequest</a></code>
+outside of workers is in the process of being removed from the web platform. (This is a
+long process that takes many years.) Developers therefore must not pass false for the
 <var title="">async</var> argument when the
 <a class="external" href="https://html.spec.whatwg.org/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
 <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#document-environment">document environment</a> as it has detrimental effects to
 the end user's experience. User agents are strongly encouraged to warn about such usage in
 developer tools and may experiment with
 <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throwing</a> an
-<code>InvalidAccessError</code> exception when it occurs so the
-feature can eventually be removed from the platform.
+<code>InvalidAccessError</code> exception when it occurs.
 
 <p>The
 <dfn id="dom-xmlhttprequest-open" title="dom-XMLHttpRequest-open"><code>open(<var title="">method</var>, <var title="">url</var>, <var title="">async</var>, <var title="">username</var>, <var title="">password</var>)</code></dfn>
@@ -2291,6 +2292,7 @@ Andrea Marchesini,
 Asbjørn Ulsberg,
 Boris Zbarsky,
 Björn Höhrmann,
+Caitlin Potter,
 Cameron McCormack,
 Chris Marrin,
 Christophe Jolif,

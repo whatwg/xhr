@@ -470,15 +470,16 @@ unset.
   attribute is not the empty string.
 </dl>
 
-<p class=critical id=sync-warning>Developers must not pass false for the
+<p class="critical no-backref" id=sync-warning>Synchronous <code>XMLHttpRequest</code>
+outside of workers is in the process of being removed from the web platform. (This is a
+long process that takes many years.) Developers therefore must not pass false for the
 <var title>async</var> argument when the
 <span data-anolis-spec=html>JavaScript global environment</span> is a
 <span data-anolis-spec=html>document environment</span> as it has detrimental effects to
 the end user's experience. User agents are strongly encouraged to warn about such usage in
 developer tools and may experiment with
 <span data-anolis-spec=webidl title=throw>throwing</span> an
-<code>InvalidAccessError</code> exception when it occurs so the
-feature can eventually be removed from the platform.
+<code>InvalidAccessError</code> exception when it occurs.
 
 <p>The
 <dfn id="dom-xmlhttprequest-open" title="dom-XMLHttpRequest-open"><code>open(<var title>method</var>, <var title>url</var>, <var title>async</var>, <var title>username</var>, <var title>password</var>)</code></dfn>
@@ -2201,6 +2202,7 @@ Andrea Marchesini,
 Asbj&oslash;rn Ulsberg,
 Boris Zbarsky,
 Bj&ouml;rn H&ouml;hrmann,
+Caitlin Potter,
 Cameron McCormack,
 Chris Marrin,
 Christophe Jolif,
