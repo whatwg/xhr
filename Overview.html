@@ -519,13 +519,11 @@ unset.
 </dl>
 
 <p class="critical no-backref" id="sync-warning">Synchronous <code><a href="#xmlhttprequest">XMLHttpRequest</a></code>
-outside of workers is in the process of being removed from the web platform. (This is a
-long process that takes many years.) Developers therefore must not pass false for the
-<var title="">async</var> argument when the
+outside of workers is in the process of being removed from the web platform as it has
+detrimental effects to the end user's experience. (This is a long process that takes many
+years.) Developers must not pass false for the <var title="">async</var> argument  when the
 <a class="external" href="https://html.spec.whatwg.org/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
-<a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#document-environment">document environment</a> as it has detrimental effects to
-the end user's experience. User agents are strongly encouraged to warn about such usage in
-developer tools and may experiment with
+<a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#document-environment">document environment</a>. User agents are strongly encouraged to warn about such usage in developer tools and may experiment with
 <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throwing</a> an
 <code>InvalidAccessError</code> exception when it occurs.
 
