@@ -824,11 +824,11 @@ method must run these steps:
     to <var>Content-Type</var>.
 
     <p>Set <span>request body</span> to <var>body</var>,
-    <span data-anolis-spec=domps title=concept-serialize>serialized</span>,
+    <span data-anolis-spec=domps title=concept-serialize>serialized</span> with the
+    <i title>require well-formed flag</i> set,
     <span data-anolis-spec=webidl title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</span>,
     and <span data-anolis-spec=encoding title="utf-8 encode">utf-8 encoded</span>.
-    Re-throw any exception
-    <span data-anolis-spec=domps title=concept-serialize>serializing</span> throws.
+    Rethrow any exceptions.
 
     <p class=note>If <var>body</var> cannot be
     <span data-anolis-spec=domps title=concept-serialize>serialized</span>, an
@@ -890,13 +890,13 @@ method must run these steps:
    <dd>Set.
    <dt><span data-anolis-spec=fetch title=concept-request-referrer>referrer</span>
    <dd><span title=concept-XMLHttpRequest-settings-object>settings object</span>'s
-   <span data-anolis-spec=html>API referrer source</span>'s
+   <span data-anolis-spec=html>referrer source</span>'s
    <span data-anolis-spec=dom title=concept-document-url>URL</span> if
    <span title=concept-XMLHttpRequest-settings-object>settings object</span>'s
-   <span data-anolis-spec=html>API referrer source</span> is a
+   <span data-anolis-spec=html>referrer source</span> is a
    <span data-anolis-spec=dom title=concept-document>document</span>, and
    <span title=concept-XMLHttpRequest-settings-object>settings object</span>'s
-   <span data-anolis-spec=html>API referrer source</span> otherwise
+   <span data-anolis-spec=html>referrer source</span> otherwise
    <dt><span data-anolis-spec=fetch title=concept-request-body>body</span>
    <dd><span>request body</span>
    <dt><span data-anolis-spec=fetch title=concept-request-client>client</span>

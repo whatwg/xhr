@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-11-november-2014">Living Standard — Last Updated 11 November 2014</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-6-december-2014">Living Standard — Last Updated 6 December 2014</h2>
 
 <dl>
  <dt>Participate:
@@ -872,14 +872,14 @@ method must run these steps:
     to <var>Content-Type</var>.
 
     <p>Set <a href="#request-body">request body</a> to <var>body</var>,
-    <a class="external" href="https://dvcs.w3.org/hg/innerhtml/raw-file/tip/index.html#concept-serialize" title="concept-serialize">serialized</a>,
+    <a class="external" href="https://dvcs.w3.org/hg/innerhtml/raw-file/tip/index.html#dfn-concept-fragment-serializing-algorithm" title="concept-serialize">serialized</a> with the
+    <i title="">require well-formed flag</i> set,
     <a class="external" href="http://heycam.github.io/webidl/#dfn-obtain-unicode" title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</a>,
     and <a class="external" href="https://encoding.spec.whatwg.org/#utf-8-encode" title="utf-8 encode">utf-8 encoded</a>.
-    Re-throw any exception
-    <a class="external" href="https://dvcs.w3.org/hg/innerhtml/raw-file/tip/index.html#concept-serialize" title="concept-serialize">serializing</a> throws.
+    Rethrow any exceptions.
 
     <p class="note">If <var>body</var> cannot be
-    <a class="external" href="https://dvcs.w3.org/hg/innerhtml/raw-file/tip/index.html#concept-serialize" title="concept-serialize">serialized</a>, an
+    <a class="external" href="https://dvcs.w3.org/hg/innerhtml/raw-file/tip/index.html#dfn-concept-fragment-serializing-algorithm" title="concept-serialize">serialized</a>, an
     <code>InvalidStateError</code> exception is thrown.
 
    <dt id="dom-xmlhttprequest-send-bodyinit"><code class="external"><a href="https://fetch.spec.whatwg.org/#bodyinit">BodyInit</a></code>
@@ -938,13 +938,13 @@ method must run these steps:
    <dd>Set.
    <dt><a class="external" href="https://fetch.spec.whatwg.org/#concept-request-referrer" title="concept-request-referrer">referrer</a>
    <dd><a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
-   <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#api-referrer-source">API referrer source</a>'s
+   <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#referrer-source">referrer source</a>'s
    <a class="external" href="https://dom.spec.whatwg.org/#concept-document-url" title="concept-document-url">URL</a> if
    <a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
-   <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#api-referrer-source">API referrer source</a> is a
+   <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#referrer-source">referrer source</a> is a
    <a class="external" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>, and
    <a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
-   <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#api-referrer-source">API referrer source</a> otherwise
+   <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#referrer-source">referrer source</a> otherwise
    <dt><a class="external" href="https://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>
    <dd><a href="#request-body">request body</a>
    <dt><a class="external" href="https://fetch.spec.whatwg.org/#concept-request-client" title="concept-request-client">client</a>
