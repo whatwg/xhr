@@ -180,8 +180,7 @@ certificates. Specifically it does not refer to proxy authentication or the
 
 <h2>Interface <code title>XMLHttpRequest</code></h2>
 
-<pre class="idl">[NoInterfaceObject,
- Exposed=(Window,Worker)]
+<pre class="idl">[Exposed=(Window,Worker)]
 interface <dfn id="xmlhttprequesteventtarget">XMLHttpRequestEventTarget</dfn> : <span data-anolis-spec=dom>EventTarget</span> {
   // <a href="#event-handlers">event handlers</a>
   attribute <span data-anolis-spec=html>EventHandler</span> <span title="handler-xhr-onloadstart">onloadstart</span>;

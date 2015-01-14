@@ -1,13 +1,13 @@
 <!DOCTYPE html><html lang="en-US"><meta charset="utf-8">
 <title>XMLHttpRequest Standard</title>
-<link href="//whatwg.org/style/specification" rel="stylesheet">
-<link href="//resources.whatwg.org/logo-xhr.svg" rel="icon">
+<link rel="stylesheet" href="//whatwg.org/style/specification">
+<link rel="icon" href="//resources.whatwg.org/logo-xhr.svg">
 
 <div class="head">
 
-<p><a class="logo" href="//whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100"></a>
+<p><a class="logo" href="//whatwg.org/"><img height="100" src="//resources.whatwg.org/logo-xhr.svg" width="100" alt="WHATWG"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-6-december-2014">Living Standard — Last Updated 6 December 2014</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-14-january-2015">Living Standard — Last Updated 14 January 2015</h2>
 
 <dl>
  <dt>Participate:
@@ -101,7 +101,7 @@ transferring data between a client and a server.
 <p><em>This section is non-normative.</em>
 
 <p>The <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object is an API for
-<a class="external" href="https://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">fetching</a> resources.
+<a title="concept-fetch" class="external" href="https://fetch.spec.whatwg.org/#concept-fetch">fetching</a> resources.
 
 <p>The name <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> is historical and has no bearing on its
 functionality.
@@ -228,17 +228,16 @@ certificates. Specifically it does not refer to proxy authentication or the
 
 <h2 id="interface-xmlhttprequest"><span class="secno">4 </span>Interface <code title="">XMLHttpRequest</code></h2>
 
-<pre class="idl">[NoInterfaceObject,
- Exposed=(Window,Worker)]
+<pre class="idl">[Exposed=(Window,Worker)]
 interface <dfn id="xmlhttprequesteventtarget">XMLHttpRequestEventTarget</dfn> : <a class="external" href="https://dom.spec.whatwg.org/#eventtarget">EventTarget</a> {
   // <a href="#event-handlers">event handlers</a>
-  attribute <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a href="#handler-xhr-onloadstart" title="handler-xhr-onloadstart">onloadstart</a>;
-  attribute <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a href="#handler-xhr-onprogress" title="handler-xhr-onprogress">onprogress</a>;
-  attribute <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a href="#handler-xhr-onabort" title="handler-xhr-onabort">onabort</a>;
-  attribute <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a href="#handler-xhr-onerror" title="handler-xhr-onerror">onerror</a>;
-  attribute <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a href="#handler-xhr-onload" title="handler-xhr-onload">onload</a>;
-  attribute <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a href="#handler-xhr-ontimeout" title="handler-xhr-ontimeout">ontimeout</a>;
-  attribute <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a href="#handler-xhr-onloadend" title="handler-xhr-onloadend">onloadend</a>;
+  attribute <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a title="handler-xhr-onloadstart" href="#handler-xhr-onloadstart">onloadstart</a>;
+  attribute <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a title="handler-xhr-onprogress" href="#handler-xhr-onprogress">onprogress</a>;
+  attribute <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a title="handler-xhr-onabort" href="#handler-xhr-onabort">onabort</a>;
+  attribute <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a title="handler-xhr-onerror" href="#handler-xhr-onerror">onerror</a>;
+  attribute <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a title="handler-xhr-onload" href="#handler-xhr-onload">onload</a>;
+  attribute <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a title="handler-xhr-ontimeout" href="#handler-xhr-ontimeout">ontimeout</a>;
+  attribute <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a title="handler-xhr-onloadend" href="#handler-xhr-onloadend">onloadend</a>;
 };
 
 [Exposed=(Window,Worker)]
@@ -254,48 +253,48 @@ enum <dfn id="xmlhttprequestresponsetype">XMLHttpRequestResponseType</dfn> {
   "text"
 };
 
-[<a href="#dom-xmlhttprequest" title="dom-XMLHttpRequest">Constructor</a>,
+[<a title="dom-XMLHttpRequest" href="#dom-xmlhttprequest">Constructor</a>,
  Exposed=(Window,Worker)]
 interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <a href="#xmlhttprequesteventtarget">XMLHttpRequestEventTarget</a> {
   // <a href="#event-handlers">event handler</a>
-  attribute <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a href="#handler-xhr-onreadystatechange" title="handler-xhr-onreadystatechange">onreadystatechange</a>;
+  attribute <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a title="handler-xhr-onreadystatechange" href="#handler-xhr-onreadystatechange">onreadystatechange</a>;
 
   // <a href="#states">states</a>
-  const unsigned short <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a> = 0;
-  const unsigned short <a href="#dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED">OPENED</a> = 1;
-  const unsigned short <a href="#dom-xmlhttprequest-headers_received" title="dom-XMLHttpRequest-HEADERS_RECEIVED">HEADERS_RECEIVED</a> = 2;
-  const unsigned short <a href="#dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING">LOADING</a> = 3;
-  const unsigned short <a href="#dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE">DONE</a> = 4;
-  readonly attribute unsigned short <a href="#dom-xmlhttprequest-readystate" title="dom-XMLHttpRequest-readyState">readyState</a>;
+  const unsigned short <a title="dom-XMLHttpRequest-UNSENT" href="#dom-xmlhttprequest-unsent">UNSENT</a> = 0;
+  const unsigned short <a title="dom-XMLHttpRequest-OPENED" href="#dom-xmlhttprequest-opened">OPENED</a> = 1;
+  const unsigned short <a title="dom-XMLHttpRequest-HEADERS_RECEIVED" href="#dom-xmlhttprequest-headers_received">HEADERS_RECEIVED</a> = 2;
+  const unsigned short <a title="dom-XMLHttpRequest-LOADING" href="#dom-xmlhttprequest-loading">LOADING</a> = 3;
+  const unsigned short <a title="dom-XMLHttpRequest-DONE" href="#dom-xmlhttprequest-done">DONE</a> = 4;
+  readonly attribute unsigned short <a title="dom-XMLHttpRequest-readyState" href="#dom-xmlhttprequest-readystate">readyState</a>;
 
   // <a href="#request">request</a>
-  void <a href="#dom-xmlhttprequest-open" title="dom-XMLHttpRequest-open">open</a>(ByteString <var>method</var>, USVString <var title="">url</var>);
-  void <a href="#dom-xmlhttprequest-open" title="dom-XMLHttpRequest-open">open</a>(ByteString <var>method</var>, USVString <var title="">url</var>, boolean <var>async</var>, optional USVString? <var>username</var> = null, optional USVString? <var>password</var> = null);
-  void <a href="#dom-xmlhttprequest-setrequestheader" title="dom-XMLHttpRequest-setRequestHeader">setRequestHeader</a>(ByteString <var>name</var>, ByteString <var>value</var>);
-           attribute unsigned long <a href="#dom-xmlhttprequest-timeout" title="dom-XMLHttpRequest-timeout">timeout</a>;
-           attribute boolean <a href="#dom-xmlhttprequest-withcredentials" title="dom-XMLHttpRequest-withCredentials">withCredentials</a>;
-  readonly attribute <a href="#xmlhttprequestupload">XMLHttpRequestUpload</a> <a href="#dom-xmlhttprequest-upload" title="dom-XMLHttpRequest-upload">upload</a>;
-  void <a href="#dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send">send</a>(optional (<a class="external" href="https://dom.spec.whatwg.org/#document">Document</a> or <a class="external" href="https://fetch.spec.whatwg.org/#bodyinit">BodyInit</a>)? <var>body</var> = null);
-  void <a href="#dom-xmlhttprequest-abort" title="dom-XMLHttpRequest-abort">abort</a>();
+  void <a title="dom-XMLHttpRequest-open" href="#dom-xmlhttprequest-open">open</a>(ByteString <var>method</var>, USVString <var title="">url</var>);
+  void <a title="dom-XMLHttpRequest-open" href="#dom-xmlhttprequest-open">open</a>(ByteString <var>method</var>, USVString <var title="">url</var>, boolean <var>async</var>, optional USVString? <var>username</var> = null, optional USVString? <var>password</var> = null);
+  void <a title="dom-XMLHttpRequest-setRequestHeader" href="#dom-xmlhttprequest-setrequestheader">setRequestHeader</a>(ByteString <var>name</var>, ByteString <var>value</var>);
+           attribute unsigned long <a title="dom-XMLHttpRequest-timeout" href="#dom-xmlhttprequest-timeout">timeout</a>;
+           attribute boolean <a title="dom-XMLHttpRequest-withCredentials" href="#dom-xmlhttprequest-withcredentials">withCredentials</a>;
+  readonly attribute <a href="#xmlhttprequestupload">XMLHttpRequestUpload</a> <a title="dom-XMLHttpRequest-upload" href="#dom-xmlhttprequest-upload">upload</a>;
+  void <a title="dom-XMLHttpRequest-send" href="#dom-xmlhttprequest-send">send</a>(optional (<a class="external" href="https://dom.spec.whatwg.org/#document">Document</a> or <a class="external" href="https://fetch.spec.whatwg.org/#bodyinit">BodyInit</a>)? <var>body</var> = null);
+  void <a title="dom-XMLHttpRequest-abort" href="#dom-xmlhttprequest-abort">abort</a>();
 
   // <a href="#response">response</a>
-  readonly attribute USVString <a href="#dom-xmlhttprequest-responseurl" title="dom-XMLHttpRequest-responseURL">responseURL</a>;
-  readonly attribute unsigned short <a href="#dom-xmlhttprequest-status" title="dom-XMLHttpRequest-status">status</a>;
-  readonly attribute ByteString <a href="#dom-xmlhttprequest-statustext" title="dom-XMLHttpRequest-statusText">statusText</a>;
-  ByteString? <a href="#dom-xmlhttprequest-getresponseheader" title="dom-XMLHttpRequest-getResponseHeader">getResponseHeader</a>(ByteString <var>name</var>);
-  ByteString <a href="#dom-xmlhttprequest-getallresponseheaders" title="dom-XMLHttpRequest-getAllResponseHeaders">getAllResponseHeaders</a>();
-  void <a href="#dom-xmlhttprequest-overridemimetype" title="dom-XMLHttpRequest-overrideMimeType">overrideMimeType</a>(DOMString <var>mime</var>);
-           attribute <a href="#xmlhttprequestresponsetype">XMLHttpRequestResponseType</a> <a href="#dom-xmlhttprequest-responsetype" title="dom-XMLHttpRequest-responseType">responseType</a>;
-  readonly attribute any <a href="#dom-xmlhttprequest-response" title="dom-XMLHttpRequest-response">response</a>;
-  readonly attribute USVString <a href="#dom-xmlhttprequest-responsetext" title="dom-XMLHttpRequest-responseText">responseText</a>;
-  [Exposed=Window] readonly attribute <a class="external" href="https://dom.spec.whatwg.org/#document">Document</a>? <a href="#dom-xmlhttprequest-responsexml" title="dom-XMLHttpRequest-responseXML">responseXML</a>;
+  readonly attribute USVString <a title="dom-XMLHttpRequest-responseURL" href="#dom-xmlhttprequest-responseurl">responseURL</a>;
+  readonly attribute unsigned short <a title="dom-XMLHttpRequest-status" href="#dom-xmlhttprequest-status">status</a>;
+  readonly attribute ByteString <a title="dom-XMLHttpRequest-statusText" href="#dom-xmlhttprequest-statustext">statusText</a>;
+  ByteString? <a title="dom-XMLHttpRequest-getResponseHeader" href="#dom-xmlhttprequest-getresponseheader">getResponseHeader</a>(ByteString <var>name</var>);
+  ByteString <a title="dom-XMLHttpRequest-getAllResponseHeaders" href="#dom-xmlhttprequest-getallresponseheaders">getAllResponseHeaders</a>();
+  void <a title="dom-XMLHttpRequest-overrideMimeType" href="#dom-xmlhttprequest-overridemimetype">overrideMimeType</a>(DOMString <var>mime</var>);
+           attribute <a href="#xmlhttprequestresponsetype">XMLHttpRequestResponseType</a> <a title="dom-XMLHttpRequest-responseType" href="#dom-xmlhttprequest-responsetype">responseType</a>;
+  readonly attribute any <a title="dom-XMLHttpRequest-response" href="#dom-xmlhttprequest-response">response</a>;
+  readonly attribute USVString <a title="dom-XMLHttpRequest-responseText" href="#dom-xmlhttprequest-responsetext">responseText</a>;
+  [Exposed=Window] readonly attribute <a class="external" href="https://dom.spec.whatwg.org/#document">Document</a>? <a title="dom-XMLHttpRequest-responseXML" href="#dom-xmlhttprequest-responsexml">responseXML</a>;
 };</pre>
 
 <p>An <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object has an associated
 <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
 
 <p>An <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object has an associated
-<dfn id="concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</dfn>, which is one of
+<dfn title="concept-XMLHttpRequest-state" id="concept-xmlhttprequest-state">state</dfn>, which is one of
 <i title="">unsent</i>,
 <i title="">opened</i>,
 <i title="">headers received</i>,
@@ -312,15 +311,15 @@ Unless stated otherwise it is unset.
 <h3 id="constructors"><span class="secno">4.1 </span>Constructors</h3>
 
 <p>The <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object has an associated
-<dfn id="concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</dfn>.
+<dfn title="concept-XMLHttpRequest-settings-object" id="concept-xmlhttprequest-settings-object">settings object</dfn>.
 
 <dl class="domintro">
- <dt><code><var title="">client</var> = new <a href="#dom-xmlhttprequest" title="dom-XMLHttpRequest">XMLHttpRequest</a>()</code>
+ <dt><code><var title="">client</var> = new <a title="dom-XMLHttpRequest" href="#dom-xmlhttprequest">XMLHttpRequest</a>()</code>
  <dd>Returns a new <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object.
 </dl>
 
 <p>The
-<dfn id="dom-xmlhttprequest" title="dom-XMLHttpRequest"><code>XMLHttpRequest()</code></dfn>
+<dfn title="dom-XMLHttpRequest" id="dom-xmlhttprequest"><code>XMLHttpRequest()</code></dfn>
 constructor must run these steps:
 
 <ol>
@@ -328,8 +327,8 @@ constructor must run these steps:
  object.
 
  <li><p>Set <var title="">xhr</var>'s
- <a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a> to the
- <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object-for-a-global-object" title="relevant settings object for a global object">relevant settings object</a>
+ <a title="concept-XMLHttpRequest-settings-object" href="#concept-xmlhttprequest-settings-object">settings object</a> to the
+ <a title="relevant settings object for a global object" class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object-for-a-global-object">relevant settings object</a>
  for the global object of <var title="">xhr</var>'s interface object.
 
  <li><p>Return <var title="">xhr</var>.
@@ -340,10 +339,10 @@ constructor must run these steps:
 <!-- Based on EventSource and WebSocket. Not sure what I am doing. -->
 
 <p>An <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object must not be garbage collected if its
-<a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is either
+<a title="concept-XMLHttpRequest-state" href="#concept-xmlhttprequest-state">state</a> is either
 <i title="">opened</i> with the <a href="#send-flag"><code>send()</code> flag</a> set,
 <i title="">headers received</i>, or <i title="">loading</i>, and it has one or more
-<a class="external" href="https://dom.spec.whatwg.org/#concept-event-listener" title="concept-event-listener">event listeners</a>
+<a title="concept-event-listener" class="external" href="https://dom.spec.whatwg.org/#concept-event-listener">event listeners</a>
 registered whose <b>type</b> is one of
 <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>,
 <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>,
@@ -362,41 +361,41 @@ connection is still open, the user agent must <a href="#terminate-the-request">t
 
 <p>The following are the
 <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers">event handlers</a> (and their corresponding
-<a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type" title="event handler event type">event handler event types</a>)
+<a title="event handler event type" class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type">event handler event types</a>)
 that must be supported on objects implementing an interface that inherits
 from <code><a href="#xmlhttprequesteventtarget">XMLHttpRequestEventTarget</a></code> as attributes:
 
 <table>
  <thead>
   <tr>
-   <th><a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers" title="event handlers">event handler</a>
+   <th><a title="event handlers" class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers">event handler</a>
    <th><a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type">event handler event type</a>
  <tbody>
   <tr>
-   <td><dfn id="handler-xhr-onloadstart" title="handler-xhr-onloadstart"><code>onloadstart</code></dfn>
+   <td><dfn title="handler-xhr-onloadstart" id="handler-xhr-onloadstart"><code>onloadstart</code></dfn>
    <td><code title="event-xhr-loadstart"><a href="#event-xhr-loadstart">loadstart</a></code>
   <tr>
-   <td><dfn id="handler-xhr-onprogress" title="handler-xhr-onprogress"><code>onprogress</code></dfn>
+   <td><dfn title="handler-xhr-onprogress" id="handler-xhr-onprogress"><code>onprogress</code></dfn>
    <td><code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>
   <tr>
-   <td><dfn id="handler-xhr-onabort" title="handler-xhr-onabort"><code>onabort</code></dfn>
+   <td><dfn title="handler-xhr-onabort" id="handler-xhr-onabort"><code>onabort</code></dfn>
    <td><code title="event-xhr-abort"><a href="#event-xhr-abort">abort</a></code>
   <tr>
-   <td><dfn id="handler-xhr-onerror" title="handler-xhr-onerror"><code>onerror</code></dfn>
+   <td><dfn title="handler-xhr-onerror" id="handler-xhr-onerror"><code>onerror</code></dfn>
    <td><code title="event-xhr-error"><a href="#event-xhr-error">error</a></code>
   <tr>
-   <td><dfn id="handler-xhr-onload" title="handler-xhr-onload"><code>onload</code></dfn>
+   <td><dfn title="handler-xhr-onload" id="handler-xhr-onload"><code>onload</code></dfn>
    <td><code title="event-xhr-load"><a href="#event-xhr-load">load</a></code>
   <tr>
-   <td><dfn id="handler-xhr-ontimeout" title="handler-xhr-ontimeout"><code>ontimeout</code></dfn>
+   <td><dfn title="handler-xhr-ontimeout" id="handler-xhr-ontimeout"><code>ontimeout</code></dfn>
    <td><code title="event-xhr-timeout"><a href="#event-xhr-timeout">timeout</a></code>
   <tr>
-   <td><dfn id="handler-xhr-onloadend" title="handler-xhr-onloadend"><code>onloadend</code></dfn>
+   <td><dfn title="handler-xhr-onloadend" id="handler-xhr-onloadend"><code>onloadend</code></dfn>
    <td><code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>
 </table>
 
 <p>The following is the
-<a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers" title="event handlers">event handler</a>
+<a title="event handlers" class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers">event handler</a>
 (and its corresponding
 <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type">event handler event type</a>) that must be
 supported as attribute solely by the
@@ -405,11 +404,11 @@ supported as attribute solely by the
 <table>
  <thead>
   <tr>
-   <th><a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers" title="event handlers">event handler</a>
+   <th><a title="event handlers" class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers">event handler</a>
    <th><a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type">event handler event type</a>
  <tbody>
   <tr>
-   <td><dfn id="handler-xhr-onreadystatechange" title="handler-xhr-onreadystatechange"><code>onreadystatechange</code></dfn>
+   <td><dfn title="handler-xhr-onreadystatechange" id="handler-xhr-onreadystatechange"><code>onreadystatechange</code></dfn>
    <td><code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code></td>
 </table>
 
@@ -417,25 +416,25 @@ supported as attribute solely by the
 <h3 id="states"><span class="secno">4.4 </span>States</h3>
 
 <dl class="domintro">
- <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-readystate" title="dom-XMLHttpRequest-readyState">readyState</a></code>
+ <dt><code><var title="">client</var> . <a title="dom-XMLHttpRequest-readyState" href="#dom-xmlhttprequest-readystate">readyState</a></code>
  <dd><p>Returns <var title="">client</var>'s
- <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a>.
+ <a title="concept-XMLHttpRequest-state" href="#concept-xmlhttprequest-state">state</a>.
 </dl>
 
-<p>The <dfn id="dom-xmlhttprequest-readystate" title="dom-XMLHttpRequest-readyState"><code>readyState</code></dfn>
+<p>The <dfn title="dom-XMLHttpRequest-readyState" id="dom-xmlhttprequest-readystate"><code>readyState</code></dfn>
 attribute's getter must return the value from the table below in the cell of the second
 column, from the row where the value in the cell in the first column is
 <a class="external" href="https://dom.spec.whatwg.org/#context-object">context object</a>'s
-<a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a>:
+<a title="concept-XMLHttpRequest-state" href="#concept-xmlhttprequest-state">state</a>:
 
 <table>
  <tr>
   <td><i title="">unsent</i>
-  <td><dfn id="dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT"><code>UNSENT</code></dfn> (numeric value 0)
+  <td><dfn title="dom-XMLHttpRequest-UNSENT" id="dom-xmlhttprequest-unsent"><code>UNSENT</code></dfn> (numeric value 0)
   <td>The object has been constructed.
  <tr>
   <td><i title="">opened</i>
-  <td><dfn id="dom-xmlhttprequest-opened" title="dom-XMLHttpRequest-OPENED"><code>OPENED</code></dfn> (numeric value 1)
+  <td><dfn title="dom-XMLHttpRequest-OPENED" id="dom-xmlhttprequest-opened"><code>OPENED</code></dfn> (numeric value 1)
   <td>The <code title="dom-XMLHttpRequest-open"><a href="#dom-xmlhttprequest-open">open()</a></code> method has been successfully
    invoked. During this state request headers can be set using
    <code title="dom-XMLHttpRequest-setRequestHeader"><a href="#dom-xmlhttprequest-setrequestheader">setRequestHeader()</a></code> and the
@@ -443,18 +442,18 @@ column, from the row where the value in the cell in the first column is
    method.
  <tr>
   <td><i title="">headers received</i>
-  <td><dfn id="dom-xmlhttprequest-headers_received" title="dom-XMLHttpRequest-HEADERS_RECEIVED"><code>HEADERS_RECEIVED</code></dfn>
+  <td><dfn title="dom-XMLHttpRequest-HEADERS_RECEIVED" id="dom-xmlhttprequest-headers_received"><code>HEADERS_RECEIVED</code></dfn>
    (numeric value 2)
   <td>All redirects (if any) have been followed and all HTTP headers of the
    <a href="#response">response</a> have been received.
  <tr>
   <td><i title="">loading</i>
-  <td><dfn id="dom-xmlhttprequest-loading" title="dom-XMLHttpRequest-LOADING"><code>LOADING</code></dfn> (numeric value 3)
+  <td><dfn title="dom-XMLHttpRequest-LOADING" id="dom-xmlhttprequest-loading"><code>LOADING</code></dfn> (numeric value 3)
   <td>The <a href="#response">response</a>'s
-  <a class="external" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> is being received.
+  <a title="concept-response-body" class="external" href="https://fetch.spec.whatwg.org/#concept-response-body">body</a> is being received.
  <tr>
   <td><i title="">done</i>
-  <td><dfn id="dom-xmlhttprequest-done" title="dom-XMLHttpRequest-DONE"><code>DONE</code></dfn> (numeric value 4)
+  <td><dfn title="dom-XMLHttpRequest-DONE" id="dom-xmlhttprequest-done"><code>DONE</code></dfn> (numeric value 4)
   <td>The data transfer has been completed or something went wrong during the transfer
    (e.g. infinite redirects).
 </table>
@@ -473,7 +472,7 @@ request-associated concepts:
 <dfn id="upload-complete-flag">upload complete flag</dfn>.
 
 <p>The <a href="#author-request-headers">author request headers</a> is an initially empty
-<a class="external" href="https://fetch.spec.whatwg.org/#concept-header-list" title="concept-header-list">header list</a>.
+<a title="concept-header-list" class="external" href="https://fetch.spec.whatwg.org/#concept-header-list">header list</a>.
 
 <p>The <a href="#request-body">request body</a> is initially null.
 
@@ -483,8 +482,8 @@ unset.
 <hr>
 
 <p>To <dfn id="terminate-the-request">terminate the request</dfn>,
-<a class="external" href="https://fetch.spec.whatwg.org/#concept-fetch-terminate" title="concept-fetch-terminate">terminate</a> the
-<a class="external" href="https://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">fetch</a> algorithm operated by the
+<a title="concept-fetch-terminate" class="external" href="https://fetch.spec.whatwg.org/#concept-fetch-terminate">terminate</a> the
+<a title="concept-fetch" class="external" href="https://fetch.spec.whatwg.org/#concept-fetch">fetch</a> algorithm operated by the
 <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> object with reason <i title="">fatal</i>.
 
 
@@ -492,7 +491,7 @@ unset.
 <h4 id="the-open()-method"><span class="secno">4.5.1 </span>The <code title="">open()</code> method</h4>
 
 <dl class="domintro">
- <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-open" title="dom-XMLHttpRequest-open">open</a>(<var title="">method</var>, <var title="">url</var> [, <var title="">async</var> = true [, <var title="">username</var> = null [, <var title="">password</var> = null]]])</code>
+ <dt><code><var title="">client</var> . <a title="dom-XMLHttpRequest-open" href="#dom-xmlhttprequest-open">open</a>(<var title="">method</var>, <var title="">url</var> [, <var title="">async</var> = true [, <var title="">username</var> = null [, <var title="">password</var> = null]]])</code>
 
  <dd>
   <p>Sets the <a href="#request-method">request method</a>, <a href="#request-url">request URL</a>, and
@@ -518,48 +517,48 @@ unset.
   attribute is not the empty string.
 </dl>
 
-<p class="critical no-backref" id="sync-warning">Synchronous <code><a href="#xmlhttprequest">XMLHttpRequest</a></code>
+<p id="sync-warning" class="critical no-backref">Synchronous <code><a href="#xmlhttprequest">XMLHttpRequest</a></code>
 outside of workers is in the process of being removed from the web platform as it has
 detrimental effects to the end user's experience. (This is a long process that takes many
 years.) Developers must not pass false for the <var title="">async</var> argument  when the
 <a class="external" href="https://html.spec.whatwg.org/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
 <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#document-environment">document environment</a>. User agents are strongly encouraged to warn about such usage in developer tools and may experiment with
-<a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throwing</a> an
+<a title="throw" class="external" href="http://heycam.github.io/webidl/#dfn-throw">throwing</a> an
 <code>InvalidAccessError</code> exception when it occurs.
 
 <p>The
-<dfn id="dom-xmlhttprequest-open" title="dom-XMLHttpRequest-open"><code>open(<var title="">method</var>, <var title="">url</var>, <var title="">async</var>, <var title="">username</var>, <var title="">password</var>)</code></dfn>
+<dfn title="dom-XMLHttpRequest-open" id="dom-xmlhttprequest-open"><code>open(<var title="">method</var>, <var title="">url</var>, <var title="">async</var>, <var title="">username</var>, <var title="">password</var>)</code></dfn>
 method must run these steps:
 
 <ol>
- <li><p>If <a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
+ <li><p>If <a title="concept-XMLHttpRequest-settings-object" href="#concept-xmlhttprequest-settings-object">settings object</a>'s
  <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#responsible-document">responsible document</a> is not
  <a class="external" href="https://html.spec.whatwg.org/multipage/browsers.html#fully-active">fully active</a>,
- <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an
+ <a title="throw" class="external" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> an
  <code>InvalidStateError</code> exception.
 
  <li><p>Set <var title="">base</var> to
- <a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
+ <a title="concept-XMLHttpRequest-settings-object" href="#concept-xmlhttprequest-settings-object">settings object</a>'s
  <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#api-base-url">API base URL</a>.
 
  <li><p>If <var>method</var> is not a
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-method" title="concept-method">method</a>,
- <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> a
+ <a title="concept-method" class="external" href="https://fetch.spec.whatwg.org/#concept-method">method</a>,
+ <a title="throw" class="external" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> a
  <code>SyntaxError</code> exception.
 
  <li><p>If <var>method</var> is a <a class="external" href="https://fetch.spec.whatwg.org/#forbidden-method">forbidden method</a>,
- <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> a
+ <a title="throw" class="external" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> a
  <code>SecurityError</code> exception.
 
- <li><p><a class="external" href="https://fetch.spec.whatwg.org/#concept-method-normalize" title="concept-method-normalize">Normalize</a>
+ <li><p><a title="concept-method-normalize" class="external" href="https://fetch.spec.whatwg.org/#concept-method-normalize">Normalize</a>
  <var>method</var>.
 
  <li><p>Let <var title="">parsedURL</var> be the result of
- <a class="external" href="https://url.spec.whatwg.org/#concept-url-parser" title="concept-url-parser">parsing</a> <var title="">url</var>
+ <a title="concept-url-parser" class="external" href="https://url.spec.whatwg.org/#concept-url-parser">parsing</a> <var title="">url</var>
  with <var title="">base</var>.
 
  <li><p>If <var title="">parsedURL</var> is failure,
- <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> a
+ <a title="throw" class="external" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> a
  <code>SyntaxError</code> exception.
 
  <li>
@@ -590,13 +589,13 @@ method must run these steps:
  <code title="dom-XMLHttpRequest-withCredentials"><a href="#dom-xmlhttprequest-withcredentials">withCredentials</a></code> attribute value is
  true, or the <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code> attribute
  value is not the empty string,
- <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an
+ <a title="throw" class="external" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> an
  <code>InvalidAccessError</code> exception.
 
  <li>
   <p><a href="#terminate-the-request">Terminate the request</a>.
 
-  <p class="note">A <a class="external" href="https://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">fetch</a> can be
+  <p class="note">A <a title="concept-fetch" class="external" href="https://fetch.spec.whatwg.org/#concept-fetch">fetch</a> can be
   ongoing at this point.
   <!-- also unsets the send() flag -->
 
@@ -611,7 +610,7 @@ method must run these steps:
    the <a href="#synchronous-flag">synchronous flag</a> otherwise.
    <li><p>Empty <a href="#author-request-headers">author request headers</a>.
    <li><p>Set <a href="#response">response</a> to a
-   <a class="external" href="https://fetch.spec.whatwg.org/#concept-network-error" title="concept-network-error">network error</a>.
+   <a title="concept-network-error" class="external" href="https://fetch.spec.whatwg.org/#concept-network-error">network error</a>.
    <li><p>Set <a href="#response-arraybuffer-object">response <code>ArrayBuffer</code> object</a> to null.
    <li><p>Set <a href="#response-blob-object">response <code>Blob</code> object</a> to null.
    <li><p>Set <a href="#response-document-object">response <code>Document</code> object</a> to null.
@@ -619,14 +618,14 @@ method must run these steps:
   </ul>
 
  <li>
-  <p>If the <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is not
+  <p>If the <a title="concept-XMLHttpRequest-state" href="#concept-xmlhttprequest-state">state</a> is not
   <i title="">opened</i>, run these substeps:
 
   <ol>
-   <li><p>Set <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> to
+   <li><p>Set <a title="concept-XMLHttpRequest-state" href="#concept-xmlhttprequest-state">state</a> to
    <i title="">opened</i>.
 
-   <li><p><a class="external" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.
+   <li><p><a title="concept-event-fire" class="external" href="https://dom.spec.whatwg.org/#concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.
   </ol>
 </ol>
 
@@ -635,14 +634,14 @@ method must run these steps:
 <h4 id="the-setrequestheader()-method"><span class="secno">4.5.2 </span>The <code title="">setRequestHeader()</code> method</h4>
 
 <dl class="domintro">
- <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-setrequestheader" title="dom-XMLHttpRequest-setRequestHeader">setRequestHeader</a>(<var>name</var>, <var>value</var>)</code>
+ <dt><code><var title="">client</var> . <a title="dom-XMLHttpRequest-setRequestHeader" href="#dom-xmlhttprequest-setrequestheader">setRequestHeader</a>(<var>name</var>, <var>value</var>)</code>
 
  <dd>
-  <p>Combines a <a class="external" href="https://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a> in
+  <p>Combines a <a title="concept-header" class="external" href="https://fetch.spec.whatwg.org/#concept-header">header</a> in
   <a href="#author-request-headers">author request headers</a>.
 
   <p>Throws an <code>InvalidStateError</code>
-  exception if either <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is not
+  exception if either <a title="concept-XMLHttpRequest-state" href="#concept-xmlhttprequest-state">state</a> is not
   <i title="">opened</i> or the <a href="#send-flag"><code>send()</code> flag</a> is set.
 
   <p>Throws a <code>SyntaxError</code> exception if
@@ -657,33 +656,33 @@ the author as indicated at the end of the
 <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code> method section.
 
 <p>The
-<dfn id="dom-xmlhttprequest-setrequestheader" title="dom-XMLHttpRequest-setRequestHeader"><code>setRequestHeader(<var>name</var>, <var>value</var>)</code></dfn>
+<dfn title="dom-XMLHttpRequest-setRequestHeader" id="dom-xmlhttprequest-setrequestheader"><code>setRequestHeader(<var>name</var>, <var>value</var>)</code></dfn>
 method must run these steps:
 
 <ol>
- <li><p>If <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is not
- <i title="">opened</i>, <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an
+ <li><p>If <a title="concept-XMLHttpRequest-state" href="#concept-xmlhttprequest-state">state</a> is not
+ <i title="">opened</i>, <a title="throw" class="external" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> an
  <code>InvalidStateError</code> exception.
 
  <li><p>If the <a href="#send-flag"><code>send()</code> flag</a> is set,
- <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an
+ <a title="throw" class="external" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> an
  <code>InvalidStateError</code> exception.
 
  <li>
   <p>If <var>name</var> is not a
-  <a class="external" href="https://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">name</a> or <var>value</var>
-  is not a <a class="external" href="https://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a>,
-  <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> a
+  <a title="concept-header-name" class="external" href="https://fetch.spec.whatwg.org/#concept-header-name">name</a> or <var>value</var>
+  is not a <a title="concept-header-value" class="external" href="https://fetch.spec.whatwg.org/#concept-header-value">value</a>,
+  <a title="throw" class="external" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> a
   <code>SyntaxError</code> exception.
 
   <p class="note no-backref">An empty byte sequence represents an empty
-  <a class="external" href="https://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a>
-  <a class="external" href="https://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a>.
+  <a title="concept-header" class="external" href="https://fetch.spec.whatwg.org/#concept-header">header</a>
+  <a title="concept-header-value" class="external" href="https://fetch.spec.whatwg.org/#concept-header-value">value</a>.
 
  <li><p>Terminate these steps if <var>name</var> is a
  <a class="external" href="https://fetch.spec.whatwg.org/#forbidden-header-name">forbidden header name</a>.
 
- <li><p><a class="external" href="https://fetch.spec.whatwg.org/#concept-header-list-combine" title="concept-header-list-combine">Combine</a>
+ <li><p><a title="concept-header-list-combine" class="external" href="https://fetch.spec.whatwg.org/#concept-header-list-combine">Combine</a>
  <var>name</var>/<var>value</var> in <a href="#author-request-headers">author request headers</a>.
 </ol>
 
@@ -706,16 +705,16 @@ X-Test: one, two</code></pre>
 <h4 id="the-timeout-attribute"><span class="secno">4.5.3 </span>The <code title="">timeout</code> attribute</h4>
 
 <dl class="domintro">
- <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-timeout" title="dom-XMLHttpRequest-timeout">timeout</a></code>
+ <dt><code><var title="">client</var> . <a title="dom-XMLHttpRequest-timeout" href="#dom-xmlhttprequest-timeout">timeout</a></code>
  <dd>
   <p>Can be set to a time in milliseconds. When set to a non-zero value
-  will cause <a class="external" href="https://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">fetching</a> to
+  will cause <a title="concept-fetch" class="external" href="https://fetch.spec.whatwg.org/#concept-fetch">fetching</a> to
   terminate after the given time has passed. When the time has passed, the request has
   not yet completed, and the <a href="#synchronous-flag">synchronous flag</a> is unset, a
   <code title="event-xhr-timeout"><a href="#event-xhr-timeout">timeout</a></code> event will then be
-  <a class="external" href="https://dom.spec.whatwg.org/#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>,
+  <a title="concept-event-dispatch" class="external" href="https://dom.spec.whatwg.org/#concept-event-dispatch">dispatched</a>,
   or a <code>TimeoutError</code> exception will be
-  <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">thrown</a> otherwise
+  <a title="throw" class="external" href="http://heycam.github.io/webidl/#dfn-throw">thrown</a> otherwise
   (for the <code title="dom-XMLHttpRequest-send"><a href="#dom-xmlhttprequest-send">send()</a></code> method).
   <p>When set: throws an
   <code>InvalidAccessError</code> exception if
@@ -726,7 +725,7 @@ X-Test: one, two</code></pre>
 </dl>
 
 <p>The
-<dfn id="dom-xmlhttprequest-timeout" title="dom-XMLHttpRequest-timeout"><code>timeout</code></dfn>
+<dfn title="dom-XMLHttpRequest-timeout" id="dom-xmlhttprequest-timeout"><code>timeout</code></dfn>
 attribute must return its value. Initially its value must be zero.
 
 <p>Setting the <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code>
@@ -737,7 +736,7 @@ attribute must run these steps:
  <a class="external" href="https://html.spec.whatwg.org/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
  <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#document-environment">document environment</a> and the
  <a href="#synchronous-flag">synchronous flag</a> is set,
- <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an
+ <a title="throw" class="external" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> an
  <code>InvalidAccessError</code> exception.
 
  <li><p>Set its value to the new value.
@@ -745,15 +744,15 @@ attribute must run these steps:
 
 <p class="note">This implies that the
 <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code> attribute can be
-set while <a class="external" href="https://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">fetching</a> is in
+set while <a title="concept-fetch" class="external" href="https://fetch.spec.whatwg.org/#concept-fetch">fetching</a> is in
 progress. If that occurs it will still be measured relative to the start
-of <a class="external" href="https://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">fetching</a>.
+of <a title="concept-fetch" class="external" href="https://fetch.spec.whatwg.org/#concept-fetch">fetching</a>.
 
 
 <h4 id="the-withcredentials-attribute"><span class="secno">4.5.4 </span>The <code title="">withCredentials</code> attribute</h4>
 
 <dl class="domintro">
- <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-withcredentials" title="dom-XMLHttpRequest-withCredentials">withCredentials</a></code>
+ <dt><code><var title="">client</var> . <a title="dom-XMLHttpRequest-withCredentials" href="#dom-xmlhttprequest-withcredentials">withCredentials</a></code>
  <dd>
   <p>True when <a href="#user-credentials">user credentials</a> are to be included in a
   cross-origin request. False when they are to be excluded in a
@@ -762,7 +761,7 @@ of <a class="external" href="https://fetch.spec.whatwg.org/#concept-fetch" title
 
   <p>When set: throws an
   <code>InvalidStateError</code> exception if
-  <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is not <i title="">unsent</i> or
+  <a title="concept-XMLHttpRequest-state" href="#concept-xmlhttprequest-state">state</a> is not <i title="">unsent</i> or
   <i title="">opened</i>, or if the <a href="#send-flag"><code>send()</code> flag</a> is set.
   <p>When set: throws an
   <code>InvalidAccessError</code> exception if
@@ -773,7 +772,7 @@ of <a class="external" href="https://fetch.spec.whatwg.org/#concept-fetch" title
 </dl>
 
 <p>The
-<dfn id="dom-xmlhttprequest-withcredentials" title="dom-XMLHttpRequest-withCredentials"><code>withCredentials</code></dfn>
+<dfn title="dom-XMLHttpRequest-withCredentials" id="dom-xmlhttprequest-withcredentials"><code>withCredentials</code></dfn>
 attribute must return its value. Initially its value must be false.
 
 <p>Setting the
@@ -781,20 +780,20 @@ attribute must return its value. Initially its value must be false.
 attribute must run these steps:
 
 <ol>
- <li><p>If <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is not
+ <li><p>If <a title="concept-XMLHttpRequest-state" href="#concept-xmlhttprequest-state">state</a> is not
  <i title="">unsent</i> or <i title="">opened</i>,
- <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an
+ <a title="throw" class="external" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> an
  <code>InvalidStateError</code> exception.
 
  <li><p>If the <a href="#send-flag"><code>send()</code> flag</a> is set,
- <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an
+ <a title="throw" class="external" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> an
  <code>InvalidStateError</code> exception.
 
  <li><p>If the
  <a class="external" href="https://html.spec.whatwg.org/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
  <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#document-environment">document environment</a> and the
  <a href="#synchronous-flag">synchronous flag</a> is set,
- <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an
+ <a title="throw" class="external" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> an
  <code>InvalidAccessError</code> exception.
 
  <li><p>Set the <code title="dom-XMLHttpRequest-withCredentials"><a href="#dom-xmlhttprequest-withcredentials">withCredentials</a></code>
@@ -803,21 +802,21 @@ attribute must run these steps:
 
 <p class="note">The <code title="dom-XMLHttpRequest-withCredentials"><a href="#dom-xmlhttprequest-withcredentials">withCredentials</a></code>
 attribute has no effect when
-<a class="external" href="https://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">fetching</a>
-<a class="external" href="https://html.spec.whatwg.org/multipage/browsers.html#same-origin" title="same origin">same-origin</a> resources.
+<a title="concept-fetch" class="external" href="https://fetch.spec.whatwg.org/#concept-fetch">fetching</a>
+<a title="same origin" class="external" href="https://html.spec.whatwg.org/multipage/browsers.html#same-origin">same-origin</a> resources.
 
 
 <h4 id="the-upload-attribute"><span class="secno">4.5.5 </span>The <code title="">upload</code> attribute</h4>
 
 <dl class="domintro">
- <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-upload" title="dom-XMLHttpRequest-upload">upload</a></code>
+ <dt><code><var title="">client</var> . <a title="dom-XMLHttpRequest-upload" href="#dom-xmlhttprequest-upload">upload</a></code>
  <dd><p>Returns the associated <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code>
  object. It can be used to gather transmission information when data is
  transferred to a server.
 </dl>
 
 <p>The
-<dfn id="dom-xmlhttprequest-upload" title="dom-XMLHttpRequest-upload"><code>upload</code></dfn>
+<dfn title="dom-XMLHttpRequest-upload" id="dom-xmlhttprequest-upload"><code>upload</code></dfn>
 attribute must return the associated
 <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object.
 
@@ -828,7 +827,7 @@ object has an associated <code><a href="#xmlhttprequestupload">XMLHttpRequestUpl
 <h4 id="the-send()-method"><span class="secno">4.5.6 </span>The <code title="">send()</code> method</h4>
 
 <dl class="domintro">
- <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send">send</a>([<var title="">body</var> = null])</code>
+ <dt><code><var title="">client</var> . <a title="dom-XMLHttpRequest-send" href="#dom-xmlhttprequest-send">send</a>([<var title="">body</var> = null])</code>
  <dd>
   <p>Initiates the request. The optional argument provides the
   <a href="#request-body">request body</a>. The argument is ignored if
@@ -836,20 +835,20 @@ object has an associated <code><a href="#xmlhttprequestupload">XMLHttpRequestUpl
   <code>HEAD</code>.
 
   <p>Throws an <code>InvalidStateError</code> exception if either
-  <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is not <i title="">opened</i> or the
+  <a title="concept-XMLHttpRequest-state" href="#concept-xmlhttprequest-state">state</a> is not <i title="">opened</i> or the
   <a href="#send-flag"><code>send()</code> flag</a> is set.
 </dl>
 
-<p>The <dfn id="dom-xmlhttprequest-send" title="dom-XMLHttpRequest-send"><code>send(<var>body</var>)</code></dfn>
+<p>The <dfn title="dom-XMLHttpRequest-send" id="dom-xmlhttprequest-send"><code>send(<var>body</var>)</code></dfn>
 method must run these steps:
 
 <ol>
- <li><p>If <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is not
- <i title="">opened</i>, <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an
+ <li><p>If <a title="concept-XMLHttpRequest-state" href="#concept-xmlhttprequest-state">state</a> is not
+ <i title="">opened</i>, <a title="throw" class="external" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> an
  <code>InvalidStateError</code> exception.
 
  <li><p>If the <a href="#send-flag"><code>send()</code> flag</a> is set,
- <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an
+ <a title="throw" class="external" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> an
  <code>InvalidStateError</code> exception.
 
  <li><p>If the <a href="#request-method">request method</a> is <code>GET</code> or
@@ -872,14 +871,14 @@ method must run these steps:
     to <var>Content-Type</var>.
 
     <p>Set <a href="#request-body">request body</a> to <var>body</var>,
-    <a class="external" href="https://dvcs.w3.org/hg/innerhtml/raw-file/tip/index.html#dfn-concept-fragment-serializing-algorithm" title="concept-serialize">serialized</a> with the
+    <a title="concept-serialize" class="external" href="https://dvcs.w3.org/hg/innerhtml/raw-file/tip/index.html#dfn-concept-fragment-serializing-algorithm">serialized</a> with the
     <i title="">require well-formed flag</i> set,
-    <a class="external" href="http://heycam.github.io/webidl/#dfn-obtain-unicode" title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</a>,
-    and <a class="external" href="https://encoding.spec.whatwg.org/#utf-8-encode" title="utf-8 encode">utf-8 encoded</a>.
+    <a title="convert a DOMString to a sequence of Unicode characters" class="external" href="http://heycam.github.io/webidl/#dfn-obtain-unicode">converted to Unicode</a>,
+    and <a title="utf-8 encode" class="external" href="https://encoding.spec.whatwg.org/#utf-8-encode">utf-8 encoded</a>.
     Rethrow any exceptions.
 
     <p class="note">If <var>body</var> cannot be
-    <a class="external" href="https://dvcs.w3.org/hg/innerhtml/raw-file/tip/index.html#dfn-concept-fragment-serializing-algorithm" title="concept-serialize">serialized</a>, an
+    <a title="concept-serialize" class="external" href="https://dvcs.w3.org/hg/innerhtml/raw-file/tip/index.html#dfn-concept-fragment-serializing-algorithm">serialized</a>, an
     <code>InvalidStateError</code> exception is thrown.
 
    <dt id="dom-xmlhttprequest-send-bodyinit"><code class="external"><a href="https://fetch.spec.whatwg.org/#bodyinit">BodyInit</a></code>
@@ -888,29 +887,29 @@ method must run these steps:
     `<code title="">UTF-8</code>`.
 
     <p>Set <a href="#request-body">request body</a> and <var>Content-Type</var> to the result of
-    <a class="external" href="https://fetch.spec.whatwg.org/#concept-bodyinit-extract" title="concept-BodyInit-extract">extracting</a>
+    <a title="concept-BodyInit-extract" class="external" href="https://fetch.spec.whatwg.org/#concept-bodyinit-extract">extracting</a>
     <var>body</var>.
   </dl>
 
   <p>If <var>Content-Type</var> is non-null and <a href="#author-request-headers">author request headers</a>
-  contains no <a class="external" href="https://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a>
-  <a class="external" href="https://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">named</a>
+  contains no <a title="concept-header" class="external" href="https://fetch.spec.whatwg.org/#concept-header">header</a>
+  <a title="concept-header-name" class="external" href="https://fetch.spec.whatwg.org/#concept-header-name">named</a>
   `<code>Content-Type</code>`,
-  <a class="external" href="https://fetch.spec.whatwg.org/#concept-header-list-append" title="concept-header-list-append">append</a>
+  <a title="concept-header-list-append" class="external" href="https://fetch.spec.whatwg.org/#concept-header-list-append">append</a>
   `<code>Content-Type</code>`/<var title="">Content-Type</var> to
   <a href="#author-request-headers">author request headers</a>.
 
-  <p>Otherwise, if the <a class="external" href="https://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a>
-  <a class="external" href="https://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">named</a>
+  <p>Otherwise, if the <a title="concept-header" class="external" href="https://fetch.spec.whatwg.org/#concept-header">header</a>
+  <a title="concept-header-name" class="external" href="https://fetch.spec.whatwg.org/#concept-header-name">named</a>
   `<code>Content-Type</code>` in <a href="#author-request-headers">author request headers</a> has a
-  <a class="external" href="https://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a> that is a
+  <a title="concept-header-value" class="external" href="https://fetch.spec.whatwg.org/#concept-header-value">value</a> that is a
   <a class="external" href="https://html.spec.whatwg.org/multipage/infrastructure.html#valid-mime-type">valid MIME type</a>, which has a
   `<code>charset</code>` parameter whose value is not a case-insensitive
   match for <var title="">encoding</var>, and <var title="">encoding</var>
   is not null, set all the `<code>charset</code>` parameters of that
   `<code>Content-Type</code>`
-  <a class="external" href="https://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a>'s
-  <a class="external" href="https://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a> to
+  <a title="concept-header" class="external" href="https://fetch.spec.whatwg.org/#concept-header">header</a>'s
+  <a title="concept-header-value" class="external" href="https://fetch.spec.whatwg.org/#concept-header-value">value</a> to
   <var title="">encoding</var>.
   <!-- XXX could still be better with case-insensitive and parameter cross-ref -->
 
@@ -919,76 +918,76 @@ method must run these steps:
 
  <li>
   <p>Let <var title="">req</var> be a new
-  <a class="external" href="https://fetch.spec.whatwg.org/#concept-request" title="concept-request">request</a>, initialized as
+  <a title="concept-request" class="external" href="https://fetch.spec.whatwg.org/#concept-request">request</a>, initialized as
   follows:
 
   <dl>
-   <dt><a class="external" href="https://fetch.spec.whatwg.org/#concept-request-method" title="concept-request-method">method</a>
+   <dt><a title="concept-request-method" class="external" href="https://fetch.spec.whatwg.org/#concept-request-method">method</a>
    <dd><a href="#request-method">request method</a>
-   <dt><a class="external" href="https://fetch.spec.whatwg.org/#concept-request-url" title="concept-request-url">url</a>
+   <dt><a title="concept-request-url" class="external" href="https://fetch.spec.whatwg.org/#concept-request-url">url</a>
    <dd><a href="#request-url">request URL</a>
-   <dt><a class="external" href="https://fetch.spec.whatwg.org/#concept-request-header-list" title="concept-request-header-list">header list</a>
+   <dt><a title="concept-request-header-list" class="external" href="https://fetch.spec.whatwg.org/#concept-request-header-list">header list</a>
    <dd><a href="#author-request-headers">author request headers</a>
    <dt><a class="external" href="https://fetch.spec.whatwg.org/#unsafe-request-flag">unsafe request flag</a>
    <dd>Set.
-   <dt><a class="external" href="https://fetch.spec.whatwg.org/#concept-request-origin" title="concept-request-origin">origin</a>
-   <dd><a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
+   <dt><a title="concept-request-origin" class="external" href="https://fetch.spec.whatwg.org/#concept-request-origin">origin</a>
+   <dd><a title="concept-XMLHttpRequest-settings-object" href="#concept-xmlhttprequest-settings-object">settings object</a>'s
    <a class="external" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>
    <dt><a class="external" href="https://fetch.spec.whatwg.org/#force-origin-header-flag">force <code title="">Origin</code> header flag</a>
    <dd>Set.
-   <dt><a class="external" href="https://fetch.spec.whatwg.org/#concept-request-referrer" title="concept-request-referrer">referrer</a>
-   <dd><a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
+   <dt><a title="concept-request-referrer" class="external" href="https://fetch.spec.whatwg.org/#concept-request-referrer">referrer</a>
+   <dd><a title="concept-XMLHttpRequest-settings-object" href="#concept-xmlhttprequest-settings-object">settings object</a>'s
    <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#referrer-source">referrer source</a>'s
-   <a class="external" href="https://dom.spec.whatwg.org/#concept-document-url" title="concept-document-url">URL</a> if
-   <a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
+   <a title="concept-document-url" class="external" href="https://dom.spec.whatwg.org/#concept-document-url">URL</a> if
+   <a title="concept-XMLHttpRequest-settings-object" href="#concept-xmlhttprequest-settings-object">settings object</a>'s
    <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#referrer-source">referrer source</a> is a
-   <a class="external" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>, and
-   <a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
+   <a title="concept-document" class="external" href="https://dom.spec.whatwg.org/#concept-document">document</a>, and
+   <a title="concept-XMLHttpRequest-settings-object" href="#concept-xmlhttprequest-settings-object">settings object</a>'s
    <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#referrer-source">referrer source</a> otherwise
-   <dt><a class="external" href="https://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>
+   <dt><a title="concept-request-body" class="external" href="https://fetch.spec.whatwg.org/#concept-request-body">body</a>
    <dd><a href="#request-body">request body</a>
-   <dt><a class="external" href="https://fetch.spec.whatwg.org/#concept-request-client" title="concept-request-client">client</a>
-   <dd><a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
+   <dt><a title="concept-request-client" class="external" href="https://fetch.spec.whatwg.org/#concept-request-client">client</a>
+   <dd><a title="concept-XMLHttpRequest-settings-object" href="#concept-xmlhttprequest-settings-object">settings object</a>'s
    <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#global-object">global object</a>
-   <dt><a class="external" href="https://fetch.spec.whatwg.org/#concept-request-context" title="concept-request-context">context</a>
+   <dt><a title="concept-request-context" class="external" href="https://fetch.spec.whatwg.org/#concept-request-context">context</a>
    <dd><i title="">xmlhttprequest</i>
    <dt><a class="external" href="https://fetch.spec.whatwg.org/#authentication-flag">authentication flag</a>
    <dd>Set.
    <dt><a data-anolis-spec="fetch" href="#synchronous-flag">synchronous flag</a>
    <dd>Set if the <a href="#synchronous-flag">synchronous flag</a> is set.
-   <dt><a class="external" href="https://fetch.spec.whatwg.org/#concept-request-mode" title="concept-request-mode">mode</a>
+   <dt><a title="concept-request-mode" class="external" href="https://fetch.spec.whatwg.org/#concept-request-mode">mode</a>
    <dd><i title="">CORS-with-forced-preflight</i> if one or more event listeners are
    registered on the associated <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object and
    <i title="">CORS</i> otherwise.
-   <dt><a class="external" href="https://fetch.spec.whatwg.org/#concept-request-credentials-mode" title="concept-request-credentials-mode">credentials mode</a>
+   <dt><a title="concept-request-credentials-mode" class="external" href="https://fetch.spec.whatwg.org/#concept-request-credentials-mode">credentials mode</a>
    <dd>If the <code title="dom-XMLHttpRequest-withCredentials"><a href="#dom-xmlhttprequest-withcredentials">withCredentials</a></code>
    attribute value is true, <i title="">include</i>, and <i title="">same-origin</i> otherwise.
-   <dt><a class="external" href="https://fetch.spec.whatwg.org/#concept-request-use-url-credentials-flag" title="concept-request-use-url-credentials-flag">use URL credentials flag</a>
+   <dt><a title="concept-request-use-url-credentials-flag" class="external" href="https://fetch.spec.whatwg.org/#concept-request-use-url-credentials-flag">use URL credentials flag</a>
    <dd>Set if either <a href="#request-url">request URL</a>'s
-   <a class="external" href="https://url.spec.whatwg.org/#concept-url-username" title="concept-url-username">username</a>
+   <a title="concept-url-username" class="external" href="https://url.spec.whatwg.org/#concept-url-username">username</a>
    is not the empty string or <a href="#request-url">request URL</a>'s
-   <a class="external" href="https://url.spec.whatwg.org/#concept-url-password" title="concept-url-password">password</a> is non-null.
+   <a title="concept-url-password" class="external" href="https://url.spec.whatwg.org/#concept-url-password">password</a> is non-null.
   </dl>
 
- <li><p>If a <a class="external" href="https://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a>
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">named</a>
+ <li><p>If a <a title="concept-header" class="external" href="https://fetch.spec.whatwg.org/#concept-header">header</a>
+ <a title="concept-header-name" class="external" href="https://fetch.spec.whatwg.org/#concept-header-name">named</a>
  `<code>Accept-Language</code>` is not in <var title="">req</var>'s
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-request-header-list" title="concept-request-header-list">header list</a>,
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-header-list-append" title="concept-header-list-append">append</a>
+ <a title="concept-request-header-list" class="external" href="https://fetch.spec.whatwg.org/#concept-request-header-list">header list</a>,
+ <a title="concept-header-list-append" class="external" href="https://fetch.spec.whatwg.org/#concept-header-list-append">append</a>
  `<code>Accept-Language</code>`/an appropriate
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a> to it.
+ <a title="concept-header-value" class="external" href="https://fetch.spec.whatwg.org/#concept-header-value">value</a> to it.
 
- <li><p>If a <a class="external" href="https://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a>
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">named</a>
+ <li><p>If a <a title="concept-header" class="external" href="https://fetch.spec.whatwg.org/#concept-header">header</a>
+ <a title="concept-header-name" class="external" href="https://fetch.spec.whatwg.org/#concept-header-name">named</a>
  `<code>Accept</code>` is not in <var title="">req</var>'s
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-request-header-list" title="concept-request-header-list">header list</a>,
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-header-list-append" title="concept-header-list-append">append</a>
+ <a title="concept-request-header-list" class="external" href="https://fetch.spec.whatwg.org/#concept-request-header-list">header list</a>,
+ <a title="concept-header-list-append" class="external" href="https://fetch.spec.whatwg.org/#concept-header-list-append">append</a>
  `<code>Accept</code>`/`<code title="">*/*</code>` to it.
 
  <li><p>Unset the <a href="#upload-complete-flag">upload complete flag</a>.
 
  <li><p>If <var title="">req</var>'s
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a> is null,
+ <a title="concept-request-body" class="external" href="https://fetch.spec.whatwg.org/#concept-request-body">body</a> is null,
  set the <a href="#upload-complete-flag">upload complete flag</a>.
 
  <li><p>Set the <a href="#send-flag"><code>send()</code> flag</a>.
@@ -997,19 +996,19 @@ method must run these steps:
   <p>If the <a href="#synchronous-flag">synchronous flag</a> is unset, run these substeps:
 
   <ol>
-   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadstart"><a href="#event-xhr-loadstart">loadstart</a></code> with 0 and 0.
+   <li><p><a title="concept-event-fire-progress" href="#concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadstart"><a href="#event-xhr-loadstart">loadstart</a></code> with 0 and 0.
 
    <li><p>If the <a href="#upload-complete-flag">upload complete flag</a> is unset,
-   <a href="#concept-event-fire-progress" title="concept-event-fire-progress">fire a progress event</a> named
+   <a title="concept-event-fire-progress" href="#concept-event-fire-progress">fire a progress event</a> named
    <code title="event-xhr-loadstart"><a href="#event-xhr-loadstart">loadstart</a></code> on the
    <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object with 0 and <var title="">req</var>'s
-   <a class="external" href="https://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>'s
-   <a class="external" href="https://fetch.spec.whatwg.org/#concept-body-length" title="concept-body-length">length</a>.
+   <a title="concept-request-body" class="external" href="https://fetch.spec.whatwg.org/#concept-request-body">body</a>'s
+   <a title="concept-body-length" class="external" href="https://fetch.spec.whatwg.org/#concept-body-length">length</a>.
 
    <li>
-    <p><a class="external" href="https://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">Fetch</a> <var title="">req</var>.
-    Handle the <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-task" title="concept-task">tasks</a>
-    <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" title="queue a task">queued</a> on the
+    <p><a title="concept-fetch" class="external" href="https://fetch.spec.whatwg.org/#concept-fetch">Fetch</a> <var title="">req</var>.
+    Handle the <a title="concept-task" class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-task">tasks</a>
+    <a title="queue a task" class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queued</a> on the
     <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#networking-task-source">networking task source</a> per below.
 
     <p>Run these subsubsteps <a class="external" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>:
@@ -1027,8 +1026,8 @@ method must run these steps:
        <li><p>If <var title="">seconds</var> is equal or greater than
        the <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code> attribute value and
        the <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code> attribute value is not
-       zero, <a class="external" href="https://fetch.spec.whatwg.org/#concept-fetch-terminate" title="concept-fetch-terminate">terminate</a>
-       <a class="external" href="https://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">fetching</a> with reason
+       zero, <a title="concept-fetch-terminate" class="external" href="https://fetch.spec.whatwg.org/#concept-fetch-terminate">terminate</a>
+       <a title="concept-fetch" class="external" href="https://fetch.spec.whatwg.org/#concept-fetch">fetching</a> with reason
        <i title="">timeout</i>.
       </ol>
     </ol>
@@ -1040,14 +1039,14 @@ method must run these steps:
      <li><p>If not roughly 50ms have passed since these subsubsteps were last invoked,
      terminate these subsubsteps.
 
-     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
+     <li><p><a title="concept-event-fire-progress" href="#concept-event-fire-progress">Fire a progress event</a> named
      <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code> on the
      <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object with <var title="">request</var>'s
-     <a class="external" href="https://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>'s
-     <a class="external" href="https://fetch.spec.whatwg.org/#concept-body-transmitted" title="concept-body-transmitted">transmitted</a> and
+     <a title="concept-request-body" class="external" href="https://fetch.spec.whatwg.org/#concept-request-body">body</a>'s
+     <a title="concept-body-transmitted" class="external" href="https://fetch.spec.whatwg.org/#concept-body-transmitted">transmitted</a> and
      <var title="">request</var>'s
-     <a class="external" href="https://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>'s
-     <a class="external" href="https://fetch.spec.whatwg.org/#concept-body-length" title="concept-body-length">length</a>.
+     <a title="concept-request-body" class="external" href="https://fetch.spec.whatwg.org/#concept-request-body">body</a>'s
+     <a title="concept-body-length" class="external" href="https://fetch.spec.whatwg.org/#concept-body-length">length</a>.
      <!-- upload complete flag can never be set here I hope -->
     </ol>
 
@@ -1058,24 +1057,24 @@ method must run these steps:
      <li><p>Set the <a href="#upload-complete-flag">upload complete flag</a>.
 
      <li><p>Let <var title="">transmitted</var> be <var title="">request</var>'s
-     <a class="external" href="https://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>'s
-     <a class="external" href="https://fetch.spec.whatwg.org/#concept-body-transmitted" title="concept-body-transmitted">transmitted</a>.
+     <a title="concept-request-body" class="external" href="https://fetch.spec.whatwg.org/#concept-request-body">body</a>'s
+     <a title="concept-body-transmitted" class="external" href="https://fetch.spec.whatwg.org/#concept-body-transmitted">transmitted</a>.
 
      <li><p>Let <var title="">length</var> be <var title="">request</var>'s
-     <a class="external" href="https://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>'s
-     <a class="external" href="https://fetch.spec.whatwg.org/#concept-body-length" title="concept-body-length">length</a>.
+     <a title="concept-request-body" class="external" href="https://fetch.spec.whatwg.org/#concept-request-body">body</a>'s
+     <a title="concept-body-length" class="external" href="https://fetch.spec.whatwg.org/#concept-body-length">length</a>.
 
-     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
+     <li><p><a title="concept-event-fire-progress" href="#concept-event-fire-progress">Fire a progress event</a> named
      <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code> on the
      <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object with <var title="">transmitted</var> and
      <var title="">length</var>.
 
-     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
+     <li><p><a title="concept-event-fire-progress" href="#concept-event-fire-progress">Fire a progress event</a> named
      <code title="event-xhr-load"><a href="#event-xhr-load">load</a></code> on the
      <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object with <var title="">transmitted</var> and
      <var title="">length</var>.
 
-     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
+     <li><p><a title="concept-event-fire-progress" href="#concept-event-fire-progress">Fire a progress event</a> named
      <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code> on the
      <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object with <var title="">transmitted</var> and
      <var title="">length</var>.
@@ -1094,13 +1093,13 @@ method must run these steps:
      <li><p><a href="#handle-errors">Handle errors</a> for <var title="">response</var>.
 
      <li><p>If <a href="#response">response</a> is a
-     <a class="external" href="https://fetch.spec.whatwg.org/#concept-network-error" title="concept-network-error">network error</a>,
+     <a title="concept-network-error" class="external" href="https://fetch.spec.whatwg.org/#concept-network-error">network error</a>,
      return.
 
-     <li><p>Set <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> to
+     <li><p>Set <a title="concept-XMLHttpRequest-state" href="#concept-xmlhttprequest-state">state</a> to
      <i title="">headers received</i>.
 
-     <li><p><a class="external" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.
+     <li><p><a title="concept-event-fire" class="external" href="https://dom.spec.whatwg.org/#concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.
     </ol>
 
     <p>To <a class="external" href="https://fetch.spec.whatwg.org/#process-response-body">process response body</a> for
@@ -1113,20 +1112,20 @@ method must run these steps:
      <li><p><a href="#handle-errors">Handle errors</a> for <var title="">response</var>.
 
      <li><p>If <a href="#response">response</a> is a
-     <a class="external" href="https://fetch.spec.whatwg.org/#concept-network-error" title="concept-network-error">network error</a>,
+     <a title="concept-network-error" class="external" href="https://fetch.spec.whatwg.org/#concept-network-error">network error</a>,
      return.
 
-     <li><p>If <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is
+     <li><p>If <a title="concept-XMLHttpRequest-state" href="#concept-xmlhttprequest-state">state</a> is
      <i title="">headers received</i>, set
-     <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> to <i title="">loading</i> and
-     <a class="external" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.
+     <a title="concept-XMLHttpRequest-state" href="#concept-xmlhttprequest-state">state</a> to <i title="">loading</i> and
+     <a title="concept-event-fire" class="external" href="https://dom.spec.whatwg.org/#concept-event-fire">fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.
 
-     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code> with <var title="">response</var>'s
-     <a class="external" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a>'s
-     <a class="external" href="https://fetch.spec.whatwg.org/#concept-body-transmitted" title="concept-body-transmitted">transmitted</a> and
+     <li><p><a title="concept-event-fire-progress" href="#concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code> with <var title="">response</var>'s
+     <a title="concept-response-body" class="external" href="https://fetch.spec.whatwg.org/#concept-response-body">body</a>'s
+     <a title="concept-body-transmitted" class="external" href="https://fetch.spec.whatwg.org/#concept-body-transmitted">transmitted</a> and
      <var title="">response</var>'s
-     <a class="external" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a>'s
-     <a class="external" href="https://fetch.spec.whatwg.org/#concept-body-length" title="concept-body-length">length</a>.
+     <a title="concept-response-body" class="external" href="https://fetch.spec.whatwg.org/#concept-response-body">body</a>'s
+     <a title="concept-body-length" class="external" href="https://fetch.spec.whatwg.org/#concept-body-length">length</a>.
     </ol>
 
     <p>To <a class="external" href="https://fetch.spec.whatwg.org/#process-response-end-of-file">process response end-of-file</a> for
@@ -1142,11 +1141,11 @@ method must run these steps:
 
    <li>
     <p>Let <var title="">response</var> be the result of
-    <a class="external" href="https://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">fetching</a> <var title="">req</var>.
+    <a title="concept-fetch" class="external" href="https://fetch.spec.whatwg.org/#concept-fetch">fetching</a> <var title="">req</var>.
 
     <p>If the <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code> attribute value is not
-    zero, <a class="external" href="https://fetch.spec.whatwg.org/#concept-fetch-terminate" title="concept-fetch-terminate">terminate</a> this
-    <a class="external" href="https://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">fetch</a> if it has not returned
+    zero, <a title="concept-fetch-terminate" class="external" href="https://fetch.spec.whatwg.org/#concept-fetch-terminate">terminate</a> this
+    <a title="concept-fetch" class="external" href="https://fetch.spec.whatwg.org/#concept-fetch">fetch</a> if it has not returned
     within the amount of milliseconds from the
     <code title="dom-XMLHttpRequest-timeout"><a href="#dom-xmlhttprequest-timeout">timeout</a></code> attribute value with reason
     <i title="">timeout</i>.
@@ -1165,33 +1164,33 @@ steps:
  <li><p><a href="#handle-errors">Handle errors</a> for <var title="">response</var>.
 
  <li><p>If <a href="#response">response</a> is a
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-network-error" title="concept-network-error">network error</a>, return.
+ <a title="concept-network-error" class="external" href="https://fetch.spec.whatwg.org/#concept-network-error">network error</a>, return.
 
  <li><p>If the <a href="#synchronous-flag">synchronous flag</a> is unset, update <a href="#response">response</a>'s
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> using
+ <a title="concept-response-body" class="external" href="https://fetch.spec.whatwg.org/#concept-response-body">body</a> using
  <var title="">response</var>.
 
- <li><p>Set <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> to <i title="">done</i>.
+ <li><p>Set <a title="concept-XMLHttpRequest-state" href="#concept-xmlhttprequest-state">state</a> to <i title="">done</i>.
 
  <li><p>Unset the <a href="#send-flag"><code>send()</code> flag</a>.
 
- <li><p><a class="external" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.
+ <li><p><a title="concept-event-fire" class="external" href="https://dom.spec.whatwg.org/#concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.
 
  <li><p>Let <var title="">transmitted</var> be <var title="">response</var>'s
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a>'s
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-body-transmitted" title="concept-body-transmitted">transmitted</a>.
+ <a title="concept-response-body" class="external" href="https://fetch.spec.whatwg.org/#concept-response-body">body</a>'s
+ <a title="concept-body-transmitted" class="external" href="https://fetch.spec.whatwg.org/#concept-body-transmitted">transmitted</a>.
 
  <li><p>Let <var title="">length</var> be <var title="">response</var>'s
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a>'s
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-body-length" title="concept-body-length">length</a>.
+ <a title="concept-response-body" class="external" href="https://fetch.spec.whatwg.org/#concept-response-body">body</a>'s
+ <a title="concept-body-length" class="external" href="https://fetch.spec.whatwg.org/#concept-body-length">length</a>.
 
- <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>
+ <li><p><a title="concept-event-fire-progress" href="#concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code>
  with <var title="">transmitted</var> and <var title="">length</var>.
 
- <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-load"><a href="#event-xhr-load">load</a></code>
+ <li><p><a title="concept-event-fire-progress" href="#concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-load"><a href="#event-xhr-load">load</a></code>
  with <var title="">transmitted</var> and <var title="">length</var>.
 
- <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>
+ <li><p><a title="concept-event-fire-progress" href="#concept-event-fire-progress">Fire a progress event</a> named <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code>
  with <var title="">transmitted</var> and <var title="">length</var>.
 </ol>
 
@@ -1201,13 +1200,13 @@ steps:
  <li><p>If the <a href="#send-flag"><code>send()</code> flag</a> is unset, return.
 
  <li><p>If <var title="">response</var> is a
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-network-error" title="concept-network-error">network error</a>, run the
+ <a title="concept-network-error" class="external" href="https://fetch.spec.whatwg.org/#concept-network-error">network error</a>, run the
  <a href="#request-error-steps">request error steps</a> for event <code title="event-xhr-error"><a href="#event-xhr-error">error</a></code> and
  exception <code>NetworkError</code>.
 
  <li>
   <p>Otherwise, if <var title="">response</var> has a
-  <a class="external" href="https://fetch.spec.whatwg.org/#concept-response-termination-reason" title="concept-response-termination-reason">termination reason</a>:
+  <a title="concept-response-termination-reason" class="external" href="https://fetch.spec.whatwg.org/#concept-response-termination-reason">termination reason</a>:
 
   <dl class="switch">
    <dt><i title="">end-user abort</i>
@@ -1218,13 +1217,13 @@ steps:
    <dt><i title="">fatal</i>
    <dd>
     <ol>
-     <li><p>Set <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> to
+     <li><p>Set <a title="concept-XMLHttpRequest-state" href="#concept-xmlhttprequest-state">state</a> to
      <i title="">done</i>.
 
      <li><p>Unset the <a href="#send-flag"><code>send()</code> flag</a>.
 
      <li><p>Set <a href="#response">response</a> to a
-     <a class="external" href="https://fetch.spec.whatwg.org/#concept-network-error" title="concept-network-error">network error</a>.
+     <a title="concept-network-error" class="external" href="https://fetch.spec.whatwg.org/#concept-network-error">network error</a>.
     </ol>
 
    <dt><i title="">timeout</i>
@@ -1238,19 +1237,19 @@ steps:
 exception <var>exception</var> are:
 
 <ol>
- <li><p>Set <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> to <i title="">done</i>.
+ <li><p>Set <a title="concept-XMLHttpRequest-state" href="#concept-xmlhttprequest-state">state</a> to <i title="">done</i>.
 
  <li><p>Unset the <a href="#send-flag"><code>send()</code> flag</a>.
 
  <li><p>Set <a href="#response">response</a> to a
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-network-error" title="concept-network-error">network error</a>.
+ <a title="concept-network-error" class="external" href="https://fetch.spec.whatwg.org/#concept-network-error">network error</a>.
 
  <li><p>If the <a href="#synchronous-flag">synchronous flag</a> is set,
- <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an <var>exception</var>
+ <a title="throw" class="external" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> an <var>exception</var>
  exception.
 
  <li>
-  <p><a class="external" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.
+  <p><a title="concept-event-fire" class="external" href="https://dom.spec.whatwg.org/#concept-event-fire">Fire an event</a> named <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code>.
 
   <p class="note">At this point it is clear that the <a href="#synchronous-flag">synchronous flag</a> is unset.
 
@@ -1260,25 +1259,25 @@ exception <var>exception</var> are:
   <ol>
    <li><p>Set the <a href="#upload-complete-flag">upload complete flag</a>.
 
-   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
+   <li><p><a title="concept-event-fire-progress" href="#concept-event-fire-progress">Fire a progress event</a> named
    <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code> on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code>
    object with 0 and 0.
 
-   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
+   <li><p><a title="concept-event-fire-progress" href="#concept-event-fire-progress">Fire a progress event</a> named
    <var title="">event</var> on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object with 0 and 0.
 
-   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
+   <li><p><a title="concept-event-fire-progress" href="#concept-event-fire-progress">Fire a progress event</a> named
    <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code> on the <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code>
    object with 0 and 0.
   </ol>
 
- <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
+ <li><p><a title="concept-event-fire-progress" href="#concept-event-fire-progress">Fire a progress event</a> named
  <code title="event-xhr-progress"><a href="#event-xhr-progress">progress</a></code> with 0 and 0.
 
- <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
+ <li><p><a title="concept-event-fire-progress" href="#concept-event-fire-progress">Fire a progress event</a> named
  <var title="">event</var> with 0 and 0.
 
- <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
+ <li><p><a title="concept-event-fire-progress" href="#concept-event-fire-progress">Fire a progress event</a> named
  <code title="event-xhr-loadend"><a href="#event-xhr-loadend">loadend</a></code> with 0 and 0.
 </ol>
 
@@ -1286,23 +1285,23 @@ exception <var>exception</var> are:
 <h4 id="the-abort()-method"><span class="secno">4.5.7 </span>The <code title="">abort()</code> method</h4>
 
   <dl class="domintro">
-   <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-abort" title="dom-XMLHttpRequest-abort">abort</a>()</code>
+   <dt><code><var title="">client</var> . <a title="dom-XMLHttpRequest-abort" href="#dom-xmlhttprequest-abort">abort</a>()</code>
    <dd>Cancels any network activity.
   </dl>
 
-<p>The <dfn id="dom-xmlhttprequest-abort" title="dom-XMLHttpRequest-abort"><code>abort()</code></dfn> method must run
+<p>The <dfn title="dom-XMLHttpRequest-abort" id="dom-xmlhttprequest-abort"><code>abort()</code></dfn> method must run
 these steps:
 
 <ol>
  <li><p><a href="#terminate-the-request">Terminate the request</a>.
 
- <li><p>If <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is either
+ <li><p>If <a title="concept-XMLHttpRequest-state" href="#concept-xmlhttprequest-state">state</a> is either
  <i title="">opened</i> with the <a href="#send-flag"><code>send()</code> flag</a> set,
  <i title="">headers received</i>, or <i title="">loading</i>, run the
  <a href="#request-error-steps">request error steps</a> for event <code title="event-xhr-abort"><a href="#event-xhr-abort">abort</a></code>.
 
  <li>
-  <p>Set <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> to <i title="">unsent</i>.
+  <p>Set <a title="concept-XMLHttpRequest-state" href="#concept-xmlhttprequest-state">state</a> to <i title="">unsent</i>.
 
   <p class="note">No <code title="event-xhr-readystatechange"><a href="#event-xhr-readystatechange">readystatechange</a></code> event
   is dispatched.
@@ -1314,59 +1313,59 @@ these steps:
 
 <p>An <code><a href="#xmlhttprequest">XMLHttpRequest</a></code> has an associated <dfn id="response">response</dfn>. Unless stated
 otherwise it is a
-<a class="external" href="https://fetch.spec.whatwg.org/#concept-network-error" title="concept-network-error">network error</a>.
+<a title="concept-network-error" class="external" href="https://fetch.spec.whatwg.org/#concept-network-error">network error</a>.
 
 
 <h4 id="the-responseurl-attribute"><span class="secno">4.6.1 </span>The <code title="">responseURL</code> attribute</h4>
 
-<p>The <dfn id="dom-xmlhttprequest-responseurl" title="dom-XMLHttpRequest-responseURL"><code>responseURL</code></dfn> attribute
+<p>The <dfn title="dom-XMLHttpRequest-responseURL" id="dom-xmlhttprequest-responseurl"><code>responseURL</code></dfn> attribute
 must return the empty string if <a href="#response">response</a>'s
-<a class="external" href="https://fetch.spec.whatwg.org/#concept-response-url" title="concept-response-url">url</a> is null and its
-<a class="external" href="https://url.spec.whatwg.org/#concept-url-serializer" title="concept-url-serializer">serialization</a> with the
+<a title="concept-response-url" class="external" href="https://fetch.spec.whatwg.org/#concept-response-url">url</a> is null and its
+<a title="concept-url-serializer" class="external" href="https://url.spec.whatwg.org/#concept-url-serializer">serialization</a> with the
 <i title="">exclude fragment flag</i> set otherwise.
 
 
 <h4 id="the-status-attribute"><span class="secno">4.6.2 </span>The <code title="">status</code> attribute</h4>
 
 <p>The
-<dfn id="dom-xmlhttprequest-status" title="dom-XMLHttpRequest-status"><code>status</code></dfn>
+<dfn title="dom-XMLHttpRequest-status" id="dom-xmlhttprequest-status"><code>status</code></dfn>
 attribute must return the <a href="#response">response</a>'s
-<a class="external" href="https://fetch.spec.whatwg.org/#concept-response-status" title="concept-response-status">status</a>.
+<a title="concept-response-status" class="external" href="https://fetch.spec.whatwg.org/#concept-response-status">status</a>.
 
 
 <h4 id="the-statustext-attribute"><span class="secno">4.6.3 </span>The <code title="">statusText</code> attribute</h4>
 
 <p>The
-<dfn id="dom-xmlhttprequest-statustext" title="dom-XMLHttpRequest-statusText"><code>statusText</code></dfn>
+<dfn title="dom-XMLHttpRequest-statusText" id="dom-xmlhttprequest-statustext"><code>statusText</code></dfn>
 attribute must return the <a href="#response">response</a>'s
-<a class="external" href="https://fetch.spec.whatwg.org/#concept-response-status-message" title="concept-response-status-message">status message</a>.
+<a title="concept-response-status-message" class="external" href="https://fetch.spec.whatwg.org/#concept-response-status-message">status message</a>.
 
 
 <h4 id="the-getresponseheader()-method"><span class="secno">4.6.4 </span>The <code title="">getResponseHeader()</code> method</h4>
 
 <p>The
-<dfn id="dom-xmlhttprequest-getresponseheader" title="dom-XMLHttpRequest-getResponseHeader"><code>getResponseHeader(<var>name</var>)</code></dfn>
+<dfn title="dom-XMLHttpRequest-getResponseHeader" id="dom-xmlhttprequest-getresponseheader"><code>getResponseHeader(<var>name</var>)</code></dfn>
 method must run these steps:
 
 <ol>
  <li><p>If <a href="#response">response</a>'s
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-response-header-list" title="concept-response-header-list">header list</a> has
- multiple <a class="external" href="https://fetch.spec.whatwg.org/#concept-header" title="concept-header">headers</a> whose
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">name</a> is <var>name</var>,
- return their <a class="external" href="https://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">values</a> in
+ <a title="concept-response-header-list" class="external" href="https://fetch.spec.whatwg.org/#concept-response-header-list">header list</a> has
+ multiple <a title="concept-header" class="external" href="https://fetch.spec.whatwg.org/#concept-header">headers</a> whose
+ <a title="concept-header-name" class="external" href="https://fetch.spec.whatwg.org/#concept-header-name">name</a> is <var>name</var>,
+ return their <a title="concept-header-value" class="external" href="https://fetch.spec.whatwg.org/#concept-header-value">values</a> in
  list order as a single byte sequence separated from each other by a 0x2C 0x20 byte pair.
 
  <li><p>If <a href="#response">response</a>'s
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-response-header-list" title="concept-response-header-list">header list</a> has
- one <a class="external" href="https://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a> whose
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">name</a> is <var>name</var>,
- return its <a class="external" href="https://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a>.
+ <a title="concept-response-header-list" class="external" href="https://fetch.spec.whatwg.org/#concept-response-header-list">header list</a> has
+ one <a title="concept-header" class="external" href="https://fetch.spec.whatwg.org/#concept-header">header</a> whose
+ <a title="concept-header-name" class="external" href="https://fetch.spec.whatwg.org/#concept-header-name">name</a> is <var>name</var>,
+ return its <a title="concept-header-value" class="external" href="https://fetch.spec.whatwg.org/#concept-header-value">value</a>.
 
  <li><p>Return null.
 </ol>
 
 <p class="note no-backref">The Fetch Standard filters <a href="#response">response</a>'s
-<a class="external" href="https://fetch.spec.whatwg.org/#concept-response-header-list" title="concept-response-header-list">header list</a>.
+<a title="concept-response-header-list" class="external" href="https://fetch.spec.whatwg.org/#concept-response-header-list">header list</a>.
 <a href="#refsFETCH">[FETCH]</a>
 
 <div class="example">
@@ -1392,18 +1391,18 @@ client.onreadystatechange = function() {
 <h4 id="the-getallresponseheaders()-method"><span class="secno">4.6.5 </span>The <code title="">getAllResponseHeaders()</code> method</h4>
 
 <p>The
-<dfn id="dom-xmlhttprequest-getallresponseheaders" title="dom-XMLHttpRequest-getAllResponseHeaders"><code>getAllResponseHeaders()</code></dfn>
+<dfn title="dom-XMLHttpRequest-getAllResponseHeaders" id="dom-xmlhttprequest-getallresponseheaders"><code>getAllResponseHeaders()</code></dfn>
 method must return <a href="#response">response</a>'s
-<a class="external" href="https://fetch.spec.whatwg.org/#concept-response-header-list" title="concept-response-header-list">header list</a>, in
+<a title="concept-response-header-list" class="external" href="https://fetch.spec.whatwg.org/#concept-response-header-list">header list</a>, in
 list order, as a single byte sequence with each
-<a class="external" href="https://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a> separated by a 0x0D 0x0A
-byte pair, and each <a class="external" href="https://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">name</a> and
-<a class="external" href="https://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a> of a
-<a class="external" href="https://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a> separated by a 0x3A 0x20
+<a title="concept-header" class="external" href="https://fetch.spec.whatwg.org/#concept-header">header</a> separated by a 0x0D 0x0A
+byte pair, and each <a title="concept-header-name" class="external" href="https://fetch.spec.whatwg.org/#concept-header-name">name</a> and
+<a title="concept-header-value" class="external" href="https://fetch.spec.whatwg.org/#concept-header-value">value</a> of a
+<a title="concept-header" class="external" href="https://fetch.spec.whatwg.org/#concept-header">header</a> separated by a 0x3A 0x20
 byte pair.
 
 <p class="note no-backref">The Fetch Standard filters <a href="#response">response</a>'s
-<a class="external" href="https://fetch.spec.whatwg.org/#concept-response-header-list" title="concept-response-header-list">header list</a>.
+<a title="concept-response-header-list" class="external" href="https://fetch.spec.whatwg.org/#concept-response-header-list">header list</a>.
 <a href="#refsFETCH">[FETCH]</a>
 
 <div class="example">
@@ -1469,9 +1468,9 @@ that is null in which case it is the <a href="#response-charset">response charse
  <li><p>If <a href="#response-arraybuffer-object">response <code>ArrayBuffer</code> object</a> is non-null, return it.
 
  <li><p>Let <var>bytes</var> be the empty byte sequence, if <a href="#response">response</a>'s
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> is null, and
+ <a title="concept-response-body" class="external" href="https://fetch.spec.whatwg.org/#concept-response-body">body</a> is null, and
  <a href="#response">response</a>'s
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> otherwise.
+ <a title="concept-response-body" class="external" href="https://fetch.spec.whatwg.org/#concept-response-body">body</a> otherwise.
 
  <li><p>Set <a href="#response-arraybuffer-object">response <code>ArrayBuffer</code> object</a> to a new
  <code>ArrayBuffer</code> object representing <var>bytes</var> and return it.
@@ -1487,13 +1486,13 @@ that is null in which case it is the <a href="#response-charset">response charse
  null, and <a href="#final-mime-type">final MIME type</a> otherwise.
 
  <li><p>Let <var>bytes</var> be the empty byte sequence, if <a href="#response">response</a>'s
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> is null, and
+ <a title="concept-response-body" class="external" href="https://fetch.spec.whatwg.org/#concept-response-body">body</a> is null, and
  <a href="#response">response</a>'s
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> otherwise.
+ <a title="concept-response-body" class="external" href="https://fetch.spec.whatwg.org/#concept-response-body">body</a> otherwise.
 
  <li><p>Set <a href="#response-blob-object">response <code>Blob</code> object</a> to a new
  <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code> object representing <var>bytes</var> with
- <code class="external" title="dom-Blob-type"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-type">type</a></code> <var title="">type</var> and
+ <code title="dom-Blob-type" class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-type">type</a></code> <var title="">type</var> and
  return it.
 </ol>
 
@@ -1504,7 +1503,7 @@ that is null in which case it is the <a href="#response-charset">response charse
  <li><p>If <a href="#response-document-object">response <code>Document</code> object</a> is non-null, return it.
 
  <li><p>Let <var>bytes</var> be <a href="#response">response</a>'s
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a>.
+ <a title="concept-response-body" class="external" href="https://fetch.spec.whatwg.org/#concept-response-body">body</a>.
 
  <li><p>If <var>bytes</var> is null, return null.
 
@@ -1531,7 +1530,7 @@ that is null in which case it is the <a href="#response-charset">response charse
    <li><p>Let <var>charset</var> be the <a href="#final-charset">final charset</a>.
 
    <li><p>If <var>charset</var> is null,
-   <a class="external" href="https://html.spec.whatwg.org/multipage/syntax.html#prescan-a-byte-stream-to-determine-its-encoding" title="prescan a byte stream to determine its encoding">prescan</a>
+   <a title="prescan a byte stream to determine its encoding" class="external" href="https://html.spec.whatwg.org/multipage/syntax.html#prescan-a-byte-stream-to-determine-its-encoding">prescan</a>
    the first 1024 bytes of <var>bytes</var> and if
    that does not terminate unsuccessfully then let <var>charset</var> be
    the return value.
@@ -1540,7 +1539,7 @@ that is null in which case it is the <a href="#response-charset">response charse
    <a class="external" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
 
    <li><p>Let <var title="">document</var> be a
-   <a class="external" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> that
+   <a title="concept-document" class="external" href="https://dom.spec.whatwg.org/#concept-document">document</a> that
    represents the result parsing <var>bytes</var> following the rules set
    forth in the HTML Standard for an HTML parser with scripting disabled and
    <a class="external" href="https://html.spec.whatwg.org/multipage/syntax.html#a-known-definite-encoding">a known definite encoding</a> <var>charset</var>.
@@ -1552,7 +1551,7 @@ that is null in which case it is the <a href="#response-charset">response charse
 
  <li>
   <p>Otherwise, let <var title="">document</var> be a
-  <a class="external" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>
+  <a title="concept-document" class="external" href="https://dom.spec.whatwg.org/#concept-document">document</a>
   that represents the result of running the <a class="external" href="https://html.spec.whatwg.org/multipage/xhtml.html#xml-parser">XML parser</a>
   with <a class="external" href="https://html.spec.whatwg.org/multipage/xhtml.html#xml-scripting-support-disabled">XML scripting support disabled</a> on
   <var>bytes</var>. If that fails (unsupported character encoding,
@@ -1567,20 +1566,20 @@ that is null in which case it is the <a href="#response-charset">response charse
  <!-- can only happen in the XML case -->
 
  <li><p>Set <var title="">document</var>'s
- <a class="external" href="https://dom.spec.whatwg.org/#concept-document-encoding" title="concept-document-encoding">encoding</a> to
+ <a title="concept-document-encoding" class="external" href="https://dom.spec.whatwg.org/#concept-document-encoding">encoding</a> to
  <var>charset</var>.
 
  <li><p>Set <var title="">document</var>'s
- <a class="external" href="https://dom.spec.whatwg.org/#concept-document-content-type" title="concept-document-content-type">content type</a>
+ <a title="concept-document-content-type" class="external" href="https://dom.spec.whatwg.org/#concept-document-content-type">content type</a>
  to <a href="#final-mime-type">final MIME type</a>.
 
  <li><p>Set <var title="">document</var>'s
- <a class="external" href="https://dom.spec.whatwg.org/#concept-document-url" title="concept-document-url">URL</a> to
+ <a title="concept-document-url" class="external" href="https://dom.spec.whatwg.org/#concept-document-url">URL</a> to
  <a href="#response">response</a>'s
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-response-url" title="concept-response-url">url</a>.
+ <a title="concept-response-url" class="external" href="https://fetch.spec.whatwg.org/#concept-response-url">url</a>.
 
  <li><p>Set <var title="">document</var>'s <a class="external" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a> to
- <a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
+ <a title="concept-XMLHttpRequest-settings-object" href="#concept-xmlhttprequest-settings-object">settings object</a>'s
  <a class="external" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>.
 
  <li><p>Set <a href="#response-document-object">response <code>Document</code> object</a> to
@@ -1594,7 +1593,7 @@ that is null in which case it is the <a href="#response-charset">response charse
  <li><p>If <a href="#response-json-object">response JSON object</a> is non-null, return it.
 
  <li><p>Let <var>bytes</var> be <a href="#response">response</a>'s
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a>.
+ <a title="concept-response-body" class="external" href="https://fetch.spec.whatwg.org/#concept-response-body">body</a>.
 
  <li><p>If <var>bytes</var> is null, return null.
 
@@ -1614,7 +1613,7 @@ that is null in which case it is the <a href="#response-charset">response charse
 
 <ol>
  <li><p>Let <var>bytes</var> be <a href="#response">response</a>'s
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a>.
+ <a title="concept-response-body" class="external" href="https://fetch.spec.whatwg.org/#concept-response-body">body</a>.
 
  <li><p>If <var>bytes</var> is null, return the empty string.
 
@@ -1652,13 +1651,13 @@ resources using <a class="external" href="https://encoding.spec.whatwg.org/#utf-
 <h4 id="the-overridemimetype()-method"><span class="secno">4.6.7 </span>The <code title="">overrideMimeType()</code> method</h4>
 
 <dl class="domintro">
- <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-overridemimetype" title="dom-XMLHttpRequest-overrideMimeType">overrideMimeType</a>(<var title="">mime</var>)</code>
+ <dt><code><var title="">client</var> . <a title="dom-XMLHttpRequest-overrideMimeType" href="#dom-xmlhttprequest-overridemimetype">overrideMimeType</a>(<var title="">mime</var>)</code>
  <dd>
   <p>Sets the `<code title="">Content-Type</code>` header for <a href="#response">response</a> to
   <var title="">mime</var>.
 
   <p>Throws an <code>InvalidStateError</code> exception if
-  <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is
+  <a title="concept-XMLHttpRequest-state" href="#concept-xmlhttprequest-state">state</a> is
   <i title="">loading</i> or <i title="">done</i>.
 
   <p>Throws a <code>SyntaxError</code> exception if
@@ -1667,18 +1666,18 @@ resources using <a class="external" href="https://encoding.spec.whatwg.org/#utf-
 </dl>
 
 <p>The
-<dfn id="dom-xmlhttprequest-overridemimetype" title="dom-XMLHttpRequest-overrideMimeType"><code>overrideMimeType(<var title="">mime</var>)</code></dfn>
+<dfn title="dom-XMLHttpRequest-overrideMimeType" id="dom-xmlhttprequest-overridemimetype"><code>overrideMimeType(<var title="">mime</var>)</code></dfn>
 method must run these steps:
 
 <ol>
- <li><p>If <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is
+ <li><p>If <a title="concept-XMLHttpRequest-state" href="#concept-xmlhttprequest-state">state</a> is
  <i title="">loading</i> or <i title="">done</i>,
- <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an
+ <a title="throw" class="external" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> an
  <code>InvalidStateError</code> exception.
 
  <li><p>If parsing <var title="">mime</var> analogously to the value of
  the `<code title="">Content-Type</code>` header fails,
- <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> a
+ <a title="throw" class="external" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> a
  <code>SyntaxError</code> exception.
 
  <li><p>If <var title="">mime</var> is successfully parsed, set
@@ -1696,7 +1695,7 @@ method must run these steps:
 
 
 <dl class="domintro">
- <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-responsetype" title="dom-XMLHttpRequest-responseType">responseType</a></code> [ = <var>value</var> ]
+ <dt><code><var title="">client</var> . <a title="dom-XMLHttpRequest-responseType" href="#dom-xmlhttprequest-responsetype">responseType</a></code> [ = <var>value</var> ]
  <dd>
   <p>Returns the response type.
   <p>Can be set to change the response type. Values are:
@@ -1711,7 +1710,7 @@ method must run these steps:
   <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#worker-environment">worker environment</a>
   <p>When set: throws an
   <code>InvalidStateError</code> exception if
-  <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is <i title="">loading</i> or
+  <a title="concept-XMLHttpRequest-state" href="#concept-xmlhttprequest-state">state</a> is <i title="">loading</i> or
   <i title="">done</i>.
   <p>When set: throws an
   <code>InvalidAccessError</code> exception if the
@@ -1722,7 +1721,7 @@ method must run these steps:
 
 
 <p>The
-<dfn id="dom-xmlhttprequest-responsetype" title="dom-XMLHttpRequest-responseType"><code>responseType</code></dfn>
+<dfn title="dom-XMLHttpRequest-responseType" id="dom-xmlhttprequest-responsetype"><code>responseType</code></dfn>
 attribute must return its value. Initially its value must be the empty
 string.
 
@@ -1736,16 +1735,16 @@ attribute must run these steps:
  <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#worker-environment">worker environment</a> and the given
  value is "<code title="">document</code>", terminate these steps.
 
- <li><p>If <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is
+ <li><p>If <a title="concept-XMLHttpRequest-state" href="#concept-xmlhttprequest-state">state</a> is
  <i title="">loading</i> or <i title="">done</i>,
- <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an
+ <a title="throw" class="external" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> an
  <code>InvalidStateError</code> exception.
 
  <li><p>If the
  <a class="external" href="https://html.spec.whatwg.org/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
  <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#document-environment">document environment</a> and the
  <a href="#synchronous-flag">synchronous flag</a> is set,
- <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an
+ <a title="throw" class="external" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> an
  <code>InvalidAccessError</code> exception.
 
  <li><p>Set the
@@ -1759,13 +1758,13 @@ attribute must run these steps:
 <h4 id="the-response-attribute"><span class="secno">4.6.9 </span>The <code title="">response</code> attribute</h4>
 
 <dl class="domintro">
- <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-response" title="dom-XMLHttpRequest-response">response</a></code>
+ <dt><code><var title="">client</var> . <a title="dom-XMLHttpRequest-response" href="#dom-xmlhttprequest-response">response</a></code>
  <dd><p>Returns the <a href="#response">response</a>'s
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a>.
+ <a title="concept-response-body" class="external" href="https://fetch.spec.whatwg.org/#concept-response-body">body</a>.
 </dl>
 
 <p>The
-<dfn id="dom-xmlhttprequest-response" title="dom-XMLHttpRequest-response"><code>response</code></dfn>
+<dfn title="dom-XMLHttpRequest-response" id="dom-xmlhttprequest-response"><code>response</code></dfn>
 attribute must return the result of running these
 steps:
 
@@ -1774,7 +1773,7 @@ steps:
  is the empty string or "<code title="">text</code>"</dt>
  <dd>
   <ol>
-   <li><p>If <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is not
+   <li><p>If <a title="concept-XMLHttpRequest-state" href="#concept-xmlhttprequest-state">state</a> is not
    <i title="">loading</i> or <i title="">done</i>, return the empty string.
 
    <li><p>Return the <a href="#text-response">text response</a>.
@@ -1783,7 +1782,7 @@ steps:
  <dt>Otherwise</dt>
  <dd>
   <ol>
-   <li><p>If <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is not
+   <li><p>If <a title="concept-XMLHttpRequest-state" href="#concept-xmlhttprequest-state">state</a> is not
    <i title="">done</i>, return null.
 
    <li>
@@ -1816,7 +1815,7 @@ steps:
 <h4 id="the-responsetext-attribute"><span class="secno">4.6.10 </span>The <code title="">responseText</code> attribute</h4>
 
 <dl class="domintro">
- <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-responsetext" title="dom-XMLHttpRequest-responseText">responseText</a></code>
+ <dt><code><var title="">client</var> . <a title="dom-XMLHttpRequest-responseText" href="#dom-xmlhttprequest-responsetext">responseText</a></code>
  <dd>
   <p>Returns the <a href="#text-response">text response</a>.
 
@@ -1827,7 +1826,7 @@ steps:
 </dl>
 
 <p>The
-<dfn id="dom-xmlhttprequest-responsetext" title="dom-XMLHttpRequest-responseText"><code>responseText</code></dfn>
+<dfn title="dom-XMLHttpRequest-responseText" id="dom-xmlhttprequest-responsetext"><code>responseText</code></dfn>
 attribute must return the result of running these
 steps:
 
@@ -1835,11 +1834,11 @@ steps:
 
  <li><p>If <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code> is not the
  empty string or "<code title="">text</code>",
- <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an
+ <a title="throw" class="external" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> an
  <code>InvalidStateError</code> exception.
 
 
- <li><p>If <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is not
+ <li><p>If <a title="concept-XMLHttpRequest-state" href="#concept-xmlhttprequest-state">state</a> is not
  <i title="">loading</i> or <i title="">done</i>, return the empty string.
 
  <li><p>Return the <a href="#text-response">text response</a>.
@@ -1849,7 +1848,7 @@ steps:
 <h4 id="the-responsexml-attribute"><span class="secno">4.6.11 </span>The <code title="">responseXML</code> attribute</h4>
 
 <dl class="domintro">
- <dt><code><var title="">client</var> . <a href="#dom-xmlhttprequest-responsexml" title="dom-XMLHttpRequest-responseXML">responseXML</a></code>
+ <dt><code><var title="">client</var> . <a title="dom-XMLHttpRequest-responseXML" href="#dom-xmlhttprequest-responsexml">responseXML</a></code>
  <dd>
   <p>Returns the <a href="#document-response">document response</a>.
 
@@ -1860,17 +1859,17 @@ steps:
 </dl>
 
 <p>The
-<dfn id="dom-xmlhttprequest-responsexml" title="dom-XMLHttpRequest-responseXML"><code>responseXML</code></dfn>
+<dfn title="dom-XMLHttpRequest-responseXML" id="dom-xmlhttprequest-responsexml"><code>responseXML</code></dfn>
 attribute must return the result of running these steps:
 
 <ol>
  <li><p>If
  <code title="dom-XMLHttpRequest-responseType"><a href="#dom-xmlhttprequest-responsetype">responseType</a></code> is not
  the empty string or "<code title="">document</code>",
- <a class="external" href="http://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an
+ <a title="throw" class="external" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> an
  <code>InvalidStateError</code> exception.
 
- <li><p>If <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is not <i title="">done</i>,
+ <li><p>If <a title="concept-XMLHttpRequest-state" href="#concept-xmlhttprequest-state">state</a> is not <i title="">done</i>,
  return null.
 
  <li><p>Return the <a href="#document-response">document response</a>.
@@ -1879,7 +1878,7 @@ attribute must return the result of running these steps:
 <p class="note">The
 <code title="dom-XMLHttpRequest-responseXML"><a href="#dom-xmlhttprequest-responsexml">responseXML</a></code> attribute
 has XML in its name for historical reasons. It also returns HTML resources
-as <a class="external" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">documents</a>.
+as <a title="concept-document" class="external" href="https://dom.spec.whatwg.org/#concept-document">documents</a>.
 
 
 <h3 id="events"><span class="secno">4.7 </span>Events summary</h3>
@@ -1897,37 +1896,37 @@ and/or <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> obj
    <th>Dispatched when…</th>
  <tbody>
   <tr>
-   <td><dfn id="event-xhr-readystatechange" title="event-xhr-readystatechange"><code>readystatechange</code></dfn></td>
+   <td><dfn title="event-xhr-readystatechange" id="event-xhr-readystatechange"><code>readystatechange</code></dfn></td>
    <td><code class="external"><a href="https://dom.spec.whatwg.org/#event">Event</a></code></td>
    <td>The <code title="dom-XMLHttpRequest-readyState"><a href="#dom-xmlhttprequest-readystate">readyState</a></code> attribute changes
-   value, except when it changes to <a href="#dom-xmlhttprequest-unsent" title="dom-XMLHttpRequest-UNSENT">UNSENT</a>.
+   value, except when it changes to <a title="dom-XMLHttpRequest-UNSENT" href="#dom-xmlhttprequest-unsent">UNSENT</a>.
   <tr>
-   <td><dfn id="event-xhr-loadstart" title="event-xhr-loadstart"><code>loadstart</code></dfn></td>
+   <td><dfn title="event-xhr-loadstart" id="event-xhr-loadstart"><code>loadstart</code></dfn></td>
    <td><code><a href="#progressevent">ProgressEvent</a></code></td>
    <td>The fetch initiates.
   <tr>
-   <td><dfn id="event-xhr-progress" title="event-xhr-progress"><code>progress</code></dfn></td>
+   <td><dfn title="event-xhr-progress" id="event-xhr-progress"><code>progress</code></dfn></td>
    <td><code><a href="#progressevent">ProgressEvent</a></code></td>
    <td>Transmitting data.
   <tr>
-   <td><dfn id="event-xhr-abort" title="event-xhr-abort"><code>abort</code></dfn></td>
+   <td><dfn title="event-xhr-abort" id="event-xhr-abort"><code>abort</code></dfn></td>
    <td><code><a href="#progressevent">ProgressEvent</a></code></td>
    <td>When the fetch has been aborted. For instance, by invoking the
    <code title="dom-XMLHttpRequest-abort"><a href="#dom-xmlhttprequest-abort">abort()</a></code> method.</td>
   <tr>
-   <td><dfn id="event-xhr-error" title="event-xhr-error"><code>error</code></dfn></td>
+   <td><dfn title="event-xhr-error" id="event-xhr-error"><code>error</code></dfn></td>
    <td><code><a href="#progressevent">ProgressEvent</a></code></td>
    <td>The fetch failed.
   <tr>
-   <td><dfn id="event-xhr-load" title="event-xhr-load"><code>load</code></dfn></td>
+   <td><dfn title="event-xhr-load" id="event-xhr-load"><code>load</code></dfn></td>
    <td><code><a href="#progressevent">ProgressEvent</a></code></td>
    <td>The fetch succeeded.
   <tr>
-   <td><dfn id="event-xhr-timeout" title="event-xhr-timeout"><code>timeout</code></dfn></td>
+   <td><dfn title="event-xhr-timeout" id="event-xhr-timeout"><code>timeout</code></dfn></td>
    <td><code><a href="#progressevent">ProgressEvent</a></code></td>
    <td>The author specified timeout has passed before the fetch completed.
   <tr>
-   <td><dfn id="event-xhr-loadend" title="event-xhr-loadend"><code>loadend</code></dfn></td>
+   <td><dfn title="event-xhr-loadend" id="event-xhr-loadend"><code>loadend</code></dfn></td>
    <td><code><a href="#progressevent">ProgressEvent</a></code></td>
    <td>The fetch completed (success or failure).
 </table>
@@ -1938,57 +1937,57 @@ and/or <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> obj
 
 <pre class="idl">typedef (<a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a> or USVString) <dfn id="formdataentryvalue">FormDataEntryValue</dfn>;
 
-[<a href="#dom-formdata" title="dom-FormData">Constructor</a>(optional <a class="external" href="https://html.spec.whatwg.org/multipage/forms.html#htmlformelement">HTMLFormElement</a> <var>form</var>),
+[<a title="dom-FormData" href="#dom-formdata">Constructor</a>(optional <a class="external" href="https://html.spec.whatwg.org/multipage/forms.html#htmlformelement">HTMLFormElement</a> <var>form</var>),
  Exposed=(Window,Worker)]
 interface <dfn id="formdata">FormData</dfn> {
-  void <a href="#dom-formdata-append" title="dom-FormData-append">append</a>(USVString <var>name</var>, <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> <var>value</var>, optional USVString <var>filename</var>);
-  void <a href="#dom-formdata-append" title="dom-FormData-append">append</a>(USVString <var>name</var>, USVString <var>value</var>);
-  void <a href="#dom-formdata-delete" title="dom-FormData-delete">delete</a>(USVString <var>name</var>);
-  <a href="#formdataentryvalue">FormDataEntryValue</a>? <a href="#dom-formdata-get" title="dom-FormData-get">get</a>(USVString <var>name</var>);
-  sequence&lt;<a href="#formdataentryvalue">FormDataEntryValue</a>&gt; <a href="#dom-formdata-getall" title="dom-FormData-getAll">getAll</a>(USVString <var>name</var>);
-  boolean <a href="#dom-formdata-has" title="dom-FormData-has">has</a>(USVString <var>name</var>);
-  void <a href="#dom-formdata-append" title="dom-FormData-append">set</a>(USVString <var>name</var>, <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> <var>value</var>, optional USVString <var>filename</var>);
-  void <a href="#dom-formdata-set" title="dom-FormData-set">set</a>(USVString <var>name</var>, USVString <var>value</var>);
+  void <a title="dom-FormData-append" href="#dom-formdata-append">append</a>(USVString <var>name</var>, <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> <var>value</var>, optional USVString <var>filename</var>);
+  void <a title="dom-FormData-append" href="#dom-formdata-append">append</a>(USVString <var>name</var>, USVString <var>value</var>);
+  void <a title="dom-FormData-delete" href="#dom-formdata-delete">delete</a>(USVString <var>name</var>);
+  <a href="#formdataentryvalue">FormDataEntryValue</a>? <a title="dom-FormData-get" href="#dom-formdata-get">get</a>(USVString <var>name</var>);
+  sequence&lt;<a href="#formdataentryvalue">FormDataEntryValue</a>&gt; <a title="dom-FormData-getAll" href="#dom-formdata-getall">getAll</a>(USVString <var>name</var>);
+  boolean <a title="dom-FormData-has" href="#dom-formdata-has">has</a>(USVString <var>name</var>);
+  void <a title="dom-FormData-append" href="#dom-formdata-append">set</a>(USVString <var>name</var>, <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> <var>value</var>, optional USVString <var>filename</var>);
+  void <a title="dom-FormData-set" href="#dom-formdata-set">set</a>(USVString <var>name</var>, USVString <var>value</var>);
   iterable&lt;USVString, <a href="#formdataentryvalue">FormDataEntryValue</a>&gt;;
 };</pre>
 
 <p>The <code><a href="#formdata">FormData</a></code> object represents an ordered list of
-<dfn id="concept-formdata-entry" title="concept-FormData-entry">entries</dfn>. Each
-<a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a> consists of a
-<dfn id="concept-formdata-entry-name" title="concept-FormData-entry-name">name</dfn> and a
-<dfn id="concept-formdata-entry-value" title="concept-FormData-entry-value">value</dfn>.
+<dfn title="concept-FormData-entry" id="concept-formdata-entry">entries</dfn>. Each
+<a title="concept-FormData-entry" href="#concept-formdata-entry">entry</a> consists of a
+<dfn title="concept-FormData-entry-name" id="concept-formdata-entry-name">name</dfn> and a
+<dfn title="concept-FormData-entry-value" id="concept-formdata-entry-value">value</dfn>.
 
 <p>For the purposes of interaction with other algorithms, an
-<a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a>'s type is "string" if
-<a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">value</a> is a string and "file" otherwise. If
-an <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a>'s type is "file", its filename is the
-value of <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a>'s
-<a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">value</a>'s
-<code class="external" title="dom-File-name"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-name">name</a></code> attribute.
+<a title="concept-FormData-entry" href="#concept-formdata-entry">entry</a>'s type is "string" if
+<a title="concept-FormData-entry-value" href="#concept-formdata-entry-value">value</a> is a string and "file" otherwise. If
+an <a title="concept-FormData-entry" href="#concept-formdata-entry">entry</a>'s type is "file", its filename is the
+value of <a title="concept-FormData-entry" href="#concept-formdata-entry">entry</a>'s
+<a title="concept-FormData-entry-value" href="#concept-formdata-entry-value">value</a>'s
+<code title="dom-File-name" class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-name">name</a></code> attribute.
 
 <p>To <dfn id="create-an-entry">create an entry</dfn> for <var>name</var>, <var>value</var>, and optionally a
 <var>filename</var>, run these steps:
 
 <ol>
  <li><p>Let <var>entry</var> be a new
- <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a>.
+ <a title="concept-FormData-entry" href="#concept-formdata-entry">entry</a>.
 
- <li><p>Set <var>entry</var>'s <a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a>
+ <li><p>Set <var>entry</var>'s <a title="concept-FormData-entry-name" href="#concept-formdata-entry-name">name</a>
  to <var>name</var>.
 
  <li><p>If <var>value</var> is a <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code> object and not
  a <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a></code> object, set <var>value</var> to a new
  <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a></code> object, representing the same bytes, whose
- <code class="external" title="dom-File-name"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-name">name</a></code> attribute value is
+ <code title="dom-File-name" class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-name">name</a></code> attribute value is
  "<code title="">blob</code>".
 
  <li><p>If <var>value</var> is a <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a></code> object and
  <var title="">filename</var> is given, set <var>value</var> to a new
  <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a></code> object, representing
- the same bytes, whose <code class="external" title="dom-File-name"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-name">name</a></code>
+ the same bytes, whose <code title="dom-File-name" class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-name">name</a></code>
  attribute value is <var>filename</var>.
 
- <li><p>Set <var>entry</var>'s <a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">value</a> to
+ <li><p>Set <var>entry</var>'s <a title="concept-FormData-entry-value" href="#concept-formdata-entry-value">value</a> to
  <var>value</var>.
 
  <li><p>Return <var>entry</var>.
@@ -1996,21 +1995,21 @@ value of <a href="#concept-formdata-entry" title="concept-FormData-entry">entry<
 
 
 <p>The
-<dfn id="dom-formdata" title="dom-FormData"><code>FormData(<var>form</var>)</code></dfn>
+<dfn title="dom-FormData" id="dom-formdata"><code>FormData(<var>form</var>)</code></dfn>
 constructor must run these steps:
 
 <ol>
  <li><p>Let <var title="">fd</var> be a new <code><a href="#formdata">FormData</a></code> object.
 
  <li><p>If <var>form</var> is given, set <var title="">fd</var>'s
- <a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a> to the result of
+ <a title="concept-FormData-entry" href="#concept-formdata-entry">entries</a> to the result of
  <a class="external" href="https://html.spec.whatwg.org/multipage/forms.html#constructing-form-data-set">constructing the form data set</a> for <var>form</var>.
 
  <li><p>Return <var title="">fd</var>.
 </ol>
 
 <p>The
-<dfn id="dom-formdata-append" title="dom-FormData-append"><code>append(<var>name</var>, <var>value</var>, <var>filename</var>)</code></dfn>
+<dfn title="dom-FormData-append" id="dom-formdata-append"><code>append(<var>name</var>, <var>value</var>, <var>filename</var>)</code></dfn>
 method must run these steps:
 
 <ol>
@@ -2018,65 +2017,65 @@ method must run these steps:
  <var>name</var>, <var>value</var>, and <var>filename</var> if given.
 
  <li><p>Append <var title="">entry</var> to <code><a href="#formdata">FormData</a></code> object's list of
- <a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a>.
+ <a title="concept-FormData-entry" href="#concept-formdata-entry">entries</a>.
 </ol>
 
 <p>The
-<dfn id="dom-formdata-delete" title="dom-FormData-delete"><code>delete(<var>name</var>)</code></dfn>
-method must remove all <a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a> whose
-<a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> is <var>name</var>.
+<dfn title="dom-FormData-delete" id="dom-formdata-delete"><code>delete(<var>name</var>)</code></dfn>
+method must remove all <a title="concept-FormData-entry" href="#concept-formdata-entry">entries</a> whose
+<a title="concept-FormData-entry-name" href="#concept-formdata-entry-name">name</a> is <var>name</var>.
 
 <p>The
-<dfn id="dom-formdata-get" title="dom-FormData-get"><code>get(<var>name</var>)</code></dfn>
-method must return the <a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">value</a> of the first
-<a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a> whose
-<a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> is <var>name</var>, and null
+<dfn title="dom-FormData-get" id="dom-formdata-get"><code>get(<var>name</var>)</code></dfn>
+method must return the <a title="concept-FormData-entry-value" href="#concept-formdata-entry-value">value</a> of the first
+<a title="concept-FormData-entry" href="#concept-formdata-entry">entry</a> whose
+<a title="concept-FormData-entry-name" href="#concept-formdata-entry-name">name</a> is <var>name</var>, and null
 otherwise.
 
 <p>The
-<dfn id="dom-formdata-getall" title="dom-FormData-getAll"><code>getAll(<var>name</var>)</code></dfn>
-method must return the <a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">values</a> of all
-<a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a> whose
-<a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> is <var>name</var>, in list
+<dfn title="dom-FormData-getAll" id="dom-formdata-getall"><code>getAll(<var>name</var>)</code></dfn>
+method must return the <a title="concept-FormData-entry-value" href="#concept-formdata-entry-value">values</a> of all
+<a title="concept-FormData-entry" href="#concept-formdata-entry">entries</a> whose
+<a title="concept-FormData-entry-name" href="#concept-formdata-entry-name">name</a> is <var>name</var>, in list
 order, and the empty sequence otherwise.
 
 <p>The
-<dfn id="dom-formdata-set" title="dom-FormData-set"><code>set(<var>name</var>, <var>value</var>)</code></dfn>
+<dfn title="dom-FormData-set" id="dom-formdata-set"><code>set(<var>name</var>, <var>value</var>)</code></dfn>
 method must run these steps:
 
 <ol>
  <li><p>Let <var>entry</var> be the result of <a href="#create-an-entry">create an entry</a> with
  <var>name</var>, <var>value</var>, and <var>filename</var> if given.
 
- <li><p>If there are any <a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a> whose
- <a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> is <var>name</var>, replace
- the first such <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a> with <var>entry</var> and
+ <li><p>If there are any <a title="concept-FormData-entry" href="#concept-formdata-entry">entries</a> whose
+ <a title="concept-FormData-entry-name" href="#concept-formdata-entry-name">name</a> is <var>name</var>, replace
+ the first such <a title="concept-FormData-entry" href="#concept-formdata-entry">entry</a> with <var>entry</var> and
  remove the others.
 
  <li><p>Otherwise, append <var>entry</var> to <code><a href="#formdata">FormData</a></code> object's list of
- <a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a>.
+ <a title="concept-FormData-entry" href="#concept-formdata-entry">entries</a>.
 </ol>
 
-<p>The <dfn id="dom-formdata-has" title="dom-FormData-has"><code>has(<var>name</var>)</code></dfn> method must
-return true if there is an <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a> whose
-<a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> is <var>name</var>, and false
+<p>The <dfn title="dom-FormData-has" id="dom-formdata-has"><code>has(<var>name</var>)</code></dfn> method must
+return true if there is an <a title="concept-FormData-entry" href="#concept-formdata-entry">entry</a> whose
+<a title="concept-FormData-entry-name" href="#concept-formdata-entry-name">name</a> is <var>name</var>, and false
 otherwise.
 
 <p>The <a class="external" href="http://heycam.github.io/webidl/#dfn-value-pairs-to-iterate-over">value pairs to iterate over</a> are the
-<a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a> with the key being the
-<a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> and the value the
-<a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">value</a>.
+<a title="concept-FormData-entry" href="#concept-formdata-entry">entries</a> with the key being the
+<a title="concept-FormData-entry-name" href="#concept-formdata-entry-name">name</a> and the value the
+<a title="concept-FormData-entry-value" href="#concept-formdata-entry-value">value</a>.
 
 
 
 <h2 id="interface-progressevent"><span class="secno">6 </span>Interface <code title="">ProgressEvent</code></h2>
 
-<pre class="idl">[<a class="external" href="https://dom.spec.whatwg.org/#concept-event-constructor" title="concept-event-constructor">Constructor</a>(DOMString <var title="">type</var>, optional <a href="#progresseventinit">ProgressEventInit</a> <var title="">eventInitDict</var>),
+<pre class="idl">[<a title="concept-event-constructor" class="external" href="https://dom.spec.whatwg.org/#concept-event-constructor">Constructor</a>(DOMString <var title="">type</var>, optional <a href="#progresseventinit">ProgressEventInit</a> <var title="">eventInitDict</var>),
  Exposed=(Window,Worker)]
 interface <dfn id="progressevent">ProgressEvent</dfn> : <a class="external" href="https://dom.spec.whatwg.org/#event">Event</a> {
-  readonly attribute boolean <a href="#dom-progressevent-lengthcomputable" title="dom-ProgressEvent-lengthComputable">lengthComputable</a>;
-  readonly attribute unsigned long long <a href="#dom-progressevent-loaded" title="dom-ProgressEvent-loaded">loaded</a>;
-  readonly attribute unsigned long long <a href="#dom-progressevent-total" title="dom-ProgressEvent-total">total</a>;
+  readonly attribute boolean <a title="dom-ProgressEvent-lengthComputable" href="#dom-progressevent-lengthcomputable">lengthComputable</a>;
+  readonly attribute unsigned long long <a title="dom-ProgressEvent-loaded" href="#dom-progressevent-loaded">loaded</a>;
+  readonly attribute unsigned long long <a title="dom-ProgressEvent-total" href="#dom-progressevent-total">total</a>;
 };
 
 dictionary <dfn id="progresseventinit">ProgressEventInit</dfn> : <a class="external" href="https://dom.spec.whatwg.org/#eventinit">EventInit</a> {
@@ -2085,24 +2084,24 @@ dictionary <dfn id="progresseventinit">ProgressEventInit</dfn> : <a class="exter
   unsigned long long <span title="dom-ProgressEventInit-total">total</span> = 0;
 };</pre>
 
-<p><a class="external" href="https://dom.spec.whatwg.org/#concept-event" title="concept-event">Events</a> using
+<p><a title="concept-event" class="external" href="https://dom.spec.whatwg.org/#concept-event">Events</a> using
 the <code><a href="#progressevent">ProgressEvent</a></code> interface indicate some kind of
 progression.
 
 <p>The
-<dfn id="dom-progressevent-lengthcomputable" title="dom-ProgressEvent-lengthComputable"><code>lengthComputable</code></dfn>,
-<dfn id="dom-progressevent-loaded" title="dom-ProgressEvent-loaded"><code>loaded</code></dfn>, and
-<dfn id="dom-progressevent-total" title="dom-ProgressEvent-total"><code>total</code></dfn>
+<dfn title="dom-ProgressEvent-lengthComputable" id="dom-progressevent-lengthcomputable"><code>lengthComputable</code></dfn>,
+<dfn title="dom-ProgressEvent-loaded" id="dom-progressevent-loaded"><code>loaded</code></dfn>, and
+<dfn title="dom-ProgressEvent-total" id="dom-progressevent-total"><code>total</code></dfn>
 attributes must return the value they were initialized to.
 
 
 <h3 id="firing-events-using-the-progressevent-interface"><span class="secno">6.1 </span>Firing events using the <code title="">ProgressEvent</code> interface</h3>
 
 <p>To
-<dfn id="concept-event-fire-progress" title="concept-event-fire-progress">fire an progress event named <var>e</var></dfn>
+<dfn title="concept-event-fire-progress" id="concept-event-fire-progress">fire an progress event named <var>e</var></dfn>
 given <var title="">transmitted</var> and <var title="">length</var>,
-<a class="external" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event named <var>e</var></a>
-with an <a class="external" href="https://dom.spec.whatwg.org/#concept-event" title="concept-event">event</a>
+<a title="concept-event-fire" class="external" href="https://dom.spec.whatwg.org/#concept-event-fire">fire an event named <var>e</var></a>
+with an <a title="concept-event" class="external" href="https://dom.spec.whatwg.org/#concept-event">event</a>
 using the <code><a href="#progressevent">ProgressEvent</a></code> interface that also meets these
 conditions:
 
@@ -2121,9 +2120,9 @@ conditions:
 
 <p><em>This section is non-normative.</em>
 
-<p>The suggested <code class="external" title="dom-Event-type"><a href="https://dom.spec.whatwg.org/#dom-event-type">type</a></code>
+<p>The suggested <code title="dom-Event-type" class="external"><a href="https://dom.spec.whatwg.org/#dom-event-type">type</a></code>
 attribute values for use with
-<a class="external" href="https://dom.spec.whatwg.org/#concept-event" title="concept-event">events</a> using the
+<a title="concept-event" class="external" href="https://dom.spec.whatwg.org/#concept-event">events</a> using the
 <code><a href="#progressevent">ProgressEvent</a></code> interface are summarized in the table below.
 Specification editors are free to tune the details to their specific
 scenarios, though are strongly encouraged to discuss their usage with the
@@ -2132,7 +2131,7 @@ WHATWG community to ensure input from people familiar with the subject.
 <table>
  <tbody>
   <tr>
-   <th><code class="external" title="dom-Event-type"><a href="https://dom.spec.whatwg.org/#dom-event-type">type</a></code> attribute value
+   <th><code title="dom-Event-type" class="external"><a href="https://dom.spec.whatwg.org/#dom-event-type">type</a></code> attribute value
    <th>Description
    <th>Times
    <th>When
@@ -2146,14 +2145,14 @@ WHATWG community to ensure input from people familiar with the subject.
    <td>In progress.
    <td>Once or more.
    <td>After <code title="">loadstart</code> has been
-    <a class="external" href="https://dom.spec.whatwg.org/#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>.
+    <a title="concept-event-dispatch" class="external" href="https://dom.spec.whatwg.org/#concept-event-dispatch">dispatched</a>.
   <tr>
    <th><code title="">error</code>
    <td>Progression failed.
    <td rowspan="4">Zero or once (mutually exclusive).
    <td rowspan="4">After the last <code title="">progress</code> has
     been
-    <a class="external" href="https://dom.spec.whatwg.org/#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>.
+    <a title="concept-event-dispatch" class="external" href="https://dom.spec.whatwg.org/#concept-event-dispatch">dispatched</a>.
   <tr>
    <th><code>abort</code>
    <td>Progression is terminated.
@@ -2169,7 +2168,7 @@ WHATWG community to ensure input from people familiar with the subject.
    <td>Once.</td>
    <td>After one of <code title="">error</code>, <code title="">abort</code>,
     <code title="">timeout</code> or <code title="">load</code> has been
-    <a class="external" href="https://dom.spec.whatwg.org/#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>.
+    <a title="concept-event-dispatch" class="external" href="https://dom.spec.whatwg.org/#concept-event-dispatch">dispatched</a>.
 </table>
 
 <p>The <code title="">error</code>, <code title="">abort</code>, <code title="">timeout</code>, and
@@ -2177,10 +2176,10 @@ WHATWG community to ensure input from people familiar with the subject.
 
 <p>Throughout the web platform the <code title="">error</code>, <code title="">abort</code>,
 <code title="">timeout</code> and <code title="">load</code> event types have
-their <code class="external" title="dom-Event-bubbles"><a href="https://dom.spec.whatwg.org/#dom-event-bubbles">bubbles</a></code> and
-<code class="external" title="dom-Event-cancelable"><a href="https://dom.spec.whatwg.org/#dom-event-cancelable">cancelable</a></code>
+their <code title="dom-Event-bubbles" class="external"><a href="https://dom.spec.whatwg.org/#dom-event-bubbles">bubbles</a></code> and
+<code title="dom-Event-cancelable" class="external"><a href="https://dom.spec.whatwg.org/#dom-event-cancelable">cancelable</a></code>
 attributes initialized to false, so it is suggested that for consistency all
-<a class="external" href="https://dom.spec.whatwg.org/#concept-event" title="concept-event">events</a> using the
+<a title="concept-event" class="external" href="https://dom.spec.whatwg.org/#concept-event">events</a> using the
 <code><a href="#progressevent">ProgressEvent</a></code> interface do the same.
 
 
@@ -2188,9 +2187,9 @@ attributes initialized to false, so it is suggested that for consistency all
 
 <p>For cross-origin requests some kind of opt-in, e.g. the
 <a class="external" href="https://fetch.spec.whatwg.org/#cors-protocol">CORS protocol</a> defined in the Fetch Standard, has to be
-used before <a class="external" href="https://dom.spec.whatwg.org/#concept-event" title="concept-event">events</a> using the
+used before <a title="concept-event" class="external" href="https://dom.spec.whatwg.org/#concept-event">events</a> using the
 <code><a href="#progressevent">ProgressEvent</a></code> interface are
-<a class="external" href="https://dom.spec.whatwg.org/#concept-event-dispatch" title="concept-event-dispatch">dispatched</a>
+<a title="concept-event-dispatch" class="external" href="https://dom.spec.whatwg.org/#concept-event-dispatch">dispatched</a>
 as information (e.g. size) would be revealed that cannot be obtained
 otherwise. <a class="informative" href="#refsFETCH">[FETCH]</a>
 
@@ -2202,7 +2201,7 @@ otherwise. <a class="informative" href="#refsFETCH">[FETCH]</a>
  defined in the sections before, and the HTML
  <code class="external"><a href="https://html.spec.whatwg.org/multipage/forms.html#the-progress-element">progress</a></code> element are used together to
  display the process of
- <a class="external" href="https://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">fetching</a> a resource.
+ <a title="concept-fetch" class="external" href="https://fetch.spec.whatwg.org/#concept-fetch">fetching</a> a resource.
 
  <pre>&lt;!DOCTYPE html&gt;
 &lt;title&gt;Waiting for Magical Unicorns&lt;/title&gt;
@@ -2382,11 +2381,11 @@ the HTML Standard (then Web Applications 1.0). <a href="#refsHTML">[HTML]</a>
 <a href="http://www.w3.org/TR/2008/REC-SVGTiny12-20081222/svgudom.html">SVG Micro DOM</a>.
 
 <p>This standard is written by
-<a href="//annevankesteren.nl/" lang="nl">Anne van Kesteren</a>
+<a lang="nl" href="//annevankesteren.nl/">Anne van Kesteren</a>
 (<a href="//www.mozilla.org/">Mozilla</a>,
 <a href="mailto:annevk@annevk.nl">annevk@annevk.nl</a>).
 
-<p>Per <a href="//creativecommons.org/publicdomain/zero/1.0/" rel="license">CC0</a>, to
+<p>Per <a rel="license" href="//creativecommons.org/publicdomain/zero/1.0/">CC0</a>, to
 the extent possible under law, the editor has waived all copyright and related or
 neighboring rights to this work.
 
