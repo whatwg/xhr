@@ -1872,19 +1872,17 @@ and/or <code>XMLHttpRequestUpload</code> objects:
 
 <h2>Interface <code title>FormData</code></h2>
 
-<pre class="idl">typedef (<span data-anolis-spec=fileapi>File</span> or USVString) <dfn>FormDataEntryValue</dfn>;
+<pre class="idl">typedef (<span data-anolis-spec=fileapi>Blob</span> or USVString) <dfn>FormDataEntryValue</dfn>;
 
 [<span title="dom-FormData">Constructor</span>(optional <span data-anolis-spec=html>HTMLFormElement</span> <var>form</var>),
  Exposed=(Window,Worker)]
 interface <dfn>FormData</dfn> {
-  void <span title="dom-FormData-append">append</span>(USVString <var>name</var>, <span data-anolis-spec=fileapi>Blob</span> <var>value</var>, optional USVString <var>filename</var>);
-  void <span title="dom-FormData-append">append</span>(USVString <var>name</var>, USVString <var>value</var>);
+  void <span title="dom-FormData-append">append</span>(USVString <var>name</var>, <span>FormDataEntryValue</span> <var>value</var>);
   void <span title=dom-FormData-delete>delete</span>(USVString <var>name</var>);
   <span>FormDataEntryValue</span>? <span title=dom-FormData-get>get</span>(USVString <var>name</var>);
   sequence&lt;<span>FormDataEntryValue</span>> <span title=dom-FormData-getAll>getAll</span>(USVString <var>name</var>);
   boolean <span title=dom-FormData-has>has</span>(USVString <var>name</var>);
-  void <span title=dom-FormData-append>set</span>(USVString <var>name</var>, <span data-anolis-spec=fileapi>Blob</span> <var>value</var>, optional USVString <var>filename</var>);
-  void <span title=dom-FormData-set>set</span>(USVString <var>name</var>, USVString <var>value</var>);
+  void <span title=dom-FormData-append>set</span>(USVString <var>name</var>, <span>FormDataEntryValue</span> <var>value</var>);
   iterable&lt;USVString, <span>FormDataEntryValue</span>>;
 };</pre>
 
@@ -1895,41 +1893,16 @@ interface <dfn>FormData</dfn> {
 <dfn title=concept-FormData-entry-value>value</dfn>.
 
 <p>For the purposes of interaction with other algorithms, an
-<span title=concept-FormData-entry>entry</span>'s type is "string" if
+<span title=concept-FormData-entry>entry</span>'s type is "string" if its
 <span title=concept-FormData-entry-value>value</span> is a string and "file" otherwise. If
-an <span title=concept-FormData-entry>entry</span>'s type is "file", its filename is the
+an <span title=concept-FormData-entry>entry</span>'s type is "file", its filename is
+"<code title>blob</code>" if <span title=concept-FormData-entry-value>value</span> is not
+a <code data-anolis-spec=fileapi>File</code> object, and otherwise its filename is the
 value of <span title=concept-FormData-entry>entry</span>'s
 <span title=concept-FormData-entry-value>value</span>'s
 <code data-anolis-spec=fileapi title=dom-File-name>name</code> attribute.
 
-<p>To <dfn>create an entry</dfn> for <var>name</var>, <var>value</var>, and optionally a
-<var>filename</var>, run these steps:
-
-<ol>
- <li><p>Let <var>entry</var> be a new
- <span title=concept-FormData-entry>entry</span>.
-
- <li><p>Set <var>entry</var>'s <span title=concept-FormData-entry-name>name</span>
- to <var>name</var>.
-
- <li><p>If <var>value</var> is a <code data-anolis-spec=fileapi>Blob</code> object and not
- a <code data-anolis-spec=fileapi>File</code> object, set <var>value</var> to a new
- <code data-anolis-spec=fileapi>File</code> object, representing the same bytes, whose
- <code data-anolis-spec=fileapi title=dom-File-name>name</code> attribute value is
- "<code title>blob</code>".
-
- <li><p>If <var>value</var> is a <code data-anolis-spec=fileapi>File</code> object and
- <var title>filename</var> is given, set <var>value</var> to a new
- <code data-anolis-spec=fileapi>File</code> object, representing
- the same bytes, whose <code data-anolis-spec=fileapi title=dom-File-name>name</code>
- attribute value is <var>filename</var>.
-
- <li><p>Set <var>entry</var>'s <span title=concept-FormData-entry-value>value</span> to
- <var>value</var>.
-
- <li><p>Return <var>entry</var>.
-</ol>
-
+<hr>
 
 <p>The
 <dfn title="dom-FormData"><code>FormData(<var>form</var>)</code></dfn>
@@ -1946,57 +1919,55 @@ constructor must run these steps:
 </ol>
 
 <p>The
-<dfn title="dom-FormData-append" id="dom-formdata-append"><code>append(<var>name</var>, <var>value</var>, <var>filename</var>)</code></dfn>
-method must run these steps:
-
-<ol>
- <li><p>Let <var title>entry</var> be the result of <span>create an entry</span> with
- <var>name</var>, <var>value</var>, and <var>filename</var> if given.
-
- <li><p>Append <var title>entry</var> to <code>FormData</code> object's list of
- <span title=concept-FormData-entry>entries</span>.
-</ol>
+<dfn title="dom-FormData-append" id="dom-formdata-append"><code>append(<var>name</var>, <var>value</var>)</code></dfn>
+method, when invoked, must append a new <span title=concept-FormData-entry>entry</span>
+whose <span title=concept-FormData-entry-name>name</span> is <var>name</var>, and
+<span title=concept-FormData-entry-value>value</span> is <var>value</var>, to
+<span data-anolis-spec=dom>context object</span>'s list of
+<span title=concept-FormData-entry>entries</span>.
 
 <p>The
 <dfn title=dom-FormData-delete><code>delete(<var>name</var>)</code></dfn>
-method must remove all <span title=concept-FormData-entry>entries</span> whose
-<span title=concept-FormData-entry-name>name</span> is <var>name</var>.
+method, when invoked, must remove all <span title=concept-FormData-entry>entries</span>
+whose <span title=concept-FormData-entry-name>name</span> is <var>name</var>.
 
-<p>The
-<dfn title=dom-FormData-get><code>get(<var>name</var>)</code></dfn>
-method must return the <span title=concept-FormData-entry-value>value</span> of the first
+<p>The <dfn title=dom-FormData-get><code>get(<var>name</var>)</code></dfn> method, when
+invoked, must return the <span title=concept-FormData-entry-value>value</span> of the first
 <span title=concept-FormData-entry>entry</span> whose
 <span title=concept-FormData-entry-name>name</span> is <var>name</var>, and null
 otherwise.
 
-<p>The
-<dfn title=dom-FormData-getAll><code>getAll(<var>name</var>)</code></dfn>
-method must return the <span title=concept-FormData-entry-value>values</span> of all
-<span title=concept-FormData-entry>entries</span> whose
-<span title=concept-FormData-entry-name>name</span> is <var>name</var>, in list
-order, and the empty sequence otherwise.
+<p>The <dfn title=dom-FormData-getAll><code>getAll(<var>name</var>)</code></dfn> method,
+when invoked, must return the <span title=concept-FormData-entry-value>values</span> of
+all <span title=concept-FormData-entry>entries</span> whose
+<span title=concept-FormData-entry-name>name</span> is <var>name</var>, in list order, and
+the empty sequence otherwise.
+
+<p>The <dfn title=dom-FormData-has><code>has(<var>name</var>)</code></dfn> method, when
+invoked, must return true if there is an <span title=concept-FormData-entry>entry</span>
+whose <span title=concept-FormData-entry-name>name</span> is <var>name</var>, and false
+otherwise.
 
 <p>The
 <dfn title=dom-FormData-set><code>set(<var>name</var>, <var>value</var>)</code></dfn>
-method must run these steps:
+method, when invoked, must run these steps:
 
 <ol>
- <li><p>Let <var>entry</var> be the result of <span>create an entry</span> with
- <var>name</var>, <var>value</var>, and <var>filename</var> if given.
+ <li><p>Let <var>entry</var> be a new <span title=concept-FormData-entry>entry</span>
+ whose <span title=concept-FormData-entry-name>name</span> is <var>name</var>, and
+ <span title=concept-FormData-entry-value>value</span> is <var>value</var>.
 
- <li><p>If there are any <span title=concept-FormData-entry>entries</span> whose
+ <li><p>If there are any <span title=concept-FormData-entry>entries</span> in
+ <span data-anolis-spec=dom>context object</span>'s list of
+ <span title=concept-FormData-entry>entries</span> whose
  <span title=concept-FormData-entry-name>name</span> is <var>name</var>, replace
  the first such <span title=concept-FormData-entry>entry</span> with <var>entry</var> and
  remove the others.
 
- <li><p>Otherwise, append <var>entry</var> to <code>FormData</code> object's list of
+ <li><p>Otherwise, append <var>entry</var> to
+ <span data-anolis-spec=dom>context object</span>'s list of
  <span title=concept-FormData-entry>entries</span>.
 </ol>
-
-<p>The <dfn title=dom-FormData-has><code>has(<var>name</var>)</code></dfn> method must
-return true if there is an <span title=concept-FormData-entry>entry</span> whose
-<span title=concept-FormData-entry-name>name</span> is <var>name</var>, and false
-otherwise.
 
 <p>The <span data-anolis-spec=webidl>value pairs to iterate over</span> are the
 <span title=concept-FormData-entry>entries</span> with the key being the

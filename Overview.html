@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="https://whatwg.org/"><img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-4-may-2015">Living Standard — Last Updated 4 May 2015</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-7-may-2015">Living Standard — Last Updated 7 May 2015</h2>
 
 <dl>
  <dt>Participate:
@@ -1920,19 +1920,17 @@ and/or <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> obj
 
 <h2 id="interface-formdata"><span class="secno">5 </span>Interface <code title="">FormData</code></h2>
 
-<pre class="idl">typedef (<a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a> or USVString) <dfn id="formdataentryvalue">FormDataEntryValue</dfn>;
+<pre class="idl">typedef (<a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or USVString) <dfn id="formdataentryvalue">FormDataEntryValue</dfn>;
 
 [<a href="#dom-formdata" title="dom-FormData">Constructor</a>(optional <a class="external" href="https://html.spec.whatwg.org/multipage/forms.html#htmlformelement">HTMLFormElement</a> <var>form</var>),
  Exposed=(Window,Worker)]
 interface <dfn id="formdata">FormData</dfn> {
-  void <a href="#dom-formdata-append" title="dom-FormData-append">append</a>(USVString <var>name</var>, <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> <var>value</var>, optional USVString <var>filename</var>);
-  void <a href="#dom-formdata-append" title="dom-FormData-append">append</a>(USVString <var>name</var>, USVString <var>value</var>);
+  void <a href="#dom-formdata-append" title="dom-FormData-append">append</a>(USVString <var>name</var>, <a href="#formdataentryvalue">FormDataEntryValue</a> <var>value</var>);
   void <a href="#dom-formdata-delete" title="dom-FormData-delete">delete</a>(USVString <var>name</var>);
   <a href="#formdataentryvalue">FormDataEntryValue</a>? <a href="#dom-formdata-get" title="dom-FormData-get">get</a>(USVString <var>name</var>);
   sequence&lt;<a href="#formdataentryvalue">FormDataEntryValue</a>&gt; <a href="#dom-formdata-getall" title="dom-FormData-getAll">getAll</a>(USVString <var>name</var>);
   boolean <a href="#dom-formdata-has" title="dom-FormData-has">has</a>(USVString <var>name</var>);
-  void <a href="#dom-formdata-append" title="dom-FormData-append">set</a>(USVString <var>name</var>, <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> <var>value</var>, optional USVString <var>filename</var>);
-  void <a href="#dom-formdata-set" title="dom-FormData-set">set</a>(USVString <var>name</var>, USVString <var>value</var>);
+  void <a href="#dom-formdata-append" title="dom-FormData-append">set</a>(USVString <var>name</var>, <a href="#formdataentryvalue">FormDataEntryValue</a> <var>value</var>);
   iterable&lt;USVString, <a href="#formdataentryvalue">FormDataEntryValue</a>&gt;;
 };</pre>
 
@@ -1943,41 +1941,16 @@ interface <dfn id="formdata">FormData</dfn> {
 <dfn id="concept-formdata-entry-value" title="concept-FormData-entry-value">value</dfn>.
 
 <p>For the purposes of interaction with other algorithms, an
-<a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a>'s type is "string" if
+<a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a>'s type is "string" if its
 <a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">value</a> is a string and "file" otherwise. If
-an <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a>'s type is "file", its filename is the
+an <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a>'s type is "file", its filename is
+"<code title="">blob</code>" if <a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">value</a> is not
+a <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a></code> object, and otherwise its filename is the
 value of <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a>'s
 <a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">value</a>'s
 <code class="external" title="dom-File-name"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-name">name</a></code> attribute.
 
-<p>To <dfn id="create-an-entry">create an entry</dfn> for <var>name</var>, <var>value</var>, and optionally a
-<var>filename</var>, run these steps:
-
-<ol>
- <li><p>Let <var>entry</var> be a new
- <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a>.
-
- <li><p>Set <var>entry</var>'s <a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a>
- to <var>name</var>.
-
- <li><p>If <var>value</var> is a <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code> object and not
- a <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a></code> object, set <var>value</var> to a new
- <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a></code> object, representing the same bytes, whose
- <code class="external" title="dom-File-name"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-name">name</a></code> attribute value is
- "<code title="">blob</code>".
-
- <li><p>If <var>value</var> is a <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a></code> object and
- <var title="">filename</var> is given, set <var>value</var> to a new
- <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a></code> object, representing
- the same bytes, whose <code class="external" title="dom-File-name"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-name">name</a></code>
- attribute value is <var>filename</var>.
-
- <li><p>Set <var>entry</var>'s <a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">value</a> to
- <var>value</var>.
-
- <li><p>Return <var>entry</var>.
-</ol>
-
+<hr>
 
 <p>The
 <dfn id="dom-formdata" title="dom-FormData"><code>FormData(<var>form</var>)</code></dfn>
@@ -1994,57 +1967,55 @@ constructor must run these steps:
 </ol>
 
 <p>The
-<dfn id="dom-formdata-append" title="dom-FormData-append"><code>append(<var>name</var>, <var>value</var>, <var>filename</var>)</code></dfn>
-method must run these steps:
-
-<ol>
- <li><p>Let <var title="">entry</var> be the result of <a href="#create-an-entry">create an entry</a> with
- <var>name</var>, <var>value</var>, and <var>filename</var> if given.
-
- <li><p>Append <var title="">entry</var> to <code><a href="#formdata">FormData</a></code> object's list of
- <a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a>.
-</ol>
+<dfn id="dom-formdata-append" title="dom-FormData-append"><code>append(<var>name</var>, <var>value</var>)</code></dfn>
+method, when invoked, must append a new <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a>
+whose <a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> is <var>name</var>, and
+<a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">value</a> is <var>value</var>, to
+<a class="external" href="https://dom.spec.whatwg.org/#context-object">context object</a>'s list of
+<a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a>.
 
 <p>The
 <dfn id="dom-formdata-delete" title="dom-FormData-delete"><code>delete(<var>name</var>)</code></dfn>
-method must remove all <a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a> whose
-<a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> is <var>name</var>.
+method, when invoked, must remove all <a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a>
+whose <a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> is <var>name</var>.
 
-<p>The
-<dfn id="dom-formdata-get" title="dom-FormData-get"><code>get(<var>name</var>)</code></dfn>
-method must return the <a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">value</a> of the first
+<p>The <dfn id="dom-formdata-get" title="dom-FormData-get"><code>get(<var>name</var>)</code></dfn> method, when
+invoked, must return the <a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">value</a> of the first
 <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a> whose
 <a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> is <var>name</var>, and null
 otherwise.
 
-<p>The
-<dfn id="dom-formdata-getall" title="dom-FormData-getAll"><code>getAll(<var>name</var>)</code></dfn>
-method must return the <a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">values</a> of all
-<a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a> whose
-<a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> is <var>name</var>, in list
-order, and the empty sequence otherwise.
+<p>The <dfn id="dom-formdata-getall" title="dom-FormData-getAll"><code>getAll(<var>name</var>)</code></dfn> method,
+when invoked, must return the <a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">values</a> of
+all <a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a> whose
+<a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> is <var>name</var>, in list order, and
+the empty sequence otherwise.
+
+<p>The <dfn id="dom-formdata-has" title="dom-FormData-has"><code>has(<var>name</var>)</code></dfn> method, when
+invoked, must return true if there is an <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a>
+whose <a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> is <var>name</var>, and false
+otherwise.
 
 <p>The
 <dfn id="dom-formdata-set" title="dom-FormData-set"><code>set(<var>name</var>, <var>value</var>)</code></dfn>
-method must run these steps:
+method, when invoked, must run these steps:
 
 <ol>
- <li><p>Let <var>entry</var> be the result of <a href="#create-an-entry">create an entry</a> with
- <var>name</var>, <var>value</var>, and <var>filename</var> if given.
+ <li><p>Let <var>entry</var> be a new <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a>
+ whose <a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> is <var>name</var>, and
+ <a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">value</a> is <var>value</var>.
 
- <li><p>If there are any <a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a> whose
+ <li><p>If there are any <a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a> in
+ <a class="external" href="https://dom.spec.whatwg.org/#context-object">context object</a>'s list of
+ <a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a> whose
  <a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> is <var>name</var>, replace
  the first such <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a> with <var>entry</var> and
  remove the others.
 
- <li><p>Otherwise, append <var>entry</var> to <code><a href="#formdata">FormData</a></code> object's list of
+ <li><p>Otherwise, append <var>entry</var> to
+ <a class="external" href="https://dom.spec.whatwg.org/#context-object">context object</a>'s list of
  <a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a>.
 </ol>
-
-<p>The <dfn id="dom-formdata-has" title="dom-FormData-has"><code>has(<var>name</var>)</code></dfn> method must
-return true if there is an <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a> whose
-<a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> is <var>name</var>, and false
-otherwise.
 
 <p>The <a class="external" href="https://heycam.github.io/webidl/#dfn-value-pairs-to-iterate-over">value pairs to iterate over</a> are the
 <a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a> with the key being the
