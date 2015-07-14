@@ -171,8 +171,8 @@ XML.
 <p>It uses the typographic conventions from HTML. <span data-anolis-ref>HTML</span>
 
 <p>The term <dfn>user credentials</dfn> for the purposes of this
-specification means cookies, HTTP authentication, and client-side SSL
-certificates. Specifically it does not refer to proxy authentication or the
+specification means cookies, HTTP authentication, and TLS client certificates.
+Specifically it does not refer to proxy authentication or the
 <code title="http-origin">Origin</code> header.
 <span data-anolis-ref>COOKIES</span> <!-- XXX ref? -->
 
@@ -880,12 +880,12 @@ method must run these steps:
    <dd><span>request URL</span>
    <dt><span data-anolis-spec=fetch title=concept-request-header-list>header list</span>
    <dd><span>author request headers</span>
-   <dt><span data-anolis-spec=fetch>unsafe request flag</span>
+   <dt><span data-anolis-spec=fetch>unsafe-request flag</span>
    <dd>Set.
    <dt><span data-anolis-spec=fetch title=concept-request-origin>origin</span>
    <dd><span title=concept-XMLHttpRequest-settings-object>settings object</span>'s
    <span data-anolis-spec=html>origin</span>
-   <dt><span data-anolis-spec=fetch>force <code title>Origin</code> header flag</span>
+   <dt><span data-anolis-spec=fetch>force-<code title>Origin</code>-header flag</span>
    <dd>Set.
    <dt><span data-anolis-spec=fetch title=concept-request-referrer>referrer</span>
    <dd><span title=concept-XMLHttpRequest-settings-object>settings object</span>'s
@@ -903,8 +903,6 @@ method must run these steps:
    <span data-anolis-spec=html>global object</span>
    <dt><span data-anolis-spec=fetch title=concept-request-context>context</span>
    <dd><i title>xmlhttprequest</i>
-   <dt><span data-anolis-spec=fetch>authentication flag</span>
-   <dd>Set.
    <dt><span data-anolis-spec=fetch>synchronous flag</span>
    <dd>Set if the <span>synchronous flag</span> is set.
    <dt><span data-anolis-spec=fetch title=concept-request-mode>mode</span>
