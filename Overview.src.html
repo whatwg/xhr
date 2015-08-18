@@ -890,6 +890,8 @@ method must run these steps:
    <span data-anolis-spec=html>origin</span>
    <dt><span data-anolis-spec=fetch>force-<code title>Origin</code>-header flag</span>
    <dd>Set.
+   <dt><span data-anolis-spec=fetch>same-origin data-URL flag</span>
+   <dd>Set.
    <dt><span data-anolis-spec=fetch title=concept-request-referrer>referrer</span>
    <dd><span title=concept-XMLHttpRequest-settings-object>settings object</span>'s
    <span data-anolis-spec=html>referrer source</span>'s
@@ -904,17 +906,18 @@ method must run these steps:
    <dt><span data-anolis-spec=fetch title=concept-request-client>client</span>
    <dd><span title=concept-XMLHttpRequest-settings-object>settings object</span>'s
    <span data-anolis-spec=html>global object</span>
-   <dt><span data-anolis-spec=fetch title=concept-request-context>context</span>
-   <dd><i title>xmlhttprequest</i>
+   <dt><span data-anolis-spec=fetch title=concept-request-destination>destination</span>
+   <dd>"<code>subresource</code>"
    <dt><span data-anolis-spec=fetch>synchronous flag</span>
    <dd>Set if the <span>synchronous flag</span> is set.
    <dt><span data-anolis-spec=fetch title=concept-request-mode>mode</span>
-   <dd><i title>CORS-with-forced-preflight</i> if one or more event listeners are
+   <dd>"<code>cors-with-forced-preflight</code>" if one or more event listeners are
    registered on the associated <code>XMLHttpRequestUpload</code> object and
-   <i title>CORS</i> otherwise.
+   "<code>cors</code>" otherwise.
    <dt><span data-anolis-spec=fetch title=concept-request-credentials-mode>credentials mode</span>
    <dd>If the <code title=dom-XMLHttpRequest-withCredentials>withCredentials</code>
-   attribute value is true, <i title>include</i>, and <i title>same-origin</i> otherwise.
+   attribute value is true, "<code>include</code>", and "<code>same-origin</code>"
+   otherwise.
    <dt><span data-anolis-spec=fetch title=concept-request-use-url-credentials-flag>use URL credentials flag</span>
    <dd>Set if either <span>request URL</span>'s
    <span data-anolis-spec=url title=concept-url-username>username</span>
@@ -2185,6 +2188,7 @@ Gorm Haug Eriksen,
 H&aring;kon Wium Lie,
 Hallvord R. M. Steen,
 Henri Sivonen,
+Hiroshige Hayashizaki,
 Huub Schaeks,
 Ian Davis,
 Ian Hickson,
@@ -2232,7 +2236,8 @@ Takeshi Yoshino,
 Thomas Roessler,
 Tom Magliery,
 Travis Leithead,
-Yehuda Katz, and
+Yehuda Katz,
+Youenn Fablet, and
 Zhenbin Xu
 for their contributions to this standard.
 
@@ -2252,6 +2257,6 @@ the HTML Standard (then Web Applications 1.0). <span data-anolis-ref>HTML</span>
 (<a href=https://www.mozilla.org/>Mozilla</a>,
 <a href=mailto:annevk@annevk.nl>annevk@annevk.nl</a>).
 
-<p>Per <a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>, to
+<p>Per <a rel=license href=https://creativecommons.org/publicdomain/zero/1.0/>CC0</a>, to
 the extent possible under law, the editor has waived all copyright and related or
 neighboring rights to this work.

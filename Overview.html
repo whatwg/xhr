@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="https://whatwg.org/"><img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-10-august-2015">Living Standard — Last Updated 10 August 2015</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-18-august-2015">Living Standard — Last Updated 18 August 2015</h2>
 
 <dl>
  <dt>Participate:
@@ -938,6 +938,8 @@ method must run these steps:
    <a class="external" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>
    <dt><a class="external" href="https://fetch.spec.whatwg.org/#force-origin-header-flag">force-<code title="">Origin</code>-header flag</a>
    <dd>Set.
+   <dt><a class="external" href="https://fetch.spec.whatwg.org/#same-origin-data-url-flag">same-origin data-URL flag</a>
+   <dd>Set.
    <dt><a class="external" href="https://fetch.spec.whatwg.org/#concept-request-referrer" title="concept-request-referrer">referrer</a>
    <dd><a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
    <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#referrer-source">referrer source</a>'s
@@ -952,17 +954,18 @@ method must run these steps:
    <dt><a class="external" href="https://fetch.spec.whatwg.org/#concept-request-client" title="concept-request-client">client</a>
    <dd><a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
    <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#global-object">global object</a>
-   <dt><a class="external" href="https://fetch.spec.whatwg.org/#concept-request-context" title="concept-request-context">context</a>
-   <dd><i title="">xmlhttprequest</i>
+   <dt><a class="external" href="https://fetch.spec.whatwg.org/#concept-request-destination" title="concept-request-destination">destination</a>
+   <dd>"<code>subresource</code>"
    <dt><a class="external" href="https://fetch.spec.whatwg.org/#synchronous-flag">synchronous flag</a>
    <dd>Set if the <a href="#synchronous-flag">synchronous flag</a> is set.
    <dt><a class="external" href="https://fetch.spec.whatwg.org/#concept-request-mode" title="concept-request-mode">mode</a>
-   <dd><i title="">CORS-with-forced-preflight</i> if one or more event listeners are
+   <dd>"<code>cors-with-forced-preflight</code>" if one or more event listeners are
    registered on the associated <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> object and
-   <i title="">CORS</i> otherwise.
+   "<code>cors</code>" otherwise.
    <dt><a class="external" href="https://fetch.spec.whatwg.org/#concept-request-credentials-mode" title="concept-request-credentials-mode">credentials mode</a>
    <dd>If the <code title="dom-XMLHttpRequest-withCredentials"><a href="#dom-xmlhttprequest-withcredentials">withCredentials</a></code>
-   attribute value is true, <i title="">include</i>, and <i title="">same-origin</i> otherwise.
+   attribute value is true, "<code>include</code>", and "<code>same-origin</code>"
+   otherwise.
    <dt><a class="external" href="https://fetch.spec.whatwg.org/#concept-request-use-url-credentials-flag" title="concept-request-use-url-credentials-flag">use URL credentials flag</a>
    <dd>Set if either <a href="#request-url">request URL</a>'s
    <a class="external" href="https://url.spec.whatwg.org/#concept-url-username" title="concept-url-username">username</a>
@@ -1477,8 +1480,8 @@ that is null in which case it is the <a href="#response-charset">response charse
  <a class="external" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> otherwise.
 
  <li><p>Set <a href="#response-blob-object">response <code>Blob</code> object</a> to a new
- <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code> object representing <var>bytes</var> with
- <code class="external" title="dom-Blob-type"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-type">type</a></code> <var title="">type</var> and
+ <code class="external"><a href="https://w3c.github.io/FileAPI/#blob">Blob</a></code> object representing <var>bytes</var> with
+ <code class="external" title="dom-Blob-type"><a href="https://w3c.github.io/FileAPI/#dfn-type">type</a></code> <var title="">type</var> and
  return it.
 </ol>
 
@@ -1921,7 +1924,7 @@ and/or <code><a href="#xmlhttprequestupload">XMLHttpRequestUpload</a></code> obj
 
 <h2 id="interface-formdata"><span class="secno">5 </span>Interface <code title="">FormData</code></h2>
 
-<pre class="idl">typedef (<a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or USVString) <dfn id="formdataentryvalue">FormDataEntryValue</dfn>;
+<pre class="idl">typedef (<a class="external" href="https://w3c.github.io/FileAPI/#blob">Blob</a> or USVString) <dfn id="formdataentryvalue">FormDataEntryValue</dfn>;
 
 [<a href="#dom-formdata" title="dom-FormData">Constructor</a>(optional <a class="external" href="https://html.spec.whatwg.org/multipage/forms.html#htmlformelement">HTMLFormElement</a> <var>form</var>),
  Exposed=(Window,Worker)]
@@ -1946,10 +1949,10 @@ interface <dfn id="formdata">FormData</dfn> {
 <a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">value</a> is a string and "file" otherwise. If
 an <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a>'s type is "file", its filename is
 "<code title="">blob</code>" if <a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">value</a> is not
-a <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#file">File</a></code> object, and otherwise its filename is the
+a <code class="external"><a href="https://w3c.github.io/FileAPI/#file">File</a></code> object, and otherwise its filename is the
 value of <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a>'s
 <a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">value</a>'s
-<code class="external" title="dom-File-name"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-name">name</a></code> attribute.
+<code class="external" title="dom-File-name"><a href="https://w3c.github.io/FileAPI/#dfn-name">name</a></code> attribute.
 
 <hr>
 
@@ -2205,7 +2208,7 @@ otherwise. <a class="informative" href="#refsFETCH">[FETCH]</a>
 <dd><cite><a href="https://fetch.spec.whatwg.org/">Fetch</a></cite>, Anne van Kesteren. WHATWG.
 
 <dt id="refsFILEAPI">[FILEAPI]
-<dd><cite><a href="http://dev.w3.org/2006/webapi/FileAPI/">File API</a></cite>, Arun Ranganathan and Jonas Sicking. W3C.
+<dd><cite><a href="https://w3c.github.io/FileAPI/">File API</a></cite>, Arun Ranganathan and Jonas Sicking. W3C.
 
 <dt id="refsHTML">[HTML]
 <dd><cite><a href="https://html.spec.whatwg.org/multipage/">HTML</a></cite>, Ian Hickson. WHATWG.
@@ -2279,6 +2282,7 @@ Gorm Haug Eriksen,
 Håkon Wium Lie,
 Hallvord R. M. Steen,
 Henri Sivonen,
+Hiroshige Hayashizaki,
 Huub Schaeks,
 Ian Davis,
 Ian Hickson,
@@ -2326,7 +2330,8 @@ Takeshi Yoshino,
 Thomas Roessler,
 Tom Magliery,
 Travis Leithead,
-Yehuda Katz, and
+Yehuda Katz,
+Youenn Fablet, and
 Zhenbin Xu
 for their contributions to this standard.
 
