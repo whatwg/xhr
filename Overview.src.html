@@ -180,7 +180,7 @@ Specifically it does not refer to proxy authentication or the
 
 <h2>Interface <code title>XMLHttpRequest</code></h2>
 
-<pre class="idl">[Exposed=(Window,Worker)]
+<pre class="idl">[Exposed=(Window,DedicatedWorker,SharedWorker)]
 interface <dfn id="xmlhttprequesteventtarget">XMLHttpRequestEventTarget</dfn> : <span data-anolis-spec=dom>EventTarget</span> {
   // <a href="#event-handlers">event handlers</a>
   attribute <span data-anolis-spec=html>EventHandler</span> <span title="handler-xhr-onloadstart">onloadstart</span>;
@@ -192,7 +192,7 @@ interface <dfn id="xmlhttprequesteventtarget">XMLHttpRequestEventTarget</dfn> : 
   attribute <span data-anolis-spec=html>EventHandler</span> <span title="handler-xhr-onloadend">onloadend</span>;
 };
 
-[Exposed=(Window,Worker)]
+[Exposed=(Window,DedicatedWorker,SharedWorker)]
 interface <dfn id="xmlhttprequestupload">XMLHttpRequestUpload</dfn> : <span>XMLHttpRequestEventTarget</span> {
 };
 
@@ -206,7 +206,7 @@ enum <dfn>XMLHttpRequestResponseType</dfn> {
 };
 
 [<span title="dom-XMLHttpRequest">Constructor</span>,
- Exposed=(Window,Worker)]
+ Exposed=(Window,DedicatedWorker,SharedWorker)]
 interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEventTarget</span> {
   // <a href="#event-handlers">event handler</a>
   attribute <span data-anolis-spec=html>EventHandler</span> <span title="handler-xhr-onreadystatechange">onreadystatechange</span>;
@@ -1983,7 +1983,7 @@ method, when invoked, must run these steps:
 <h2>Interface <code title>ProgressEvent</code></h2>
 
 <pre class="idl">[<span data-anolis-spec=dom title=concept-event-constructor>Constructor</span>(DOMString <var title>type</var>, optional <span>ProgressEventInit</span> <var title>eventInitDict</var>),
- Exposed=(Window,Worker)]
+ Exposed=(Window,DedicatedWorker,SharedWorker)]
 interface <dfn>ProgressEvent</dfn> : <span data-anolis-spec=dom>Event</span> {
   readonly attribute boolean <span title="dom-ProgressEvent-lengthComputable">lengthComputable</span>;
   readonly attribute unsigned long long <span title="dom-ProgressEvent-loaded">loaded</span>;
@@ -2222,6 +2222,7 @@ Odin H&oslash;rthe Omdal,
 Olli Pettay,
 Pawel Glowacki,
 Peter Michaux,
+Philip Jägenstedt,
 Philip Taylor,
 Robin Berjon,
 Rune <span title=Fabulous>F.</span> Halvorsen,

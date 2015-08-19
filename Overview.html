@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="https://whatwg.org/"><img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-18-august-2015">Living Standard — Last Updated 18 August 2015</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-19-august-2015">Living Standard — Last Updated 19 August 2015</h2>
 
 <dl>
  <dt>Participate:
@@ -228,7 +228,7 @@ Specifically it does not refer to proxy authentication or the
 
 <h2 id="interface-xmlhttprequest"><span class="secno">4 </span>Interface <code title="">XMLHttpRequest</code></h2>
 
-<pre class="idl">[Exposed=(Window,Worker)]
+<pre class="idl">[Exposed=(Window,DedicatedWorker,SharedWorker)]
 interface <dfn id="xmlhttprequesteventtarget">XMLHttpRequestEventTarget</dfn> : <a class="external" href="https://dom.spec.whatwg.org/#eventtarget">EventTarget</a> {
   // <a href="#event-handlers">event handlers</a>
   attribute <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a href="#handler-xhr-onloadstart" title="handler-xhr-onloadstart">onloadstart</a>;
@@ -240,7 +240,7 @@ interface <dfn id="xmlhttprequesteventtarget">XMLHttpRequestEventTarget</dfn> : 
   attribute <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a href="#handler-xhr-onloadend" title="handler-xhr-onloadend">onloadend</a>;
 };
 
-[Exposed=(Window,Worker)]
+[Exposed=(Window,DedicatedWorker,SharedWorker)]
 interface <dfn id="xmlhttprequestupload">XMLHttpRequestUpload</dfn> : <a href="#xmlhttprequesteventtarget">XMLHttpRequestEventTarget</a> {
 };
 
@@ -254,7 +254,7 @@ enum <dfn id="xmlhttprequestresponsetype">XMLHttpRequestResponseType</dfn> {
 };
 
 [<a href="#dom-xmlhttprequest" title="dom-XMLHttpRequest">Constructor</a>,
- Exposed=(Window,Worker)]
+ Exposed=(Window,DedicatedWorker,SharedWorker)]
 interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <a href="#xmlhttprequesteventtarget">XMLHttpRequestEventTarget</a> {
   // <a href="#event-handlers">event handler</a>
   attribute <a class="external" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a href="#handler-xhr-onreadystatechange" title="handler-xhr-onreadystatechange">onreadystatechange</a>;
@@ -2031,7 +2031,7 @@ method, when invoked, must run these steps:
 <h2 id="interface-progressevent"><span class="secno">6 </span>Interface <code title="">ProgressEvent</code></h2>
 
 <pre class="idl">[<a class="external" href="https://dom.spec.whatwg.org/#concept-event-constructor" title="concept-event-constructor">Constructor</a>(DOMString <var title="">type</var>, optional <a href="#progresseventinit">ProgressEventInit</a> <var title="">eventInitDict</var>),
- Exposed=(Window,Worker)]
+ Exposed=(Window,DedicatedWorker,SharedWorker)]
 interface <dfn id="progressevent">ProgressEvent</dfn> : <a class="external" href="https://dom.spec.whatwg.org/#event">Event</a> {
   readonly attribute boolean <a href="#dom-progressevent-lengthcomputable" title="dom-ProgressEvent-lengthComputable">lengthComputable</a>;
   readonly attribute unsigned long long <a href="#dom-progressevent-loaded" title="dom-ProgressEvent-loaded">loaded</a>;
@@ -2316,6 +2316,7 @@ Odin Hørthe Omdal,
 Olli Pettay,
 Pawel Glowacki,
 Peter Michaux,
+Philip Jägenstedt,
 Philip Taylor,
 Robin Berjon,
 Rune <span title="Fabulous">F.</span> Halvorsen,
