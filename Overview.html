@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="https://whatwg.org/"><img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-7-september-2015">Living Standard — Last Updated 7 September 2015</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-21-september-2015">Living Standard — Last Updated 21 September 2015</h2>
 
 <dl>
  <dt>Participate:
@@ -909,7 +909,8 @@ method must run these steps:
   <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/infrastructure.html#valid-mime-type">valid MIME type</a>, which has a
   `<code>charset</code>` parameter whose value is not a case-insensitive
   match for <var title="">encoding</var>, and <var title="">encoding</var>
-  is not null, set all the `<code>charset</code>` parameters of that
+  is not null, then set all the `<code>charset</code>` parameters whose value is not a
+  case-insensitive match for <var title="">encoding</var> of that
   `<code>Content-Type</code>`
   <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a>'s
   <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a> to
@@ -933,25 +934,12 @@ method must run these steps:
    <dd><a href="#author-request-headers">author request headers</a>
    <dt><a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#unsafe-request-flag">unsafe-request flag</a>
    <dd>Set.
-   <dt><a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-request-origin" title="concept-request-origin">origin</a>
-   <dd><a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
-   <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>
    <dt><a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#same-origin-data-url-flag">same-origin data-URL flag</a>
    <dd>Set.
-   <dt><a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-request-referrer" title="concept-request-referrer">referrer</a>
-   <dd><a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
-   <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#referrer-source">referrer source</a>'s
-   <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-url" title="concept-document-url">URL</a> if
-   <a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
-   <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#referrer-source">referrer source</a> is a
-   <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>, and
-   <a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
-   <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#referrer-source">referrer source</a> otherwise
    <dt><a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>
    <dd><a href="#request-body">request body</a>
    <dt><a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-request-client" title="concept-request-client">client</a>
-   <dd><a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
-   <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#global-object">global object</a>
+   <dd><a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>
    <dt><a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-request-destination" title="concept-request-destination">destination</a>
    <dd>"<code>subresource</code>"
    <dt><a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#synchronous-flag">synchronous flag</a>
