@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="https://whatwg.org/"><img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-21-september-2015">Living Standard — Last Updated 21 September 2015</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-14-october-2015">Living Standard — Last Updated 14 October 2015</h2>
 
 <dl>
  <dt>Participate:
@@ -989,16 +989,16 @@ method must run these steps:
     <p>Run these subsubsteps <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>:
 
     <ol>
-     <li><p>Let <var title="">seconds</var> be zero.
+     <li><p>Let <var>milliseconds</var> be zero.
 
      <li>
       <p>Every millisecond, as long as the <a href="#stop-timeout-flag">stop timeout flag</a> is unset,
       <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-microtask">queue a microtask</a> to run these subsubsubsteps:
 
       <ol>
-       <li><p>Increase <var title="">seconds</var> by one.
+       <li><p>Increase <var>milliseconds</var> by one.
 
-       <li><p>If <var title="">seconds</var> is equal or greater than
+       <li><p>If <var>milliseconds</var> is equal or greater than
        the <a href="#dom-xmlhttprequest-timeout"><code title="dom-XMLHttpRequest-timeout">timeout</code></a> attribute value and
        the <a href="#dom-xmlhttprequest-timeout"><code title="dom-XMLHttpRequest-timeout">timeout</code></a> attribute value is not
        zero, <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-fetch-terminate" title="concept-fetch-terminate">terminate</a>
@@ -2206,6 +2206,8 @@ otherwise. <a class="informative" href="#refsFETCH">[FETCH]</a>
 
 <dd><cite><a href="https://tools.ietf.org/html/rfc7234">Hypertext Transfer Protocol (HTTP/1.1): Caching</a></cite>, Roy Fielding and Julian Reschke. IETF.
 
+<dd><cite><a href="https://tools.ietf.org/html/rfc7235">Hypertext Transfer Protocol (HTTP/1.1): Authentication</a></cite>, Roy Fielding and Julian Reschke. IETF.
+
 <dt id="refsRFC2119">[RFC2119]
 <dd><cite><a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner. IETF.
 
@@ -2273,6 +2275,7 @@ Huub Schaeks,
 Ian Davis,
 Ian Hickson,
 Ivan Herman,
+Jake Archibald,
 Jared Jacobs,
 Jarred Nicholls,
 Jeff Walden,

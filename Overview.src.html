@@ -941,16 +941,16 @@ method must run these steps:
     <p>Run these subsubsteps <span data-anolis-spec=html>in parallel</span>:
 
     <ol>
-     <li><p>Let <var title>seconds</var> be zero.
+     <li><p>Let <var>milliseconds</var> be zero.
 
      <li>
       <p>Every millisecond, as long as the <span>stop timeout flag</span> is unset,
       <span data-anolis-spec=html>queue a microtask</span> to run these subsubsubsteps:
 
       <ol>
-       <li><p>Increase <var title>seconds</var> by one.
+       <li><p>Increase <var>milliseconds</var> by one.
 
-       <li><p>If <var title>seconds</var> is equal or greater than
+       <li><p>If <var>milliseconds</var> is equal or greater than
        the <code title="dom-XMLHttpRequest-timeout">timeout</code> attribute value and
        the <code title="dom-XMLHttpRequest-timeout">timeout</code> attribute value is not
        zero, <span data-anolis-spec=fetch title=concept-fetch-terminate>terminate</span>
@@ -2179,6 +2179,7 @@ Huub Schaeks,
 Ian Davis,
 Ian Hickson,
 Ivan Herman,
+Jake Archibald,
 Jared Jacobs,
 Jarred Nicholls,
 Jeff Walden,
