@@ -897,9 +897,10 @@ method must run these steps:
    <dt><span data-anolis-spec=fetch>synchronous flag</span>
    <dd>Set if the <span>synchronous flag</span> is set.
    <dt><span data-anolis-spec=fetch title=concept-request-mode>mode</span>
-   <dd>"<code>cors-with-forced-preflight</code>" if one or more event listeners are
-   registered on the associated <code>XMLHttpRequestUpload</code> object and
-   "<code>cors</code>" otherwise.
+   <dd>"<code>cors</code>"
+   <dt><span data-anolis-spec=fetch>use-CORS-preflight flag</span>
+   <dd>Set if one or more event listeners are registered on the associated
+   <code>XMLHttpRequestUpload</code> object.
    <dt><span data-anolis-spec=fetch title=concept-request-credentials-mode>credentials mode</span>
    <dd>If the <code title=dom-XMLHttpRequest-withCredentials>withCredentials</code>
    attribute value is true, "<code>include</code>", and "<code>same-origin</code>"

@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="https://whatwg.org/"><img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-19-october-2015">Living Standard — Last Updated 19 October 2015</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-25-november-2015">Living Standard — Last Updated 25 November 2015</h2>
 
 <dl>
  <dt>Participate:
@@ -945,9 +945,10 @@ method must run these steps:
    <dt><a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#synchronous-flag">synchronous flag</a>
    <dd>Set if the <a href="#synchronous-flag">synchronous flag</a> is set.
    <dt><a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-request-mode" title="concept-request-mode">mode</a>
-   <dd>"<code>cors-with-forced-preflight</code>" if one or more event listeners are
-   registered on the associated <a href="#xmlhttprequestupload"><code>XMLHttpRequestUpload</code></a> object and
-   "<code>cors</code>" otherwise.
+   <dd>"<code>cors</code>"
+   <dt><a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#use-cors-preflight-flag">use-CORS-preflight flag</a>
+   <dd>Set if one or more event listeners are registered on the associated
+   <a href="#xmlhttprequestupload"><code>XMLHttpRequestUpload</code></a> object.
    <dt><a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-request-credentials-mode" title="concept-request-credentials-mode">credentials mode</a>
    <dd>If the <a href="#dom-xmlhttprequest-withcredentials"><code title="dom-XMLHttpRequest-withCredentials">withCredentials</code></a>
    attribute value is true, "<code>include</code>", and "<code>same-origin</code>"
