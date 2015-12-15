@@ -1865,7 +1865,8 @@ and/or <code>XMLHttpRequestUpload</code> objects:
 [<span title="dom-FormData">Constructor</span>(optional <span data-anolis-spec=html>HTMLFormElement</span> <var>form</var>),
  Exposed=(Window,Worker)]
 interface <dfn>FormData</dfn> {
-  void <span title="dom-FormData-append">append</span>(USVString <var>name</var>, <span>FormDataEntryValue</span> <var>value</var>);
+  void <span title=dom-FormData-append>append</span>(USVString <var>name</var>, USVString <var>value</var>);
+  void <span title=dom-FormData-append>append</span>(USVString <var>name</var>, <span data-anolis-spec=fileapi>Blob</span> <var>value</var>, optional USVString <var>filename</var>);
   void <span title=dom-FormData-delete>delete</span>(USVString <var>name</var>);
   <span>FormDataEntryValue</span>? <span title=dom-FormData-get>get</span>(USVString <var>name</var>);
   sequence&lt;<span>FormDataEntryValue</span>> <span title=dom-FormData-getAll>getAll</span>(USVString <var>name</var>);
@@ -1907,12 +1908,21 @@ constructor must run these steps:
 </ol>
 
 <p>The
-<dfn title="dom-FormData-append" id="dom-formdata-append"><code>append(<var>name</var>, <var>value</var>)</code></dfn>
-method, when invoked, must append a new <span title=concept-FormData-entry>entry</span>
-whose <span title=concept-FormData-entry-name>name</span> is <var>name</var>, and
-<span title=concept-FormData-entry-value>value</span> is <var>value</var>, to
-<span data-anolis-spec=dom>context object</span>'s list of
-<span title=concept-FormData-entry>entries</span>.
+<dfn title="dom-FormData-append" id="dom-formdata-append"><code>append(<var>name</var>, <var>value</var>, <var>filename</var>)</code></dfn>
+method, when invoked, must run these steps:
+
+<ol>
+ <li><p>If the <var>filename</var> argument is given, set <var>value</var> to a new
+ <code data-anolis-spec=fileapi>File</code> object whose contents are <var>value</var> and
+ <code data-anolis-spec=fileapi title=dom-File-name>name</code> is <var>filename</var>.
+ <!-- XXX at some point File API should get internal slots for this -->
+
+ <li><p>Append a new <span title=concept-FormData-entry>entry</span> whose
+ <span title=concept-FormData-entry-name>name</span> is <var>name</var>, and
+ <span title=concept-FormData-entry-value>value</span> is <var>value</var>, to
+ <span data-anolis-spec=dom>context object</span>'s list of
+ <span title=concept-FormData-entry>entries</span>.
+</ol>
 
 <p>The
 <dfn title=dom-FormData-delete><code>delete(<var>name</var>)</code></dfn>
@@ -2155,6 +2165,7 @@ David H&aring;s&auml;ther,
 David Levin,
 Dean Jackson,
 Denis Sureau,
+Domenic Denicola,
 Dominik Röttsches,
 Doug Schepers,
 Douglas Livingstone,
