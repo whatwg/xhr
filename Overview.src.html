@@ -458,24 +458,23 @@ unset.
   `<code title>CONNECT</code>`, `<code title>TRACE</code>` or `<code title>TRACK</code>`.
 
   <p>Throws an <code>InvalidAccessError</code>
-  exception if <var title>async</var> is false, the
-  <span data-anolis-spec=html>JavaScript global environment</span> is a
-  <span data-anolis-spec=html>document environment</span>, and either the
-  <code title=dom-XMLHttpRequest-timeout>timeout</code> attribute is not
-  zero, the
-  <code title=dom-XMLHttpRequest-withCredentials>withCredentials</code>
-  attribute is true, or the
-  <code title=dom-XMLHttpRequest-responseType>responseType</code>
-  attribute is not the empty string.
+  exception if <var title>async</var> is false,
+  <span data-anolis-spec=html>entry settings object</span>'s
+  <span data-anolis-spec=html>global object</span> is a <code data-anolis-spec=html>Window</code>
+  object, and either the <code title=dom-XMLHttpRequest-timeout>timeout</code> attribute is not
+  zero, the <code title=dom-XMLHttpRequest-withCredentials>withCredentials</code> attribute is true,
+  or the <code title=dom-XMLHttpRequest-responseType>responseType</code> attribute is not the empty
+  string.
 </dl>
 
 <p class="critical no-backref" id=sync-warning>Synchronous <code>XMLHttpRequest</code>
 outside of workers is in the process of being removed from the web platform as it has
 detrimental effects to the end user's experience. (This is a long process that takes many
-years.) Developers must not pass false for the <var title>async</var> argument  when the
-<span data-anolis-spec=html>JavaScript global environment</span> is a
-<span data-anolis-spec=html>document environment</span>. User agents are strongly encouraged to warn about such usage in developer tools and may experiment with
-<span data-anolis-spec=webidl title=throw>throwing</span> an
+years.) Developers must not pass false for the <var title>async</var> argument when
+<span data-anolis-spec=html>entry settings object</span>'s
+<span data-anolis-spec=html>global object</span> is a <code data-anolis-spec=html>Window</code>
+object. User agents are strongly encouraged to warn about such usage in developer tools and may
+experiment with <span data-anolis-spec=webidl title=throw>throwing</span> an
 <code>InvalidAccessError</code> exception when it occurs.
 
 <p>The
@@ -534,14 +533,12 @@ method must run these steps:
    <var>password</var>.
   </ol>
 
- <li><p>If <var>async</var> is false, the
- <span data-anolis-spec=html>JavaScript global environment</span> is a
- <span data-anolis-spec=html>document environment</span>, and either the
- <code title=dom-XMLHttpRequest-timeout>timeout</code> attribute value is not zero, the
- <code title=dom-XMLHttpRequest-withCredentials>withCredentials</code> attribute value is
- true, or the <code title=dom-XMLHttpRequest-responseType>responseType</code> attribute
- value is not the empty string,
- <span data-anolis-spec=webidl title=throw>throw</span> an
+ <li><p>If <var>async</var> is false, <span data-anolis-spec=html>entry settings object</span>'s
+ <span data-anolis-spec=html>global object</span> is a <code data-anolis-spec=html>Window</code>
+ object, and either the <code title=dom-XMLHttpRequest-timeout>timeout</code> attribute value is not
+ zero, the <code title=dom-XMLHttpRequest-withCredentials>withCredentials</code> attribute value is
+ true, or the <code title=dom-XMLHttpRequest-responseType>responseType</code> attribute value is not
+ the empty string, <span data-anolis-spec=webidl title=throw>throw</span> an
  <code>InvalidAccessError</code> exception.
 
  <li>
@@ -673,9 +670,10 @@ X-Test: one, two</code></pre>
   (for the <code title=dom-XMLHttpRequest-send>send()</code> method).
   <p>When set: throws an
   <code>InvalidAccessError</code> exception if
-  the <span>synchronous flag</span> is set and the
-  <span data-anolis-spec=html>JavaScript global environment</span> is a
-  <span data-anolis-spec=html>document environment</span>.
+  the <span>synchronous flag</span> is set and
+  <span data-anolis-spec=html>entry settings object</span>'s
+  <span data-anolis-spec=html>global object</span> is a <code data-anolis-spec=html>Window</code>
+  object.
  </dd>
 </dl>
 
@@ -687,10 +685,9 @@ attribute must return its value. Initially its value must be zero.
 attribute must run these steps:
 
 <ol>
- <li><p>If the
- <span data-anolis-spec=html>JavaScript global environment</span> is a
- <span data-anolis-spec=html>document environment</span> and the
- <span>synchronous flag</span> is set,
+ <li><p>If <span data-anolis-spec=html>entry settings object</span>'s
+ <span data-anolis-spec=html>global object</span> is a <code data-anolis-spec=html>Window</code>
+ object and the <span>synchronous flag</span> is set,
  <span data-anolis-spec=webidl title=throw>throw</span> an
  <code>InvalidAccessError</code> exception.
 
@@ -718,11 +715,11 @@ of <span data-anolis-spec=fetch title=concept-fetch>fetching</span>.
   <code>InvalidStateError</code> exception if
   <span title=concept-XMLHttpRequest-state>state</span> is not <i title>unsent</i> or
   <i title>opened</i>, or if the <span><code>send()</code> flag</span> is set.
-  <p>When set: throws an
-  <code>InvalidAccessError</code> exception if
-  either the <span>synchronous flag</span> is set and the
-  <span data-anolis-spec=html>JavaScript global environment</span> is a
-  <span data-anolis-spec=html>document environment</span>.
+  <p>When set: throws an <code>InvalidAccessError</code> exception if the
+  <span>synchronous flag</span> is set and
+  <span data-anolis-spec=html>entry settings object</span>'s
+  <span data-anolis-spec=html>global object</span> is a <code data-anolis-spec=html>Window</code>
+  object.
  </dd>
 </dl>
 
@@ -744,10 +741,9 @@ attribute must run these steps:
  <span data-anolis-spec=webidl title=throw>throw</span> an
  <code>InvalidStateError</code> exception.
 
- <li><p>If the
- <span data-anolis-spec=html>JavaScript global environment</span> is a
- <span data-anolis-spec=html>document environment</span> and the
- <span>synchronous flag</span> is set,
+ <li><p>If <span data-anolis-spec=html>entry settings object</span>'s
+ <span data-anolis-spec=html>global object</span> is a <code data-anolis-spec=html>Window</code>
+ object and the <span>synchronous flag</span> is set,
  <span data-anolis-spec=webidl title=throw>throw</span> an
  <code>InvalidAccessError</code> exception.
 
@@ -1633,18 +1629,20 @@ method must run these steps:
   "<code title>document</code>",
   "<code title>json</code>", and
   "<code title>text</code>".
-  <p>When set: setting to "<code title>document</code>" is ignored if the
-  <span data-anolis-spec=html>JavaScript global environment</span> is a
-  <span data-anolis-spec=html>worker environment</span>
+  <p>When set: setting to "<code title>document</code>" is ignored if
+  <span data-anolis-spec=html>entry settings object</span>'s
+  <span data-anolis-spec=html>global object</span> is <em>not</em> a
+  <code data-anolis-spec=html>Window</code> object.
   <p>When set: throws an
   <code>InvalidStateError</code> exception if
   <span title=concept-XMLHttpRequest-state>state</span> is <i title>loading</i> or
   <i title>done</i>.
   <p>When set: throws an
   <code>InvalidAccessError</code> exception if the
-  <span>synchronous flag</span> is set and the
-  <span data-anolis-spec=html>JavaScript global environment</span> is a
-  <span data-anolis-spec=html>document environment</span>.
+  <span>synchronous flag</span> is set and
+  <span data-anolis-spec=html>entry settings object</span>'s
+  <span data-anolis-spec=html>global object</span> is a <code data-anolis-spec=html>Window</code>
+  object.
 </dl>
 
 
@@ -1658,20 +1656,19 @@ string.
 attribute must run these steps:
 
 <ol>
- <li><p>If the
- <span data-anolis-spec=html>JavaScript global environment</span> is a
- <span data-anolis-spec=html>worker environment</span> and the given
- value is "<code title>document</code>", terminate these steps.
+ <li><p>If <span data-anolis-spec=html>entry settings object</span>'s
+ <span data-anolis-spec=html>global object</span> is <em>not</em> a
+ <code data-anolis-spec=html>Window</code> object and the given value is
+ "<code title>document</code>", terminate these steps.
 
  <li><p>If <span title=concept-XMLHttpRequest-state>state</span> is
  <i title>loading</i> or <i title>done</i>,
  <span data-anolis-spec=webidl title=throw>throw</span> an
  <code>InvalidStateError</code> exception.
 
- <li><p>If the
- <span data-anolis-spec=html>JavaScript global environment</span> is a
- <span data-anolis-spec=html>document environment</span> and the
- <span>synchronous flag</span> is set,
+ <li><p>If <span data-anolis-spec=html>entry settings object</span>'s
+ <span data-anolis-spec=html>global object</span> is a <code data-anolis-spec=html>Window</code>
+ object and the <span>synchronous flag</span> is set,
  <span data-anolis-spec=webidl title=throw>throw</span> an
  <code>InvalidAccessError</code> exception.
 

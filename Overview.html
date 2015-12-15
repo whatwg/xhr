@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="https://whatwg.org/"><img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-25-november-2015">Living Standard — Last Updated 25 November 2015</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-15-december-2015">Living Standard — Last Updated 15 December 2015</h2>
 
 <dl>
  <dt>Participate:
@@ -506,24 +506,23 @@ unset.
   `<code title="">CONNECT</code>`, `<code title="">TRACE</code>` or `<code title="">TRACK</code>`.
 
   <p>Throws an <code>InvalidAccessError</code>
-  exception if <var title="">async</var> is false, the
-  <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
-  <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#document-environment">document environment</a>, and either the
-  <a href="#dom-xmlhttprequest-timeout"><code title="dom-XMLHttpRequest-timeout">timeout</code></a> attribute is not
-  zero, the
-  <a href="#dom-xmlhttprequest-withcredentials"><code title="dom-XMLHttpRequest-withCredentials">withCredentials</code></a>
-  attribute is true, or the
-  <a href="#dom-xmlhttprequest-responsetype"><code title="dom-XMLHttpRequest-responseType">responseType</code></a>
-  attribute is not the empty string.
+  exception if <var title="">async</var> is false,
+  <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#entry-settings-object">entry settings object</a>'s
+  <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#global-object">global object</a> is a <a href="https://html.spec.whatwg.org/multipage/browsers.html#window"><code class="external" data-anolis-spec="html">Window</code></a>
+  object, and either the <a href="#dom-xmlhttprequest-timeout"><code title="dom-XMLHttpRequest-timeout">timeout</code></a> attribute is not
+  zero, the <a href="#dom-xmlhttprequest-withcredentials"><code title="dom-XMLHttpRequest-withCredentials">withCredentials</code></a> attribute is true,
+  or the <a href="#dom-xmlhttprequest-responsetype"><code title="dom-XMLHttpRequest-responseType">responseType</code></a> attribute is not the empty
+  string.
 </dl>
 
 <p class="critical no-backref" id="sync-warning">Synchronous <a href="#xmlhttprequest"><code>XMLHttpRequest</code></a>
 outside of workers is in the process of being removed from the web platform as it has
 detrimental effects to the end user's experience. (This is a long process that takes many
-years.) Developers must not pass false for the <var title="">async</var> argument  when the
-<a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
-<a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#document-environment">document environment</a>. User agents are strongly encouraged to warn about such usage in developer tools and may experiment with
-<a class="external" data-anolis-spec="webidl" href="https://heycam.github.io/webidl/#dfn-throw" title="throw">throwing</a> an
+years.) Developers must not pass false for the <var title="">async</var> argument when
+<a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#entry-settings-object">entry settings object</a>'s
+<a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#global-object">global object</a> is a <a href="https://html.spec.whatwg.org/multipage/browsers.html#window"><code class="external" data-anolis-spec="html">Window</code></a>
+object. User agents are strongly encouraged to warn about such usage in developer tools and may
+experiment with <a class="external" data-anolis-spec="webidl" href="https://heycam.github.io/webidl/#dfn-throw" title="throw">throwing</a> an
 <code>InvalidAccessError</code> exception when it occurs.
 
 <p>The
@@ -582,14 +581,12 @@ method must run these steps:
    <var>password</var>.
   </ol>
 
- <li><p>If <var>async</var> is false, the
- <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
- <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#document-environment">document environment</a>, and either the
- <a href="#dom-xmlhttprequest-timeout"><code title="dom-XMLHttpRequest-timeout">timeout</code></a> attribute value is not zero, the
- <a href="#dom-xmlhttprequest-withcredentials"><code title="dom-XMLHttpRequest-withCredentials">withCredentials</code></a> attribute value is
- true, or the <a href="#dom-xmlhttprequest-responsetype"><code title="dom-XMLHttpRequest-responseType">responseType</code></a> attribute
- value is not the empty string,
- <a class="external" data-anolis-spec="webidl" href="https://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an
+ <li><p>If <var>async</var> is false, <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#entry-settings-object">entry settings object</a>'s
+ <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#global-object">global object</a> is a <a href="https://html.spec.whatwg.org/multipage/browsers.html#window"><code class="external" data-anolis-spec="html">Window</code></a>
+ object, and either the <a href="#dom-xmlhttprequest-timeout"><code title="dom-XMLHttpRequest-timeout">timeout</code></a> attribute value is not
+ zero, the <a href="#dom-xmlhttprequest-withcredentials"><code title="dom-XMLHttpRequest-withCredentials">withCredentials</code></a> attribute value is
+ true, or the <a href="#dom-xmlhttprequest-responsetype"><code title="dom-XMLHttpRequest-responseType">responseType</code></a> attribute value is not
+ the empty string, <a class="external" data-anolis-spec="webidl" href="https://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an
  <code>InvalidAccessError</code> exception.
 
  <li>
@@ -721,9 +718,10 @@ X-Test: one, two</code></pre>
   (for the <a href="#dom-xmlhttprequest-send"><code title="dom-XMLHttpRequest-send">send()</code></a> method).
   <p>When set: throws an
   <code>InvalidAccessError</code> exception if
-  the <a href="#synchronous-flag">synchronous flag</a> is set and the
-  <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
-  <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#document-environment">document environment</a>.
+  the <a href="#synchronous-flag">synchronous flag</a> is set and
+  <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#entry-settings-object">entry settings object</a>'s
+  <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#global-object">global object</a> is a <a href="https://html.spec.whatwg.org/multipage/browsers.html#window"><code class="external" data-anolis-spec="html">Window</code></a>
+  object.
  </dd>
 </dl>
 
@@ -735,10 +733,9 @@ attribute must return its value. Initially its value must be zero.
 attribute must run these steps:
 
 <ol>
- <li><p>If the
- <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
- <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#document-environment">document environment</a> and the
- <a href="#synchronous-flag">synchronous flag</a> is set,
+ <li><p>If <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#entry-settings-object">entry settings object</a>'s
+ <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#global-object">global object</a> is a <a href="https://html.spec.whatwg.org/multipage/browsers.html#window"><code class="external" data-anolis-spec="html">Window</code></a>
+ object and the <a href="#synchronous-flag">synchronous flag</a> is set,
  <a class="external" data-anolis-spec="webidl" href="https://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an
  <code>InvalidAccessError</code> exception.
 
@@ -766,11 +763,11 @@ of <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.
   <code>InvalidStateError</code> exception if
   <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is not <i title="">unsent</i> or
   <i title="">opened</i>, or if the <a href="#send-flag"><code>send()</code> flag</a> is set.
-  <p>When set: throws an
-  <code>InvalidAccessError</code> exception if
-  either the <a href="#synchronous-flag">synchronous flag</a> is set and the
-  <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
-  <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#document-environment">document environment</a>.
+  <p>When set: throws an <code>InvalidAccessError</code> exception if the
+  <a href="#synchronous-flag">synchronous flag</a> is set and
+  <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#entry-settings-object">entry settings object</a>'s
+  <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#global-object">global object</a> is a <a href="https://html.spec.whatwg.org/multipage/browsers.html#window"><code class="external" data-anolis-spec="html">Window</code></a>
+  object.
  </dd>
 </dl>
 
@@ -792,10 +789,9 @@ attribute must run these steps:
  <a class="external" data-anolis-spec="webidl" href="https://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an
  <code>InvalidStateError</code> exception.
 
- <li><p>If the
- <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
- <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#document-environment">document environment</a> and the
- <a href="#synchronous-flag">synchronous flag</a> is set,
+ <li><p>If <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#entry-settings-object">entry settings object</a>'s
+ <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#global-object">global object</a> is a <a href="https://html.spec.whatwg.org/multipage/browsers.html#window"><code class="external" data-anolis-spec="html">Window</code></a>
+ object and the <a href="#synchronous-flag">synchronous flag</a> is set,
  <a class="external" data-anolis-spec="webidl" href="https://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an
  <code>InvalidAccessError</code> exception.
 
@@ -1681,18 +1677,20 @@ method must run these steps:
   "<code title="">document</code>",
   "<code title="">json</code>", and
   "<code title="">text</code>".
-  <p>When set: setting to "<code title="">document</code>" is ignored if the
-  <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
-  <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#worker-environment">worker environment</a>
+  <p>When set: setting to "<code title="">document</code>" is ignored if
+  <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#entry-settings-object">entry settings object</a>'s
+  <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#global-object">global object</a> is <em>not</em> a
+  <a href="https://html.spec.whatwg.org/multipage/browsers.html#window"><code class="external" data-anolis-spec="html">Window</code></a> object.
   <p>When set: throws an
   <code>InvalidStateError</code> exception if
   <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is <i title="">loading</i> or
   <i title="">done</i>.
   <p>When set: throws an
   <code>InvalidAccessError</code> exception if the
-  <a href="#synchronous-flag">synchronous flag</a> is set and the
-  <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
-  <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#document-environment">document environment</a>.
+  <a href="#synchronous-flag">synchronous flag</a> is set and
+  <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#entry-settings-object">entry settings object</a>'s
+  <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#global-object">global object</a> is a <a href="https://html.spec.whatwg.org/multipage/browsers.html#window"><code class="external" data-anolis-spec="html">Window</code></a>
+  object.
 </dl>
 
 
@@ -1706,20 +1704,19 @@ string.
 attribute must run these steps:
 
 <ol>
- <li><p>If the
- <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
- <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#worker-environment">worker environment</a> and the given
- value is "<code title="">document</code>", terminate these steps.
+ <li><p>If <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#entry-settings-object">entry settings object</a>'s
+ <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#global-object">global object</a> is <em>not</em> a
+ <a href="https://html.spec.whatwg.org/multipage/browsers.html#window"><code class="external" data-anolis-spec="html">Window</code></a> object and the given value is
+ "<code title="">document</code>", terminate these steps.
 
  <li><p>If <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is
  <i title="">loading</i> or <i title="">done</i>,
  <a class="external" data-anolis-spec="webidl" href="https://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an
  <code>InvalidStateError</code> exception.
 
- <li><p>If the
- <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
- <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#document-environment">document environment</a> and the
- <a href="#synchronous-flag">synchronous flag</a> is set,
+ <li><p>If <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#entry-settings-object">entry settings object</a>'s
+ <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#global-object">global object</a> is a <a href="https://html.spec.whatwg.org/multipage/browsers.html#window"><code class="external" data-anolis-spec="html">Window</code></a>
+ object and the <a href="#synchronous-flag">synchronous flag</a> is set,
  <a class="external" data-anolis-spec="webidl" href="https://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an
  <code>InvalidAccessError</code> exception.
 
