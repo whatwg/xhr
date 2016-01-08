@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="https://whatwg.org/"><img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-15-december-2015">Living Standard — Last Updated 15 December 2015</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-8-january-2016">Living Standard — Last Updated 8 January 2016</h2>
 
 <dl>
  <dt>Participate:
@@ -1919,7 +1919,8 @@ interface <dfn id="formdata">FormData</dfn> {
   <a href="#formdataentryvalue">FormDataEntryValue</a>? <a href="#dom-formdata-get" title="dom-FormData-get">get</a>(USVString <var>name</var>);
   sequence&lt;<a href="#formdataentryvalue">FormDataEntryValue</a>&gt; <a href="#dom-formdata-getall" title="dom-FormData-getAll">getAll</a>(USVString <var>name</var>);
   boolean <a href="#dom-formdata-has" title="dom-FormData-has">has</a>(USVString <var>name</var>);
-  void <a href="#dom-formdata-append" title="dom-FormData-append">set</a>(USVString <var>name</var>, <a href="#formdataentryvalue">FormDataEntryValue</a> <var>value</var>);
+  void <a href="#dom-formdata-append" title="dom-FormData-append">set</a>(USVString <var>name</var>, USVString<var>value</var>);
+  void <a href="#dom-formdata-append" title="dom-FormData-append">set</a>(USVString <var>name</var>, <a class="external" data-anolis-spec="fileapi" href="https://w3c.github.io/FileAPI/#blob">Blob</a> <var>value</var>, optional USVString <var>filename</var>);
   iterable&lt;USVString, <a href="#formdataentryvalue">FormDataEntryValue</a>&gt;;
 };</pre>
 
@@ -1995,10 +1996,15 @@ whose <a href="#concept-formdata-entry-name" title="concept-FormData-entry-name"
 otherwise.
 
 <p>The
-<dfn id="dom-formdata-set" title="dom-FormData-set"><code>set(<var>name</var>, <var>value</var>)</code></dfn>
+<dfn id="dom-formdata-set" title="dom-FormData-set"><code>set(<var>name</var>, <var>value</var>, <var>filename</var>)</code></dfn>
 method, when invoked, must run these steps:
 
 <ol>
+ <li><p>If the <var>filename</var> argument is given, set <var>value</var> to a new
+ <a href="https://w3c.github.io/FileAPI/#file"><code class="external" data-anolis-spec="fileapi">File</code></a> object whose contents are <var>value</var> and
+ <a href="https://w3c.github.io/FileAPI/#dfn-name"><code class="external" data-anolis-spec="fileapi" title="dom-File-name">name</code></a> is <var>filename</var>.
+ <!-- XXX at some point File API should get internal slots for this -->
+
  <li><p>Let <var>entry</var> be a new <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a>
  whose <a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> is <var>name</var>, and
  <a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">value</a> is <var>value</var>.
