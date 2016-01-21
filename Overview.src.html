@@ -479,14 +479,13 @@ experiment with <span data-anolis-spec=webidl title=throw>throwing</span> an
 
 <p>The
 <dfn id="dom-xmlhttprequest-open" title="dom-XMLHttpRequest-open"><code>open(<var title>method</var>, <var title>url</var>, <var title>async</var>, <var title>username</var>, <var title>password</var>)</code></dfn>
-method must run these steps:
+method, when invoked, must run these steps:
 
 <ol>
- <li><p>If <span title=concept-XMLHttpRequest-settings-object>settings object</span>'s
- <span data-anolis-spec=html>responsible document</span> is not
+ <li><p>If <span title=concept-XMLHttpRequest-settings-object>settings object</span> has a
+ <span data-anolis-spec=html>responsible document</span> and it is <em>not</em>
  <span data-anolis-spec=html>fully active</span>,
- <span data-anolis-spec=webidl title=throw>throw</span> an
- <code>InvalidStateError</code> exception.
+ <span data-anolis-spec=webidl title=throw>throw</span> an <code>InvalidStateError</code> exception.
 
  <li><p>Set <var title>base</var> to
  <span title=concept-XMLHttpRequest-settings-object>settings object</span>'s
