@@ -1393,8 +1393,16 @@ that is null in which case it is the <span>response charset</span>.
  <span>response</span>'s
  <span data-anolis-spec=fetch title=concept-response-body>body</span> otherwise.
 
- <li><p>Set <span>response <code>ArrayBuffer</code> object</span> to a new
- <code>ArrayBuffer</code> object representing <var>bytes</var> and return it.
+ <li>
+  <p>Set <span>response <code>ArrayBuffer</code> object</span> to a new <code>ArrayBuffer</code>
+  object representing <var>bytes</var>. If this throws an exception, set
+  <span>response <code>ArrayBuffer</code> object</span> and <span>response</span>'s
+  <span data-anolis-spec=fetch title=concept-response-body>body</span> to null.
+
+  <p class="note">Allocating an <code>ArrayBuffer</code> buffer is not guaranteed to succeed.
+  <span data-anolis-ref>ECMASCRIPT</span>
+
+ <li><p>Return <span>response <code>ArrayBuffer</code> object</span>.
 </ol>
 
 

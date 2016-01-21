@@ -1441,8 +1441,16 @@ that is null in which case it is the <a href="#response-charset">response charse
  <a href="#response">response</a>'s
  <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> otherwise.
 
- <li><p>Set <a href="#response-arraybuffer-object">response <code>ArrayBuffer</code> object</a> to a new
- <code>ArrayBuffer</code> object representing <var>bytes</var> and return it.
+ <li>
+  <p>Set <a href="#response-arraybuffer-object">response <code>ArrayBuffer</code> object</a> to a new <code>ArrayBuffer</code>
+  object representing <var>bytes</var>. If this throws an exception, set
+  <a href="#response-arraybuffer-object">response <code>ArrayBuffer</code> object</a> and <a href="#response">response</a>'s
+  <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> to null.
+
+  <p class="note">Allocating an <code>ArrayBuffer</code> buffer is not guaranteed to succeed.
+  <a href="#refsECMASCRIPT">[ECMASCRIPT]</a>
+
+ <li><p>Return <a href="#response-arraybuffer-object">response <code>ArrayBuffer</code> object</a>.
 </ol>
 
 
