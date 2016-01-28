@@ -83,6 +83,7 @@
             loadDataAndAddLinks();
         }else{
             if(styleElm && styleElm.parentElement)styleElm.parentElement.removeChild(styleElm);
+            var elms, i, elm;
             for(elms = document.getElementsByClassName('test_annotation'),i = elms.length-1,elm = elms[i];; i--){
                 elm = elms[i];
                 if(!elm)break;
