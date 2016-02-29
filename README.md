@@ -15,11 +15,16 @@ started, leave a comment on the issue or ask around [on IRC](https://wiki.whatwg
 
 ### Pull requests
 
-See the [whatwg/html README](https://github.com/whatwg/html/blob/master/README.md) for the general
-guidelines. Note that `source` is `Overview.src.html` and "Acknowledgements" is "Acknowledgments"
-here (I know). Also, the XMLHttpRequest Standard uses [Anolis](https://wiki.whatwg.org/wiki/Anolis)
-to generate `Overview.html`. (Do not worry if using that tool is too complicated, your pull request
-does not need to contain the generated HTML.)
+See the [html repository's README](https://github.com/whatwg/html/blob/master/README.md) for the
+general guidelines. Note that `source` is `Overview.src.html` and "Acknowledgements" is
+"Acknowledgments" here (I know). Also, the XMLHttpRequest Standard uses
+[Anolis](https://wiki.whatwg.org/wiki/Anolis) to generate `Overview.html`. (Do not worry if using
+that tool is too complicated, your pull request does not need to contain the generated HTML.)
+
+### Merge policy
+
+If you can commit to this repository, see the
+[html repository's TEAM](https://github.com/whatwg/html/blob/master/TEAM.md) for guidelines.
 
 ### Tests
 
