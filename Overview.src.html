@@ -1254,8 +1254,8 @@ exception <var>exception</var> are:
    <dd>Cancels any network activity.
   </dl>
 
-<p>The <dfn title="dom-XMLHttpRequest-abort"><code>abort()</code></dfn> method must run
-these steps:
+<p>The <dfn title="dom-XMLHttpRequest-abort"><code>abort()</code></dfn> method, when invoked, must
+run these steps:
 
 <ol>
  <li><p><span>Terminate the request</span>.
@@ -1266,7 +1266,8 @@ these steps:
  <span>request error steps</span> for event <code title=event-xhr-abort>abort</code>.
 
  <li>
-  <p>Set <span title=concept-XMLHttpRequest-state>state</span> to <i title>unsent</i>.
+  <p>If <span title=concept-XMLHttpRequest-state>state</span> is <i>done</i>, set
+  <span title=concept-XMLHttpRequest-state>state</span> to <i>unsent</i>.
 
   <p class=note>No <code title="event-xhr-readystatechange">readystatechange</code> event
   is dispatched.

@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="https://whatwg.org/"><img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-22-march-2016">Living Standard — Last Updated 22 March 2016</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-25-march-2016">Living Standard — Last Updated 25 March 2016</h2>
 
 <dl>
  <dt>Participate:
@@ -1302,8 +1302,8 @@ exception <var>exception</var> are:
    <dd>Cancels any network activity.
   </dl>
 
-<p>The <dfn id="dom-xmlhttprequest-abort" title="dom-XMLHttpRequest-abort"><code>abort()</code></dfn> method must run
-these steps:
+<p>The <dfn id="dom-xmlhttprequest-abort" title="dom-XMLHttpRequest-abort"><code>abort()</code></dfn> method, when invoked, must
+run these steps:
 
 <ol>
  <li><p><a href="#terminate-the-request">Terminate the request</a>.
@@ -1314,7 +1314,8 @@ these steps:
  <a href="#request-error-steps">request error steps</a> for event <a href="#event-xhr-abort"><code title="event-xhr-abort">abort</code></a>.
 
  <li>
-  <p>Set <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> to <i title="">unsent</i>.
+  <p>If <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is <i>done</i>, set
+  <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> to <i>unsent</i>.
 
   <p class="note">No <a href="#event-xhr-readystatechange"><code title="event-xhr-readystatechange">readystatechange</code></a> event
   is dispatched.
