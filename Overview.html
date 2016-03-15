@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="https://whatwg.org/"><img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-21-january-2016">Living Standard — Last Updated 21 January 2016</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-22-march-2016">Living Standard — Last Updated 22 March 2016</h2>
 
 <dl>
  <dt>Participate:
@@ -607,6 +607,7 @@ method, when invoked, must run these steps:
    <li><p>Empty <a href="#author-request-headers">author request headers</a>.
    <li><p>Set <a href="#response">response</a> to a
    <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-network-error" title="concept-network-error">network error</a>.
+   <li><p>Set <a href="#received-bytes">received bytes</a> to the empty byte sequence.
    <li><p>Set <a href="#response-arraybuffer-object">response <code>ArrayBuffer</code> object</a> to null.
    <li><p>Set <a href="#response-blob-object">response <code>Blob</code> object</a> to null.
    <li><p>Set <a href="#response-document-object">response <code>Document</code> object</a> to null.
@@ -974,7 +975,7 @@ method must run these steps:
    <a href="#event-xhr-loadstart"><code title="event-xhr-loadstart">loadstart</code></a> on the
    <a href="#xmlhttprequestupload"><code>XMLHttpRequestUpload</code></a> object with 0 and <var title="">req</var>'s
    <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>'s
-   <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-body-length" title="concept-body-length">length</a>.
+   <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-body-total-bytes" title="concept-body-total-bytes">total bytes</a>.
 
    <li>
     <p><a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">Fetch</a> <var title="">req</var>.
@@ -1014,10 +1015,10 @@ method must run these steps:
      <a href="#event-xhr-progress"><code title="event-xhr-progress">progress</code></a> on the
      <a href="#xmlhttprequestupload"><code>XMLHttpRequestUpload</code></a> object with <var title="">request</var>'s
      <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>'s
-     <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-body-transmitted" title="concept-body-transmitted">transmitted</a> and
+     <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-body-transmitted" title="concept-body-transmitted">transmitted bytes</a> and
      <var title="">request</var>'s
      <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>'s
-     <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-body-length" title="concept-body-length">length</a>.
+     <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-body-total-bytes" title="concept-body-total-bytes">total bytes</a>.
      <!-- upload complete flag can never be set here I hope -->
     </ol>
 
@@ -1029,11 +1030,11 @@ method must run these steps:
 
      <li><p>Let <var title="">transmitted</var> be <var title="">request</var>'s
      <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>'s
-     <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-body-transmitted" title="concept-body-transmitted">transmitted</a>.
+     <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-body-transmitted" title="concept-body-transmitted">transmitted bytes</a>.
 
      <li><p>Let <var title="">length</var> be <var title="">request</var>'s
      <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>'s
-     <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-body-length" title="concept-body-length">length</a>.
+     <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-body-total-bytes" title="concept-body-total-bytes">total bytes</a>.
 
      <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
      <a href="#event-xhr-progress"><code title="event-xhr-progress">progress</code></a> on the
@@ -1070,38 +1071,58 @@ method must run these steps:
      <li><p>Set <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> to
      <i title="">headers received</i>.
 
-     <li><p><a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named <a href="#event-xhr-readystatechange"><code title="event-xhr-readystatechange">readystatechange</code></a>.
+     <li><p><a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named
+     <a href="#event-xhr-readystatechange"><code title="event-xhr-readystatechange">readystatechange</code></a>.
+
+     <li><p>If <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is not
+     <i>headers received</i>, then return.
+
+     <li><p>If <var>response</var>'s
+     <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> is null,
+     then run <a href="#handle-response-end-of-file">handle response end-of-file</a> and return.
+
+     <li>
+      <p>Let <var>reader</var> be the result of
+      <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-get-reader" title="concept-get-reader">getting a reader</a> from
+      <var>response</var>'s <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a>'s
+      <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-body-stream" title="concept-body-stream">stream</a>.
+
+      <p><span class="note no-backref">This operation will not throw an exception.</span>
+
+     <li>
+      <p>Let <var>read</var> be the result of calling
+      <a href="https://streams.spec.whatwg.org/#read-from-readable-stream-reader"><code class="external" data-anolis-spec="streams">ReadFromReadableStreamReader</code></a>(<var>reader</var>).
+
+      <p>When <var>read</var> is fulfilled with an object whose <code>done</code> property is false
+      and whose <code>value</code> property is a <code>Uint8Array</code> object, run these
+      subsubsubsteps and then run the above subsubstep again:
+
+      <ol>
+       <li><p>Append the <code>value</code> property to <a href="#received-bytes">received bytes</a>.
+
+       <li><p>If not roughly 50ms have passed since these subsubsubsteps were last invoked,
+       then terminate these subsubsubsteps.
+
+       <li><p>If <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is
+       <i>headers received</i>, then set
+       <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> to <i>loading</i> and
+       <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a> named
+       <a href="#event-xhr-readystatechange"><code title="event-xhr-readystatechange">readystatechange</code></a>.
+
+       <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
+       <a href="#event-xhr-progress"><code title="event-xhr-progress">progress</code></a> with <var>response</var>'s
+       <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a>'s
+       <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-body-transmitted" title="concept-body-transmitted">transmitted bytes</a> and
+       <var>response</var>'s <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a>'s
+       <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-body-total-bytes" title="concept-body-total-bytes">total bytes</a>.
+      </ol>
+
+      <p>When <var>read</var> is fulfilled with an object whose <code>done</code> property is true,
+      run <a href="#handle-response-end-of-file">handle response end-of-file</a> for <var>response</var>.
+
+      <p>When <var>read</var> is rejected with an exception, run <a href="#handle-errors">handle errors</a> for
+      <var>response</var>.
     </ol>
-
-    <p>To <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#process-response-body">process response body</a> for
-    <var title="">response</var>, run these subsubsteps:
-
-    <ol>
-     <li><p>If not roughly 50ms have passed since these subsubsteps were last invoked,
-     terminate these subsubsteps.
-
-     <li><p><a href="#handle-errors">Handle errors</a> for <var title="">response</var>.
-
-     <li><p>If <a href="#response">response</a> is a
-     <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-network-error" title="concept-network-error">network error</a>,
-     return.
-
-     <li><p>If <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is
-     <i title="">headers received</i>, set
-     <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> to <i title="">loading</i> and
-     <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a> named <a href="#event-xhr-readystatechange"><code title="event-xhr-readystatechange">readystatechange</code></a>.
-
-     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <a href="#event-xhr-progress"><code title="event-xhr-progress">progress</code></a> with <var title="">response</var>'s
-     <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a>'s
-     <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-body-transmitted" title="concept-body-transmitted">transmitted</a> and
-     <var title="">response</var>'s
-     <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a>'s
-     <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-body-length" title="concept-body-length">length</a>.
-    </ol>
-
-    <p>To <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#process-response-end-of-file">process response end-of-file</a> for
-    <var title="">response</var>, run <a href="#handle-response-end-of-file">handle response end-of-file</a> for
-    <var title="">response</var>.
   </ol>
 
  <li>
@@ -1118,6 +1139,29 @@ method must run these steps:
     within the amount of milliseconds from the
     <a href="#dom-xmlhttprequest-timeout"><code title="dom-XMLHttpRequest-timeout">timeout</code></a> attribute value with reason
     <i title="">timeout</i>.
+
+   <li><p>If <var>response</var>'s
+   <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> is null,
+   then run <a href="#handle-response-end-of-file">handle response end-of-file</a> and return.
+
+   <li>
+    <p>Let <var>reader</var> be the result of
+    <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-get-reader" title="concept-get-reader">getting a reader</a> from
+    <var>response</var>'s <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a>'s
+    <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-body-stream" title="concept-body-stream">stream</a>.
+
+    <p><span class="note no-backref">This operation will not throw an exception.</span>
+
+   <li><p>Let <var>promise</var> be the result of
+   <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-read-all-bytes-from-readablestream" title="concept-read-all-bytes-from-ReadableStream">reading all
+   bytes</a> from <var>response</var>'s
+   <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a>'s
+   <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-body-stream" title="concept-body-stream">stream</a> with <var>reader</var>.
+
+   <li><p>Wait for <var>promise</var> to be fulfilled or rejected.
+
+   <li><p>If <var>promise</var> is fulfilled with <var>bytes</var>, then append <var>bytes</var>
+   to <a href="#received-bytes">received bytes</a>.
 
    <li><p>Run <a href="#handle-response-end-of-file">handle response end-of-file</a> for <var title="">response</var>.
   </ol>
@@ -1147,11 +1191,11 @@ steps:
 
  <li><p>Let <var title="">transmitted</var> be <var title="">response</var>'s
  <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a>'s
- <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-body-transmitted" title="concept-body-transmitted">transmitted</a>.
+ <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-body-transmitted" title="concept-body-transmitted">transmitted bytes</a>.
 
  <li><p>Let <var title="">length</var> be <var title="">response</var>'s
  <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a>'s
- <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-body-length" title="concept-body-length">length</a>.
+ <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-body-total-bytes" title="concept-body-total-bytes">total bytes</a>.
 
  <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <a href="#event-xhr-progress"><code title="event-xhr-progress">progress</code></a>
  with <var title="">transmitted</var> and <var title="">length</var>.
@@ -1284,6 +1328,8 @@ these steps:
 otherwise it is a
 <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-network-error" title="concept-network-error">network error</a>.
 
+<p>An <a href="#xmlhttprequest"><code>XMLHttpRequest</code></a> also has an associated <dfn id="received-bytes">received bytes</dfn> (a byte
+sequence). Unless stated otherwise it is the empty byte sequence.
 
 <h4 id="the-responseurl-attribute"><span class="secno">4.6.1 </span>The <code title="">responseURL</code> attribute</h4>
 
@@ -1436,16 +1482,11 @@ that is null in which case it is the <a href="#response-charset">response charse
 <ol>
  <li><p>If <a href="#response-arraybuffer-object">response <code>ArrayBuffer</code> object</a> is non-null, return it.
 
- <li><p>Let <var>bytes</var> be the empty byte sequence, if <a href="#response">response</a>'s
- <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> is null, and
- <a href="#response">response</a>'s
- <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> otherwise.
-
  <li>
   <p>Set <a href="#response-arraybuffer-object">response <code>ArrayBuffer</code> object</a> to a new <code>ArrayBuffer</code>
-  object representing <var>bytes</var>. If this throws an exception, set
-  <a href="#response-arraybuffer-object">response <code>ArrayBuffer</code> object</a> and <a href="#response">response</a>'s
-  <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> to null.
+  object representing <a href="#received-bytes">received bytes</a>. If this throws an exception, then set
+  <a href="#response-arraybuffer-object">response <code>ArrayBuffer</code> object</a> to null and set <a href="#received-bytes">received bytes</a>
+  to the empty byte sequence.
 
   <p class="note">Allocating an <code>ArrayBuffer</code> buffer is not guaranteed to succeed.
   <a href="#refsECMASCRIPT">[ECMASCRIPT]</a>
@@ -1462,13 +1503,8 @@ that is null in which case it is the <a href="#response-charset">response charse
  <li><p>Let <var title="">type</var> be the empty string, if <a href="#final-mime-type">final MIME type</a> is
  null, and <a href="#final-mime-type">final MIME type</a> otherwise.
 
- <li><p>Let <var>bytes</var> be the empty byte sequence, if <a href="#response">response</a>'s
- <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> is null, and
- <a href="#response">response</a>'s
- <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> otherwise.
-
  <li><p>Set <a href="#response-blob-object">response <code>Blob</code> object</a> to a new
- <a href="https://w3c.github.io/FileAPI/#blob"><code class="external" data-anolis-spec="fileapi">Blob</code></a> object representing <var>bytes</var> with
+ <a href="https://w3c.github.io/FileAPI/#blob"><code class="external" data-anolis-spec="fileapi">Blob</code></a> object representing <a href="#received-bytes">received bytes</a> with
  <a href="https://w3c.github.io/FileAPI/#dfn-type"><code class="external" data-anolis-spec="fileapi" title="dom-Blob-type">type</code></a> <var title="">type</var> and
  return it.
 </ol>
@@ -1479,10 +1515,8 @@ that is null in which case it is the <a href="#response-charset">response charse
 <ol>
  <li><p>If <a href="#response-document-object">response <code>Document</code> object</a> is non-null, return it.
 
- <li><p>Let <var>bytes</var> be <a href="#response">response</a>'s
- <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a>.
-
- <li><p>If <var>bytes</var> is null, return null.
+ <li><p>If <a href="#response">response</a>'s
+ <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> is null, then return null.
 
  <li><p>If <a href="#final-mime-type">final MIME type</a> is not null,
  <code>text/html</code>, <code>text/xml</code>,
@@ -1508,7 +1542,7 @@ that is null in which case it is the <a href="#response-charset">response charse
 
    <li><p>If <var>charset</var> is null,
    <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/syntax.html#prescan-a-byte-stream-to-determine-its-encoding" title="prescan a byte stream to determine its encoding">prescan</a>
-   the first 1024 bytes of <var>bytes</var> and if
+   the first 1024 bytes of <a href="#received-bytes">received bytes</a> and if
    that does not terminate unsuccessfully then let <var>charset</var> be
    the return value.
 
@@ -1517,7 +1551,7 @@ that is null in which case it is the <a href="#response-charset">response charse
 
    <li><p>Let <var title="">document</var> be a
    <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> that
-   represents the result parsing <var>bytes</var> following the rules set
+   represents the result parsing <a href="#received-bytes">received bytes</a> following the rules set
    forth in the HTML Standard for an HTML parser with scripting disabled and
    <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/syntax.html#a-known-definite-encoding">a known definite encoding</a> <var>charset</var>.
    <a href="#refsHTML">[HTML]</a>
@@ -1531,8 +1565,8 @@ that is null in which case it is the <a href="#response-charset">response charse
   <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>
   that represents the result of running the <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/xhtml.html#xml-parser">XML parser</a>
   with <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/xhtml.html#xml-scripting-support-disabled">XML scripting support disabled</a> on
-  <var>bytes</var>. If that fails (unsupported character encoding,
-  namespace well-formedness error, etc.), return null.
+  <a href="#received-bytes">received bytes</a>. If that fails (unsupported character encoding,
+  namespace well-formedness error, etc.), then return null.
   <a href="#refsHTML">[HTML]</a>
 
   <p class="note">Resources referenced will not be loaded and no associated XSLT will be
@@ -1569,13 +1603,11 @@ that is null in which case it is the <a href="#response-charset">response charse
 <ol>
  <li><p>If <a href="#response-json-object">response JSON object</a> is non-null, return it.
 
- <li><p>Let <var>bytes</var> be <a href="#response">response</a>'s
- <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a>.
-
- <li><p>If <var>bytes</var> is null, return null.
+ <li><p>If <a href="#response">response</a>'s
+ <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> is null, then return null.
 
  <li><p>Let <var>JSON text</var> be the result of running
- <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#utf-8-decode">utf-8 decode</a> on byte stream <var>bytes</var>.
+ <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#utf-8-decode">utf-8 decode</a> on <a href="#received-bytes">received bytes</a>.
 
  <li><p>Let <var>JSON object</var> be the result of invoking the initial value of the
  <code title="">parse</code> property of the <code title="">JSON</code> object, with
@@ -1589,10 +1621,9 @@ that is null in which case it is the <a href="#response-charset">response charse
 <p>A <dfn id="text-response">text response</dfn> is the return value of these steps:
 
 <ol>
- <li><p>Let <var>bytes</var> be <a href="#response">response</a>'s
- <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a>.
-
- <li><p>If <var>bytes</var> is null, return the empty string.
+ <li><p>If <a href="#response">response</a>'s
+ <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> is null, then return the
+ empty string.
 
  <li><p>Let <var>charset</var> be the <a href="#final-charset">final charset</a>.
 
@@ -1615,9 +1646,8 @@ that is null in which case it is the <a href="#response-charset">response charse
  <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
 
  <li><p>Return the result of running
- <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#decode">decode</a> on byte stream
- <var>bytes</var> using fallback encoding
- <var>charset</var>.
+ <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#decode">decode</a> on <a href="#received-bytes">received bytes</a> using fallback
+ encoding <var>charset</var>.
 </ol>
 
 <p class="note">Authors are strongly encouraged to always encode their
@@ -2223,6 +2253,8 @@ otherwise. <a class="informative" href="#refsFETCH">[FETCH]</a>
 
 <dd><cite><a href="https://tools.ietf.org/html/rfc7231">Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content</a></cite>, Roy Fielding and Julian Reschke. IETF.
 
+<dd><cite><a href="https://tools.ietf.org/html/rfc7232">Hypertext Transfer Protocol (HTTP/1.1): Conditional Requests</a></cite>, Roy Fielding and Julian Reschke. IETF.
+
 <dd><cite><a href="https://tools.ietf.org/html/rfc7234">Hypertext Transfer Protocol (HTTP/1.1): Caching</a></cite>, Roy Fielding and Julian Reschke. IETF.
 
 <dd><cite><a href="https://tools.ietf.org/html/rfc7235">Hypertext Transfer Protocol (HTTP/1.1): Authentication</a></cite>, Roy Fielding and Julian Reschke. IETF.
@@ -2237,10 +2269,10 @@ otherwise. <a class="informative" href="#refsFETCH">[FETCH]</a>
 <dd><cite><a href="https://heycam.github.io/webidl/">Web IDL</a></cite>, Cameron McCormack. W3C.
 
 <dt id="refsXML">[XML]
-<dd><cite><a href="http://www.w3.org/TR/xml/">Extensible Markup Language</a></cite>, Tim Bray, Jean Paoli, C. M. Sperberg-McQueen et al.. W3C.
+<dd><cite><a href="https://www.w3.org/TR/xml/">Extensible Markup Language</a></cite>, Tim Bray, Jean Paoli, C. M. Sperberg-McQueen et al.. W3C.
 
 <dt id="refsXMLNS">[XMLNS]
-<dd><cite><a href="http://www.w3.org/TR/xml-names/">Namespaces in XML</a></cite>, Tim Bray, Dave Hollander, Andrew Layman et al.. W3C.
+<dd><cite><a href="https://www.w3.org/TR/xml-names/">Namespaces in XML</a></cite>, Tim Bray, Dave Hollander, Andrew Layman et al.. W3C.
 
 </dl></div>
 

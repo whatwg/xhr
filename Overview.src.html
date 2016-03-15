@@ -559,6 +559,7 @@ method, when invoked, must run these steps:
    <li><p>Empty <span>author request headers</span>.
    <li><p>Set <span>response</span> to a
    <span data-anolis-spec=fetch title=concept-network-error>network error</span>.
+   <li><p>Set <span>received bytes</span> to the empty byte sequence.
    <li><p>Set <span>response <code>ArrayBuffer</code> object</span> to null.
    <li><p>Set <span>response <code>Blob</code> object</span> to null.
    <li><p>Set <span>response <code>Document</code> object</span> to null.
@@ -926,7 +927,7 @@ method must run these steps:
    <code title="event-xhr-loadstart">loadstart</code> on the
    <code>XMLHttpRequestUpload</code> object with 0 and <var title>req</var>'s
    <span data-anolis-spec=fetch title=concept-request-body>body</span>'s
-   <span data-anolis-spec=fetch title=concept-body-length>length</span>.
+   <span data-anolis-spec=fetch title=concept-body-total-bytes>total bytes</span>.
 
    <li>
     <p><span data-anolis-spec=fetch title=concept-fetch>Fetch</span> <var title>req</var>.
@@ -966,10 +967,10 @@ method must run these steps:
      <code title="event-xhr-progress">progress</code> on the
      <code>XMLHttpRequestUpload</code> object with <var title>request</var>'s
      <span data-anolis-spec=fetch title=concept-request-body>body</span>'s
-     <span data-anolis-spec=fetch title=concept-body-transmitted>transmitted</span> and
+     <span data-anolis-spec=fetch title=concept-body-transmitted>transmitted bytes</span> and
      <var title>request</var>'s
      <span data-anolis-spec=fetch title=concept-request-body>body</span>'s
-     <span data-anolis-spec=fetch title=concept-body-length>length</span>.
+     <span data-anolis-spec=fetch title=concept-body-total-bytes>total bytes</span>.
      <!-- upload complete flag can never be set here I hope -->
     </ol>
 
@@ -981,11 +982,11 @@ method must run these steps:
 
      <li><p>Let <var title>transmitted</var> be <var title>request</var>'s
      <span data-anolis-spec=fetch title=concept-request-body>body</span>'s
-     <span data-anolis-spec=fetch title=concept-body-transmitted>transmitted</span>.
+     <span data-anolis-spec=fetch title=concept-body-transmitted>transmitted bytes</span>.
 
      <li><p>Let <var title>length</var> be <var title>request</var>'s
      <span data-anolis-spec=fetch title=concept-request-body>body</span>'s
-     <span data-anolis-spec=fetch title=concept-body-length>length</span>.
+     <span data-anolis-spec=fetch title=concept-body-total-bytes>total bytes</span>.
 
      <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named
      <code title=event-xhr-progress>progress</code> on the
@@ -1022,38 +1023,58 @@ method must run these steps:
      <li><p>Set <span title=concept-XMLHttpRequest-state>state</span> to
      <i title>headers received</i>.
 
-     <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.
+     <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named
+     <code title=event-xhr-readystatechange>readystatechange</code>.
+
+     <li><p>If <span title=concept-XMLHttpRequest-state>state</span> is not
+     <i>headers received</i>, then return.
+
+     <li><p>If <var>response</var>'s
+     <span data-anolis-spec=fetch title=concept-response-body>body</span> is null,
+     then run <span>handle response end-of-file</span> and return.
+
+     <li>
+      <p>Let <var>reader</var> be the result of
+      <span data-anolis-spec=fetch title=concept-get-reader>getting a reader</span> from
+      <var>response</var>'s <span data-anolis-spec=fetch title=concept-response-body>body</span>'s
+      <span data-anolis-spec=fetch title=concept-body-stream>stream</span>.
+
+      <p><span class="note no-backref">This operation will not throw an exception.</span>
+
+     <li>
+      <p>Let <var>read</var> be the result of calling
+      <code data-anolis-spec=streams>ReadFromReadableStreamReader</code>(<var>reader</var>).
+
+      <p>When <var>read</var> is fulfilled with an object whose <code>done</code> property is false
+      and whose <code>value</code> property is a <code>Uint8Array</code> object, run these
+      subsubsubsteps and then run the above subsubstep again:
+
+      <ol>
+       <li><p>Append the <code>value</code> property to <span>received bytes</span>.
+
+       <li><p>If not roughly 50ms have passed since these subsubsubsteps were last invoked,
+       then terminate these subsubsubsteps.
+
+       <li><p>If <span title=concept-XMLHttpRequest-state>state</span> is
+       <i>headers received</i>, then set
+       <span title=concept-XMLHttpRequest-state>state</span> to <i>loading</i> and
+       <span data-anolis-spec=dom title=concept-event-fire>fire an event</span> named
+       <code title=event-xhr-readystatechange>readystatechange</code>.
+
+       <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named
+       <code title="event-xhr-progress">progress</code> with <var>response</var>'s
+       <span data-anolis-spec=fetch title=concept-response-body>body</span>'s
+       <span data-anolis-spec=fetch title=concept-body-transmitted>transmitted bytes</span> and
+       <var>response</var>'s <span data-anolis-spec=fetch title=concept-response-body>body</span>'s
+       <span data-anolis-spec=fetch title=concept-body-total-bytes>total bytes</span>.
+      </ol>
+
+      <p>When <var>read</var> is fulfilled with an object whose <code>done</code> property is true,
+      run <span>handle response end-of-file</span> for <var>response</var>.
+
+      <p>When <var>read</var> is rejected with an exception, run <span>handle errors</span> for
+      <var>response</var>.
     </ol>
-
-    <p>To <span data-anolis-spec=fetch>process response body</span> for
-    <var title>response</var>, run these subsubsteps:
-
-    <ol>
-     <li><p>If not roughly 50ms have passed since these subsubsteps were last invoked,
-     terminate these subsubsteps.
-
-     <li><p><span>Handle errors</span> for <var title>response</var>.
-
-     <li><p>If <span>response</span> is a
-     <span data-anolis-spec=fetch title=concept-network-error>network error</span>,
-     return.
-
-     <li><p>If <span title=concept-XMLHttpRequest-state>state</span> is
-     <i title>headers received</i>, set
-     <span title=concept-XMLHttpRequest-state>state</span> to <i title>loading</i> and
-     <span data-anolis-spec=dom title=concept-event-fire>fire an event</span> named <code title=event-xhr-readystatechange>readystatechange</code>.
-
-     <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-progress">progress</code> with <var title>response</var>'s
-     <span data-anolis-spec=fetch title=concept-response-body>body</span>'s
-     <span data-anolis-spec=fetch title=concept-body-transmitted>transmitted</span> and
-     <var title>response</var>'s
-     <span data-anolis-spec=fetch title=concept-response-body>body</span>'s
-     <span data-anolis-spec=fetch title=concept-body-length>length</span>.
-    </ol>
-
-    <p>To <span data-anolis-spec=fetch>process response end-of-file</span> for
-    <var title>response</var>, run <span>handle response end-of-file</span> for
-    <var title>response</var>.
   </ol>
 
  <li>
@@ -1070,6 +1091,29 @@ method must run these steps:
     within the amount of milliseconds from the
     <code title=dom-XMLHttpRequest-timeout>timeout</code> attribute value with reason
     <i title>timeout</i>.
+
+   <li><p>If <var>response</var>'s
+   <span data-anolis-spec=fetch title=concept-response-body>body</span> is null,
+   then run <span>handle response end-of-file</span> and return.
+
+   <li>
+    <p>Let <var>reader</var> be the result of
+    <span data-anolis-spec=fetch title=concept-get-reader>getting a reader</span> from
+    <var>response</var>'s <span data-anolis-spec=fetch title=concept-response-body>body</span>'s
+    <span data-anolis-spec=fetch title=concept-body-stream>stream</span>.
+
+    <p><span class="note no-backref">This operation will not throw an exception.</span>
+
+   <li><p>Let <var>promise</var> be the result of
+   <span data-anolis-spec=fetch title=concept-read-all-bytes-from-ReadableStream>reading all
+   bytes</span> from <var>response</var>'s
+   <span data-anolis-spec=fetch title=concept-response-body>body</span>'s
+   <span data-anolis-spec=fetch title=concept-body-stream>stream</span> with <var>reader</var>.
+
+   <li><p>Wait for <var>promise</var> to be fulfilled or rejected.
+
+   <li><p>If <var>promise</var> is fulfilled with <var>bytes</var>, then append <var>bytes</var>
+   to <span>received bytes</span>.
 
    <li><p>Run <span>handle response end-of-file</span> for <var title>response</var>.
   </ol>
@@ -1099,11 +1143,11 @@ steps:
 
  <li><p>Let <var title>transmitted</var> be <var title>response</var>'s
  <span data-anolis-spec=fetch title=concept-response-body>body</span>'s
- <span data-anolis-spec=fetch title=concept-body-transmitted>transmitted</span>.
+ <span data-anolis-spec=fetch title=concept-body-transmitted>transmitted bytes</span>.
 
  <li><p>Let <var title>length</var> be <var title>response</var>'s
  <span data-anolis-spec=fetch title=concept-response-body>body</span>'s
- <span data-anolis-spec=fetch title=concept-body-length>length</span>.
+ <span data-anolis-spec=fetch title=concept-body-total-bytes>total bytes</span>.
 
  <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>
  with <var title>transmitted</var> and <var title>length</var>.
@@ -1236,6 +1280,8 @@ these steps:
 otherwise it is a
 <span data-anolis-spec=fetch title=concept-network-error>network error</span>.
 
+<p>An <code>XMLHttpRequest</code> also has an associated <dfn>received bytes</dfn> (a byte
+sequence). Unless stated otherwise it is the empty byte sequence.
 
 <h4>The <code title>responseURL</code> attribute</h4>
 
@@ -1388,16 +1434,11 @@ that is null in which case it is the <span>response charset</span>.
 <ol>
  <li><p>If <span>response <code>ArrayBuffer</code> object</span> is non-null, return it.
 
- <li><p>Let <var>bytes</var> be the empty byte sequence, if <span>response</span>'s
- <span data-anolis-spec=fetch title=concept-response-body>body</span> is null, and
- <span>response</span>'s
- <span data-anolis-spec=fetch title=concept-response-body>body</span> otherwise.
-
  <li>
   <p>Set <span>response <code>ArrayBuffer</code> object</span> to a new <code>ArrayBuffer</code>
-  object representing <var>bytes</var>. If this throws an exception, set
-  <span>response <code>ArrayBuffer</code> object</span> and <span>response</span>'s
-  <span data-anolis-spec=fetch title=concept-response-body>body</span> to null.
+  object representing <span>received bytes</span>. If this throws an exception, then set
+  <span>response <code>ArrayBuffer</code> object</span> to null and set <span>received bytes</span>
+  to the empty byte sequence.
 
   <p class="note">Allocating an <code>ArrayBuffer</code> buffer is not guaranteed to succeed.
   <span data-anolis-ref>ECMASCRIPT</span>
@@ -1414,13 +1455,8 @@ that is null in which case it is the <span>response charset</span>.
  <li><p>Let <var title>type</var> be the empty string, if <span>final MIME type</span> is
  null, and <span>final MIME type</span> otherwise.
 
- <li><p>Let <var>bytes</var> be the empty byte sequence, if <span>response</span>'s
- <span data-anolis-spec=fetch title=concept-response-body>body</span> is null, and
- <span>response</span>'s
- <span data-anolis-spec=fetch title=concept-response-body>body</span> otherwise.
-
  <li><p>Set <span>response <code>Blob</code> object</span> to a new
- <code data-anolis-spec=fileapi>Blob</code> object representing <var>bytes</var> with
+ <code data-anolis-spec=fileapi>Blob</code> object representing <span>received bytes</span> with
  <code data-anolis-spec=fileapi title=dom-Blob-type>type</code> <var title>type</var> and
  return it.
 </ol>
@@ -1431,10 +1467,8 @@ that is null in which case it is the <span>response charset</span>.
 <ol>
  <li><p>If <span>response <code>Document</code> object</span> is non-null, return it.
 
- <li><p>Let <var>bytes</var> be <span>response</span>'s
- <span data-anolis-spec=fetch title=concept-response-body>body</span>.
-
- <li><p>If <var>bytes</var> is null, return null.
+ <li><p>If <span>response</span>'s
+ <span data-anolis-spec=fetch title=concept-response-body>body</span> is null, then return null.
 
  <li><p>If <span>final MIME type</span> is not null,
  <code>text/html</code>, <code>text/xml</code>,
@@ -1460,7 +1494,7 @@ that is null in which case it is the <span>response charset</span>.
 
    <li><p>If <var>charset</var> is null,
    <span data-anolis-spec=html title="prescan a byte stream to determine its encoding">prescan</span>
-   the first 1024 bytes of <var>bytes</var> and if
+   the first 1024 bytes of <span>received bytes</span> and if
    that does not terminate unsuccessfully then let <var>charset</var> be
    the return value.
 
@@ -1469,7 +1503,7 @@ that is null in which case it is the <span>response charset</span>.
 
    <li><p>Let <var title>document</var> be a
    <span data-anolis-spec=dom title=concept-document>document</span> that
-   represents the result parsing <var>bytes</var> following the rules set
+   represents the result parsing <span>received bytes</span> following the rules set
    forth in the HTML Standard for an HTML parser with scripting disabled and
    <span data-anolis-spec=html>a known definite encoding</span> <var>charset</var>.
    <span data-anolis-ref>HTML</span>
@@ -1483,8 +1517,8 @@ that is null in which case it is the <span>response charset</span>.
   <span data-anolis-spec=dom title=concept-document>document</span>
   that represents the result of running the <span data-anolis-spec=html>XML parser</span>
   with <span data-anolis-spec=html>XML scripting support disabled</span> on
-  <var>bytes</var>. If that fails (unsupported character encoding,
-  namespace well-formedness error, etc.), return null.
+  <span>received bytes</span>. If that fails (unsupported character encoding,
+  namespace well-formedness error, etc.), then return null.
   <span data-anolis-ref>HTML</span>
 
   <p class=note>Resources referenced will not be loaded and no associated XSLT will be
@@ -1521,13 +1555,11 @@ that is null in which case it is the <span>response charset</span>.
 <ol>
  <li><p>If <span>response JSON object</span> is non-null, return it.
 
- <li><p>Let <var>bytes</var> be <span>response</span>'s
- <span data-anolis-spec=fetch title=concept-response-body>body</span>.
-
- <li><p>If <var>bytes</var> is null, return null.
+ <li><p>If <span>response</span>'s
+ <span data-anolis-spec=fetch title=concept-response-body>body</span> is null, then return null.
 
  <li><p>Let <var>JSON text</var> be the result of running
- <span data-anolis-spec=encoding>utf-8 decode</span> on byte stream <var>bytes</var>.
+ <span data-anolis-spec=encoding>utf-8 decode</span> on <span>received bytes</span>.
 
  <li><p>Let <var>JSON object</var> be the result of invoking the initial value of the
  <code title>parse</code> property of the <code title>JSON</code> object, with
@@ -1541,10 +1573,9 @@ that is null in which case it is the <span>response charset</span>.
 <p>A <dfn>text response</dfn> is the return value of these steps:
 
 <ol>
- <li><p>Let <var>bytes</var> be <span>response</span>'s
- <span data-anolis-spec=fetch title=concept-response-body>body</span>.
-
- <li><p>If <var>bytes</var> is null, return the empty string.
+ <li><p>If <span>response</span>'s
+ <span data-anolis-spec=fetch title=concept-response-body>body</span> is null, then return the
+ empty string.
 
  <li><p>Let <var>charset</var> be the <span>final charset</span>.
 
@@ -1567,9 +1598,8 @@ that is null in which case it is the <span>response charset</span>.
  <span data-anolis-spec=encoding>utf-8</span>.
 
  <li><p>Return the result of running
- <span data-anolis-spec=encoding>decode</span> on byte stream
- <var>bytes</var> using fallback encoding
- <var>charset</var>.
+ <span data-anolis-spec=encoding>decode</span> on <span>received bytes</span> using fallback
+ encoding <var>charset</var>.
 </ol>
 
 <p class=note>Authors are strongly encouraged to always encode their
