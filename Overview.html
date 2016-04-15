@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="https://whatwg.org/"><img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-25-march-2016">Living Standard — Last Updated 25 March 2016</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-15-april-2016">Living Standard — Last Updated 15 April 2016</h2>
 
 <dl>
  <dt>Participate:
@@ -1967,9 +1967,10 @@ interface <dfn id="formdata">FormData</dfn> {
 <dfn id="concept-formdata-entry-value" title="concept-FormData-entry-value">value</dfn>.
 
 <p>For the purposes of interaction with other algorithms, an
-<a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a>'s type is "string" if its
-<a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">value</a> is a string and "file" otherwise. If
-an <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a>'s type is "file", its filename is
+<a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a>'s <dfn id="concept-formdata-entry-type" title="concept-FormData-entry-type">type</dfn>
+is "string" if its <a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">value</a> is a string and "file"
+otherwise. If an <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a>'s
+<a href="#concept-formdata-entry-type" title="concept-FormData-entry-type">type</a> is "file", its filename is
 the empty string if <a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">value</a> is not
 a <a href="https://w3c.github.io/FileAPI/#file"><code class="external" data-anolis-spec="fileapi">File</code></a> object, and otherwise its filename is the
 value of <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a>'s

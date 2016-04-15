@@ -1919,9 +1919,10 @@ interface <dfn>FormData</dfn> {
 <dfn title=concept-FormData-entry-value>value</dfn>.
 
 <p>For the purposes of interaction with other algorithms, an
-<span title=concept-FormData-entry>entry</span>'s type is "string" if its
-<span title=concept-FormData-entry-value>value</span> is a string and "file" otherwise. If
-an <span title=concept-FormData-entry>entry</span>'s type is "file", its filename is
+<span title=concept-FormData-entry>entry</span>'s <dfn title=concept-FormData-entry-type>type</dfn>
+is "string" if its <span title=concept-FormData-entry-value>value</span> is a string and "file"
+otherwise. If an <span title=concept-FormData-entry>entry</span>'s
+<span title=concept-FormData-entry-type>type</span> is "file", its filename is
 the empty string if <span title=concept-FormData-entry-value>value</span> is not
 a <code data-anolis-spec=fileapi>File</code> object, and otherwise its filename is the
 value of <span title=concept-FormData-entry>entry</span>'s
