@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="https://whatwg.org/"><img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-25-march-2016">Living Standard — Last Updated 25 March 2016</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-19-april-2016">Living Standard — Last Updated 19 April 2016</h2>
 
 <dl>
  <dt>Participate:
@@ -310,29 +310,13 @@ Unless stated otherwise it is unset.
 
 <h3 id="constructors"><span class="secno">4.1 </span>Constructors</h3>
 
-<p>The <a href="#xmlhttprequest"><code>XMLHttpRequest</code></a> object has an associated
-<dfn id="concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</dfn>.
-
 <dl class="domintro">
  <dt><code><var title="">client</var> = new <a href="#dom-xmlhttprequest" title="dom-XMLHttpRequest">XMLHttpRequest</a>()</code>
  <dd>Returns a new <a href="#xmlhttprequest"><code>XMLHttpRequest</code></a> object.
 </dl>
 
-<p>The
-<dfn id="dom-xmlhttprequest" title="dom-XMLHttpRequest"><code>XMLHttpRequest()</code></dfn>
-constructor must run these steps:
-
-<ol>
- <li><p>Let <var title="">xhr</var> be a new <a href="#xmlhttprequest"><code>XMLHttpRequest</code></a>
- object.
-
- <li><p>Set <var title="">xhr</var>'s
- <a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a> to the
- <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object-for-a-global-object" title="relevant settings object for a global object">relevant settings object</a>
- for the global object of <var title="">xhr</var>'s interface object.
-
- <li><p>Return <var title="">xhr</var>.
-</ol>
+<p>The <dfn id="dom-xmlhttprequest" title="dom-XMLHttpRequest"><code>XMLHttpRequest()</code></dfn> constructor, when
+invoked, must return a new <a href="#xmlhttprequest"><code>XMLHttpRequest</code></a> object.
 
 
 <h3 id="garbage-collection"><span class="secno">4.2 </span>Garbage collection</h3>
@@ -530,14 +514,11 @@ experiment with <a class="external" data-anolis-spec="webidl" href="https://heyc
 method, when invoked, must run these steps:
 
 <ol>
- <li><p>If <a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a> has a
+ <li><p>If <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#context-object">context object</a>'s
+ <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object">relevant settings object</a> has a
  <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#responsible-document">responsible document</a> and it is <em>not</em>
  <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#fully-active">fully active</a>,
  <a class="external" data-anolis-spec="webidl" href="https://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> an <code>InvalidStateError</code> exception.
-
- <li><p>Set <var title="">base</var> to
- <a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
- <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#api-base-url">API base URL</a>.
 
  <li><p>If <var>method</var> is not a
  <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-method" title="concept-method">method</a>,
@@ -552,8 +533,10 @@ method, when invoked, must run these steps:
  <var>method</var>.
 
  <li><p>Let <var title="">parsedURL</var> be the result of
- <a class="external" data-anolis-spec="url" href="https://url.spec.whatwg.org/#concept-url-parser" title="concept-url-parser">parsing</a> <var title="">url</var>
- with <var title="">base</var>.
+ <a class="external" data-anolis-spec="url" href="https://url.spec.whatwg.org/#concept-url-parser" title="concept-url-parser">parsing</a> <var title="">url</var> with
+ <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#context-object">context object</a>'s
+ <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object">relevant settings object</a>'s
+ <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#api-base-url">API base URL</a>.
 
  <li><p>If <var title="">parsedURL</var> is failure,
  <a class="external" data-anolis-spec="webidl" href="https://heycam.github.io/webidl/#dfn-throw" title="throw">throw</a> a
@@ -935,7 +918,8 @@ method must run these steps:
    <dt><a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>
    <dd><a href="#request-body">request body</a>
    <dt><a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-request-client" title="concept-request-client">client</a>
-   <dd><a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>
+   <dd><a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#context-object">context object</a>'s
+   <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object">relevant settings object</a>
    <dt><a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-request-destination" title="concept-request-destination">destination</a>
    <dd>"<code>subresource</code>"
    <dt><a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#synchronous-flag">synchronous flag</a>
@@ -1591,7 +1575,8 @@ that is null in which case it is the <a href="#response-charset">response charse
  <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-url" title="concept-response-url">url</a>.
 
  <li><p>Set <var title="">document</var>'s <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a> to
- <a href="#concept-xmlhttprequest-settings-object" title="concept-XMLHttpRequest-settings-object">settings object</a>'s
+ <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#context-object">context object</a>'s
+ <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object">relevant settings object</a>'s
  <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>.
 
  <li><p>Set <a href="#response-document-object">response <code>Document</code> object</a> to
