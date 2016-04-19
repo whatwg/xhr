@@ -262,29 +262,13 @@ Unless stated otherwise it is unset.
 
 <h3 id="constructors">Constructors</h3>
 
-<p>The <code>XMLHttpRequest</code> object has an associated
-<dfn title=concept-XMLHttpRequest-settings-object>settings object</dfn>.
-
 <dl class=domintro>
  <dt><code><var title>client</var> = new <span title=dom-XMLHttpRequest>XMLHttpRequest</span>()</code>
  <dd>Returns a new <code>XMLHttpRequest</code> object.
 </dl>
 
-<p>The
-<dfn title="dom-XMLHttpRequest"><code>XMLHttpRequest()</code></dfn>
-constructor must run these steps:
-
-<ol>
- <li><p>Let <var title>xhr</var> be a new <code>XMLHttpRequest</code>
- object.
-
- <li><p>Set <var title>xhr</var>'s
- <span title=concept-XMLHttpRequest-settings-object>settings object</span> to the
- <span data-anolis-spec=html title="relevant settings object for a global object">relevant settings object</span>
- for the global object of <var title>xhr</var>'s interface object.
-
- <li><p>Return <var title>xhr</var>.
-</ol>
+<p>The <dfn title="dom-XMLHttpRequest"><code>XMLHttpRequest()</code></dfn> constructor, when
+invoked, must return a new <code>XMLHttpRequest</code> object.
 
 
 <h3>Garbage collection</h3>
@@ -482,14 +466,11 @@ experiment with <span data-anolis-spec=webidl title=throw>throwing</span> an
 method, when invoked, must run these steps:
 
 <ol>
- <li><p>If <span title=concept-XMLHttpRequest-settings-object>settings object</span> has a
+ <li><p>If <span data-anolis-spec=dom>context object</span>'s
+ <span data-anolis-spec=html>relevant settings object</span> has a
  <span data-anolis-spec=html>responsible document</span> and it is <em>not</em>
  <span data-anolis-spec=html>fully active</span>,
  <span data-anolis-spec=webidl title=throw>throw</span> an <code>InvalidStateError</code> exception.
-
- <li><p>Set <var title>base</var> to
- <span title=concept-XMLHttpRequest-settings-object>settings object</span>'s
- <span data-anolis-spec=html>API base URL</span>.
 
  <li><p>If <var>method</var> is not a
  <span data-anolis-spec=fetch title=concept-method>method</span>,
@@ -504,8 +485,10 @@ method, when invoked, must run these steps:
  <var>method</var>.
 
  <li><p>Let <var title>parsedURL</var> be the result of
- <span data-anolis-spec=url title=concept-url-parser>parsing</span> <var title>url</var>
- with <var title>base</var>.
+ <span data-anolis-spec=url title=concept-url-parser>parsing</span> <var title>url</var> with
+ <span data-anolis-spec=dom>context object</span>'s
+ <span data-anolis-spec=html>relevant settings object</span>'s
+ <span data-anolis-spec=html>API base URL</span>.
 
  <li><p>If <var title>parsedURL</var> is failure,
  <span data-anolis-spec=webidl title=throw>throw</span> a
@@ -887,7 +870,8 @@ method must run these steps:
    <dt><span data-anolis-spec=fetch title=concept-request-body>body</span>
    <dd><span>request body</span>
    <dt><span data-anolis-spec=fetch title=concept-request-client>client</span>
-   <dd><span title=concept-XMLHttpRequest-settings-object>settings object</span>
+   <dd><span data-anolis-spec=dom>context object</span>'s
+   <span data-anolis-spec=html>relevant settings object</span>
    <dt><span data-anolis-spec=fetch title=concept-request-destination>destination</span>
    <dd>"<code>subresource</code>"
    <dt><span data-anolis-spec=fetch>synchronous flag</span>
@@ -1543,7 +1527,8 @@ that is null in which case it is the <span>response charset</span>.
  <span data-anolis-spec=fetch title=concept-response-url>url</span>.
 
  <li><p>Set <var title>document</var>'s <span data-anolis-spec=html>origin</span> to
- <span title=concept-XMLHttpRequest-settings-object>settings object</span>'s
+ <span data-anolis-spec=dom>context object</span>'s
+ <span data-anolis-spec=html>relevant settings object</span>'s
  <span data-anolis-spec=html>origin</span>.
 
  <li><p>Set <span>response <code>Document</code> object</span> to
