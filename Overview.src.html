@@ -441,14 +441,11 @@ unset.
   if <var title>method</var> is a case-insensitive match for
   `<code title>CONNECT</code>`, `<code title>TRACE</code>` or `<code title>TRACK</code>`.
 
-  <p>Throws an <code>InvalidAccessError</code>
-  exception if <var title>async</var> is false,
+  <p>Throws an <code>InvalidAccessError</code> exception if <var title>async</var> is false,
   <span data-anolis-spec=html>entry settings object</span>'s
   <span data-anolis-spec=html>global object</span> is a <code data-anolis-spec=html>Window</code>
-  object, and either the <code title=dom-XMLHttpRequest-timeout>timeout</code> attribute is not
-  zero, the <code title=dom-XMLHttpRequest-withCredentials>withCredentials</code> attribute is true,
-  or the <code title=dom-XMLHttpRequest-responseType>responseType</code> attribute is not the empty
-  string.
+  object, and the <code title=dom-XMLHttpRequest-timeout>timeout</code> attribute is not zero or the
+  <code title=dom-XMLHttpRequest-responseType>responseType</code> attribute is not the empty string.
 </dl>
 
 <p class="critical no-backref" id=sync-warning>Synchronous <code>XMLHttpRequest</code>
@@ -517,10 +514,9 @@ method, when invoked, must run these steps:
 
  <li><p>If <var>async</var> is false, <span data-anolis-spec=html>entry settings object</span>'s
  <span data-anolis-spec=html>global object</span> is a <code data-anolis-spec=html>Window</code>
- object, and either the <code title=dom-XMLHttpRequest-timeout>timeout</code> attribute value is not
- zero, the <code title=dom-XMLHttpRequest-withCredentials>withCredentials</code> attribute value is
- true, or the <code title=dom-XMLHttpRequest-responseType>responseType</code> attribute value is not
- the empty string, <span data-anolis-spec=webidl title=throw>throw</span> an
+ object, and the <code title=dom-XMLHttpRequest-timeout>timeout</code> attribute value is not zero
+ or the <code title=dom-XMLHttpRequest-responseType>responseType</code> attribute value is not the
+ empty string, then <span data-anolis-spec=webidl title=throw>throw</span> an
  <code>InvalidAccessError</code> exception.
 
  <li>
@@ -698,11 +694,6 @@ of <span data-anolis-spec=fetch title=concept-fetch>fetching</span>.
   <code>InvalidStateError</code> exception if
   <span title=concept-XMLHttpRequest-state>state</span> is not <i title>unsent</i> or
   <i title>opened</i>, or if the <span><code>send()</code> flag</span> is set.
-  <p>When set: throws an <code>InvalidAccessError</code> exception if the
-  <span>synchronous flag</span> is set and
-  <span data-anolis-spec=html>entry settings object</span>'s
-  <span data-anolis-spec=html>global object</span> is a <code data-anolis-spec=html>Window</code>
-  object.
  </dd>
 </dl>
 
@@ -723,12 +714,6 @@ attribute must run these steps:
  <li><p>If the <span><code>send()</code> flag</span> is set,
  <span data-anolis-spec=webidl title=throw>throw</span> an
  <code>InvalidStateError</code> exception.
-
- <li><p>If <span data-anolis-spec=html>entry settings object</span>'s
- <span data-anolis-spec=html>global object</span> is a <code data-anolis-spec=html>Window</code>
- object and the <span>synchronous flag</span> is set,
- <span data-anolis-spec=webidl title=throw>throw</span> an
- <code>InvalidAccessError</code> exception.
 
  <li><p>Set the <code title="dom-XMLHttpRequest-withCredentials">withCredentials</code>
  attribute's value to the given value.
