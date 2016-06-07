@@ -1287,19 +1287,15 @@ method must run these steps:
 
 <ol>
  <li><p>If <span>response</span>'s
- <span data-anolis-spec=fetch title=concept-response-header-list>header list</span> has
- multiple <span data-anolis-spec=fetch title=concept-header>headers</span> whose
- <span data-anolis-spec=fetch title=concept-header-name>name</span> is <var>name</var>,
- return their <span data-anolis-spec=fetch title=concept-header-value>values</span> in
- list order as a single byte sequence separated from each other by a 0x2C 0x20 byte pair.
+ <span data-anolis-spec=fetch title=concept-response-header-list>header list</span> has <em>no</em>
+ <span data-anolis-spec=fetch title=concept-header>header</span> whose
+ <span data-anolis-spec=fetch title=concept-header-name>name</span> is <var>name</var>, then return
+ null.
 
- <li><p>If <span>response</span>'s
- <span data-anolis-spec=fetch title=concept-response-header-list>header list</span> has
- one <span data-anolis-spec=fetch title=concept-header>header</span> whose
- <span data-anolis-spec=fetch title=concept-header-name>name</span> is <var>name</var>,
- return its <span data-anolis-spec=fetch title=concept-header-value>value</span>.
-
- <li><p>Return null.
+ <li><p>Return the
+ <span data-anolis-spec=fetch title=concept-header-value-combined>combined value</span> given
+ <var>name</var> and <span>response</span>'s
+ <span data-anolis-spec=fetch title=concept-response-header-list>header list</span>.
 </ol>
 
 <p class="note no-backref">The Fetch Standard filters <span>response</span>'s
@@ -1330,14 +1326,31 @@ client.onreadystatechange = function() {
 
 <p>The
 <dfn title="dom-XMLHttpRequest-getAllResponseHeaders"><code>getAllResponseHeaders()</code></dfn>
-method must return <span>response</span>'s
-<span data-anolis-spec=fetch title=concept-response-header-list>header list</span>, in
-list order, as a single byte sequence with each
-<span data-anolis-spec=fetch title=concept-header>header</span> separated by a 0x0D 0x0A
-byte pair, and each <span data-anolis-spec=fetch title=concept-header-name>name</span> and
-<span data-anolis-spec=fetch title=concept-header-value>value</span> of a
-<span data-anolis-spec=fetch title=concept-header>header</span> separated by a 0x3A 0x20
-byte pair.
+method, when invoked, must run these steps:</p>
+
+<ol>
+ <li><p>Let <var>output</var> be an empty byte sequence.
+
+ <li><p>Let <var>headers</var> be the result of running
+ <span data-anolis-spec=fetch title=concept-header-list-sort-and-combine>sort and combine</span>
+ with <span>response</span>'s
+ <span data-anolis-spec=fetch title=concept-response-header-list>header list</span>.
+
+ <li>
+  <p>For each <var>header</var> in <var>headers</var>, run these substeps:
+
+  <ol>
+   <li><p>Append <var>header</var>'s
+   <span data-anolis-spec=fetch title=concept-header-name>name</span>, followed by a 0x3A 0x20 byte
+   pair, followed by <var>header</var>'s
+   <span data-anolis-spec=fetch title=concept-header-value>value</span>, to <var>output</var>.
+
+   <li><p>If <var>header</var> is not the last pair in <var>headers</var>, then append a 0x0D 0x0A
+   byte pair, to <var>output</var>.
+  </ol>
+
+ <li><p>Return <var>output</var>.
+</ol>
 
 <p class="note no-backref">The Fetch Standard filters <span>response</span>'s
 <span data-anolis-spec=fetch title=concept-response-header-list>header list</span>.

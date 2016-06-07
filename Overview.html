@@ -1335,19 +1335,15 @@ method must run these steps:
 
 <ol>
  <li><p>If <a href="#response">response</a>'s
- <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-header-list" title="concept-response-header-list">header list</a> has
- multiple <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-header" title="concept-header">headers</a> whose
- <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">name</a> is <var>name</var>,
- return their <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">values</a> in
- list order as a single byte sequence separated from each other by a 0x2C 0x20 byte pair.
+ <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-header-list" title="concept-response-header-list">header list</a> has <em>no</em>
+ <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a> whose
+ <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">name</a> is <var>name</var>, then return
+ null.
 
- <li><p>If <a href="#response">response</a>'s
- <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-header-list" title="concept-response-header-list">header list</a> has
- one <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a> whose
- <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">name</a> is <var>name</var>,
- return its <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a>.
-
- <li><p>Return null.
+ <li><p>Return the
+ <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-header-value-combined" title="concept-header-value-combined">combined value</a> given
+ <var>name</var> and <a href="#response">response</a>'s
+ <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-header-list" title="concept-response-header-list">header list</a>.
 </ol>
 
 <p class="note no-backref">The Fetch Standard filters <a href="#response">response</a>'s
@@ -1378,14 +1374,31 @@ client.onreadystatechange = function() {
 
 <p>The
 <dfn id="dom-xmlhttprequest-getallresponseheaders" title="dom-XMLHttpRequest-getAllResponseHeaders"><code>getAllResponseHeaders()</code></dfn>
-method must return <a href="#response">response</a>'s
-<a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-header-list" title="concept-response-header-list">header list</a>, in
-list order, as a single byte sequence with each
-<a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a> separated by a 0x0D 0x0A
-byte pair, and each <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">name</a> and
-<a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a> of a
-<a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a> separated by a 0x3A 0x20
-byte pair.
+method, when invoked, must run these steps:</p>
+
+<ol>
+ <li><p>Let <var>output</var> be an empty byte sequence.
+
+ <li><p>Let <var>headers</var> be the result of running
+ <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-header-list-sort-and-combine" title="concept-header-list-sort-and-combine">sort and combine</a>
+ with <a href="#response">response</a>'s
+ <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-header-list" title="concept-response-header-list">header list</a>.
+
+ <li>
+  <p>For each <var>header</var> in <var>headers</var>, run these substeps:
+
+  <ol>
+   <li><p>Append <var>header</var>'s
+   <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">name</a>, followed by a 0x3A 0x20 byte
+   pair, followed by <var>header</var>'s
+   <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a>, to <var>output</var>.
+
+   <li><p>If <var>header</var> is not the last pair in <var>headers</var>, then append a 0x0D 0x0A
+   byte pair, to <var>output</var>.
+  </ol>
+
+ <li><p>Return <var>output</var>.
+</ol>
 
 <p class="note no-backref">The Fetch Standard filters <a href="#response">response</a>'s
 <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-header-list" title="concept-response-header-list">header list</a>.
