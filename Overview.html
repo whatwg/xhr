@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="https://whatwg.org/"><img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-7-june-2016">Living Standard — Last Updated 7 June 2016</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-27-june-2016">Living Standard — Last Updated 27 June 2016</h2>
 
 <dl>
  <dt>Participate:
@@ -1928,7 +1928,7 @@ and/or <a href="#xmlhttprequestupload"><code>XMLHttpRequestUpload</code></a> obj
 
 <h2 id="interface-formdata"><span class="secno">5 </span>Interface <code title="">FormData</code></h2>
 
-<pre class="idl">typedef (<a class="external" data-anolis-spec="fileapi" href="https://w3c.github.io/FileAPI/#blob">Blob</a> or USVString) <dfn id="formdataentryvalue">FormDataEntryValue</dfn>;
+<pre class="idl">typedef (<a class="external" data-anolis-spec="fileapi" href="https://w3c.github.io/FileAPI/#file">File</a> or USVString) <dfn id="formdataentryvalue">FormDataEntryValue</dfn>;
 
 [<a href="#dom-formdata" title="dom-FormData">Constructor</a>(optional <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/forms.html#htmlformelement">HTMLFormElement</a> <var>form</var>),
  Exposed=(Window,Worker)]
@@ -1960,6 +1960,34 @@ value of <a href="#concept-formdata-entry" title="concept-FormData-entry">entry<
 <a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">value</a>'s
 <a href="https://w3c.github.io/FileAPI/#dfn-name"><code class="external" data-anolis-spec="fileapi" title="dom-File-name">name</code></a> attribute.
 
+<p>To <dfn id="create-an-entry">create an entry</dfn> for <var>name</var>, <var>value</var>, and optionally a
+<var>filename</var>, run these steps:
+
+<ol>
+ <li><p>Let <var>entry</var> be a new <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a>.
+
+ <li><p>Set <var>entry</var>'s <a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> to
+ <var>name</var>.
+
+ <li><p>If <var>value</var> is a <a href="https://w3c.github.io/FileAPI/#blob"><code class="external" data-anolis-spec="fileapi">Blob</code></a> object and not a
+ <a href="https://w3c.github.io/FileAPI/#file"><code class="external" data-anolis-spec="fileapi">File</code></a> object, then set <var>value</var> to a new
+ <a href="https://w3c.github.io/FileAPI/#file"><code class="external" data-anolis-spec="fileapi">File</code></a> object, representing the same bytes, whose
+ <a href="https://w3c.github.io/FileAPI/#dfn-name"><code class="external" data-anolis-spec="fileapi" title="dom-File-name">name</code></a> attribute value is
+ "<code title="">blob</code>".
+ <!-- XXX at some point File API should get internal slots for this -->
+
+ <li><p>If <var>value</var> is (now) a <a href="https://w3c.github.io/FileAPI/#file"><code class="external" data-anolis-spec="fileapi">File</code></a> object and
+ <var title="">filename</var> is given, then set <var>value</var> to a new
+ <a href="https://w3c.github.io/FileAPI/#file"><code class="external" data-anolis-spec="fileapi">File</code></a> object, representing the same bytes, whose
+ <a href="https://w3c.github.io/FileAPI/#dfn-name"><code class="external" data-anolis-spec="fileapi" title="dom-File-name">name</code></a> attribute value is
+ <var>filename</var>.
+
+ <li><p>Set <var>entry</var>'s <a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">value</a> to
+ <var>value</var>.
+
+ <li><p>Return <var>entry</var>.
+</ol>
+
 <hr>
 
 <p>The
@@ -1981,15 +2009,10 @@ constructor must run these steps:
 method, when invoked, must run these steps:
 
 <ol>
- <li><p>If the <var>filename</var> argument is given, set <var>value</var> to a new
- <a href="https://w3c.github.io/FileAPI/#file"><code class="external" data-anolis-spec="fileapi">File</code></a> object whose contents are <var>value</var> and
- <a href="https://w3c.github.io/FileAPI/#dfn-name"><code class="external" data-anolis-spec="fileapi" title="dom-File-name">name</code></a> is <var>filename</var>.
- <!-- XXX at some point File API should get internal slots for this -->
+ <li><p>Let <var>entry</var> be the result of <a href="#create-an-entry" title="create an entry">creating an entry</a>
+ with <var>name</var>, <var>value</var>, and <var>filename</var> if given.
 
- <li><p>Append a new <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a> whose
- <a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> is <var>name</var>, and
- <a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">value</a> is <var>value</var>, to
- <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#context-object">context object</a>'s list of
+ <li><p>Append <var>entry</var> to <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#context-object">context object</a>'s list of
  <a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a>.
 </ol>
 
@@ -2020,25 +2043,17 @@ otherwise.
 method, when invoked, must run these steps:
 
 <ol>
- <li><p>If the <var>filename</var> argument is given, set <var>value</var> to a new
- <a href="https://w3c.github.io/FileAPI/#file"><code class="external" data-anolis-spec="fileapi">File</code></a> object whose contents are <var>value</var> and
- <a href="https://w3c.github.io/FileAPI/#dfn-name"><code class="external" data-anolis-spec="fileapi" title="dom-File-name">name</code></a> is <var>filename</var>.
- <!-- XXX at some point File API should get internal slots for this -->
-
- <li><p>Let <var>entry</var> be a new <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a>
- whose <a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> is <var>name</var>, and
- <a href="#concept-formdata-entry-value" title="concept-FormData-entry-value">value</a> is <var>value</var>.
+ <li><p>Let <var>entry</var> be the result of <a href="#create-an-entry" title="create an entry">creating an entry</a>
+ with <var>name</var>, <var>value</var>, and <var>filename</var> if given.
 
  <li><p>If there are any <a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a> in
  <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#context-object">context object</a>'s list of
  <a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a> whose
- <a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> is <var>name</var>, replace
- the first such <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a> with <var>entry</var> and
- remove the others.
+ <a href="#concept-formdata-entry-name" title="concept-FormData-entry-name">name</a> is <var>name</var>, then replace the first such
+ <a href="#concept-formdata-entry" title="concept-FormData-entry">entry</a> with <var>entry</var> and remove the others.
 
- <li><p>Otherwise, append <var>entry</var> to
- <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#context-object">context object</a>'s list of
- <a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a>.
+ <li><p>Otherwise, append <var>entry</var> to <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#context-object">context object</a>'s
+ list of <a href="#concept-formdata-entry" title="concept-FormData-entry">entries</a>.
 </ol>
 
 <p>The <a class="external" data-anolis-spec="webidl" href="https://heycam.github.io/webidl/#dfn-value-pairs-to-iterate-over">value pairs to iterate over</a> are the

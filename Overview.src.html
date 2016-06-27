@@ -1880,7 +1880,7 @@ and/or <code>XMLHttpRequestUpload</code> objects:
 
 <h2>Interface <code title>FormData</code></h2>
 
-<pre class="idl">typedef (<span data-anolis-spec=fileapi>Blob</span> or USVString) <dfn>FormDataEntryValue</dfn>;
+<pre class="idl">typedef (<span data-anolis-spec=fileapi>File</span> or USVString) <dfn>FormDataEntryValue</dfn>;
 
 [<span title="dom-FormData">Constructor</span>(optional <span data-anolis-spec=html>HTMLFormElement</span> <var>form</var>),
  Exposed=(Window,Worker)]
@@ -1912,6 +1912,34 @@ value of <span title=concept-FormData-entry>entry</span>'s
 <span title=concept-FormData-entry-value>value</span>'s
 <code data-anolis-spec=fileapi title=dom-File-name>name</code> attribute.
 
+<p>To <dfn>create an entry</dfn> for <var>name</var>, <var>value</var>, and optionally a
+<var>filename</var>, run these steps:
+
+<ol>
+ <li><p>Let <var>entry</var> be a new <span title=concept-FormData-entry>entry</span>.
+
+ <li><p>Set <var>entry</var>'s <span title=concept-FormData-entry-name>name</span> to
+ <var>name</var>.
+
+ <li><p>If <var>value</var> is a <code data-anolis-spec=fileapi>Blob</code> object and not a
+ <code data-anolis-spec=fileapi>File</code> object, then set <var>value</var> to a new
+ <code data-anolis-spec=fileapi>File</code> object, representing the same bytes, whose
+ <code data-anolis-spec=fileapi title=dom-File-name>name</code> attribute value is
+ "<code title>blob</code>".
+ <!-- XXX at some point File API should get internal slots for this -->
+
+ <li><p>If <var>value</var> is (now) a <code data-anolis-spec=fileapi>File</code> object and
+ <var title>filename</var> is given, then set <var>value</var> to a new
+ <code data-anolis-spec=fileapi>File</code> object, representing the same bytes, whose
+ <code data-anolis-spec=fileapi title=dom-File-name>name</code> attribute value is
+ <var>filename</var>.
+
+ <li><p>Set <var>entry</var>'s <span title=concept-FormData-entry-value>value</span> to
+ <var>value</var>.
+
+ <li><p>Return <var>entry</var>.
+</ol>
+
 <hr>
 
 <p>The
@@ -1933,15 +1961,10 @@ constructor must run these steps:
 method, when invoked, must run these steps:
 
 <ol>
- <li><p>If the <var>filename</var> argument is given, set <var>value</var> to a new
- <code data-anolis-spec=fileapi>File</code> object whose contents are <var>value</var> and
- <code data-anolis-spec=fileapi title=dom-File-name>name</code> is <var>filename</var>.
- <!-- XXX at some point File API should get internal slots for this -->
+ <li><p>Let <var>entry</var> be the result of <span title="create an entry">creating an entry</span>
+ with <var>name</var>, <var>value</var>, and <var>filename</var> if given.
 
- <li><p>Append a new <span title=concept-FormData-entry>entry</span> whose
- <span title=concept-FormData-entry-name>name</span> is <var>name</var>, and
- <span title=concept-FormData-entry-value>value</span> is <var>value</var>, to
- <span data-anolis-spec=dom>context object</span>'s list of
+ <li><p>Append <var>entry</var> to <span data-anolis-spec=dom>context object</span>'s list of
  <span title=concept-FormData-entry>entries</span>.
 </ol>
 
@@ -1972,25 +1995,17 @@ otherwise.
 method, when invoked, must run these steps:
 
 <ol>
- <li><p>If the <var>filename</var> argument is given, set <var>value</var> to a new
- <code data-anolis-spec=fileapi>File</code> object whose contents are <var>value</var> and
- <code data-anolis-spec=fileapi title=dom-File-name>name</code> is <var>filename</var>.
- <!-- XXX at some point File API should get internal slots for this -->
-
- <li><p>Let <var>entry</var> be a new <span title=concept-FormData-entry>entry</span>
- whose <span title=concept-FormData-entry-name>name</span> is <var>name</var>, and
- <span title=concept-FormData-entry-value>value</span> is <var>value</var>.
+ <li><p>Let <var>entry</var> be the result of <span title="create an entry">creating an entry</span>
+ with <var>name</var>, <var>value</var>, and <var>filename</var> if given.
 
  <li><p>If there are any <span title=concept-FormData-entry>entries</span> in
  <span data-anolis-spec=dom>context object</span>'s list of
  <span title=concept-FormData-entry>entries</span> whose
- <span title=concept-FormData-entry-name>name</span> is <var>name</var>, replace
- the first such <span title=concept-FormData-entry>entry</span> with <var>entry</var> and
- remove the others.
+ <span title=concept-FormData-entry-name>name</span> is <var>name</var>, then replace the first such
+ <span title=concept-FormData-entry>entry</span> with <var>entry</var> and remove the others.
 
- <li><p>Otherwise, append <var>entry</var> to
- <span data-anolis-spec=dom>context object</span>'s list of
- <span title=concept-FormData-entry>entries</span>.
+ <li><p>Otherwise, append <var>entry</var> to <span data-anolis-spec=dom>context object</span>'s
+ list of <span title=concept-FormData-entry>entries</span>.
 </ol>
 
 <p>The <span data-anolis-spec=webidl>value pairs to iterate over</span> are the
