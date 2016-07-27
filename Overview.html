@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="https://whatwg.org/"><img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-27-june-2016">Living Standard — Last Updated 27 June 2016</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-27-july-2016">Living Standard — Last Updated 27 July 2016</h2>
 
 <dl>
  <dt>Participate:
@@ -992,7 +992,7 @@ method must run these steps:
      <!-- upload complete flag can never be set here I hope -->
     </ol>
 
-    <p>To <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#process-request-end-of-file">process request end-of-file</a> for
+    <p>To <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#process-request-end-of-body">process request end-of-body</a> for
     <var title="">request</var>, run these subsubsteps:
 
     <ol>
@@ -1049,7 +1049,7 @@ method must run these steps:
 
      <li><p>If <var>response</var>'s
      <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> is null,
-     then run <a href="#handle-response-end-of-file">handle response end-of-file</a> and return.
+     then run <a href="#handle-response-end-of-body">handle response end-of-body</a> and return.
 
      <li>
       <p>Let <var>reader</var> be the result of
@@ -1088,7 +1088,7 @@ method must run these steps:
       </ol>
 
       <p>When <var>read</var> is fulfilled with an object whose <code>done</code> property is true,
-      run <a href="#handle-response-end-of-file">handle response end-of-file</a> for <var>response</var>.
+      run <a href="#handle-response-end-of-body">handle response end-of-body</a> for <var>response</var>.
 
       <p>When <var>read</var> is rejected with an exception, run <a href="#handle-errors">handle errors</a> for
       <var>response</var>.
@@ -1112,7 +1112,7 @@ method must run these steps:
 
    <li><p>If <var>response</var>'s
    <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> is null,
-   then run <a href="#handle-response-end-of-file">handle response end-of-file</a> and return.
+   then run <a href="#handle-response-end-of-body">handle response end-of-body</a> and return.
 
    <li>
     <p>Let <var>reader</var> be the result of
@@ -1133,12 +1133,12 @@ method must run these steps:
    <li><p>If <var>promise</var> is fulfilled with <var>bytes</var>, then append <var>bytes</var>
    to <a href="#received-bytes">received bytes</a>.
 
-   <li><p>Run <a href="#handle-response-end-of-file">handle response end-of-file</a> for <var title="">response</var>.
+   <li><p>Run <a href="#handle-response-end-of-body">handle response end-of-body</a> for <var title="">response</var>.
   </ol>
 </ol>
 
-<p>To <dfn id="handle-response-end-of-file">handle response end-of-file</dfn> for <var title="">response</var>, run these
-steps:
+<p id="handle-response-end-of-file">To <dfn id="handle-response-end-of-body">handle response end-of-body</dfn> for
+<var title="">response</var>, run these steps:
 
 <ol>
  <li><p>If the <a href="#synchronous-flag">synchronous flag</a> is set, set <a href="#response">response</a> to

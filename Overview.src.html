@@ -944,7 +944,7 @@ method must run these steps:
      <!-- upload complete flag can never be set here I hope -->
     </ol>
 
-    <p>To <span data-anolis-spec=fetch>process request end-of-file</span> for
+    <p>To <span data-anolis-spec=fetch>process request end-of-body</span> for
     <var title>request</var>, run these subsubsteps:
 
     <ol>
@@ -1001,7 +1001,7 @@ method must run these steps:
 
      <li><p>If <var>response</var>'s
      <span data-anolis-spec=fetch title=concept-response-body>body</span> is null,
-     then run <span>handle response end-of-file</span> and return.
+     then run <span>handle response end-of-body</span> and return.
 
      <li>
       <p>Let <var>reader</var> be the result of
@@ -1040,7 +1040,7 @@ method must run these steps:
       </ol>
 
       <p>When <var>read</var> is fulfilled with an object whose <code>done</code> property is true,
-      run <span>handle response end-of-file</span> for <var>response</var>.
+      run <span>handle response end-of-body</span> for <var>response</var>.
 
       <p>When <var>read</var> is rejected with an exception, run <span>handle errors</span> for
       <var>response</var>.
@@ -1064,7 +1064,7 @@ method must run these steps:
 
    <li><p>If <var>response</var>'s
    <span data-anolis-spec=fetch title=concept-response-body>body</span> is null,
-   then run <span>handle response end-of-file</span> and return.
+   then run <span>handle response end-of-body</span> and return.
 
    <li>
     <p>Let <var>reader</var> be the result of
@@ -1085,12 +1085,12 @@ method must run these steps:
    <li><p>If <var>promise</var> is fulfilled with <var>bytes</var>, then append <var>bytes</var>
    to <span>received bytes</span>.
 
-   <li><p>Run <span>handle response end-of-file</span> for <var title>response</var>.
+   <li><p>Run <span>handle response end-of-body</span> for <var title>response</var>.
   </ol>
 </ol>
 
-<p>To <dfn>handle response end-of-file</dfn> for <var title>response</var>, run these
-steps:
+<p id=handle-response-end-of-file>To <dfn>handle response end-of-body</dfn> for
+<var title>response</var>, run these steps:
 
 <ol>
  <li><p>If the <span>synchronous flag</span> is set, set <span>response</span> to
