@@ -1,6 +1,10 @@
-<!doctype html><html lang=en-US><meta charset=utf-8>
+<!doctype html>
+<html lang=en-US>
+<meta charset=utf-8>
+<meta content=width=device-width,initial-scale=1,shrink-to-fit=no name=viewport>
+<meta content=#3c790a name=theme-color>
 <title>XMLHttpRequest Standard</title>
-<link href=https://whatwg.org/style/specification rel=stylesheet>
+<link href=https://resources.whatwg.org/standard.css rel=stylesheet>
 <link href=https://resources.whatwg.org/logo-xhr.svg rel=icon>
 
 <div class="head">
@@ -407,16 +411,17 @@ request-associated concepts:
 <dfn>request URL</dfn>,
 <dfn id="author-request-headers">author request headers</dfn>,
 <dfn>request body</dfn>,
-<dfn>synchronous flag</dfn>, and
-<dfn id="upload-complete-flag">upload complete flag</dfn>.
+<dfn>synchronous flag</dfn>,
+<dfn id="upload-complete-flag">upload complete flag</dfn>, and
+<dfn>upload listener flag</dfn>.
 
 <p>The <span>author request headers</span> is an initially empty
 <span data-anolis-spec=fetch title=concept-header-list>header list</span>.
 
 <p>The <span>request body</span> is initially null.
 
-<p>The <span>synchronous flag</span> and <span>upload complete flag</span> are initially
-unset.
+<p>The <span>synchronous flag</span>, <span>upload complete flag</span>, and
+<span>upload listener flag</span> are initially unset.
 
 <hr>
 
@@ -533,7 +538,7 @@ method, when invoked, must run these steps:
   <p>Set variables associated with the object as follows:
 
   <ul>
-   <li><p>Unset the <span>stop timeout flag</span>.
+   <li><p>Unset the <span>stop timeout flag</span> and <span>upload listener flag</span>.
    <li><p>Set <span>request method</span> to <var>method</var>.
    <li><p>Set <span>request URL</span> to <var title>parsedURL</var>.
    <li><p>Set the <span>synchronous flag</span>, if <var>async</var> is false, and unset
@@ -839,6 +844,9 @@ method must run these steps:
   <!-- reminder: if we ever change this to always include charset it has
   to be included as the first parameter for compatibility reasons -->
 
+ <li><p>If one or more event listeners are registered on the associated
+ <code>XMLHttpRequestUpload</code> object, then set <span>upload listener flag</span>.
+
  <li>
   <p>Let <var title>req</var> be a new
   <span data-anolis-spec=fetch title=concept-request>request</span>, initialized as
@@ -865,8 +873,7 @@ method must run these steps:
    <dt><span data-anolis-spec=fetch title=concept-request-mode>mode</span>
    <dd>"<code>cors</code>"
    <dt><span data-anolis-spec=fetch>use-CORS-preflight flag</span>
-   <dd>Set if one or more event listeners are registered on the associated
-   <code>XMLHttpRequestUpload</code> object.
+   <dd>Set if <span>upload listener flag</span> is set.
    <dt><span data-anolis-spec=fetch title=concept-request-credentials-mode>credentials mode</span>
    <dd>If the <code title=dom-XMLHttpRequest-withCredentials>withCredentials</code>
    attribute value is true, "<code>include</code>", and "<code>same-origin</code>"
@@ -892,8 +899,8 @@ method must run these steps:
   <ol>
    <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-loadstart">loadstart</code> with 0 and 0.
 
-   <li><p>If the <span>upload complete flag</span> is unset,
-   <span title=concept-event-fire-progress>fire a progress event</span> named
+   <li><p>If the <span>upload complete flag</span> is unset and <span>upload listener flag</span> is
+   set, then <span title=concept-event-fire-progress>fire a progress event</span> named
    <code title="event-xhr-loadstart">loadstart</code> on the
    <code>XMLHttpRequestUpload</code> object with 0 and <var title>req</var>'s
    <span data-anolis-spec=fetch title=concept-request-body>body</span>'s
@@ -933,7 +940,8 @@ method must run these steps:
      <li><p>If not roughly 50ms have passed since these subsubsteps were last invoked,
      terminate these subsubsteps.
 
-     <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named
+     <li><p>If <span>upload listener flag</span> is set, then
+     <span title=concept-event-fire-progress>fire a progress event</span> named
      <code title="event-xhr-progress">progress</code> on the
      <code>XMLHttpRequestUpload</code> object with <var title>request</var>'s
      <span data-anolis-spec=fetch title=concept-request-body>body</span>'s
@@ -949,6 +957,8 @@ method must run these steps:
 
     <ol>
      <li><p>Set the <span>upload complete flag</span>.
+
+     <li><p>If <span>upload listener flag</span> is unset, then terminate these subsubsteps.
 
      <li><p>Let <var title>transmitted</var> be <var title>request</var>'s
      <span data-anolis-spec=fetch title=concept-request-body>body</span>'s
@@ -1193,6 +1203,8 @@ exception <var>exception</var> are:
 
   <ol>
    <li><p>Set the <span>upload complete flag</span>.
+
+   <li><p>If <span>upload listener flag</span> is unset, then terminate these substeps.
 
    <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named
    <code title=event-xhr-progress>progress</code> on the <code>XMLHttpRequestUpload</code>
@@ -2274,6 +2286,7 @@ Sunava Dutta,
 Takeshi Kurosawa,
 Takeshi Yoshino,
 Thomas Roessler,
+Thomas Wisniewski,
 Tom Magliery,
 Travis Leithead,
 Yehuda Katz,

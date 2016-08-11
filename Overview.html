@@ -1,13 +1,15 @@
 <!DOCTYPE html><html lang="en-US"><meta charset="utf-8">
+<meta content="width=device-width,initial-scale=1,shrink-to-fit=no" name="viewport">
+<meta content="#3c790a" name="theme-color">
 <title>XMLHttpRequest Standard</title>
-<link href="https://whatwg.org/style/specification" rel="stylesheet">
+<link href="https://resources.whatwg.org/standard.css" rel="stylesheet">
 <link href="https://resources.whatwg.org/logo-xhr.svg" rel="icon">
 
 <div class="head">
 
 <p><a class="logo" href="https://whatwg.org/"><img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-27-july-2016">Living Standard — Last Updated 27 July 2016</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-11-august-2016">Living Standard — Last Updated 11 August 2016</h2>
 
 <dl>
  <dt>Participate:
@@ -455,16 +457,17 @@ request-associated concepts:
 <dfn id="request-url">request URL</dfn>,
 <dfn id="author-request-headers">author request headers</dfn>,
 <dfn id="request-body">request body</dfn>,
-<dfn id="synchronous-flag">synchronous flag</dfn>, and
-<dfn id="upload-complete-flag">upload complete flag</dfn>.
+<dfn id="synchronous-flag">synchronous flag</dfn>,
+<dfn id="upload-complete-flag">upload complete flag</dfn>, and
+<dfn id="upload-listener-flag">upload listener flag</dfn>.
 
 <p>The <a href="#author-request-headers">author request headers</a> is an initially empty
 <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-header-list" title="concept-header-list">header list</a>.
 
 <p>The <a href="#request-body">request body</a> is initially null.
 
-<p>The <a href="#synchronous-flag">synchronous flag</a> and <a href="#upload-complete-flag">upload complete flag</a> are initially
-unset.
+<p>The <a href="#synchronous-flag">synchronous flag</a>, <a href="#upload-complete-flag">upload complete flag</a>, and
+<a href="#upload-listener-flag">upload listener flag</a> are initially unset.
 
 <hr>
 
@@ -581,7 +584,7 @@ method, when invoked, must run these steps:
   <p>Set variables associated with the object as follows:
 
   <ul>
-   <li><p>Unset the <a href="#stop-timeout-flag">stop timeout flag</a>.
+   <li><p>Unset the <a href="#stop-timeout-flag">stop timeout flag</a> and <a href="#upload-listener-flag">upload listener flag</a>.
    <li><p>Set <a href="#request-method">request method</a> to <var>method</var>.
    <li><p>Set <a href="#request-url">request URL</a> to <var title="">parsedURL</var>.
    <li><p>Set the <a href="#synchronous-flag">synchronous flag</a>, if <var>async</var> is false, and unset
@@ -887,6 +890,9 @@ method must run these steps:
   <!-- reminder: if we ever change this to always include charset it has
   to be included as the first parameter for compatibility reasons -->
 
+ <li><p>If one or more event listeners are registered on the associated
+ <a href="#xmlhttprequestupload"><code>XMLHttpRequestUpload</code></a> object, then set <a href="#upload-listener-flag">upload listener flag</a>.
+
  <li>
   <p>Let <var title="">req</var> be a new
   <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-request" title="concept-request">request</a>, initialized as
@@ -913,8 +919,7 @@ method must run these steps:
    <dt><a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-request-mode" title="concept-request-mode">mode</a>
    <dd>"<code>cors</code>"
    <dt><a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#use-cors-preflight-flag">use-CORS-preflight flag</a>
-   <dd>Set if one or more event listeners are registered on the associated
-   <a href="#xmlhttprequestupload"><code>XMLHttpRequestUpload</code></a> object.
+   <dd>Set if <a href="#upload-listener-flag">upload listener flag</a> is set.
    <dt><a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-request-credentials-mode" title="concept-request-credentials-mode">credentials mode</a>
    <dd>If the <a href="#dom-xmlhttprequest-withcredentials"><code title="dom-XMLHttpRequest-withCredentials">withCredentials</code></a>
    attribute value is true, "<code>include</code>", and "<code>same-origin</code>"
@@ -940,8 +945,8 @@ method must run these steps:
   <ol>
    <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <a href="#event-xhr-loadstart"><code title="event-xhr-loadstart">loadstart</code></a> with 0 and 0.
 
-   <li><p>If the <a href="#upload-complete-flag">upload complete flag</a> is unset,
-   <a href="#concept-event-fire-progress" title="concept-event-fire-progress">fire a progress event</a> named
+   <li><p>If the <a href="#upload-complete-flag">upload complete flag</a> is unset and <a href="#upload-listener-flag">upload listener flag</a> is
+   set, then <a href="#concept-event-fire-progress" title="concept-event-fire-progress">fire a progress event</a> named
    <a href="#event-xhr-loadstart"><code title="event-xhr-loadstart">loadstart</code></a> on the
    <a href="#xmlhttprequestupload"><code>XMLHttpRequestUpload</code></a> object with 0 and <var title="">req</var>'s
    <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>'s
@@ -981,7 +986,8 @@ method must run these steps:
      <li><p>If not roughly 50ms have passed since these subsubsteps were last invoked,
      terminate these subsubsteps.
 
-     <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
+     <li><p>If <a href="#upload-listener-flag">upload listener flag</a> is set, then
+     <a href="#concept-event-fire-progress" title="concept-event-fire-progress">fire a progress event</a> named
      <a href="#event-xhr-progress"><code title="event-xhr-progress">progress</code></a> on the
      <a href="#xmlhttprequestupload"><code>XMLHttpRequestUpload</code></a> object with <var title="">request</var>'s
      <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>'s
@@ -997,6 +1003,8 @@ method must run these steps:
 
     <ol>
      <li><p>Set the <a href="#upload-complete-flag">upload complete flag</a>.
+
+     <li><p>If <a href="#upload-listener-flag">upload listener flag</a> is unset, then terminate these subsubsteps.
 
      <li><p>Let <var title="">transmitted</var> be <var title="">request</var>'s
      <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>'s
@@ -1241,6 +1249,8 @@ exception <var>exception</var> are:
 
   <ol>
    <li><p>Set the <a href="#upload-complete-flag">upload complete flag</a>.
+
+   <li><p>If <a href="#upload-listener-flag">upload listener flag</a> is unset, then terminate these substeps.
 
    <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
    <a href="#event-xhr-progress"><code title="event-xhr-progress">progress</code></a> on the <a href="#xmlhttprequestupload"><code>XMLHttpRequestUpload</code></a>
@@ -2372,6 +2382,7 @@ Sunava Dutta,
 Takeshi Kurosawa,
 Takeshi Yoshino,
 Thomas Roessler,
+Thomas Wisniewski,
 Tom Magliery,
 Travis Leithead,
 Yehuda Katz,
