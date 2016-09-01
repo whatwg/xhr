@@ -9,7 +9,7 @@
 
 <p><a class="logo" href="https://whatwg.org/"><img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-11-august-2016">Living Standard — Last Updated 11 August 2016</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-1-september-2016">Living Standard — Last Updated 1 September 2016</h2>
 
 <dl>
  <dt>Participate:
@@ -1068,38 +1068,41 @@ method must run these steps:
       <p><span class="note no-backref">This operation will not throw an exception.</span>
 
      <li>
-      <p>Let <var>read</var> be the result of calling
-      <a href="https://streams.spec.whatwg.org/#read-from-readable-stream-reader"><code class="external" data-anolis-spec="streams">ReadFromReadableStreamReader</code></a>(<var>reader</var>).
-
-      <p>When <var>read</var> is fulfilled with an object whose <code>done</code> property is false
-      and whose <code>value</code> property is a <code>Uint8Array</code> object, run these
-      subsubsubsteps and then run the above subsubstep again:
-
-      <ol>
-       <li><p>Append the <code>value</code> property to <a href="#received-bytes">received bytes</a>.
-
-       <li><p>If not roughly 50ms have passed since these subsubsubsteps were last invoked,
-       then terminate these subsubsubsteps.
-
-       <li><p>If <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is
-       <i>headers received</i>, then set
-       <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> to <i>loading</i> and
-       <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a> named
-       <a href="#event-xhr-readystatechange"><code title="event-xhr-readystatechange">readystatechange</code></a>.
-
-       <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
-       <a href="#event-xhr-progress"><code title="event-xhr-progress">progress</code></a> with <var>response</var>'s
+       <p>Let <var>read</var> be the result of
+       <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-read-chunk-from-readablestream" title="concept-read-chunk-from-readablestream">reading a chunk</a>
+       from <var>response</var>'s
        <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a>'s
-       <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-body-transmitted" title="concept-body-transmitted">transmitted bytes</a> and
-       <var>response</var>'s <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a>'s
-       <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-body-total-bytes" title="concept-body-total-bytes">total bytes</a>.
-      </ol>
+       <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-body-stream" title="concept-body-stream">stream</a> with <var>reader</var>.
 
-      <p>When <var>read</var> is fulfilled with an object whose <code>done</code> property is true,
-      run <a href="#handle-response-end-of-body">handle response end-of-body</a> for <var>response</var>.
+       <p>When <var>read</var> is fulfilled with an object whose <code>done</code> property is false
+       and whose <code>value</code> property is a <code>Uint8Array</code> object, run these
+       subsubsubsteps and then run the above subsubstep again:
 
-      <p>When <var>read</var> is rejected with an exception, run <a href="#handle-errors">handle errors</a> for
-      <var>response</var>.
+       <ol>
+        <li><p>Append the <code>value</code> property to <a href="#received-bytes">received bytes</a>.
+
+        <li><p>If not roughly 50ms have passed since these subsubsubsteps were last invoked,
+        then terminate these subsubsubsteps.
+
+        <li><p>If <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is
+        <i>headers received</i>, then set
+        <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> to <i>loading</i> and
+        <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a> named
+        <a href="#event-xhr-readystatechange"><code title="event-xhr-readystatechange">readystatechange</code></a>.
+
+        <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
+        <a href="#event-xhr-progress"><code title="event-xhr-progress">progress</code></a> with <var>response</var>'s
+        <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a>'s
+        <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-body-transmitted" title="concept-body-transmitted">transmitted bytes</a> and
+        <var>response</var>'s <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a>'s
+        <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-body-total-bytes" title="concept-body-total-bytes">total bytes</a>.
+       </ol>
+
+       <p>When <var>read</var> is fulfilled with an object whose <code>done</code> property is true,
+       run <a href="#handle-response-end-of-body">handle response end-of-body</a> for <var>response</var>.
+
+       <p>When <var>read</var> is rejected with an exception, run <a href="#handle-errors">handle errors</a> for
+       <var>response</var>.
     </ol>
   </ol>
 

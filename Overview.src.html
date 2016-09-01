@@ -1022,38 +1022,41 @@ method must run these steps:
       <p><span class="note no-backref">This operation will not throw an exception.</span>
 
      <li>
-      <p>Let <var>read</var> be the result of calling
-      <code data-anolis-spec=streams>ReadFromReadableStreamReader</code>(<var>reader</var>).
-
-      <p>When <var>read</var> is fulfilled with an object whose <code>done</code> property is false
-      and whose <code>value</code> property is a <code>Uint8Array</code> object, run these
-      subsubsubsteps and then run the above subsubstep again:
-
-      <ol>
-       <li><p>Append the <code>value</code> property to <span>received bytes</span>.
-
-       <li><p>If not roughly 50ms have passed since these subsubsubsteps were last invoked,
-       then terminate these subsubsubsteps.
-
-       <li><p>If <span title=concept-XMLHttpRequest-state>state</span> is
-       <i>headers received</i>, then set
-       <span title=concept-XMLHttpRequest-state>state</span> to <i>loading</i> and
-       <span data-anolis-spec=dom title=concept-event-fire>fire an event</span> named
-       <code title=event-xhr-readystatechange>readystatechange</code>.
-
-       <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named
-       <code title="event-xhr-progress">progress</code> with <var>response</var>'s
+       <p>Let <var>read</var> be the result of
+       <span data-anolis-spec=fetch title=concept-read-chunk-from-readablestream>reading a chunk</span>
+       from <var>response</var>'s
        <span data-anolis-spec=fetch title=concept-response-body>body</span>'s
-       <span data-anolis-spec=fetch title=concept-body-transmitted>transmitted bytes</span> and
-       <var>response</var>'s <span data-anolis-spec=fetch title=concept-response-body>body</span>'s
-       <span data-anolis-spec=fetch title=concept-body-total-bytes>total bytes</span>.
-      </ol>
+       <span data-anolis-spec=fetch title=concept-body-stream>stream</span> with <var>reader</var>.
 
-      <p>When <var>read</var> is fulfilled with an object whose <code>done</code> property is true,
-      run <span>handle response end-of-body</span> for <var>response</var>.
+       <p>When <var>read</var> is fulfilled with an object whose <code>done</code> property is false
+       and whose <code>value</code> property is a <code>Uint8Array</code> object, run these
+       subsubsubsteps and then run the above subsubstep again:
 
-      <p>When <var>read</var> is rejected with an exception, run <span>handle errors</span> for
-      <var>response</var>.
+       <ol>
+        <li><p>Append the <code>value</code> property to <span>received bytes</span>.
+
+        <li><p>If not roughly 50ms have passed since these subsubsubsteps were last invoked,
+        then terminate these subsubsubsteps.
+
+        <li><p>If <span title=concept-XMLHttpRequest-state>state</span> is
+        <i>headers received</i>, then set
+        <span title=concept-XMLHttpRequest-state>state</span> to <i>loading</i> and
+        <span data-anolis-spec=dom title=concept-event-fire>fire an event</span> named
+        <code title=event-xhr-readystatechange>readystatechange</code>.
+
+        <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named
+        <code title="event-xhr-progress">progress</code> with <var>response</var>'s
+        <span data-anolis-spec=fetch title=concept-response-body>body</span>'s
+        <span data-anolis-spec=fetch title=concept-body-transmitted>transmitted bytes</span> and
+        <var>response</var>'s <span data-anolis-spec=fetch title=concept-response-body>body</span>'s
+        <span data-anolis-spec=fetch title=concept-body-total-bytes>total bytes</span>.
+       </ol>
+
+       <p>When <var>read</var> is fulfilled with an object whose <code>done</code> property is true,
+       run <span>handle response end-of-body</span> for <var>response</var>.
+
+       <p>When <var>read</var> is rejected with an exception, run <span>handle errors</span> for
+       <var>response</var>.
     </ol>
   </ol>
 
