@@ -1022,8 +1022,11 @@ method must run these steps:
       <p><span class="note no-backref">This operation will not throw an exception.</span>
 
      <li>
-      <p>Let <var>read</var> be the result of calling
-      <code data-anolis-spec=streams>ReadFromReadableStreamReader</code>(<var>reader</var>).
+      <p>Let <var>read</var> be the result of
+      <span data-anolis-spec=fetch title=concept-read-chunk-from-readablestream>reading a chunk</span>
+      from <var>response</var>'s
+      <span data-anolis-spec=fetch title=concept-response-body>body</span>'s
+      <span data-anolis-spec=fetch title=concept-body-stream>stream</span> with <var>reader</var>.
 
       <p>When <var>read</var> is fulfilled with an object whose <code>done</code> property is false
       and whose <code>value</code> property is a <code>Uint8Array</code> object, run these

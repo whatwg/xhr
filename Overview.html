@@ -9,7 +9,7 @@
 
 <p><a class="logo" href="https://whatwg.org/"><img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-11-august-2016">Living Standard — Last Updated 11 August 2016</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-1-september-2016">Living Standard — Last Updated 1 September 2016</h2>
 
 <dl>
  <dt>Participate:
@@ -1068,8 +1068,11 @@ method must run these steps:
       <p><span class="note no-backref">This operation will not throw an exception.</span>
 
      <li>
-      <p>Let <var>read</var> be the result of calling
-      <a href="https://streams.spec.whatwg.org/#read-from-readable-stream-reader"><code class="external" data-anolis-spec="streams">ReadFromReadableStreamReader</code></a>(<var>reader</var>).
+      <p>Let <var>read</var> be the result of
+      <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-read-chunk-from-readablestream" title="concept-read-chunk-from-readablestream">reading a chunk</a>
+      from <var>response</var>'s
+      <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a>'s
+      <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-body-stream" title="concept-body-stream">stream</a> with <var>reader</var>.
 
       <p>When <var>read</var> is fulfilled with an object whose <code>done</code> property is false
       and whose <code>value</code> property is a <code>Uint8Array</code> object, run these
