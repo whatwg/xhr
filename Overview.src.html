@@ -861,8 +861,6 @@ method must run these steps:
    <dd><span>author request headers</span>
    <dt><span data-anolis-spec=fetch>unsafe-request flag</span>
    <dd>Set.
-   <dt><span data-anolis-spec=fetch>same-origin data-URL flag</span>
-   <dd>Set.
    <dt><span data-anolis-spec=fetch title=concept-request-body>body</span>
    <dd><span>request body</span>
    <dt><span data-anolis-spec=fetch title=concept-request-client>client</span>
@@ -1118,6 +1116,9 @@ method must run these steps:
  <span data-anolis-spec=fetch title=concept-response-body>body</span> using
  <var title>response</var>.
 
+ <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named
+ <code title=event-xhr-progress>progress</code> with <var>transmitted</var> and <var>length</var>.
+
  <li><p>Set <span title=concept-XMLHttpRequest-state>state</span> to <i title>done</i>.
 
  <li><p>Unset the <span><code>send()</code> flag</span>.
@@ -1131,9 +1132,6 @@ method must run these steps:
  <li><p>Let <var title>length</var> be <var title>response</var>'s
  <span data-anolis-spec=fetch title=concept-response-body>body</span>'s
  <span data-anolis-spec=fetch title=concept-body-total-bytes>total bytes</span>.
-
- <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title=event-xhr-progress>progress</code>
- with <var title>transmitted</var> and <var title>length</var>.
 
  <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named <code title="event-xhr-load">load</code>
  with <var title>transmitted</var> and <var title>length</var>.
@@ -1210,19 +1208,12 @@ exception <var>exception</var> are:
    <li><p>If <span>upload listener flag</span> is unset, then terminate these substeps.
 
    <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named
-   <code title=event-xhr-progress>progress</code> on the <code>XMLHttpRequestUpload</code>
-   object with 0 and 0.
-
-   <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named
    <var title>event</var> on the <code>XMLHttpRequestUpload</code> object with 0 and 0.
 
    <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named
    <code title="event-xhr-loadend">loadend</code> on the <code>XMLHttpRequestUpload</code>
    object with 0 and 0.
   </ol>
-
- <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named
- <code title=event-xhr-progress>progress</code> with 0 and 0.
 
  <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named
  <var title>event</var> with 0 and 0.

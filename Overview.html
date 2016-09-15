@@ -9,7 +9,7 @@
 
 <p><a class="logo" href="https://whatwg.org/"><img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-1-september-2016">Living Standard — Last Updated 1 September 2016</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-15-september-2016">Living Standard — Last Updated 15 September 2016</h2>
 
 <dl>
  <dt>Participate:
@@ -907,8 +907,6 @@ method must run these steps:
    <dd><a href="#author-request-headers">author request headers</a>
    <dt><a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#unsafe-request-flag">unsafe-request flag</a>
    <dd>Set.
-   <dt><a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#same-origin-data-url-flag">same-origin data-URL flag</a>
-   <dd>Set.
    <dt><a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>
    <dd><a href="#request-body">request body</a>
    <dt><a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-request-client" title="concept-request-client">client</a>
@@ -1164,6 +1162,9 @@ method must run these steps:
  <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a> using
  <var title="">response</var>.
 
+ <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
+ <a href="#event-xhr-progress"><code title="event-xhr-progress">progress</code></a> with <var>transmitted</var> and <var>length</var>.
+
  <li><p>Set <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> to <i title="">done</i>.
 
  <li><p>Unset the <a href="#send-flag"><code>send()</code> flag</a>.
@@ -1177,9 +1178,6 @@ method must run these steps:
  <li><p>Let <var title="">length</var> be <var title="">response</var>'s
  <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-body" title="concept-response-body">body</a>'s
  <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-body-total-bytes" title="concept-body-total-bytes">total bytes</a>.
-
- <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <a href="#event-xhr-progress"><code title="event-xhr-progress">progress</code></a>
- with <var title="">transmitted</var> and <var title="">length</var>.
 
  <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named <a href="#event-xhr-load"><code title="event-xhr-load">load</code></a>
  with <var title="">transmitted</var> and <var title="">length</var>.
@@ -1256,19 +1254,12 @@ exception <var>exception</var> are:
    <li><p>If <a href="#upload-listener-flag">upload listener flag</a> is unset, then terminate these substeps.
 
    <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
-   <a href="#event-xhr-progress"><code title="event-xhr-progress">progress</code></a> on the <a href="#xmlhttprequestupload"><code>XMLHttpRequestUpload</code></a>
-   object with 0 and 0.
-
-   <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
    <var title="">event</var> on the <a href="#xmlhttprequestupload"><code>XMLHttpRequestUpload</code></a> object with 0 and 0.
 
    <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
    <a href="#event-xhr-loadend"><code title="event-xhr-loadend">loadend</code></a> on the <a href="#xmlhttprequestupload"><code>XMLHttpRequestUpload</code></a>
    object with 0 and 0.
   </ol>
-
- <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
- <a href="#event-xhr-progress"><code title="event-xhr-progress">progress</code></a> with 0 and 0.
 
  <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
  <var title="">event</var> with 0 and 0.
