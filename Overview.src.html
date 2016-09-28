@@ -1040,9 +1040,15 @@ method must run these steps:
 
        <li><p>If <span title=concept-XMLHttpRequest-state>state</span> is
        <i>headers received</i>, then set
-       <span title=concept-XMLHttpRequest-state>state</span> to <i>loading</i> and
-       <span data-anolis-spec=dom title=concept-event-fire>fire an event</span> named
-       <code title=event-xhr-readystatechange>readystatechange</code>.
+       <span title=concept-XMLHttpRequest-state>state</span> to <i>loading</i>.
+
+       <li>
+        <p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named
+        <code title=event-xhr-readystatechange>readystatechange</code>.
+
+        <p class="note no-backref">Web compatibility is the reason
+        <code title=event-xhr-readystatechange>readystatechange</code> fires more often than
+        <span title=concept-XMLHttpRequest-state>state</span> changes.
 
        <li><p><span title=concept-event-fire-progress>Fire a progress event</span> named
        <code title="event-xhr-progress">progress</code> with <var>response</var>'s

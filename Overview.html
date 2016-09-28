@@ -9,7 +9,7 @@
 
 <p><a class="logo" href="https://whatwg.org/"><img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-15-september-2016">Living Standard — Last Updated 15 September 2016</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-28-september-2016">Living Standard — Last Updated 28 September 2016</h2>
 
 <dl>
  <dt>Participate:
@@ -1086,9 +1086,15 @@ method must run these steps:
 
        <li><p>If <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> is
        <i>headers received</i>, then set
-       <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> to <i>loading</i> and
-       <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a> named
-       <a href="#event-xhr-readystatechange"><code title="event-xhr-readystatechange">readystatechange</code></a>.
+       <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> to <i>loading</i>.
+
+       <li>
+        <p><a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named
+        <a href="#event-xhr-readystatechange"><code title="event-xhr-readystatechange">readystatechange</code></a>.
+
+        <p class="note no-backref">Web compatibility is the reason
+        <a href="#event-xhr-readystatechange"><code title="event-xhr-readystatechange">readystatechange</code></a> fires more often than
+        <a href="#concept-xmlhttprequest-state" title="concept-XMLHttpRequest-state">state</a> changes.
 
        <li><p><a href="#concept-event-fire-progress" title="concept-event-fire-progress">Fire a progress event</a> named
        <a href="#event-xhr-progress"><code title="event-xhr-progress">progress</code></a> with <var>response</var>'s
