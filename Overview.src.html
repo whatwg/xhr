@@ -232,7 +232,7 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
   void <span title="dom-XMLHttpRequest-setRequestHeader">setRequestHeader</span>(ByteString <var>name</var>, ByteString <var>value</var>);
            attribute unsigned long <span title="dom-XMLHttpRequest-timeout">timeout</span>;
            attribute boolean <span title="dom-XMLHttpRequest-withCredentials">withCredentials</span>;
-  readonly attribute <span>XMLHttpRequestUpload</span> <span title="dom-XMLHttpRequest-upload">upload</span>;
+  [SameObject] readonly attribute <span>XMLHttpRequestUpload</span> <span title="dom-XMLHttpRequest-upload">upload</span>;
   void <span title="dom-XMLHttpRequest-send">send</span>(optional (<span data-anolis-spec=dom>Document</span> or <span data-anolis-spec=fetch>BodyInit</span>)? <var>body</var> = null);
   void <span title="dom-XMLHttpRequest-abort">abort</span>();
 
