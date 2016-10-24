@@ -532,13 +532,13 @@ method, when invoked, must run these steps:
 
   <p class=note>A <span data-anolis-spec=fetch title=concept-fetch>fetch</span> can be
   ongoing at this point.
-  <!-- also unsets the send() flag -->
 
  <li>
   <p>Set variables associated with the object as follows:
 
   <ul>
-   <li><p>Unset the <span>stop timeout flag</span> and <span>upload listener flag</span>.
+   <li><p>Unset the <span><code>send()</code> flag</span>, <span>stop timeout flag</span>, and
+   <span>upload listener flag</span>.
    <li><p>Set <span>request method</span> to <var>method</var>.
    <li><p>Set <span>request URL</span> to <var title>parsedURL</var>.
    <li><p>Set the <span>synchronous flag</span>, if <var>async</var> is false, and unset
@@ -2206,8 +2206,9 @@ Alex Vincent,
 Alexey Proskuryakov,
 Andrea Marchesini,
 Asbj&oslash;rn Ulsberg,
-Boris Zbarsky,
+Bertrand Guay-Paquet,
 Bj&ouml;rn H&ouml;hrmann,
+Boris Zbarsky,
 Caitlin Potter,
 Cameron McCormack,
 Chris Marrin,

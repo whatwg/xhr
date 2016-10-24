@@ -9,7 +9,7 @@
 
 <p><a class="logo" href="https://whatwg.org/"><img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-19-october-2016">Living Standard — Last Updated 19 October 2016</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-24-october-2016">Living Standard — Last Updated 24 October 2016</h2>
 
 <dl>
  <dt>Participate:
@@ -578,13 +578,13 @@ method, when invoked, must run these steps:
 
   <p class="note">A <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">fetch</a> can be
   ongoing at this point.
-  <!-- also unsets the send() flag -->
 
  <li>
   <p>Set variables associated with the object as follows:
 
   <ul>
-   <li><p>Unset the <a href="#stop-timeout-flag">stop timeout flag</a> and <a href="#upload-listener-flag">upload listener flag</a>.
+   <li><p>Unset the <a href="#send-flag"><code>send()</code> flag</a>, <a href="#stop-timeout-flag">stop timeout flag</a>, and
+   <a href="#upload-listener-flag">upload listener flag</a>.
    <li><p>Set <a href="#request-method">request method</a> to <var>method</var>.
    <li><p>Set <a href="#request-url">request URL</a> to <var title="">parsedURL</var>.
    <li><p>Set the <a href="#synchronous-flag">synchronous flag</a>, if <var>async</var> is false, and unset
@@ -2302,8 +2302,9 @@ Alex Vincent,
 Alexey Proskuryakov,
 Andrea Marchesini,
 Asbjørn Ulsberg,
-Boris Zbarsky,
+Bertrand Guay-Paquet,
 Björn Höhrmann,
+Boris Zbarsky,
 Caitlin Potter,
 Cameron McCormack,
 Chris Marrin,
