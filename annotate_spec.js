@@ -68,8 +68,15 @@
         testLinksAdded = true;
     }
 
-    var ref = document.querySelector("#xmlhttprequest-tests"),
-        dd = ref.parentElement.insertBefore(document.createElement('dd'), ref.nextElementSibling.nextElementSibling),
+    var potentialRefs = document.querySelectorAll("dt"),
+        ref = null
+    for(let potentialRef of potentialRefs) {
+      if(potentialRef.firstChild.data.startsWith("Tests:")) {
+        ref = potentialRef
+        break
+      }
+    }
+    var dd = ref.parentElement.insertBefore(document.createElement('dd'), ref.nextElementSibling.nextElementSibling),
         cb = dd.appendChild(document.createElement('label')).appendChild(document.createElement('input'));
     cb.type = "checkbox";
     cb.onchange = toggleTestsuiteLinks;
