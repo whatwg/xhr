@@ -9,7 +9,7 @@
 
 <p><a class="logo" href="https://whatwg.org/"><img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-xhr.svg" width="100"></a>
 <h1 id="xmlhttprequest-ls">XMLHttpRequest</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-24-october-2016">Living Standard — Last Updated 24 October 2016</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-8-november-2016">Living Standard — Last Updated 8 November 2016</h2>
 
 <dl>
  <dt>Participate:
@@ -111,7 +111,7 @@ transferring data between a client and a server.
 <p>The name <a href="#xmlhttprequest"><code>XMLHttpRequest</code></a> is historical and has no bearing on its
 functionality.
 
-<div class="example">
+<div class="example" id="example-xhr">
  <p>Some simple code to do something with data from an XML document
  fetched over the network:
 
@@ -671,7 +671,7 @@ method must run these steps:
  <var>name</var>/<var>value</var> in <a href="#author-request-headers">author request headers</a>.
 </ol>
 
-<div class="example">
+<div class="example" id="example-setting-header-twice">
  <p>Some simple code demonstrating what happens when setting the same
  header twice:
 
@@ -1362,7 +1362,7 @@ method must run these steps:
 <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-header-list" title="concept-response-header-list">header list</a>.
 <a href="#refsFETCH">[FETCH]</a>
 
-<div class="example">
+<div class="example" id="example-getresponseheader">
 
  <p>For the following script:
 
@@ -1416,7 +1416,7 @@ method, when invoked, must run these steps:</p>
 <a class="external" data-anolis-spec="fetch" href="https://fetch.spec.whatwg.org/#concept-response-header-list" title="concept-response-header-list">header list</a>.
 <a href="#refsFETCH">[FETCH]</a>
 
-<div class="example">
+<div class="example" id="example-getresponseheaders">
  <p>For the following script:
 
  <pre><code>var client = new XMLHttpRequest();
@@ -2203,7 +2203,7 @@ otherwise. <a class="informative" href="#refsFETCH">[FETCH]</a>
 
 <h3 id="example"><span class="secno">6.4 </span>Example</h3>
 
-<div class="example">
+<div class="example" id="example-progress-events">
  <p>In this example <a href="#xmlhttprequest"><code>XMLHttpRequest</code></a>, combined with concepts
  defined in the sections before, and the HTML
  <a href="https://html.spec.whatwg.org/multipage/forms.html#the-progress-element"><code class="external" data-anolis-spec="html">progress</code></a> element are used together to

@@ -42,20 +42,20 @@
 
 
 
-<h2 class="no-num no-toc" id="specabstract">Abstract</h2>
+<h2 class="no-num no-toc" id=specabstract>Abstract</h2>
 
 <p>XMLHttpRequest defines an API that provides scripted client functionality for
 transferring data between a client and a server.
 
 
 
-<h2 class="no-num no-toc" id="toc">Table of Contents</h2>
+<h2 class="no-num no-toc" id=toc>Table of Contents</h2>
 
 <!--toc-->
 
 
 
-<h2 id="introduction">Introduction</h2>
+<h2 id=introduction>Introduction</h2>
 
 <p><em>This section is non-normative.</em>
 
@@ -65,7 +65,7 @@ transferring data between a client and a server.
 <p>The name <code>XMLHttpRequest</code> is historical and has no bearing on its
 functionality.
 
-<div class="example">
+<div id=example-xhr class=example>
  <p>Some simple code to do something with data from an XML document
  fetched over the network:
 
@@ -113,7 +113,7 @@ client.send();</code></pre>
 </div>
 
 
-<h3>Specification history</h3>
+<h3 id=specification-history>Specification history</h3>
 
 <p>The <code>XMLHttpRequest</code> object was initially defined as part of
 the WHATWG's HTML effort. (Based on Microsoft's implementation many years prior.)
@@ -136,7 +136,7 @@ archives:
 
 
 
-<h2 id="conformance">Conformance</h2>
+<h2 id=conformance>Conformance</h2>
 
 <p>All diagrams, examples, and notes in this specification are
 non-normative, as are all sections explicitly marked non-normative.
@@ -150,7 +150,7 @@ not appear in all uppercase letters in this specification.
 <span data-anolis-ref>RFC2119</span>
 
 
-<h3 id="extensibility">Extensibility</h3>
+<h3 id=extensibility>Extensibility</h3>
 
 <p>User agents, Working Groups, and other interested parties are
 <em>strongly encouraged</em> to discuss new features with the WHATWG
@@ -158,7 +158,7 @@ community.
 
 
 
-<h2 id="terminology">Terminology</h2>
+<h2 id=terminology>Terminology</h2>
 
 <p>This specification uses terminology, cross-linked throughout, from DOM,
 DOM Parsing and Serialization, Encoding, Fetch, File API, HTML, HTTP, URL, Web IDL, and
@@ -185,9 +185,9 @@ Specifically it does not refer to proxy authentication or the
 
 
 
-<h2>Interface <code title>XMLHttpRequest</code></h2>
+<h2 id=interface-xmlhttprequest>Interface <code title>XMLHttpRequest</code></h2>
 
-<pre class="idl">[Exposed=(Window,DedicatedWorker,SharedWorker)]
+<pre class=idl>[Exposed=(Window,DedicatedWorker,SharedWorker)]
 interface <dfn id="xmlhttprequesteventtarget">XMLHttpRequestEventTarget</dfn> : <span data-anolis-spec=dom>EventTarget</span> {
   // <a href="#event-handlers">event handlers</a>
   attribute <span data-anolis-spec=html>EventHandler</span> <span title="handler-xhr-onloadstart">onloadstart</span>;
@@ -267,7 +267,7 @@ interface <dfn id="xmlhttprequest">XMLHttpRequest</dfn> : <span>XMLHttpRequestEv
 Unless stated otherwise it is unset.
 
 
-<h3 id="constructors">Constructors</h3>
+<h3 id=constructors>Constructors</h3>
 
 <dl class=domintro>
  <dt><code><var title>client</var> = new <span title=dom-XMLHttpRequest>XMLHttpRequest</span>()</code>
@@ -278,7 +278,7 @@ Unless stated otherwise it is unset.
 invoked, must return a new <code>XMLHttpRequest</code> object.
 
 
-<h3>Garbage collection</h3>
+<h3 id=garbage-collection>Garbage collection</h3>
 <!-- Based on EventSource and WebSocket. Not sure what I am doing. -->
 
 <p>An <code>XMLHttpRequest</code> object must not be garbage collected if its
@@ -300,7 +300,7 @@ registered whose <b>type</b> is one of
 connection is still open, the user agent must <span>terminate the request</span>.
 
 
-<h3 id="event-handlers">Event handlers</h3>
+<h3 id=event-handlers>Event handlers</h3>
 
 <p>The following are the
 <span data-anolis-spec=html>event handlers</span> (and their corresponding
@@ -356,7 +356,7 @@ supported as attribute solely by the
 </table>
 
 
-<h3 id="states">States</h3>
+<h3 id=states>States</h3>
 
 <dl class=domintro>
  <dt><code><var title>client</var> . <span title="dom-XMLHttpRequest-readyState">readyState</span></code>
@@ -402,17 +402,17 @@ column, from the row where the value in the cell in the first column is
 </table>
 
 
-<h3 id="request">Request</h3>
+<h3 id=request>Request</h3>
 
 <p>Each <code>XMLHttpRequest</code> object has the following
 request-associated concepts:
 
 <dfn>request method</dfn>,
 <dfn>request URL</dfn>,
-<dfn id="author-request-headers">author request headers</dfn>,
+<dfn id=author-request-headers>author request headers</dfn>,
 <dfn>request body</dfn>,
 <dfn>synchronous flag</dfn>,
-<dfn id="upload-complete-flag">upload complete flag</dfn>, and
+<dfn id=upload-complete-flag>upload complete flag</dfn>, and
 <dfn>upload listener flag</dfn>.
 
 <p>The <span>author request headers</span> is an initially empty
@@ -432,7 +432,7 @@ request-associated concepts:
 
 
 
-<h4>The <code title>open()</code> method</h4>
+<h4 id=the-open()-method>The <code title>open()</code> method</h4>
 
 <dl class=domintro>
  <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-open>open</span>(<var title>method</var>, <var title>url</var> [, <var title>async</var> = true [, <var title>username</var> = null [, <var title>password</var> = null]]])</code>
@@ -467,7 +467,7 @@ experiment with <span data-anolis-spec=webidl title=throw>throwing</span> an
 <code>InvalidAccessError</code> exception when it occurs.
 
 <p>The
-<dfn id="dom-xmlhttprequest-open" title="dom-XMLHttpRequest-open"><code>open(<var title>method</var>, <var title>url</var>, <var title>async</var>, <var title>username</var>, <var title>password</var>)</code></dfn>
+<dfn id=dom-xmlhttprequest-open title="dom-XMLHttpRequest-open"><code>open(<var title>method</var>, <var title>url</var>, <var title>async</var>, <var title>username</var>, <var title>password</var>)</code></dfn>
 method, when invoked, must run these steps:
 
 <ol>
@@ -567,7 +567,7 @@ method, when invoked, must run these steps:
 
 
 
-<h4>The <code title>setRequestHeader()</code> method</h4>
+<h4 id=the-setrequestheader()-method>The <code title>setRequestHeader()</code> method</h4>
 
 <dl class=domintro>
  <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-setRequestHeader>setRequestHeader</span>(<var>name</var>, <var>value</var>)</code>
@@ -592,7 +592,7 @@ the author as indicated at the end of the
 <code title="dom-XMLHttpRequest-send">send()</code> method section.
 
 <p>The
-<dfn id="dom-xmlhttprequest-setrequestheader" title="dom-XMLHttpRequest-setRequestHeader"><code>setRequestHeader(<var>name</var>, <var>value</var>)</code></dfn>
+<dfn id=dom-xmlhttprequest-setrequestheader title="dom-XMLHttpRequest-setRequestHeader"><code>setRequestHeader(<var>name</var>, <var>value</var>)</code></dfn>
 method must run these steps:
 
 <ol>
@@ -625,7 +625,7 @@ method must run these steps:
  <var>name</var>/<var>value</var> in <span>author request headers</span>.
 </ol>
 
-<div class="example">
+<div id=example-setting-header-twice class=example>
  <p>Some simple code demonstrating what happens when setting the same
  header twice:
 
@@ -641,7 +641,7 @@ X-Test: one, two</code></pre>
 </div>
 
 
-<h4>The <code title>timeout</code> attribute</h4>
+<h4 id=the-timeout-attribute>The <code title>timeout</code> attribute</h4>
 
 <dl class=domintro>
  <dt><code><var title>client</var> . <span title="dom-XMLHttpRequest-timeout">timeout</span></code>
@@ -665,7 +665,7 @@ X-Test: one, two</code></pre>
 </dl>
 
 <p>The
-<dfn id="dom-xmlhttprequest-timeout" title="dom-XMLHttpRequest-timeout"><code>timeout</code></dfn>
+<dfn id=dom-xmlhttprequest-timeout title="dom-XMLHttpRequest-timeout"><code>timeout</code></dfn>
 attribute must return its value. Initially its value must be zero.
 
 <p>Setting the <code title="dom-XMLHttpRequest-timeout">timeout</code>
@@ -688,7 +688,7 @@ progress. If that occurs it will still be measured relative to the start
 of <span data-anolis-spec=fetch title=concept-fetch>fetching</span>.
 
 
-<h4>The <code title>withCredentials</code> attribute</h4>
+<h4 id=the-withcredentials-attribute>The <code title>withCredentials</code> attribute</h4>
 
 <dl class=domintro>
  <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-withCredentials>withCredentials</span></code>
@@ -733,7 +733,7 @@ attribute has no effect when
 <span data-anolis-spec=html title="same origin">same-origin</span> resources.
 
 
-<h4>The <code title>upload</code> attribute</h4>
+<h4 id=the-upload-attribute>The <code title>upload</code> attribute</h4>
 
 <dl class=domintro>
  <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-upload>upload</span></code>
@@ -751,7 +751,7 @@ attribute must return the associated
 object has an associated <code>XMLHttpRequestUpload</code> object.
 
 
-<h4>The <code title>send()</code> method</h4>
+<h4 id=the-send()-method>The <code title>send()</code> method</h4>
 
 <dl class=domintro>
  <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-send>send</span>([<var title>body</var> = null])</code>
@@ -1231,7 +1231,7 @@ exception <var>exception</var> are:
 </ol>
 
 
-<h4>The <code title>abort()</code> method</h4>
+<h4 id=the-abort()-method>The <code title>abort()</code> method</h4>
 
   <dl class=domintro>
    <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-abort>abort</span>()</code>
@@ -1268,7 +1268,7 @@ otherwise it is a
 <p>An <code>XMLHttpRequest</code> also has an associated <dfn>received bytes</dfn> (a byte
 sequence). Unless stated otherwise it is the empty byte sequence.
 
-<h4>The <code title>responseURL</code> attribute</h4>
+<h4 id=the-responseurl-attribute>The <code title>responseURL</code> attribute</h4>
 
 <p>The <dfn title=dom-XMLHttpRequest-responseURL><code>responseURL</code></dfn> attribute
 must return the empty string if <span>response</span>'s
@@ -1277,7 +1277,7 @@ must return the empty string if <span>response</span>'s
 <i title>exclude fragment flag</i> set otherwise.
 
 
-<h4>The <code title>status</code> attribute</h4>
+<h4 id=the-status-attribute>The <code title>status</code> attribute</h4>
 
 <p>The
 <dfn title="dom-XMLHttpRequest-status"><code>status</code></dfn>
@@ -1285,7 +1285,7 @@ attribute must return the <span>response</span>'s
 <span data-anolis-spec=fetch title=concept-response-status>status</span>.
 
 
-<h4>The <code title>statusText</code> attribute</h4>
+<h4 id=the-statustext-attribute>The <code title>statusText</code> attribute</h4>
 
 <p>The
 <dfn title="dom-XMLHttpRequest-statusText"><code>statusText</code></dfn>
@@ -1293,7 +1293,7 @@ attribute must return the <span>response</span>'s
 <span data-anolis-spec=fetch title=concept-response-status-message>status message</span>.
 
 
-<h4>The <code title>getResponseHeader()</code> method</h4>
+<h4 id=the-getresponseheader()-method>The <code title>getResponseHeader()</code> method</h4>
 
 <p>The
 <dfn title="dom-XMLHttpRequest-getResponseHeader"><code>getResponseHeader(<var>name</var>)</code></dfn>
@@ -1316,7 +1316,7 @@ method must run these steps:
 <span data-anolis-spec=fetch title=concept-response-header-list>header list</span>.
 <span data-anolis-ref>FETCH</span>
 
-<div class="example">
+<div id=example-getresponseheader class=example>
 
  <p>For the following script:
 
@@ -1336,7 +1336,7 @@ client.onreadystatechange = function() {
 </div>
 
 
-<h4>The <code title>getAllResponseHeaders()</code> method</h4>
+<h4 id=the-getallresponseheaders()-method>The <code title>getAllResponseHeaders()</code> method</h4>
 
 <p>The
 <dfn title="dom-XMLHttpRequest-getAllResponseHeaders"><code>getAllResponseHeaders()</code></dfn>
@@ -1370,7 +1370,7 @@ method, when invoked, must run these steps:</p>
 <span data-anolis-spec=fetch title=concept-response-header-list>header list</span>.
 <span data-anolis-ref>FETCH</span>
 
-<div class="example">
+<div id=example-getresponseheaders class=example>
  <p>For the following script:
 
  <pre><code>var client = new XMLHttpRequest();
@@ -1394,27 +1394,27 @@ Content-Type: text/plain; charset=utf-8</code></pre>
 </div>
 
 
-<h4>Response body</h4>
+<h4 id=response-body>Response body</h4>
 
-<p>The <dfn id="response-mime-type">response MIME type</dfn> is the
+<p>The <dfn id=response-mime-type>response MIME type</dfn> is the
 MIME type the `<code title>Content-Type</code>` header contains excluding any
 parameters and
 <span data-anolis-spec=dom>converted to ASCII lowercase</span>, or null if
 the response header can not be parsed or was omitted. The
-<dfn id="override-mime-type">override MIME type</dfn> is initially null
+<dfn id=override-mime-type>override MIME type</dfn> is initially null
 and can get a value if
 <code title="dom-XMLHttpRequest-overrideMimeType">overrideMimeType()</code>
-is invoked. <dfn id="final-mime-type">Final MIME type</dfn> is the
+is invoked. <dfn id=final-mime-type>Final MIME type</dfn> is the
 <span>override MIME type</span> unless that is null in which case it is
 the <span>response MIME type</span>.
 
-<p>The <dfn id="response-charset">response charset</dfn> is the value of
+<p>The <dfn id=response-charset>response charset</dfn> is the value of
 the <code>charset</code> parameter of the `<code title>Content-Type</code>` header
 or null if there was no `<code title>charset</code>` parameter or the header could
 not be parsed or was omitted. The
-<dfn id="override-charset">override charset</dfn> is initially null and
+<dfn id=override-charset>override charset</dfn> is initially null and
 can get a value if <code title="dom-XMLHttpRequest-overrideMimeType">overrideMimeType()</code> is invoked.
-<dfn id="final-charset">Final charset</dfn> is the
+<dfn id=final-charset>Final charset</dfn> is the
 <span>override charset</span> unless
 that is null in which case it is the <span>response charset</span>.
 
@@ -1438,7 +1438,7 @@ that is null in which case it is the <span>response charset</span>.
   <span>response <code>ArrayBuffer</code> object</span> to null and set <span>received bytes</span>
   to the empty byte sequence.
 
-  <p class="note">Allocating an <code>ArrayBuffer</code> buffer is not guaranteed to succeed.
+  <p class=note>Allocating an <code>ArrayBuffer</code> buffer is not guaranteed to succeed.
   <span data-anolis-ref>ECMASCRIPT</span>
 
  <li><p>Return <span>response <code>ArrayBuffer</code> object</span>.
@@ -1606,7 +1606,7 @@ resources using <span data-anolis-spec=encoding>utf-8</span>.
 
 
 
-<h4>The <code title>overrideMimeType()</code> method</h4>
+<h4 id=the-overridemimetype()-method>The <code title>overrideMimeType()</code> method</h4>
 
 <dl class=domintro>
  <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-overrideMimeType>overrideMimeType</span>(<var title>mime</var>)</code>
@@ -1649,7 +1649,7 @@ method must run these steps:
 
 
 
-<h4>The <code title>responseType</code> attribute</h4>
+<h4 id=the-responsetype-attribute>The <code title>responseType</code> attribute</h4>
 
 
 <dl class=domintro>
@@ -1714,7 +1714,7 @@ attribute must run these steps:
 
 
 
-<h4>The <code title>response</code> attribute</h4>
+<h4 id=the-response-attribute>The <code title>response</code> attribute</h4>
 
 <dl class=domintro>
  <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-response>response</span></code>
@@ -1771,7 +1771,7 @@ steps:
 
 
 
-<h4>The <code title>responseText</code> attribute</h4>
+<h4 id=the-responsetext-attribute>The <code title>responseText</code> attribute</h4>
 
 <dl class=domintro>
  <dt><code><var title>client</var> . <span title="dom-XMLHttpRequest-responseText">responseText</span></code>
@@ -1804,7 +1804,7 @@ steps:
 </ol>
 
 
-<h4>The <code title>responseXML</code> attribute</h4>
+<h4 id=the-responsexml-attribute>The <code title>responseXML</code> attribute</h4>
 
 <dl class=domintro>
  <dt><code><var title>client</var> . <span title=dom-XMLHttpRequest-responseXML>responseXML</span></code>
@@ -1840,7 +1840,7 @@ has XML in its name for historical reasons. It also returns HTML resources
 as <span data-anolis-spec=dom title=concept-document>documents</span>.
 
 
-<h3 id="events">Events summary</h3>
+<h3 id=events>Events summary</h3>
 
 <p><em>This section is non-normative.</em>
 
@@ -1892,9 +1892,9 @@ and/or <code>XMLHttpRequestUpload</code> objects:
 
 
 
-<h2>Interface <code title>FormData</code></h2>
+<h2 id=interface-formdata>Interface <code title>FormData</code></h2>
 
-<pre class="idl">typedef (<span data-anolis-spec=fileapi>File</span> or USVString) <dfn>FormDataEntryValue</dfn>;
+<pre class=idl>typedef (<span data-anolis-spec=fileapi>File</span> or USVString) <dfn>FormDataEntryValue</dfn>;
 
 [<span title="dom-FormData">Constructor</span>(optional <span data-anolis-spec=html>HTMLFormElement</span> <var>form</var>),
  Exposed=(Window,Worker)]
@@ -1971,7 +1971,7 @@ constructor must run these steps:
 </ol>
 
 <p>The
-<dfn title="dom-FormData-append" id="dom-formdata-append"><code>append(<var>name</var>, <var>value</var>, <var>filename</var>)</code></dfn>
+<dfn title="dom-FormData-append" id=dom-formdata-append><code>append(<var>name</var>, <var>value</var>, <var>filename</var>)</code></dfn>
 method, when invoked, must run these steps:
 
 <ol>
@@ -2029,9 +2029,9 @@ method, when invoked, must run these steps:
 
 
 
-<h2>Interface <code title>ProgressEvent</code></h2>
+<h2 id=interface-progressevent>Interface <code title>ProgressEvent</code></h2>
 
-<pre class="idl">[<span data-anolis-spec=dom title=concept-event-constructor>Constructor</span>(DOMString <var title>type</var>, optional <span>ProgressEventInit</span> <var title>eventInitDict</var>),
+<pre class=idl>[<span data-anolis-spec=dom title=concept-event-constructor>Constructor</span>(DOMString <var title>type</var>, optional <span>ProgressEventInit</span> <var title>eventInitDict</var>),
  Exposed=(Window,DedicatedWorker,SharedWorker)]
 interface <dfn>ProgressEvent</dfn> : <span data-anolis-spec=dom>Event</span> {
   readonly attribute boolean <span title="dom-ProgressEvent-lengthComputable">lengthComputable</span>;
@@ -2050,13 +2050,13 @@ the <code>ProgressEvent</code> interface indicate some kind of
 progression.
 
 <p>The
-<dfn id="dom-progressevent-lengthcomputable" title="dom-ProgressEvent-lengthComputable"><code>lengthComputable</code></dfn>,
-<dfn id="dom-progressevent-loaded" title="dom-ProgressEvent-loaded"><code>loaded</code></dfn>, and
-<dfn id="dom-progressevent-total" title="dom-ProgressEvent-total"><code>total</code></dfn>
+<dfn id=dom-progressevent-lengthcomputable title="dom-ProgressEvent-lengthComputable"><code>lengthComputable</code></dfn>,
+<dfn id=dom-progressevent-loaded title="dom-ProgressEvent-loaded"><code>loaded</code></dfn>, and
+<dfn id=dom-progressevent-total title="dom-ProgressEvent-total"><code>total</code></dfn>
 attributes must return the value they were initialized to.
 
 
-<h3>Firing events using the <code title>ProgressEvent</code> interface</h3>
+<h3 id=firing-events-using-the-progressevent-interface>Firing events using the <code title>ProgressEvent</code> interface</h3>
 
 <p>To
 <dfn title=concept-event-fire-progress>fire a progress event named <var>e</var></dfn>
@@ -2077,7 +2077,7 @@ conditions:
 </ul>
 
 
-<h3>Suggested names for events using the <code title>ProgressEvent</code> interface</h3>
+<h3 id=suggested-names-for-events-using-the-progressevent-interface>Suggested names for events using the <code title>ProgressEvent</code> interface</h3>
 
 <p><em>This section is non-normative.</em>
 
@@ -2144,7 +2144,7 @@ attributes initialized to false, so it is suggested that for consistency all
 <code>ProgressEvent</code> interface do the same.
 
 
-<h3>Security Considerations</h3>
+<h3 id=security-considerations>Security Considerations</h3>
 
 <p>For cross-origin requests some kind of opt-in, e.g. the
 <span data-anolis-spec=fetch>CORS protocol</span> defined in the Fetch Standard, has to be
@@ -2155,9 +2155,9 @@ as information (e.g. size) would be revealed that cannot be obtained
 otherwise. <span data-anolis-ref class=informative>FETCH</span>
 
 
-<h3>Example</h3>
+<h3 id=example>Example</h3>
 
-<div class="example">
+<div id=example-progress-events class=example>
  <p>In this example <code>XMLHttpRequest</code>, combined with concepts
  defined in the sections before, and the HTML
  <code data-anolis-spec=html>progress</code> element are used together to
@@ -2194,7 +2194,7 @@ otherwise. <span data-anolis-ref class=informative>FETCH</span>
 
 
 
-<h2 class="no-num" id="acknowledgments">Acknowledgments</h2>
+<h2 class=no-num id=acknowledgments>Acknowledgments</h2>
 
 <p>Thanks to
 Addison Phillips,
@@ -2205,9 +2205,9 @@ Alex Hopmann,
 Alex Vincent,
 Alexey Proskuryakov,
 Andrea Marchesini,
-Asbj&oslash;rn Ulsberg,
+Asbjørn Ulsberg,
 Bertrand Guay-Paquet,
-Bj&ouml;rn H&ouml;hrmann,
+Björn Höhrmann,
 Boris Zbarsky,
 Caitlin Potter,
 Cameron McCormack,
@@ -2217,7 +2217,7 @@ Charles McCathieNevile,
 Dan Winship,
 David Andersson,
 David Flanagan,
-David H&aring;s&auml;ther,
+David Håsäther,
 David Levin,
 Dean Jackson,
 Denis Sureau,
@@ -2230,13 +2230,13 @@ Elliotte Harold,
 Eric Lawrence,
 Eric Uhrhane,
 Erik Arvidsson,
-Erik Dahlstr&ouml;m,
+Erik Dahlström,
 Feras Moussa,
 Geoffrey Sneddon,
 Gideon Cohn,
 Glenn Adams,
 Gorm Haug Eriksen,
-H&aring;kon Wium Lie,
+Håkon Wium Lie,
 Hallvord R. M. Steen,
 Henri Sivonen,
 Hiroshige Hayashizaki,
@@ -2248,7 +2248,7 @@ Jake Archibald,
 Jared Jacobs,
 Jarred Nicholls,
 Jeff Walden,
-Jens Lindstr&ouml;m,
+Jens Lindström,
 Jim Deegan,
 Jim Ley,
 Joe Farro,
@@ -2271,7 +2271,7 @@ Mark S. Miller,
 Martin Hassman,
 Mohamed Zergaoui,
 Ms2ger,
-Odin H&oslash;rthe Omdal,
+Odin Hørthe Omdal,
 Olli Pettay,
 Pawel Glowacki,
 Peter Michaux,
@@ -2282,7 +2282,7 @@ Rune <span title=Fabulous>F.</span> Halvorsen,
 Ruud Steltenpool,
 Sergiu Dumitriu,
 Shivakumar Jagalur Matt,
-Sigbj&oslash;rn Finne,
+Sigbjørn Finne,
 Simon Pieters,
 Stewart Brodie,
 Sunava Dutta,
