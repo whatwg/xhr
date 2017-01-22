@@ -11,6 +11,7 @@ Boilerplate: omit feedback-header, omit conformance, omit index, omit idl-index
 !Participate: <a href=https://github.com/whatwg/xhr>GitHub whatwg/xhr</a> (<a href=https://github.com/whatwg/xhr/issues/new>file an issue</a>, <a href=https://github.com/whatwg/xhr/issues>open issues</a>, <a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=XHR&amp;resolution=---">legacy open bugs</a>)
 !Participate: <a href=https://wiki.whatwg.org/wiki/IRC>IRC: #whatwg on Freenode</a>
 !Commits: <a href=https://github.com/whatwg/xhr/commits>GitHub whatwg/xhr/commits</a>
+!Commits: [SNAPSHOT-LINK]
 !Commits: <a href=https://twitter.com/xhrstandard>@xhrstandard</a>
 !Tests: <a href=https://w3c-test.org/XMLHttpRequest/>XMLHttpRequest tests</a> are hosted in the <a href="https://github.com/w3c/web-platform-tests/">W3C Web platform testsuite</a> &mdash; contributions welcome!
 !Translation (non-normative): <span title=Japanese><a href=https://triple-underscore.github.io/XHR-ja.html lang=ja hreflang=ja rel=alternate>日本語</a></span>
@@ -18,6 +19,7 @@ Translate IDs: enumdef-xmlhttprequestresponsetype xmlhttprequestresponsetype,dic
 </pre>
 
 <script src=https://resources.whatwg.org/file-issue.js async></script>
+<script src=https://resources.whatwg.org/commit-snapshot-shortcut-key.js async></script>
 <script src=annotate_spec.js async></script>
 <script src=https://resources.whatwg.org/dfn.js defer></script>
 
