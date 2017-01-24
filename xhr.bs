@@ -1233,8 +1233,8 @@ when invoked, must run these steps:
  <a>request error steps</a> for event <a event><code>abort</code></a>.
 
  <li>
-  <p>If <a>state</a> is <i>done</i>, set
-  <a>state</a> to <i>unsent</i>.
+  <p>If <a>state</a> is <i>done</i>, then set <a>state</a> to <i>unsent</i> and <a>response</a> to a
+  <a>network error</a>.
 
   <p class=note>No <a event><code>readystatechange</code></a> event
   is dispatched.
@@ -2182,6 +2182,7 @@ Alan Thomas,
 Alex Hopmann,
 Alex Vincent,
 Alexey Proskuryakov,
+Ali Alabbas,
 Andrea Marchesini,
 Asbjørn Ulsberg,
 Bertrand Guay-Paquet,
