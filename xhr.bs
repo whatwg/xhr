@@ -13,7 +13,7 @@ Boilerplate: omit feedback-header, omit conformance
 !Commits: <a href=https://github.com/whatwg/xhr/commits>GitHub whatwg/xhr/commits</a>
 !Commits: [SNAPSHOT-LINK]
 !Commits: <a href=https://twitter.com/xhrstandard>@xhrstandard</a>
-!Tests: <a href=https://w3c-test.org/XMLHttpRequest/>XMLHttpRequest tests</a> are hosted in the <a href="https://github.com/w3c/web-platform-tests/">W3C Web platform testsuite</a> &mdash; contributions welcome!
+!Tests: <a href=https://github.com/w3c/web-platform-tests/tree/master/XMLHttpRequest>web-platform-tests XMLHttpRequest/</a> (<a href=https://github.com/w3c/web-platform-tests/labels/xhr>ongoing work</a>)
 !Translation (non-normative): <span title=Japanese><a href=https://triple-underscore.github.io/XHR-ja.html lang=ja hreflang=ja rel=alternate>日本語</a></span>
 Translate IDs: enumdef-xmlhttprequestresponsetype xmlhttprequestresponsetype,dictdef-progresseventinit progresseventinit,typedefdef-formdataentryvalue formdataentryvalue
 </pre>
