@@ -1107,6 +1107,12 @@ method must run these steps:
  <a for=response>body</a> using
  <var>response</var>.
 
+ <li><p>Let <var>transmitted</var> be <var>response</var>'s <a for=response>body</a>'s
+ <a for=body>transmitted bytes</a>.
+
+ <li><p>Let <var>length</var> be <var>response</var>'s <a for=response>body</a>'s
+ <a for=body>total bytes</a>.
+
  <li><p><a>Fire a progress event</a> named
  <a event><code>progress</code></a> with <var>transmitted</var> and <var>length</var>.
 
@@ -1115,14 +1121,6 @@ method must run these steps:
  <li><p>Unset the <a><code>send()</code> flag</a>.
 
  <li><p><a>Fire an event</a> named <a event><code>readystatechange</code></a>.
-
- <li><p>Let <var>transmitted</var> be <var>response</var>'s
- <a for=response>body</a>'s
- <a>transmitted bytes</a>.
-
- <li><p>Let <var>length</var> be <var>response</var>'s
- <a for=response>body</a>'s
- <a>total bytes</a>.
 
  <li><p><a>Fire a progress event</a> named <a event><code>load</code></a>
  with <var>transmitted</var> and <var>length</var>.
