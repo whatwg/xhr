@@ -20,7 +20,6 @@ Translate IDs: enumdef-xmlhttprequestresponsetype xmlhttprequestresponsetype,dic
 
 <script src=https://resources.whatwg.org/file-issue.js async></script>
 <script src=https://resources.whatwg.org/commit-snapshot-shortcut-key.js async></script>
-<script src=annotate_spec.js async></script>
 <script src=https://resources.whatwg.org/dfn.js defer></script>
 
 <pre class=link-defaults>
