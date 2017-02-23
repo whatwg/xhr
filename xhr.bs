@@ -531,10 +531,7 @@ methods, when invoked, must run these steps:
    <li><p>Set <a>response</a> to a
    <a>network error</a>.
    <li><p>Set <a>received bytes</a> to the empty byte sequence.
-   <li><p>Set <a>response <code>ArrayBuffer</code> object</a> to null.
-   <li><p>Set <a>response <code>Blob</code> object</a> to null.
-   <li><p>Set <a>response <code>Document</code> object</a> to null.
-   <li><p>Set <a>response JSON object</a> to null.
+   <li><p>Set <a>response object</a> to null.
   </ul>
 
  <li>
@@ -1405,40 +1402,32 @@ that is null in which case it is the <a>response charset</a>.
 
 <hr>
 
-<p>An {{XMLHttpRequest}} object has an associated
-<dfn>response <code>ArrayBuffer</code> object</dfn>,
-<dfn>response <code>Blob</code> object</dfn>,
-<dfn>response <code>Document</code> object</dfn>, and a
-<dfn>response JSON object</dfn>. Their shared initial value is null.
+<p>An {{XMLHttpRequest}} object has an associated <dfn>response object</dfn>. Unless stated
+otherwise it is null.
 
 
 <p>An <dfn>arraybuffer response</dfn> is the return value of these steps:
 
 <ol>
- <li><p>If <a>response <code>ArrayBuffer</code> object</a> is non-null, return it.
-
  <li>
-  <p>Set <a>response <code>ArrayBuffer</code> object</a> to a new {{ArrayBuffer}}
-  object representing <a>received bytes</a>. If this throws an exception, then set
-  <a>response <code>ArrayBuffer</code> object</a> to null and set <a>received bytes</a>
-  to the empty byte sequence.
+  <p>Set <a>response object</a> to a new {{ArrayBuffer}} object representing <a>received bytes</a>.
+  If this throws an exception, then set <a>response object</a> to null and set
+  <a>received bytes</a> to the empty byte sequence.
 
   <p class=note>Allocating an {{ArrayBuffer}} object is not guaranteed to succeed.
   [[!ECMASCRIPT]]
 
- <li><p>Return <a>response <code>ArrayBuffer</code> object</a>.
+ <li><p>Return <a>response object</a>.
 </ol>
 
 
 <p>A <dfn>blob response</dfn> is the return value of these steps:
 
 <ol>
- <li><p>If <a>response <code>Blob</code> object</a> is non-null, return it.
-
  <li><p>Let <var>type</var> be the empty string, if <a>final MIME type</a> is
  null, and <a>final MIME type</a> otherwise.
 
- <li><p>Set <a>response <code>Blob</code> object</a> to a new
+ <li><p>Set <a>response object</a> to a new
  {{Blob}} object representing <a>received bytes</a> with
  {{Blob/type}} <var>type</var> and
  return it.
@@ -1448,8 +1437,6 @@ that is null in which case it is the <a>response charset</a>.
 <p>A <dfn>document response</dfn> is the return value of these steps:
 
 <ol>
- <li><p>If <a>response <code>Document</code> object</a> is non-null, return it.
-
  <li><p>If <a>response</a>'s
  <a for=response>body</a> is null, then return null.
 
@@ -1529,7 +1516,7 @@ that is null in which case it is the <a>response charset</a>.
  <a>relevant settings object</a>'s
  <a for="environment settings object">origin</a>.
 
- <li><p>Set <a>response <code>Document</code> object</a> to
+ <li><p>Set <a>response object</a> to
  <var>document</var> and return it.
 </ol>
 
@@ -1537,8 +1524,6 @@ that is null in which case it is the <a>response charset</a>.
 <p>A <dfn>JSON response</dfn> is the return value of these steps:
 
 <ol>
- <li><p>If <a>response JSON object</a> is non-null, return it.
-
  <li><p>If <a>response</a>'s
  <a for=response>body</a> is null, then return null.
 
@@ -1550,7 +1535,7 @@ that is null in which case it is the <a>response charset</a>.
  <var>JSON text</var> as its only argument. If that threw an exception, return null.
  [[!ECMASCRIPT]]
 
- <li><p>Set <a>response JSON object</a> to <var>JSON object</var> and return it.
+ <li><p>Set <a>response object</a> to <var>JSON object</var> and return it.
 </ol>
 
 
@@ -1725,6 +1710,8 @@ steps:
    <li><p>If <a>state</a> is not
    <i>done</i>, return null.
 
+   <li><p>If <a>response object</a> is non-null, then return it.
+
    <li>
     <dl class=switch>
      <dt>If
@@ -1811,6 +1798,8 @@ attribute must return the result of running these steps:
 
  <li><p>If <a>state</a> is not <i>done</i>,
  return null.
+
+ <li><p>If <a>response object</a> is non-null, then return it.
 
  <li><p>Return the <a>document response</a>.
 </ol>
