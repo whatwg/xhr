@@ -1042,6 +1042,8 @@ method must run these steps:
        <a>total bytes</a>.
       </ol>
 
+      <p class=note>These subsubsubsteps are only invoked when new bytes are transmitted.
+
       <p>When <var>read</var> is fulfilled with an object whose <code>done</code> property is true,
       run <a>handle response end-of-body</a> for <var>response</var>.
 
