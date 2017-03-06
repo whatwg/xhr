@@ -885,6 +885,9 @@ method must run these steps:
    <a for=request>body</a>'s
    <a>total bytes</a>.
 
+   <li><p>If <a>state</a> is not <i>opened</i> or the <a><code>send()</code> flag</a> is unset, then
+   return.
+
    <li>
     <p><a for=/>Fetch</a> <var>req</var>.
     Handle the <a>tasks</a>
