@@ -1384,7 +1384,7 @@ Content-Type: text/plain; charset=utf-8</code></pre>
 
 <p>The <dfn id=response-mime-type>response MIME type</dfn> is the
 MIME type the `<code>Content-Type</code>` header contains excluding any
-parameters and in <a>ASCII lowercase</a>, or null if
+parameters and in <a>ASCII lowercase</a>, or `<code>text/xml</code>` if
 the response header can not be parsed or was omitted. The
 <dfn id=override-mime-type>override MIME type</dfn> is initially null
 and can get a value if
@@ -1425,13 +1425,10 @@ or null). Unless stated otherwise it is null.
 <p>A <dfn>blob response</dfn> is the return value of these steps:
 
 <ol>
- <li><p>Let <var>type</var> be the empty string, if <a>final MIME type</a> is
- null, and <a>final MIME type</a> otherwise.
+ <li><p>Set <a>response object</a> to a new {{Blob}} object representing <a>received bytes</a> with
+ {{Blob/type}} <a>final MIME type</a>.
 
- <li><p>Set <a>response object</a> to a new
- {{Blob}} object representing <a>received bytes</a> with
- {{Blob/type}} <var>type</var> and
- return it.
+ <li><p>Return <a>response object</a>.
 </ol>
 
 
@@ -1441,15 +1438,12 @@ or null). Unless stated otherwise it is null.
  <li><p>If <a>response</a>'s
  <a for=response>body</a> is null, then return null.
 
- <li><p>If <a>final MIME type</a> is not null,
- <code>text/html</code>, <code>text/xml</code>,
- <code>application/xml</code>, or does not end in
- <code>+xml</code>, return null.
+ <li><p>If <a>final MIME type</a> is `<code>text/html</code>`, `<code>text/xml</code>`,
+ `<code>application/xml</code>`, or does not end in `<code>+xml</code>`, then return null.
 
  <li>
-  <p>If {{XMLHttpRequest/responseType}} is
-  the empty string and <a>final MIME type</a> is
-  <code>text/html</code>, return null.
+  <p>If {{XMLHttpRequest/responseType}} is the empty string and <a>final MIME type</a> is
+  `<code>text/html</code>`, then return null.
 
   <p class=note>This is restricted to
   {{XMLHttpRequest/responseType}} being
@@ -1457,8 +1451,7 @@ or null). Unless stated otherwise it is null.
   content.
 
  <li>
-  <p>If <a>final MIME type</a> is <code>text/html</code>, run these
-  substeps:
+  <p>If <a>final MIME type</a> is `<code>text/html</code>`, then run these substeps:
 
   <ol>
    <li><p>Let <var>charset</var> be the <a>final charset</a>.
@@ -1503,9 +1496,7 @@ or null). Unless stated otherwise it is null.
  <a for=Document>encoding</a> to
  <var>charset</var>.
 
- <li><p>Set <var>document</var>'s
- <a>content type</a>
- to <a>final MIME type</a>.
+ <li><p>Set <var>document</var>'s <a>content type</a> to <a>final MIME type</a>.
 
  <li><p>Set <var>document</var>'s
  <a for=Document>URL</a> to
@@ -1550,12 +1541,10 @@ or null). Unless stated otherwise it is null.
  <li><p>Let <var>charset</var> be the <a>final charset</a>.
 
  <li>
-  <p>If {{XMLHttpRequest/responseType}} is
-  the empty string, <var>charset</var> is null, and
-  <a>final MIME type</a> is either null, <code>text/xml</code>,
-  <code>application/xml</code> or ends in <code>+xml</code>, use the
-  rules set forth in the XML specifications to determine the encoding. Let
-  <var>charset</var> be the determined encoding.
+  <p>If {{XMLHttpRequest/responseType}} is the empty string, <var>charset</var> is null, and
+  <a>final MIME type</a> is `<code>text/xml</code>`, `<code>application/xml</code>`, or ends in
+  `<code>+xml</code>`, then use the rules set forth in the XML specifications to determine the
+  encoding. Let <var>charset</var> be the determined encoding.
   [[!XML]] [[!XMLNS]]
 
   <p class=note>This is restricted to
@@ -1582,16 +1571,11 @@ resources using <a>utf-8</a>.
 <dl class=domintro>
  <dt><code><var>client</var> . <a method for=XMLHttpRequest>overrideMimeType(<var>mime</var>)</a></code>
  <dd>
-  <p>Sets the `<code>Content-Type</code>` header for <a>response</a> to
-  <var>mime</var>.
+  <p>Acts as if the `<code>Content-Type</code>` header for <a>response</a> is <var>mime</var>.
 
   <p>Throws an <code>InvalidStateError</code> exception if
   <a>state</a> is
   <i>loading</i> or <i>done</i>.
-
-  <p>Throws a <code>SyntaxError</code> exception if
-  <var>mime</var> is not a valid MIME type.
-
 </dl>
 
 <p>The
@@ -1604,18 +1588,14 @@ method must run these steps:
  <a>throw</a> an
  <code>InvalidStateError</code> exception.
 
- <li><p>If parsing <var>mime</var> analogously to the value of
- the `<code>Content-Type</code>` header fails,
- <a>throw</a> a
- <code>SyntaxError</code> exception.
+ <li><p>Set <a>override MIME type</a> to `<code>application/octet-stream</code>`.
 
- <li><p>If <var>mime</var> is successfully parsed, set
- <a>override MIME type</a> to its MIME type,
- excluding any parameters, and
- in <a>ASCII lowercase</a>.
+ <li><p>If <var>mime</var> is a <a>parsable MIME type</a>, then set <a>override MIME type</a> to its
+ <a>MIME type portion</a>.
+ <!-- XXX Ignore string to byte sequence conversion issues until some point in the future -->
 
- <li><p>If a `<code>charset</code>` parameter is successfully parsed, set
- <a>override charset</a> to its value.
+ <li><p>If <a>override MIME type</a> is not failure and has `<code>charset</code>` parameter, then
+ set <a>override charset</a> to its value.
 </ol>
 
 
