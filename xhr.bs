@@ -605,8 +605,8 @@ method must run these steps:
  <li><p>Terminate these steps if <var>name</var> is a
  <a>forbidden header name</a>.
 
- <li><p><a>Combine</a>
- <var>name</var>/<var>value</var> in <a>author request headers</a>.
+ <li><p><a for="header list">Combine</a> <var>name</var>/<var>value</var> in
+ <a>author request headers</a> with <var>legacySpaceFlag</var> set.
 </ol>
 
 <div id=example-setting-header-twice class=example>
