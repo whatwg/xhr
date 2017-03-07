@@ -1405,8 +1405,8 @@ that is null in which case it is the <a>response charset</a>.
 
 <hr>
 
-<p>An {{XMLHttpRequest}} object has an associated <dfn>response object</dfn>. Unless stated
-otherwise it is null.
+<p>An {{XMLHttpRequest}} object has an associated <dfn>response object</dfn> (an object, failure,
+or null). Unless stated otherwise it is null.
 
 
 <p>An <dfn>arraybuffer response</dfn> is the return value of these steps:
@@ -1414,11 +1414,9 @@ otherwise it is null.
 <ol>
  <li>
   <p>Set <a>response object</a> to a new {{ArrayBuffer}} object representing <a>received bytes</a>.
-  If this throws an exception, then set <a>response object</a> to null and set
-  <a>received bytes</a> to the empty byte sequence.
+  If this throws an exception, then set <a>response object</a> to failure and return null.
 
-  <p class=note>Allocating an {{ArrayBuffer}} object is not guaranteed to succeed.
-  [[!ECMASCRIPT]]
+  <p class=note>Allocating an {{ArrayBuffer}} object is not guaranteed to succeed. [[!ECMASCRIPT]]
 
  <li><p>Return <a>response object</a>.
 </ol>
@@ -1713,6 +1711,8 @@ steps:
    <li><p>If <a>state</a> is not
    <i>done</i>, return null.
 
+   <li><p>If <a>response object</a> is failure, then return null.
+
    <li><p>If <a>response object</a> is non-null, then return it.
 
    <li>
@@ -1802,6 +1802,7 @@ attribute must return the result of running these steps:
  <li><p>If <a>state</a> is not <i>done</i>,
  return null.
 
+ <!-- Assert: response object is not failure -->
  <li><p>If <a>response object</a> is non-null, then return it.
 
  <li><p>Return the <a>document response</a>.
