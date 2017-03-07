@@ -604,8 +604,8 @@ method must run these steps:
  <li><p>Terminate these steps if <var>name</var> is a
  <a>forbidden header name</a>.
 
- <li><p><a>Combine</a>
- <var>name</var>/<var>value</var> in <a>author request headers</a>.
+ <li><p><a for="header list">Combine</a> <var>name</var>/<var>value</var> in
+ <a>author request headers</a>.
 </ol>
 
 <div id=example-setting-header-twice class=example>
@@ -1271,15 +1271,10 @@ attribute must return the <a>response</a>'s
 method must run these steps:
 
 <ol>
- <li><p>If <a>response</a>'s
- <a for=response>header list</a> has <em>no</em>
- <a>header</a> whose
- <a for=header>name</a> is <var>name</var>, then return
- null.
+ <li><p>If <a>response</a>'s <a for=response>header list</a>
+ <a for="header list" lt=contain>does not contain</a> <var>name</var>, then return null.
 
- <li><p>Return the
- <a>combined value</a> given
- <var>name</var> and <a>response</a>'s
+ <li><p>Return the <a>combined value</a> given <var>name</var> and <a>response</a>'s
  <a for=response>header list</a>.
 </ol>
 
@@ -1318,23 +1313,12 @@ method, when invoked, must run these steps:
 <ol>
  <li><p>Let <var>output</var> be an empty byte sequence.
 
- <li><p>Let <var>headers</var> be the result of running
- <a>sort and combine</a>
- with <a>response</a>'s
- <a for=response>header list</a>.
+ <li><p>Let <var>headers</var> be the result of running <a>sort and combine</a> with
+ <a>response</a>'s <a for=response>header list</a>.
 
- <li>
-  <p>For each <var>header</var> in <var>headers</var>, run these substeps:
-
-  <ol>
-   <li><p>Append <var>header</var>'s
-   <a for=header>name</a>, followed by a 0x3A 0x20 byte
-   pair, followed by <var>header</var>'s
-   <a for=header>value</a>, to <var>output</var>.
-
-   <li><p>If <var>header</var> is not the last pair in <var>headers</var>, then append a 0x0D 0x0A
-   byte pair, to <var>output</var>.
-  </ol>
+ <li><p><a for=list>For each</a> <var>header</var> in <var>headers</var>, append <var>header</var>'s
+ <a for=header>name</a>, followed by a 0x3A 0x20 byte pair, followed by <var>header</var>'s
+ <a for=header>value</a>, followed by a 0x0D 0x0A byte pair, to <var>output</var>.
 
  <li><p>Return <var>output</var>.
 </ol>
