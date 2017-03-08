@@ -1438,7 +1438,7 @@ or null). Unless stated otherwise it is null.
  <li><p>If <a>response</a>'s
  <a for=response>body</a> is null, then return null.
 
- <li><p>If <a>final MIME type</a> is `<code>text/html</code>`, `<code>text/xml</code>`,
+ <li><p>If <a>final MIME type</a> is not `<code>text/html</code>`, `<code>text/xml</code>`,
  `<code>application/xml</code>`, or does not end in `<code>+xml</code>`, then return null.
 
  <li>
@@ -1594,8 +1594,8 @@ method must run these steps:
  <a>MIME type portion</a>.
  <!-- XXX Ignore string to byte sequence conversion issues until some point in the future -->
 
- <li><p>If <a>override MIME type</a> is not failure and has `<code>charset</code>` parameter, then
- set <a>override charset</a> to its value.
+ <li><p>If <a>override MIME type</a> has a `<code>charset</code>` parameter, then set
+ <a>override charset</a> to its value.
 </ol>
 
 
@@ -2243,6 +2243,7 @@ Thomas Roessler,
 Thomas Wisniewski,
 Tom Magliery,
 Travis Leithead,
+triple-underscore,
 Yehuda Katz,
 Youenn Fablet, and
 Zhenbin Xu
