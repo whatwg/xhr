@@ -588,8 +588,7 @@ method must run these steps:
  <a>throw</a> an
  <code>InvalidStateError</code> exception.
 
- <li><p><a for=header>Normalize</a>
- <var>value</var>.
+ <li><p><a for=header/value>Normalize</a> <var>value</var>.
 
  <li>
   <p>If <var>name</var> is not a
