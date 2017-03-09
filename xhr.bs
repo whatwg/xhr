@@ -765,18 +765,17 @@ method must run these steps:
  <li>
   <p>If <var>body</var> is null, go to the next step.
 
-  <p>Otherwise, let <var>encoding</var> be null, <var>Content-Type</var> be null, and then
-  follow these rules, depending on <var>body</var>:
+  <p>Otherwise, let <var>encoding</var> and <var>mimeType</var> be null, and then follow these
+  rules, switching on <var>body</var>:
 
   <dl class=switch>
    <dt id=dom-xmlhttprequest-send-document>{{Document}}
    <dd>
     <p>Set <var>encoding</var> to `<code>UTF-8</code>`.
 
-    <p>If <var>body</var> is an <a>HTML document</a>, set
-    <var>Content-Type</var> to `<code>text/html</code>`, and set <var>Content-Type</var>
-    to `<code>application/xml</code>` otherwise. Then append `<code>;charset=UTF-8</code>`
-    to <var>Content-Type</var>.
+    <p>Set <var>mimeType</var> to `<code>text/html</code>` if <var>body</var> is an
+    <a>HTML document</a>, and to `<code>application/xml</code>` otherwise. Then append
+    `<code>;charset=UTF-8</code>` to <var>mimeType</var>.
 
     <p>Set <a>request body</a> to <var>body</var>,
     <a lt="fragment serializing algorithm">serialized</a> with the
@@ -794,32 +793,23 @@ method must run these steps:
     <p>If <var>body</var> is a string, set <var>encoding</var> to
     `<code>UTF-8</code>`.
 
-    <p>Set <a>request body</a> and <var>Content-Type</var> to the result of
+    <p>Set <a>request body</a> and <var>mimeType</var> to the result of
     <a for=BodyInit>extracting</a> <var>body</var>.
   </dl>
 
-  <p>If <var>Content-Type</var> is non-null and <a>author request headers</a>
-  contains no <a>header</a>
-  <a for=header>named</a>
-  `<code>Content-Type</code>`,
-  <a for="header list">append</a>
-  `<code>Content-Type</code>`/<var>Content-Type</var> to
+  <p>If <var>mimeType</var> is non-null and <a>author request headers</a>
+  <a lt=contain for="header list">does not contain</a> `<code>Content-Type</code>`, then
+  <a for="header list">append</a> `<code>Content-Type</code>`/<var>mimeType</var> to
   <a>author request headers</a>.
 
-  <p>Otherwise, if the <a>header</a>
-  <a for=header>named</a>
-  `<code>Content-Type</code>` in <a>author request headers</a> has a
-  <a for=header>value</a> that is a
-  <a>valid MIME type</a>, which has a
-  `<code>charset</code>` parameter whose value is not a case-insensitive
-  match for <var>encoding</var>, and <var>encoding</var>
-  is not null, then set all the `<code>charset</code>` parameters whose value is not a
-  case-insensitive match for <var>encoding</var> of that
-  `<code>Content-Type</code>`
-  <a>header</a>'s
-  <a for=header>value</a> to
-  <var>encoding</var>.
-  <!-- XXX could still be better with case-insensitive and parameter cross-ref -->
+  <p>Otherwise, if the <a>header</a> whose <a for=header>name</a> is a <a>byte-case-insensitive</a>
+  match for `<code>Content-Type</code>` in <a>author request headers</a> has a
+  <a for=header>value</a> that is a <a>valid MIME type</a>, which has a `<code>charset</code>`
+  parameter whose value is not a <a>byte-case-insensitive</a> match for <var>encoding</var>, and
+  <var>encoding</var> is not null, then set all the `<code>charset</code>` parameters whose value is
+  not a <a>byte-case-insensitive</a> match for <var>encoding</var> of that <a>header</a>'s
+  <a for=header>value</a> to <var>encoding</var>.
+  <!-- XXX could still be better with parameter cross-ref -->
 
   <!-- reminder: if we ever change this to always include charset it has
   to be included as the first parameter for compatibility reasons -->
