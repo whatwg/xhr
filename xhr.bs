@@ -606,7 +606,7 @@ method must run these steps:
  <a>forbidden header name</a>.
 
  <li><p><a for="header list">Combine</a> <var>name</var>/<var>value</var> in
- <a>author request headers</a> with <var>legacySpaceFlag</var> set.
+ <a>author request headers</a>.
 </ol>
 
 <div id=example-setting-header-twice class=example>
