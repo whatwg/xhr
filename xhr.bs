@@ -778,15 +778,8 @@ method must run these steps:
     `<code>;charset=UTF-8</code>` to <var>mimeType</var>.
 
     <p>Set <a>request body</a> to <var>body</var>,
-    <a lt="fragment serializing algorithm">serialized</a> with the
-    <i>require well-formed flag</i> set,
-    <a lt="obtain Unicode">converted to Unicode</a>,
-    and <a lt="UTF-8 encode">utf-8 encoded</a>.
-    Rethrow any exceptions.
-
-    <p class=note>If <var>body</var> cannot be
-    <a lt="fragment serializing algorithm">serialized</a>, an
-    <code>InvalidStateError</code> exception is thrown.
+    <a lt="fragment serializing algorithm">serialized</a>,
+    <a lt="obtain Unicode">converted to Unicode</a>, and <a lt="UTF-8 encode">utf-8 encoded</a>.
 
    <dt id=dom-xmlhttprequest-send-bodyinit>{{BodyInit}}
    <dd>
