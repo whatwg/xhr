@@ -886,22 +886,17 @@ method must run these steps:
     <p>Run these subsubsteps <a>in parallel</a>:
 
     <ol>
-     <li><p>Let <var>milliseconds</var> be zero.
-
      <li>
-      <p>Every millisecond, as long as the <a>stop timeout flag</a> is unset,
-      <a>queue a microtask</a> to run these subsubsubsteps:
+      <p>Wait until either <var>req</var>'s <a for=request>done flag</a> is set or
 
       <ol>
-       <li><p>Increase <var>milliseconds</var> by one.
-
-       <li><p>If <var>milliseconds</var> is equal or greater than
-       the {{XMLHttpRequest/timeout!!attribute}} attribute value and
-       the {{XMLHttpRequest/timeout!!attribute}} attribute value is not
-       zero, <a for=fetch>terminate</a>
-       <a for=/>fetching</a> with reason
-       <i>timeout</i>.
+       <li><p>the {{XMLHttpRequest/timeout!!attribute}} attribute value number of milliseconds has
+       passed since these subsubsteps started
+       <li><p>while {{XMLHttpRequest/timeout!!attribute}} attribute value is not zero.
       </ol>
+
+     <li><p>If <var>req</var>'s <a for=request>done flag</a> is unset, then
+     <a for=fetch>terminate</a> <a for=/>fetching</a> with reason <i>timeout</i>.
     </ol>
 
     <p>To <a>process request body</a> for
