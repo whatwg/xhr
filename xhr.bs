@@ -408,10 +408,10 @@ the row where the value in the cell in the first column is <a>context object</a>
 <p>The <a>synchronous flag</a>, <a>upload complete flag</a>, and
 <a>upload listener flag</a> are initially unset.
 
-<p class=note no-backref id=event-listeners-and-preflight>Registering one or more event listeners on
-an {{XMLHttpRequestUpload}} object will result in a <a>CORS-preflight request</a>. (That is because
-registering an event listener causes the <a>upload listener flag</a> to be set, which in turn causes
-the <a>use-CORS-preflight flag</a> to be set.)
+<p class="note no-backref" id=event-listeners-and-preflight>Registering one or more event listeners
+on an {{XMLHttpRequestUpload}} object will result in a <a>CORS-preflight request</a>. (That is
+because registering an event listener causes the <a>upload listener flag</a> to be set, which in
+turn causes the <a>use-CORS-preflight flag</a> to be set.)
 
 <hr>
 
