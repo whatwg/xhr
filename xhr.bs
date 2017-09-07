@@ -1033,7 +1033,7 @@ method must run these steps:
     <p>Let <var>response</var> be the result of
     <a for=/>fetching</a> <var>req</var>.
 
-    <p>If the {{XMLHttpRequest/timeout!!attribute}} attribute value is not zero, set the
+    <p>If the {{XMLHttpRequest/timeout!!attribute}} attribute value is not zero, then set the
     <a>timed out flag</a> and <a for=fetch>terminate</a> <a for=/>fetching</a> if it has not
     returned within the amount of milliseconds from the {{XMLHttpRequest/timeout!!attribute}}.
 
