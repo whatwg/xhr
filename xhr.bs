@@ -519,8 +519,7 @@ methods, when invoked, must run these steps:
   <p>Set variables associated with the object as follows:
 
   <ul>
-   <li><p>Unset the <a><code>send()</code> flag</a>, and
-   <a>upload listener flag</a>.
+   <li><p>Unset the <a><code>send()</code> flag</a> and <a>upload listener flag</a>.
    <li><p>Set <a>request method</a> to <var>method</var>.
    <li><p>Set <a>request URL</a> to <var>parsedURL</var>.
    <li><p>Set the <a>synchronous flag</a>, if <var>async</var> is false, and unset
@@ -889,7 +888,7 @@ method must run these steps:
       </ol>
 
      <li><p>If <var>req</var>'s <a for=request>done flag</a> is unset, then set the
-     <a>timed out flag</a>, and <a for=fetch>terminate</a> <a for=/>fetching</a>.
+     <a>timed out flag</a> and <a for=fetch>terminate</a> <a for=/>fetching</a>.
     </ol>
 
     <p>To <a>process request body</a> for
