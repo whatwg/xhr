@@ -252,9 +252,6 @@ interface XMLHttpRequest : XMLHttpRequestEventTarget {
 <p>An {{XMLHttpRequest}} object has an associated
 <dfn id=send-flag><code>send()</code> flag</dfn>. Unless stated otherwise it is unset.
 
-<p>An {{XMLHttpRequest}} object has an associated <dfn>stop timeout flag</dfn>.
-Unless stated otherwise it is unset.
-
 
 <h3 id=constructors>Constructors</h3>
 
@@ -526,7 +523,7 @@ methods, when invoked, must run these steps:
   <p>Set variables associated with the object as follows:
 
   <ul>
-   <li><p>Unset the <a><code>send()</code> flag</a>, <a>stop timeout flag</a>, and
+   <li><p>Unset the <a><code>send()</code> flag</a>, and
    <a>upload listener flag</a>.
    <li><p>Set <a>request method</a> to <var>method</var>.
    <li><p>Set <a>request URL</a> to <var>parsedURL</var>.
@@ -955,9 +952,6 @@ method must run these steps:
     run these subsubsteps:
 
     <ol>
-     <li><p>If the <a>stop timeout flag</a> is unset, set the
-     <a>stop timeout flag</a>.
-
      <li><p>Set <a>response</a> to <var>response</var>.
 
      <li><p><a>Handle errors</a> for <var>response</var>.
