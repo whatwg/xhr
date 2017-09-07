@@ -283,7 +283,8 @@ registered whose <b>type</b> is one of
 <!-- No need to mention upload event listeners as they happen during /opened/. -->
 
 <p>If an {{XMLHttpRequest}} object is garbage collected while its
-connection is still open, the user agent must <a>terminate the request</a>.
+connection is still open, the user agent must <a for=fetch lt=terminated>terminate</a> the ongoing
+fetch operated by the {{XMLHttpRequest}} object.
 
 
 <h3 id=event-handlers>Event handlers</h3>
@@ -413,13 +414,6 @@ turn causes the <a>use-CORS-preflight flag</a> to be set.)
 
 <hr>
 
-<p>To <dfn>terminate the request</dfn>,
-<a for=fetch>terminate</a> the
-<a for=/>fetch</a> algorithm operated by the
-{{XMLHttpRequest}} object.
-
-
-
 <h4 id=the-open()-method>The <code>open()</code> method</h4>
 
 <dl class=domintro>
@@ -515,7 +509,8 @@ methods, when invoked, must run these steps:
  <code>InvalidAccessError</code> exception.
 
  <li>
-  <p><a>Terminate the request</a>.
+  <p><a for=fetch lt=terminated>Terminate</a> the ongoing fetch operated by the
+  {{XMLHttpRequest}} object.
 
   <p class=note>A <a for=/>fetch</a> can be
   ongoing at this point.
