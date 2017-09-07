@@ -394,16 +394,17 @@ the row where the value in the cell in the first column is <a>context object</a>
 <dfn id=author-request-headers>author request headers</dfn>,
 <dfn>request body</dfn>,
 <dfn>synchronous flag</dfn>,
-<dfn id=upload-complete-flag>upload complete flag</dfn>, and
-<dfn>upload listener flag</dfn>.
+<dfn id=upload-complete-flag>upload complete flag</dfn>,
+<dfn>upload listener flag</dfn>, and
+<dfn>timed out flag</dfn>.
 
 <p>The <a>author request headers</a> is an initially empty
 <a for=/>header list</a>.
 
 <p>The <a>request body</a> is initially null.
 
-<p>The <a>synchronous flag</a>, <a>upload complete flag</a>, and
-<a>upload listener flag</a> are initially unset.
+<p>The <a>synchronous flag</a>, <a>upload complete flag</a>, <a>upload listener flag</a> and
+<a>timed out flag</a> are initially unset.
 
 <p class="note no-backref" id=event-listeners-and-preflight>Registering one or more event listeners
 on an {{XMLHttpRequestUpload}} object will result in a <a>CORS-preflight request</a>. (That is
@@ -415,7 +416,7 @@ turn causes the <a>use-CORS-preflight flag</a> to be set.)
 <p>To <dfn>terminate the request</dfn>,
 <a for=fetch>terminate</a> the
 <a for=/>fetch</a> algorithm operated by the
-{{XMLHttpRequest}} object with reason <i>fatal</i>.
+{{XMLHttpRequest}} object.
 
 
 
@@ -850,6 +851,8 @@ method must run these steps:
 
  <li><p>Unset the <a>upload complete flag</a>.
 
+ <li><p>Unset the <a>timed out flag</a>.
+
  <li><p>If <var>req</var>'s
  <a for=request>body</a> is null,
  set the <a>upload complete flag</a>.
@@ -890,8 +893,8 @@ method must run these steps:
        <li><p>while {{XMLHttpRequest/timeout!!attribute}} attribute value is not zero.
       </ol>
 
-     <li><p>If <var>req</var>'s <a for=request>done flag</a> is unset, then
-     <a for=fetch>terminate</a> <a for=/>fetching</a> with reason <i>timeout</i>.
+     <li><p>If <var>req</var>'s <a for=request>done flag</a> is unset, then set the
+     <a>timed out flag</a>, and <a for=fetch>terminate</a> <a for=/>fetching</a>.
     </ol>
 
     <p>To <a>process request body</a> for
@@ -1036,12 +1039,9 @@ method must run these steps:
     <p>Let <var>response</var> be the result of
     <a for=/>fetching</a> <var>req</var>.
 
-    <p>If the {{XMLHttpRequest/timeout!!attribute}} attribute value is not
-    zero, <a for=fetch>terminate</a> this
-    <a for=/>fetch</a> if it has not returned
-    within the amount of milliseconds from the
-    {{XMLHttpRequest/timeout!!attribute}} attribute value with reason
-    <i>timeout</i>.
+    <p>If the {{XMLHttpRequest/timeout!!attribute}} attribute value is not zero, set the
+    <a>timed out flag</a> and <a for=fetch>terminate</a> <a for=/>fetching</a> if it has not
+    returned within the amount of milliseconds from the {{XMLHttpRequest/timeout!!attribute}}.
 
    <li><p>If <var>response</var>'s
    <a for=response>body</a> is null,
@@ -1116,33 +1116,24 @@ method must run these steps:
  <a>request error steps</a> for event <a event><code>error</code></a> and
  exception <code>NetworkError</code>.
 
+ <li><p>If the <a>timed out flag</a> is set, then run the <a>request error steps</a> for event
+ <a event><code>timeout</code></a> and exception <code>TimeoutError</code>.
+
  <li>
-  <p>Otherwise, if <var>response</var> has a
-  <a>termination reason</a>:
+  <p>Otherwise, if <var>response</var>'s <a for=response>body</a>'s <a for=body>stream</a> has
+  <a for=ReadableStream>errored</a>, then:
 
-  <dl class=switch>
-   <dt><i>end-user abort</i>
-   <dd><p>Run the <a>request error steps</a> for event
-   <a event><code>abort</code></a> and exception
-   <code>AbortError</code>.
+  <ol>
+   <li><p>Set <a>state</a> to <i>done</i>.
 
-   <dt><i>fatal</i>
-   <dd>
-    <ol>
-     <li><p>Set <a>state</a> to
-     <i>done</i>.
+   <li><p>Unset the <a><code>send()</code> flag</a>.
 
-     <li><p>Unset the <a><code>send()</code> flag</a>.
+   <li><p>Set <a>response</a> to a <a>network error</a>.
+  </ol>
 
-     <li><p>Set <a>response</a> to a
-     <a>network error</a>.
-    </ol>
-
-   <dt><i>timeout</i>
-   <dd><p>Run the <a>request error steps</a> for event
-   <a event><code>timeout</code></a> and exception
-   <code>TimeoutError</code>.
-  </dl>
+ <li><p>Otherwise, if <var>response</var>'s <a for=response>aborted flag</a> is set, then run the
+ <a>request error steps</a> for event <a event><code>abort</code></a> and exception
+ <code>AbortError</code>.
 </ol>
 
 <p>The <dfn>request error steps</dfn> for event <var>event</var> and optionally an
@@ -1200,7 +1191,7 @@ exception <var>exception</var> are:
 when invoked, must run these steps:
 
 <ol>
- <li><p><a>Terminate the request</a>.
+ <li><p><a for=fetch lt=terminated>Terminate</a> the ongoing fetch with the <i>aborted</i> flag set.
 
  <li><p>If <a>state</a> is either
  <i>opened</i> with the <a><code>send()</code> flag</a> set,
