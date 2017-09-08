@@ -1114,7 +1114,7 @@ method must run these steps:
  <a event><code>timeout</code></a> and exception <code>TimeoutError</code>.
 
  <li>
-  <p>Otherwise, if <var>response</var>'s <a for=response>body</a>'s <a for=body>stream</a> has
+  <p>Otherwise, if <var>response</var>'s <a for=response>body</a>'s <a for=body>stream</a> is
   <a for=ReadableStream>errored</a>, then:
 
   <ol>
