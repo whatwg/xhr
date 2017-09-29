@@ -1466,18 +1466,12 @@ or null). Unless stated otherwise it is null.
 <p>A <dfn>JSON response</dfn> is the return value of these steps:
 
 <ol>
- <li><p>If <a>response</a>'s
- <a for=response>body</a> is null, then return null.
+ <li><p>If <a>response</a>'s <a for=response>body</a> is null, then return null.
 
- <li><p>Let <var>JSON text</var> be the result of running
- <a>utf-8 decode</a> on <a>received bytes</a>.
+ <li><p>Let <var>jsonObject</var> be the result of running <a>JSON parse with bytes</a> on
+ <a>received bytes</a>. If that threw an exception, then return null.
 
- <li><p>Let <var>JSON object</var> be the result of invoking the initial value of the
- <code>parse</code> property of the <code>JSON</code> object, with
- <var>JSON text</var> as its only argument. If that threw an exception, return null.
- [[!ECMASCRIPT]]
-
- <li><p>Set <a>response object</a> to <var>JSON object</var> and return it.
+ <li><p>Set <a>response object</a> to <var>jsonObject</var> and return it.
 </ol>
 
 
