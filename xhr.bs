@@ -1468,7 +1468,7 @@ or null). Unless stated otherwise it is null.
 <ol>
  <li><p>If <a>response</a>'s <a for=response>body</a> is null, then return null.
 
- <li><p>Let <var>jsonObject</var> be the result of running <a>JSON parse with bytes</a> on
+ <li><p>Let <var>jsonObject</var> be the result of running <a>parse JSON from bytes</a> on
  <a>received bytes</a>. If that threw an exception, then return null.
 
  <li><p>Set <a>response object</a> to <var>jsonObject</var> and return it.
