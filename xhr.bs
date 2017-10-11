@@ -1468,7 +1468,7 @@ or null). Unless stated otherwise it is null.
 <ol>
  <li><p>If <a>response</a>'s <a for=response>body</a> is null, then return null.
 
- <li><p>Let <var>jsonObject</var> be the result of running <a>JSON parse with bytes</a> on
+ <li><p>Let <var>jsonObject</var> be the result of running <a>parse JSON from bytes</a> on
  <a>received bytes</a>. If that threw an exception, then return null.
 
  <li><p>Set <a>response object</a> to <var>jsonObject</var> and return it.
@@ -1807,10 +1807,9 @@ interface FormData {
 };</pre>
 
 <p>The {{FormData}} object represents an ordered list of
-<dfn id=concept-formdata-entry for=FormData lt=entry|entries>entries</dfn>. Each
-<a>entry</a> consists of a
-<dfn id=concept-formdata-entry-name for=entry>name</dfn> and a
-<dfn id=concept-formdata-entry-value for=entry>value</dfn>.
+<dfn id=concept-formdata-entry export for=FormData lt=entry|entries>entries</dfn>. Each <a>entry</a>
+consists of a <dfn id=concept-formdata-entry-name export for=FormData/entry>name</dfn> and a
+<dfn id=concept-formdata-entry-value export for=FormData/entry>value</dfn>.
 
 <p>For the purposes of interaction with other algorithms, an
 <a>entry</a>'s type is "string" if its
