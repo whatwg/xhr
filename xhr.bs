@@ -1807,10 +1807,9 @@ interface FormData {
 };</pre>
 
 <p>The {{FormData}} object represents an ordered list of
-<dfn id=concept-formdata-entry for=FormData lt=entry|entries>entries</dfn>. Each
-<a>entry</a> consists of a
-<dfn id=concept-formdata-entry-name for=entry>name</dfn> and a
-<dfn id=concept-formdata-entry-value for=entry>value</dfn>.
+<dfn id=concept-formdata-entry export for=FormData lt=entry|entries>entries</dfn>. Each <a>entry</a>
+consists of a <dfn id=concept-formdata-entry-name export for=FormData/entry>name</dfn> and a
+<dfn id=concept-formdata-entry-value export for=FormData/entry>value</dfn>.
 
 <p>For the purposes of interaction with other algorithms, an
 <a>entry</a>'s type is "string" if its
