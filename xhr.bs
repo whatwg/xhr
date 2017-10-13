@@ -166,13 +166,6 @@ XML.
 
 <p>It uses the typographic conventions from HTML. [[!HTML]]
 
-<p>The term <dfn>user credentials</dfn> for the purposes of this
-specification means cookies, HTTP authentication, and TLS client certificates.
-Specifically it does not refer to proxy authentication or the
-<a http-header><code>Origin</code></a> header.
-[[!COOKIES]] <!-- XXX ref? -->
-
-
 <h2 id=interface-xmlhttprequest>Interface {{XMLHttpRequest}}</h2>
 
 <pre class=idl>
@@ -671,9 +664,8 @@ of <a for=/>fetching</a>.
 <dl class=domintro>
  <dt><code><var>client</var> . <a attribute for=XMLHttpRequest>withCredentials</a></code>
  <dd>
-  <p>True when <a>user credentials</a> are to be included in a
-  cross-origin request. False when they are to be excluded in a
-  cross-origin request and when cookies are to be ignored in its response.
+  <p>True when <a>credentials</a> are to be included in a cross-origin request. False when they are
+  to be excluded in a cross-origin request and when cookies are to be ignored in its response.
   Initially false.
 
   <p>When set: throws an
