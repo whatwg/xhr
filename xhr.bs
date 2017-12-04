@@ -1380,12 +1380,12 @@ or null). Unless stated otherwise it is null.
  <li><p>If <a>response</a>'s
  <a for=response>body</a> is null, then return null.
 
- <li><p>If <a>final MIME type</a> is not `<code>text/html</code>`, `<code>text/xml</code>`,
- `<code>application/xml</code>`, or does not end in `<code>+xml</code>`, then return null.
+ <li><p>If <a>final MIME type</a> is not an <a>HTML MIME type</a> or an <a>XML MIME type</a>, then
+ return null.
 
  <li>
-  <p>If {{XMLHttpRequest/responseType}} is the empty string and <a>final MIME type</a> is
-  `<code>text/html</code>`, then return null.
+  <p>If {{XMLHttpRequest/responseType}} is the empty string and <a>final MIME type</a> is an
+  <a>HTML MIME type</a>, then return null.
 
   <p class=note>This is restricted to
   {{XMLHttpRequest/responseType}} being
@@ -1393,7 +1393,7 @@ or null). Unless stated otherwise it is null.
   content.
 
  <li>
-  <p>If <a>final MIME type</a> is `<code>text/html</code>`, then run these substeps:
+  <p>If <a>final MIME type</a> is an <a>HTML MIME type</a>, then run these substeps:
 
   <ol>
    <li><p>Let <var>charset</var> be the <a>final charset</a>.
@@ -1478,9 +1478,8 @@ or null). Unless stated otherwise it is null.
 
  <li>
   <p>If {{XMLHttpRequest/responseType}} is the empty string, <var>charset</var> is null, and
-  <a>final MIME type</a> is `<code>text/xml</code>`, `<code>application/xml</code>`, or ends in
-  `<code>+xml</code>`, then use the rules set forth in the XML specifications to determine the
-  encoding. Let <var>charset</var> be the determined encoding.
+  <a>final MIME type</a> is an <a>XML MIME type</a>, then use the rules set forth in the XML
+  specifications to determine the encoding. Let <var>charset</var> be the determined encoding.
   [[!XML]] [[!XMLNS]]
 
   <p class=note>This is restricted to
