@@ -495,6 +495,7 @@ methods, when invoked, must run these steps:
    <a>network error</a>.
    <li><p>Set <a>received bytes</a> to the empty byte sequence.
    <li><p>Set <a>response object</a> to null.
+   <li><p>Set <a>override MIME type</a> to null.
   </ul>
 
  <li>
@@ -1299,19 +1300,24 @@ transfer-encoding: chunked</code></pre>
  <li><p>Return <var>mimeType</var>.
 </ol>
 
-<p>The <dfn id=override-mime-type>override MIME type</dfn> is initially null and can get a value if
-{{overrideMimeType()}} is invoked. <dfn id=final-mime-type>Final MIME type</dfn> is the
+<p>The <dfn id=override-mime-type>override MIME type</dfn> is initially null and can get a value
+when {{overrideMimeType()}} is invoked. <dfn id=final-mime-type>Final MIME type</dfn> is the
 <a>override MIME type</a> unless that is null in which case it is the <a>response MIME type</a>.
 
-<p>The <dfn id=response-charset>response charset</dfn> is the value of
-the <code>charset</code> parameter of the `<code>Content-Type</code>` header
-or null if there was no `<code>charset</code>` parameter or the header could
-not be parsed or was omitted. The
-<dfn id=override-charset>override charset</dfn> is initially null and
-can get a value if <a><code>overrideMimeType()</code></a> is invoked.
-<dfn id=final-charset>Final charset</dfn> is the
-<a>override charset</a> unless
-that is null in which case it is the <a>response charset</a>.
+<p><dfn id=final-charset>Final charset</dfn> is the return value of these steps:
+
+<ol>
+ <li><p>If <a>override MIME type</a>'s <a for="MIME type">parameters</a>["<code>charset</code>"] is
+ not nothing, then return it.
+
+ <li><p>If <a>response MIME type</a>'s <a for="MIME type">parameters</a>["<code>charset</code>"] is
+ not nothing, then return it.
+
+ <li><p>Return null.
+</ol>
+
+<p class=note>The above steps intentionally do not use <a>final MIME type</a> as it would yield the
+wrong result.
 
 <hr>
 
@@ -1474,28 +1480,26 @@ resources using <a>utf-8</a>.
 <dl class=domintro>
  <dt><code><var>client</var> . <a method for=XMLHttpRequest>overrideMimeType(<var>mime</var>)</a></code>
  <dd>
-  <p>Acts as if the `<code>Content-Type</code>` header for <a>response</a> is <var>mime</var>.
+  <p>Acts as if the `<code>Content-Type</code>` header value for <a>response</a> is <var>mime</var>.
+  (It does not actually change the header though.)
 
   <p>Throws an "{{InvalidStateError!!exception}}" {{DOMException}} if <a>state</a> is <i>loading</i>
   or <i>done</i>.
 </dl>
 
-<p>The
-<dfn method for=XMLHttpRequest><code>overrideMimeType(<var>mime</var>)</code></dfn>
-method must run these steps:
+<p>The <dfn method for=XMLHttpRequest><code>overrideMimeType(<var>mime</var>)</code></dfn> method,
+when invoked, must run these steps:
 
 <ol>
  <li><p>If <a>state</a> is <i>loading</i> or <i>done</i>, then <a>throw</a> an
  "{{InvalidStateError!!exception}}" {{DOMException}}.
 
- <li><p>Set <a>override MIME type</a> to `<code>application/octet-stream</code>`.
+ <li><p>Set <a>override MIME type</a> to the result of <a lt="parse a MIME type">parsing</a>
+ <var>mime</var>.
 
- <li><p>If <var>mime</var> is a <a>parsable MIME type</a>, then set <a>override MIME type</a> to its
- <a>MIME type portion</a>.
- <!-- XXX Ignore string to byte sequence conversion issues until some point in the future -->
-
- <li><p>If <a>override MIME type</a> has a `<code>charset</code>` parameter, then set
- <a>override charset</a> to its value.
+ <li><p>If <a>override MIME type</a> is failure, then set <var>mimeTypeRecord</var> to a new
+ <a>MIME type</a> whose <a for="MIME type">type</a> is "<code>application</code>" and
+ <a for="MIME type">subtype</a> is "<code>octet-stream</code>".
 </ol>
 
 
