@@ -761,17 +761,31 @@ method must run these steps:
   <a for="header list">append</a> `<code>Content-Type</code>`/<var>mimeType</var> to
   <a>author request headers</a>.
 
-  <p>Otherwise, if the <a>header</a> whose <a for=header>name</a> is a <a>byte-case-insensitive</a>
-  match for `<code>Content-Type</code>` in <a>author request headers</a> has a
-  <a for=header>value</a> that is a <a>valid MIME type</a>, which has a `<code>charset</code>`
-  parameter whose value is not a <a>byte-case-insensitive</a> match for <var>encoding</var>, and
-  <var>encoding</var> is not null, then set all the `<code>charset</code>` parameters whose value is
-  not a <a>byte-case-insensitive</a> match for <var>encoding</var> of that <a>header</a>'s
-  <a for=header>value</a> to <var>encoding</var>.
-  <!-- XXX could still be better with parameter cross-ref -->
+  <p>Otherwise, if <var>encoding</var> is non-null, run these steps:
 
-  <!-- reminder: if we ever change this to always include charset it has
-  to be included as the first parameter for compatibility reasons -->
+  <ol>
+   <li><p>Let <var>value</var> be the <a for=header>value</a> of the <a>header</a> whose
+   <a for=header>name</a> is a <a>byte-case-insensitive</a> match for `<code>Content-Type</code>` in
+   <a>author request headers</a>.
+
+   <li><p>Let <var>mimeTypeRecord</var> be <var>value</var>,
+   <a for="parse a MIME type from bytes">parsed</a>.
+
+   <li>
+    <p>If <var>mimeTypeRecord</var> is not failure and
+    <var>mimeTypeRecord</var>["<code>charset</code>"] is not nothing, then:
+
+    <ol>
+     <li><p><a for=map>Set</a> <var>mimeTypeRecord</var>["<code>charset</code>"] to
+     <var>encoding</var>.
+
+     <li><p>Let <var>newValue</var> be <var>mimeTypeRecord</var>,
+     <a for="serialize a MIME type with bytes">serialized</a>.
+
+     <li><p><a for="header list">Set</a> `<code>Content-Type</code>`/<var>newValue</var> in
+     <a>author request headers</a>.
+    </ol>
+  </ol>
 
  <li><p>If one or more event listeners are registered on the associated
  {{XMLHttpRequestUpload}} object, then set <a>upload listener flag</a>.
