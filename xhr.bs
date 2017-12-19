@@ -2044,13 +2044,11 @@ attributes initialized to false, so it is suggested that for consistency all
 <p>This specification defines a policy-controlled feature named <dfn>Synchronous
 XMLHttpRequest</dfn>.
 
-<p>The feature name for <a>Synchronous XMLHttpRequest</a> is "sync-xhr".
+<p>The feature name for <a>Synchronous XMLHttpRequest</a> is
+"<code>sync-xhr</code>".
 
-<p>The default allowlist for Synchronous XMLHttpRequest is <code>*</code>.
-
-<p>When disabled in a document, calling send() on an XMLHttpRequest object with
-the synchronous flag set MUST cause a DOMException named
- <code>NetworkError</code> to be thrown.
+<p>The default allowlist for <a>Synchronous XMLHttpRequest</a> is
+<code>*</code>.
 
 <h3 id=security-considerations>Security Considerations</h3>
 
