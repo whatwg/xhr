@@ -29,6 +29,10 @@ spec:dom; type:interface; text:Document
 <pre class=anchors>
 urlPrefix: https://w3c.github.io/DOM-Parsing/; spec: dom-parsing
     type: dfn; text: fragment serializing algorithm; url: dfn-fragment-serializing-algorithm
+urlPrefix: https://wicg.github.io/feature-policy/; spec: FEATURE-POLICY
+    type: dfn; text: policy-controlled feature; url: policy-controlled-feature
+    type: dfn; text: feature name; url: feature-name
+    type: dfn; text: default allowlist; url: default-allowlist
 </pre>
 
 <pre class=biblio>
@@ -2041,13 +2045,13 @@ attributes initialized to false, so it is suggested that for consistency all
 
 <h3 id=feature-policy>Feature Policy Integration</h3>
 
-<p>This specification defines a policy-controlled feature named <dfn>Synchronous
-XMLHttpRequest</dfn>.
+<p>This specification defines a <a>policy-controlled feature</a> named
+<dfn>Synchronous XMLHttpRequest</dfn>.
 
-<p>The feature name for <a>Synchronous XMLHttpRequest</a> is
+<p>The <a>feature name</a> for <a>Synchronous XMLHttpRequest</a> is
 "<code>sync-xhr</code>".
 
-<p>The default allowlist for <a>Synchronous XMLHttpRequest</a> is
+<p>The <a>default allowlist</a> for <a>Synchronous XMLHttpRequest</a> is
 <code>*</code>.
 
 <h3 id=security-considerations>Security Considerations</h3>
