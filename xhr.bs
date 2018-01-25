@@ -1,26 +1,12 @@
 <pre class=metadata>
-Title: XMLHttpRequest Standard
 Group: WHATWG
 H1: XMLHttpRequest
 Shortname: xhr
-Status: LS
-No Editor: true
+Text Macro: TWITTER xhrstandard
 Abstract: The XMLHttpRequest Standard defines an API that provides scripted client functionality for transferring data between a client and a server.
-Logo: https://resources.whatwg.org/logo-xhr.svg
-Boilerplate: omit feedback-header, omit conformance
-!Participate: <a href=https://github.com/whatwg/xhr>GitHub whatwg/xhr</a> (<a href=https://github.com/whatwg/xhr/issues/new>file an issue</a>, <a href=https://github.com/whatwg/xhr/issues>open issues</a>)
-!Participate: <a href=https://wiki.whatwg.org/wiki/IRC>IRC: #whatwg on Freenode</a>
-!Commits: <a href=https://github.com/whatwg/xhr/commits>GitHub whatwg/xhr/commits</a>
-!Commits: [SNAPSHOT-LINK]
-!Commits: <a href=https://twitter.com/xhrstandard>@xhrstandard</a>
-!Tests: <a href=https://github.com/w3c/web-platform-tests/tree/master/XMLHttpRequest>web-platform-tests XMLHttpRequest/</a> (<a href=https://github.com/w3c/web-platform-tests/labels/xhr>ongoing work</a>)
-!Translation (non-normative): <span title=Japanese><a href=https://triple-underscore.github.io/XHR-ja.html lang=ja hreflang=ja rel=alternate>日本語</a></span>
+Translation: ja https://triple-underscore.github.io/XHR-ja.html
 Translate IDs: enumdef-xmlhttprequestresponsetype xmlhttprequestresponsetype,dictdef-progresseventinit progresseventinit,typedefdef-formdataentryvalue formdataentryvalue
 </pre>
-
-<script src=https://resources.whatwg.org/file-issue.js async></script>
-<script src=https://resources.whatwg.org/commit-snapshot-shortcut-key.js async></script>
-<script src=https://resources.whatwg.org/dfn.js defer></script>
 
 <pre class=link-defaults>
 spec:dom; type:interface; text:Document
@@ -450,33 +436,25 @@ and
 methods, when invoked, must run these steps:
 
 <ol>
- <li><p>If <a>context object</a>'s
- <a>relevant settings object</a> has a
- <a>responsible document</a> and it is <em>not</em>
- <a>fully active</a>,
- <a>throw</a> an <code>InvalidStateError</code> exception.
+ <li><p>Let <var>settingsObject</var> be <a>context object</a>'s <a>relevant settings object</a>.
 
- <li><p>If <var>method</var> is not a
- <a for=/>method</a>,
- <a>throw</a> a
- <code>SyntaxError</code> exception.
+ <li><p>If <var>settingsObject</var> has a <a>responsible document</a> and it is <em>not</em>
+ <a>fully active</a>, then <a>throw</a> an "{{InvalidStateError!!exception}}" {{DOMException}}.
 
- <li><p>If <var>method</var> is a <a>forbidden method</a>,
- <a>throw</a> a
- <code>SecurityError</code> exception.
+ <li><p>If <var>method</var> is not a <a for=/>method</a>, then <a>throw</a> a
+ "{{SyntaxError!!exception}}" {{DOMException}}.
 
- <li><p><a for=method>Normalize</a>
- <var>method</var>.
+ <li><p>If <var>method</var> is a <a>forbidden method</a>, then <a>throw</a> a
+ "{{SecurityError!!exception}}" {{DOMException}}.
 
- <li><p>Let <var>parsedURL</var> be the result of
- <a lt="URL parser">parsing</a> <var>url</var> with
- <a>context object</a>'s
- <a>relevant settings object</a>'s
- <a>API base URL</a>.
+ <li><p><a for=method>Normalize</a> <var>method</var>.
 
- <li><p>If <var>parsedURL</var> is failure,
- <a>throw</a> a
- <code>SyntaxError</code> exception.
+ <li><p>Let <var>parsedURL</var> be the result of <a lt="URL parser">parsing</a> <var>url</var> with
+ <var>settingsObject</var>'s <a for="environment settings object">API base URL</a> and
+ <var>settingsObject</var>'s <a for="environment settings object">API URL character encoding</a>.
+
+ <li><p>If <var>parsedURL</var> is failure, then <a>throw</a> a "{{SyntaxError!!exception}}"
+ {{DOMException}}.
 
  <li>
   <p>If the <var>async</var> argument is omitted, set <var>async</var> to true, and set
@@ -499,11 +477,10 @@ methods, when invoked, must run these steps:
    <var>password</var>.
   </ol>
 
- <li><p>If <var>async</var> is false, <a>current global object</a> is a {{Window}}
- object, and the {{XMLHttpRequest/timeout!!attribute}} attribute value is not zero
- or the {{XMLHttpRequest/responseType}} attribute value is not the
- empty string, then <a>throw</a> an
- <code>InvalidAccessError</code> exception.
+ <li><p>If <var>async</var> is false, <a>current global object</a> is a {{Window}} object, and the
+ {{XMLHttpRequest/timeout!!attribute}} attribute value is not zero or the
+ {{XMLHttpRequest/responseType}} attribute value is not the empty string, then <a>throw</a> an
+ "{{InvalidAccessError!!exception}}" {{DOMException}}.
 
  <li>
   <p><a for=fetch lt=terminated>Terminate</a> the ongoing fetch operated by the
@@ -1390,12 +1367,12 @@ or null). Unless stated otherwise it is null.
  <li><p>If <a>response</a>'s
  <a for=response>body</a> is null, then return null.
 
- <li><p>If <a>final MIME type</a> is not `<code>text/html</code>`, `<code>text/xml</code>`,
- `<code>application/xml</code>`, or does not end in `<code>+xml</code>`, then return null.
+ <li><p>If <a>final MIME type</a> is not an <a>HTML MIME type</a> or an <a>XML MIME type</a>, then
+ return null.
 
  <li>
-  <p>If {{XMLHttpRequest/responseType}} is the empty string and <a>final MIME type</a> is
-  `<code>text/html</code>`, then return null.
+  <p>If {{XMLHttpRequest/responseType}} is the empty string and <a>final MIME type</a> is an
+  <a>HTML MIME type</a>, then return null.
 
   <p class=note>This is restricted to
   {{XMLHttpRequest/responseType}} being
@@ -1403,7 +1380,7 @@ or null). Unless stated otherwise it is null.
   content.
 
  <li>
-  <p>If <a>final MIME type</a> is `<code>text/html</code>`, then run these substeps:
+  <p>If <a>final MIME type</a> is an <a>HTML MIME type</a>, then run these substeps:
 
   <ol>
    <li><p>Let <var>charset</var> be the <a>final charset</a>.
@@ -1488,9 +1465,8 @@ or null). Unless stated otherwise it is null.
 
  <li>
   <p>If {{XMLHttpRequest/responseType}} is the empty string, <var>charset</var> is null, and
-  <a>final MIME type</a> is `<code>text/xml</code>`, `<code>application/xml</code>`, or ends in
-  `<code>+xml</code>`, then use the rules set forth in the XML specifications to determine the
-  encoding. Let <var>charset</var> be the determined encoding.
+  <a>final MIME type</a> is an <a>XML MIME type</a>, then use the rules set forth in the XML
+  specifications to determine the encoding. Let <var>charset</var> be the determined encoding.
   [[!XML]] [[!XMLNS]]
 
   <p class=note>This is restricted to
@@ -2092,9 +2068,6 @@ otherwise. [[!FETCH]]
 </div>
 
 
-<div data-fill-with=references></div>
-
-
 <h2 class=no-num id=acknowledgments>Acknowledgments</h2>
 
 <p>Thanks to
@@ -2215,7 +2188,3 @@ the HTML Standard (then Web Applications 1.0). [[!HTML]]
 <a href=https://annevankesteren.nl/ lang=nl>Anne van Kesteren</a>
 (<a href=https://www.mozilla.org/>Mozilla</a>,
 <a href=mailto:annevk@annevk.nl>annevk@annevk.nl</a>).
-
-<p>Per <a rel=license href=https://creativecommons.org/publicdomain/zero/1.0/>CC0</a>, to
-the extent possible under law, the editor has waived all copyright and related or
-neighboring rights to this work.
