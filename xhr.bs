@@ -1002,11 +1002,10 @@ method must run these steps:
   <p>Otherwise, if the <a>synchronous flag</a> is set, run these substeps:
 
   <ol>
-   <li>
-    <p>If <a>context object</a>'s <a>relevant settings object</a> has a
-    <a>responsible document</a> and it is <em>not</em> <a>allowed to use</a> the
-    <code><a>sync-xhr</a></code> feature, then run <a>handle response
-    end-of-body</a> for a <a>network error</a> and return.
+   <li><p>If <a>context object</a>'s <a>relevant settings object</a> has a
+   <a>responsible document</a> which is <em>not</em> <a>allowed to use</a> the
+   "<code><a>sync-xhr</a></code>" feature, then run <a>handle response end-of-body</a> for a
+   <a>network error</a> and return.
 
    <li>
     <p>Let <var>response</var> be the result of
@@ -2017,11 +2016,11 @@ attributes initialized to false, so it is suggested that for consistency all
 {{ProgressEvent}} interface do the same.
 
 
-<h3 id=feature-policy>Feature Policy Integration</h3>
+<h3 id=feature-policy-integration>Feature Policy Integration</h3>
 
-<p>This specification defines a <a>policy-controlled feature</a> identified by
-the string <code><dfn>sync-xhr</dfn></code>. Its <a>default allowlist</a> is
-<code>*</code>.
+<p>This specification defines a <a>policy-controlled feature</a> identified by the string
+"<code><dfn>sync-xhr</dfn></code>". Its <a>default allowlist</a> is <code>*</code>.
+
 
 <h3 id=security-considerations>Security Considerations</h3>
 
