@@ -15,9 +15,6 @@ spec:dom; type:interface; text:Document
 <pre class=anchors>
 urlPrefix: https://w3c.github.io/DOM-Parsing/; spec: dom-parsing
     type: dfn; text: fragment serializing algorithm; url: dfn-fragment-serializing-algorithm
-urlPrefix: https://wicg.github.io/feature-policy/; spec: FEATURE-POLICY
-    type: dfn; text: policy-controlled feature; url: policy-controlled-feature
-    type: dfn; text: default allowlist; url: default-allowlist
 </pre>
 
 <pre class=biblio>
