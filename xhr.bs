@@ -783,7 +783,7 @@ method must run these steps:
      <a for="MIME type">parameters</a>["<code>charset</code>"] to <var>encoding</var>.
 
      <li><p>Let <var>newValue</var> be <var>mimeTypeRecord</var>,
-     <a lt="serialize a MIME type with bytes">serialized</a>.
+     <a lt="serialize a MIME type to bytes">serialized</a>.
 
      <li><p><a for="header list">Set</a> `<code>Content-Type</code>`/<var>newValue</var> in
      <a>author request headers</a>.
