@@ -771,7 +771,7 @@ method must run these steps:
    <!-- XXX: add a primitive for this in Fetch -->
 
    <li><p>Let <var>mimeTypeRecord</var> be <var>value</var>,
-   <a for="parse a MIME type from bytes">parsed</a>.
+   <a lt="parse a MIME type from bytes">parsed</a>.
 
    <li>
     <p>If <var>mimeTypeRecord</var> is not failure and
@@ -783,7 +783,7 @@ method must run these steps:
      <a for="MIME type">parameters</a>["<code>charset</code>"] to <var>encoding</var>.
 
      <li><p>Let <var>newValue</var> be <var>mimeTypeRecord</var>,
-     <a for="serialize a MIME type with bytes">serialized</a>.
+     <a lt="serialize a MIME type with bytes">serialized</a>.
 
      <li><p><a for="header list">Set</a> `<code>Content-Type</code>`/<var>newValue</var> in
      <a>author request headers</a>.
