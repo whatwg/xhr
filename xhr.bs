@@ -761,23 +761,26 @@ method must run these steps:
   <a for="header list">append</a> `<code>Content-Type</code>`/<var>mimeType</var> to
   <a>author request headers</a>.
 
-  <p>Otherwise, if <var>encoding</var> is non-null, run these steps:
+  <p>Otherwise, if <var>encoding</var> is non-null and <a>author request headers</a>
+  <a for="header list">contains</a> `<code>Content-Type</code>`:
 
   <ol>
    <li><p>Let <var>value</var> be the <a for=header>value</a> of the <a>header</a> whose
    <a for=header>name</a> is a <a>byte-case-insensitive</a> match for `<code>Content-Type</code>` in
    <a>author request headers</a>.
+   <!-- XXX: add a primitive for this in Fetch -->
 
    <li><p>Let <var>mimeTypeRecord</var> be <var>value</var>,
    <a for="parse a MIME type from bytes">parsed</a>.
 
    <li>
     <p>If <var>mimeTypeRecord</var> is not failure and
-    <var>mimeTypeRecord</var>["<code>charset</code>"] is not nothing, then:
+    <var>mimeTypeRecord</var>'s <a for="MIME type">parameters</a>["<code>charset</code>"]
+    <a for=map>exists</a>, then:
 
     <ol>
-     <li><p><a for=map>Set</a> <var>mimeTypeRecord</var>["<code>charset</code>"] to
-     <var>encoding</var>.
+     <li><p><a for=map>Set</a> <var>mimeTypeRecord</var>'s
+     <a for="MIME type">parameters</a>["<code>charset</code>"] to <var>encoding</var>.
 
      <li><p>Let <var>newValue</var> be <var>mimeTypeRecord</var>,
      <a for="serialize a MIME type with bytes">serialized</a>.
