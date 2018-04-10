@@ -1307,13 +1307,21 @@ when {{overrideMimeType()}} is invoked. <dfn id=final-mime-type>Final MIME type<
 <p><dfn id=final-charset>Final charset</dfn> is the return value of these steps:
 
 <ol>
- <li><p>If <a>override MIME type</a>'s <a for="MIME type">parameters</a>["<code>charset</code>"] is
- not nothing, then return it.
+ <li><p>Let <var>label<var> be null.
 
- <li><p>If <a>response MIME type</a>'s <a for="MIME type">parameters</a>["<code>charset</code>"] is
- not nothing, then return it.
+ <li><p>If <a>response MIME type</a>'s <a for="MIME type">parameters</a>["<code>charset</code>"]
+ <a for=map>exists</a>, then set <var>label</var> to it.
 
- <li><p>Return null.
+ <li><p>If <a>override MIME type</a>'s <a for="MIME type">parameters</a>["<code>charset</code>"]
+ <a for=map>exists</a>, then set <var>label</var> to it.
+
+ <li><p>If <var>label</var> is null, then return null.
+
+ <li><p>Let <var>encoding</var> be the result of <a>getting an encoding</a> from <var>label</var>.
+
+ <li><p>If <var>encoding</var> is failure, then return null.
+
+ <li><p>Return <var>encoding</var>.
 </ol>
 
 <p class=note>The above steps intentionally do not use <a>final MIME type</a> as it would yield the
@@ -1497,7 +1505,7 @@ when invoked, must run these steps:
  <li><p>Set <a>override MIME type</a> to the result of <a lt="parse a MIME type">parsing</a>
  <var>mime</var>.
 
- <li><p>If <a>override MIME type</a> is failure, then set <var>mimeTypeRecord</var> to a new
+ <li><p>If <a>override MIME type</a> is failure, then set <a>override MIME type</a> to a new
  <a>MIME type</a> whose <a for="MIME type">type</a> is "<code>application</code>" and
  <a for="MIME type">subtype</a> is "<code>octet-stream</code>".
 </ol>
