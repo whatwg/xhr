@@ -674,7 +674,7 @@ object has an associated {{XMLHttpRequestUpload}} object.
 <h4 id=the-send()-method>The <code>send()</code> method</h4>
 
 <dl class=domintro>
- <dt><code><var>client</var> . <a method for=XMLHttpRequest>send([<var>body</var> = null])</a></code>
+ <dt><code><var>client</var> . <a method for=XMLHttpRequest lt="send(body)">send([<var>body</var> = null])</a></code>
  <dd>
   <p>Initiates the request. The optional argument provides the
   <a>request body</a>. The argument is ignored if
@@ -1660,8 +1660,7 @@ reasons. It also returns HTML resources as <a for=/>documents</a>.
 
 <p><em>This section is non-normative.</em>
 
-<p>The following events are dispatched on {{XMLHttpRequest}}
-and/or {{XMLHttpRequestUpload}} objects:
+<p>The following events are dispatched on {{XMLHttpRequest}} or {{XMLHttpRequestUpload}} objects:
 
 <table>
  <thead>
