@@ -1301,13 +1301,13 @@ transfer-encoding: chunked</code></pre>
 </ol>
 
 <p>The <dfn id=override-mime-type>override MIME type</dfn> is initially null and can get a value
-when {{overrideMimeType()}} is invoked. <dfn id=final-mime-type>Final MIME type</dfn> is the
+when {{overrideMimeType()}} is invoked. The <dfn id=final-mime-type>final MIME type</dfn> is the
 <a>override MIME type</a> unless that is null in which case it is the <a>response MIME type</a>.
 
-<p><dfn id=final-charset>Final charset</dfn> is the return value of these steps:
+<p>The <dfn id=final-charset>final charset</dfn> is the return value of these steps:
 
 <ol>
- <li><p>Let <var>label<var> be null.
+ <li><p>Let <var>label</var> be null.
 
  <li><p>If <a>response MIME type</a>'s <a for="MIME type">parameters</a>["<code>charset</code>"]
  <a for=map>exists</a>, then set <var>label</var> to it.
@@ -1324,8 +1324,8 @@ when {{overrideMimeType()}} is invoked. <dfn id=final-mime-type>Final MIME type<
  <li><p>Return <var>encoding</var>.
 </ol>
 
-<p class=note>The above steps intentionally do not use <a>final MIME type</a> as it would yield the
-wrong result.
+<p class=note>The above steps intentionally do not use the <a>final MIME type</a> as it would yield
+the wrong result.
 
 <hr>
 
@@ -1350,7 +1350,7 @@ or null). Unless stated otherwise it is null.
 
 <ol>
  <li><p>Set <a>response object</a> to a new {{Blob}} object representing <a>received bytes</a> with
- {{Blob/type}} <a>final MIME type</a>.
+ {{Blob/type}} set to the <a>final MIME type</a>.
 
  <li><p>Return <a>response object</a>.
 </ol>
@@ -1362,11 +1362,11 @@ or null). Unless stated otherwise it is null.
  <li><p>If <a>response</a>'s
  <a for=response>body</a> is null, then return null.
 
- <li><p>If <a>final MIME type</a> is not an <a>HTML MIME type</a> or an <a>XML MIME type</a>, then
- return null.
+ <li><p>If the <a>final MIME type</a> is not an <a>HTML MIME type</a> or an <a>XML MIME type</a>,
+ then return null.
 
  <li>
-  <p>If {{XMLHttpRequest/responseType}} is the empty string and <a>final MIME type</a> is an
+  <p>If {{XMLHttpRequest/responseType}} is the empty string and the <a>final MIME type</a> is an
   <a>HTML MIME type</a>, then return null.
 
   <p class=note>This is restricted to
@@ -1375,7 +1375,7 @@ or null). Unless stated otherwise it is null.
   content.
 
  <li>
-  <p>If <a>final MIME type</a> is an <a>HTML MIME type</a>, then run these substeps:
+  <p>If the <a>final MIME type</a> is an <a>HTML MIME type</a>, then:
 
   <ol>
    <li><p>Let <var>charset</var> be the <a>final charset</a>.
@@ -1420,7 +1420,7 @@ or null). Unless stated otherwise it is null.
  <a for=Document>encoding</a> to
  <var>charset</var>.
 
- <li><p>Set <var>document</var>'s <a>content type</a> to <a>final MIME type</a>.
+ <li><p>Set <var>document</var>'s <a>content type</a> to the <a>final MIME type</a>.
 
  <li><p>Set <var>document</var>'s
  <a for=Document>URL</a> to
@@ -1459,7 +1459,7 @@ or null). Unless stated otherwise it is null.
  <li><p>Let <var>charset</var> be the <a>final charset</a>.
 
  <li>
-  <p>If {{XMLHttpRequest/responseType}} is the empty string, <var>charset</var> is null, and
+  <p>If {{XMLHttpRequest/responseType}} is the empty string, <var>charset</var> is null, and the
   <a>final MIME type</a> is an <a>XML MIME type</a>, then use the rules set forth in the XML
   specifications to determine the encoding. Let <var>charset</var> be the determined encoding.
   [[!XML]] [[!XMLNS]]
@@ -1505,9 +1505,8 @@ when invoked, must run these steps:
  <li><p>Set <a>override MIME type</a> to the result of <a lt="parse a MIME type">parsing</a>
  <var>mime</var>.
 
- <li><p>If <a>override MIME type</a> is failure, then set <a>override MIME type</a> to a new
- <a>MIME type</a> whose <a for="MIME type">type</a> is "<code>application</code>" and
- <a for="MIME type">subtype</a> is "<code>octet-stream</code>".
+ <li><p>If <a>override MIME type</a> is failure, then set <a>override MIME type</a> to
+ <code>application/octet-stream</code>.
 </ol>
 
 
