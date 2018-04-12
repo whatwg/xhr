@@ -1156,11 +1156,9 @@ sequence). Unless stated otherwise it is the empty byte sequence.
 
 <h4 id=the-responseurl-attribute>The <code>responseURL</code> attribute</h4>
 
-<p>The <dfn attribute for=XMLHttpRequest><code>responseURL</code></dfn> attribute
-must return the empty string if <a>response</a>'s
-<a for=response>url</a> is null and its
-<a lt="URL serializer">serialization</a> with the
-<i>exclude fragment flag</i> set otherwise.
+<p>The <dfn attribute for=XMLHttpRequest><code>responseURL</code></dfn> attribute's getter, when
+invoked, must return the empty string if <a>response</a>'s <a for=response>URL</a> is null and its
+<a lt="URL serializer">serialization</a> otherwise.
 
 
 <h4 id=the-status-attribute>The <code>status</code> attribute</h4>
