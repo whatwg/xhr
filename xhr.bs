@@ -716,7 +716,7 @@ method must run these steps:
 
     <p>Set <a>request body</a> to <var>body</var>,
     <a lt="fragment serializing algorithm">serialized</a>,
-    <a lt="obtain Unicode">converted to Unicode</a>, and <a lt="UTF-8 encode">utf-8 encoded</a>.
+    <a lt="obtain Unicode">converted to Unicode</a>, and <a lt="UTF-8 encode">UTF-8 encoded</a>.
 
    <dt id=dom-xmlhttprequest-send-bodyinit>{{BodyInit}}
    <dd>
@@ -1386,8 +1386,7 @@ or null). Unless stated otherwise it is null.
    that does not terminate unsuccessfully then let <var>charset</var> be
    the return value.
 
-   <li><p>If <var>charset</var> is null, set <var>charset</var> to
-   <a>utf-8</a>.
+   <li><p>If <var>charset</var> is null, then set <var>charset</var> to <a>UTF-8</a>.
 
    <li><p>Let <var>document</var> be a
    <a>document</a> that
@@ -1412,8 +1411,7 @@ or null). Unless stated otherwise it is null.
   <p class=note>Resources referenced will not be loaded and no associated XSLT will be
   applied. <!-- XXX more formally?! -->
 
- <li><p>If <var>charset</var> is null, set <var>charset</var> to
- <a>utf-8</a>.
+ <li><p>If <var>charset</var> is null, then set <var>charset</var> to <a>UTF-8</a>.
  <!-- can only happen in the XML case -->
 
  <li><p>Set <var>document</var>'s
@@ -1470,16 +1468,14 @@ or null). Unless stated otherwise it is null.
   {{XMLHttpRequest/responseType}} value
   "<code>text</code>" simple.
 
- <li><p>If <var>charset</var> is null, set <var>charset</var> to
- <a>utf-8</a>.
+ <li><p>If <var>charset</var> is null, then set <var>charset</var> to <a>UTF-8</a>.
 
  <li><p>Return the result of running
  <a>decode</a> on <a>received bytes</a> using fallback
  encoding <var>charset</var>.
 </ol>
 
-<p class=note>Authors are strongly encouraged to always encode their
-resources using <a>utf-8</a>.
+<p class=note>Authors are strongly encouraged to always encode their resources using <a>UTF-8</a>.
 
 
 
