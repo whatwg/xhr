@@ -392,7 +392,6 @@ on an {{XMLHttpRequestUpload}} object will result in a <a>CORS-preflight request
 because registering an event listener causes the <a>upload listener flag</a> to be set, which in
 turn causes the <a>use-CORS-preflight flag</a> to be set.)
 
-<hr>
 
 <h4 id=the-open()-method>The <code>open()</code> method</h4>
 
@@ -1162,7 +1161,6 @@ when invoked, must run these steps:
 </ol>
 
 
-
 <h3 id=xmlhttprequest-response>Response</h3>
 
 <p>An {{XMLHttpRequest}} has an associated <dfn>response</dfn>. Unless stated
@@ -1171,6 +1169,7 @@ otherwise it is a
 
 <p>An {{XMLHttpRequest}} also has an associated <dfn>received bytes</dfn> (a byte
 sequence). Unless stated otherwise it is the empty byte sequence.
+
 
 <h4 id=the-responseurl-attribute>The <code>responseURL</code> attribute</h4>
 
@@ -1478,7 +1477,6 @@ or null). Unless stated otherwise it is null.
 <p class=note>Authors are strongly encouraged to always encode their resources using <a>UTF-8</a>.
 
 
-
 <h4 id=the-overridemimetype()-method>The <code>overrideMimeType()</code> method</h4>
 
 <dl class=domintro>
@@ -1506,9 +1504,7 @@ when invoked, must run these steps:
 </ol>
 
 
-
 <h4 id=the-responsetype-attribute>The <code>responseType</code> attribute</h4>
-
 
 <dl class=domintro>
  <dt><code><var>client</var> . <a attribute for=XMLHttpRequest>responseType</a> [ = <var>value</var> ]</code>
@@ -1557,8 +1553,6 @@ attribute must run these steps:
  {{XMLHttpRequest/responseType}}
  attribute's value to the given value.
 </ol>
-
-
 
 
 <h4 id=the-response-attribute>The <code>response</code> attribute</h4>
@@ -1621,7 +1615,6 @@ steps:
 </dl>
 
 
-
 <h4 id=the-responsetext-attribute>The <code>responseText</code> attribute</h4>
 
 <dl class=domintro>
@@ -1675,9 +1668,6 @@ attribute must return the result of running these steps:
 
  <li><p>Return the <a>document response</a>.
 </ol>
-
-<p class=note>The {{XMLHttpRequest/responseXML}} attribute has XML in its name for historical
-reasons. It also returns HTML resources as <a for=/>documents</a>.
 
 
 <h3 id=events>Events summary</h3>
@@ -1976,7 +1966,7 @@ attributes initialized to false, so it is suggested that for consistency all
 "<code><dfn>sync-xhr</dfn></code>". Its <a>default allowlist</a> is <code>*</code>.
 
 
-<h3 id=security-considerations>Security Considerations</h3>
+<h3 id=security-considerations>Security considerations</h3>
 
 <p>For cross-origin requests some kind of opt-in, e.g. the
 <a>CORS protocol</a> defined in the Fetch Standard, has to be
