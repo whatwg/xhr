@@ -702,13 +702,13 @@ method must run these steps:
   <p>If <var>body</var> is not null, then:
 
   <ol>
-   <li><p>Let <var>extractedMIMEType</var> be null.
+   <li><p>Let <var>extractedContentType</var> be null.
 
    <li><p>If <var>body</var> is a {{Document}}, then set <a>request body</a> to
    <var>body</var>, <a lt="fragment serializing algorithm">serialized</a>,
    <a lt="obtain Unicode">converted to Unicode</a>, and <a lt="UTF-8 encode">UTF-8 encoded</a>.
 
-   <li><p>Otherwise, set <a>request body</a> and <var>extractedMIMEType</var> to the result of
+   <li><p>Otherwise, set <a>request body</a> and <var>extractedContentType</var> to the result of
    <a for=BodyInit>extracting</a> <var>body</var>.
 
    <li>
@@ -743,10 +743,8 @@ method must run these steps:
          `<code>Content-Type</code>`/<var>newContentTypeSerialized</var> in
          <a>author request headers</a>.
         </ol>
-       </li>
       </ol>
     </ol>
-   </li>
    <li>
     Otherwise:
 
@@ -759,12 +757,10 @@ method must run these steps:
      `<code>Content-Type</code>`/`<code>application/xml;charset=UTF-8</code>` in
      <a>author request headers</a>.
 
-     <li><p>Otherwise, if <var>extractedMIMEType</var> is not null, <a for="header list">set</a>
-     `<code>Content-Type</code>`/<var>extractedMIMEType</var> in <a>author request headers</a>.
+     <li><p>Otherwise, if <var>extractedContentType</var> is not null, <a for="header list">set</a>
+     `<code>Content-Type</code>`/<var>extractedContentType</var> in <a>author request headers</a>.
     </ol>
-   </li>
   </ol>
- </li>
 
  <li><p>If one or more event listeners are registered on the associated
  {{XMLHttpRequestUpload}} object, then set <a>upload listener flag</a>.
