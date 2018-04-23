@@ -699,64 +699,66 @@ method must run these steps:
  <code>HEAD</code>, set <var>body</var> to null.
 
  <li>
-  <p>If <var>body</var> is null, go to the next step.
-
-  <p>Otherwise, let <var>encoding</var> and <var>mimeType</var> be null, and then follow these
-  rules, switching on <var>body</var>:
-
-  <dl class=switch>
-   <dt id=dom-xmlhttprequest-send-document>{{Document}}
-   <dd>
-    <p>Set <var>encoding</var> to `<code>UTF-8</code>`.
-
-    <p>Set <var>mimeType</var> to `<code>text/html</code>` if <var>body</var> is an
-    <a>HTML document</a>, and to `<code>application/xml</code>` otherwise. Then append
-    `<code>;charset=UTF-8</code>` to <var>mimeType</var>.
-
-    <p>Set <a>request body</a> to <var>body</var>,
-    <a lt="fragment serializing algorithm">serialized</a>,
-    <a lt="obtain Unicode">converted to Unicode</a>, and <a lt="UTF-8 encode">UTF-8 encoded</a>.
-
-   <dt id=dom-xmlhttprequest-send-bodyinit>{{BodyInit}}
-   <dd>
-    <p>If <var>body</var> is a string, set <var>encoding</var> to
-    `<code>UTF-8</code>`.
-
-    <p>Set <a>request body</a> and <var>mimeType</var> to the result of
-    <a for=BodyInit>extracting</a> <var>body</var>.
-  </dl>
-
-  <p>If <var>mimeType</var> is non-null and <a>author request headers</a>
-  <a for="header list">does not contain</a> `<code>Content-Type</code>`, then
-  <a for="header list">append</a> `<code>Content-Type</code>`/<var>mimeType</var> to
-  <a>author request headers</a>.
-
-  <p>Otherwise, if <var>encoding</var> is non-null and <a>author request headers</a>
-  <a for="header list">contains</a> `<code>Content-Type</code>`:
+  <p>If <var>body</var> is not null, then:
 
   <ol>
-   <li><p>Let <var>value</var> be the <a for=header>value</a> of the <a>header</a> whose
-   <a for=header>name</a> is a <a>byte-case-insensitive</a> match for `<code>Content-Type</code>` in
-   <a>author request headers</a>.
-   <!-- XXX: add a primitive for this in Fetch -->
+   <li><p>Let <var>extractedContentType</var> be null.
 
-   <li><p>Let <var>mimeTypeRecord</var> be <var>value</var>,
-   <a lt="parse a MIME type from bytes">parsed</a>.
+   <li><p>If <var>body</var> is a {{Document}}, then set <a>request body</a> to
+   <var>body</var>, <a lt="fragment serializing algorithm">serialized</a>,
+   <a lt="obtain Unicode">converted to Unicode</a>, and <a lt="UTF-8 encode">UTF-8 encoded</a>.
+
+   <li><p>Otherwise, set <a>request body</a> and <var>extractedContentType</var> to the result of
+   <a for=BodyInit>extracting</a> <var>body</var>.
 
    <li>
-    <p>If <var>mimeTypeRecord</var> is not failure and
-    <var>mimeTypeRecord</var>'s <a for="MIME type">parameters</a>["<code>charset</code>"]
-    <a for=map>exists</a>, then:
+    <p>If <a>author request headers</a> <a for="header list">contains</a>
+    `<code>Content-Type</code>`, then:
 
     <ol>
-     <li><p><a for=map>Set</a> <var>mimeTypeRecord</var>'s
-     <a for="MIME type">parameters</a>["<code>charset</code>"] to <var>encoding</var>.
+     <li>
+      <p>If <var>body</var> is a {{Document}} or a {{USVString}}, then:
 
-     <li><p>Let <var>newValue</var> be <var>mimeTypeRecord</var>,
-     <a lt="serialize a MIME type to bytes">serialized</a>.
+      <ol>
+       <li><p>Let <var>originalAuthorContentType</var> be the <a for=header>value</a> of the
+       <a>header</a> whose <a for=header>name</a> is a <a>byte-case-insensitive</a> match for
+       `<code>Content-Type</code>` in <a>author request headers</a>.
+       <!-- XXX: add a primitive for this in Fetch -->
 
-     <li><p><a for="header list">Set</a> `<code>Content-Type</code>`/<var>newValue</var> in
+       <li><p>Let <var>contentTypeRecord</var> be the result of
+       <a lt="parse a MIME type from bytes">parsing</a> <var>originalAuthorContentType</var>.
+
+       <li>
+        <p>If <var>contentTypeRecord</var> is not failure, and <var>contentTypeRecord</var>'s
+        <a for="MIME type">parameters</a>["<code>charset</code>"] <a for=map>exists</a>, then:
+
+        <ol>
+         <li><p><a for=map>Set</a> <var>contentTypeRecord</var>'s
+         <a for="MIME type">parameters</a>["<code>charset</code>"] to "<code>UTF-8</code>".
+
+         <li><p>Let <var>newContentTypeSerialized</var> be the result of
+         <a lt="serialize a MIME type to bytes">serializing</a> <var>contentTypeRecord</var>.
+
+         <li><p><a for="header list">Set</a>
+         `<code>Content-Type</code>`/<var>newContentTypeSerialized</var> in
+         <a>author request headers</a>.
+        </ol>
+      </ol>
+    </ol>
+   <li>
+    Otherwise:
+
+    <ol>
+     <li><p>If <var>body</var> is a <a>HTML document</a>, <a for="header list">set</a>
+     `<code>Content-Type</code>`/`<code>text/html;charset=UTF-8</code>` in
      <a>author request headers</a>.
+
+     <li><p>Otherwise, if <var>body</var> is an <a>XML document</a>, <a for="header list">set</a>
+     `<code>Content-Type</code>`/`<code>application/xml;charset=UTF-8</code>` in
+     <a>author request headers</a>.
+
+     <li><p>Otherwise, if <var>extractedContentType</var> is not null, <a for="header list">set</a>
+     `<code>Content-Type</code>`/<var>extractedContentType</var> in <a>author request headers</a>.
     </ol>
   </ol>
 
