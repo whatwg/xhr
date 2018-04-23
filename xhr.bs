@@ -1720,7 +1720,7 @@ attribute must return the result of running these steps:
 </table>
 
 
-<h3 id=feature-policy-integration>Feature policy integration</h3>
+<h3 id=feature-policy-integration>Feature Policy integration</h3>
 
 <p>This specification defines a <a>policy-controlled feature</a> identified by the string
 "<code><dfn>sync-xhr</dfn></code>". Its <a>default allowlist</a> is <code>*</code>.
