@@ -1047,7 +1047,7 @@ method must run these steps:
  <li><p>Let <var>length</var> be <var>response</var>'s <a for=response>body</a>'s
  <a for=body>total bytes</a>.
 
- <li><p><a>Fire a progress event</a> named
+ <li><p>If the <a>synchronous flag</a> is unset, <a>fire a progress event</a> named
  <a event><code>progress</code></a> with <var>transmitted</var> and <var>length</var>.
 
  <li><p>Set <a>state</a> to <i>done</i>.
