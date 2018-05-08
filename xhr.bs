@@ -1755,11 +1755,10 @@ interface FormData {
 <dfn id=concept-formdata-entry-name export for=FormData/entry>name</dfn> and a
 <dfn id=concept-formdata-entry-value export for=FormData/entry>value</dfn>.
 
-<p>For the purposes of interaction with other algorithms, an <a for=FormData>entry</a>'s type is
-"string" if its <a for=FormData/entry>value</a> is a string and "file" otherwise. If an
-<a for=FormData>entry</a>'s type is "file", its filename is the empty string if
-<a for=FormData/entry>value</a> is not a {{File}} object, and otherwise its filename is the value of
-<a for=FormData>entry</a>'s <a for=FormData/entry>value</a>'s {{File/name}} attribute.
+<p>For the purposes of interaction with other algorithms, an <a for=FormData>entry</a>'s filename is
+the empty string if <a for=FormData/entry>value</a> is not a {{File}} object, and otherwise its
+filename is the value of <a for=FormData>entry</a>'s <a for=FormData/entry>value</a>'s {{File/name}}
+attribute.
 
 <p>To <dfn>create an entry</dfn> for <var>name</var>, <var>value</var>, and optionally a
 <var>filename</var>, run these steps:
@@ -2079,6 +2078,7 @@ Julian Reschke,
 呂康豪 (Kang-Hao Lu),
 Karl Dubost,
 Keith Yeung,
+田村健人 (Kent TAMURA),
 Lachlan Hunt,
 Maciej Stachowiak,
 Magnus Kristiansen,
