@@ -1792,7 +1792,7 @@ constructor must run these steps:
  <li><p>Let <var>fd</var> be a new {{FormData}} object.
 
  <li><p>If <var>form</var> is given, then set <var>fd</var>'s <a for=FormData>entry list</a> to the
- result of <a>constructing the form data set</a> for <var>form</var>.
+ result of <a>constructing the entry list</a> for <var>form</var>.
 
  <li><p>Return <var>fd</var>.
 </ol>
