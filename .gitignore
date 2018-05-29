@@ -1,5 +1,6 @@
 /xhr.spec.whatwg.org/
-deploy_key
-deploy_key.pub
-deploy.sh
-xhr.html
+/deploy_key
+/deploy_key.pub
+/deploy.sh
+/review.sh
+/xhr.html
