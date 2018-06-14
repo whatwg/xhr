@@ -1068,12 +1068,12 @@ method must run these steps:
 <ol>
  <li><p>If the <a><code>send()</code> flag</a> is unset, return.
 
+ <li><p>If the <a>timed out flag</a> is set, then run the <a>request error steps</a> for event
+ <a event><code>timeout</code></a> and exception "{{TimeoutError!!exception}}" {{DOMException}}.
+
  <li><p>If <var>response</var> is a <a>network error</a>, then run the <a>request error steps</a>
  for event <a event><code>error</code></a> and exception "{{NetworkError!!exception}}"
  {{DOMException}}.
-
- <li><p>If the <a>timed out flag</a> is set, then run the <a>request error steps</a> for event
- <a event><code>timeout</code></a> and exception "{{TimeoutError!!exception}}" {{DOMException}}.
 
  <li>
   <p>Otherwise, if <var>response</var>'s <a for=response>body</a>'s <a for=body>stream</a> is
