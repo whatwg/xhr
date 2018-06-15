@@ -529,12 +529,6 @@ the editing software used to write the XMLHttpRequest Standard.
   or if <var>value</var> is not a header value.
 </dl>
 
-<p class=note>As indicated in the algorithm below certain headers cannot
-be set and are left up to the user agent. In addition there are certain
-other headers the user agent will take control of if they are not set by
-the author as indicated at the end of the
-<a><code>send()</code></a> method section.
-
 <p>The
 <dfn id=dom-xmlhttprequest-setrequestheader method for=XMLHttpRequest><code>setRequestHeader(<var>name</var>, <var>value</var>)</code></dfn>
 method must run these steps:
@@ -2101,6 +2095,7 @@ Philip Taylor,
 Robin Berjon,
 Rune <span title=Fabulous>F.</span> Halvorsen,
 Ruud Steltenpool,
+Ryo Onodera,
 Sergiu Dumitriu,
 Shivakumar Jagalur Matt,
 Sigbjørn Finne,
