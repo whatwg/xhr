@@ -672,10 +672,8 @@ object has an associated {{XMLHttpRequestUpload}} object.
 <dl class=domintro>
  <dt><code><var>client</var> . <a method for=XMLHttpRequest lt="send(body)">send([<var>body</var> = null])</a></code>
  <dd>
-  <p>Initiates the request. The optional argument provides the
-  <a>request body</a>. The argument is ignored if
-  <a>request method</a> is <code>GET</code> or
-  <code>HEAD</code>.
+  <p>Initiates the request. The <var>body</var> argument provides the <a>request body</a>, if any,
+  and is ignored if the <a>request method</a> is <code>GET</code> or <code>HEAD</code>.
 
   <p>Throws an "{{InvalidStateError!!exception}}" {{DOMException}} if either <a>state</a> is not
   <i>opened</i> or the <a><code>send()</code> flag</a> is set.
