@@ -494,8 +494,10 @@ methods, when invoked, must run these steps:
    <a>network error</a>.
    <li><p>Set <a>received bytes</a> to the empty byte sequence.
    <li><p>Set <a>response object</a> to null.
-   <li><p>Set <a>override MIME type</a> to null.
   </ul>
+
+  <p class=note><a>Override MIME type</a> is not overridden here as the
+  <code>overrideMimeType()</code> method can be invoked before the <code>open()</code> method.
 
  <li>
   <p>If the <a>state</a> is not
@@ -670,10 +672,8 @@ object has an associated {{XMLHttpRequestUpload}} object.
 <dl class=domintro>
  <dt><code><var>client</var> . <a method for=XMLHttpRequest lt="send(body)">send([<var>body</var> = null])</a></code>
  <dd>
-  <p>Initiates the request. The optional argument provides the
-  <a>request body</a>. The argument is ignored if
-  <a>request method</a> is <code>GET</code> or
-  <code>HEAD</code>.
+  <p>Initiates the request. The <var>body</var> argument provides the <a>request body</a>, if any,
+  and is ignored if the <a>request method</a> is <code>GET</code> or <code>HEAD</code>.
 
   <p>Throws an "{{InvalidStateError!!exception}}" {{DOMException}} if either <a>state</a> is not
   <i>opened</i> or the <a><code>send()</code> flag</a> is set.
