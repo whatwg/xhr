@@ -1345,7 +1345,7 @@ or null). Unless stated otherwise it is null.
 
 <ol>
  <li><p>Set <a>response object</a> to a new {{Blob}} object representing <a>received bytes</a> with
- {{Blob/type}} set to the <a>final MIME type</a>.
+ {{Blob/type}} set to the <a lt="serialize a MIME type to bytes">serializing</a> of the <a>final MIME type</a>.
 
  <li><p>Return <a>response object</a>.
 </ol>
