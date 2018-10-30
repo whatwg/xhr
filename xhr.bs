@@ -723,8 +723,10 @@ method must run these steps:
        <a lt="parse a MIME type from bytes">parsing</a> <var>originalAuthorContentType</var>.
 
        <li>
-        <p>If <var>contentTypeRecord</var> is not failure, and <var>contentTypeRecord</var>'s
-        <a for="MIME type">parameters</a>["<code>charset</code>"] <a for=map>exists</a>, then:
+        <p>If <var>contentTypeRecord</var> is not failure, <var>contentTypeRecord</var>'s
+        <a for="MIME type">parameters</a>["<code>charset</code>"] <a for=map>exists</a>, and
+        <a for="MIME type">parameters</a>["<code>charset</code>"] is not an
+        <a>ASCII case-insensitive</a> match for "<code>UTF-8</code>", then:
 
         <ol>
          <li><p><a for=map>Set</a> <var>contentTypeRecord</var>'s
