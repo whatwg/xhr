@@ -1280,8 +1280,7 @@ transfer-encoding: chunked</code></pre>
  <li><p>Let <var>mimeType</var> be the result of <a for="header list">extracting a MIME type</a>
  from <a>response</a>'s <a for=response>header list</a>.
 
- <li><p>If <var>mimeType</var> is the empty byte sequence, then set <var>mimeType</var> to
- `<code>text/xml</code>`.
+ <li><p>If <var>mimeType</var> is failure, then set <var>mimeType</var> to <code>text/xml</code>.
 
  <li><p>Return <var>mimeType</var>.
 </ol>
