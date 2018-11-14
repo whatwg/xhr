@@ -455,8 +455,7 @@ methods, when invoked, must run these steps:
   argument being <code>undefined</code> identical from it being omitted.
 
  <li>
-  <p>If <var>parsedURL</var>'s <a for=url>host</a>
-  is non-null, run these substeps:
+  <p>If <var>parsedURL</var>'s <a for=url>host</a> is non-null, then:
 
   <ol>
    <li><p>If the <var>username</var> argument is not null,
@@ -500,8 +499,7 @@ methods, when invoked, must run these steps:
   <code>overrideMimeType()</code> method can be invoked before the <code>open()</code> method.
 
  <li>
-  <p>If the <a>state</a> is not
-  <i>opened</i>, run these substeps:
+  <p>If the <a>state</a> is not <i>opened</i>, then:
 
   <ol>
    <li><p>Set <a>state</a> to
@@ -808,7 +806,7 @@ method must run these steps:
  <li><p>Set the <a><code>send()</code> flag</a>.
 
  <li>
-  <p>If the <a>synchronous flag</a> is unset, run these substeps:
+  <p>If the <a>synchronous flag</a> is unset, then:
 
   <ol>
    <li><p><a>Fire a progress event</a> named <a event><code>loadstart</code></a> with 0 and 0.
@@ -829,7 +827,7 @@ method must run these steps:
     <a lt="queue a task">queued</a> on the
     <a>networking task source</a> per below.
 
-    <p>Run these subsubsteps <a>in parallel</a>:
+    <p>Run these steps <a>in parallel</a>:
 
     <ol>
      <li>
@@ -837,7 +835,7 @@ method must run these steps:
 
       <ol>
        <li><p>the {{XMLHttpRequest/timeout!!attribute}} attribute value number of milliseconds has
-       passed since these subsubsteps started
+       passed since these steps started
        <li><p>while {{XMLHttpRequest/timeout!!attribute}} attribute value is not zero.
       </ol>
 
@@ -845,12 +843,11 @@ method must run these steps:
      <a>timed out flag</a> and <a for=fetch>terminate</a> <a for=/>fetching</a>.
     </ol>
 
-    <p>To <a>process request body</a> for
-    <var>request</var>, run these subsubsteps:
+    <p>To <a>process request body</a> for <var>request</var>, run these steps:
 
     <ol>
-     <li><p>If not roughly 50ms have passed since these subsubsteps were last invoked,
-     terminate these subsubsteps.
+     <li><p>If not roughly 50ms have passed since these steps were last invoked,
+     terminate these steps.
 
      <li><p>If <a>upload listener flag</a> is set, then
      <a>fire a progress event</a> named
@@ -864,15 +861,14 @@ method must run these steps:
      <!-- upload complete flag can never be set here I hope -->
     </ol>
 
-    <p class=note>These subsubsteps are only invoked when new bytes are transmitted.
+    <p class=note>These steps are only invoked when new bytes are transmitted.
 
-    <p>To <a>process request end-of-body</a> for
-    <var>request</var>, run these subsubsteps:
+    <p>To <a>process request end-of-body</a> for <var>request</var>, run these steps:
 
     <ol>
      <li><p>Set the <a>upload complete flag</a>.
 
-     <li><p>If <a>upload listener flag</a> is unset, then terminate these subsubsteps.
+     <li><p>If <a>upload listener flag</a> is unset, then terminate these steps.
 
      <li><p>Let <var>transmitted</var> be <var>request</var>'s
      <a for=request>body</a>'s
@@ -899,8 +895,7 @@ method must run these steps:
     </ol>
     <!-- upload complete flag can never be set here I hope -->
 
-    <p>To <a>process response</a> for <var>response</var>,
-    run these subsubsteps:
+    <p>To <a>process response</a> for <var>response</var>, run these steps:
 
     <ol>
      <li><p>Set <a>response</a> to <var>response</var>.
@@ -941,13 +936,13 @@ method must run these steps:
 
       <p>When <var>read</var> is fulfilled with an object whose <code>done</code> property is false
       and whose <code>value</code> property is a <code>Uint8Array</code> object, run these
-      subsubsubsteps and then run the above subsubstep again:
+      steps and then run this step again:
 
       <ol>
        <li><p>Append the <code>value</code> property to <a>received bytes</a>.
 
-       <li><p>If not roughly 50ms have passed since these subsubsubsteps were last invoked,
-       then terminate these subsubsubsteps.
+       <li><p>If not roughly 50ms have passed since these steps were last invoked, then terminate
+       these steps.
 
        <li><p>If <a>state</a> is
        <i>headers received</i>, then set
@@ -969,7 +964,7 @@ method must run these steps:
        <a>total bytes</a>.
       </ol>
 
-      <p class=note>These subsubsubsteps are only invoked when new bytes are transmitted.
+      <p class=note>These steps are only invoked when new bytes are transmitted.
 
       <p>When <var>read</var> is fulfilled with an object whose <code>done</code> property is true,
       run <a>handle response end-of-body</a> for <var>response</var>.
@@ -980,7 +975,7 @@ method must run these steps:
   </ol>
 
  <li>
-  <p>Otherwise, if the <a>synchronous flag</a> is set, run these substeps:
+  <p>Otherwise, if the <a>synchronous flag</a> is set, run these steps:
 
   <ol>
    <li><p>If <a>context object</a>'s <a>relevant settings object</a> has a
@@ -1109,19 +1104,21 @@ exception <var>exception</var> are:
   <p class=note>At this point it is clear that the <a>synchronous flag</a> is unset.
 
  <li>
-  <p>If the <a>upload complete flag</a> is unset, follow these substeps:
+  <p>If the <a>upload complete flag</a> is unset, then:
 
   <ol>
    <li><p>Set the <a>upload complete flag</a>.
 
-   <li><p>If <a>upload listener flag</a> is unset, then terminate these substeps.
+   <li>
+    <p>If the <a>upload listener flag</a> is set, then:
 
-   <li><p><a>Fire a progress event</a> named
-   <var>event</var> on the {{XMLHttpRequestUpload}} object with 0 and 0.
+    <ol>
+     <li><p><a>Fire a progress event</a> named <var>event</var> on the {{XMLHttpRequestUpload}}
+     object with 0 and 0.
 
-   <li><p><a>Fire a progress event</a> named
-   <a event><code>loadend</code></a> on the {{XMLHttpRequestUpload}}
-   object with 0 and 0.
+     <li><p><a>Fire a progress event</a> named <a event><code>loadend</code></a> on the
+     {{XMLHttpRequestUpload}} object with 0 and 0.
+    </ol>
   </ol>
 
  <li><p><a>Fire a progress event</a> named
@@ -2111,6 +2108,7 @@ Thomas Wisniewski,
 Tom Magliery,
 Travis Leithead,
 triple-underscore,
+Yaron Tausky,
 Yehuda Katz,
 Youenn Fablet, and
 Zhenbin Xu
