@@ -1196,24 +1196,14 @@ attribute must return the <a>response</a>'s
 
 <h4 id=the-getresponseheader()-method>The <code>getResponseHeader()</code> method</h4>
 
-<p>The
-<dfn method for=XMLHttpRequest><code>getResponseHeader(<var>name</var>)</code></dfn>
-method must run these steps:
-
-<ol>
- <li><p>If <a>response</a>'s <a for=response>header list</a>
- <a for="header list" lt=contain>does not contain</a> <var>name</var>, then return null.
-
- <li><p>Return the <a>combined value</a> given <var>name</var> and <a>response</a>'s
- <a for=response>header list</a>.
-</ol>
+<p>The <dfn method for=XMLHttpRequest><code>getResponseHeader(<var>name</var>)</code></dfn> method,
+when invoked, must return the result of <a for="header list">getting</a> <var>name</var> from
+<a>response</a>'s <a for=response>header list</a>
 
 <p class="note no-backref">The Fetch Standard filters <a>response</a>'s
-<a for=response>header list</a>.
-[[!FETCH]]
+<a for=response>header list</a>. [[!FETCH]]
 
 <div id=example-getresponseheader class=example>
-
  <p>For the following script:
 
  <pre><code class=lang-javascript>
@@ -1226,8 +1216,7 @@ client.onreadystatechange = function() {
   }
 }</code></pre>
 
- <p>The <code>print()</code> function will get to process something
- like:
+ <p>The <code>print()</code> function will get to process something like:
 
  <pre><code>
 text/plain; charset=UTF-8</code></pre>
