@@ -1782,7 +1782,7 @@ constructor must run these steps:
    <li><p>Let <var>list</var> be the result of <a>constructing the entry list</a> for
    <var>form</var>.<p></li>
 
-   <li><p>If <var>list</var> is null, <a>throw</a> an "{{IllegalStateError!!exception}}"
+   <li><p>If <var>list</var> is null, <a>throw</a> an "{{InvalidStateError!!exception}}"
    {{DOMException}}.</p></li>
 
    <li><p>Set <var>fd</var>'s <a for=FormData>entry list</a> to <var>list</var>.</p></li>
