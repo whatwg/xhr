@@ -1857,7 +1857,7 @@ is due to a limitation of the editing software used to write the XMLHttpRequest 
 
 <p>The <a>value pairs to iterate over</a> are the <a>context object</a>'s
 <a for=FormData>entry list</a>'s <a for=FormData>entries</a> with the key being the
-<a for=FormData/entry>name</a> and the value the <a for=FormData/entry>value</a>.
+<a for=FormData/entry>name</a> and the value being the <a for=FormData/entry>value</a>.
 
 
 <h2 id=interface-progressevent>Interface {{ProgressEvent}}</h2>
@@ -2025,6 +2025,7 @@ Björn Höhrmann,
 Boris Zbarsky,
 Caitlin Potter,
 Cameron McCormack,
+白丞祐 (Cheng-You Bai),
 Chris Marrin,
 Christophe Jolif,
 Charles McCathieNevile,
