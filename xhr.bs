@@ -505,7 +505,7 @@ methods, when invoked, must run these steps:
    <li><p>Set <a>state</a> to
    <i>opened</i>.
 
-   <li><p><a>Fire an event</a> named <a event><code>readystatechange</code></a>.
+   <li><p><a>Fire an event</a> named <a event><code>readystatechange</code></a> at <b>this</b>.
   </ol>
 </ol>
 
@@ -910,7 +910,7 @@ method must run these steps:
      <i>headers received</i>.
 
      <li><p><a>Fire an event</a> named
-     <a event><code>readystatechange</code></a>.
+     <a event><code>readystatechange</code></a> at <b>this</b>.
 
      <li><p>If <a>state</a> is not
      <i>headers received</i>, then return.
@@ -950,7 +950,7 @@ method must run these steps:
 
        <li>
         <p><a>Fire an event</a> named
-        <a event><code>readystatechange</code></a>.
+        <a event><code>readystatechange</code></a> at <b>this</b>.
 
         <p class="note no-backref">Web compatibility is the reason
         <a event><code>readystatechange</code></a> fires more often than
@@ -1045,7 +1045,7 @@ method must run these steps:
 
  <li><p>Unset the <a><code>send()</code> flag</a>.
 
- <li><p><a>Fire an event</a> named <a event><code>readystatechange</code></a>.
+ <li><p><a>Fire an event</a> named <a event><code>readystatechange</code></a> at <b>this</b>.
 
  <li><p><a>Fire a progress event</a> named <a event><code>load</code></a>
  at <b>this</b>
@@ -1101,7 +1101,7 @@ exception <var>exception</var> are:
  exception.
 
  <li>
-  <p><a>Fire an event</a> named <a event><code>readystatechange</code></a>.
+  <p><a>Fire an event</a> named <a event><code>readystatechange</code></a> at <b>this</b>.
 
   <p class=note>At this point it is clear that the <a>synchronous flag</a> is unset.
 
