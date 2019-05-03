@@ -1052,7 +1052,7 @@ method must run these steps:
  with <var>transmitted</var> and <var>length</var>.
 
  <li><p><a>Fire a progress event</a> named <a event><code>loadend</code></a>
- at <b>this</b>'s {{XMLHttpRequestUpload}} object
+ at <b>this</b>
  with <var>transmitted</var> and <var>length</var>.
 </ol>
 
