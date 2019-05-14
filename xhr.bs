@@ -743,7 +743,7 @@ method must run these steps:
     Otherwise:
 
     <ol>
-     <li><p>If <var>body</var> is a <a>HTML document</a>, <a for="header list">set</a>
+     <li><p>If <var>body</var> is an <a>HTML document</a>, <a for="header list">set</a>
      `<code>Content-Type</code>`/`<code>text/html;charset=UTF-8</code>` in
      <a>author request headers</a>.
 
@@ -1207,7 +1207,7 @@ when invoked, must return the result of <a for="header list">getting</a> <var>na
 
  <pre><code class=lang-javascript>
 var client = new XMLHttpRequest();
-client.open("GET", "unicorns-are-teh-awesome.txt", true);
+client.open("GET", "unicorns-are-awesome.txt", true);
 client.send();
 client.onreadystatechange = function() {
   if(this.readyState == this.HEADERS_RECEIVED) {
