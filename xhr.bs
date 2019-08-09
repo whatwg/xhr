@@ -1880,7 +1880,7 @@ is due to a limitation of the editing software used to write the XMLHttpRequest 
 <h2 id=interface-progressevent>Interface {{ProgressEvent}}</h2>
 
 <pre class=idl>
-[Constructor(DOMString type, optional ProgressEventInit eventInitDict),
+[Constructor(DOMString type, optional ProgressEventInit eventInitDict = {}),
  Exposed=(Window,DedicatedWorker,SharedWorker)]
 interface ProgressEvent : Event {
   readonly attribute boolean lengthComputable;
