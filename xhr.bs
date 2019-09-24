@@ -184,6 +184,7 @@ enum XMLHttpRequestResponseType {
 [Exposed=(Window,DedicatedWorker,SharedWorker)]
 interface XMLHttpRequest : XMLHttpRequestEventTarget {
   constructor();
+
   // event handler
   attribute EventHandler onreadystatechange;
 
@@ -1739,6 +1740,7 @@ typedef (File or USVString) FormDataEntryValue;
 [Exposed=(Window,Worker)]
 interface FormData {
   constructor(optional HTMLFormElement form);
+
   void append(USVString name, USVString value);
   void append(USVString name, Blob blobValue, optional USVString filename);
   void delete(USVString name);
@@ -1885,6 +1887,7 @@ is due to a limitation of the editing software used to write the XMLHttpRequest 
 [Exposed=(Window,DedicatedWorker,SharedWorker)]
 interface ProgressEvent : Event {
   constructor(DOMString type, optional ProgressEventInit eventInitDict = {});
+
   readonly attribute boolean lengthComputable;
   readonly attribute unsigned long long loaded;
   readonly attribute unsigned long long total;
