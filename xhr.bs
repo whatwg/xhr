@@ -203,7 +203,7 @@ interface XMLHttpRequest : XMLHttpRequestEventTarget {
            attribute unsigned long timeout;
            attribute boolean withCredentials;
   [SameObject] readonly attribute XMLHttpRequestUpload upload;
-  void send(optional (Document or BodyInit)? body = null);
+  void send(optional (Document or XMLHttpRequestBodyInit)? body = null);
   void abort();
 
   // response
@@ -703,7 +703,7 @@ method must run these steps:
    <a for=string>converted</a>, and <a lt="UTF-8 encode">UTF-8 encoded</a>.
 
    <li><p>Otherwise, set <a>request body</a> and <var>extractedContentType</var> to the result of
-   <a for=BodyInit>extracting</a> <var>body</var>.
+   <a for=XMLHttpRequestBodyInit>extracting</a> <var>body</var>.
 
    <li>
     <p>If <a>author request headers</a> <a for="header list">contains</a>
@@ -2073,6 +2073,7 @@ Feras Moussa,
 Gideon Cohn,
 Glenn Adams,
 Gorm Haug Eriksen,
+Gregory Terzian,
 Håkon Wium Lie,
 Hallvord R. M. Steen,
 Henri Sivonen,
