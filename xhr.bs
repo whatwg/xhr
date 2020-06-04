@@ -703,7 +703,7 @@ method must run these steps:
    <a for=string>converted</a>, and <a lt="UTF-8 encode">UTF-8 encoded</a>.
 
    <li><p>Otherwise, set <a>request body</a> and <var>extractedContentType</var> to the result of
-   <a for=XMLHttpRequestBodyInit>extracting</a> <var>body</var>.
+   <a for=BodyInit>extracting</a> <var>body</var>.
 
    <li>
     <p>If <a>author request headers</a> <a for="header list">contains</a>
