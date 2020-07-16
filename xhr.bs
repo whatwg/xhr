@@ -220,19 +220,51 @@ interface XMLHttpRequest : XMLHttpRequestEventTarget {
 };
 </pre>
 
-<p>An {{XMLHttpRequest}} object has an associated
-{{XMLHttpRequestUpload}} object.
+<p>An {{XMLHttpRequest}} object has an associated:
 
-<p>An {{XMLHttpRequest}} object has an associated
-<dfn id=concept-xmlhttprequest-state>state</dfn>, which is one of
-<i>unsent</i>,
-<i>opened</i>,
-<i>headers received</i>,
-<i>loading</i>, and
-<i>done</i>. Unless stated otherwise it is <i>unsent</i>.
+<dl>
+ <dt><dfn>upload object</dfn>
+ <dd>An {{XMLHttpRequestUpload}} object.
 
-<p>An {{XMLHttpRequest}} object has an associated
-<dfn id=send-flag><code>send()</code> flag</dfn>. Unless stated otherwise it is unset.
+ <dt><dfn id=concept-xmlhttprequest-state>state</dfn>
+ <dd>One of <i>unsent</i>, <i>opened</i>, <i>headers received</i>, <i>loading</i>, and <i>done</i>;
+ initially <i>unsent</i>.
+
+ <dt><dfn id=send-flag><code>send()</code> flag</dfn>
+ <dd>A flag, initially unset.
+
+ <dt><dfn>timeout</dfn>
+ <dd>An unsigned integer, initially 0.
+
+ <dt><dfn>cross-origin credentials</dfn>
+ <dd>A boolean, initially false.
+
+ <dt><dfn>request method</dfn>
+ <dd>A <a for=/>method</a>.
+
+ <dt><dfn>request URL</dfn>,
+ <dd>A <a for=/>URL</a>.
+
+ <dt><dfn id=author-request-headers>author request headers</dfn>
+ <dd>A <a for=/>header list</a>, initially empty.
+
+ <dt><dfn>request body</dfn>
+ <dd>Initially null.
+
+ <dt><dfn>synchronous flag</dfn>
+ <dd>A flag, initially unset.
+
+ <dt><dfn id=upload-complete-flag>upload complete flag</dfn>
+ <dd>A flag, initially unset.
+
+ <dt><dfn>upload listener flag</dfn>
+ <dd>A flag, initially unset.
+
+ <dt><dfn>timed out flag</dfn>.
+ <dd>A flag, initially unset.
+
+
+</dl>
 
 
 <h3 id=constructors>Constructors</h3>
@@ -242,8 +274,14 @@ interface XMLHttpRequest : XMLHttpRequestEventTarget {
  <dd>Returns a new {{XMLHttpRequest}} object.
 </dl>
 
-<p>The <dfn id=dom-xmlhttprequest constructor for=XMLHttpRequest><code>XMLHttpRequest()</code></dfn>
-constructor, when invoked, must return a new {{XMLHttpRequest}} object.
+<p>The
+<dfn id=dom-xmlhttprequest constructor for=XMLHttpRequest lt="XMLHttpRequest()"><code>new XMLHttpRequest()</code></dfn>
+constructor steps are:
+
+<ol>
+ <li><p>Set <a>this</a>'s <a>upload object</a> to a <a for=/>new</a>
+ <code>XMLHttpRequestUpload</code> object.
+</ol>
 
 
 <h3 id=garbage-collection>Garbage collection</h3>
@@ -333,10 +371,9 @@ supported as attribute solely by the
  <a>state</a>.
 </dl>
 
-<p>The
-<dfn attribute for=XMLHttpRequest><code>readyState</code></dfn>
-attribute's getter must return the value from the table below in the cell of the second column, from
-the row where the value in the cell in the first column is <a>context object</a>'s <a>state</a>:
+<p>The <dfn attribute for=XMLHttpRequest><code>readyState</code></dfn> getter steps are to return
+the value from the table below in the cell of the second column, from the row where the value in the
+cell in the first column is <a>this</a>'s <a>state</a>:
 
 <table>
  <tbody><tr>
@@ -370,24 +407,6 @@ the row where the value in the cell in the first column is <a>context object</a>
 
 
 <h3 id=request>Request</h3>
-
-<p>Each {{XMLHttpRequest}} object has the following request-associated concepts:
-<dfn>request method</dfn>,
-<dfn>request URL</dfn>,
-<dfn id=author-request-headers>author request headers</dfn>,
-<dfn>request body</dfn>,
-<dfn>synchronous flag</dfn>,
-<dfn id=upload-complete-flag>upload complete flag</dfn>,
-<dfn>upload listener flag</dfn>, and
-<dfn>timed out flag</dfn>.
-
-<p>The <a>author request headers</a> is an initially empty
-<a for=/>header list</a>.
-
-<p>The <a>request body</a> is initially null.
-
-<p>The <a>synchronous flag</a>, <a>upload complete flag</a>, <a>upload listener flag</a> and
-<a>timed out flag</a> are initially unset.
 
 <p class="note no-backref" id=event-listeners-and-preflight>Registering one or more event listeners
 on an {{XMLHttpRequestUpload}} object will result in a <a>CORS-preflight request</a>. (That is
@@ -429,7 +448,7 @@ and
 methods, when invoked, must run these steps:
 
 <ol>
- <li><p>Let <var>settingsObject</var> be <a>context object</a>'s <a>relevant settings object</a>.
+ <li><p>Let <var>settingsObject</var> be <a>this</a>'s <a>relevant settings object</a>.
 
  <li><p>If <var>settingsObject</var> has a <a>responsible document</a> and it is <em>not</em>
  <a>fully active</a>, then <a>throw</a> an "{{InvalidStateError!!exception}}" {{DOMException}}.
@@ -469,8 +488,8 @@ methods, when invoked, must run these steps:
    <var>password</var>.
   </ol>
 
- <li><p>If <var>async</var> is false, <a>current global object</a> is a {{Window}} object, and the
- {{XMLHttpRequest/timeout!!attribute}} attribute value is not zero or the
+ <li><p>If <var>async</var> is false, the <a>current global object</a> is a {{Window}} object, and
+ either <a>this</a>'s <a>timeout</a> is not 0 or the
  {{XMLHttpRequest/responseType}} attribute value is not the empty string, then <a>throw</a> an
  "{{InvalidAccessError!!exception}}" {{DOMException}}.
 
@@ -485,16 +504,16 @@ methods, when invoked, must run these steps:
   <p>Set variables associated with the object as follows:
 
   <ul>
-   <li><p>Unset the <a><code>send()</code> flag</a> and <a>upload listener flag</a>.
-   <li><p>Set <a>request method</a> to <var>method</var>.
-   <li><p>Set <a>request URL</a> to <var>parsedURL</var>.
-   <li><p>Set the <a>synchronous flag</a>, if <var>async</var> is false, and unset
-   the <a>synchronous flag</a> otherwise.
-   <li><p>Empty <a>author request headers</a>.
-   <li><p>Set <a>response</a> to a
-   <a>network error</a>.
-   <li><p>Set <a>received bytes</a> to the empty byte sequence.
-   <li><p>Set <a>response object</a> to null.
+   <li><p>Unset <a>this</a>'s <a><code>send()</code> flag</a>.
+   <li><p>Unset <a>this</a>'s <a>upload listener flag</a>.
+   <li><p>Set <a>this</a>'s <a>request method</a> to <var>method</var>.
+   <li><p>Set <a>this</a>'s <a>request URL</a> to <var>parsedURL</var>.
+   <li><p>Set <a>this</a>'s <a>synchronous flag</a> if <var>async</var> is false; otherwise unset
+   <a>this</a>'s <a>synchronous flag</a>.
+   <li><p><a for=list>Empty</a> <a>this</a>'s <a>author request headers</a>.
+   <li><p>Set <a>this</a>'s <a>response</a> to a <a>network error</a>.
+   <li><p>Set <a>this</a>'s <a>received bytes</a> to the empty byte sequence.
+   <li><p>Set <a>this</a>'s <a>response object</a> to null.
   </ul>
 
   <p class=note><a>Override MIME type</a> is not overridden here as the
@@ -507,7 +526,7 @@ methods, when invoked, must run these steps:
    <li><p>Set <a>state</a> to
    <i>opened</i>.
 
-   <li><p><a>Fire an event</a> named <a event><code>readystatechange</code></a> at <b>this</b>.
+   <li><p><a>Fire an event</a> named <a event><code>readystatechange</code></a> at <a>this</a>.
   </ol>
 </ol>
 
@@ -591,17 +610,17 @@ client.send();
   <a>synchronous flag</a> is set and <a>current global object</a> is a {{Window}} object.
 </dl>
 
-<p>The <dfn attribute for=XMLHttpRequest><code>timeout</code></dfn>
-attribute must return its value. Initially its value must be zero.
+<p>The <dfn attribute for=XMLHttpRequest><code>timeout</code></dfn> getter steps are to return
+<a>this</a>'s <a>timeout</a>.
 
-<p>Setting the {{XMLHttpRequest/timeout!!attribute}}
-attribute must run these steps:
+<p>The {{XMLHttpRequest/timeout!!attribute}} setter steps are:
 
 <ol>
- <li><p>If <a>current global object</a> is a {{Window}} object and the <a>synchronous flag</a> is
- set, then <a>throw</a> an "{{InvalidAccessError!!exception}}" {{DOMException}}.
+ <li><p>If the <a>current global object</a> is a {{Window}} object and <a>this</a>'s
+ <a>synchronous flag</a> is set, then <a>throw</a> an "{{InvalidAccessError!!exception}}"
+ {{DOMException}}.
 
- <li><p>Set its value to the new value.
+ <li><p>Set <a>this</a>'s <a>timeout</a> to the given value.
 </ol>
 
 <p class=note>This implies that the
@@ -624,29 +643,20 @@ of <a for=/>fetching</a>.
   <i>unsent</i> or <i>opened</i>, or if the <a><code>send()</code> flag</a> is set.
 </dl>
 
-<p>The
-<dfn attribute for=XMLHttpRequest><code>withCredentials</code></dfn>
-attribute must return its value. Initially its value must be false.
+<p>The <dfn attribute for=XMLHttpRequest><code>withCredentials</code></dfn> getter steps are to
+return <a>this</a>'s <a>cross-origin credentials</a>.
 
-<p>Setting the
-{{XMLHttpRequest/withCredentials}}
-attribute must run these steps:
+<p>The {{XMLHttpRequest/withCredentials}} setter steps are:
 
 <ol>
- <li><p>If <a>state</a> is not <i>unsent</i> or <i>opened</i>, then <a>throw</a> an
+ <li><p>If <a>this</a>'s <a>state</a> is not <i>unsent</i> or <i>opened</i>, then <a>throw</a> an
  "{{InvalidStateError!!exception}}" {{DOMException}}.
 
- <li><p>If the <a><code>send()</code> flag</a> is set, then <a>throw</a> an
+ <li><p>If <a>this</a>'s <a><code>send()</code> flag</a> is set, then <a>throw</a> an
  "{{InvalidStateError!!exception}}" {{DOMException}}.
 
- <li><p>Set the {{XMLHttpRequest/withCredentials}}
- attribute's value to the given value.
+ <li><p>Set <a>this</a>'s <a>cross-origin credentials</a> to the given value.
 </ol>
-
-<p class=note>The {{XMLHttpRequest/withCredentials}}
-attribute has no effect when
-<a for=/>fetching</a>
-<a lt="same origin">same-origin</a> resources.
 
 
 <h4 id=the-upload-attribute>The <code>upload</code> attribute</h4>
@@ -658,13 +668,8 @@ attribute has no effect when
  transferred to a server.
 </dl>
 
-<p>The
-<dfn attribute for=XMLHttpRequest><code>upload</code></dfn>
-attribute must return the associated
-{{XMLHttpRequestUpload}} object.
-
-<p class=note>As indicated earlier, each {{XMLHttpRequest}}
-object has an associated {{XMLHttpRequestUpload}} object.
+<p>The <dfn attribute for=XMLHttpRequest><code>upload</code></dfn> getter steps are to return
+<a>this</a>'s <a>upload object</a>.
 
 
 <h4 id=the-send()-method>The <code>send()</code> method</h4>
@@ -679,18 +684,17 @@ object has an associated {{XMLHttpRequestUpload}} object.
   <i>opened</i> or the <a><code>send()</code> flag</a> is set.
 </dl>
 
-<p>The <dfn method for=XMLHttpRequest><code>send(<var>body</var>)</code></dfn>
-method must run these steps:
+<p>The <dfn method for=XMLHttpRequest><code>send(<var>body</var>)</code></dfn> method steps are:
 
 <ol>
- <li><p>If <a>state</a> is not <i>opened</i>, then <a>throw</a> an
+ <li><p>If <a>this</a>'s <a>state</a> is not <i>opened</i>, then <a>throw</a> an
  "{{InvalidStateError!!exception}}" {{DOMException}}.
 
- <li><p>If the <a><code>send()</code> flag</a> is set, then <a>throw</a> an
+ <li><p>If <a>this</a>'s <a><code>send()</code> flag</a> is set, then <a>throw</a> an
  "{{InvalidStateError!!exception}}" {{DOMException}}.
 
- <li><p>If the <a>request method</a> is <code>GET</code> or
- <code>HEAD</code>, set <var>body</var> to null.
+ <li><p>If <a>this</a>'s <a>request method</a> is `<code>GET</code>` or `<code>HEAD</code>`, then
+ set <var>body</var> to null.
 
  <li>
   <p>If <var>body</var> is not null, then:
@@ -742,7 +746,7 @@ method must run these steps:
       </ol>
     </ol>
    <li>
-    Otherwise:
+    <p>Otherwise:
 
     <ol>
      <li><p>If <var>body</var> is an <a>HTML document</a>, <a for="header list">set</a>
@@ -758,8 +762,8 @@ method must run these steps:
     </ol>
   </ol>
 
- <li><p>If one or more event listeners are registered on the associated
- {{XMLHttpRequestUpload}} object, then set <a>upload listener flag</a>.
+ <li><p>If one or more event listeners are registered on <a>this</a>'s <a>upload object</a>, then
+ set <a>this</a>'s <a>upload listener flag</a>.
 
  <li>
   <p>Let <var>req</var> be a new
@@ -778,7 +782,7 @@ method must run these steps:
    <dt><a for=request>body</a>
    <dd><a>request body</a>
    <dt><a for=request>client</a>
-   <dd><a>context object</a>'s
+   <dd><a>this</a>'s
    <a>relevant settings object</a>
    <dt><a for=request>synchronous flag</a>
    <dd>Set if the <a>synchronous flag</a> is set.
@@ -787,14 +791,10 @@ method must run these steps:
    <dt><a for=request>use-CORS-preflight flag</a>
    <dd>Set if <a>upload listener flag</a> is set.
    <dt><a for=request>credentials mode</a>
-   <dd>If the {{XMLHttpRequest/withCredentials}}
-   attribute value is true, "<code>include</code>", and "<code>same-origin</code>"
-   otherwise.
+   <dd>If <a>this</a>'s <a>cross-origin credentials</a> is true, then "<code>include</code>";
+   otherwise "<code>same-origin</code>".
    <dt><a for=request>use-URL-credentials flag</a>
-   <dd>Set if either <a>request URL</a>'s
-   <a for=url>username</a>
-   is not the empty string or <a>request URL</a>'s
-   <a for=url>password</a> is non-null.
+   <dd>Set if <a>request URL</a> <a>includes credentials</a>.
   </dl>
 
  <li><p>Unset the <a>upload complete flag</a>.
@@ -808,20 +808,18 @@ method must run these steps:
  <li><p>Set the <a><code>send()</code> flag</a>.
 
  <li>
-  <p>If the <a>synchronous flag</a> is unset, then:
+  <p>If <a>this</a>'s <a>synchronous flag</a> is unset, then:
 
   <ol>
-   <li><p><a>Fire a progress event</a> named <a event><code>loadstart</code></a> at <b>this</b> with 0 and 0.
+   <li><p><a>Fire a progress event</a> named <a event><code>loadstart</code></a> at <a>this</a> with 0 and 0.
 
-   <li><p>If the <a>upload complete flag</a> is unset and <a>upload listener flag</a> is
-   set, then <a>fire a progress event</a> named
-   <a event><code>loadstart</code></a> at <b>this</b>'s
-   {{XMLHttpRequestUpload}} object with 0 and <var>req</var>'s
-   <a for=request>body</a>'s
-   <a>total bytes</a>.
+   <li><p>If <a>this</a>'s <a>upload complete flag</a> is unset and <a>this</a>'s
+   <a>upload listener flag</a> is set, then <a>fire a progress event</a> named
+   <a event><code>loadstart</code></a> at <a>this</a>'s <a>upload object</a> with 0 and
+   <var>req</var>'s <a for=request>body</a>'s <a>total bytes</a>.
 
-   <li><p>If <a>state</a> is not <i>opened</i> or the <a><code>send()</code> flag</a> is unset, then
-   return.
+   <li><p>If <a>this</a>'s <a>state</a> is not <i>opened</i> or <a>this</a>'s
+   <a><code>send()</code> flag</a> is unset, then return.
 
    <li>
     <p><a for=/>Fetch</a> <var>req</var>.
@@ -832,14 +830,9 @@ method must run these steps:
     <p>Run these steps <a>in parallel</a>:
 
     <ol>
-     <li>
-      <p>Wait until either <var>req</var>'s <a for=request>done flag</a> is set or
-
-      <ol>
-       <li><p>the {{XMLHttpRequest/timeout!!attribute}} attribute value number of milliseconds has
-       passed since these steps started
-       <li><p>while {{XMLHttpRequest/timeout!!attribute}} attribute value is not zero.
-      </ol>
+     <li><p>Wait until either <var>req</var>'s <a for=request>done flag</a> is set or <a>this</a>'s
+     <a>timeout</a> is not 0 and <a>this</a>'s <a>timeout</a> milliseconds have passed since these
+     steps started.
 
      <li><p>If <var>req</var>'s <a for=request>done flag</a> is unset, then set the
      <a>timed out flag</a> and <a for=fetch>terminate</a> <a for=/>fetching</a>.
@@ -851,15 +844,10 @@ method must run these steps:
      <li><p>If not roughly 50ms have passed since these steps were last invoked,
      terminate these steps.
 
-     <li><p>If <a>upload listener flag</a> is set, then
-     <a>fire a progress event</a> named
-     <a event><code>progress</code></a> at <b>this</b>'s
-     {{XMLHttpRequestUpload}} object with <var>request</var>'s
-     <a for=request>body</a>'s
-     <a>transmitted bytes</a> and
-     <var>request</var>'s
-     <a for=request>body</a>'s
-     <a>total bytes</a>.
+     <li><p>If <a>this</a>'s <a>upload listener flag</a> is set, then <a>fire a progress event</a>
+     named <a event><code>progress</code></a> at <a>this</a>'s <a>upload object</a> with
+     <var>request</var>'s <a for=request>body</a>'s <a>transmitted bytes</a> and
+     <var>request</var>'s <a for=request>body</a>'s <a>total bytes</a>.
      <!-- upload complete flag can never be set here I hope -->
     </ol>
 
@@ -868,9 +856,9 @@ method must run these steps:
     <p>To <a>process request end-of-body</a> for <var>request</var>, run these steps:
 
     <ol>
-     <li><p>Set the <a>upload complete flag</a>.
+     <li><p>Set <a>this</a>'s <a>upload complete flag</a>.
 
-     <li><p>If <a>upload listener flag</a> is unset, then terminate these steps.
+     <li><p>If <a>this</a>'s <a>upload listener flag</a> is unset, then terminate these steps.
 
      <li><p>Let <var>transmitted</var> be <var>request</var>'s
      <a for=request>body</a>'s
@@ -880,61 +868,47 @@ method must run these steps:
      <a for=request>body</a>'s
      <a>total bytes</a>.
 
-     <li><p><a>Fire a progress event</a> named
-     <a event><code>progress</code></a> at <b>this</b>'s
-     {{XMLHttpRequestUpload}} object with <var>transmitted</var> and
-     <var>length</var>.
+     <li><p><a>Fire a progress event</a> named <a event><code>progress</code></a> at <a>this</a>'s
+     <a>upload object</a> with <var>transmitted</var> and <var>length</var>.
 
-     <li><p><a>Fire a progress event</a> named
-     <a event><code>load</code></a> at <b>this</b>'s
-     {{XMLHttpRequestUpload}} object with <var>transmitted</var> and
-     <var>length</var>.
+     <li><p><a>Fire a progress event</a> named <a event><code>load</code></a> at <a>this</a>'s
+     <a>upload object</a> with <var>transmitted</var> and <var>length</var>.
 
-     <li><p><a>Fire a progress event</a> named
-     <a event><code>loadend</code></a> at <b>this</b>'s
-     {{XMLHttpRequestUpload}} object with <var>transmitted</var> and
-     <var>length</var>.
+     <li><p><a>Fire a progress event</a> named <a event><code>loadend</code></a> at <a>this</a>'s
+     <a>upload object</a> with <var>transmitted</var> and <var>length</var>.
     </ol>
     <!-- upload complete flag can never be set here I hope -->
 
     <p>To <a>process response</a> for <var>response</var>, run these steps:
 
     <ol>
-     <li><p>Set <a>response</a> to <var>response</var>.
+     <li><p>Set <a>this</a>'s <a>response</a> to <var>response</var>.
 
      <li><p><a>Handle errors</a> for <var>response</var>.
 
-     <li><p>If <a>response</a> is a
-     <a>network error</a>,
-     return.
+     <li><p>If <a>this</a>'s <a>response</a> is a <a>network error</a>, then return.
 
-     <li><p>Set <a>state</a> to
-     <i>headers received</i>.
+     <li><p>Set <a>this</a>'s <a>state</a> to <i>headers received</i>.
 
      <li><p><a>Fire an event</a> named
-     <a event><code>readystatechange</code></a> at <b>this</b>.
+     <a event><code>readystatechange</code></a> at <a>this</a>.
 
-     <li><p>If <a>state</a> is not
-     <i>headers received</i>, then return.
+     <li><p>If <a>this</a>'s <a>state</a> is not <i>headers received</i>, then return.
 
-     <li><p>If <var>response</var>'s
-     <a for=response>body</a> is null,
-     then run <a>handle response end-of-body</a> and return.
+     <li><p>If <a>this</a>'s <a>response</a>'s <a for=response>body</a> is null, then run
+     <a>handle response end-of-body</a> and return.
 
      <li>
       <p>Let <var>reader</var> be the result of
-      <a lt="get a reader" for=ReadableStream>getting a reader</a> from
-      <var>response</var>'s <a for=response>body</a>'s
-      <a for=body>stream</a>.
+      <a lt="get a reader" for=ReadableStream>getting a reader</a> from <a>this</a>'s
+      <a>response</a>'s <a for=response>body</a>'s <a for=body>stream</a>.
 
       <p><span class="note no-backref">This operation will not throw an exception.</span>
 
      <li>
       <p>Let <var>read</var> be the result of
-      <a lt="read a chunk" for=ReadableStream>reading a chunk</a>
-      from <var>response</var>'s
-      <a for=response>body</a>'s
-      <a>stream</a> with <var>reader</var>.
+      <a lt="read a chunk" for=ReadableStream>reading a chunk</a> from <a>this</a>'s
+      <a>response</a>'s <a for=response>body</a>'s <a for=body>stream</a> with <var>reader</var>.
 
       <p>When <var>read</var> is fulfilled with an object whose <code>done</code> property is false
       and whose <code>value</code> property is a <code>Uint8Array</code> object, run these
@@ -946,41 +920,36 @@ method must run these steps:
        <li><p>If not roughly 50ms have passed since these steps were last invoked, then terminate
        these steps.
 
-       <li><p>If <a>state</a> is
-       <i>headers received</i>, then set
-       <a>state</a> to <i>loading</i>.
+       <li><p>If <a>state</a> is <i>headers received</i>, then set <a>this</a>'s <a>state</a> to
+       <i>loading</i>.
 
        <li>
-        <p><a>Fire an event</a> named
-        <a event><code>readystatechange</code></a> at <b>this</b>.
+        <p><a>Fire an event</a> named <a event><code>readystatechange</code></a> at <a>this</a>.
 
         <p class="note no-backref">Web compatibility is the reason
         <a event><code>readystatechange</code></a> fires more often than
         <a>state</a> changes.
 
-       <li><p><a>Fire a progress event</a> named
-       <a event><code>progress</code></a> at <b>this</b> with <var>response</var>'s
-       <a for=response>body</a>'s
-       <a>transmitted bytes</a> and
-       <var>response</var>'s <a for=response>body</a>'s
-       <a>total bytes</a>.
+       <li><p><a>Fire a progress event</a> named <a event><code>progress</code></a> at <a>this</a>
+       with <a>this</a>'s <a>response</a>'s <a for=response>body</a>'s <a>transmitted bytes</a> and
+       <var>response</var>'s <a for=response>body</a>'s <a>total bytes</a>.
       </ol>
 
       <p class=note>These steps are only invoked when new bytes are transmitted.
 
       <p>When <var>read</var> is fulfilled with an object whose <code>done</code> property is true,
-      run <a>handle response end-of-body</a> for <var>response</var>.
+      run <a>handle response end-of-body</a> for <a>this</a>'s <a>response</a>.
 
       <p>When <var>read</var> is rejected with an exception, run <a>handle errors</a> for
-      <var>response</var>.
+      <a>this</a>'s <a>response</a>.
     </ol>
   </ol>
 
  <li>
-  <p>Otherwise, if the <a>synchronous flag</a> is set, run these steps:
+  <p>Otherwise, if <a>this</a>'s <a>synchronous flag</a> is set:
 
   <ol>
-   <li><p>If <a>context object</a>'s <a>relevant settings object</a> has a
+   <li><p>If <a>this</a>'s <a>relevant settings object</a> has a
    <a>responsible document</a> which is <em>not</em> <a>allowed to use</a> the
    "<code><a>sync-xhr</a></code>" feature, then run <a>handle response end-of-body</a> for a
    <a>network error</a> and return.
@@ -989,19 +958,17 @@ method must run these steps:
     <p>Let <var>response</var> be the result of
     <a for=/>fetching</a> <var>req</var>.
 
-    <p>If the {{XMLHttpRequest/timeout!!attribute}} attribute value is not zero, then set the
-    <a>timed out flag</a> and <a for=fetch>terminate</a> <a for=/>fetching</a> if it has not
-    returned within the amount of milliseconds from the {{XMLHttpRequest/timeout!!attribute}}.
+    <p>If <a>this</a>'s <a>timeout</a> is not 0, then set <a>this</a>'s <a>timed out flag</a> and
+    <a for=fetch>terminate</a> <a for=/>fetching</a> if it has not returned within <a>this</a>'s
+    <a>timeout</a> milliseconds.
 
-   <li><p>If <var>response</var>'s
-   <a for=response>body</a> is null,
-   then run <a>handle response end-of-body</a> and return.
+   <li><p>If <var>response</var>'s <a for=response>body</a> is null, then run
+   <a>handle response end-of-body</a> and return.
 
    <li>
     <p>Let <var>reader</var> be the result of
     <a lt="get a reader" for=ReadableStream>getting a reader</a> from
-    <var>response</var>'s <a for=response>body</a>'s
-    <a for=body>stream</a>.
+    <var>response</var>'s <a for=response>body</a>'s <a for=body>stream</a>.
 
     <p><span class="note no-backref">This operation will not throw an exception.</span>
 
@@ -1022,17 +989,15 @@ method must run these steps:
 <var>response</var>, run these steps:
 
 <ol>
- <li><p>If the <a>synchronous flag</a> is set, set <a>response</a> to
+ <li><p>If <a>this</a>'s <a>synchronous flag</a> is set, then set <a>this</a>'s <a>response</a> to
  <var>response</var>.
 
  <li><p><a>Handle errors</a> for <var>response</var>.
 
- <li><p>If <a>response</a> is a
- <a>network error</a>, return.
+ <li><p>If <a>this</a>'s <a>response</a> is a <a>network error</a>, then return.
 
- <li><p>If the <a>synchronous flag</a> is unset, update <a>response</a>'s
- <a for=response>body</a> using
- <var>response</var>.
+ <li><p>If <a>this</a>'s <a>synchronous flag</a> is unset, then update <a>this</a>'s
+ <a>response</a>'s <a for=response>body</a> using <var>response</var>.
 
  <li><p>Let <var>transmitted</var> be <var>response</var>'s <a for=response>body</a>'s
  <a for=body>transmitted bytes</a>.
@@ -1040,22 +1005,21 @@ method must run these steps:
  <li><p>Let <var>length</var> be <var>response</var>'s <a for=response>body</a>'s
  <a for=body>total bytes</a>.
 
- <li><p>If the <a>synchronous flag</a> is unset, <a>fire a progress event</a> named
- <a event><code>progress</code></a> at <b>this</b> with <var>transmitted</var> and <var>length</var>.
+ <li><p>If <a>this</a>'s <a>synchronous flag</a> is unset, then <a>fire a progress event</a> named
+ <a event><code>progress</code></a> at <a>this</a> with <var>transmitted</var> and
+ <var>length</var>.
 
- <li><p>Set <a>state</a> to <i>done</i>.
+ <li><p>Set <a>this</a>'s <a>state</a> to <i>done</i>.
 
- <li><p>Unset the <a><code>send()</code> flag</a>.
+ <li><p>Unset <a>this</a>'s <a><code>send()</code> flag</a>.
 
- <li><p><a>Fire an event</a> named <a event><code>readystatechange</code></a> at <b>this</b>.
+ <li><p><a>Fire an event</a> named <a event><code>readystatechange</code></a> at <a>this</a>.
 
- <li><p><a>Fire a progress event</a> named <a event><code>load</code></a>
- at <b>this</b>
- with <var>transmitted</var> and <var>length</var>.
+ <li><p><a>Fire a progress event</a> named <a event><code>load</code></a> at <a>this</a> with
+ <var>transmitted</var> and <var>length</var>.
 
- <li><p><a>Fire a progress event</a> named <a event><code>loadend</code></a>
- at <b>this</b>
- with <var>transmitted</var> and <var>length</var>.
+ <li><p><a>Fire a progress event</a> named <a event><code>loadend</code></a> at <a>this</a> with
+ <var>transmitted</var> and <var>length</var>.
 </ol>
 
 <p>To <dfn>handle errors</dfn> for <var>response</var> run these steps:
@@ -1103,7 +1067,7 @@ exception <var>exception</var> are:
  exception.
 
  <li>
-  <p><a>Fire an event</a> named <a event><code>readystatechange</code></a> at <b>this</b>.
+  <p><a>Fire an event</a> named <a event><code>readystatechange</code></a> at <a>this</a>.
 
   <p class=note>At this point it is clear that the <a>synchronous flag</a> is unset.
 
@@ -1117,19 +1081,19 @@ exception <var>exception</var> are:
     <p>If the <a>upload listener flag</a> is set, then:
 
     <ol>
-     <li><p><a>Fire a progress event</a> named <var>event</var> at <b>this</b>'s {{XMLHttpRequestUpload}}
-     object with 0 and 0.
+     <li><p><a>Fire a progress event</a> named <var>event</var> at <a>this</a>'s
+     <a>upload object</a> with 0 and 0.
 
-     <li><p><a>Fire a progress event</a> named <a event><code>loadend</code></a> at <b>this</b>'s
-     {{XMLHttpRequestUpload}} object with 0 and 0.
+     <li><p><a>Fire a progress event</a> named <a event><code>loadend</code></a> at <a>this</a>'s
+     <a>upload object</a> with 0 and 0.
     </ol>
   </ol>
 
  <li><p><a>Fire a progress event</a> named
- <var>event</var> at <b>this</b> with 0 and 0.
+ <var>event</var> at <a>this</a> with 0 and 0.
 
  <li><p><a>Fire a progress event</a> named
- <a event><code>loadend</code></a> at <b>this</b> with 0 and 0.
+ <a event><code>loadend</code></a> at <a>this</a> with 0 and 0.
 </ol>
 
 
@@ -1140,23 +1104,20 @@ exception <var>exception</var> are:
    <dd>Cancels any network activity.
   </dl>
 
-<p>The <dfn method for=XMLHttpRequest><code>abort()</code></dfn> method,
-when invoked, must run these steps:
+<p>The <dfn method for=XMLHttpRequest><code>abort()</code></dfn> method steps are:
 
 <ol>
  <li><p><a for=fetch lt=terminated>Terminate</a> the ongoing fetch with the <i>aborted</i> flag set.
 
- <li><p>If <a>state</a> is either
- <i>opened</i> with the <a><code>send()</code> flag</a> set,
- <i>headers received</i>, or <i>loading</i>, run the
+ <li><p>If <a>this</a>'s <a>state</a> is <i>opened</i> with <a>this</a>'s
+ <a><code>send()</code> flag</a> set, <i>headers received</i>, or <i>loading</i>, then run the
  <a>request error steps</a> for event <a event><code>abort</code></a>.
 
  <li>
-  <p>If <a>state</a> is <i>done</i>, then set <a>state</a> to <i>unsent</i> and <a>response</a> to a
-  <a>network error</a>.
+  <p>If <a>this</a>'s <a>state</a> is <i>done</i>, then set <a>this</a>'s <a>state</a> to
+  <i>unsent</i> and <a>response</a> to a <a>network error</a>.
 
-  <p class=note>No <a event><code>readystatechange</code></a> event
-  is dispatched.
+  <p class=note>No <a event><code>readystatechange</code></a> event is dispatched.
 </ol>
 
 
@@ -1431,7 +1392,7 @@ or null). Unless stated otherwise it is null.
  <a for=response>url</a>.
 
  <li><p>Set <var>document</var>'s <a for=Document>origin</a> to
- <a>context object</a>'s
+ <a>this</a>'s
  <a>relevant settings object</a>'s
  <a for="environment settings object">origin</a>.
 
@@ -1569,10 +1530,7 @@ attribute must run these steps:
  <a for=response>body</a>.
 </dl>
 
-<p>The
-<dfn attribute for=XMLHttpRequest><code>response</code></dfn>
-attribute must return the result of running these
-steps:
+<p>The <dfn attribute for=XMLHttpRequest><code>response</code></dfn> getter steps are:
 
 <dl class=switch>
  <dt>If {{XMLHttpRequest/responseType}}
@@ -1632,10 +1590,7 @@ steps:
   {{XMLHttpRequest/responseType}} is not the empty string or "<code>text</code>".
 </dl>
 
-<p>The
-<dfn attribute for=XMLHttpRequest><code>responseText</code></dfn>
-attribute must return the result of running these
-steps:
+<p>The <dfn attribute for=XMLHttpRequest><code>responseText</code></dfn> getter steps are:
 
 <ol>
  <li><p>If {{XMLHttpRequest/responseType}} is not the empty string or "<code>text</code>", then
@@ -1658,9 +1613,7 @@ steps:
   {{XMLHttpRequest/responseType}} is not the empty string or "<code>document</code>".
 </dl>
 
-<p>The
-<dfn attribute for=XMLHttpRequest><code>responseXML</code></dfn>
-attribute must return the result of running these steps:
+<p>The <dfn attribute for=XMLHttpRequest><code>responseXML</code></dfn> getter steps are:
 
 <ol>
  <li><p>If {{XMLHttpRequest/responseType}} is not the empty string or "<code>document</code>", then
@@ -1791,12 +1744,10 @@ attribute.
 <hr>
 
 <p>The
-<dfn id=dom-formdata constructor for=FormData><code>FormData(<var>form</var>)</code></dfn>
-constructor must run these steps:
+<dfn id=dom-formdata constructor for=FormData lt="FormData(form)"><code>new FormData(<var>form</var>)</code></dfn>
+constructor steps are:
 
 <ol>
- <li><p>Let <var>fd</var> be a new {{FormData}} object.
-
  <li>
   <p>If <var>form</var> is given, then:
 
@@ -1807,78 +1758,87 @@ constructor must run these steps:
    <li><p>If <var>list</var> is null, then <a>throw</a> an "{{InvalidStateError!!exception}}"
    {{DOMException}}.
 
-   <li><p>Set <var>fd</var>'s <a for=FormData>entry list</a> to <var>list</var>.
+   <li><p>Set <a>this</a>'s <a for=FormData>entry list</a> to <var>list</var>.
   </ol>
-
- <li><p>Return <var>fd</var>.
 </ol>
 
 <p>The
 <dfn id=dom-formdata-append method for=FormData><code>append(<var>name</var>, <var>value</var>)</code></dfn>
 and
 <dfn id=dom-formdata-append-blob method for=FormData><code>append(<var>name</var>, <var>blobValue</var>, <var>filename</var>)</code></dfn>
-methods, when invoked, must run these steps:
+method steps are:
 
 <ol>
- <li><p>Let <var>value</var> be <var>value</var> if given, and <var>blobValue</var> otherwise.
+ <li><p>Let <var>value</var> be <var>value</var> if given; otherwise <var>blobValue</var>.
 
  <li><p>Let <var>entry</var> be the result of <a lt="create an entry">creating an entry</a> with
  <var>name</var>, <var>value</var>, and <var>filename</var> if given.
 
- <li><p><a for=list>Append</a> <var>entry</var> to the <a>context object</a>'s
- <a for=FormData>entry list</a>.
+ <li><p><a for=list>Append</a> <var>entry</var> to <a>this</a>'s <a for=FormData>entry list</a>.
 </ol>
 
 <p class=note>The reason there is an argument named <var>value</var> as well as <var>blobValue</var>
 is due to a limitation of the editing software used to write the XMLHttpRequest Standard.
 
 <p>The <dfn id=dom-formdata-delete method for=FormData><code>delete(<var>name</var>)</code></dfn>
-method, when invoked, must <a for=list>remove</a> all <a for=FormData>entries</a> whose
-<a for=FormData/entry>name</a> is <var>name</var> from the <a>context object</a>'s
-<a for=FormData>entry list</a>.
+method steps are to <a for=list>remove</a> all <a for=FormData>entries</a> whose
+<a for=FormData/entry>name</a> is <var>name</var> from <a>this</a>'s <a for=FormData>entry list</a>.
 
-<p>The <dfn id=dom-formdata-get method for=FormData><code>get(<var>name</var>)</code></dfn> method,
-when invoked, must return the <a for=FormData/entry>value</a> of the first <a for=FormData>entry</a>
-whose <a for=FormData/entry>name</a> is <var>name</var> from the <a>context object</a>'s
-<a for=FormData>entry list</a>, and null otherwise.
+<p>The <dfn id=dom-formdata-get method for=FormData><code>get(<var>name</var>)</code></dfn> method
+steps are:
+
+<ol>
+ <li><p>If there is no <a for=FormData>entry</a> whose <a for=FormData/entry>name</a> is
+ <var>name</var> in <a>this</a>'s <a for=FormData>entry list</a>, then return null.
+
+ <li><p>Return the <a for=FormData/entry>value</a> of the first <a for=FormData>entry</a> whose
+ <a for=FormData/entry>name</a> is <var>name</var> from <a>this</a>'s
+ <a for=FormData>entry list</a>.
+</ol>
 
 <p>The <dfn id=dom-formdata-getall method for=FormData><code>getAll(<var>name</var>)</code></dfn>
-method, when invoked, must return the <a for=FormData/entry>values</a> of all
-<a for=FormData>entries</a> whose <a for=FormData/entry>name</a> is <var>name</var>, in order, from
-the <a>context object</a>'s <a for=FormData>entry list</a>, and the empty list otherwise.
+method steps are:
 
-<p>The <dfn id=dom-formdata-has method for=FormData><code>has(<var>name</var>)</code></dfn> method,
-when invoked, must return true if there is an <a for=FormData>entry</a> whose
-<a for=FormData/entry>name</a> is <var>name</var> in the <a>context object</a>'s
-<a for=FormData>entry list</a>, and false otherwise.
+<ol>
+ <li><p>If there is no <a for=FormData>entry</a> whose <a for=FormData/entry>name</a> is
+ <var>name</var> in <a>this</a>'s <a for=FormData>entry list</a>, then return the empty list.
+
+ <li><p>Return the <a for=FormData/entry>values</a> of all <a for=FormData>entries</a> whose
+ <a for=FormData/entry>name</a> is <var>name</var>, in order, from <a>this</a>'s
+ <a for=FormData>entry list</a>.
+</ol>
+
+<p>The <dfn id=dom-formdata-has method for=FormData><code>has(<var>name</var>)</code></dfn> method
+steps are to return true if there is an <a for=FormData>entry</a> whose
+<a for=FormData/entry>name</a> is <var>name</var> in <a>this</a>'s <a for=FormData>entry list</a>;
+otherwise false.
 
 <p>The
 <dfn id=dom-formdata-set method for=FormData><code>set(<var>name</var>, <var>value</var>)</code></dfn>
 and
 <dfn id=dom-formdata-set-blob method for=FormData><code>set(<var>name</var>, <var>blobValue</var>, <var>filename</var>)</code></dfn>
-methods, when invoked, must run these steps:
+method steps are:
 
 <ol>
- <li><p>Let <var>value</var> be <var>value</var> if given, and <var>blobValue</var> otherwise.
+ <li><p>Let <var>value</var> be <var>value</var> if given; otherwise <var>blobValue</var>.
 
  <li><p>Let <var>entry</var> be the result of <a lt="create an entry">creating an entry</a> with
  <var>name</var>, <var>value</var>, and <var>filename</var> if given.
 
- <li><p>If there are any <a for=FormData>entries</a> in the <a>context object</a>'s
- <a for=FormData>entry list</a> whose <a for=FormData/entry>name</a> is <var>name</var>, then
- <a for=list>replace</a> the first such <a for=FormData>entry</a> with <var>entry</var> and
- <a for=list>remove</a> the others.
+ <li><p>If there are <a for=FormData>entries</a> in <a>this</a>'s <a for=FormData>entry list</a>
+ whose <a for=FormData/entry>name</a> is <var>name</var>, then <a for=list>replace</a> the first
+ such <a for=FormData>entry</a> with <var>entry</var> and <a for=list>remove</a> the others.
 
- <li><p>Otherwise, <a for=list>append</a> <var>entry</var> to the <a>context object</a>'s
+ <li><p>Otherwise, <a for=list>append</a> <var>entry</var> to <a>this</a>'s
  <a for=FormData>entry list</a>.
 </ol>
 
 <p class=note>The reason there is an argument named <var>value</var> as well as <var>blobValue</var>
 is due to a limitation of the editing software used to write the XMLHttpRequest Standard.
 
-<p>The <a>value pairs to iterate over</a> are the <a>context object</a>'s
-<a for=FormData>entry list</a>'s <a for=FormData>entries</a> with the key being the
-<a for=FormData/entry>name</a> and the value being the <a for=FormData/entry>value</a>.
+<p>The <a>value pairs to iterate over</a> are <a>this</a>'s <a for=FormData>entry list</a>'s
+<a for=FormData>entries</a> with the key being the <a for=FormData/entry>name</a> and the value
+being the <a for=FormData/entry>value</a>.
 
 
 <h2 id=interface-progressevent>Interface {{ProgressEvent}}</h2>
@@ -1906,7 +1866,7 @@ dictionary ProgressEventInit : EventInit {
 <dfn attribute for=ProgressEvent><code>lengthComputable</code></dfn>,
 <dfn attribute for=ProgressEvent><code>loaded</code></dfn>, and
 <dfn attribute for=ProgressEvent><code>total</code></dfn>
-attributes must return the value they were initialized to.
+getter steps are to return the value they were initialized to.
 
 
 <h3 id=firing-events-using-the-progressevent-interface>Firing events using the {{ProgressEvent}} interface</h3>
