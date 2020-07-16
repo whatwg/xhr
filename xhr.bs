@@ -263,9 +263,22 @@ interface XMLHttpRequest : XMLHttpRequestEventTarget {
  <dt><dfn>timed out flag</dfn>.
  <dd>A flag, initially unset.
 
+ <dt><dfn>response</dfn>
+ <dd>A <a for=/>response</a>, initially a <a>network error</a>.
+
+ <dt><dfn>received bytes</dfn>
+ <dd>A <a for=/>byte sequence</a>, initially the empty byte sequence.
+
  <dt><dfn>response type</dfn>
  <dd>One of the empty string, "<code>arraybuffer</code>", "<code>blob</code>",
  "<code>document</code>", "<code>json</code>", and "<code>text</code>"; initially the empty string.
+
+ <dt><dfn>response object</dfn>
+ <dd>An object, failure, or null, initially null.
+
+ <dt><dfn id=override-mime-type>override MIME type</dfn>
+ <dd>A <a for=/>MIME type</a> or null, initially null. <span class=note>Can get a value when
+ {{overrideMimeType()}} is invoked.</span>
 </dl>
 
 
@@ -912,7 +925,7 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
       steps and then run this step again:
 
       <ol>
-       <li><p>Append the <code>value</code> property to <a>received bytes</a>.
+       <li><p>Append the <code>value</code> property to <a>this</a>'s <a>received bytes</a>.
 
        <li><p>If not roughly 50ms have passed since these steps were last invoked, then terminate
        these steps.
@@ -976,7 +989,7 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
    <li><p>Wait for <var>promise</var> to be fulfilled or rejected.
 
    <li><p>If <var>promise</var> is fulfilled with <var>bytes</var>, then append <var>bytes</var>
-   to <a>received bytes</a>.
+   to <a>this</a>'s <a>received bytes</a>.
 
    <li><p>Run <a>handle response end-of-body</a> for <var>response</var>.
   </ol>
@@ -1117,14 +1130,6 @@ exception <var>exception</var> are:
 
 <h3 id=xmlhttprequest-response>Response</h3>
 
-<p>An {{XMLHttpRequest}} has an associated <dfn>response</dfn>. Unless stated
-otherwise it is a
-<a>network error</a>.
-
-<p>An {{XMLHttpRequest}} also has an associated <dfn>received bytes</dfn> (a byte
-sequence). Unless stated otherwise it is the empty byte sequence.
-
-
 <h4 id=the-responseurl-attribute>The <code>responseURL</code> attribute</h4>
 
 <p>The <dfn attribute for=XMLHttpRequest><code>responseURL</code></dfn> getter steps are to return
@@ -1240,31 +1245,43 @@ transfer-encoding: chunked</code></pre>
 
 <h4 id=response-body>Response body</h4>
 
-<p>The <dfn id=response-mime-type>response MIME type</dfn> is the result of running these steps:
+<p>To <dfn id=response-mime-type>get a response MIME type</dfn> for an {{XMLHttpRequest}} object
+<var>xhr</var>, run these steps:
 
 <ol>
  <li><p>Let <var>mimeType</var> be the result of <a for="header list">extracting a MIME type</a>
- from <a>response</a>'s <a for=response>header list</a>.
+ from <var>xhr</var>'s <a>response</a>'s <a for=response>header list</a>.
 
  <li><p>If <var>mimeType</var> is failure, then set <var>mimeType</var> to <code>text/xml</code>.
 
  <li><p>Return <var>mimeType</var>.
 </ol>
 
-<p>The <dfn id=override-mime-type>override MIME type</dfn> is initially null and can get a value
-when {{overrideMimeType()}} is invoked. The <dfn id=final-mime-type>final MIME type</dfn> is the
-<a>override MIME type</a> unless that is null in which case it is the <a>response MIME type</a>.
+<p>To <dfn id=final-mime-type>get a final MIME type</dfn> for an {{XMLHttpRequest}} object
+<var>xhr</var>, run these steps:
 
-<p>The <dfn id=final-charset>final charset</dfn> is the return value of these steps:
+<ol>
+ <li><p>If <var>xhr</var>'s <a>override MIME type</a> is null, return the result of
+ <a>get a response MIME type</a> for <var>xhr</var>.
+
+ <li><p>Return <var>xhr</var>'s <a>override MIME type</a>.
+</ol>
+
+<p>To <dfn id=final-charset>get a final encoding</dfn> for an {{XMLHttpRequest}} object
+<var>xhr</var>, run these steps:
 
 <ol>
  <li><p>Let <var>label</var> be null.
 
- <li><p>If <a>response MIME type</a>'s <a for="MIME type">parameters</a>["<code>charset</code>"]
+ <li><p>Let <var>responseMIME</var> be the result of <a>get a response MIME type</a> for
+ <var>xhr</var>.
+
+ <li><p>If <var>responseMIME</var>'s <a for="MIME type">parameters</a>["<code>charset</code>"]
  <a for=map>exists</a>, then set <var>label</var> to it.
 
- <li><p>If <a>override MIME type</a>'s <a for="MIME type">parameters</a>["<code>charset</code>"]
- <a for=map>exists</a>, then set <var>label</var> to it.
+ <li><p>If <var>xhr</var>'s <a>override MIME type</a>'s
+ <a for="MIME type">parameters</a>["<code>charset</code>"] <a for=map>exists</a>, then set
+ <var>label</var> to it.
 
  <li><p>If <var>label</var> is null, then return null.
 
@@ -1275,14 +1292,10 @@ when {{overrideMimeType()}} is invoked. The <dfn id=final-mime-type>final MIME t
  <li><p>Return <var>encoding</var>.
 </ol>
 
-<p class=note>The above steps intentionally do not use the <a>final MIME type</a> as it would yield
-the wrong result.
+<p class=note>The above steps intentionally do not use the <a>get a final MIME type</a> as it would
+not be web compatible.
 
 <hr>
-
-<p>An {{XMLHttpRequest}} object has an associated <dfn>response object</dfn> (an object, failure,
-or null). Unless stated otherwise it is null.
-
 
 <p>To <dfn id=document-response>set a document response</dfn> for an {{XMLHttpRequest}} object
 <var>xhr</var>, run these steps:
@@ -1290,25 +1303,27 @@ or null). Unless stated otherwise it is null.
 <ol>
  <li><p>If <var>xhr</var>'s <a>response</a>'s <a for=response>body</a> is null, then return.
 
- <li><p>If the <a>final MIME type</a> is not an <a>HTML MIME type</a> or an <a>XML MIME type</a>,
- then return.
+ <li><p>Let <var>finalMIME</var> be the result of <a>get a final MIME type</a> for <var>xhr</var>.
+
+ <li><p>If <var>finalMIME</var> is not an <a>HTML MIME type</a> or an <a>XML MIME type</a>, then
+ return.
 
  <li>
-  <p>If <var>xhr</var>'s <a>response type</a> is the empty string and the <a>final MIME type</a> is an
+  <p>If <var>xhr</var>'s <a>response type</a> is the empty string and <var>finalMIME</var> is an
   <a>HTML MIME type</a>, then return.
 
   <p class=note>This is restricted to <var>xhr</var>'s <a>response type</a> being
   "<code>document</code>" in order to prevent breaking legacy content.
 
  <li>
-  <p>If the <a>final MIME type</a> is an <a>HTML MIME type</a>, then:
+  <p>If <var>finalMIME</var> is an <a>HTML MIME type</a>, then:
 
   <ol>
-   <li><p>Let <var>charset</var> be the <a>final charset</a>.
+   <li><p>Let <var>charset</var> be the result of <a>get a final encoding</a> for <var>xhr</var>.
 
    <li><p>If <var>charset</var> is null,
    <a lt="prescan a byte stream to determine its encoding">prescan</a>
-   the first 1024 bytes of <a>received bytes</a> and if
+   the first 1024 bytes of <var>xhr</var>'s <a>received bytes</a> and if
    that does not terminate unsuccessfully then let <var>charset</var> be
    the return value.
 
@@ -1326,13 +1341,10 @@ or null). Unless stated otherwise it is null.
   </ol>
 
  <li>
-  <p>Otherwise, let <var>document</var> be a
-  <a>document</a>
-  that represents the result of running the <a>XML parser</a>
-  with <a>XML scripting support disabled</a> on
+  <p>Otherwise, let <var>document</var> be a <a>document</a> that represents the result of running
+  the <a>XML parser</a> with <a>XML scripting support disabled</a> on <var>xhr</var>'s
   <a>received bytes</a>. If that fails (unsupported character encoding,
-  namespace well-formedness error, etc.), then return null.
-  [[!HTML]]
+  namespace well-formedness error, etc.), then return null. [[!HTML]]
 
   <p class=note>Resources referenced will not be loaded and no associated XSLT will be
   applied. <!-- XXX more formally?! -->
@@ -1342,7 +1354,7 @@ or null). Unless stated otherwise it is null.
 
  <li><p>Set <var>document</var>'s <a for=Document>encoding</a> to <var>charset</var>.
 
- <li><p>Set <var>document</var>'s <a>content type</a> to the <a>final MIME type</a>.
+ <li><p>Set <var>document</var>'s <a>content type</a> to <var>finalMIME</var>.
 
  <li><p>Set <var>document</var>'s <a for=Document>URL</a> to <var>xhr</var>'s <a>response</a>'s
  <a for=response>URL</a>.
@@ -1353,7 +1365,6 @@ or null). Unless stated otherwise it is null.
  <li><p>Set <var>xhr</var>'s <a>response object</a> to <var>document</var>.
 </ol>
 
-
 <p>To <dfn id="text-response" lt="getting a text response">get a text response</dfn> for an
 {{XMLHttpRequest}} object <var>xhr</var>, run these steps:
 
@@ -1361,13 +1372,13 @@ or null). Unless stated otherwise it is null.
  <li><p>If <var>xhr</var>'s <a>response</a>'s <a for=response>body</a> is null, then return
  the empty string.
 
- <li><p>Let <var>charset</var> be the <a>final charset</a>.
+ <li><p>Let <var>charset</var> be the result of <a>get a final encoding</a> for <var>xhr</var>.
 
  <li>
-  <p>If <var>xhr</var>'s <a>response type</a> is the empty string, <var>charset</var> is null, and the
-  <a>final MIME type</a> is an <a>XML MIME type</a>, then use the rules set forth in the XML
-  specifications to determine the encoding. Let <var>charset</var> be the determined encoding.
-  [[!XML]] [[!XMLNS]]
+  <p>If <var>xhr</var>'s <a>response type</a> is the empty string, <var>charset</var> is null, and
+  the result of <a>get a final MIME type</a> for <var>xhr</var> is an <a>XML MIME type</a>, then use
+  the rules set forth in the XML specifications to determine the encoding. Let <var>charset</var> be
+  the determined encoding. [[!XML]] [[!XMLNS]]
 
   <p class=note>This is restricted to <var>xhr</var>'s <a>response type</a> being the empty string
   to keep the non-legacy <a>response type</a> value "<code>text</code>" simple.
@@ -1489,7 +1500,8 @@ steps are:
 
  <li id=blob-response><p>Otherwise, if <a>this</a>'s <a>response type</a> is "<code>blob</code>",
  set <a>this</a>'s <a>response object</a> to a <a for=/>new</a> {{Blob}} object representing
- <a>this</a>'s <a>received bytes</a> with {{Blob/type}} set to the <a>final MIME type</a>.
+ <a>this</a>'s <a>received bytes</a> with {{Blob/type}} set to the result of
+ <a>get a final MIME type</a> for <a>this</a>.
 
  <li><p>Otherwise, if <a>this</a>'s <a>response type</a> is "<code>document</code>",
  <a>set a document response</a> for <a>this</a>.
