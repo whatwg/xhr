@@ -606,7 +606,7 @@ client.send();
 </div>
 
 
-<h4 id=the-timeout-attribute>The <code>timeout</code> attribute</h4>
+<h4 id=the-timeout-attribute>The <code>timeout</code> getter and setter</h4>
 
 <dl class=domintro>
  <dt><code><var>client</var> . <a attribute for=XMLHttpRequest>timeout</a></code>
@@ -642,7 +642,7 @@ progress. If that occurs it will still be measured relative to the start
 of <a for=/>fetching</a>.
 
 
-<h4 id=the-withcredentials-attribute>The <code>withCredentials</code> attribute</h4>
+<h4 id=the-withcredentials-attribute>The <code>withCredentials</code> getter and setter</h4>
 
 <dl class=domintro>
  <dt><code><var>client</var> . <a attribute for=XMLHttpRequest>withCredentials</a></code>
@@ -671,7 +671,7 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
 </ol>
 
 
-<h4 id=the-upload-attribute>The <code>upload</code> attribute</h4>
+<h4 id=the-upload-attribute>The <code>upload</code> getter</h4>
 
 <dl class=domintro>
  <dt><code><var>client</var> . <a attribute for=XMLHttpRequest>upload</a></code>
@@ -1130,20 +1130,20 @@ exception <var>exception</var> are:
 
 <h3 id=xmlhttprequest-response>Response</h3>
 
-<h4 id=the-responseurl-attribute>The <code>responseURL</code> attribute</h4>
+<h4 id=the-responseurl-attribute>The <code>responseURL</code> getter</h4>
 
 <p>The <dfn attribute for=XMLHttpRequest><code>responseURL</code></dfn> getter steps are to return
 the empty string if <a>this</a>'s <a>response</a>'s <a for=response>URL</a> is null; otherwise its
 <a lt="URL serializer">serialization</a> with the <i>exclude fragment flag</i> set.
 
 
-<h4 id=the-status-attribute>The <code>status</code> attribute</h4>
+<h4 id=the-status-attribute>The <code>status</code> getter</h4>
 
 <p>The <dfn attribute for=XMLHttpRequest><code>status</code></dfn> getter steps are to return
 <a>this</a>'s <a>response</a>'s <a for=response>status</a>.
 
 
-<h4 id=the-statustext-attribute>The <code>statusText</code> attribute</h4>
+<h4 id=the-statustext-attribute>The <code>statusText</code> getter</h4>
 
 <p>The <dfn attribute for=XMLHttpRequest><code>statusText</code></dfn> getter steps are to return
 <a>this</a>'s <a>response</a>'s <a>status message</a>.
@@ -1419,7 +1419,7 @@ steps are:
 </ol>
 
 
-<h4 id=the-responsetype-attribute>The <code>responseType</code> attribute</h4>
+<h4 id=the-responsetype-attribute>The <code>responseType</code> getter and setter</h4>
 
 <dl class=domintro>
  <dt><code><var>client</var> . <a attribute for=XMLHttpRequest>responseType</a> [ = <var>value</var> ]</code>
@@ -1463,7 +1463,7 @@ steps are:
 </ol>
 
 
-<h4 id=the-response-attribute>The <code>response</code> attribute</h4>
+<h4 id=the-response-attribute>The <code>response</code> getter</h4>
 
 <dl class=domintro>
  <dt><code><var>client</var> . <a attribute for=XMLHttpRequest>response</a></code>
@@ -1524,7 +1524,7 @@ steps are:
 </ol>
 
 
-<h4 id=the-responsetext-attribute>The <code>responseText</code> attribute</h4>
+<h4 id=the-responsetext-attribute>The <code>responseText</code> getter</h4>
 
 <dl class=domintro>
  <dt><code><var>client</var> . <a attribute for=XMLHttpRequest>responseText</a></code>
@@ -1548,7 +1548,7 @@ steps are:
 </ol>
 
 
-<h4 id=the-responsexml-attribute>The <code>responseXML</code> attribute</h4>
+<h4 id=the-responsexml-attribute>The <code>responseXML</code> getter</h4>
 
 <dl class=domintro>
  <dt><code><var>client</var> . <a attribute for=XMLHttpRequest>responseXML</a></code>
