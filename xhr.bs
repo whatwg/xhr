@@ -260,7 +260,7 @@ interface XMLHttpRequest : XMLHttpRequestEventTarget {
  <dt><dfn>upload listener flag</dfn>
  <dd>A flag, initially unset.
 
- <dt><dfn>timed out flag</dfn>.
+ <dt><dfn>timed out flag</dfn>
  <dd>A flag, initially unset.
 
  <dt><dfn>response</dfn>
@@ -894,7 +894,7 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
     <ol>
      <li><p>Set <a>this</a>'s <a>response</a> to <var>response</var>.
 
-     <li><p><a>Handle errors</a> for <var>response</var>.
+     <li><p><a>Handle errors</a> fo <a>this</a> and <var>response</var>.
 
      <li><p>If <a>this</a>'s <a>response</a> is a <a>network error</a>, then return.
 
@@ -906,7 +906,8 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
      <li><p>If <a>this</a>'s <a>state</a> is not <i>headers received</i>, then return.
 
      <li><p>If <a>this</a>'s <a>response</a>'s <a for=response>body</a> is null, then run
-     <a>handle response end-of-body</a> and return.
+     <a>handle response end-of-body</a> for <a>this</a> and <a>this</a>'s <a>response</a>, and then
+     return.
 
      <li>
       <p>Let <var>reader</var> be the result of
@@ -948,10 +949,10 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
       <p class=note>These steps are only invoked when new bytes are transmitted.
 
       <p>When <var>read</var> is fulfilled with an object whose <code>done</code> property is true,
-      run <a>handle response end-of-body</a> for <a>this</a>'s <a>response</a>.
+      run <a>handle response end-of-body</a> for <a>this</a> and <a>this</a>'s <a>response</a>.
 
       <p>When <var>read</var> is rejected with an exception, run <a>handle errors</a> for
-      <a>this</a>'s <a>response</a>.
+      <a>this</a> and <a>this</a>'s <a>response</a>.
     </ol>
   </ol>
 
@@ -959,10 +960,9 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
   <p>Otherwise, if <a>this</a>'s <a>synchronous flag</a> is set:
 
   <ol>
-   <li><p>If <a>this</a>'s <a>relevant settings object</a> has a
-   <a>responsible document</a> which is <em>not</em> <a>allowed to use</a> the
-   "<code><a>sync-xhr</a></code>" feature, then run <a>handle response end-of-body</a> for a
-   <a>network error</a> and return.
+   <li><p>If <a>this</a>'s <a>relevant settings object</a> has a <a>responsible document</a> which
+   is not <a>allowed to use</a> the "<code><a>sync-xhr</a></code>" feature, then run
+   <a>handle response end-of-body</a> for <a>this</a> and a <a>network error</a>, and then return.
 
    <li>
     <p>Let <var>response</var> be the result of
@@ -973,7 +973,7 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
     <a>timeout</a> milliseconds.
 
    <li><p>If <var>response</var>'s <a for=response>body</a> is null, then run
-   <a>handle response end-of-body</a> and return.
+   <a>handle response end-of-body</a> for <a>this</a> and <var>response</var>, and then return.
 
    <li>
     <p>Let <var>reader</var> be the result of
@@ -991,22 +991,23 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
    <li><p>If <var>promise</var> is fulfilled with <var>bytes</var>, then append <var>bytes</var>
    to <a>this</a>'s <a>received bytes</a>.
 
-   <li><p>Run <a>handle response end-of-body</a> for <var>response</var>.
+   <li><p>Run <a>handle response end-of-body</a> for <a>this</a> and <var>response</var>.
   </ol>
 </ol>
 
-<p id=handle-response-end-of-file>To <dfn>handle response end-of-body</dfn> for
-<var>response</var>, run these steps:
+<p id=handle-response-end-of-file>To <dfn>handle response end-of-body</dfn> for an
+{{XMLHttpRequest}} object <var>xhr</var> and a <a for=/>response</a> <var>response</var>, run these
+steps:
 
 <ol>
- <li><p>If <a>this</a>'s <a>synchronous flag</a> is set, then set <a>this</a>'s <a>response</a> to
- <var>response</var>.
+ <li><p>If <var>xhr</var>'s <a>synchronous flag</a> is set, then set <var>xhr</var>'s
+ <a>response</a> to <var>response</var>.
 
- <li><p><a>Handle errors</a> for <var>response</var>.
+ <li><p><a>Handle errors</a> for <var>xhr</var> and <var>response</var>.
 
- <li><p>If <a>this</a>'s <a>response</a> is a <a>network error</a>, then return.
+ <li><p>If <var>xhr</var>'s <a>response</a> is a <a>network error</a>, then return.
 
- <li><p>If <a>this</a>'s <a>synchronous flag</a> is unset, then update <a>this</a>'s
+ <li><p>If <var>xhr</var>'s <a>synchronous flag</a> is unset, then update <var>xhr</var>'s
  <a>response</a>'s <a for=response>body</a> using <var>response</var>.
 
  <li><p>Let <var>transmitted</var> be <var>response</var>'s <a for=response>body</a>'s
@@ -1015,33 +1016,35 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
  <li><p>Let <var>length</var> be <var>response</var>'s <a for=response>body</a>'s
  <a for=body>total bytes</a>.
 
- <li><p>If <a>this</a>'s <a>synchronous flag</a> is unset, then <a>fire a progress event</a> named
- <a event><code>progress</code></a> at <a>this</a> with <var>transmitted</var> and
+ <li><p>If <var>xhr</var>'s <a>synchronous flag</a> is unset, then <a>fire a progress event</a>
+ named <a event><code>progress</code></a> at <var>xhr</var> with <var>transmitted</var> and
  <var>length</var>.
 
- <li><p>Set <a>this</a>'s <a>state</a> to <i>done</i>.
+ <li><p>Set <var>xhr</var>'s <a>state</a> to <i>done</i>.
 
- <li><p>Unset <a>this</a>'s <a><code>send()</code> flag</a>.
+ <li><p>Unset <var>xhr</var>'s <a><code>send()</code> flag</a>.
 
- <li><p><a>Fire an event</a> named <a event><code>readystatechange</code></a> at <a>this</a>.
+ <li><p><a>Fire an event</a> named <a event><code>readystatechange</code></a> at <var>xhr</var>.
 
- <li><p><a>Fire a progress event</a> named <a event><code>load</code></a> at <a>this</a> with
+ <li><p><a>Fire a progress event</a> named <a event><code>load</code></a> at <var>xhr</var> with
  <var>transmitted</var> and <var>length</var>.
 
- <li><p><a>Fire a progress event</a> named <a event><code>loadend</code></a> at <a>this</a> with
+ <li><p><a>Fire a progress event</a> named <a event><code>loadend</code></a> at <var>xhr</var> with
  <var>transmitted</var> and <var>length</var>.
 </ol>
 
-<p>To <dfn>handle errors</dfn> for <var>response</var> run these steps:
+<p>To <dfn>handle errors</dfn> for an {{XMLHttpRequest}} object <var>xhr</var> and a
+<a for=/>response</a> <var>response</var>, run these steps:
 
 <ol>
- <li><p>If the <a><code>send()</code> flag</a> is unset, return.
+ <li><p>If <var>xhr</var>'s <a><code>send()</code> flag</a> is unset, then return.
 
- <li><p>If the <a>timed out flag</a> is set, then run the <a>request error steps</a> for event
- <a event><code>timeout</code></a> and exception "{{TimeoutError!!exception}}" {{DOMException}}.
+ <li><p>If <var>xhr</var>'s <a>timed out flag</a> is set, then run the <a>request error steps</a>
+ for <var>xhr</var>, <a event><code>timeout</code></a>, and "{{TimeoutError!!exception}}"
+ {{DOMException}}.
 
  <li><p>If <var>response</var> is a <a>network error</a>, then run the <a>request error steps</a>
- for event <a event><code>error</code></a> and exception "{{NetworkError!!exception}}"
+ for <var>xhr</var>, <a event><code>error</code></a>, and "{{NetworkError!!exception}}"
  {{DOMException}}.
 
  <li>
@@ -1049,58 +1052,57 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
   <a for=ReadableStream>errored</a>, then:
 
   <ol>
-   <li><p>Set <a>state</a> to <i>done</i>.
+   <li><p>Set <var>xhr</var>'s <a>state</a> to <i>done</i>.
 
-   <li><p>Unset the <a><code>send()</code> flag</a>.
+   <li><p>Unset <var>xhr</var>'s <a><code>send()</code> flag</a>.
 
-   <li><p>Set <a>response</a> to a <a>network error</a>.
+   <li><p>Set <var>xhr</var>'s <a>response</a> to a <a>network error</a>.
   </ol>
 
- <li><p>Otherwise, if <var>response</var>'s <a for=response>aborted flag</a> is set, then run the
- <a>request error steps</a> for event <a event><code>abort</code></a> and exception
- "{{AbortError!!exception}}" {{DOMException}}.
+ <li><p>Otherwise, if <var>xhr</var>'s <var>response</var>'s <a for=response>aborted flag</a> is
+ set, then run the <a>request error steps</a> for <var>xhr</var>, <a event><code>abort</code></a>,
+ and "{{AbortError!!exception}}" {{DOMException}}.
 </ol>
 
-<p>The <dfn>request error steps</dfn> for event <var>event</var> and optionally an
-exception <var>exception</var> are:
+<p>The <dfn>request error steps</dfn> for an {{XMLHttpRequest}} object <var>xhr</var>,
+<var>event</var>, and optionally <var>exception</var> are:
 
 <ol>
- <li><p>Set <a>state</a> to <i>done</i>.
+ <li><p>Set <var>xhr</var>'s <a>state</a> to <i>done</i>.
 
- <li><p>Unset the <a><code>send()</code> flag</a>.
+ <li><p>Unset <var>xhr</var>'s <a><code>send()</code> flag</a>.
 
- <li><p>Set <a>this</a>'s <a>response</a> to a <a>network error</a>.
+ <li><p>Set <var>xhr</var>'s <a>response</a> to a <a>network error</a>.
 
- <li><p>If <a>this</a>'s <a>synchronous flag</a> is set, then <a>throw</a> <var>exception</var>.
-
- <li>
-  <p><a>Fire an event</a> named <a event><code>readystatechange</code></a> at <a>this</a>.
-
-  <p class=note>At this point it is clear that <a>this</a>'s <a>synchronous flag</a> is unset.
+ <li><p>If <var>xhr</var>'s <a>synchronous flag</a> is set, then <a>throw</a> <var>exception</var>.
 
  <li>
-  <p>If the <a>upload complete flag</a> is unset, then:
+  <p><a>Fire an event</a> named <a event><code>readystatechange</code></a> at <var>xhr</var>.
+
+  <p class=note>At this point it is clear that <var>xhr</var>'s <a>synchronous flag</a> is unset.
+
+ <li>
+  <p>If <var>xhr</var>'s <a>upload complete flag</a> is unset, then:
 
   <ol>
-   <li><p>Set the <a>upload complete flag</a>.
+   <li><p>Set <var>xhr</var>'s <a>upload complete flag</a>.
 
    <li>
-    <p>If the <a>upload listener flag</a> is set, then:
+    <p>If <var>xhr</var>'s <a>upload listener flag</a> is set, then:
 
     <ol>
-     <li><p><a>Fire a progress event</a> named <var>event</var> at <a>this</a>'s
+     <li><p><a>Fire a progress event</a> named <var>event</var> at <var>xhr</var>'s
      <a>upload object</a> with 0 and 0.
 
-     <li><p><a>Fire a progress event</a> named <a event><code>loadend</code></a> at <a>this</a>'s
+     <li><p><a>Fire a progress event</a> named <a event><code>loadend</code></a> at <var>xhr</var>'s
      <a>upload object</a> with 0 and 0.
     </ol>
   </ol>
 
- <li><p><a>Fire a progress event</a> named
- <var>event</var> at <a>this</a> with 0 and 0.
+ <li><p><a>Fire a progress event</a> named <var>event</var> at <var>xhr</var> with 0 and 0.
 
- <li><p><a>Fire a progress event</a> named
- <a event><code>loadend</code></a> at <a>this</a> with 0 and 0.
+ <li><p><a>Fire a progress event</a> named <a event><code>loadend</code></a> at <var>xhr</var>
+ with 0 and 0.
 </ol>
 
 
@@ -1118,7 +1120,7 @@ exception <var>exception</var> are:
 
  <li><p>If <a>this</a>'s <a>state</a> is <i>opened</i> with <a>this</a>'s
  <a><code>send()</code> flag</a> set, <i>headers received</i>, or <i>loading</i>, then run the
- <a>request error steps</a> for event <a event><code>abort</code></a>.
+ <a>request error steps</a> for <a>this</a> and <a event><code>abort</code></a>.
 
  <li>
   <p>If <a>this</a>'s <a>state</a> is <i>done</i>, then set <a>this</a>'s <a>state</a> to
