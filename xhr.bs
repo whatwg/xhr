@@ -242,7 +242,7 @@ interface XMLHttpRequest : XMLHttpRequestEventTarget {
  <dt><dfn>request method</dfn>
  <dd>A <a for=/>method</a>.
 
- <dt><dfn>request URL</dfn>,
+ <dt><dfn>request URL</dfn>
  <dd>A <a for=/>URL</a>.
 
  <dt><dfn id=author-request-headers>author request headers</dfn>
@@ -782,7 +782,7 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
   <dl>
    <dt><a for=request>method</a>
    <dd><a>This</a>'s <a>request method</a>.
-   <dt><a for=request>url</a>
+   <dt><a for=request>URL</a>
    <dd><a>This</a>'s <a>request URL</a>.
    <dt><a for=request>header list</a>
    <dd><a>This</a>'s <a>author request headers</a>.
