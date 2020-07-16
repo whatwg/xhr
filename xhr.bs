@@ -263,7 +263,9 @@ interface XMLHttpRequest : XMLHttpRequestEventTarget {
  <dt><dfn>timed out flag</dfn>.
  <dd>A flag, initially unset.
 
-
+ <dt><dfn>response type</dfn>
+ <dd>One of the empty string, "<code>arraybuffer</code>", "<code>blob</code>",
+ "<code>document</code>", "<code>json</code>", and "<code>text</code>"; initially the empty string.
 </dl>
 
 
@@ -489,9 +491,8 @@ method steps are:
   </ol>
 
  <li><p>If <var>async</var> is false, the <a>current global object</a> is a {{Window}} object, and
- either <a>this</a>'s <a>timeout</a> is not 0 or the
- {{XMLHttpRequest/responseType}} attribute value is not the empty string, then <a>throw</a> an
- "{{InvalidAccessError!!exception}}" {{DOMException}}.
+ either <a>this</a>'s <a>timeout</a> is not 0 or <a>this</a>'s <a>response type</a> is not
+ the empty string, then <a>throw</a> an "{{InvalidAccessError!!exception}}" {{DOMException}}.
 
  <li>
   <p><a for=fetch lt=terminated>Terminate</a> the ongoing fetch operated by the
@@ -1145,11 +1146,11 @@ the empty string if <a>this</a>'s <a>response</a>'s <a for=response>URL</a> is n
 
 <h4 id=the-getresponseheader()-method>The <code>getResponseHeader()</code> method</h4>
 
-<p>The <dfn method for=XMLHttpRequest><code>getResponseHeader(<var>name</var>)</code></dfn> method,
-when invoked, must return the result of <a for="header list">getting</a> <var>name</var> from
-<a>response</a>'s <a for=response>header list</a>
+<p>The <dfn method for=XMLHttpRequest><code>getResponseHeader(<var>name</var>)</code></dfn> method
+steps are to return the result of <a for="header list">getting</a> <var>name</var> from
+<a>this</a>'s <a>response</a>'s <a for=response>header list</a>.
 
-<p class="note no-backref">The Fetch Standard filters <a>response</a>'s
+<p class="note no-backref">The Fetch Standard filters <a>this</a>'s <a>response</a>'s
 <a for=response>header list</a>. [[!FETCH]]
 
 <div id=example-getresponseheader class=example>
@@ -1185,15 +1186,13 @@ text/plain; charset=UTF-8</code></pre>
  <li><p>Return <var>A</var> is <a>byte less than</a> <var>B</var>.
 </ol>
 
-<p>The
-<dfn method for=XMLHttpRequest><code>getAllResponseHeaders()</code></dfn>
-method, when invoked, must run these steps:
+<p>The <dfn method for=XMLHttpRequest><code>getAllResponseHeaders()</code></dfn> method steps are:
 
 <ol>
  <li><p>Let <var>output</var> be an empty byte sequence.
 
  <li><p>Let <var>initialHeaders</var> be the result of running <a>sort and combine</a> with
- <a>response</a>'s <a for=response>header list</a>.
+ <a>this</a>'s <a>response</a>'s <a for=response>header list</a>.
 
  <li>
   <p>Let <var>headers</var> be the result of <a for=list>sorting</a> <var>initialHeaders</var> in
@@ -1210,9 +1209,8 @@ method, when invoked, must run these steps:
  <li><p>Return <var>output</var>.
 </ol>
 
-<p class="note no-backref">The Fetch Standard filters <a>response</a>'s
-<a for=response>header list</a>.
-[[!FETCH]]
+<p class="note no-backref">The Fetch Standard filters <a>this</a>'s <a>response</a>'s
+<a for=response>header list</a>. [[!FETCH]]
 
 <div id=example-getresponseheaders class=example>
  <p>For the following script:
@@ -1286,46 +1284,21 @@ the wrong result.
 or null). Unless stated otherwise it is null.
 
 
-<p>An <dfn>arraybuffer response</dfn> is the return value of these steps:
+<p>To <dfn id=document-response>set a document response</dfn> for an {{XMLHttpRequest}} object
+<var>xhr</var>, run these steps:
 
 <ol>
- <li>
-  <p>Set <a>response object</a> to a new {{ArrayBuffer}} object representing <a>received bytes</a>.
-  If this throws an exception, then set <a>response object</a> to failure and return null.
-
-  <p class=note>Allocating an {{ArrayBuffer}} object is not guaranteed to succeed. [[!ECMASCRIPT]]
-
- <li><p>Return <a>response object</a>.
-</ol>
-
-
-<p>A <dfn>blob response</dfn> is the return value of these steps:
-
-<ol>
- <li><p>Set <a>response object</a> to a new {{Blob}} object representing <a>received bytes</a> with
- {{Blob/type}} set to the <a>final MIME type</a>.
-
- <li><p>Return <a>response object</a>.
-</ol>
-
-
-<p>A <dfn>document response</dfn> is the return value of these steps:
-
-<ol>
- <li><p>If <a>response</a>'s
- <a for=response>body</a> is null, then return null.
+ <li><p>If <var>xhr</var>'s <a>response</a>'s <a for=response>body</a> is null, then return.
 
  <li><p>If the <a>final MIME type</a> is not an <a>HTML MIME type</a> or an <a>XML MIME type</a>,
- then return null.
+ then return.
 
  <li>
-  <p>If {{XMLHttpRequest/responseType}} is the empty string and the <a>final MIME type</a> is an
-  <a>HTML MIME type</a>, then return null.
+  <p>If <var>xhr</var>'s <a>response type</a> is the empty string and the <a>final MIME type</a> is an
+  <a>HTML MIME type</a>, then return.
 
-  <p class=note>This is restricted to
-  {{XMLHttpRequest/responseType}} being
-  "<code>document</code>" in order to prevent breaking legacy
-  content.
+  <p class=note>This is restricted to <var>xhr</var>'s <a>response type</a> being
+  "<code>document</code>" in order to prevent breaking legacy content.
 
  <li>
   <p>If the <a>final MIME type</a> is an <a>HTML MIME type</a>, then:
@@ -1343,7 +1316,7 @@ or null). Unless stated otherwise it is null.
 
    <li><p>Let <var>document</var> be a
    <a>document</a> that
-   represents the result parsing <a>received bytes</a> following the rules set
+   represents the result parsing <var>xhr</var>'s <a>received bytes</a> following the rules set
    forth in the HTML Standard for an HTML parser with scripting disabled and
    <a>a known definite encoding</a> <var>charset</var>.
    [[!HTML]]
@@ -1367,65 +1340,42 @@ or null). Unless stated otherwise it is null.
  <li><p>If <var>charset</var> is null, then set <var>charset</var> to <a>UTF-8</a>.
  <!-- can only happen in the XML case -->
 
- <li><p>Set <var>document</var>'s
- <a for=Document>encoding</a> to
- <var>charset</var>.
+ <li><p>Set <var>document</var>'s <a for=Document>encoding</a> to <var>charset</var>.
 
  <li><p>Set <var>document</var>'s <a>content type</a> to the <a>final MIME type</a>.
 
- <li><p>Set <var>document</var>'s
- <a for=Document>URL</a> to
- <a>response</a>'s
- <a for=response>url</a>.
+ <li><p>Set <var>document</var>'s <a for=Document>URL</a> to <var>xhr</var>'s <a>response</a>'s
+ <a for=response>URL</a>.
 
- <li><p>Set <var>document</var>'s <a for=Document>origin</a> to
- <a>this</a>'s
- <a>relevant settings object</a>'s
- <a for="environment settings object">origin</a>.
+ <li><p>Set <var>document</var>'s <a for=Document>origin</a> to <var>xhr</var>'s
+ <a>relevant settings object</a>'s <a for="environment settings object">origin</a>.
 
- <li><p>Set <a>response object</a> to
- <var>document</var> and return it.
+ <li><p>Set <var>xhr</var>'s <a>response object</a> to <var>document</var>.
 </ol>
 
 
-<p>A <dfn>JSON response</dfn> is the return value of these steps:
+<p>To <dfn id="text-response" lt="getting a text response">get a text response</dfn> for an
+{{XMLHttpRequest}} object <var>xhr</var>, run these steps:
 
 <ol>
- <li><p>If <a>response</a>'s <a for=response>body</a> is null, then return null.
-
- <li><p>Let <var>jsonObject</var> be the result of running <a>parse JSON from bytes</a> on
- <a>received bytes</a>. If that threw an exception, then return null.
-
- <li><p>Set <a>response object</a> to <var>jsonObject</var> and return it.
-</ol>
-
-
-<p>A <dfn>text response</dfn> is the return value of these steps:
-
-<ol>
- <li><p>If <a>response</a>'s
- <a for=response>body</a> is null, then return the
- empty string.
+ <li><p>If <var>xhr</var>'s <a>response</a>'s <a for=response>body</a> is null, then return
+ the empty string.
 
  <li><p>Let <var>charset</var> be the <a>final charset</a>.
 
  <li>
-  <p>If {{XMLHttpRequest/responseType}} is the empty string, <var>charset</var> is null, and the
+  <p>If <var>xhr</var>'s <a>response type</a> is the empty string, <var>charset</var> is null, and the
   <a>final MIME type</a> is an <a>XML MIME type</a>, then use the rules set forth in the XML
   specifications to determine the encoding. Let <var>charset</var> be the determined encoding.
   [[!XML]] [[!XMLNS]]
 
-  <p class=note>This is restricted to
-  {{XMLHttpRequest/responseType}} being
-  the empty string to keep the non-legacy
-  {{XMLHttpRequest/responseType}} value
-  "<code>text</code>" simple.
+  <p class=note>This is restricted to <var>xhr</var>'s <a>response type</a> being the empty string
+  to keep the non-legacy <a>response type</a> value "<code>text</code>" simple.
 
  <li><p>If <var>charset</var> is null, then set <var>charset</var> to <a>UTF-8</a>.
 
- <li><p>Return the result of running
- <a>decode</a> on <a>received bytes</a> using fallback
- encoding <var>charset</var>.
+ <li><p>Return the result of running <a>decode</a> on <var>xhr</var>'s <a>received bytes</a> using
+ fallback encoding <var>charset</var>.
 </ol>
 
 <p class=note>Authors are strongly encouraged to always encode their resources using <a>UTF-8</a>.
@@ -1443,18 +1393,18 @@ or null). Unless stated otherwise it is null.
   or <i>done</i>.
 </dl>
 
-<p>The <dfn method for=XMLHttpRequest><code>overrideMimeType(<var>mime</var>)</code></dfn> method,
-when invoked, must run these steps:
+<p>The <dfn method for=XMLHttpRequest><code>overrideMimeType(<var>mime</var>)</code></dfn> method
+steps are:
 
 <ol>
  <li><p>If <a>this</a>'s <a>state</a> is <i>loading</i> or <i>done</i>, then <a>throw</a> an
  "{{InvalidStateError!!exception}}" {{DOMException}}.
 
- <li><p>Set <a>override MIME type</a> to the result of <a lt="parse a MIME type">parsing</a>
- <var>mime</var>.
+ <li><p>Set <a>this</a>'s <a>override MIME type</a> to the result of
+ <a lt="parse a MIME type">parsing</a> <var>mime</var>.
 
- <li><p>If <a>override MIME type</a> is failure, then set <a>override MIME type</a> to
- <code>application/octet-stream</code>.
+ <li><p>If <a>this</a>'s <a>override MIME type</a> is failure, then set <a>this</a>'s
+ <a>override MIME type</a> to <code>application/octet-stream</code>.
 </ol>
 
 
@@ -1482,30 +1432,23 @@ when invoked, must run these steps:
   <a>synchronous flag</a> is set and <a>current global object</a> is a {{Window}} object.
 </dl>
 
+<p>The <dfn attribute for=XMLHttpRequest><code>responseType</code></dfn> getter steps are to return
+<a>this</a>'s <a>response type</a>.
 
-<p>The
-<dfn attribute for=XMLHttpRequest><code>responseType</code></dfn>
-attribute must return its value. Initially its value must be the empty
-string.
-
-<p>Setting the
-{{XMLHttpRequest/responseType}}
-attribute must run these steps:
+<p>The {{XMLHttpRequest/responseType}} setter steps are:
 
 <ol>
- <li><p>If <a>current global object</a> is <em>not</em> a
- {{Window}} object and the given value is
- "<code>document</code>", terminate these steps.
+ <li><p>If the <a>current global object</a> is not a {{Window}} object and the given value is
+ "<code>document</code>", then return.
 
  <li><p>If <a>this</a>'s <a>state</a> is <i>loading</i> or <i>done</i>, then <a>throw</a> an
  "{{InvalidStateError!!exception}}" {{DOMException}}.
 
- <li><p>If <a>current global object</a> is a {{Window}} object and <a>this</a>'s <a>synchronous flag</a> is
- set, then <a>throw</a> an "{{InvalidAccessError!!exception}}" {{DOMException}}.
+ <li><p>If the <a>current global object</a> is a {{Window}} object and <a>this</a>'s
+ <a>synchronous flag</a> is set, then <a>throw</a> an "{{InvalidAccessError!!exception}}"
+ {{DOMException}}.
 
- <li><p>Set the
- {{XMLHttpRequest/responseType}}
- attribute's value to the given value.
+ <li><p>Set <a>this</a>'s <a>response type</a> to the given value.
 </ol>
 
 
@@ -1519,51 +1462,54 @@ attribute must run these steps:
 
 <p>The <dfn attribute for=XMLHttpRequest><code>response</code></dfn> getter steps are:
 
-<dl class=switch>
- <dt>If {{XMLHttpRequest/responseType}}
- is the empty string or "<code>text</code>"
- <dd>
-  <ol>
-   <li><p>If <a>this</a>'s <a>state</a> is not
-   <i>loading</i> or <i>done</i>, return the empty string.
+<ol>
+ <li>
+  <p>If <a>this</a>'s <a>response type</a> is the empty string or "<code>text</code>", then:
 
-   <li><p>Return the <a>text response</a>.
+  <ol>
+   <li><p>If <a>this</a>'s <a>state</a> is not <i>loading</i> or <i>done</i>, then return
+   the empty string.
+
+   <li><p>Return the result of <a>getting a text response</a> for <a>this</a>.
   </ol>
 
- <dt>Otherwise
- <dd>
+ <li><p>If <a>this</a>'s <a>state</a> is not <i>done</i>, then return null.
+
+ <li><p>If <a>this</a>'s <a>response object</a> is failure, then return null.
+
+ <li><p>If <a>this</a>'s <a>response object</a> is non-null, then return it.
+
+ <li id=arraybuffer-response>
+  <p>If <a>this</a>'s <a>response type</a> is "<code>arraybuffer</code>", then set <a>this</a>'s
+  <a>response object</a> to a <a for=/>new</a> {{ArrayBuffer}} object representing <a>this</a>'s
+  <a>received bytes</a>. If this throws an exception, then set <a>this</a>'s <a>response object</a>
+  to failure and return null.
+
+  <p class=note>Allocating an {{ArrayBuffer}} object is not guaranteed to succeed. [[!ECMASCRIPT]]
+
+ <li id=blob-response><p>Otherwise, if <a>this</a>'s <a>response type</a> is "<code>blob</code>",
+ set <a>this</a>'s <a>response object</a> to a <a for=/>new</a> {{Blob}} object representing
+ <a>this</a>'s <a>received bytes</a> with {{Blob/type}} set to the <a>final MIME type</a>.
+
+ <li><p>Otherwise, if <a>this</a>'s <a>response type</a> is "<code>document</code>",
+ <a>set a document response</a> for <a>this</a>.
+
+ <li>
+  <p>Otherwise:
+
   <ol>
-   <li><p>If <a>this</a>'s <a>state</a> is not
-   <i>done</i>, return null.
+   <li id=json-response><p>Assert: <a>this</a>'s <a>response type</a> is "<code>json</code>".
 
-   <li><p>If <a>response object</a> is failure, then return null.
+   <li><p>If <a>this</a>'s <a>response</a>'s <a for=response>body</a> is null, then return null.
 
-   <li><p>If <a>response object</a> is non-null, then return it.
+   <li><p>Let <var>jsonObject</var> be the result of running <a>parse JSON from bytes</a> on
+   <a>this</a>'s <a>received bytes</a>. If that threw an exception, then return null.
 
-   <li>
-    <dl class=switch>
-     <dt>If
-     {{XMLHttpRequest/responseType}} is
-     "<code>arraybuffer</code>"
-     <dd><p>Return the <a>arraybuffer response</a>.
-
-     <dt>If
-     {{XMLHttpRequest/responseType}} is
-     "<code>blob</code>"
-     <dd><p>Return the <a>blob response</a>.
-
-     <dt>If
-     {{XMLHttpRequest/responseType}} is
-     "<code>document</code>"
-     <dd><p>Return the <a>document response</a>.
-
-     <dt>If
-     {{XMLHttpRequest/responseType}} is
-     "<code>json</code>"
-     <dd><p>Return the <a>JSON response</a>.
-    </dl>
+   <li><p>Set <a>this</a>'s <a>response object</a> to <var>jsonObject</var>.
   </ol>
-</dl>
+
+ <li><p>Return <a>this</a>'s <a>response object</a>.
+</ol>
 
 
 <h4 id=the-responsetext-attribute>The <code>responseText</code> attribute</h4>
@@ -1571,7 +1517,7 @@ attribute must run these steps:
 <dl class=domintro>
  <dt><code><var>client</var> . <a attribute for=XMLHttpRequest>responseText</a></code>
  <dd>
-  <p>Returns the <a>text response</a>.
+  <p>Returns response as text.
 
   <p>Throws an "{{InvalidStateError!!exception}}" {{DOMException}} if
   {{XMLHttpRequest/responseType}} is not the empty string or "<code>text</code>".
@@ -1580,12 +1526,13 @@ attribute must run these steps:
 <p>The <dfn attribute for=XMLHttpRequest><code>responseText</code></dfn> getter steps are:
 
 <ol>
- <li><p>If {{XMLHttpRequest/responseType}} is not the empty string or "<code>text</code>", then
+ <li><p>If <a>this</a>'s <a>response type</a> is not the empty string or "<code>text</code>", then
  <a>throw</a> an "{{InvalidStateError!!exception}}" {{DOMException}}.
 
- <li><p>If <a>this</a>'s <a>state</a> is not <i>loading</i> or <i>done</i>, then return the empty string.
+ <li><p>If <a>this</a>'s <a>state</a> is not <i>loading</i> or <i>done</i>, then return
+ the empty string.
 
- <li><p>Return the <a>text response</a>.
+ <li><p>Return the result of <a>getting a text response</a> for <a>this</a>.
 </ol>
 
 
@@ -1594,7 +1541,7 @@ attribute must run these steps:
 <dl class=domintro>
  <dt><code><var>client</var> . <a attribute for=XMLHttpRequest>responseXML</a></code>
  <dd>
-  <p>Returns the <a>document response</a>.
+  <p>Returns the response as document.
 
   <p>Throws an "{{InvalidStateError!!exception}}" {{DOMException}} if
   {{XMLHttpRequest/responseType}} is not the empty string or "<code>document</code>".
@@ -1603,16 +1550,18 @@ attribute must run these steps:
 <p>The <dfn attribute for=XMLHttpRequest><code>responseXML</code></dfn> getter steps are:
 
 <ol>
- <li><p>If {{XMLHttpRequest/responseType}} is not the empty string or "<code>document</code>", then
- <a>throw</a> an "{{InvalidStateError!!exception}}" {{DOMException}}.
+ <li><p>If <a>this</a>'s <a>response type</a> is not the empty string or "<code>document</code>",
+ then <a>throw</a> an "{{InvalidStateError!!exception}}" {{DOMException}}.
 
  <li><p>If <a>this</a>'s <a>state</a> is not <i>done</i>, then return null.
 
- <li><p>Assert: <a>response object</a> is not failure.
+ <li><p>Assert: <a>this</a>'s <a>response object</a> is not failure.
 
- <li><p>If <a>response object</a> is non-null, then return it.
+ <li><p>If <a>this</a>'s <a>response object</a> is non-null, then return it.
 
- <li><p>Return the <a>document response</a>.
+ <li><p><a>Set a document response</a> for <a>this</a>.
+
+ <li><p>Return <a>this</a>'s <a>response object</a>.
 </ol>
 
 
