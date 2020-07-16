@@ -445,7 +445,7 @@ agents are strongly encouraged to warn about such usage in developer tools and m
 <dfn id=dom-xmlhttprequest-open method for=XMLHttpRequest><code>open(<var>method</var>, <var>url</var>)</code></dfn>
 and
 <dfn method for=XMLHttpRequest><code>open(<var>method</var>, <var>url</var>, <var>async</var>, <var>username</var>, <var>password</var>)</code></dfn>
-methods, when invoked, must run these steps:
+method steps are:
 
 <ol>
  <li><p>Let <var>settingsObject</var> be <a>this</a>'s <a>relevant settings object</a>.
@@ -520,11 +520,10 @@ methods, when invoked, must run these steps:
   <code>overrideMimeType()</code> method can be invoked before the <code>open()</code> method.
 
  <li>
-  <p>If the <a>state</a> is not <i>opened</i>, then:
+  <p>If <a>this</a>'s <a>state</a> is not <i>opened</i>, then:
 
   <ol>
-   <li><p>Set <a>state</a> to
-   <i>opened</i>.
+   <li><p>Set <a>this</a>'s <a>state</a> to <i>opened</i>.
 
    <li><p><a>Fire an event</a> named <a event><code>readystatechange</code></a> at <a>this</a>.
   </ol>
@@ -555,10 +554,10 @@ the editing software used to write the XMLHttpRequest Standard.
 method must run these steps:
 
 <ol>
- <li><p>If <a>state</a> is not <i>opened</i>, then <a>throw</a> an
+ <li><p>If <a>this</a>'s <a>state</a> is not <i>opened</i>, then <a>throw</a> an
  "{{InvalidStateError!!exception}}" {{DOMException}}.
 
- <li><p>If the <a><code>send()</code> flag</a> is set, then <a>throw</a> an
+ <li><p>If <a>this</a>'s <a><code>send()</code> flag</a> is set, then <a>throw</a> an
  "{{InvalidStateError!!exception}}" {{DOMException}}.
 
  <li><p><a for=header/value>Normalize</a> <var>value</var>.
@@ -570,10 +569,9 @@ method must run these steps:
   <p class="note no-backref">An empty byte sequence represents an empty <a>header</a>
   <a for=header>value</a>.
 
- <li><p>Terminate these steps if <var>name</var> is a
- <a>forbidden header name</a>.
+ <li><p>If <var>name</var> is a <a>forbidden header name</a>, then return.
 
- <li><p><a for="header list">Combine</a> <var>name</var>/<var>value</var> in
+ <li><p><a for="header list">Combine</a> <var>name</var>/<var>value</var> in <a>this</a>'s
  <a>author request headers</a>.
 </ol>
 
@@ -601,7 +599,7 @@ client.send();
  <dd>
   <p>Can be set to a time in milliseconds. When set to a non-zero value will cause
   <a for=/>fetching</a> to terminate after the given time has passed. When the time has passed, the
-  request has not yet completed, and the <a>synchronous flag</a> is unset, a
+  request has not yet completed, and <a>this</a>'s <a>synchronous flag</a> is unset, a
   <a event><code>timeout</code></a> event will then be <a>dispatched</a>, or a
   "{{TimeoutError!!exception}}" {{DOMException}} will be <a lt=throw>thrown</a> otherwise (for the
   <a><code>send()</code></a> method).
@@ -702,27 +700,24 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
   <ol>
    <li><p>Let <var>extractedContentType</var> be null.
 
-   <li><p>If <var>body</var> is a {{Document}}, then set <a>request body</a> to
+   <li><p>If <var>body</var> is a {{Document}}, then set <a>this</a>'s <a>request body</a> to
    <var>body</var>, <a lt="fragment serializing algorithm">serialized</a>,
    <a for=string>converted</a>, and <a lt="UTF-8 encode">UTF-8 encoded</a>.
 
-   <li><p>Otherwise, set <a>request body</a> and <var>extractedContentType</var> to the result of
-   <a for=BodyInit>extracting</a> <var>body</var>.
+   <li><p>Otherwise, set <a>this</a>'s <a>request body</a> and <var>extractedContentType</var> to
+   the result of <a for=BodyInit lt="safely extract">safely extracting</a> <var>body</var>.
+
+   <li><p>Let <var>originalAuthorContentType</var> be the result of <a for="header list">getting</a>
+   `<code>Content-Type</code>` from <a>this</a>'s <a>author request headers</a>.
 
    <li>
-    <p>If <a>author request headers</a> <a for="header list">contains</a>
-    `<code>Content-Type</code>`, then:
+    <p>If <var>originalAuthorContentType</var> is non-null, then:
 
     <ol>
      <li>
       <p>If <var>body</var> is a {{Document}} or a {{USVString}}, then:
 
       <ol>
-       <li><p>Let <var>originalAuthorContentType</var> be the <a for=header>value</a> of the
-       <a>header</a> whose <a for=header>name</a> is a <a>byte-case-insensitive</a> match for
-       `<code>Content-Type</code>` in <a>author request headers</a>.
-       <!-- XXX: add a primitive for this in Fetch -->
-
        <li><p>Let <var>contentTypeRecord</var> be the result of
        <a lt="parse a MIME type from bytes">parsing</a> <var>originalAuthorContentType</var>.
 
@@ -740,25 +735,27 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
          <a lt="serialize a MIME type to bytes">serializing</a> <var>contentTypeRecord</var>.
 
          <li><p><a for="header list">Set</a>
-         `<code>Content-Type</code>`/<var>newContentTypeSerialized</var> in
+         `<code>Content-Type</code>`/<var>newContentTypeSerialized</var> in <a>this</a>'s
          <a>author request headers</a>.
         </ol>
       </ol>
     </ol>
+
    <li>
     <p>Otherwise:
 
     <ol>
      <li><p>If <var>body</var> is an <a>HTML document</a>, <a for="header list">set</a>
-     `<code>Content-Type</code>`/`<code>text/html;charset=UTF-8</code>` in
+     `<code>Content-Type</code>`/`<code>text/html;charset=UTF-8</code>` in <a>this</a>'s
      <a>author request headers</a>.
 
      <li><p>Otherwise, if <var>body</var> is an <a>XML document</a>, <a for="header list">set</a>
-     `<code>Content-Type</code>`/`<code>application/xml;charset=UTF-8</code>` in
+     `<code>Content-Type</code>`/`<code>application/xml;charset=UTF-8</code>` in <a>this</a>'s
      <a>author request headers</a>.
 
      <li><p>Otherwise, if <var>extractedContentType</var> is not null, <a for="header list">set</a>
-     `<code>Content-Type</code>`/<var>extractedContentType</var> in <a>author request headers</a>.
+     `<code>Content-Type</code>`/<var>extractedContentType</var> in <a>this</a>'s
+     <a>author request headers</a>.
     </ol>
   </ol>
 
@@ -772,46 +769,45 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
 
   <dl>
    <dt><a for=request>method</a>
-   <dd><a>request method</a>
+   <dd><a>This</a>'s <a>request method</a>.
    <dt><a for=request>url</a>
-   <dd><a>request URL</a>
+   <dd><a>This</a>'s <a>request URL</a>.
    <dt><a for=request>header list</a>
-   <dd><a>author request headers</a>
+   <dd><a>This</a>'s <a>author request headers</a>.
    <dt><a for=request>unsafe-request flag</a>
    <dd>Set.
    <dt><a for=request>body</a>
-   <dd><a>request body</a>
+   <dd><a>This</a>'s <a>request body</a>.
    <dt><a for=request>client</a>
-   <dd><a>this</a>'s
-   <a>relevant settings object</a>
+   <dd><a>This</a>'s <a>relevant settings object</a>.
    <dt><a for=request>synchronous flag</a>
-   <dd>Set if the <a>synchronous flag</a> is set.
+   <dd>Set if <a>this</a>'s <a>synchronous flag</a> is set.
    <dt><a for=request>mode</a>
-   <dd>"<code>cors</code>"
+   <dd>"<code>cors</code>".
    <dt><a for=request>use-CORS-preflight flag</a>
-   <dd>Set if <a>upload listener flag</a> is set.
+   <dd>Set if <a>this</a>'s <a>upload listener flag</a> is set.
    <dt><a for=request>credentials mode</a>
    <dd>If <a>this</a>'s <a>cross-origin credentials</a> is true, then "<code>include</code>";
    otherwise "<code>same-origin</code>".
    <dt><a for=request>use-URL-credentials flag</a>
-   <dd>Set if <a>request URL</a> <a>includes credentials</a>.
+   <dd>Set if <a>this</a>'s <a>request URL</a> <a>includes credentials</a>.
   </dl>
 
- <li><p>Unset the <a>upload complete flag</a>.
+ <li><p>Unset <a>this</a>'s <a>upload complete flag</a>.
 
- <li><p>Unset the <a>timed out flag</a>.
+ <li><p>Unset <a>this</a>'s <a>timed out flag</a>.
 
- <li><p>If <var>req</var>'s
- <a for=request>body</a> is null,
- set the <a>upload complete flag</a>.
+ <li><p>If <var>req</var>'s <a for=request>body</a> is null, then set <a>this</a>'s
+ <a>upload complete flag</a>.
 
- <li><p>Set the <a><code>send()</code> flag</a>.
+ <li><p>Set <a>this</a>'s <a><code>send()</code> flag</a>.
 
  <li>
   <p>If <a>this</a>'s <a>synchronous flag</a> is unset, then:
 
   <ol>
-   <li><p><a>Fire a progress event</a> named <a event><code>loadstart</code></a> at <a>this</a> with 0 and 0.
+   <li><p><a>Fire a progress event</a> named <a event><code>loadstart</code></a> at <a>this</a>
+   with 0 and 0.
 
    <li><p>If <a>this</a>'s <a>upload complete flag</a> is unset and <a>this</a>'s
    <a>upload listener flag</a> is set, then <a>fire a progress event</a> named
@@ -920,7 +916,7 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
        <li><p>If not roughly 50ms have passed since these steps were last invoked, then terminate
        these steps.
 
-       <li><p>If <a>state</a> is <i>headers received</i>, then set <a>this</a>'s <a>state</a> to
+       <li><p>If <a>this</a>'s <a>state</a> is <i>headers received</i>, then set <a>this</a>'s <a>state</a> to
        <i>loading</i>.
 
        <li>
@@ -1059,17 +1055,14 @@ exception <var>exception</var> are:
 
  <li><p>Unset the <a><code>send()</code> flag</a>.
 
- <li><p>Set <a>response</a> to a
- <a>network error</a>.
+ <li><p>Set <a>this</a>'s <a>response</a> to a <a>network error</a>.
 
- <li><p>If the <a>synchronous flag</a> is set,
- <a>throw</a> an <var>exception</var>
- exception.
+ <li><p>If <a>this</a>'s <a>synchronous flag</a> is set, then <a>throw</a> <var>exception</var>.
 
  <li>
   <p><a>Fire an event</a> named <a event><code>readystatechange</code></a> at <a>this</a>.
 
-  <p class=note>At this point it is clear that the <a>synchronous flag</a> is unset.
+  <p class=note>At this point it is clear that <a>this</a>'s <a>synchronous flag</a> is unset.
 
  <li>
   <p>If the <a>upload complete flag</a> is unset, then:
@@ -1133,27 +1126,21 @@ sequence). Unless stated otherwise it is the empty byte sequence.
 
 <h4 id=the-responseurl-attribute>The <code>responseURL</code> attribute</h4>
 
-<p>The <dfn attribute for=XMLHttpRequest><code>responseURL</code></dfn> attribute
-must return the empty string if <a>response</a>'s
-<a for=response>url</a> is null and its
-<a lt="URL serializer">serialization</a> with the
-<i>exclude fragment flag</i> set otherwise.
+<p>The <dfn attribute for=XMLHttpRequest><code>responseURL</code></dfn> getter steps are to return
+the empty string if <a>this</a>'s <a>response</a>'s <a for=response>URL</a> is null; otherwise its
+<a lt="URL serializer">serialization</a> with the <i>exclude fragment flag</i> set.
 
 
 <h4 id=the-status-attribute>The <code>status</code> attribute</h4>
 
-<p>The
-<dfn attribute for=XMLHttpRequest><code>status</code></dfn>
-attribute must return the <a>response</a>'s
-<a for=response>status</a>.
+<p>The <dfn attribute for=XMLHttpRequest><code>status</code></dfn> getter steps are to return
+<a>this</a>'s <a>response</a>'s <a for=response>status</a>.
 
 
 <h4 id=the-statustext-attribute>The <code>statusText</code> attribute</h4>
 
-<p>The
-<dfn attribute for=XMLHttpRequest><code>statusText</code></dfn>
-attribute must return the <a>response</a>'s
-<a>status message</a>.
+<p>The <dfn attribute for=XMLHttpRequest><code>statusText</code></dfn> getter steps are to return
+<a>this</a>'s <a>response</a>'s <a>status message</a>.
 
 
 <h4 id=the-getresponseheader()-method>The <code>getResponseHeader()</code> method</h4>
@@ -1460,7 +1447,7 @@ or null). Unless stated otherwise it is null.
 when invoked, must run these steps:
 
 <ol>
- <li><p>If <a>state</a> is <i>loading</i> or <i>done</i>, then <a>throw</a> an
+ <li><p>If <a>this</a>'s <a>state</a> is <i>loading</i> or <i>done</i>, then <a>throw</a> an
  "{{InvalidStateError!!exception}}" {{DOMException}}.
 
  <li><p>Set <a>override MIME type</a> to the result of <a lt="parse a MIME type">parsing</a>
@@ -1510,10 +1497,10 @@ attribute must run these steps:
  {{Window}} object and the given value is
  "<code>document</code>", terminate these steps.
 
- <li><p>If <a>state</a> is <i>loading</i> or <i>done</i>, then <a>throw</a> an
+ <li><p>If <a>this</a>'s <a>state</a> is <i>loading</i> or <i>done</i>, then <a>throw</a> an
  "{{InvalidStateError!!exception}}" {{DOMException}}.
 
- <li><p>If <a>current global object</a> is a {{Window}} object and the <a>synchronous flag</a> is
+ <li><p>If <a>current global object</a> is a {{Window}} object and <a>this</a>'s <a>synchronous flag</a> is
  set, then <a>throw</a> an "{{InvalidAccessError!!exception}}" {{DOMException}}.
 
  <li><p>Set the
@@ -1537,7 +1524,7 @@ attribute must run these steps:
  is the empty string or "<code>text</code>"
  <dd>
   <ol>
-   <li><p>If <a>state</a> is not
+   <li><p>If <a>this</a>'s <a>state</a> is not
    <i>loading</i> or <i>done</i>, return the empty string.
 
    <li><p>Return the <a>text response</a>.
@@ -1546,7 +1533,7 @@ attribute must run these steps:
  <dt>Otherwise
  <dd>
   <ol>
-   <li><p>If <a>state</a> is not
+   <li><p>If <a>this</a>'s <a>state</a> is not
    <i>done</i>, return null.
 
    <li><p>If <a>response object</a> is failure, then return null.
@@ -1596,7 +1583,7 @@ attribute must run these steps:
  <li><p>If {{XMLHttpRequest/responseType}} is not the empty string or "<code>text</code>", then
  <a>throw</a> an "{{InvalidStateError!!exception}}" {{DOMException}}.
 
- <li><p>If <a>state</a> is not <i>loading</i> or <i>done</i>, then return the empty string.
+ <li><p>If <a>this</a>'s <a>state</a> is not <i>loading</i> or <i>done</i>, then return the empty string.
 
  <li><p>Return the <a>text response</a>.
 </ol>
@@ -1619,7 +1606,7 @@ attribute must run these steps:
  <li><p>If {{XMLHttpRequest/responseType}} is not the empty string or "<code>document</code>", then
  <a>throw</a> an "{{InvalidStateError!!exception}}" {{DOMException}}.
 
- <li><p>If <a>state</a> is not <i>done</i>, then return null.
+ <li><p>If <a>this</a>'s <a>state</a> is not <i>done</i>, then return null.
 
  <li><p>Assert: <a>response object</a> is not failure.
 
