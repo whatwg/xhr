@@ -263,7 +263,7 @@ interface XMLHttpRequest : XMLHttpRequestEventTarget {
  <dt><dfn>timed out flag</dfn>
  <dd>A flag, initially unset.
 
- <dt><dfn>response</dfn>
+ <dt><dfn id=response for=XMLHttpRequest>response</dfn>
  <dd>A <a for=/>response</a>, initially a <a>network error</a>.
 
  <dt><dfn>received bytes</dfn>
@@ -399,25 +399,23 @@ cell in the first column is <a>this</a>'s <a>state</a>:
   <td><i>opened</i>
   <td><dfn const for=XMLHttpRequest><code>OPENED</code></dfn> (numeric value 1)
   <td>The <a method for=XMLHttpRequest lt="open(method, url)"><code>open()</code></a> method has
-   been successfully invoked. During this state request headers can be set using
-   <a><code>setRequestHeader()</code></a> and the fetch can be initiated using the
-   <a><code>send()</code></a> method.
+  been successfully invoked. During this state request headers can be set using
+  <a><code>setRequestHeader()</code></a> and the fetch can be initiated using the
+  <a><code>send()</code></a> method.
  <tr>
   <td><i>headers received</i>
-  <td><dfn const for=XMLHttpRequest><code>HEADERS_RECEIVED</code></dfn>
-   (numeric value 2)
-  <td>All redirects (if any) have been followed and all HTTP headers of the
-   <a>response</a> have been received.
+  <td><dfn const for=XMLHttpRequest><code>HEADERS_RECEIVED</code></dfn> (numeric value 2)
+  <td>All redirects (if any) have been followed and all HTTP headers of a response have been
+  received.
  <tr>
   <td><i>loading</i>
   <td><dfn const for=XMLHttpRequest><code>LOADING</code></dfn> (numeric value 3)
-  <td>The <a>response</a>'s
-  <a for=response>body</a> is being received.
+  <td>The response body is being received.
  <tr>
   <td><i>done</i>
   <td><dfn const for=XMLHttpRequest><code>DONE</code></dfn> (numeric value 4)
-  <td>The data transfer has been completed or something went wrong during the transfer
-   (e.g. infinite redirects).
+  <td>The data transfer has been completed or something went wrong during the transfer (e.g.,
+  infinite redirects).
 </table>
 
 
@@ -525,7 +523,7 @@ method steps are:
    <li><p>Set <a>this</a>'s <a>synchronous flag</a> if <var>async</var> is false; otherwise unset
    <a>this</a>'s <a>synchronous flag</a>.
    <li><p><a for=list>Empty</a> <a>this</a>'s <a>author request headers</a>.
-   <li><p>Set <a>this</a>'s <a>response</a> to a <a>network error</a>.
+   <li><p>Set <a>this</a>'s <a for=XMLHttpRequest>response</a> to a <a>network error</a>.
    <li><p>Set <a>this</a>'s <a>received bytes</a> to the empty byte sequence.
    <li><p>Set <a>this</a>'s <a>response object</a> to null.
   </ul>
@@ -844,7 +842,7 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
      <a>timeout</a> is not 0 and <a>this</a>'s <a>timeout</a> milliseconds have passed since these
      steps started.
 
-     <li><p>If <var>req</var>'s <a for=request>done flag</a> is unset, then set the
+     <li><p>If <var>req</var>'s <a for=request>done flag</a> is unset, then set <a>this</a>'s
      <a>timed out flag</a> and <a for=fetch>terminate</a> <a for=/>fetching</a>.
     </ol>
 
@@ -892,34 +890,35 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
     <p>To <a>process response</a> for <var>response</var>, run these steps:
 
     <ol>
-     <li><p>Set <a>this</a>'s <a>response</a> to <var>response</var>.
+     <li><p>Set <a>this</a>'s <a for=XMLHttpRequest>response</a> to <var>response</var>.
 
      <li><p><a>Handle errors</a> fo <a>this</a> and <var>response</var>.
 
-     <li><p>If <a>this</a>'s <a>response</a> is a <a>network error</a>, then return.
+     <li><p>If <a>this</a>'s <a for=XMLHttpRequest>response</a> is a <a>network error</a>, then
+     return.
 
      <li><p>Set <a>this</a>'s <a>state</a> to <i>headers received</i>.
 
-     <li><p><a>Fire an event</a> named
-     <a event><code>readystatechange</code></a> at <a>this</a>.
+     <li><p><a>Fire an event</a> named <a event><code>readystatechange</code></a> at <a>this</a>.
 
      <li><p>If <a>this</a>'s <a>state</a> is not <i>headers received</i>, then return.
 
-     <li><p>If <a>this</a>'s <a>response</a>'s <a for=response>body</a> is null, then run
-     <a>handle response end-of-body</a> for <a>this</a> and <a>this</a>'s <a>response</a>, and then
-     return.
+     <li><p>If <a>this</a>'s <a for=XMLHttpRequest>response</a>'s <a for=response>body</a> is null,
+     then run <a>handle response end-of-body</a> for <a>this</a> and <a>this</a>'s
+     <a for=XMLHttpRequest>response</a>, and then return.
 
      <li>
       <p>Let <var>reader</var> be the result of
       <a lt="get a reader" for=ReadableStream>getting a reader</a> from <a>this</a>'s
-      <a>response</a>'s <a for=response>body</a>'s <a for=body>stream</a>.
+      <a for=XMLHttpRequest>response</a>'s <a for=response>body</a>'s <a for=body>stream</a>.
 
       <p><span class="note no-backref">This operation will not throw an exception.</span>
 
      <li>
       <p>Let <var>read</var> be the result of
       <a lt="read a chunk" for=ReadableStream>reading a chunk</a> from <a>this</a>'s
-      <a>response</a>'s <a for=response>body</a>'s <a for=body>stream</a> with <var>reader</var>.
+      <a for=XMLHttpRequest>response</a>'s <a for=response>body</a>'s <a for=body>stream</a> with
+      <var>reader</var>.
 
       <p>When <var>read</var> is fulfilled with an object whose <code>done</code> property is false
       and whose <code>value</code> property is a <code>Uint8Array</code> object, run these
@@ -931,28 +930,30 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
        <li><p>If not roughly 50ms have passed since these steps were last invoked, then terminate
        these steps.
 
-       <li><p>If <a>this</a>'s <a>state</a> is <i>headers received</i>, then set <a>this</a>'s <a>state</a> to
-       <i>loading</i>.
+       <li><p>If <a>this</a>'s <a>state</a> is <i>headers received</i>, then set <a>this</a>'s
+       <a>state</a> to <i>loading</i>.
 
        <li>
         <p><a>Fire an event</a> named <a event><code>readystatechange</code></a> at <a>this</a>.
 
         <p class="note no-backref">Web compatibility is the reason
-        <a event><code>readystatechange</code></a> fires more often than
-        <a>state</a> changes.
+        <a event><code>readystatechange</code></a> fires more often than <a>this</a>'s <a>state</a>
+        changes.
 
        <li><p><a>Fire a progress event</a> named <a event><code>progress</code></a> at <a>this</a>
-       with <a>this</a>'s <a>response</a>'s <a for=response>body</a>'s <a>transmitted bytes</a> and
-       <var>response</var>'s <a for=response>body</a>'s <a>total bytes</a>.
+       with <a>this</a>'s <a for=XMLHttpRequest>response</a>'s <a for=response>body</a>'s
+       <a>transmitted bytes</a> and <a>this</a>'s <a for=XMLHttpRequest>response</a>'s
+       <a for=response>body</a>'s <a>total bytes</a>.
       </ol>
 
       <p class=note>These steps are only invoked when new bytes are transmitted.
 
       <p>When <var>read</var> is fulfilled with an object whose <code>done</code> property is true,
-      run <a>handle response end-of-body</a> for <a>this</a> and <a>this</a>'s <a>response</a>.
+      run <a>handle response end-of-body</a> for <a>this</a> and <a>this</a>'s
+      <a for=XMLHttpRequest>response</a>.
 
       <p>When <var>read</var> is rejected with an exception, run <a>handle errors</a> for
-      <a>this</a> and <a>this</a>'s <a>response</a>.
+      <a>this</a> and <a>this</a>'s <a for=XMLHttpRequest>response</a>.
     </ol>
   </ol>
 
@@ -1001,14 +1002,15 @@ steps:
 
 <ol>
  <li><p>If <var>xhr</var>'s <a>synchronous flag</a> is set, then set <var>xhr</var>'s
- <a>response</a> to <var>response</var>.
+ <a for=XMLHttpRequest>response</a> to <var>response</var>.
 
  <li><p><a>Handle errors</a> for <var>xhr</var> and <var>response</var>.
 
- <li><p>If <var>xhr</var>'s <a>response</a> is a <a>network error</a>, then return.
+ <li><p>If <var>xhr</var>'s <a for=XMLHttpRequest>response</a> is a <a>network error</a>, then
+ return.
 
  <li><p>If <var>xhr</var>'s <a>synchronous flag</a> is unset, then update <var>xhr</var>'s
- <a>response</a>'s <a for=response>body</a> using <var>response</var>.
+ <a for=XMLHttpRequest>response</a>'s <a for=response>body</a> using <var>response</var>.
 
  <li><p>Let <var>transmitted</var> be <var>response</var>'s <a for=response>body</a>'s
  <a for=body>transmitted bytes</a>.
@@ -1056,7 +1058,7 @@ steps:
 
    <li><p>Unset <var>xhr</var>'s <a><code>send()</code> flag</a>.
 
-   <li><p>Set <var>xhr</var>'s <a>response</a> to a <a>network error</a>.
+   <li><p>Set <var>xhr</var>'s <a for=XMLHttpRequest>response</a> to a <a>network error</a>.
   </ol>
 
  <li><p>Otherwise, if <var>xhr</var>'s <var>response</var>'s <a for=response>aborted flag</a> is
@@ -1072,7 +1074,7 @@ steps:
 
  <li><p>Unset <var>xhr</var>'s <a><code>send()</code> flag</a>.
 
- <li><p>Set <var>xhr</var>'s <a>response</a> to a <a>network error</a>.
+ <li><p>Set <var>xhr</var>'s <a for=XMLHttpRequest>response</a> to a <a>network error</a>.
 
  <li><p>If <var>xhr</var>'s <a>synchronous flag</a> is set, then <a>throw</a> <var>exception</var>.
 
@@ -1124,7 +1126,7 @@ steps:
 
  <li>
   <p>If <a>this</a>'s <a>state</a> is <i>done</i>, then set <a>this</a>'s <a>state</a> to
-  <i>unsent</i> and <a>response</a> to a <a>network error</a>.
+  <i>unsent</i> and <a>this</a>'s <a for=XMLHttpRequest>response</a> to a <a>network error</a>.
 
   <p class=note>No <a event><code>readystatechange</code></a> event is dispatched.
 </ol>
@@ -1135,30 +1137,31 @@ steps:
 <h4 id=the-responseurl-attribute>The <code>responseURL</code> getter</h4>
 
 <p>The <dfn attribute for=XMLHttpRequest><code>responseURL</code></dfn> getter steps are to return
-the empty string if <a>this</a>'s <a>response</a>'s <a for=response>URL</a> is null; otherwise its
-<a lt="URL serializer">serialization</a> with the <i>exclude fragment flag</i> set.
+the empty string if <a>this</a>'s <a for=XMLHttpRequest>response</a>'s <a for=response>URL</a> is
+null; otherwise its <a lt="URL serializer">serialization</a> with the <i>exclude fragment flag</i>
+set.
 
 
 <h4 id=the-status-attribute>The <code>status</code> getter</h4>
 
 <p>The <dfn attribute for=XMLHttpRequest><code>status</code></dfn> getter steps are to return
-<a>this</a>'s <a>response</a>'s <a for=response>status</a>.
+<a>this</a>'s <a for=XMLHttpRequest>response</a>'s <a for=response>status</a>.
 
 
 <h4 id=the-statustext-attribute>The <code>statusText</code> getter</h4>
 
 <p>The <dfn attribute for=XMLHttpRequest><code>statusText</code></dfn> getter steps are to return
-<a>this</a>'s <a>response</a>'s <a>status message</a>.
+<a>this</a>'s <a for=XMLHttpRequest>response</a>'s <a>status message</a>.
 
 
 <h4 id=the-getresponseheader()-method>The <code>getResponseHeader()</code> method</h4>
 
 <p>The <dfn method for=XMLHttpRequest><code>getResponseHeader(<var>name</var>)</code></dfn> method
 steps are to return the result of <a for="header list">getting</a> <var>name</var> from
-<a>this</a>'s <a>response</a>'s <a for=response>header list</a>.
+<a>this</a>'s <a for=XMLHttpRequest>response</a>'s <a for=response>header list</a>.
 
-<p class="note no-backref">The Fetch Standard filters <a>this</a>'s <a>response</a>'s
-<a for=response>header list</a>. [[!FETCH]]
+<p class="note no-backref">The Fetch Standard filters <a>this</a>'s
+<a for=XMLHttpRequest>response</a>'s <a for=response>header list</a>. [[!FETCH]]
 
 <div id=example-getresponseheader class=example>
  <p>For the following script:
@@ -1199,7 +1202,7 @@ text/plain; charset=UTF-8</code></pre>
  <li><p>Let <var>output</var> be an empty byte sequence.
 
  <li><p>Let <var>initialHeaders</var> be the result of running <a>sort and combine</a> with
- <a>this</a>'s <a>response</a>'s <a for=response>header list</a>.
+ <a>this</a>'s <a for=XMLHttpRequest>response</a>'s <a for=response>header list</a>.
 
  <li>
   <p>Let <var>headers</var> be the result of <a for=list>sorting</a> <var>initialHeaders</var> in
@@ -1216,8 +1219,8 @@ text/plain; charset=UTF-8</code></pre>
  <li><p>Return <var>output</var>.
 </ol>
 
-<p class="note no-backref">The Fetch Standard filters <a>this</a>'s <a>response</a>'s
-<a for=response>header list</a>. [[!FETCH]]
+<p class="note no-backref">The Fetch Standard filters <a>this</a>'s
+<a for=XMLHttpRequest>response</a>'s <a for=response>header list</a>. [[!FETCH]]
 
 <div id=example-getresponseheaders class=example>
  <p>For the following script:
@@ -1252,7 +1255,7 @@ transfer-encoding: chunked</code></pre>
 
 <ol>
  <li><p>Let <var>mimeType</var> be the result of <a for="header list">extracting a MIME type</a>
- from <var>xhr</var>'s <a>response</a>'s <a for=response>header list</a>.
+ from <var>xhr</var>'s <a for=XMLHttpRequest>response</a>'s <a for=response>header list</a>.
 
  <li><p>If <var>mimeType</var> is failure, then set <var>mimeType</var> to <code>text/xml</code>.
 
@@ -1303,7 +1306,8 @@ not be web compatible.
 <var>xhr</var>, run these steps:
 
 <ol>
- <li><p>If <var>xhr</var>'s <a>response</a>'s <a for=response>body</a> is null, then return.
+ <li><p>If <var>xhr</var>'s <a for=XMLHttpRequest>response</a>'s <a for=response>body</a> is null,
+ then return.
 
  <li><p>Let <var>finalMIME</var> be the result of <a>get a final MIME type</a> for <var>xhr</var>.
 
@@ -1358,8 +1362,8 @@ not be web compatible.
 
  <li><p>Set <var>document</var>'s <a>content type</a> to <var>finalMIME</var>.
 
- <li><p>Set <var>document</var>'s <a for=Document>URL</a> to <var>xhr</var>'s <a>response</a>'s
- <a for=response>URL</a>.
+ <li><p>Set <var>document</var>'s <a for=Document>URL</a> to <var>xhr</var>'s
+ <a for=XMLHttpRequest>response</a>'s <a for=response>URL</a>.
 
  <li><p>Set <var>document</var>'s <a for=Document>origin</a> to <var>xhr</var>'s
  <a>relevant settings object</a>'s <a for="environment settings object">origin</a>.
@@ -1371,8 +1375,8 @@ not be web compatible.
 {{XMLHttpRequest}} object <var>xhr</var>, run these steps:
 
 <ol>
- <li><p>If <var>xhr</var>'s <a>response</a>'s <a for=response>body</a> is null, then return
- the empty string.
+ <li><p>If <var>xhr</var>'s <a for=XMLHttpRequest>response</a>'s <a for=response>body</a> is null,
+ then return the empty string.
 
  <li><p>Let <var>charset</var> be the result of <a>get a final encoding</a> for <var>xhr</var>.
 
@@ -1399,8 +1403,8 @@ not be web compatible.
 <dl class=domintro>
  <dt><code><var>client</var> . <a method for=XMLHttpRequest>overrideMimeType(<var>mime</var>)</a></code>
  <dd>
-  <p>Acts as if the `<code>Content-Type</code>` header value for <a>response</a> is <var>mime</var>.
-  (It does not actually change the header though.)
+  <p>Acts as if the `<code>Content-Type</code>` header value for a response is <var>mime</var>. (It
+  does not change the header.)
 
   <p>Throws an "{{InvalidStateError!!exception}}" {{DOMException}} if <a>state</a> is <i>loading</i>
   or <i>done</i>.
@@ -1469,8 +1473,7 @@ steps are:
 
 <dl class=domintro>
  <dt><code><var>client</var> . <a attribute for=XMLHttpRequest>response</a></code>
- <dd><p>Returns the <a>response</a>'s
- <a for=response>body</a>.
+ <dd><p>Returns the response body.
 </dl>
 
 <p>The <dfn attribute for=XMLHttpRequest><code>response</code></dfn> getter steps are:
@@ -1514,7 +1517,8 @@ steps are:
   <ol>
    <li id=json-response><p>Assert: <a>this</a>'s <a>response type</a> is "<code>json</code>".
 
-   <li><p>If <a>this</a>'s <a>response</a>'s <a for=response>body</a> is null, then return null.
+   <li><p>If <a>this</a>'s <a for=XMLHttpRequest>response</a>'s <a for=response>body</a> is null,
+   then return null.
 
    <li><p>Let <var>jsonObject</var> be the result of running <a>parse JSON from bytes</a> on
    <a>this</a>'s <a>received bytes</a>. If that threw an exception, then return null.
