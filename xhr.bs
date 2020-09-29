@@ -3,6 +3,7 @@ Group: WHATWG
 H1: XMLHttpRequest
 Shortname: xhr
 Text Macro: TWITTER xhrstandard
+Text Macro: LATESTRD 2020-08
 Abstract: The XMLHttpRequest Standard defines an API that provides scripted client functionality for transferring data between a client and a server.
 Translation: ja https://triple-underscore.github.io/XHR-ja.html
 Translate IDs: enumdef-xmlhttprequestresponsetype xmlhttprequestresponsetype,dictdef-progresseventinit progresseventinit,typedefdef-formdataentryvalue formdataentryvalue
