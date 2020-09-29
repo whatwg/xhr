@@ -922,57 +922,51 @@ method must run these steps:
      then run <a>handle response end-of-body</a> and return.
 
      <li>
-      <p>Let <var>reader</var> be the result of
-      <a lt="get a reader" for=ReadableStream>getting a reader</a> from
-      <var>response</var>'s <a for=response>body</a>'s
-      <a for=body>stream</a>.
+      <p>Let <var>reader</var> be the result of <a for=ReadableStream>getting a reader</a> for
+      <var>response</var>'s <a for=response>body</a>'s <a for=body>stream</a>.
 
       <p><span class="note no-backref">This operation will not throw an exception.</span>
 
      <li>
-      <p>Let <var>read</var> be the result of
-      <a lt="read a chunk" for=ReadableStream>reading a chunk</a>
-      from <var>response</var>'s
-      <a for=response>body</a>'s
-      <a>stream</a> with <var>reader</var>.
+      <p>Let <var>readRequest</var> be the following <a>read request</a>:
 
-      <p>When <var>read</var> is fulfilled with an object whose <code>done</code> property is false
-      and whose <code>value</code> property is a <code>Uint8Array</code> object, run these
-      steps and then run this step again:
+      <dl>
+       <dt><a for="read request">chunk steps</a>, given <var>chunk</var>
+       <dd>
+        <ol>
+         <li><p>Append <var>chunk</var> to <a>received bytes</a>.
 
-      <ol>
-       <li><p>Append the <code>value</code> property to <a>received bytes</a>.
+         <li><p>If not roughly 50ms have passed since these steps were last invoked, then abort
+         these steps.
 
-       <li><p>If not roughly 50ms have passed since these steps were last invoked, then terminate
-       these steps.
+         <li><p>If <a>state</a> is <i>headers received</i>, then set <a>state</a> to <i>loading</i>.
 
-       <li><p>If <a>state</a> is
-       <i>headers received</i>, then set
-       <a>state</a> to <i>loading</i>.
+         <li>
+          <p><a>Fire an event</a> named <a event><code>readystatechange</code></a> at <b>this</b>.
 
-       <li>
-        <p><a>Fire an event</a> named
-        <a event><code>readystatechange</code></a> at <b>this</b>.
+          <p class="note no-backref">Web compatibility is the reason
+          <a event><code>readystatechange</code></a> fires more often than <a>state</a> changes.
 
-        <p class="note no-backref">Web compatibility is the reason
-        <a event><code>readystatechange</code></a> fires more often than
-        <a>state</a> changes.
+         <li><p><a>Fire a progress event</a> named <a event><code>progress</code></a> at <b>this</b>
+         with <var>response</var>'s <a for=response>body</a>'s <a>transmitted bytes</a> and
+         <var>response</var>'s <a for=response>body</a>'s <a>total bytes</a>.
+        </ol>
 
-       <li><p><a>Fire a progress event</a> named
-       <a event><code>progress</code></a> at <b>this</b> with <var>response</var>'s
-       <a for=response>body</a>'s
-       <a>transmitted bytes</a> and
-       <var>response</var>'s <a for=response>body</a>'s
-       <a>total bytes</a>.
-      </ol>
+       <dt><a for="read request">close steps</a>
+       <dd>
+        <ol>
+         <li><p>Run <a>handle response end-of-body</a> for <var>response</var>.
+        </ol>
 
-      <p class=note>These steps are only invoked when new bytes are transmitted.
+       <dt><a for="read request">error steps</a>
+       <dd>
+        <ol>
+         <li><p>Run <a>handle errors</a> for <var>response</var>.
+        </ol>
+      </dl>
 
-      <p>When <var>read</var> is fulfilled with an object whose <code>done</code> property is true,
-      run <a>handle response end-of-body</a> for <var>response</var>.
-
-      <p>When <var>read</var> is rejected with an exception, run <a>handle errors</a> for
-      <var>response</var>.
+     <li><p><a for=ReadableStreamDefaultReader>Read a chunk</a> from <var>reader</var> given
+     <var>readRequest</var>.
     </ol>
   </ol>
 
@@ -998,16 +992,13 @@ method must run these steps:
    then run <a>handle response end-of-body</a> and return.
 
    <li>
-    <p>Let <var>reader</var> be the result of
-    <a lt="get a reader" for=ReadableStream>getting a reader</a> from
-    <var>response</var>'s <a for=response>body</a>'s
-    <a for=body>stream</a>.
+    <p>Let <var>reader</var> be the result of <a for=ReadableStream>getting a reader</a> for
+    <var>response</var>'s <a for=response>body</a>'s <a for=body>stream</a>.
 
     <p><span class="note no-backref">This operation will not throw an exception.</span>
 
    <li><p>Let <var>promise</var> be the result of
-   <a lt="read all bytes" for=ReadableStream>reading all bytes</a> from <var>response</var>'s
-   <a for=response>body</a>'s <a for=body>stream</a> with <var>reader</var>.
+   <a for=ReadableStreamDefaultReader>reading all bytes</a> from <var>reader</var>.
 
    <li><p>Wait for <var>promise</var> to be fulfilled or rejected.
 
