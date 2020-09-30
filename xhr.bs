@@ -14,15 +14,6 @@ urlPrefix: https://w3c.github.io/DOM-Parsing/; spec: dom-parsing
     type: dfn; text: fragment serializing algorithm; url: dfn-fragment-serializing-algorithm
 </pre>
 
-<pre class=biblio>
-{
-  "HTTP": {
-    "aliasOf": "HTTP11"
-  },
-  "XMLNS": {
-    "aliasOf": "XML-NAMES"
-  }
-}</pre>
 
 
 <h2 id=introduction>Introduction</h2>
@@ -88,7 +79,7 @@ function fetchStatus(address) {
 
 <p>The {{XMLHttpRequest}} object was initially defined as part of
 the WHATWG's HTML effort. (Based on Microsoft's implementation many years prior.)
-It moved to the W3C in 2006. Extensions (e.g. progress events and
+It moved to the W3C in 2006. Extensions (e.g., progress events and
 cross-origin requests) to {{XMLHttpRequest}} were developed in a
 separate draft (XMLHttpRequest Level 2) until end of 2011, at which point
 the two drafts were merged and {{XMLHttpRequest}} became a single
@@ -106,32 +97,13 @@ archives:
 </ul>
 
 
-<h2 id=conformance>Conformance</h2>
-
-<p>All diagrams, examples, and notes in this specification are
-non-normative, as are all sections explicitly marked non-normative.
-Everything else in this specification is normative.
-
-<p>The key words "MUST", "MUST NOT", "REQUIRED", <!--"SHALL", "SHALL
-NOT",--> "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
-"OPTIONAL" in the normative parts of this specification are to be
-interpreted as described in RFC2119. For readability, these words do
-not appear in all uppercase letters in this specification.
-[[!RFC2119]]
-
-
-<h3 id=extensibility>Extensibility</h3>
-
-<p>User agents, Working Groups, and other interested parties are
-<em>strongly encouraged</em> to discuss new features with the WHATWG
-community.
-
 
 <h2 id=terminology>Terminology</h2>
 
-<p>This specification uses terminology, cross-linked throughout, from DOM,
-DOM Parsing and Serialization, Encoding, Feature Policy, Fetch, File API, HTML,
-HTTP, URL, Web IDL, and XML.
+<p>This specification depends on the Infra Standard. [[!INFRA]]
+
+<p>This specification uses terminology from DOM, DOM Parsing and Serialization, Encoding,
+Feature Policy, Fetch, File API, HTML, URL, Web IDL, and XML.
 
 [[!DOM]]
 [[!DOM-PARSING]]
@@ -140,12 +112,11 @@ HTTP, URL, Web IDL, and XML.
 [[!FETCH]]
 [[!FILEAPI]]
 [[!HTML]]
-[[!HTTP]]
 [[!URL]]
 [[!WEBIDL]]
-[[!XML]] [[!XMLNS]]
+[[!XML]] [[!XML-NAMES]]
 
-<p>It uses the typographic conventions from HTML. [[!HTML]]
+
 
 <h2 id=interface-xmlhttprequest>Interface {{XMLHttpRequest}}</h2>
 
@@ -399,8 +370,7 @@ cell in the first column is <a>this</a>'s <a>state</a>:
  <tr>
   <td><i>headers received</i>
   <td><dfn const for=XMLHttpRequest><code>HEADERS_RECEIVED</code></dfn> (numeric value 2)
-  <td>All redirects (if any) have been followed and all HTTP headers of a response have been
-  received.
+  <td>All redirects (if any) have been followed and all headers of a response have been received.
  <tr>
   <td><i>loading</i>
   <td><dfn const for=XMLHttpRequest><code>LOADING</code></dfn> (numeric value 3)
@@ -431,7 +401,7 @@ turn causes the <a>use-CORS-preflight flag</a> to be set.)
   <a>synchronous flag</a>.
 
   <p>Throws a "{{SyntaxError!!exception}}" {{DOMException}} if either <var>method</var> is not a
-  valid HTTP method or <var>url</var> cannot be parsed.
+  valid method or <var>url</var> cannot be parsed.
 
   <p>Throws a "{{SecurityError!!exception}}" {{DOMException}} if <var>method</var> is a
   case-insensitive match for `<code>CONNECT</code>`, `<code>TRACE</code>`, or `<code>TRACK</code>`.
@@ -1377,7 +1347,7 @@ not be web compatible.
   <p>If <var>xhr</var>'s <a>response type</a> is the empty string, <var>charset</var> is null, and
   the result of <a>get a final MIME type</a> for <var>xhr</var> is an <a>XML MIME type</a>, then use
   the rules set forth in the XML specifications to determine the encoding. Let <var>charset</var> be
-  the determined encoding. [[!XML]] [[!XMLNS]]
+  the determined encoding. [[!XML]] [[!XML-NAMES]]
 
   <p class=note>This is restricted to <var>xhr</var>'s <a>response type</a> being the empty string
   to keep the non-legacy <a>response type</a> value "<code>text</code>" simple.
@@ -1894,12 +1864,12 @@ attributes initialized to false, so it is suggested that for consistency all
 
 <h3 id=security-considerations>Security considerations</h3>
 
-<p>For cross-origin requests some kind of opt-in, e.g. the
+<p>For cross-origin requests some kind of opt-in, e.g., the
 <a>CORS protocol</a> defined in the Fetch Standard, has to be
 used before <a>events</a> using the
 {{ProgressEvent}} interface are
 <a>dispatched</a>
-as information (e.g. size) would be revealed that cannot be obtained
+as information (e.g., size) would be revealed that cannot be obtained
 otherwise. [[!FETCH]]
 
 
@@ -1935,6 +1905,7 @@ otherwise. [[!FETCH]]
  <p>Fully working code would of course be more elaborate and deal with more
  scenarios, such as network errors or the end user terminating the request.
 </div>
+
 
 
 <h2 class=no-num id=acknowledgments>Acknowledgments</h2>
@@ -2050,7 +2021,7 @@ Zhenbin Xu
 for their contributions to this standard.
 
 <p>Special thanks to the Microsoft employees who first implemented the
-<code>XMLHttpRequest</code> interface, which was first widely deployed by the
+{{XMLHttpRequest}} interface, which was first widely deployed by the
 Windows Internet Explorer browser.
 
 <p>Special thanks to Ian Hickson for drafting an initial version of this specification in
