@@ -3,13 +3,10 @@ Group: WHATWG
 H1: XMLHttpRequest
 Shortname: xhr
 Text Macro: TWITTER xhrstandard
+Text Macro: LATESTRD 2020-08
 Abstract: The XMLHttpRequest Standard defines an API that provides scripted client functionality for transferring data between a client and a server.
 Translation: ja https://triple-underscore.github.io/XHR-ja.html
 Translate IDs: enumdef-xmlhttprequestresponsetype xmlhttprequestresponsetype,dictdef-progresseventinit progresseventinit,typedefdef-formdataentryvalue formdataentryvalue
-</pre>
-
-<pre class=link-defaults>
-spec:dom; type:interface; text:Document
 </pre>
 
 <pre class=anchors>
@@ -19,9 +16,6 @@ urlPrefix: https://w3c.github.io/DOM-Parsing/; spec: dom-parsing
 
 <pre class=biblio>
 {
-  "DOMPS": {
-    "aliasOf": "DOM-PARSING"
-  },
   "HTTP": {
     "aliasOf": "HTTP11"
   },
@@ -140,7 +134,7 @@ DOM Parsing and Serialization, Encoding, Feature Policy, Fetch, File API, HTML,
 HTTP, URL, Web IDL, and XML.
 
 [[!DOM]]
-[[!DOMPS]]
+[[!DOM-PARSING]]
 [[!ENCODING]]
 [[!FEATURE-POLICY]]
 [[!FETCH]]
