@@ -12,8 +12,32 @@ Translate IDs: enumdef-xmlhttprequestresponsetype xmlhttprequestresponsetype,dic
 <pre class=anchors>
 urlPrefix: https://w3c.github.io/DOM-Parsing/; spec: dom-parsing
     type: dfn; text: fragment serializing algorithm; url: dfn-fragment-serializing-algorithm
+spec: DOCUMENT-POLICY; urlPrefix: https://w3c.github.io/webappsec-permissions-policy/document-policy.html
+    type: dfn
+        text: get policy value
+        text: configuration point
+        for: configuration point; urlPrefix: #configuration-point-
+            text: name
+            text: default value
+            text: type
 </pre>
 
+<pre class="biblio">
+  {
+    "DOCUMENT-POLICY": {
+      "authors": [
+        "Ian Clelland"
+      ],
+      "href": "https://w3c.github.io/webappsec-permissions-policy/document-policy.html",
+      "title": "Document Policy",
+      "status": "ED",
+      "publisher": "W3C",
+      "deliveredBy": [
+        "https://www.w3.org/2011/webappsec/"
+      ]
+    }
+  }
+</pre>
 
 
 <h2 id=introduction>Introduction</h2>
@@ -102,13 +126,13 @@ archives:
 
 <p>This specification depends on the Infra Standard. [[!INFRA]]
 
-<p>This specification uses terminology from DOM, DOM Parsing and Serialization, Encoding,
-Feature Policy, Fetch, File API, HTML, URL, Web IDL, and XML.
+<p>This specification uses terminology from Document Policy, DOM, DOM Parsing and Serialization,
+Encoding, Fetch, File API, HTML, URL, Web IDL, and XML.
 
+[[!DOCUMENT-POLICY]]
 [[!DOM]]
 [[!DOM-PARSING]]
 [[!ENCODING]]
-[[!FEATURE-POLICY]]
 [[!FETCH]]
 [[!FILEAPI]]
 [[!HTML]]
@@ -926,9 +950,10 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
   <p>Otherwise, if <a>this</a>'s <a>synchronous flag</a> is set:
 
   <ol>
-   <li><p>If <a>this</a>'s <a>relevant settings object</a> has a <a>responsible document</a> which
-   is not <a>allowed to use</a> the "<code><a>sync-xhr</a></code>" feature, then run
-   <a>handle response end-of-body</a> for <a>this</a> and a <a>network error</a>, and then return.
+   <li><p>If <a>this</a>'s <a>relevant settings object</a> has a <a>responsible document</a> for
+   which the <a lt="get policy value">policy value</a> for "<code><a>sync-xhr</a></code>" is false,
+   then run <a>handle response end-of-body</a> for <a>this</a> and a <a>network error</a>, and then
+   return.
 
    <li>
     <p>Let <var>response</var> be the result of
@@ -1596,11 +1621,16 @@ steps are:
 </table>
 
 
-<h3 id=feature-policy-integration>Feature Policy integration</h3>
+<h3 id=document-policy-integration oldids=feature-policy-integration>Document Policy integration</h3>
 
-<p>This specification defines a <a>policy-controlled feature</a> identified by the string
-"<code><dfn>sync-xhr</dfn></code>". Its <a>default allowlist</a> is <code>*</code>.
+<p>This specification defines a <a>configuration point</a> whose <a for="configuration
+point">name</a> is "<code><dfn>sync-xhr</dfn></code>". Its <a for="configuration point">type</a> is
+<code>boolean</code>, and and its <a for="configuration point">default value</a> is
+<code>false</code>.
 
+<div class=note>This section used to define an integration with Feature Policy. That integration
+has been deprecated in favor of Document Policy, which allows independent control of synchronous
+XHR in frames.</div>
 
 <h2 id=interface-formdata>Interface {{FormData}}</h2>
 
