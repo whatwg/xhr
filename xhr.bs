@@ -1300,9 +1300,10 @@ not be web compatible.
 
    <li><p>Let <var>document</var> be a
    <a>document</a> that
-   represents the result parsing <var>xhr</var>'s <a>received bytes</a> following the rules set
-   forth in the HTML Standard for an HTML parser with scripting disabled and
-   <a>a known definite encoding</a> <var>charset</var>.
+   represents the result of parsing <var>xhr</var>'s <a>received bytes</a> following the rules set
+   forth in the HTML Standard for an HTML parser with scripting disabled,
+   <a>a known definite encoding</a> <var>charset</var>, and <span>include shadow roots state</span>
+   set to "deny".
    [[!HTML]]
 
    <li><p>Flag <var>document</var> as an
