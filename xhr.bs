@@ -1302,7 +1302,7 @@ not be web compatible.
    <a>document</a> that
    represents the result of parsing <var>xhr</var>'s <a>received bytes</a> following the rules set
    forth in the HTML Standard for an HTML parser with scripting disabled,
-   <a>a known definite encoding</a> <var>charset</var>, and <span>include shadow roots state</span>
+   <a>a known definite encoding</a> <var>charset</var>, and <a>include shadow roots state</a>
    set to "deny".
    [[!HTML]]
 
@@ -1988,6 +1988,7 @@ Mark Birbeck,
 Mark Nottingham,
 Mark S. Miller,
 Martin Hassman,
+Mason Freed,
 Mike Pennisi,
 Mohamed Zergaoui,
 Ms2ger,
