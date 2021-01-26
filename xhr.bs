@@ -1761,7 +1761,7 @@ being the <a for=FormData/entry>value</a>.
 <h2 id=interface-progressevent>Interface {{ProgressEvent}}</h2>
 
 <pre class=idl>
-[Exposed=(Window,DedicatedWorker,SharedWorker)]
+[Exposed=(Window,Worker)]
 interface ProgressEvent : Event {
   constructor(DOMString type, optional ProgressEventInit eventInitDict = {});
 
@@ -1996,6 +1996,7 @@ Pawel Glowacki,
 Peter Michaux,
 Philip Jägenstedt,
 Philip Taylor,
+Rashika Jaggi,
 Robin Berjon,
 Rune <span title=Fabulous>F.</span> Halvorsen,
 Ruud Steltenpool,
