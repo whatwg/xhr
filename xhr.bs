@@ -756,8 +756,6 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
    <dd><a>This</a>'s <a>request body</a>.
    <dt><a for=request>client</a>
    <dd><a>This</a>'s <a>relevant settings object</a>.
-   <dt><a for=request>synchronous flag</a>
-   <dd>Set if <a>this</a>'s <a>synchronous flag</a> is set.
    <dt><a for=request>mode</a>
    <dd>"<code>cors</code>".
    <dt><a for=request>use-CORS-preflight flag</a>
