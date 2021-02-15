@@ -909,13 +909,16 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
    <var>processRequestEndOfBody</var>, and <a for=fetch><i>processResponse</i></a> set to
    <var>processResponse</var>.
 
+   <li><p>Let <var>now</var> be the present time.
+   <!-- Eventually this should use some kind of time standard. -->
+
    <li>
     <p>Run these steps <a>in parallel</a>:
 
     <ol>
      <li><p>Wait until either <var>req</var>'s <a for=request>done flag</a> is set or <a>this</a>'s
-     <a>timeout</a> is not 0 and <a>this</a>'s <a>timeout</a> milliseconds have passed since these
-     steps started.
+     <a>timeout</a> is not 0 and <a>this</a>'s <a>timeout</a> milliseconds have passed since
+     <var>now</var>.
 
      <li><p>If <var>req</var>'s <a for=request>done flag</a> is unset, then set <a>this</a>'s
      <a>timed out flag</a> and <a for=fetch>terminate</a> <a for=/>fetching</a>.
