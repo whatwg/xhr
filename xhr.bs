@@ -923,16 +923,21 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
    <li><p>Let <var>processedResponse</var> be false.
 
    <li>
-    <p>Let <var>processResponse</var>, given a <var>fetchResponse</var>, be these steps:
+    <p>Let <var>processResponseEndOfBody</var>, given a <var>fetchResponse</var> and
+    <var>nullOrFailureOrBytes</var>, be these steps:
 
     <ol>
      <li><p>Set <var>response</var> to <var>fetchResponse</var>.
 
+     <li><p>If <var>nullOrFailureOrBytes</var> is a <a for=/>byte sequence</a>, then append
+     <var>nullOrFailureOrBytes</var> to <a>this</a>'s <a>received bytes</a>.
+
      <li><p>Set <var>processedResponse</var> to true.
     </ol>
 
-   <li><p><a for=/>Fetch</a> <var>req</var> with <a for=fetch><i>processResponse</i></a>
-   set to <var>processResponse</var> and <a for=fetch><i>useParallelQueue</i></a> set to true.
+   <li><p><a for=/>Fetch</a> <var>req</var> with <a for=fetch><i>processResponseEndOfBody</i></a>
+   set to <var>processResponseEndOfBody</var> and <a for=fetch><i>useParallelQueue</i></a> set to
+   true.
 
    <li><p>Let <var>now</var> be the present time.
    <!-- Eventually this should use some kind of time standard. -->
@@ -943,23 +948,6 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
 
    <li><p>If <var>processedResponse</var> is false, then set <a>this</a>'s <a>timed out flag</a> and
    <a for=fetch>terminate</a> <a for=/>fetching</a>.
-
-   <li><p>If <var>response</var>'s <a for=response>body</a> is null, then run
-   <a>handle response end-of-body</a> for <a>this</a> and <var>response</var>, and then return.
-
-   <li>
-    <p>Let <var>reader</var> be the result of <a for=ReadableStream>getting a reader</a> for
-    <var>response</var>'s <a for=response>body</a>'s <a for=body>stream</a>.
-
-    <p class=note>This operation will not throw an exception.
-
-   <li><p>Let <var>promise</var> be the result of
-   <a for=ReadableStreamDefaultReader>reading all bytes</a> from <var>reader</var>.
-
-   <li><p><a>Pause</a> until <var>promise</var> is fulfilled or rejected.
-
-   <li><p>If <var>promise</var> is fulfilled with <var>bytes</var>, then append <var>bytes</var>
-   to <a>this</a>'s <a>received bytes</a>.
 
    <li><p>Run <a>handle response end-of-body</a> for <a>this</a> and <var>response</var>.
   </ol>
