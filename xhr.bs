@@ -856,52 +856,37 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
      <a for=XMLHttpRequest>response</a>, and then return.
 
      <li>
-      <p>Let <var>reader</var> be the result of <a for=ReadableStream>getting a reader</a> for
-      <a>this</a>'s <a for=XMLHttpRequest>response</a>'s <a for=response>body</a>'s
-      <a for=body>stream</a>.
+      <p>Let <var>processBodyChunk</var> given <var>bytes</var> be these steps:
 
-      <p class=note>This operation will not throw an exception.
+      <ol>
+       <li><p>Append <var>bytes</var> to <a>this</a>'s <a>received bytes</a>.
 
-     <li>
-      <p>Let <var>readRequest</var> be the following <a>read request</a>:
+       <li><p>If not roughly 50ms have passed since these steps were last invoked, then return.
 
-      <dl>
-       <dt><a for="read request">chunk steps</a>, given <var>chunk</var>
-       <dd>
-        <ol>
-         <li><p>Append <var>chunk</var> to <a>this</a>'s <a>received bytes</a>.
+       <li><p>If <a>this</a>'s <a>state</a> is <i>headers received</i>, then set <a>this</a>'s
+       <a>state</a> to <i>loading</i>.
 
-         <li><p>If not roughly 50ms have passed since these steps were last invoked, then return.
+       <li>
+        <p><a>Fire an event</a> named <a event><code>readystatechange</code></a> at <a>this</a>.
 
-         <li><p>If <a>this</a>'s <a>state</a> is <i>headers received</i>, then set <a>this</a>'s
-         <a>state</a> to <i>loading</i>.
+        <p class=note>Web compatibility is the reason <a event><code>readystatechange</code></a>
+        fires more often than <a>this</a>'s <a>state</a> changes.
 
-         <li>
-          <p><a>Fire an event</a> named <a event><code>readystatechange</code></a> at <a>this</a>.
+       <li><p><a>Fire a progress event</a> named <a event><code>progress</code></a> at <a>this</a>
+       with <a>this</a>'s <a for=XMLHttpRequest>response</a>'s <a for=response>body</a>'s
+       <a>read bytes</a> and <a>this</a>'s <a for=XMLHttpRequest>response</a>'s
+       <a for=response>body</a>'s <a>total bytes</a>.
+      </ol>
 
-          <p class="note no-backref">Web compatibility is the reason
-          <a event><code>readystatechange</code></a> fires more often than <a>this</a>'s
-          <a>state</a> changes.
+     <li><p>Let <var>processEndOfBody</var> be this step: run <a>handle response end-of-body</a> for
+     <a>this</a> and <a>this</a>'s <a for=XMLHttpRequest>response</a>.
 
-         <li><p><a>Fire a progress event</a> named <a event><code>progress</code></a> at <a>this</a>
-         with <a>this</a>'s <a for=XMLHttpRequest>response</a>'s <a for=response>body</a>'s
-         <a>transmitted bytes</a> and <a>this</a>'s <a for=XMLHttpRequest>response</a>'s
-         <a for=response>body</a>'s <a>total bytes</a>.
-        </ol>
+     <li><p>Let <var>processBodyError</var> be this step: run <a>handle errors</a> for <a>this</a>
+     and <a>this</a>'s <a for=XMLHttpRequest>response</a>.
 
-       <dt><a for="read request">close steps</a>
-       <dd>
-        <ol><li><p>Run <a>handle response end-of-body</a> for <a>this</a> and <a>this</a>'s
-        <a for=XMLHttpRequest>response</a>.</ol>
-
-       <dt><a for="read request">error steps</a>
-       <dd>
-        <ol><li><p>Run <a>handle errors</a> for <a>this</a> and <a>this</a>'s
-        <a for=XMLHttpRequest>response</a>.</ol>
-      </dl>
-
-     <li><p><a for=ReadableStreamDefaultReader>Read a chunk</a> from <var>reader</var> given
-     <var>readRequest</var>.
+     <li><p><a for=body>Incrementally read</a> <a>this</a>'s <a for=XMLHttpRequest>response</a>'s
+     <a for=response>body</a>, given <var>processBodyChunk</var>, <var>processEndOfBody</var>,
+     <var>processBodyError</var>, and <a>this</a>'s <a>relevant global object</a>.
     </ol>
 
    <li><p><a for=/>Fetch</a> <var>req</var> with <a for=fetch><i>processRequestBody</i></a> set to
