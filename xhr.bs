@@ -839,8 +839,7 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
     <ol>
      <li><p>Set <a>this</a>'s <a for=XMLHttpRequest>response</a> to <var>response</var>.
 
-     <li><p><a>Handle errors</a> for <a>this</a> and <a>this</a>'s
-     <a for=XMLHttpRequest>response</a>.
+     <li><p><a>Handle errors</a> for <a>this</a>.
 
      <li><p>If <a>this</a>'s <a for=XMLHttpRequest>response</a> is a <a>network error</a>, then
      return.
@@ -852,8 +851,7 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
      <li><p>If <a>this</a>'s <a>state</a> is not <i>headers received</i>, then return.
 
      <li><p>If <a>this</a>'s <a for=XMLHttpRequest>response</a>'s <a for=response>body</a> is null,
-     then run <a>handle response end-of-body</a> for <a>this</a> and <a>this</a>'s
-     <a for=XMLHttpRequest>response</a>, and then return.
+     then run <a>handle response end-of-body</a> for <a>this</a> and return.
 
      <li>
       <p>Let <var>processBodyChunk</var> given <var>bytes</var> be these steps:
@@ -879,10 +877,9 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
       </ol>
 
      <li><p>Let <var>processEndOfBody</var> be this step: run <a>handle response end-of-body</a> for
-     <a>this</a> and <a>this</a>'s <a for=XMLHttpRequest>response</a>.
+     <a>this</a>.
 
-     <li><p>Let <var>processBodyError</var> be this step: run <a>handle errors</a> for <a>this</a>
-     and <a>this</a>'s <a for=XMLHttpRequest>response</a>.
+     <li><p>Let <var>processBodyError</var> be this step: run <a>handle errors</a> for <a>this</a>.
 
      <li><p><a for=body>Incrementally read</a> <a>this</a>'s <a for=XMLHttpRequest>response</a>'s
      <a for=response>body</a>, given <var>processBodyChunk</var>, <var>processEndOfBody</var>,
@@ -916,18 +913,17 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
   <ol>
    <li><p>If <a>this</a>'s <a>relevant settings object</a> has a <a>responsible document</a> which
    is not <a>allowed to use</a> the "<code><a>sync-xhr</a></code>" feature, then run
-   <a>handle response end-of-body</a> for <a>this</a> and a <a>network error</a>, and then return.
-
-   <li><p>Let <var>response</var> be a <a for=/>network error</a>.
+   <a>handle response end-of-body</a> for <a>this</a> and return.
 
    <li><p>Let <var>processedResponse</var> be false.
 
    <li>
-    <p>Let <var>processResponseEndOfBody</var>, given a <var>fetchResponse</var> and
+    <p>Let <var>processResponseEndOfBody</var>, given a <var>response</var> and
     <var>nullOrFailureOrBytes</var>, be these steps:
 
     <ol>
-     <li><p>Set <var>response</var> to <var>fetchResponse</var>.
+     <li><p>If <var>nullOrFailureOrBytes</var> is not failure, then set <a>this</a>'s
+     <a for=XMLHttpRequest>response</a> to <var>response</var>.
 
      <li><p>If <var>nullOrFailureOrBytes</var> is a <a for=/>byte sequence</a>, then append
      <var>nullOrFailureOrBytes</var> to <a>this</a>'s <a>received bytes</a>.
@@ -949,31 +945,24 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
    <li><p>If <var>processedResponse</var> is false, then set <a>this</a>'s <a>timed out flag</a> and
    <a for=fetch>terminate</a> <a for=/>fetching</a>.
 
-   <li><p>Run <a>handle response end-of-body</a> for <a>this</a> and <var>response</var>.
+   <li><p>Run <a>handle response end-of-body</a> for <a>this</a>.
   </ol>
 </ol>
 
 <p id=handle-response-end-of-file>To <dfn>handle response end-of-body</dfn> for an
-{{XMLHttpRequest}} object <var>xhr</var> and a <a for=/>response</a> <var>response</var>, run these
-steps:
+{{XMLHttpRequest}} object <var>xhr</var>, run these steps:
 
 <ol>
- <li><p>If <var>xhr</var>'s <a>synchronous flag</a> is set, then set <var>xhr</var>'s
- <a for=XMLHttpRequest>response</a> to <var>response</var>.
-
- <li><p><a>Handle errors</a> for <var>xhr</var> and <var>response</var>.
+ <li><p><a>Handle errors</a> for <var>xhr</var>.
 
  <li><p>If <var>xhr</var>'s <a for=XMLHttpRequest>response</a> is a <a>network error</a>, then
  return.
 
- <li><p>If <var>xhr</var>'s <a>synchronous flag</a> is unset, then update <var>xhr</var>'s
- <a for=XMLHttpRequest>response</a>'s <a for=response>body</a> using <var>response</var>.
-
  <li><p>Let <var>transmitted</var> be <var>xhr</var>'s <a>received bytes</a>'s
  <a for="byte sequence">length</a>.
 
- <li><p>Let <var>length</var> be <var>response</var>'s <a for=response>body</a>'s
- <a for=body>total bytes</a>.
+ <li><p>Let <var>length</var> be <var>xhr</var>'s <a for=XMLHttpRequest>response</a>'s
+ <a for=response>body</a>'s <a for=body>total bytes</a>.
 
  <li><p>If <var>xhr</var>'s <a>synchronous flag</a> is unset, then <a>fire a progress event</a>
  named <a event><code>progress</code></a> at <var>xhr</var> with <var>transmitted</var> and
@@ -992,8 +981,7 @@ steps:
  <var>transmitted</var> and <var>length</var>.
 </ol>
 
-<p>To <dfn>handle errors</dfn> for an {{XMLHttpRequest}} object <var>xhr</var> and a
-<a for=/>response</a> <var>response</var>, run these steps:
+<p>To <dfn>handle errors</dfn> for an {{XMLHttpRequest}} object <var>xhr</var>, run these steps:
 
 <ol>
  <li><p>If <var>xhr</var>'s <a><code>send()</code> flag</a> is unset, then return.
@@ -1002,25 +990,12 @@ steps:
  for <var>xhr</var>, <a event><code>timeout</code></a>, and "{{TimeoutError!!exception}}"
  {{DOMException}}.
 
- <li><p>If <var>response</var> is a <a>network error</a>, then run the <a>request error steps</a>
- for <var>xhr</var>, <a event><code>error</code></a>, and "{{NetworkError!!exception}}"
- {{DOMException}}.
+ <li><p>Otherwise, if <var>xhr</var>'s <a for=XMLHttpRequest>response</a>'s
+ <a for=response>aborted flag</a> is set, run the <a>request error steps</a> for <var>xhr</var>,
+ <a event><code>abort</code></a>, and "{{AbortError!!exception}}" {{DOMException}}.
 
- <li>
-  <p>Otherwise, if <var>response</var>'s <a for=response>body</a>'s <a for=body>stream</a> is
-  <a for=ReadableStream>errored</a>, then:
-
-  <ol>
-   <li><p>Set <var>xhr</var>'s <a>state</a> to <i>done</i>.
-
-   <li><p>Unset <var>xhr</var>'s <a><code>send()</code> flag</a>.
-
-   <li><p>Set <var>xhr</var>'s <a for=XMLHttpRequest>response</a> to a <a>network error</a>.
-  </ol>
-
- <li><p>Otherwise, if <var>xhr</var>'s <var>response</var>'s <a for=response>aborted flag</a> is
- set, then run the <a>request error steps</a> for <var>xhr</var>, <a event><code>abort</code></a>,
- and "{{AbortError!!exception}}" {{DOMException}}.
+ <li><p>Otherwise, run the <a>request error steps</a> for <var>xhr</var>,
+ <a event><code>error</code></a>, and "{{NetworkError!!exception}}" {{DOMException}}.
 </ol>
 
 <p>The <dfn>request error steps</dfn> for an {{XMLHttpRequest}} object <var>xhr</var>,
