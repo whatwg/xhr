@@ -879,7 +879,14 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
      <li><p>Let <var>processEndOfBody</var> be this step: run <a>handle response end-of-body</a> for
      <a>this</a>.
 
-     <li><p>Let <var>processBodyError</var> be this step: run <a>handle errors</a> for <a>this</a>.
+     <li>
+      <p>Let <var>processBodyError</var> be these steps:
+
+      <ol>
+       <li><p>Set <a>this</a>'s <a for=XMLHttpRequest>response</a> to a <a for=/>network error</a>.
+
+       <li><p>Run <a>handle errors</a> for <a>this</a>.
+      </ol>
 
      <li><p><a for=body>Incrementally read</a> <a>this</a>'s <a for=XMLHttpRequest>response</a>'s
      <a for=response>body</a>, given <var>processBodyChunk</var>, <var>processEndOfBody</var>,
@@ -994,7 +1001,8 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
  <a for=response>aborted flag</a> is set, run the <a>request error steps</a> for <var>xhr</var>,
  <a event><code>abort</code></a>, and "{{AbortError!!exception}}" {{DOMException}}.
 
- <li><p>Otherwise, run the <a>request error steps</a> for <var>xhr</var>,
+ <li><p>Otherwise, if <var>xhr</var>'s <a for=XMLHttpRequest>response</a>'s is a
+ <a for=/>network error</a>, run the <a>request error steps</a> for <var>xhr</var>,
  <a event><code>error</code></a>, and "{{NetworkError!!exception}}" {{DOMException}}.
 </ol>
 
