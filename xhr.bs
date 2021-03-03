@@ -786,8 +786,7 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
    <li><p>Let <var>uploadedBytesLength</var> be 0.
 
    <li><p>Let <var>totalUploadedBytesLength</var> be <var>req</var>'s <a for=request>body</a>'s
-   <a for=body>length</a>, if <var>req</var>'s <a for=request>body</a>'s <a for=body>length</a> is
-   non-null; otherwise 0.
+   <a for=body>length</a>, if <var>req</var>'s <a for=request>body</a> is non-null; otherwise 0.
 
    <li><p>If <a>this</a>'s <a>upload complete flag</a> is unset and <a>this</a>'s
    <a>upload listener flag</a> is set, then <a>fire a progress event</a> named
