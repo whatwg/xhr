@@ -1009,11 +1009,7 @@ and "xmlhttprequest".
  <a event><code>abort</code></a>, and "{{AbortError!!exception}}" {{DOMException}}.
 
  <li><p>Otherwise, if <var>xhr</var>'s <a for=XMLHttpRequest>response</a>'s is a
- <a for=/>network error</a>, then perform the following steps:
- <ol>
-  <li><p><a for=/>Report timing</a> for <var>xhr</var>.
-
-  <li><p>Run the <a>request error steps</a> for <var>xhr</var>,
+ <a for=/>network error</a>, then run the <a>request error steps</a> for <var>xhr</var>,
   <a event><code>error</code></a>, and "{{NetworkError!!exception}}" {{DOMException}}.
  </ol>
 </ol>
@@ -1023,6 +1019,8 @@ and "xmlhttprequest".
 
 <ol>
  <li><p>Set <var>xhr</var>'s <a>state</a> to <i>done</i>.
+
+ <li><p><a for=/>Report timing</a> for <var>xhr</var>.
 
  <li><p>Unset <var>xhr</var>'s <a><code>send()</code> flag</a>.
 
