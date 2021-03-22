@@ -956,7 +956,7 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
 
 <p id=report-xhr-timing>To <dfn>report timing</dfn> for an {{XMLHttpRequest}} object <var>xhr</var>,
 <a href="https://github.com/whatwg/fetch/pull/1185">finalize and report timing</a> for
-<var>xhr</var>'s <a for=XMLHttpRequest>response</a>, <var>xhr</var>'s <a>relevant global object</a>
+<var>xhr</var>'s <a for=XMLHttpRequest>response</a>, <var>xhr</var>'s <a>relevant global object</a>,
 and "xmlhttprequest".
 
 <p id=handle-response-end-of-file>To <dfn>handle response end-of-body</dfn> for an
@@ -1010,7 +1010,7 @@ and "xmlhttprequest".
 
  <li><p>Otherwise, if <var>xhr</var>'s <a for=XMLHttpRequest>response</a>'s is a
  <a for=/>network error</a>, then run the <a>request error steps</a> for <var>xhr</var>,
-  <a event><code>error</code></a>, and "{{NetworkError!!exception}}" {{DOMException}}.
+ <a event><code>error</code></a>, and "{{NetworkError!!exception}}" {{DOMException}}.
  </ol>
 </ol>
 
