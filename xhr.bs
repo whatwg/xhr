@@ -1011,7 +1011,6 @@ and "xmlhttprequest".
  <li><p>Otherwise, if <var>xhr</var>'s <a for=XMLHttpRequest>response</a>'s is a
  <a for=/>network error</a>, then run the <a>request error steps</a> for <var>xhr</var>,
  <a event><code>error</code></a>, and "{{NetworkError!!exception}}" {{DOMException}}.
- </ol>
 </ol>
 
 <p>The <dfn>request error steps</dfn> for an {{XMLHttpRequest}} object <var>xhr</var>,
