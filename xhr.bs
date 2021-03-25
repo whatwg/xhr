@@ -1009,7 +1009,7 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
  <a event><code>abort</code></a>, and "{{AbortError!!exception}}" {{DOMException}}.
 
  <li><p>Otherwise, if <var>xhr</var>'s <a for=XMLHttpRequest>response</a>'s is a
- <a for=/>network error</a>, then run the <a>request error steps</a> for <var>xhr</var>,
+ <a for=/>network error</a>, run the <a>request error steps</a> for <var>xhr</var>,
  <a event><code>error</code></a>, and "{{NetworkError!!exception}}" {{DOMException}}.
 </ol>
 
