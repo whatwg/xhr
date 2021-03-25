@@ -955,7 +955,7 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
 </ol>
 
 <p id=report-xhr-timing>To <dfn>report timing</dfn> for an {{XMLHttpRequest}} object <var>xhr</var>,
-<a href="https://github.com/whatwg/fetch/pull/1185">finalize and report timing</a> for
+<a for=/>finalize and report timing</a> for
 <var>xhr</var>'s <a for=XMLHttpRequest>response</a>, <var>xhr</var>'s <a>relevant global object</a>,
 and "<code>xmlhttprequest</code>".
 
