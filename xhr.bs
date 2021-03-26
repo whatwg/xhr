@@ -108,7 +108,6 @@ Fetch, File API, HTML, URL, Web IDL, and XML.
 [[!DOM]]
 [[!DOM-PARSING]]
 [[!ENCODING]]
-[[!FEATURE-POLICY]]
 [[!FETCH]]
 [[!FILEAPI]]
 [[!HTML]]
