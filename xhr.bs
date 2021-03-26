@@ -922,10 +922,6 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
   <p>Otherwise, if <a>this</a>'s <a>synchronous flag</a> is set:
 
   <ol>
-   <li><p>If <a>this</a>'s <a>relevant settings object</a> has a <a>responsible document</a> which
-   is not <a>allowed to use</a> the "<code><a>sync-xhr</a></code>" feature, then run
-   <a>handle response end-of-body</a> for <a>this</a> and return.
-
    <li><p>Let <var>processedResponse</var> be false.
 
    <li>
