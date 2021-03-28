@@ -955,6 +955,10 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
   </ol>
 </ol>
 
+<p>To <dfn>report timing</dfn> for an {{XMLHttpRequest}} object <var>xhr</var>,
+<a for=/>finalize and report timing</a> for <var>xhr</var>'s <a for=XMLHttpRequest>response</a>,
+<var>xhr</var>'s <a>relevant global object</a>, and "<code>xmlhttprequest</code>".
+
 <p id=handle-response-end-of-file>To <dfn>handle response end-of-body</dfn> for an
 {{XMLHttpRequest}} object <var>xhr</var>, run these steps:
 
@@ -963,6 +967,8 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
 
  <li><p>If <var>xhr</var>'s <a for=XMLHttpRequest>response</a> is a <a>network error</a>, then
  return.
+
+ <li><p><a for=/>Report timing</a> for <var>xhr</var>.
 
  <li><p>Let <var>transmitted</var> be <var>xhr</var>'s <a>received bytes</a>'s
  <a for="byte sequence">length</a>.
@@ -1012,6 +1018,8 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
 
 <ol>
  <li><p>Set <var>xhr</var>'s <a>state</a> to <i>done</i>.
+
+ <li><p><a for=/>Report timing</a> for <var>xhr</var>.
 
  <li><p>Unset <var>xhr</var>'s <a><code>send()</code> flag</a>.
 
