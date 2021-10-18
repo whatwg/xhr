@@ -896,7 +896,8 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
      <var>processBodyError</var>, and <a>this</a>'s <a>relevant global object</a>.
     </ol>
 
-   <li><p><a for=/>Fetch</a> <var>req</var> with <a for=fetch><i>processRequestBodyChunkLength</i></a> set to
+   <li><p><a for=/>Fetch</a> <var>req</var> with
+   <a for=fetch><i>processRequestBodyChunkLength</i></a> set to
    <var>processRequestBodyChunkLength</var>, <a for=fetch><i>processRequestEndOfBody</i></a> set to
    <var>processRequestEndOfBody</var>, and <a for=fetch><i>processResponse</i></a> set to
    <var>processResponse</var>.
