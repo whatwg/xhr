@@ -535,18 +535,17 @@ method must run these steps:
  <li><p>If <a>this</a>'s <a><code>send()</code> flag</a> is set, then <a>throw</a> an
  "{{InvalidStateError!!exception}}" {{DOMException}}.
 
- <li><p><a for=header/value>Normalize</a> <var>value</var>.
+ <li><p><a for="header value">Normalize</a> <var>value</var>.
 
  <li>
-  <p>If <var>name</var> is not a <a for=header>name</a> or <var>value</var> is not a
-  <a for=header>value</a>, then <a>throw</a> a "{{SyntaxError!!exception}}" {{DOMException}}.
+  <p>If <var>name</var> is not a <a>header name</a> or <var>value</var> is not a
+  <a>header value</a>, then <a>throw</a> a "{{SyntaxError!!exception}}" {{DOMException}}.
 
-  <p class="note no-backref">An empty byte sequence represents an empty <a>header</a>
-  <a for=header>value</a>.
+  <p class=note>An empty byte sequence represents an empty <a>header value</a>.
 
  <li><p>If <var>name</var> is a <a>forbidden header name</a>, then return.
 
- <li><p><a for="header list">Combine</a> <var>name</var>/<var>value</var> in <a>this</a>'s
+ <li><p><a for="header list">Combine</a> (<var>name</var>, <var>value</var>) in <a>this</a>'s
  <a>author request headers</a>.
 </ol>
 
@@ -709,9 +708,8 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
          <li><p>Let <var>newContentTypeSerialized</var> be the result of
          <a lt="serialize a MIME type to bytes">serializing</a> <var>contentTypeRecord</var>.
 
-         <li><p><a for="header list">Set</a>
-         `<code>Content-Type</code>`/<var>newContentTypeSerialized</var> in <a>this</a>'s
-         <a>author request headers</a>.
+         <li><p><a for="header list">Set</a> (`<code>Content-Type</code>`,
+         <var>newContentTypeSerialized</var>) in <a>this</a>'s <a>author request headers</a>.
         </ol>
       </ol>
     </ol>
@@ -720,16 +718,16 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
     <p>Otherwise:
 
     <ol>
-     <li><p>If <var>body</var> is an <a>HTML document</a>, <a for="header list">set</a>
-     `<code>Content-Type</code>`/`<code>text/html;charset=UTF-8</code>` in <a>this</a>'s
+     <li><p>If <var>body</var> is an <a>HTML document</a>, then <a for="header list">set</a>
+     (`<code>Content-Type</code>`, `<code>text/html;charset=UTF-8</code>`) in <a>this</a>'s
      <a>author request headers</a>.
 
      <li><p>Otherwise, if <var>body</var> is an <a>XML document</a>, <a for="header list">set</a>
-     `<code>Content-Type</code>`/`<code>application/xml;charset=UTF-8</code>` in <a>this</a>'s
+     (`<code>Content-Type</code>`, `<code>application/xml;charset=UTF-8</code>`) in <a>this</a>'s
      <a>author request headers</a>.
 
      <li><p>Otherwise, if <var>extractedContentType</var> is not null, <a for="header list">set</a>
-     `<code>Content-Type</code>`/<var>extractedContentType</var> in <a>this</a>'s
+     (`<code>Content-Type</code>`, <var>extractedContentType</var>) in <a>this</a>'s
      <a>author request headers</a>.
     </ol>
   </ol>
