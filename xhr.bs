@@ -384,10 +384,10 @@ cell in the first column is <a>this</a>'s <a>state</a>:
 
 <h3 id=request>Request</h3>
 
-<p class="note no-backref" id=event-listeners-and-preflight>Registering one or more event listeners
-on an {{XMLHttpRequestUpload}} object will result in a <a>CORS-preflight request</a>. (That is
-because registering an event listener causes the <a>upload listener flag</a> to be set, which in
-turn causes the <a>use-CORS-preflight flag</a> to be set.)
+<p class=note id=event-listeners-and-preflight>Registering one or more event listeners on an
+{{XMLHttpRequestUpload}} object will result in a <a>CORS-preflight request</a>. (That is because
+registering an event listener causes the <a>upload listener flag</a> to be set, which in turn causes
+the <a>use-CORS-preflight flag</a> to be set.)
 
 
 <h4 id=the-open()-method>The <code>open()</code> method</h4>
@@ -410,11 +410,11 @@ turn causes the <a>use-CORS-preflight flag</a> to be set.)
   attribute is not zero or the {{XMLHttpRequest/responseType}} attribute is not the empty string.
 </dl>
 
-<p class="critical no-backref" id=sync-warning>Synchronous {{XMLHttpRequest}} outside of workers is
-in the process of being removed from the web platform as it has detrimental effects to the end
-user's experience. (This is a long process that takes many years.) Developers must not pass false
-for the <var>async</var> argument when <a>current global object</a> is a {{Window}} object. User
-agents are strongly encouraged to warn about such usage in developer tools and may experiment with
+<p class=critical id=sync-warning>Synchronous {{XMLHttpRequest}} outside of workers is in the
+process of being removed from the web platform as it has detrimental effects to the end user's
+experience. (This is a long process that takes many years.) Developers must not pass false for the
+<var>async</var> argument when <a>current global object</a> is a {{Window}} object. User agents are
+strongly encouraged to warn about such usage in developer tools and may experiment with
 <a lt=throw>throwing</a> an "{{InvalidAccessError!!exception}}" {{DOMException}} when it occurs.
 
 <p>The
@@ -1102,8 +1102,8 @@ set.
 steps are to return the result of <a for="header list">getting</a> <var>name</var> from
 <a>this</a>'s <a for=XMLHttpRequest>response</a>'s <a for=response>header list</a>.
 
-<p class="note no-backref">The Fetch Standard filters <a>this</a>'s
-<a for=XMLHttpRequest>response</a>'s <a for=response>header list</a>. [[!FETCH]]
+<p class=note>The Fetch Standard filters <a>this</a>'s <a for=XMLHttpRequest>response</a>'s
+<a for=response>header list</a>. [[!FETCH]]
 
 <div id=example-getresponseheader class=example>
  <p>For the following script:
@@ -1161,8 +1161,8 @@ text/plain; charset=UTF-8</code></pre>
  <li><p>Return <var>output</var>.
 </ol>
 
-<p class="note no-backref">The Fetch Standard filters <a>this</a>'s
-<a for=XMLHttpRequest>response</a>'s <a for=response>header list</a>. [[!FETCH]]
+<p class=note>The Fetch Standard filters <a>this</a>'s <a for=XMLHttpRequest>response</a>'s
+<a for=response>header list</a>. [[!FETCH]]
 
 <div id=example-getresponseheaders class=example>
  <p>For the following script:
