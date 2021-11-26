@@ -1598,15 +1598,12 @@ interface FormData {
 <dfn id=concept-formdata-entry-list export for=FormData>entry list</dfn> (an <a for="/">entry
 list</a>). It is initially empty.
 
-<span id="concept-formdata-entry"></span>
-<span id="concept-formdata-entry-name"></span>
-<span id="concept-formdata-entry-value"></span>
-<span id="create-an-entry"></span>
-
-<p class="note">This section used to define <a for="entry list">entry</a>, an entry's <a
-for="entry list/entry">name</a> and <a for="entry list/entry">value</a>, and the <a
-for="entry list">create an entry</a> algorithm. These definitions have been moved to the HTML
-Standard. [[HTML]]</p>
+<p class="note">This section used to define
+<a id="concept-formdata-entry" for="entry list">entry</a>, an entry's
+<a id="concept-formdata-entry-name" for="entry list/entry">name</a> and
+<a id="concept-formdata-entry-value" for="entry list/entry">value</a>, and the
+<a id="create-an-entry" for="entry list">create an entry</a> algorithm. These definitions have been
+moved to the HTML Standard. [[HTML]]</p>
 
 <hr>
 
@@ -1638,8 +1635,8 @@ method steps are:
 <ol>
  <li><p>Let <var>value</var> be <var>value</var> if given; otherwise <var>blobValue</var>.
 
- <li><p>Let <var>entry</var> be the result of <a for="entry list" lt="create an entry">creating an
- entry</a> with <var>name</var>, <var>value</var>, and <var>filename</var> if given.
+ <li><p>Let <var>entry</var> be the result of <a for="entry list">creating an entry</a> with
+ <var>name</var>, <var>value</var>, and <var>filename</var> if given.
 
  <li><p><a for=list>Append</a> <var>entry</var> to <a>this</a>'s <a for=FormData>entry list</a>.
 </ol>
@@ -1689,8 +1686,8 @@ method steps are:
 <ol>
  <li><p>Let <var>value</var> be <var>value</var> if given; otherwise <var>blobValue</var>.
 
- <li><p>Let <var>entry</var> be the result of <a for="entry list" lt="create an entry">creating an
- entry</a> with <var>name</var>, <var>value</var>, and <var>filename</var> if given.
+ <li><p>Let <var>entry</var> be the result of <a for="entry list">creating an entry</a> with
+ <var>name</var>, <var>value</var>, and <var>filename</var> if given.
 
  <li><p>If there are <a for=FormData>entries</a> in <a>this</a>'s <a for=FormData>entry list</a>
  whose <a for=FormData/entry>name</a> is <var>name</var>, then <a for=list>replace</a> the first
