@@ -1595,7 +1595,7 @@ interface FormData {
 </pre>
 
 <p>Each {{FormData}} object has an associated
-<dfn id=concept-formdata-entry-list export for=FormData>entry list</dfn> (an 
+<dfn id=concept-formdata-entry-list export for=FormData>entry list</dfn> (an
 <a for=/>entry list</a>). It is initially empty.
 
 <p class="note">This section used to define
