@@ -1595,8 +1595,8 @@ interface FormData {
 </pre>
 
 <p>Each {{FormData}} object has an associated
-<dfn id=concept-formdata-entry-list export for=FormData>entry list</dfn> (an <a for="/">entry
-list</a>). It is initially empty.
+<dfn id=concept-formdata-entry-list export for=FormData>entry list</dfn> (an 
+<a for=/>entry list</a>). It is initially empty.
 
 <p class="note">This section used to define
 <a id="concept-formdata-entry" for="entry list">entry</a>, an entry's
@@ -1604,8 +1604,6 @@ list</a>). It is initially empty.
 <a id="concept-formdata-entry-value" for="entry list/entry">value</a>, and the
 <a id="create-an-entry" for="entry list">create an entry</a> algorithm. These definitions have been
 moved to the HTML Standard. [[HTML]]</p>
-
-<hr>
 
 <p>The
 <dfn id=dom-formdata constructor for=FormData lt="FormData(form)"><code>new FormData(<var>form</var>)</code></dfn>
