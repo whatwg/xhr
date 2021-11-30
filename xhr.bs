@@ -1595,41 +1595,15 @@ interface FormData {
 </pre>
 
 <p>Each {{FormData}} object has an associated
-<dfn id=concept-formdata-entry-list export for=FormData>entry list</dfn> (a <a for=/>list</a> of
-<a>entries</a>). It is initially the empty list.
+<dfn id=concept-formdata-entry-list export for=FormData>entry list</dfn> (an
+<a for=/>entry list</a>). It is initially empty.
 
-<p>An <dfn id=concept-formdata-entry export for=FormData lt=entry|entries>entry</dfn> consists of a
-<dfn id=concept-formdata-entry-name export for=FormData/entry>name</dfn> and a
-<dfn id=concept-formdata-entry-value export for=FormData/entry>value</dfn>.
-
-<p>For the purposes of interaction with other algorithms, an <a for=FormData>entry</a>'s filename is
-the empty string if <a for=FormData/entry>value</a> is not a {{File}} object, and otherwise its
-filename is the value of <a for=FormData>entry</a>'s <a for=FormData/entry>value</a>'s {{File/name}}
-attribute.
-
-<p>To <dfn>create an entry</dfn> for <var>name</var>, <var>value</var>, and optionally a
-<var>filename</var>, run these steps:
-
-<ol>
- <li><p>Let <var>entry</var> be a new <a for=FormData>entry</a>.
-
- <li><p>Set <var>entry</var>'s <a for=FormData/entry>name</a> to <var>name</var>.
-
- <li><p>If <var>value</var> is a {{Blob}} object and not a {{File}} object, then set
- <var>value</var> to a new {{File}} object, representing the same bytes, whose {{File/name}}
- attribute value is "<code>blob</code>".
- <!-- XXX at some point File API should get internal slots for this -->
-
- <li><p>If <var>value</var> is (now) a {{File}} object and <var>filename</var> is given, then set
- <var>value</var> to a new {{File}} object, representing the same bytes, whose {{File/name}}
- attribute value is <var>filename</var>.
-
- <li><p>Set <var>entry</var>'s <a for=FormData/entry>value</a> to <var>value</var>.
-
- <li><p>Return <var>entry</var>.
-</ol>
-
-<hr>
+<p class="note">This section used to define
+<a id="concept-formdata-entry" for="entry list">entry</a>, an entry's
+<a id="concept-formdata-entry-name" for="entry list/entry">name</a> and
+<a id="concept-formdata-entry-value" for="entry list/entry">value</a>, and the
+<a id="create-an-entry" for="entry list">create an entry</a> algorithm. These definitions have been
+moved to the HTML Standard. [[HTML]]
 
 <p>The
 <dfn id=dom-formdata constructor for=FormData lt="FormData(form)"><code>new FormData(<var>form</var>)</code></dfn>
@@ -1659,7 +1633,7 @@ method steps are:
 <ol>
  <li><p>Let <var>value</var> be <var>value</var> if given; otherwise <var>blobValue</var>.
 
- <li><p>Let <var>entry</var> be the result of <a lt="create an entry">creating an entry</a> with
+ <li><p>Let <var>entry</var> be the result of <a for="entry list">creating an entry</a> with
  <var>name</var>, <var>value</var>, and <var>filename</var> if given.
 
  <li><p><a for=list>Append</a> <var>entry</var> to <a>this</a>'s <a for=FormData>entry list</a>.
@@ -1710,7 +1684,7 @@ method steps are:
 <ol>
  <li><p>Let <var>value</var> be <var>value</var> if given; otherwise <var>blobValue</var>.
 
- <li><p>Let <var>entry</var> be the result of <a lt="create an entry">creating an entry</a> with
+ <li><p>Let <var>entry</var> be the result of <a for="entry list">creating an entry</a> with
  <var>name</var>, <var>value</var>, and <var>filename</var> if given.
 
  <li><p>If there are <a for=FormData>entries</a> in <a>this</a>'s <a for=FormData>entry list</a>
