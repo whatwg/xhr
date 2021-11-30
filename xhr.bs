@@ -1603,7 +1603,7 @@ interface FormData {
 <a id="concept-formdata-entry-name" for="entry list/entry">name</a> and
 <a id="concept-formdata-entry-value" for="entry list/entry">value</a>, and the
 <a id="create-an-entry" for="entry list">create an entry</a> algorithm. These definitions have been
-moved to the HTML Standard. [[HTML]]</p>
+moved to the HTML Standard. [[HTML]]
 
 <p>The
 <dfn id=dom-formdata constructor for=FormData lt="FormData(form)"><code>new FormData(<var>form</var>)</code></dfn>
