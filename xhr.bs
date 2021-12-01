@@ -1643,18 +1643,19 @@ method steps are:
 is due to a limitation of the editing software used to write the XMLHttpRequest Standard.
 
 <p>The <dfn id=dom-formdata-delete method for=FormData><code>delete(<var>name</var>)</code></dfn>
-method steps are to <a for=list>remove</a> all <a for=FormData>entries</a> whose
-<a for=FormData/entry>name</a> is <var>name</var> from <a>this</a>'s <a for=FormData>entry list</a>.
+method steps are to <a for=list>remove</a> all <a for="entry list">entries</a> whose
+<a for="entry list/entry">name</a> is <var>name</var> from <a>this</a>'s
+<a for=FormData>entry list</a>.
 
 <p>The <dfn id=dom-formdata-get method for=FormData><code>get(<var>name</var>)</code></dfn> method
 steps are:
 
 <ol>
- <li><p>If there is no <a for=FormData>entry</a> whose <a for=FormData/entry>name</a> is
+ <li><p>If there is no <a for="entry list">entry</a> whose <a for="entry list/entry">name</a> is
  <var>name</var> in <a>this</a>'s <a for=FormData>entry list</a>, then return null.
 
- <li><p>Return the <a for=FormData/entry>value</a> of the first <a for=FormData>entry</a> whose
- <a for=FormData/entry>name</a> is <var>name</var> from <a>this</a>'s
+ <li><p>Return the <a for="entry list/entry">value</a> of the first <a for="entry list">entry</a>
+ whose <a for="entry list/entry">name</a> is <var>name</var> from <a>this</a>'s
  <a for=FormData>entry list</a>.
 </ol>
 
@@ -1662,18 +1663,18 @@ steps are:
 method steps are:
 
 <ol>
- <li><p>If there is no <a for=FormData>entry</a> whose <a for=FormData/entry>name</a> is
+ <li><p>If there is no <a for="entry list">entry</a> whose <a for="entry list/entry">name</a> is
  <var>name</var> in <a>this</a>'s <a for=FormData>entry list</a>, then return the empty list.
 
- <li><p>Return the <a for=FormData/entry>values</a> of all <a for=FormData>entries</a> whose
- <a for=FormData/entry>name</a> is <var>name</var>, in order, from <a>this</a>'s
+ <li><p>Return the <a for="entry list/entry">values</a> of all <a for="entry list">entries</a> whose
+ <a for="entry list/entry">name</a> is <var>name</var>, in order, from <a>this</a>'s
  <a for=FormData>entry list</a>.
 </ol>
 
 <p>The <dfn id=dom-formdata-has method for=FormData><code>has(<var>name</var>)</code></dfn> method
-steps are to return true if there is an <a for=FormData>entry</a> whose
-<a for=FormData/entry>name</a> is <var>name</var> in <a>this</a>'s <a for=FormData>entry list</a>;
-otherwise false.
+steps are to return true if there is an <a for="entry list">entry</a> whose
+<a for="entry list/entry">name</a> is <var>name</var> in <a>this</a>'s
+<a for=FormData>entry list</a>; otherwise false.
 
 <p>The
 <dfn id=dom-formdata-set method for=FormData><code>set(<var>name</var>, <var>value</var>)</code></dfn>
@@ -1687,9 +1688,9 @@ method steps are:
  <li><p>Let <var>entry</var> be the result of <a for="entry list">creating an entry</a> with
  <var>name</var>, <var>value</var>, and <var>filename</var> if given.
 
- <li><p>If there are <a for=FormData>entries</a> in <a>this</a>'s <a for=FormData>entry list</a>
- whose <a for=FormData/entry>name</a> is <var>name</var>, then <a for=list>replace</a> the first
- such <a for=FormData>entry</a> with <var>entry</var> and <a for=list>remove</a> the others.
+ <li><p>If there are <a for="entry list">entries</a> in <a>this</a>'s <a for=FormData>entry list</a>
+ whose <a for="entry list/entry">name</a> is <var>name</var>, then <a for=list>replace</a> the first
+ such <a for="entry list">entry</a> with <var>entry</var> and <a for=list>remove</a> the others.
 
  <li><p>Otherwise, <a for=list>append</a> <var>entry</var> to <a>this</a>'s
  <a for=FormData>entry list</a>.
@@ -1699,8 +1700,8 @@ method steps are:
 is due to a limitation of the editing software used to write the XMLHttpRequest Standard.
 
 <p>The <a>value pairs to iterate over</a> are <a>this</a>'s <a for=FormData>entry list</a>'s
-<a for=FormData>entries</a> with the key being the <a for=FormData/entry>name</a> and the value
-being the <a for=FormData/entry>value</a>.
+<a for="entry list">entries</a> with the key being the <a for="entry list/entry">name</a> and the
+value being the <a for="entry list/entry">value</a>.
 
 
 <h2 id=interface-progressevent>Interface {{ProgressEvent}}</h2>
