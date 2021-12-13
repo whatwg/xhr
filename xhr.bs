@@ -923,7 +923,7 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
    <li><p>Let <var>processedResponse</var> be false.
 
    <li>
-    <p>Let <var>processResponseEndOfBody</var>, given a <var>response</var> and
+    <p>Let <var>processResponseConsumeBody</var>, given a <var>response</var> and
     <var>nullOrFailureOrBytes</var>, be these steps:
 
     <ol>
@@ -936,8 +936,8 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
      <li><p>Set <var>processedResponse</var> to true.
     </ol>
 
-   <li><p><a for=/>Fetch</a> <var>req</var> with <a for=fetch><i>processResponseEndOfBody</i></a>
-   set to <var>processResponseEndOfBody</var> and <a for=fetch><i>useParallelQueue</i></a> set to
+   <li><p><a for=/>Fetch</a> <var>req</var> with <a for=fetch><i>processResponseConsumeBody</i></a>
+   set to <var>processResponseConsumeBody</var> and <a for=fetch><i>useParallelQueue</i></a> set to
    true.
 
    <li><p>Let <var>now</var> be the present time.
