@@ -1018,11 +1018,11 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
 <ol>
  <li><p>Set <var>xhr</var>'s <a>state</a> to <i>done</i>.
 
- <li><p><a for=/>Report timing</a> for <var>xhr</var>.
-
  <li><p>Unset <var>xhr</var>'s <a><code>send()</code> flag</a>.
 
  <li><p>Set <var>xhr</var>'s <a for=XMLHttpRequest>response</a> to a <a>network error</a>.
+
+ <li><p><a for=/>Report timing</a> for <var>xhr</var>.
 
  <li><p>If <var>xhr</var>'s <a>synchronous flag</a> is set, then <a>throw</a> <var>exception</var>.
 
