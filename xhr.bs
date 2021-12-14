@@ -1007,9 +1007,16 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
  <a for=response>aborted flag</a> is set, run the <a>request error steps</a> for <var>xhr</var>,
  <a event><code>abort</code></a>, and "{{AbortError!!exception}}" {{DOMException}}.
 
- <li><p>Otherwise, if <var>xhr</var>'s <a for=XMLHttpRequest>response</a>'s is a
- <a for=/>network error</a>, run the <a>request error steps</a> for <var>xhr</var>,
- <a event><code>error</code></a>, and "{{NetworkError!!exception}}" {{DOMException}}.
+ <li>
+  <p>Otherwise, if <var>xhr</var>'s <a for=XMLHttpRequest>response</a>'s is a
+  <a for=/>network error</a>, then:
+
+  <ol>
+   <li><p><a for=/>Report timing</a> for <var>xhr</var>.
+
+   <li><p>Run the <a>request error steps</a> for <var>xhr</var>,
+   <a event><code>error</code></a>, and "{{NetworkError!!exception}}" {{DOMException}}.
+  </ol>
 </ol>
 
 <p>The <dfn>request error steps</dfn> for an {{XMLHttpRequest}} object <var>xhr</var>,
@@ -1021,8 +1028,6 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
  <li><p>Unset <var>xhr</var>'s <a><code>send()</code> flag</a>.
 
  <li><p>Set <var>xhr</var>'s <a for=XMLHttpRequest>response</a> to a <a>network error</a>.
-
- <li><p><a for=/>Report timing</a> for <var>xhr</var>.
 
  <li><p>If <var>xhr</var>'s <a>synchronous flag</a> is set, then <a>throw</a> <var>exception</var>.
 
