@@ -955,7 +955,7 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
 </ol>
 
 <p>To <dfn>report timing</dfn> for an {{XMLHttpRequest}} object <var>xhr</var>,
-<a for=/>finalize and report timing</a> for <var>xhr</var>'s <a for=XMLHttpRequest>response</a>,
+<a for=/>finalize and report timing</a> with <var>xhr</var>'s <a for=XMLHttpRequest>response</a>,
 <var>xhr</var>'s <a>relevant global object</a>, and "<code>xmlhttprequest</code>".
 
 <p id=handle-response-end-of-file>To <dfn>handle response end-of-body</dfn> for an
