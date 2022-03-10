@@ -424,10 +424,9 @@ and
 method steps are:
 
 <ol>
- <li><p>Let <var>settingsObject</var> be <a>this</a>'s <a>relevant settings object</a>.
-
- <li><p>If <var>settingsObject</var> has a <a>responsible document</a> and it is <em>not</em>
- <a>fully active</a>, then <a>throw</a> an "{{InvalidStateError!!exception}}" {{DOMException}}.
+ <li><p>If <a>this</a>'s <a>relevant global object</a> is a {{Window}} object and its
+ <a>associated <code>Document</code></a> is not <a>fully active</a>, then <a>throw</a> an
+ "{{InvalidStateError!!exception}}" {{DOMException}}.
 
  <li><p>If <var>method</var> is not a <a for=/>method</a>, then <a>throw</a> a
  "{{SyntaxError!!exception}}" {{DOMException}}.
@@ -438,8 +437,10 @@ method steps are:
  <li><p><a for=method>Normalize</a> <var>method</var>.
 
  <li><p>Let <var>parsedURL</var> be the result of <a lt="URL parser">parsing</a> <var>url</var> with
- <var>settingsObject</var>'s <a for="environment settings object">API base URL</a> and
- <var>settingsObject</var>'s <a for="environment settings object">API URL character encoding</a>.
+ <a>this</a>'s <a>relevant settings object</a>'s
+ <a for="environment settings object">API base URL</a> and <a>this</a>'s
+ <a>relevant settings object</a>'s
+ <a for="environment settings object">API URL character encoding</a>.
 
  <li><p>If <var>parsedURL</var> is failure, then <a>throw</a> a "{{SyntaxError!!exception}}"
  {{DOMException}}.
