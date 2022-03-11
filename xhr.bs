@@ -406,15 +406,16 @@ the <a>use-CORS-preflight flag</a> to be set.)
   case-insensitive match for `<code>CONNECT</code>`, `<code>TRACE</code>`, or `<code>TRACK</code>`.
 
   <p>Throws an "{{InvalidAccessError!!exception}}" {{DOMException}} if <var>async</var> is false,
-  <a>current global object</a> is a {{Window}} object, and the {{XMLHttpRequest/timeout!!attribute}}
-  attribute is not zero or the {{XMLHttpRequest/responseType}} attribute is not the empty string.
+  the <a>current global object</a> is a {{Window}} object, and the
+  {{XMLHttpRequest/timeout!!attribute}} attribute is not zero or the {{XMLHttpRequest/responseType}}
+  attribute is not the empty string.
 </dl>
 
 <p class=critical id=sync-warning>Synchronous {{XMLHttpRequest}} outside of workers is in the
 process of being removed from the web platform as it has detrimental effects to the end user's
 experience. (This is a long process that takes many years.) Developers must not pass false for the
-<var>async</var> argument when <a>current global object</a> is a {{Window}} object. User agents are
-strongly encouraged to warn about such usage in developer tools and may experiment with
+<var>async</var> argument when the <a>current global object</a> is a {{Window}} object. User agents
+are strongly encouraged to warn about such usage in developer tools and may experiment with
 <a lt=throw>throwing</a> an "{{InvalidAccessError!!exception}}" {{DOMException}} when it occurs.
 
 <p>The
@@ -580,7 +581,7 @@ client.send();
   <a><code>send()</code></a> method).
 
   <p>When set: throws an "{{InvalidAccessError!!exception}}" {{DOMException}} if the
-  <a>synchronous flag</a> is set and <a>current global object</a> is a {{Window}} object.
+  <a>synchronous flag</a> is set and the <a>current global object</a> is a {{Window}} object.
 </dl>
 
 <p>The <dfn attribute for=XMLHttpRequest><code>timeout</code></dfn> getter steps are to return
@@ -1385,6 +1386,7 @@ steps are:
  <dt><code><var>client</var> . <a attribute for=XMLHttpRequest>responseType</a> [ = <var>value</var> ]</code>
  <dd>
   <p>Returns the response type.
+
   <p>Can be set to change the response type. Values are:
   the empty string (default),
   "<code>arraybuffer</code>",
@@ -1392,15 +1394,15 @@ steps are:
   "<code>document</code>",
   "<code>json</code>", and
   "<code>text</code>".
-  <p>When set: setting to "<code>document</code>" is ignored if
-  <a>current global object</a> is <em>not</em> a
-  {{Window}} object.
+
+  <p>When set: setting to "<code>document</code>" is ignored if the <a>current global object</a> is
+  not a {{Window}} object.
 
   <p>When set: throws an "{{InvalidStateError!!exception}}" {{DOMException}} if <a>state</a> is
   <i>loading</i> or <i>done</i>.
 
   <p>When set: throws an "{{InvalidAccessError!!exception}}" {{DOMException}} if the
-  <a>synchronous flag</a> is set and <a>current global object</a> is a {{Window}} object.
+  <a>synchronous flag</a> is set and the <a>current global object</a> is a {{Window}} object.
 </dl>
 
 <p>The <dfn attribute for=XMLHttpRequest><code>responseType</code></dfn> getter steps are to return
