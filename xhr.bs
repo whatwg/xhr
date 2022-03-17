@@ -240,6 +240,12 @@ interface XMLHttpRequest : XMLHttpRequestEventTarget {
  <dt><dfn>response object</dfn>
  <dd>An object, failure, or null, initially null.
 
+ <dt><dfn for=XMLHttpRequest>fetch controller</dfn>
+ <dd>A <a for=/>fetch controller</a>, initially a new <a for=/>fetch controller</a>.
+ <span class=note>The <a><code>send()</code></a> method sets it to a useful
+ <a for=/>fetch controller</a>, but for simplicity it always holds a
+ <a for=/>fetch controller</a>.</span>
+
  <dt><dfn id=override-mime-type>override MIME type</dfn>
  <dd>A <a for=/>MIME type</a> or null, initially null. <span class=note>Can get a value when
  {{overrideMimeType()}} is invoked.</span>
@@ -281,9 +287,9 @@ registered whose <b>type</b> is one of
 <a event><code>loadend</code></a>.
 <!-- No need to mention upload event listeners as they happen during /opened/. -->
 
-<p>If an {{XMLHttpRequest}} object is garbage collected while its
-connection is still open, the user agent must <a for=fetch lt=terminated>terminate</a> the ongoing
-fetch operated by the {{XMLHttpRequest}} object.
+<p>If an {{XMLHttpRequest}} object is garbage collected while its connection is still open, the user
+agent must <a for="fetch controller">terminate</a> the {{XMLHttpRequest}} object's
+<a for=XMLHttpRequest>fetch controller</a>.
 
 
 <h3 id=event-handlers>Event handlers</h3>
@@ -471,11 +477,10 @@ method steps are:
  the empty string, then <a>throw</a> an "{{InvalidAccessError!!exception}}" {{DOMException}}.
 
  <li>
-  <p><a for=fetch lt=terminated>Terminate</a> the ongoing fetch operated by the
-  {{XMLHttpRequest}} object.
+  <p><a for="fetch controller">Terminate</a> <a>this</a>'s
+  <a for=XMLHttpRequest>fetch controller</a>.
 
-  <p class=note>A <a for=/>fetch</a> can be
-  ongoing at this point.
+  <p class=note>A <a for=/>fetch</a> can be ongoing at this point.
 
  <li>
   <p>Set variables associated with the object as follows:
@@ -896,7 +901,8 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
      <var>processBodyError</var>, and <a>this</a>'s <a>relevant global object</a>.
     </ol>
 
-   <li><p><a for=/>Fetch</a> <var>req</var> with
+   <li><p>Set <a>this</a>'s <a for=XMLHttpRequest>fetch controller</a> to the result of
+   <a for=/ lt=fetch>fetching</a> <var>req</var> with
    <a for=fetch><i>processRequestBodyChunkLength</i></a> set to
    <var>processRequestBodyChunkLength</var>, <a for=fetch><i>processRequestEndOfBody</i></a> set to
    <var>processRequestEndOfBody</var>, and <a for=fetch><i>processResponse</i></a> set to
@@ -914,7 +920,8 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
      <var>now</var>.
 
      <li><p>If <var>req</var>'s <a for=request>done flag</a> is unset, then set <a>this</a>'s
-     <a>timed out flag</a> and <a for=fetch>terminate</a> <a for=/>fetching</a>.
+     <a>timed out flag</a> and <a for="fetch controller">terminate</a> <a>this</a>'s
+     <a for=XMLHttpRequest>fetch controller</a>.
     </ol>
   </ol>
 
@@ -938,9 +945,10 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
      <li><p>Set <var>processedResponse</var> to true.
     </ol>
 
-   <li><p><a for=/>Fetch</a> <var>req</var> with <a for=fetch><i>processResponseConsumeBody</i></a>
-   set to <var>processResponseConsumeBody</var> and <a for=fetch><i>useParallelQueue</i></a> set to
-   true.
+   <li><p>Set <a>this</a>'s <a for=XMLHttpRequest>fetch controller</a> to the result of
+   <a for=/ lt=fetch>fetching</a> <var>req</var> with
+   <a for=fetch><i>processResponseConsumeBody</i></a> set to <var>processResponseConsumeBody</var>
+   and <a for=fetch><i>useParallelQueue</i></a> set to true.
 
    <li><p>Let <var>now</var> be the present time.
    <!-- Eventually this should use some kind of time standard. -->
@@ -950,7 +958,7 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
    <var>now</var>.
 
    <li><p>If <var>processedResponse</var> is false, then set <a>this</a>'s <a>timed out flag</a> and
-   <a for=fetch>terminate</a> <a for=/>fetching</a>.
+   <a for="fetch controller">terminate</a> <a>this</a>'s <a for=XMLHttpRequest>fetch controller</a>.
 
    <li><p>Run <a>handle response end-of-body</a> for <a>this</a>.
   </ol>
@@ -1073,7 +1081,8 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
 <p>The <dfn method for=XMLHttpRequest><code>abort()</code></dfn> method steps are:
 
 <ol>
- <li><p><a for=fetch lt=terminated>Terminate</a> the ongoing fetch with the <i>aborted</i> flag set.
+ <li><p><a for="fetch controller">Abort</a> <a>this</a>'s
+ <a for=XMLHttpRequest>fetch controller</a>.
 
  <li><p>If <a>this</a>'s <a>state</a> is <i>opened</i> with <a>this</a>'s
  <a><code>send()</code> flag</a> set, <i>headers received</i>, or <i>loading</i>, then run the
@@ -1953,6 +1962,7 @@ Martin Hassman,
 Mike Pennisi,
 Mohamed Zergaoui,
 Ms2ger,
+Noam Rosenthal,
 Odin Hørthe Omdal,
 Olli Pettay,
 Pawel Glowacki,
