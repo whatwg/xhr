@@ -964,9 +964,9 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
   </ol>
 </ol>
 
-<p>To <dfn>report timing</dfn> for an {{XMLHttpRequest}} object <var>xhr</var>,
-<a for=/>finalize and report timing</a> with <var>xhr</var>'s <a for=XMLHttpRequest>response</a>,
-<var>xhr</var>'s <a>relevant global object</a>, and "<code>xmlhttprequest</code>".
+<p>To <dfn>conclude</dfn> an {{XMLHttpRequest}} object <var>xhr</var>,
+<a for="fetch controller">conclude</a> <var>xhr</var>'s <a for=XMLHttpRequest>fetch controller</a>,
+given "<code>xmlhttprequest</code>" and <var>xhr</var>'s <a>relevant global object</a>.
 
 <p id=handle-response-end-of-file>To <dfn>handle response end-of-body</dfn> for an
 {{XMLHttpRequest}} object <var>xhr</var>, run these steps:
@@ -977,7 +977,7 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
  <li><p>If <var>xhr</var>'s <a for=XMLHttpRequest>response</a> is a <a>network error</a>, then
  return.
 
- <li><p><a for=/>Report timing</a> for <var>xhr</var>.
+ <li><p><a for=/>Conclude</a> <var>xhr</var>.
 
  <li><p>Let <var>transmitted</var> be <var>xhr</var>'s <a>received bytes</a>'s
  <a for="byte sequence">length</a>.
@@ -1022,7 +1022,7 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
   <a for=/>network error</a>, then:
 
   <ol>
-   <li><p><a for=/>Report timing</a> for <var>xhr</var>.
+   <li><p><a for=/>Conclude</a> <var>xhr</var>.
 
    <li><p>Run the <a>request error steps</a> for <var>xhr</var>,
    <a event><code>error</code></a>, and "{{NetworkError!!exception}}" {{DOMException}}.
