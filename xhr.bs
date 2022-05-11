@@ -685,8 +685,20 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
    <var>body</var>, <a lt="fragment serializing algorithm">serialized</a>,
    <a for=string>converted</a>, and <a lt="UTF-8 encode">UTF-8 encoded</a>.
 
-   <li><p>Otherwise, set <a>this</a>'s <a>request body</a> and <var>extractedContentType</var> to
-   the result of <a for=BodyInit lt="safely extract">safely extracting</a> <var>body</var>.
+   <li>
+    <p>Otherwise:
+
+    <ol>
+     <li><p>Let <var>bodyWithType</var> be the result of
+     <a for=BodyInit lt="safely extract">safely extracting</a> <var>body</var>.
+
+     <li><p>Set <a>this</a>'s <a>request body</a> to <var>bodyWithType</var>'s
+     <a for="body with type">body</a>.
+
+     <li><p>Set <var>extractedContentType</var> to <var>bodyWithType</var>'s
+     <a for="body with type">type</a>.
+    </ol>
+   </li>
 
    <li><p>Let <var>originalAuthorContentType</var> be the result of <a for="header list">getting</a>
    `<code>Content-Type</code>` from <a>this</a>'s <a>author request headers</a>.
