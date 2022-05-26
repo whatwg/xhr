@@ -903,6 +903,8 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
 
    <li><p>Set <a>this</a>'s <a for=XMLHttpRequest>fetch controller</a> to the result of
    <a for=/ lt=fetch>fetching</a> <var>req</var> with
+   <a for=fetch><i>timingGlobal</i></a> set to "<code>client</code>",
+   <a for=fetch><i>initiatorType</i></a> set to "<code>xmlhttprequest</code>",
    <a for=fetch><i>processRequestBodyChunkLength</i></a> set to
    <var>processRequestBodyChunkLength</var>, <a for=fetch><i>processRequestEndOfBody</i></a> set to
    <var>processRequestEndOfBody</var>, and <a for=fetch><i>processResponse</i></a> set to
@@ -964,10 +966,6 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
   </ol>
 </ol>
 
-<p>To <dfn>conclude</dfn> an {{XMLHttpRequest}} object <var>xhr</var>,
-<a for="fetch controller">conclude</a> <var>xhr</var>'s <a for=XMLHttpRequest>fetch controller</a>,
-given "<code>xmlhttprequest</code>" and <var>xhr</var>'s <a>relevant global object</a>.
-
 <p id=handle-response-end-of-file>To <dfn>handle response end-of-body</dfn> for an
 {{XMLHttpRequest}} object <var>xhr</var>, run these steps:
 
@@ -976,8 +974,6 @@ given "<code>xmlhttprequest</code>" and <var>xhr</var>'s <a>relevant global obje
 
  <li><p>If <var>xhr</var>'s <a for=XMLHttpRequest>response</a> is a <a>network error</a>, then
  return.
-
- <li><p><a for=/>Conclude</a> <var>xhr</var>.
 
  <li><p>Let <var>transmitted</var> be <var>xhr</var>'s <a>received bytes</a>'s
  <a for="byte sequence">length</a>.
@@ -1017,16 +1013,9 @@ given "<code>xmlhttprequest</code>" and <var>xhr</var>'s <a>relevant global obje
  <a for=response>aborted flag</a> is set, run the <a>request error steps</a> for <var>xhr</var>,
  <a event><code>abort</code></a>, and "{{AbortError!!exception}}" {{DOMException}}.
 
- <li>
-  <p>Otherwise, if <var>xhr</var>'s <a for=XMLHttpRequest>response</a> is a
-  <a for=/>network error</a>, then:
-
-  <ol>
-   <li><p><a for=/>Conclude</a> <var>xhr</var>.
-
-   <li><p>Run the <a>request error steps</a> for <var>xhr</var>,
-   <a event><code>error</code></a>, and "{{NetworkError!!exception}}" {{DOMException}}.
-  </ol>
+ <li><p>Otherwise, if <var>xhr</var>'s <a for=XMLHttpRequest>response</a> is a
+ <a for=/>network error</a>, thenr run the <a>request error steps</a> for <var>xhr</var>,
+ <a event><code>error</code></a>, and "{{NetworkError!!exception}}" {{DOMException}}.
 </ol>
 
 <p>The <dfn>request error steps</dfn> for an {{XMLHttpRequest}} object <var>xhr</var>,
