@@ -769,6 +769,8 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
    otherwise "<code>same-origin</code>".
    <dt><a for=request>use-URL-credentials flag</a>
    <dd>Set if <a>this</a>'s <a>request URL</a> <a>includes credentials</a>.
+   <dt><a for=request>initiator</a>
+   <dd>"<code>xmlhttprequest</code>".
   </dl>
 
  <li><p>Unset <a>this</a>'s <a>upload complete flag</a>.
@@ -903,8 +905,6 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
 
    <li><p>Set <a>this</a>'s <a for=XMLHttpRequest>fetch controller</a> to the result of
    <a for=/ lt=fetch>fetching</a> <var>req</var> with
-   <a for=fetch><i>timingGlobal</i></a> set to "<code>client</code>",
-   <a for=fetch><i>initiatorType</i></a> set to "<code>xmlhttprequest</code>",
    <a for=fetch><i>processRequestBodyChunkLength</i></a> set to
    <var>processRequestBodyChunkLength</var>, <a for=fetch><i>processRequestEndOfBody</i></a> set to
    <var>processRequestEndOfBody</var>, and <a for=fetch><i>processResponse</i></a> set to
@@ -1014,7 +1014,7 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
  <a event><code>abort</code></a>, and "{{AbortError!!exception}}" {{DOMException}}.
 
  <li><p>Otherwise, if <var>xhr</var>'s <a for=XMLHttpRequest>response</a> is a
- <a for=/>network error</a>, thenr run the <a>request error steps</a> for <var>xhr</var>,
+ <a for=/>network error</a>, then run the <a>request error steps</a> for <var>xhr</var>,
  <a event><code>error</code></a>, and "{{NetworkError!!exception}}" {{DOMException}}.
 </ol>
 
