@@ -769,7 +769,7 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
    otherwise "<code>same-origin</code>".
    <dt><a for=request>use-URL-credentials flag</a>
    <dd>Set if <a>this</a>'s <a>request URL</a> <a>includes credentials</a>.
-   <dt><a for=request>initiator</a>
+   <dt><a for=request>initiator type</a>
    <dd>"<code>xmlhttprequest</code>".
   </dl>
 
