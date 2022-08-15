@@ -781,6 +781,8 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
    otherwise "<code>same-origin</code>".
    <dt><a for=request>use-URL-credentials flag</a>
    <dd>Set if <a>this</a>'s <a>request URL</a> <a>includes credentials</a>.
+   <dt><a for=request>initiator type</a>
+   <dd>"<code>xmlhttprequest</code>".
   </dl>
 
  <li><p>Unset <a>this</a>'s <a>upload complete flag</a>.
@@ -972,13 +974,12 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
    <li><p>If <var>processedResponse</var> is false, then set <a>this</a>'s <a>timed out flag</a> and
    <a for="fetch controller">terminate</a> <a>this</a>'s <a for=XMLHttpRequest>fetch controller</a>.
 
+   <li><p><a for="fetch controller">Report timing</a> for <a>this</a>'s
+   <a for=XMLHttpRequest>fetch controller</a> given the <a>current global object</a>.
+
    <li><p>Run <a>handle response end-of-body</a> for <a>this</a>.
   </ol>
 </ol>
-
-<p>To <dfn>report timing</dfn> for an {{XMLHttpRequest}} object <var>xhr</var>,
-<a for=/>finalize and report timing</a> with <var>xhr</var>'s <a for=XMLHttpRequest>response</a>,
-<var>xhr</var>'s <a>relevant global object</a>, and "<code>xmlhttprequest</code>".
 
 <p id=handle-response-end-of-file>To <dfn>handle response end-of-body</dfn> for an
 {{XMLHttpRequest}} object <var>xhr</var>, run these steps:
@@ -988,8 +989,6 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
 
  <li><p>If <var>xhr</var>'s <a for=XMLHttpRequest>response</a> is a <a>network error</a>, then
  return.
-
- <li><p><a for=/>Report timing</a> for <var>xhr</var>.
 
  <li><p>Let <var>transmitted</var> be <var>xhr</var>'s <a>received bytes</a>'s
  <a for="byte sequence">length</a>.
@@ -1029,16 +1028,9 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
  <a for=response>aborted flag</a> is set, run the <a>request error steps</a> for <var>xhr</var>,
  <a event><code>abort</code></a>, and "{{AbortError!!exception}}" {{DOMException}}.
 
- <li>
-  <p>Otherwise, if <var>xhr</var>'s <a for=XMLHttpRequest>response</a> is a
-  <a for=/>network error</a>, then:
-
-  <ol>
-   <li><p><a for=/>Report timing</a> for <var>xhr</var>.
-
-   <li><p>Run the <a>request error steps</a> for <var>xhr</var>,
-   <a event><code>error</code></a>, and "{{NetworkError!!exception}}" {{DOMException}}.
-  </ol>
+ <li><p>Otherwise, if <var>xhr</var>'s <a for=XMLHttpRequest>response</a> is a
+ <a for=/>network error</a>, then run the <a>request error steps</a> for <var>xhr</var>,
+ <a event><code>error</code></a>, and "{{NetworkError!!exception}}" {{DOMException}}.
 </ol>
 
 <p>The <dfn>request error steps</dfn> for an {{XMLHttpRequest}} object <var>xhr</var>,
