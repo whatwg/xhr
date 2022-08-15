@@ -962,8 +962,8 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
    <li><p>If <var>processedResponse</var> is false, then set <a>this</a>'s <a>timed out flag</a> and
    <a for="fetch controller">terminate</a> <a>this</a>'s <a for=XMLHttpRequest>fetch controller</a>.
 
-   <li><p>Call <a>this</a>'s <a for=XMLHttpRequest>fetch controller</a>'s
-   <a for="fetch controller">report timing</a> given the <a>current global object</a>.
+   <li><p><a for="fetch controller">Report timing</a> for <a>this</a>'s
+   <a for=XMLHttpRequest>fetch controller</a> given the <a>current global object</a>.
 
    <li><p>Run <a>handle response end-of-body</a> for <a>this</a>.
   </ol>
