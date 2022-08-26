@@ -369,7 +369,7 @@ cell in the first column is <a>this</a>'s <a>state</a>:
   <td><i>opened</i>
   <td><dfn const for=XMLHttpRequest><code>OPENED</code></dfn> (numeric value 1)
   <td>The <a method for=XMLHttpRequest lt="open(method, url)"><code>open()</code></a> method has
-  been successfully invoked. During this state request headers can be set using
+  been successfully invoked. During this state author request headers can be set using
   <a><code>setRequestHeader()</code></a> and the fetch can be initiated using the
   <a><code>send()</code></a> method.
  <tr>
