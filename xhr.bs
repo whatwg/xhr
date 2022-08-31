@@ -522,7 +522,7 @@ the editing software used to write the XMLHttpRequest Standard.
  <dt><code><var>client</var> . <a method for=XMLHttpRequest>setRequestHeader(<var>name</var>, <var>value</var>)</a></code>
 
  <dd>
-  <p>Combines a <a>header</a> in <a>author request headers</a>.
+  <p>Appends a value to an existing request header or adds a new request header.
 
   <p>Throws an "{{InvalidStateError!!exception}}" {{DOMException}} if either <a>state</a> is not
   <i>opened</i> or the <a><code>send()</code> flag</a> is set.
