@@ -2009,7 +2009,5 @@ the HTML Standard (then Web Applications 1.0). [[!HTML]]
 {{ProgressEvent}} class as part of the
 <a href=https://www.w3.org/TR/2008/REC-SVGTiny12-20081222/svgudom.html>SVG Micro DOM</a>.
 
-<p>This standard is written by
-<a href=https://annevankesteren.nl/ lang=nl>Anne van Kesteren</a>
-(<a href=https://www.mozilla.org/>Mozilla</a>,
-<a href=mailto:annevk@annevk.nl>annevk@annevk.nl</a>).
+<p>This standard is written by <a href=https://annevankesteren.nl/ lang=nl>Anne van Kesteren</a>
+(<a href=https://www.apple.com/>Apple</a>, <a href=mailto:annevk@annevk.nl>annevk@annevk.nl</a>).
