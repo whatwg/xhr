@@ -550,7 +550,7 @@ method must run these steps:
 
   <p class=note>An empty byte sequence represents an empty <a>header value</a>.
 
- <li><p>If <var>name</var> is a <a>forbidden header name</a>, then return.
+ <li><p>If (<var>name</var>, <var>value</var>) is a <a>forbidden request-header</a>, then return.
 
  <li><p><a for="header list">Combine</a> (<var>name</var>, <var>value</var>) in <a>this</a>'s
  <a>author request headers</a>.
