@@ -1609,7 +1609,7 @@ typedef (File or USVString) FormDataEntryValue;
 
 [Exposed=(Window,Worker)]
 interface FormData {
-  constructor(optional HTMLFormElement form);
+  constructor(optional HTMLFormElement form, optional HTMLElement? submitter = null);
 
   undefined append(USVString name, USVString value);
   undefined append(USVString name, Blob blobValue, optional USVString filename);
@@ -1635,7 +1635,7 @@ interface FormData {
 moved to the HTML Standard. [[HTML]]
 
 <p>The
-<dfn id=dom-formdata constructor for=FormData lt="FormData(form)"><code>new FormData(<var>form</var>)</code></dfn>
+<dfn id=dom-formdata constructor for=FormData lt="FormData(form)"><code>new FormData(<var>form</var>, <var>submitter</var>)</code></dfn>
 constructor steps are:
 
 <ol>
@@ -1643,8 +1643,15 @@ constructor steps are:
   <p>If <var>form</var> is given, then:
 
   <ol>
+   <li>
+    <p>If <var>submitter</var> is not null, then:
+    <ol>
+      <li><p>If <var>submitter</var> is not a submit button, then throw a {{TypeError}}.
+      <li><p>If <var>submitter</var>'s form owner is not <var>form</var>, then throw a "{{NotFoundError!!exception}}" {{DOMException}}.
+    </ol>
+
    <li><p>Let <var>list</var> be the result of <a>constructing the entry list</a> for
-   <var>form</var>.
+   <var>form</var> and <var>submitter</var>.
 
    <li><p>If <var>list</var> is null, then <a>throw</a> an "{{InvalidStateError!!exception}}"
    {{DOMException}}.
