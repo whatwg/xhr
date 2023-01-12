@@ -1647,10 +1647,10 @@ constructor steps are:
     <p>If <var>submitter</var> is non-null, then:
 
     <ol>
-     <li><p>If <var>submitter</var> is not a <a>submit button</a>, then <a>throw</a> a 
+     <li><p>If <var>submitter</var> is not a <a>submit button</a>, then <a>throw</a> a
      {{TypeError}}.
 
-     <li><p>If <var>submitter</var>'s <a>form owner</a> is not <var>form</var>, then <a>throw</a> a 
+     <li><p>If <var>submitter</var>'s <a>form owner</a> is not <var>form</var>, then <a>throw</a> a
      "{{NotFoundError!!exception}}" {{DOMException}}.
     </ol>
 
