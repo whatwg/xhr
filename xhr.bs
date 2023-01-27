@@ -9,6 +9,11 @@ Translation: ja https://triple-underscore.github.io/XHR-ja.html
 Translate IDs: enumdef-xmlhttprequestresponsetype xmlhttprequestresponsetype,dictdef-progresseventinit progresseventinit,typedefdef-formdataentryvalue formdataentryvalue
 </pre>
 
+<!-- Temporary: https://github.com/w3c/webdriver-bidi/issues/358 -->
+<pre class=link-defaults>
+spec:webdriver-bidi; type:dfn; text:event
+</pre>
+
 <pre class=anchors>
 urlPrefix: https://w3c.github.io/DOM-Parsing/; spec: dom-parsing
     type: dfn; text: fragment serializing algorithm; url: dfn-fragment-serializing-algorithm
