@@ -448,11 +448,8 @@ method steps are:
 
  <li><p><a for=method>Normalize</a> <var>method</var>.
 
- <li><p>Let <var>parsedURL</var> be the result of <a lt="URL parser">parsing</a> <var>url</var> with
- <a>this</a>'s <a>relevant settings object</a>'s
- <a for="environment settings object">API base URL</a> and <a>this</a>'s
- <a>relevant settings object</a>'s
- <a for="environment settings object">API URL character encoding</a>.
+ <li><p>Let <var>parsedURL</var> be the result of <a>encoding-parsing a URL</a> <var>url</var>,
+ relative to <a>this</a>'s <a>relevant settings object</a>.
 
  <li><p>If <var>parsedURL</var> is failure, then <a>throw</a> a "{{SyntaxError!!exception}}"
  {{DOMException}}.
