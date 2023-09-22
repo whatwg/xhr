@@ -1331,7 +1331,7 @@ not be web compatible.
 
  <li><p>Set <var>document</var>'s <a for=Document>encoding</a> to <var>charset</var>.
 
- <li><p>Set <var>document</var>'s <a>content type</a> to <var>finalMIME</var>.
+ <li><p>Set <var>document</var>'s <a for=Document>content type</a> to <var>finalMIME</var>.
 
  <li><p>Set <var>document</var>'s <a for=Document>URL</a> to <var>xhr</var>'s
  <a for=XMLHttpRequest>response</a>'s <a for=response>URL</a>.
