@@ -16,7 +16,7 @@ remote: xhr.bs
 	);
 
 local: xhr.bs
-	bikeshed spec xhr.bs xhr.html --md-Text-Macro="COMMIT-SHA LOCAL COPY"
+	bikeshed spec xhr.bs xhr.html --md-Text-Macro="COMMIT-SHA LOCAL-COPY"
 
 deploy: xhr.bs
 	curl --remote-name --fail https://resources.whatwg.org/build/deploy.sh
