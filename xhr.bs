@@ -283,13 +283,13 @@ constructor steps are:
 <i>headers received</i>, or <i>loading</i>, and it has one or more
 <a>event listeners</a>
 registered whose <b>type</b> is one of
-<a event><code>readystatechange</code></a>,
-<a event><code>progress</code></a>,
-<a event><code>abort</code></a>,
-<a event><code>error</code></a>,
-<a event><code>load</code></a>,
-<a event><code>timeout</code></a>, and
-<a event><code>loadend</code></a>.
+{{XMLHttpRequest/readystatechange}},
+{{XMLHttpRequest/progress}},
+{{XMLHttpRequest/abort}},
+{{XMLHttpRequest/error}},
+{{XMLHttpRequest/load}},
+{{XMLHttpRequest/timeout!!event}}, and
+{{XMLHttpRequest/loadend}}.
 <!-- No need to mention upload event listeners as they happen during /opened/. -->
 
 <p>If an {{XMLHttpRequest}} object is garbage collected while its connection is still open, the user
@@ -313,25 +313,25 @@ from {{XMLHttpRequestEventTarget}} as attributes:
  <tbody>
   <tr>
    <td><dfn id=handler-xhr-onloadstart attribute for=XMLHttpRequestEventTarget><code>onloadstart</code></dfn>
-   <td><a event><code>loadstart</code></a>
+   <td>{{XMLHttpRequest/loadstart}}
   <tr>
    <td><dfn id=handler-xhr-onprogress attribute for=XMLHttpRequestEventTarget><code>onprogress</code></dfn>
-   <td><a event><code>progress</code></a>
+   <td>{{XMLHttpRequest/progress}}
   <tr>
    <td><dfn id=handler-xhr-onabort attribute for=XMLHttpRequestEventTarget><code>onabort</code></dfn>
-   <td><a event><code>abort</code></a>
+   <td>{{XMLHttpRequest/abort}}
   <tr>
    <td><dfn id=handler-xhr-onerror attribute for=XMLHttpRequestEventTarget><code>onerror</code></dfn>
-   <td><a event><code>error</code></a>
+   <td>{{XMLHttpRequest/error}}
   <tr>
    <td><dfn id=handler-xhr-onload attribute for=XMLHttpRequestEventTarget><code>onload</code></dfn>
-   <td><a event><code>load</code></a>
+   <td>{{XMLHttpRequest/load}}
   <tr>
    <td><dfn id=handler-xhr-ontimeout attribute for=XMLHttpRequestEventTarget><code>ontimeout</code></dfn>
-   <td><a event><code>timeout</code></a>
+   <td>{{XMLHttpRequest/timeout!!event}}
   <tr>
    <td><dfn id=handler-xhr-onloadend attribute for=XMLHttpRequestEventTarget><code>onloadend</code></dfn>
-   <td><a event><code>loadend</code></a>
+   <td>{{XMLHttpRequest/loadend}}
 </table>
 
 <p>The following is the
@@ -1029,11 +1029,12 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
 
  <li><p>Otherwise, if <var>xhr</var>'s <a for=XMLHttpRequest>response</a>'s
  <a for=response>aborted flag</a> is set, run the <a>request error steps</a> for <var>xhr</var>,
- <a event><code>abort</code></a>, and "{{AbortError!!exception}}" {{DOMException}}.
+ <a event for=XMLHttpRequest><code>abort</code></a>, and "{{AbortError!!exception}}"
+ {{DOMException}}.
 
  <li><p>Otherwise, if <var>xhr</var>'s <a for=XMLHttpRequest>response</a> is a
  <a for=/>network error</a>, then run the <a>request error steps</a> for <var>xhr</var>,
- <a event><code>error</code></a>, and "{{NetworkError!!exception}}" {{DOMException}}.
+ {{XMLHttpRequest/error}}, and "{{NetworkError!!exception}}" {{DOMException}}.
 </ol>
 
 <p>The <dfn>request error steps</dfn> for an {{XMLHttpRequest}} object <var>xhr</var>,
@@ -1093,7 +1094,7 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
 
  <li><p>If <a>this</a>'s <a>state</a> is <i>opened</i> with <a>this</a>'s
  <a><code>send()</code> flag</a> set, <i>headers received</i>, or <i>loading</i>, then run the
- <a>request error steps</a> for <a>this</a> and <a event><code>abort</code></a>.
+ <a>request error steps</a> for <a>this</a> and <a event for=XMLHttpRequest><code>abort</code></a>.
 
  <li>
   <p>If <a>this</a>'s <a>state</a> is <i>done</i>, then set <a>this</a>'s <a>state</a> to
