@@ -283,13 +283,13 @@ constructor steps are:
 <i>headers received</i>, or <i>loading</i>, and it has one or more
 <a>event listeners</a>
 registered whose <b>type</b> is one of
-<a event><code>readystatechange</code></a>,
-<a event><code>progress</code></a>,
-<a event for=XMLHttpRequest><code>abort</code></a>,
-<a event><code>error</code></a>,
-<a event><code>load</code></a>,
-<a event><code>timeout</code></a>, and
-<a event><code>loadend</code></a>.
+{{XMLHttpRequest/readystatechange}},
+{{XMLHttpRequest/progress}},
+{{XMLHttpRequest/abort}},
+{{XMLHttpRequest/error}},
+{{XMLHttpRequest/load}},
+{{XMLHttpRequest/timeout}}, and
+{{XMLHttpRequest/loadend}}.
 <!-- No need to mention upload event listeners as they happen during /opened/. -->
 
 <p>If an {{XMLHttpRequest}} object is garbage collected while its connection is still open, the user
