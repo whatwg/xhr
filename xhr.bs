@@ -285,7 +285,7 @@ constructor steps are:
 registered whose <b>type</b> is one of
 <a event><code>readystatechange</code></a>,
 <a event><code>progress</code></a>,
-<a event><code>abort</code></a>,
+<a event for=XMLHttpRequest><code>abort</code></a>,
 <a event><code>error</code></a>,
 <a event><code>load</code></a>,
 <a event><code>timeout</code></a>, and
@@ -319,7 +319,7 @@ from {{XMLHttpRequestEventTarget}} as attributes:
    <td><a event><code>progress</code></a>
   <tr>
    <td><dfn id=handler-xhr-onabort attribute for=XMLHttpRequestEventTarget><code>onabort</code></dfn>
-   <td><a event><code>abort</code></a>
+   <td><a event for=XMLHttpRequest><code>abort</code></a>
   <tr>
    <td><dfn id=handler-xhr-onerror attribute for=XMLHttpRequestEventTarget><code>onerror</code></dfn>
    <td><a event><code>error</code></a>
@@ -1029,7 +1029,8 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
 
  <li><p>Otherwise, if <var>xhr</var>'s <a for=XMLHttpRequest>response</a>'s
  <a for=response>aborted flag</a> is set, run the <a>request error steps</a> for <var>xhr</var>,
- <a event><code>abort</code></a>, and "{{AbortError!!exception}}" {{DOMException}}.
+ <a event for=XMLHttpRequest><code>abort</code></a>, and "{{AbortError!!exception}}"
+ {{DOMException}}.
 
  <li><p>Otherwise, if <var>xhr</var>'s <a for=XMLHttpRequest>response</a> is a
  <a for=/>network error</a>, then run the <a>request error steps</a> for <var>xhr</var>,
@@ -1093,7 +1094,7 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
 
  <li><p>If <a>this</a>'s <a>state</a> is <i>opened</i> with <a>this</a>'s
  <a><code>send()</code> flag</a> set, <i>headers received</i>, or <i>loading</i>, then run the
- <a>request error steps</a> for <a>this</a> and <a event><code>abort</code></a>.
+ <a>request error steps</a> for <a>this</a> and <a event for=XMLHttpRequest><code>abort</code></a>.
 
  <li>
   <p>If <a>this</a>'s <a>state</a> is <i>done</i>, then set <a>this</a>'s <a>state</a> to
