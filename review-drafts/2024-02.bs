@@ -14,6 +14,7 @@ Translate IDs: enumdef-xmlhttprequestresponsetype xmlhttprequestresponsetype,dic
 <!-- Temporary: https://github.com/w3c/webdriver-bidi/issues/358 -->
 <pre class=link-defaults>
 spec:webdriver-bidi; type:dfn; text:event
+spec:fetch; type:dfn; text:credentials
 </pre>
 
 <pre class=anchors>
