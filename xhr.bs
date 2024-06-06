@@ -314,7 +314,7 @@ from {{XMLHttpRequestEventTarget}} as attributes:
  <tbody>
   <tr>
    <td><dfn id=handler-xhr-onloadstart attribute for=XMLHttpRequestEventTarget><code>onloadstart</code></dfn>
-   <td>{{XMLHttpRequest/loadstart}}
+   <td>{{XMLHttpRequestEventTarget/loadstart}}
   <tr>
    <td><dfn id=handler-xhr-onprogress attribute for=XMLHttpRequestEventTarget><code>onprogress</code></dfn>
    <td>{{XMLHttpRequestEventTarget/progress}}
