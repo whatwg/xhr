@@ -285,12 +285,12 @@ constructor steps are:
 <a>event listeners</a>
 registered whose <b>type</b> is one of
 {{XMLHttpRequest/readystatechange}},
-{{XMLHttpRequest/progress}},
-{{XMLHttpRequest/abort}},
-{{XMLHttpRequest/error}},
-{{XMLHttpRequest/load}},
-{{XMLHttpRequest/timeout!!event}}, and
-{{XMLHttpRequest/loadend}}.
+{{XMLHttpRequestEventTarget/progress}},
+{{XMLHttpRequestEventTarget/abort}},
+{{XMLHttpRequestEventTarget/error}},
+{{XMLHttpRequestEventTarget/load}},
+{{XMLHttpRequestEventTarget/timeout!!event}}, and
+{{XMLHttpRequestEventTarget/loadend}}.
 <!-- No need to mention upload event listeners as they happen during /opened/. -->
 
 <p>If an {{XMLHttpRequest}} object is garbage collected while its connection is still open, the user
@@ -314,25 +314,25 @@ from {{XMLHttpRequestEventTarget}} as attributes:
  <tbody>
   <tr>
    <td><dfn id=handler-xhr-onloadstart attribute for=XMLHttpRequestEventTarget><code>onloadstart</code></dfn>
-   <td>{{XMLHttpRequest/loadstart}}
+   <td>{{XMLHttpRequestEventTarget/loadstart}}
   <tr>
    <td><dfn id=handler-xhr-onprogress attribute for=XMLHttpRequestEventTarget><code>onprogress</code></dfn>
-   <td>{{XMLHttpRequest/progress}}
+   <td>{{XMLHttpRequestEventTarget/progress}}
   <tr>
    <td><dfn id=handler-xhr-onabort attribute for=XMLHttpRequestEventTarget><code>onabort</code></dfn>
-   <td>{{XMLHttpRequest/abort}}
+   <td>{{XMLHttpRequestEventTarget/abort}}
   <tr>
    <td><dfn id=handler-xhr-onerror attribute for=XMLHttpRequestEventTarget><code>onerror</code></dfn>
-   <td>{{XMLHttpRequest/error}}
+   <td>{{XMLHttpRequestEventTarget/error}}
   <tr>
    <td><dfn id=handler-xhr-onload attribute for=XMLHttpRequestEventTarget><code>onload</code></dfn>
-   <td>{{XMLHttpRequest/load}}
+   <td>{{XMLHttpRequestEventTarget/load}}
   <tr>
    <td><dfn id=handler-xhr-ontimeout attribute for=XMLHttpRequestEventTarget><code>ontimeout</code></dfn>
-   <td>{{XMLHttpRequest/timeout!!event}}
+   <td>{{XMLHttpRequestEventTarget/timeout!!event}}
   <tr>
    <td><dfn id=handler-xhr-onloadend attribute for=XMLHttpRequestEventTarget><code>onloadend</code></dfn>
-   <td>{{XMLHttpRequest/loadend}}
+   <td>{{XMLHttpRequestEventTarget/loadend}}
 </table>
 
 <p>The following is the
@@ -1035,7 +1035,7 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
 
  <li><p>Otherwise, if <var>xhr</var>'s <a for=XMLHttpRequest>response</a> is a
  <a for=/>network error</a>, then run the <a>request error steps</a> for <var>xhr</var>,
- {{XMLHttpRequest/error}}, and "{{NetworkError!!exception}}" {{DOMException}}.
+ {{XMLHttpRequestEventTarget/error}}, and "{{NetworkError!!exception}}" {{DOMException}}.
 </ol>
 
 <p>The <dfn>request error steps</dfn> for an {{XMLHttpRequest}} object <var>xhr</var>,
@@ -1576,32 +1576,32 @@ steps are:
    <td>The {{XMLHttpRequest/readyState}} attribute changes
    value, except when it changes to <a const for=XMLHttpRequest>UNSENT</a>.
   <tr>
-   <td><dfn id=event-xhr-loadstart event for=XMLHttpRequest><code>loadstart</code></dfn>
+   <td><dfn id=event-xhr-loadstart event for=XMLHttpRequestEventTarget><code>loadstart</code></dfn>
    <td>{{ProgressEvent}}
    <td>The fetch initiates.
   <tr>
-   <td><dfn id=event-xhr-progress event for=XMLHttpRequest><code>progress</code></dfn>
+   <td><dfn id=event-xhr-progress event for=XMLHttpRequestEventTarget><code>progress</code></dfn>
    <td>{{ProgressEvent}}
    <td>Transmitting data.
   <tr>
-   <td><dfn id=event-xhr-abort event for=XMLHttpRequest><code>abort</code></dfn>
+   <td><dfn id=event-xhr-abort event for=XMLHttpRequestEventTarget><code>abort</code></dfn>
    <td>{{ProgressEvent}}
    <td>When the fetch has been aborted. For instance, by invoking the
    {{XMLHttpRequest/abort()}} method.
   <tr>
-   <td><dfn id=event-xhr-error event for=XMLHttpRequest><code>error</code></dfn>
+   <td><dfn id=event-xhr-error event for=XMLHttpRequestEventTarget><code>error</code></dfn>
    <td>{{ProgressEvent}}
    <td>The fetch failed.
   <tr>
-   <td><dfn id=event-xhr-load event for=XMLHttpRequest><code>load</code></dfn>
+   <td><dfn id=event-xhr-load event for=XMLHttpRequestEventTarget><code>load</code></dfn>
    <td>{{ProgressEvent}}
    <td>The fetch succeeded.
   <tr>
-   <td><dfn id=event-xhr-timeout event for=XMLHttpRequest><code>timeout</code></dfn>
+   <td><dfn id=event-xhr-timeout event for=XMLHttpRequestEventTarget><code>timeout</code></dfn>
    <td>{{ProgressEvent}}
    <td>The author specified timeout has passed before the fetch completed.
   <tr>
-   <td><dfn id=event-xhr-loadend event for=XMLHttpRequest><code>loadend</code></dfn>
+   <td><dfn id=event-xhr-loadend event for=XMLHttpRequestEventTarget><code>loadend</code></dfn>
    <td>{{ProgressEvent}}
    <td>The fetch completed (success or failure).
 </table>
