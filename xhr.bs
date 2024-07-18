@@ -15,11 +15,6 @@ spec:webdriver-bidi; type:dfn; text:event
 spec:fetch; type:dfn; for:/; text:credentials
 </pre>
 
-<pre class=anchors>
-urlPrefix: https://w3c.github.io/DOM-Parsing/; spec: dom-parsing
-    type: dfn; text: fragment serializing algorithm; url: dfn-fragment-serializing-algorithm
-</pre>
-
 
 
 <h2 id=introduction>Introduction</h2>
@@ -686,7 +681,7 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
    <li><p>Let <var>extractedContentType</var> be null.
 
    <li><p>If <var>body</var> is a {{Document}}, then set <a>this</a>'s <a>request body</a> to
-   <var>body</var>, <a lt="fragment serializing algorithm">serialized</a>,
+   <var>body</var>, <a lt="fragment serializing algorithm steps">serialized</a>,
    <a for=string>converted</a>, and <a lt="UTF-8 encode">UTF-8 encoded</a>.
 
    <li>
