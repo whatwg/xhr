@@ -1023,9 +1023,9 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
  for <var>xhr</var>, <a event><code>timeout</code></a>, and "{{TimeoutError!!exception}}"
  {{DOMException}}.
 
- <li><p>Otherwise, if <var>xhr</var>'s <a for=XMLHttpRequest>response</a>'s <a for=response>aborted
- flag</a> is set, run the <a>request error steps</a> for <var>xhr</var>, <a event
- for=XMLHttpRequestEventTarget><code>abort</code></a>, and "{{AbortError!!exception}}"
+ <li><p>Otherwise, if <var>xhr</var>'s <a for=XMLHttpRequest>response</a>'s
+ <a for=response>aborted flag</a> is set, run the <a>request error steps</a> for <var>xhr</var>,
+ <a event for=XMLHttpRequestEventTarget><code>abort</code></a>, and "{{AbortError!!exception}}"
  {{DOMException}}.
 
  <li><p>Otherwise, if <var>xhr</var>'s <a for=XMLHttpRequest>response</a> is a
@@ -1088,9 +1088,10 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
  <li><p><a for="fetch controller">Abort</a> <a>this</a>'s
  <a for=XMLHttpRequest>fetch controller</a>.
 
- <li><p>If <a>this</a>'s <a>state</a> is <i>opened</i> with <a>this</a>'s <a><code>send()</code>
- flag</a> set, <i>headers received</i>, or <i>loading</i>, then run the <a>request error steps</a>
- for <a>this</a> and <a event for=XMLHttpRequestEventTarget><code>abort</code></a>.
+ <li><p>If <a>this</a>'s <a>state</a> is <i>opened</i> with <a>this</a>'s
+ <a><code>send()</code> flag</a> set, <i>headers received</i>, or <i>loading</i>, then run the
+ <a>request error steps</a> for <a>this</a> and
+ <a event for=XMLHttpRequestEventTarget><code>abort</code></a>.
 
  <li>
   <p>If <a>this</a>'s <a>state</a> is <i>done</i>, then set <a>this</a>'s <a>state</a> to
