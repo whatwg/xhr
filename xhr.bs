@@ -15,11 +15,6 @@ spec:webdriver-bidi; type:dfn; text:event
 spec:fetch; type:dfn; for:/; text:credentials
 </pre>
 
-<pre class=anchors>
-urlPrefix: https://w3c.github.io/DOM-Parsing/; spec: dom-parsing
-    type: dfn; text: fragment serializing algorithm; url: dfn-fragment-serializing-algorithm
-</pre>
-
 
 
 <h2 id=introduction>Introduction</h2>
@@ -686,7 +681,7 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
    <li><p>Let <var>extractedContentType</var> be null.
 
    <li><p>If <var>body</var> is a {{Document}}, then set <a>this</a>'s <a>request body</a> to
-   <var>body</var>, <a lt="fragment serializing algorithm">serialized</a>,
+   <var>body</var>, <a lt="fragment serializing algorithm steps">serialized</a>,
    <a for=string>converted</a>, and <a lt="UTF-8 encode">UTF-8 encoded</a>.
 
    <li>
@@ -1030,7 +1025,7 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
 
  <li><p>Otherwise, if <var>xhr</var>'s <a for=XMLHttpRequest>response</a>'s
  <a for=response>aborted flag</a> is set, run the <a>request error steps</a> for <var>xhr</var>,
- <a event for=XMLHttpRequest><code>abort</code></a>, and "{{AbortError!!exception}}"
+ <a event for=XMLHttpRequestEventTarget><code>abort</code></a>, and "{{AbortError!!exception}}"
  {{DOMException}}.
 
  <li><p>Otherwise, if <var>xhr</var>'s <a for=XMLHttpRequest>response</a> is a
@@ -1095,7 +1090,8 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
 
  <li><p>If <a>this</a>'s <a>state</a> is <i>opened</i> with <a>this</a>'s
  <a><code>send()</code> flag</a> set, <i>headers received</i>, or <i>loading</i>, then run the
- <a>request error steps</a> for <a>this</a> and <a event for=XMLHttpRequest><code>abort</code></a>.
+ <a>request error steps</a> for <a>this</a> and
+ <a event for=XMLHttpRequestEventTarget><code>abort</code></a>.
 
  <li>
   <p>If <a>this</a>'s <a>state</a> is <i>done</i>, then set <a>this</a>'s <a>state</a> to
