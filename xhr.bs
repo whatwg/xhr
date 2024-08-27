@@ -1306,9 +1306,10 @@ not be web compatible.
 
    <li><p>Let <var>document</var> be a
    <a>document</a> that
-   represents the result parsing <var>xhr</var>'s <a>received bytes</a> following the rules set
-   forth in the HTML Standard for an HTML parser with scripting disabled and
-   <a>a known definite encoding</a> <var>charset</var>.
+   represents the result of parsing <var>xhr</var>'s <a>received bytes</a> following the rules set
+   forth in the HTML Standard for an HTML parser with scripting disabled,
+   <a>a known definite encoding</a> <var>charset</var>, and <a>include shadow roots state</a>
+   set to "deny".
    [[!HTML]]
 
    <li><p>Flag <var>document</var> as an
@@ -1975,6 +1976,7 @@ Mark Birbeck,
 Mark Nottingham,
 Mark S. Miller,
 Martin Hassman,
+Mason Freed,
 Mike Pennisi,
 Mohamed Zergaoui,
 Ms2ger,
