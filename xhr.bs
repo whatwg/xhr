@@ -1305,7 +1305,7 @@ not be web compatible.
    <li><p>If <var>charset</var> is null, then set <var>charset</var> to <a>UTF-8</a>.
 
    <li><p>Let <var>document</var> be a
-   <a>document</a> that
+   <a for=/>document</a> that
    represents the result parsing <var>xhr</var>'s <a>received bytes</a> following the rules set
    forth in the HTML Standard for an HTML parser with scripting disabled and
    <a>a known definite encoding</a> <var>charset</var>.
@@ -1316,8 +1316,8 @@ not be web compatible.
   </ol>
 
  <li>
-  <p>Otherwise, let <var>document</var> be a <a>document</a> that represents the result of running
-  the <a>XML parser</a> with <a>XML scripting support disabled</a> on <var>xhr</var>'s
+  <p>Otherwise, let <var>document</var> be a <a for=/>document</a> that represents the result of
+  running the <a>XML parser</a> with <a>XML scripting support disabled</a> on <var>xhr</var>'s
   <a>received bytes</a>. If that fails (unsupported character encoding,
   namespace well-formedness error, etc.), then return null. [[!HTML]]
 
