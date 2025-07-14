@@ -6,6 +6,7 @@ Text Macro: TWITTER xhrstandard
 Text Macro: LATESTRD 2024-02
 Abstract: The XMLHttpRequest Standard defines an API that provides scripted client functionality for transferring data between a client and a server.
 Translation: ja https://triple-underscore.github.io/XHR-ja.html
+Translation: zh-Hans https://htmlspecs.com/xhr/
 Translate IDs: enumdef-xmlhttprequestresponsetype xmlhttprequestresponsetype,dictdef-progresseventinit progresseventinit,typedefdef-formdataentryvalue formdataentryvalue
 </pre>
 
