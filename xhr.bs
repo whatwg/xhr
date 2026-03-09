@@ -488,13 +488,13 @@ method steps are:
 
   <ul>
    <li><p>Unset <a>this</a>'s <a><code>send()</code> flag</a>.
-   <li><p>Unset <a>this</a>'s <a>upload listener flag</a>.
-   <li><p>Set <a>this</a>'s <a>request body</a> to null.
    <li><p>Set <a>this</a>'s <a>request method</a> to <var>method</var>.
    <li><p>Set <a>this</a>'s <a>request URL</a> to <var>parsedURL</var>.
+   <li><p><a for=list>Empty</a> <a>this</a>'s <a>author request headers</a>.
+   <li><p>Set <a>this</a>'s <a>request body</a> to null.
    <li><p>Set <a>this</a>'s <a>synchronous flag</a> if <var>async</var> is false; otherwise unset
    <a>this</a>'s <a>synchronous flag</a>.
-   <li><p><a for=list>Empty</a> <a>this</a>'s <a>author request headers</a>.
+   <li><p>Unset <a>this</a>'s <a>upload listener flag</a>.
    <li><p>Set <a>this</a>'s <a for=XMLHttpRequest>response</a> to a <a>network error</a>.
    <li><p>Set <a>this</a>'s <a>received bytes</a> to the empty byte sequence.
    <li><p>Set <a>this</a>'s <a>response object</a> to null.
