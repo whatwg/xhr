@@ -709,7 +709,8 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
 
     <ol>
      <li>
-      <p>If <var>body</var> is a {{Document}} or a {{USVString}}:
+      <p>If <var>body</var> is a {{Document}} object, a {{URLSearchParams}} object, or a
+      <a for=/>string</a>:
 
       <ol>
        <li><p>Let <var>contentTypeRecord</var> be the result of
