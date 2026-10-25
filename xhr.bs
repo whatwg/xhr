@@ -682,8 +682,8 @@ return <a>this</a>'s <a>cross-origin credentials</a>.
   <ol>
    <li><p>Let <var>extractedContentType</var> be null.
 
-   <li><p>If <var>body</var> is a {{Document}}, then set <a>this</a>'s <a>request body</a> to
-   <var>body</var>, <a lt="fragment serializing algorithm steps">serialized</a>,
+   <li><p>If <var>body</var> is a {{Document}}, then set <a>this</a>'s <a>request body</a> to the
+   result of running the <a>fragment serializing algorithm steps</a> given <var>body</var> and false,
    <a for=string>converted</a>, and <a lt="UTF-8 encode">UTF-8 encoded</a>.
 
    <li>
