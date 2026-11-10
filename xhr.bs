@@ -39,7 +39,7 @@ function processData(data) {
 function handler() {
   if(this.status == 200 &amp;&amp;
     this.responseXML != null &amp;&amp;
-    this.responseXML.getElementById('test').textContent) {
+    this.responseXML.getElementById('test')?.textContent) {
     // success!
     processData(this.responseXML.getElementById('test').textContent);
   } else {
